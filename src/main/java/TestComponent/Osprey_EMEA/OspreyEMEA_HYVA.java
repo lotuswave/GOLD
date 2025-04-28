@@ -10277,12 +10277,12 @@ return Number;
 			if(URL.contains("stage")|| URL.contains("preprod")) {
 			Thread.sleep(5000);
 			
-		Sync.waitElementPresent("xpath", "//button[contains(text(),'Add Gift Card')]");	
+		Sync.waitElementPresent("xpath", "//h3[contains(text(),'Add Gift Card')]");	
 		Thread.sleep(4000);
-		String GiftCrad= Common.findElement("xpath", "//button[contains(text(),'Add Gift Card')]").getAttribute("title");
+		String GiftCrad= Common.findElement("xpath", "//h3[contains(text(),'Add Gift Card')]").getAttribute("title");
 		System.out.println(GiftCrad);
 		if (GiftCrad.equals("Show items")) {
-			Common.clickElement("xpath", "//button[contains(text(),'Add Gift Card')]");	
+			Common.clickElement("xpath", "//h3[contains(text(),'Add Gift Card')]");	
 		}
 		else {
 			System.out.println();
@@ -10294,22 +10294,22 @@ return Number;
 		Thread.sleep(2000);
 		String successmsg=Common.findElement("xpath", "//div[@ui-id='message-success']//span").getText();
 	    System.out.println(successmsg);	
-		Common.assertionCheckwithReport(successmsg.contains("added"),
+		Common.assertionCheckwithReport(successmsg.contains("added."),
 				"validating the success message after applying gift card",
 				"Success message should be displayed after the applying of gift card",
 				"Sucessfully gift card has been applyed","Failed to apply the gift card");
 			}
 			else
 			{
-				Common.scrollIntoView("xpath", "//button[contains(text(),'Add Gift Card')]");
-				Common.clickElement("xpath","//button[contains(text(),'Add Gift Card')]");
+				Common.scrollIntoView("xpath", "//h3[contains(text(),'Add Gift Card')]");
+				Common.clickElement("xpath","//h3[contains(text(),'Add Gift Card')]");
 				Common.textBoxInput("xpath","//input[@x-model='giftCardCode']", data.get(dataSet).get("GiftCard_Prod"));
 //				Common.actionsKeyPress(Keys.ARROW_UP);
 				Common.clickElement("xpath","//button[@aria-label='Add Code']");
 				Thread.sleep(2000);
 				String successmsg=Common.findElement("xpath", "//div[@ui-id='message-success']//span").getText();
 			    System.out.println(successmsg);	
-				Common.assertionCheckwithReport(successmsg.contains("added"),
+				Common.assertionCheckwithReport(successmsg.contains("added."),
 						"validating the success message after applying gift card",
 						"Success message should be displayed after the applying of gift card",
 						"Sucessfully gift card has been applyed","Failed to apply the gift card");
@@ -10332,15 +10332,15 @@ return Number;
 		{
 		Thread.sleep(4000);
 		
-		Sync.waitElementPresent("xpath", "//button[contains(text(),'Add Gift Card')]");	
-		Common.clickElement("xpath", "//button[contains(text(),'Add Gift Card')]");
+		Sync.waitElementPresent("xpath", "//h3[contains(text(),'Add Gift Card')]");	
+		Common.clickElement("xpath", "//h3[contains(text(),'Add Gift Card')]");
 	    Common.scrollIntoView("xpath", "//input[@x-model='giftCardCode']");
 		Common.textBoxInput("xpath","//input[@x-model='giftCardCode']", data.get(dataSet).get("InvalidGC"));
 		
 		Common.clickElement("xpath","//button[@aria-label='Add Code']");
 		Thread.sleep(3000);
-		Sync.waitElementPresent("xpath", "//button[contains(text(),'Add Gift Card')]");	
-		Common.clickElement("xpath", "//button[contains(text(),'Add Gift Card')]");
+		Sync.waitElementPresent("xpath", "//h3[contains(text(),'Add Gift Card')]");	
+		Common.clickElement("xpath", "//h3[contains(text(),'Add Gift Card')]");
 //		String errormsg=Common.findElement("xpath", "//div[@role='alert']").getText();
 //	  System.out.println(errormsg);
 //		
