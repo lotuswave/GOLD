@@ -23,6 +23,7 @@ public class TEST_DGLD_OSP_E2E_008_Register_User_Checkout_with_Mutliple_items_an
 			 
 			 Osprey_ReEu.prepareOrdersData1("OspreyUS_Admin_E2E_orderDetails.xlsx");
 			 String Description ="Admin  user checkout with 4 Items - 2 QTY each -  from Colorado address with standard shipping  CC";
+			 Osprey_ReEu.verifingHomePage();
 			  Osprey_ReEu.Admin_signin("Login Details");
 			  Osprey_ReEu.Customers();
 			  Osprey_ReEu.Allcustomers();

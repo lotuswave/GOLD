@@ -612,6 +612,12 @@ My Favourites Gift card added">
             <class name="TestExecute.Osprey_US.RegressionTestcase.TEST_DGLD_OS_US_ST_086_Guest_gift_card_add_to_My_favourites_and_Guest_create_account_with_My_Favourites_Gift_card_added"/>
      </classes>  
     </test>
+<test name=" Test_DGLD_OS_US_132_Decline_All_Create_Account_Login_and_checkout_as_Register_User" testid="DQA-4541" priority="P1" description = "This test case is to verify the flow of checkout process as register user by creating new account by declining all cookies">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.Test_DGLD_OS_US_132_Decline_All_Create_Account_Login_and_checkout_as_Register_User"/>
+     </classes>  
+    </test>
+
 
 
 </suite>

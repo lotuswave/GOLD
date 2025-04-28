@@ -23,9 +23,9 @@
 </classes>
 </test>
  
-<test name="TEST_DGLD_OSP_E2E_006_GuestUser_checkout_with_AfterPay_Expedited" testid="DQA-3281" priority="P1" description="This test case is verify GuestUser checkout with AfterPay Expeditedr.">
+<test name="TEST_DGLD_OSP_E2E_006_GuestUser_checkout_Different_Billing_Shipingaddress_with_AfterPay_Expedited" testid="DQA-3281" priority="P1" description="This test case is verify GuestUser checkout with AfterPay Expeditedr.">
 <classes>
-<class name="TestExecute.Osprey_US.Osprey_US_O2C_E2E.TEST_DGLD_OSP_E2E_006_GuestUser_checkout_with_AfterPay_Expedited" />
+<class name="TestExecute.Osprey_US.Osprey_US_O2C_E2E.TEST_DGLD_OSP_E2E_006_GuestUser_checkout_Different_Billing_Shipingaddress_with_AfterPay_Expedited" />
 </classes>
 </test>
  

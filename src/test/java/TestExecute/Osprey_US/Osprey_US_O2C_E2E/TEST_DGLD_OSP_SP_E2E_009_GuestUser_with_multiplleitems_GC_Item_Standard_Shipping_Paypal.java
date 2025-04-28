@@ -23,6 +23,7 @@ public class TEST_DGLD_OSP_SP_E2E_009_GuestUser_with_multiplleitems_GC_Item_Stan
 			 
 			 Osprey_ReEu.prepareOrdersData("OspreyUS_E2E_orderDetails.xlsx");
 			 String Description ="Guest User with multiplle items + GC Item + Standard Shipping Paypal";
+			 Osprey_ReEu.verifingHomePage();
 		     Osprey_ReEu.search_product("SKU-10005235 -2QTY");
 		     Osprey_ReEu.addtocart("SKU-10005235 -2QTY");
 		     Osprey_ReEu.search_product("SKU-10003319-2QTY");

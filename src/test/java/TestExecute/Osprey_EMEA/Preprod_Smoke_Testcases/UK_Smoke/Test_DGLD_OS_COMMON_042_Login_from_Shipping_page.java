@@ -25,14 +25,11 @@ public class Test_DGLD_OS_COMMON_042_Login_from_Shipping_page {
         Osprey_ReEu.addtocart("Product");
         Osprey_ReEu.minicart_Checkout();
         Osprey_ReEu.Signin_Checkoutpage("Account");
-        String newaddress= Osprey_ReEu.shipping_new_Address("BillingDetails");
+        Osprey_ReEu.RegaddDeliveryAddress("BillingDetails");
         Osprey_ReEu.Edit_Address_verify("Edit Address");    //need to change
         Osprey_ReEu.selectshippingmethod("GroundShipping method");    
         Osprey_ReEu.updatePaymentAndSubmitOrder("CCVisacard");
-       
-        
 
-        
 		} catch (Exception e) {
 
 			Assert.fail(e.getMessage(), e);

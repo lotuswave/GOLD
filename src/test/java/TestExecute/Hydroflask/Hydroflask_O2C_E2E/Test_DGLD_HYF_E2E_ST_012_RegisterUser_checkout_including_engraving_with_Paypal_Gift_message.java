@@ -24,14 +24,15 @@ public class Test_DGLD_HYF_E2E_ST_012_RegisterUser_checkout_including_engraving_
 			String Description ="Register user checkout including engraving with Paypal (standard)+ Gift message (More than 50 characters)";
 			Hydro.verifingHomePage();
 			Hydro.click_singinButton();
-			Hydro.login_Hydroflask("AccountDetails");
-			Hydro.search_product("SKU-P-S21001 - 1"); 
+			Hydro.login_Hydroflask("AccountDetails_TC12");
+			Hydro.reorder();
+		/*	Hydro.search_product("SKU-P-S21001 - 1"); 
 			Hydro.Add_Myhydro_Text("SKU-P-S21001 - 1");
 			Hydro.enraving_Checkout("SKU-P-S21001 - 1");
 			Hydro.search_product("SKU-TT32PS678");     
 			Hydro.addtocart("SKU-TT32PS678");
 			Hydro.search_product("SKU-SCS415 -1QTY");     
-			Hydro.addtocart("SKU-SCS415 -1QTY");
+			Hydro.addtocart("SKU-SCS415 -1QTY");*/
 			Hydro.minicart_viewcart();
 			Hydro.Gift_message("Gift Message above 50");
 			Hydro.minicart_Checkout();

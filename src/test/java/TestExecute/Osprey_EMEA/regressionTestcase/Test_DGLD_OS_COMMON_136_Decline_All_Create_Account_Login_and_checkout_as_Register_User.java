@@ -28,10 +28,17 @@ public class Test_DGLD_OS_COMMON_136_Decline_All_Create_Account_Login_and_checko
         Osprey_ReEu.selectshippingmethod("GroundShipping method");
         Osprey_ReEu.clickSubmitbutton_Shippingpage();
         Osprey_ReEu.updatePaymentAndSubmitOrder("CCAmexcard");
-        Osprey_ReEu.signout();
-        Osprey_ReEu.click_singinButton();
-        Osprey_ReEu.Login_Account("Account");
-        
+        if(Common.getCurrentURL().contains("preprod")) {
+        	System.out.println("Executed In PRE-PROD");
+        	 String Email= Osprey_ReEu.EmailID_from_successpage();
+        	 System.out.println(Email);
+        	   Osprey_ReEu.signout();
+               Osprey_ReEu.click_singinButton();
+               Osprey_ReEu.Login_with_Create_Account_Email(Email);
+        }else {
+        	System.out.println("Executed In PROD");
+        }
+ 
 		} catch (Exception e) {
 
 			Assert.fail(e.getMessage(), e);

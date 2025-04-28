@@ -7056,8 +7056,8 @@ return Number;
             
 			
 			Common.switchFrames("xpath", "//iframe[contains(@class,'component-frame visible')]");
-			Sync.waitElementPresent("xpath", "(//div[contains(@class,'paypal-button paypal-button')])[1]");
-			Common.clickElement("xpath", "(//div[contains(@class,'paypal-button paypal-button')])[1]");
+			Sync.waitElementPresent("css", "div[class='paypal-button-label-container']");
+			Common.clickElement("css", "div[class='paypal-button-label-container']");
 //			Common.switchFrames("xpath", "//iframe[contains(@class,'component-frame visible')]");
 
 			Thread.sleep(8000);
@@ -9465,33 +9465,33 @@ return Number;
 		try {
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			int size1= Common.findElements("xpath", "//button[contains(text(), 'Agregar código de descuento')]").size();
-			int size2= Common.findElements("xpath", "//button[contains(text(), 'Lägg till rabattkod')]").size();
-			int size3= Common.findElements("xpath", "//button[contains(text(), 'Rabattcode hinzufügen')]").size();
-			int size4= Common.findElements("xpath", "//button[contains(text(), 'Legg til rabattkode')]").size();
-			int size5=Common.findElements("xpath", "//button[contains(text(), 'Aggiungi un codice sconto')]").size();
+			int size1= Common.findElements("xpath", "//h3[contains(text(), 'Agregar código de descuento')]").size();
+			int size2= Common.findElements("xpath", "//h3[contains(text(), 'Lägg till rabattkod')]").size();
+			int size3= Common.findElements("xpath", "//h3[contains(text(), 'Rabattcode hinzufügen')]").size();
+			int size4= Common.findElements("xpath", "//h3[contains(text(), 'Legg til rabattkode')]").size();
+			int size5=Common.findElements("xpath", "//h3[contains(text(), 'Aggiungi un codice sconto')]").size();
 		       if (size1>0) {
-		    	   Sync.waitElementClickable("xpath", "//button[contains(text(), 'Agregar código de descuento')]");
-		    	   Common.clickElement("xpath", "//button[contains(text(), 'Agregar código de descuento')]");
+		    	   Sync.waitElementClickable("xpath", "//h3[contains(text(), 'Agregar código de descuento')]");
+		    	   Common.clickElement("xpath", "//h3[contains(text(), 'Agregar código de descuento')]");
 		    	   
 		       } 
 		       else if(size2>0) {
-		    	   Sync.waitElementClickable("xpath", "//button[contains(text(), 'Lägg till rabattkod')]");
-		    	   Common.clickElement("xpath", "//button[contains(text(), 'Lägg till rabattkod')]");
+		    	   Sync.waitElementClickable("xpath", "//h3[contains(text(), 'Lägg till rabattkod')]");
+		    	   Common.clickElement("xpath", "//h3[contains(text(), 'Lägg till rabattkod')]");
 		       }else if(size3>0) {
-		    	   Sync.waitElementClickable("xpath", "//button[contains(text(), 'Rabattcode hinzufügen')]");
-		    	   Common.clickElement("xpath", "//button[contains(text(), 'Rabattcode hinzufügen')]");
+		    	   Sync.waitElementClickable("xpath", "//h3[contains(text(), 'Rabattcode hinzufügen')]");
+		    	   Common.clickElement("xpath", "//h3[contains(text(), 'Rabattcode hinzufügen')]");
 		       }else if(size4>0) {
-		    	   Sync.waitElementClickable("xpath", "//button[contains(text(), 'Legg til rabattkode')]");
-		    	   Common.clickElement("xpath", "//button[contains(text(), 'Legg til rabattkode')]");
+		    	   Sync.waitElementClickable("xpath", "//h3[contains(text(), 'Legg til rabattkode')]");
+		    	   Common.clickElement("xpath", "//h3[contains(text(), 'Legg til rabattkode')]");
 		    	   
 		       }
 		       else if(size5>0){
-		    	   Sync.waitElementClickable("xpath", "//button[contains(text(), 'Aggiungi un codice sconto')]");
-		    	   Common.clickElement("xpath", "//button[contains(text(), 'Aggiungi un codice sconto')]");
+		    	   Sync.waitElementClickable("xpath", "//h3[contains(text(), 'Aggiungi un codice sconto')]");
+		    	   Common.clickElement("xpath", "//h3[contains(text(), 'Aggiungi un codice sconto')]");
 		       }
-		       else {	Sync.waitElementClickable("xpath", "//button[contains(text(), 'Add Discount Code')]");
-					Common.clickElement("xpath", "//button[contains(text(), 'Add Discount Code')]");
+		       else {	Sync.waitElementClickable("xpath", "//h3[contains(text(), 'Add Discount Code')]");
+					Common.clickElement("xpath", "//h3[contains(text(), 'Add Discount Code')]");
 		       }
 			
 			if (Common.getCurrentURL().contains("stage") || Common.getCurrentURL().contains("preprod")) {

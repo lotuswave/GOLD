@@ -22,7 +22,7 @@
 </test>
 <test name="CS Order - 1 Line Item QTY2 - zero dollar charge">
 <classes>
-<class name="Test_DGLD_API_OXO_05_CS_Order_via_Admin_with_Zero_dollar_charge_1LineItem_2QTY_Full_shippment_Invoice"/>
+<class name="TestExecute.API.Oxo.Test_DGLD_API_OXO_05_CS_Order_via_Admin_with_Zero_dollar_charge_1LineItem_2QTY_Full_shippment_Invoice"/>
 </classes>
 </test>
 </suite>

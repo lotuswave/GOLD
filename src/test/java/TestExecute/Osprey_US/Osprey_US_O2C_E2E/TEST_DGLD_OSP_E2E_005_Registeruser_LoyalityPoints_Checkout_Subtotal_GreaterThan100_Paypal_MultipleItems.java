@@ -22,14 +22,15 @@ public class TEST_DGLD_OSP_E2E_005_Registeruser_LoyalityPoints_Checkout_Subtotal
 			 
 			 Osprey_ReEu.prepareOrdersData("OspreyUS_E2E_orderDetails.xlsx");
 			 String Description ="Register user loyality points checkout + Subtotal > 100$ + Paypal + Multiple items ";
-			  Osprey_ReEu.click_singinButton();
-		      Osprey_ReEu.Login_Account("Account");
+			 Osprey_ReEu.verifingHomePage();
+			 Osprey_ReEu.click_singinButton();
+		     Osprey_ReEu.Login_Account("Account");
 		     Osprey_ReEu.search_product("SKU-10005235 -2QTY");
 		     Osprey_ReEu.addtocart("SKU-10005235 -2QTY");
-		     Osprey_ReEu.search_product("SKU-10003319-2QTY");
-		     Osprey_ReEu.addtocart_Configurable("SKU-10003319-2QTY");
-		     Osprey_ReEu.search_product("SKU-10005151 -2QTY");
-		     Osprey_ReEu.addtocart("SKU-10005151 -2QTY");
+		     Osprey_ReEu.search_product("SKU-10002925-2QTY");
+		     Osprey_ReEu.addtocart_Configurable("SKU-10002925-2QTY");
+//		     Osprey_ReEu.search_product("SKU-10005151 -2QTY");
+//		     Osprey_ReEu.addtocart("SKU-10005151 -2QTY");
 		     Osprey_ReEu.minicart_Checkout();
 		     Osprey_ReEu.RegaddDeliveryAddress("Account");
 		     Osprey_ReEu.selectshippingmethod("GroundShipping method");
@@ -50,7 +51,6 @@ public class TEST_DGLD_OSP_E2E_005_Registeruser_LoyalityPoints_Checkout_Subtotal
 		}
 	}
 
-
 	@AfterTest
 	public void clearBrowser() {
 		Common.closeAll();
@@ -61,7 +61,7 @@ public class TEST_DGLD_OSP_E2E_005_Registeruser_LoyalityPoints_Checkout_Subtotal
 	public void startTest() throws Exception {
 		System.setProperty("configFile", "Osprey_US\\config.properties");
         Login.signIn();
-        Osprey_ReEu.acceptPrivacy();
+   
         
 
 	}

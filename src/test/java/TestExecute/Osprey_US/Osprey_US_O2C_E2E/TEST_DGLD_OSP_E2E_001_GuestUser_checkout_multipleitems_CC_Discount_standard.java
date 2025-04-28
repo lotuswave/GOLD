@@ -23,6 +23,7 @@ public class TEST_DGLD_OSP_E2E_001_GuestUser_checkout_multipleitems_CC_Discount_
 			 
 			 Osprey_ReEu.prepareOrdersData("OspreyUS_E2E_orderDetails.xlsx");
 			 String Description ="Guest user checkout  multiple items + CC + Discount + standard";
+			 Osprey_ReEu.verifingHomePage();
 		     Osprey_ReEu.search_product("SKU-10005235 -3QTY");
 		     Osprey_ReEu.addtocart("SKU-10005235 -3QTY");
 		     Osprey_ReEu.search_product("SKU-10005151 -2QTY");
@@ -51,7 +52,7 @@ public class TEST_DGLD_OSP_E2E_001_GuestUser_checkout_multipleitems_CC_Discount_
 
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+		//Common.closeAll();
 
 	}
 
