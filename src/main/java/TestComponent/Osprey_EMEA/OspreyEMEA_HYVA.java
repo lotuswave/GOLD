@@ -7426,10 +7426,12 @@ return Number;
 		// TODO Auto-generated method stub
 		String items = "";
 		try {
+			Thread.sleep(5000);
 			Sync.waitElementPresent("xpath", "//div[@x-text='cartSummaryCount']");
 			items = Common.findElement("xpath", "//div[@x-text='cartSummaryCount']").getText();
 			System.out.println(items);
 			Common.clickElement("xpath", "//button[@id='menu-cart-icon']");
+			Thread.sleep(4000);
 			Sync.waitElementPresent("xpath", "//span[@x-text='totalCartAmount']");
 			String miniitems = Common.findElement("xpath", "//span[@x-text='totalCartAmount']")
 					.getText().trim();
