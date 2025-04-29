@@ -4232,12 +4232,12 @@ public void Remove_GiftCode() {
 
 			else {
 				try {
-					Thread.sleep(6000);
+					Thread.sleep(8000);
 					Common.scrollIntoView("xpath", "(//button[contains(@class,'btn btn-primary place-order')])[1]");
 					
 					Common.clickElement("xpath", "(//button[contains(@class,'btn btn-primary place-order')])[1]");
 
-					Thread.sleep(6000);
+					Thread.sleep(7000);
 					Sync.waitElementPresent(30, "xpath", "//h1[normalize-space()='Thank you for your purchase!']");
 					String sucessMessage = Common.getText("xpath",
 							" //h1[normalize-space()='Thank you for your purchase!']");
