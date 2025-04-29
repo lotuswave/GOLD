@@ -309,7 +309,7 @@ public void Login_Account(String dataSet) {
 			System.out.println(Common.getPageTitle());
 			Common.assertionCheckwithReport(
 					Common.getPageTitle().contains("Home page") || Common.getPageTitle().contains("Backpacks, Luggage & Travel")
-							|| Common.getPageTitle().contains("Osprey")||Common.getPageTitle().contains("Favorites Sharing"),
+							|| Common.getPageTitle().contains("Osprey")||Common.getPageTitle().contains("Favorites Sharing")||Common.getPageTitle().contains("Dashboard"),
 					"To validate the user lands on Home page after successfull login",
 					"After clicking on the signIn button it should navigate to the Home page",
 					"user Sucessfully navigate to the Home page after clicking on the signIn button",
@@ -6679,7 +6679,8 @@ public void review(String Dataset) {
              }
 			 else
 			 {
-				Common.textBoxInput("xpath", "//input[@placeholder='State/Province']", data.get(dataSet).get("Region"));
+				 Thread.sleep(2000);
+				 Common.dropdown("xpath", "//select[@name='region_id']",Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
 			 }
 
 			Common.textBoxInput("xpath", "//input[@name='postcode']", data.get(dataSet).get("postcode"));
@@ -6743,9 +6744,12 @@ public void review(String Dataset) {
 	             }
 				else
 				{
+				Thread.sleep(2000);
 				Common.clickElement("xpath", "//input[@name='region']");
+				Thread.sleep(2000);
 				Common.textBoxInput("xpath", "//input[@name='region']", region);
 				}
+				Thread.sleep(2000);
 				Common.clickElement("xpath", "//input[@name='postcode']");
 				Common.textBoxInput("xpath", "//input[@name='postcode']", zipcode);
 				Common.clickElement("xpath", "//label[@for='primary_shipping']");
@@ -6879,9 +6883,11 @@ public void review(String Dataset) {
 	             }
 				else
 				{
+				Thread.sleep(2000);
 				Common.clickElement("xpath", "//input[@placeholder='State/Province']");
 				Common.textBoxInput("xpath", "//input[@placeholder='State/Province']", region);
 				}
+				Thread.sleep(2000);
 				Common.clickElement("xpath", "//input[@name='postcode']");
 				Common.textBoxInput("xpath", "//input[@name='postcode']", zipcode);
 				
@@ -15240,7 +15246,7 @@ public void Footer_Links_BrandTeam(String Dataset) {
 	try {
 		
 		for (i = 0; i < footerlinks.length; i++) {
-			Thread.sleep(2000);
+//			Thread.sleep(2000);
 			Sync.waitElementPresent(30, "xpath",
 					"//div[contains(@class,'footer')]//a[@title='" + footerlinks[i] + "']");
 			Thread.sleep(2000);
@@ -15300,8 +15306,8 @@ public void Footer_validation(String Dataset) {
 	int i = 0;
 	try {
 		for (i = 0; i < footerlinks.length; i++) {
-			Sync.waitPageLoad();
-			Thread.sleep(2000);
+//			Sync.waitPageLoad();
+//			Thread.sleep(2000);
 			Sync.waitElementPresent(30, "xpath",
 					"//div[contains(@class,'footer')]//a[@title='" + footerlinks[i] + "']");
 //			Thread.sleep(1000);
@@ -17257,6 +17263,7 @@ public String create_account(String Dataset) {
 		
 		Sync.waitElementVisible(30, "xpath", "//button[@title='Sign Up']");
 		Common.clickElement("xpath", "//button[@title='Sign Up']");
+		Thread.sleep(2000);
 		Sync.waitElementPresent(30, "xpath", "//div[@ui-id='message-success']");
 		String message = Common.findElement("xpath", "//div[@ui-id='message-success']").getText();
 		System.out.println(message);
