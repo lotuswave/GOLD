@@ -16,7 +16,7 @@ public class Test_DGLD_OXO_ST_007_Checkout_With_Different_Billing_and_Different_
 	GoldOxoHyva_PRODHelper Oxo = new GoldOxoHyva_PRODHelper(datafile, "DataSet");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Validate_My_Account_Page_Validation_and_Checkout_With_Different_Billing_and_Different_Shipping_validate_Discount() throws Exception {
+	public void Validate_Checkout_With_Different_Billing_and_Different_Shipping_validate_Discount() throws Exception {
 
 		try {
 			Oxo.verifingHomePage();
