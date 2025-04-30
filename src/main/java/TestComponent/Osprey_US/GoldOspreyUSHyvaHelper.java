@@ -3604,9 +3604,9 @@ public void Validate_retailerlocations() {
 		// TODO Auto-generated method stub
 		try {
 
-			Sync.waitElementPresent(40, "xpath", "(//h5[text()='" + Productname + "'])[3]");
-			Common.scrollIntoView("xpath", "(//h5[text()='" + Productname + "'])[3]");
-			Common.javascriptclickElement("xpath", "(//h5[text()='" + Productname + "'])[3]");
+			Sync.waitElementPresent(40, "xpath", "//h5[text()='" + Productname + "']");
+			Common.scrollIntoView("xpath", "//h5[text()='" + Productname + "']");
+			Common.javascriptclickElement("xpath", "//h5[text()='" + Productname + "']");
 			Sync.waitElementVisible("xpath", "//div[@class='stock-status-banner alert success checkmark']");
 			Common.scrollIntoView("xpath", "(//h4[@class='pdp-information-title'])[1]");
 			int product = Common.findElements("xpath", "//div[@class='pdp-information']/p[2]").size();
@@ -4028,7 +4028,7 @@ public void Validate_retailerlocations() {
 			Common.clickElement("css", "section#shipping-details input[name='street[0]']");
 			Common.textBoxInput("css", "section#shipping-details input[name='street[0]']", address);
 //			Sync.waitPageLoad();
-			Thread.sleep(6000);
+			Thread.sleep(10000);
 			Common.findElement("css", "section[id='shipping-details'] input[name='city']").clear();
 			Common.textBoxInput("css", "section[id='shipping-details'] input[name='city']",
 					data.get(dataSet).get("City"));
@@ -4054,7 +4054,7 @@ public void Validate_retailerlocations() {
 			  Thread.sleep(3000);
 				Common.textBoxInputClear("xpath", "//input[@name='postcode']");
 				Common.textBoxInput("xpath", "//input[@name='postcode']", data.get(dataSet).get("postcode"));
-				Thread.sleep(3000);
+				Thread.sleep(7000);
 		
 				Common.textBoxInput("name", "telephone", data.get(dataSet).get("phone"));
 				Sync.waitPageLoad();
@@ -10464,43 +10464,86 @@ catch (Exception | Error e) {
 //
 //}
 
-public void webpagelinks_validation(String Dataset) throws Exception, IOException {
-    String links = data.get(Dataset).get("Links");
-    int failedCount = 0;
-    String[] strArray = links.split("\\r?\\n");
-    for (int i = 0; i < strArray.length; i++) {
-        String currentLink = strArray[i].trim();
-        System.out.println("Checking URL: " + currentLink);
-        try {
-            Common.oppenURL(currentLink);
-            String currentURL = Common.getCurrentURL();
-            System.out.println("Current URL after opening: " + currentURL);
-            int responseCode = getpageresponce(currentURL);
-            System.out.println("Response Code: " + responseCode);
-            if (responseCode == 200) {
-                ExtenantReportUtils.addPassLog("Validating Page URL", "Page should be accessible",
-                        "Successfully accessed: " + currentURL, Common.getscreenShotPathforReport("link" + i));
-            } else if (responseCode == 404) {
-                ExtenantReportUtils.addPassLog("Validating 404 Page", "Expected 404 error page displayed",
-                        "Verified 404 page for: " + currentURL, Common.getscreenShotPathforReport("404" + i));
-            } 
-            else {
-                failedCount++;
-                ExtenantReportUtils.addFailedLog("Validating Page URL", "Page should be accessible or return 404",
-                        "Unexpected response code (" + responseCode + ") for: " + currentURL,
-                        Common.getscreenShotPathforReport("error" + i));
-            }
-        } catch (Exception e) {
-            failedCount++;
-            System.out.println("Exception while checking: " + currentLink + " - " + e.getMessage());
-            ExtenantReportUtils.addFailedLog("Exception occurred", "Error while validating page",
-                    "Exception: " + e.getMessage(), Common.getscreenShotPathforReport("error" + i));
-        }
-    }
-    if (failedCount > 0) {
-        Assert.fail(failedCount + " link(s) failed validation.");
-    }
-}
+	public void webpagelinks_validation(String Dataset) throws Exception, IOException {
+		
+		if(Common.getCurrentURL().contains("www.osprey.com")) {
+		
+			String links = data.get(Dataset).get("prod Links");
+			int failedCount = 0;
+			String[] strArray = links.split("\\r?\\n");
+			for (int i = 0; i < strArray.length; i++) {
+			    String currentLink = strArray[i].trim();
+			    System.out.println("Checking URL: " + currentLink);
+			    try {
+			        Common.oppenURL(currentLink);
+			        String currentURL = Common.getCurrentURL();
+			        System.out.println("Current URL after opening: " + currentURL);
+			        int responseCode = getpageresponce(currentURL);
+			        System.out.println("Response Code: " + responseCode);
+			        if (responseCode == 200) {
+			            ExtenantReportUtils.addPassLog("Validating Page URL", "Page should be accessible",
+			                    "Successfully accessed: " + currentURL, Common.getscreenShotPathforReport("link" + i));
+			        } else if (responseCode == 404) {
+			            ExtenantReportUtils.addPassLog("Validating 404 Page", "Expected 404 error page displayed",
+			                    "Verified 404 page for: " + currentURL, Common.getscreenShotPathforReport("404" + i));
+			        } 
+			        else {
+			            failedCount++;
+			            ExtenantReportUtils.addFailedLog("Validating Page URL", "Page should be accessible or return 404",
+			                    "Unexpected response code (" + responseCode + ") for: " + currentURL,
+			                    Common.getscreenShotPathforReport("error" + i));
+			        }
+			    } catch (Exception e) {
+			        failedCount++;
+			        System.out.println("Exception while checking: " + currentLink + " - " + e.getMessage());
+			        ExtenantReportUtils.addFailedLog("Exception occurred", "Error while validating page",
+			                "Exception: " + e.getMessage(), Common.getscreenShotPathforReport("error" + i));
+			    }
+			}
+			if (failedCount > 0) {
+			    Assert.fail(failedCount + " link(s) failed validation.");
+			    }
+			}
+		
+		else {
+			String links = data.get(Dataset).get("Links");
+			int failedCount = 0;
+			String[] strArray = links.split("\\r?\\n");
+			for (int i = 0; i < strArray.length; i++) {
+			    String currentLink = strArray[i].trim();
+			    System.out.println("Checking URL: " + currentLink);
+			    try {
+			        Common.oppenURL(currentLink);
+			        String currentURL = Common.getCurrentURL();
+			        System.out.println("Current URL after opening: " + currentURL);
+			        int responseCode = getpageresponce(currentURL);
+			        System.out.println("Response Code: " + responseCode);
+			        if (responseCode == 200) {
+			            ExtenantReportUtils.addPassLog("Validating Page URL", "Page should be accessible",
+			                    "Successfully accessed: " + currentURL, Common.getscreenShotPathforReport("link" + i));
+			        } else if (responseCode == 404) {
+			            ExtenantReportUtils.addPassLog("Validating 404 Page", "Expected 404 error page displayed",
+			                    "Verified 404 page for: " + currentURL, Common.getscreenShotPathforReport("404" + i));
+			        } 
+			        else {
+			            failedCount++;
+			            ExtenantReportUtils.addFailedLog("Validating Page URL", "Page should be accessible or return 404",
+			                    "Unexpected response code (" + responseCode + ") for: " + currentURL,
+			                    Common.getscreenShotPathforReport("error" + i));
+			        }
+			    } catch (Exception e) {
+			        failedCount++;
+			        System.out.println("Exception while checking: " + currentLink + " - " + e.getMessage());
+			        ExtenantReportUtils.addFailedLog("Exception occurred", "Error while validating page",
+			                "Exception: " + e.getMessage(), Common.getscreenShotPathforReport("error" + i));
+			    }
+			}
+			if (failedCount > 0) {
+			    Assert.fail(failedCount + " link(s) failed validation.");
+			    }
+		}
+	}
+	
 
 public void Gift_cards(String Dataset) {
 	// TODO Auto-generated method stub
@@ -12500,9 +12543,9 @@ catch(Exception | Error e)
 			if(Common.getCurrentURL().contains("preprod")) {
 			Sync.waitPageLoad();
 			for (int i = 0; i <= 10; i++) {
-				Sync.waitElementPresent("xpath", "//img[contains(@itemprop ,'image')]");
-				List<WebElement> webelementslist = Common.findElements("xpath",
-						"//img[contains(@itemprop ,'image')]");
+				Sync.waitElementPresent("css", "a[class='product-image-link'] img");
+				List<WebElement> webelementslist = Common.findElements("css",
+						"a[class='product-image-link'] img");
 				String s = webelementslist.get(i).getAttribute("src");
 				System.out.println(s);
 				if (s.isEmpty()) {

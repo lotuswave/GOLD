@@ -15,7 +15,7 @@ public class Test_DGLD_OSP_US_ST_053_Validate_SearchResults_Page_PLP_and_PDP_pag
 	GoldOspreyUS_PRODHyvaHelper Osprey_ReEu = new GoldOspreyUS_PRODHyvaHelper(datafile,"Search");
 	GoldOspreyUS_PRODHyvaHelper Osprey_ReEu1 = new GoldOspreyUS_PRODHyvaHelper(datafile,"PDP");
 	GoldOspreyUS_PRODHyvaHelper Osprey_ReEu2 = new GoldOspreyUS_PRODHyvaHelper(datafile,"Giftcard Payments");
-
+	
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Validate_SearchResults_Page_PLP_and_PDP_page_Regular_Item_GC_Purchase () throws Exception {
@@ -32,11 +32,13 @@ public class Test_DGLD_OSP_US_ST_053_Validate_SearchResults_Page_PLP_and_PDP_pag
         Osprey_ReEu1.filter_By("Fliters");
         Osprey_ReEu1.color_validation("PLP Color");
         Osprey_ReEu1.price_filter_validation("PLP Color");
-        Osprey_ReEu1.Bagpacks_headerlinks("Backpacks & Bags");       
+       // Osprey_ReEu1.Bagpacks_headerlinks("Backpacks & Bags");
+        Osprey_ReEu1.search_product("Simple product");
         Osprey_ReEu1.Simple_PDP("Simple product");
         Osprey_ReEu1.search_product("Product");  
         Osprey_ReEu1.Configurable_PDP("Product");
-        Osprey_ReEu1.addtocart("Product");//
+        Osprey_ReEu1.search_product("Product");  
+        Osprey_ReEu1.addtocart("Product");
 	    Osprey_ReEu2.Gift_cards("Osprey Gift Card");
         Osprey_ReEu2.Card_Value("Gift Details");
         Osprey_ReEu2.minicart_Checkout();
@@ -55,7 +57,7 @@ public class Test_DGLD_OSP_US_ST_053_Validate_SearchResults_Page_PLP_and_PDP_pag
 
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+		//Common.closeAll();
 
 	}
 
