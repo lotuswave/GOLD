@@ -1220,17 +1220,18 @@ public class GoldOxoHyvaHelper
 		{
 			Thread.sleep(4000);
 			
-			Sync.waitElementPresent("xpath", "//button[contains(text(),'Add Gift Card')]");	
-			Common.clickElement("xpath", "//button[contains(text(),'Add Gift Card')]");
-		    Common.scrollIntoView("xpath", "//input[@x-model='giftCardCode']");
+			Sync.waitElementPresent("xpath", "//h3[contains(text(),'Add Gift Card')]");	
+			Common.clickElement("xpath", "//h3[contains(text(),'Add Gift Card')]");
+		    Common.scrollIntoView("xpath", "//h3[contains(text(),'Add Gift Card')]");
 			Common.textBoxInput("xpath","//input[@x-model='giftCardCode']", data.get(dataSet).get("InvalidGC"));
 			
 			Common.clickElement("xpath","//button[@aria-label='Add Code']");
 			Thread.sleep(3000);
-			Sync.waitElementPresent("xpath", "//button[contains(text(),'Add Gift Card')]");	
-			Common.clickElement("xpath", "//button[contains(text(),'Add Gift Card')]");
+			Sync.waitElementPresent("xpath", "//h3[contains(text(),'Add Gift Card')]");	
+			Common.clickElement("xpath", "//h3[contains(text(),'Add Gift Card')]");
 //		String errormsg=Common.findElement("xpath", "//div[@role='alert']").getText();
 //	  System.out.println(errormsg);
+//		
 //		
 //		Common.assertionCheckwithReport(errormsg.contains("not found"),
 //				"validating the error message after applying gift card",
@@ -13543,7 +13544,7 @@ public void header_WeAre_Oxo(String Dataset) {
 			Common.clickElement("xpath", "//button[@aria-label='Add to Cart "+Product+"']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			String Pdp=Common.findElement("xpath", "//span[@itemprop='name']").getText().toLowerCase();
+			String Pdp=Common.findElement("xpath", "//h1[@itemprop='name']").getText().toLowerCase();
 			System.out.println(Pdp);
 			
 			Common.assertionCheckwithReport(product.equalsIgnoreCase(Pdp),

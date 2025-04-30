@@ -23,7 +23,7 @@ public class TEST_DGLD_OSP_US_BCST_099_Validate_Footer_links {
 		        Osprey_ReEu.Footer_validation("Breadcrumbs");
 		        Osprey_ReEu.Footer_Links("Footer");
 		        Osprey_ReEu.Footer_Links_Resources("Footer");
-		        Osprey_ReEu.Footer_Links_BrandTeam("Footer");
+		//        Osprey_ReEu.Footer_Links_BrandTeam("Footer");           //covered in breadcrumbs validation
 		        Osprey_ReEu.Footer_Links_Repari_And_Replacement("Footer");
         
 		} catch (Exception e) {
