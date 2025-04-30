@@ -11742,8 +11742,8 @@ public void outofstock_subcription(String Dataset) {
 			if(discountordersummary>0)
 			{
 
-				Sync.waitElementPresent("xpath", "//button[contains(text(),'Add Discount Code')]");
-				Common.clickElement("xpath", "//button[contains(text(),'Add Discount Code')]");
+				Sync.waitElementPresent("xpath", "//h3[contains(text(),'Add Discount Code')]");
+				Common.clickElement("xpath", "//h3[contains(text(),'Add Discount Code')]");
 				Sync.waitElementPresent("xpath", "//span[contains(text(),'Cancel Coupon')]");
 				Common.clickElement("xpath", "//span[contains(text(),'Cancel Coupon')]");
 				Sync.waitPageLoad();
@@ -11751,8 +11751,8 @@ public void outofstock_subcription(String Dataset) {
 			}
 			else
 			{
-				Sync.waitElementPresent("xpath", "//button[contains(text(),'Add Discount Code')]");
-				Common.clickElement("xpath", "//button[contains(text(),'Add Discount Code')]");
+				Sync.waitElementPresent("xpath", "//h3[contains(text(),'Add Discount Code')]");
+				Common.clickElement("xpath", "//h3[contains(text(),'Add Discount Code')]");
 				
 				
 			}

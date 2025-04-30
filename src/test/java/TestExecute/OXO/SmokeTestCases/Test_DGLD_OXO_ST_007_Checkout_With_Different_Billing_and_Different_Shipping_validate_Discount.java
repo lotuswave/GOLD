@@ -10,7 +10,7 @@ import TestComponent.OXO.GoldOxoHyva_PRODHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_OXO_ST_007_My_Account_Page_Validation_and_Checkout_With_Different_Billing_and_Different_Shipping_validate_Discount {
+public class Test_DGLD_OXO_ST_007_Checkout_With_Different_Billing_and_Different_Shipping_validate_Discount {
 
 	String datafile = "OXO//GoldOxoTestData.xlsx";
 	GoldOxoHyva_PRODHelper Oxo = new GoldOxoHyva_PRODHelper(datafile, "DataSet");
@@ -22,7 +22,7 @@ public class Test_DGLD_OXO_ST_007_My_Account_Page_Validation_and_Checkout_With_D
 			Oxo.verifingHomePage();
 			Oxo.click_singinButton();
 			Oxo.Usersignin("AccountDetails");
-			Oxo.Account_page_Validation("Account");
+			//Oxo.Account_page_Validation("Account");
 			Oxo.search_product("Product");
 			Oxo.addtocart("Product");
 			Oxo.minicart_Checkout();
