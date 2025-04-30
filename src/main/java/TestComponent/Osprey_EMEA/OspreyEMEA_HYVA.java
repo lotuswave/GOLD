@@ -13676,8 +13676,8 @@ public void contactUsPage(String dataSet) throws Exception {
 //		Common.textBoxInput("xpath", "//input[@name='conversationPhoneForForms']", data.get(dataSet).get("phone"));
 		
 		Thread.sleep(4000);
-		Sync.waitElementPresent("xpath", "//div[@id='conversationCountryCodeFor']");
-		Common.clickElement("xpath", "//div[@id='conversationCountryCodeFor']");
+		Sync.waitElementPresent("css", "div[id*='conversationCountry']");
+		Common.clickElement("css", "div[id*='conversationCountry']");
 		Sync.waitElementPresent("xpath", "//div[text()='" + country + "']");
 		Common.clickElement("xpath", "//div[text()='" + country + "']");
 		
@@ -13705,13 +13705,19 @@ public void contactUsPage(String dataSet) throws Exception {
 //		Sync.waitElementPresent("xpath", "//input[@name='conversationPostalCodeForForms']");
 //		Common.textBoxInput("xpath", "//input[@name='conversationPostalCodeForForms']",
 //				data.get(dataSet).get("postcode"));
-        Common.scrollIntoView("xpath", "//div[@id='conversationHowcanwehelp']");
-		Sync.waitElementPresent("xpath", "//div[@id='conversationHowcanwehelp']");
-		Common.clickElement("xpath", "//div[@id='conversationHowcanwehelp']");
-		
+        Common.scrollIntoView("css", "div[id*='conversationHowcanwehelp']");
+		Sync.waitElementPresent("css", "div[id*='conversationHowcanwehelp']");
+		Common.clickElement("css", "div[id*='conversationHowcanwehelp']");
+		if(Common.getCurrentURL().contains("preprod"))
+		{
 		Common.clickElement("xpath", "//div[@data-path='order_issues']");
+		}
+		else
+		{
+			Common.clickElement("xpath", "//div[@data-path='product_info_request']");
+		}
 //
-//		Thread.sleep(4000);
+//		Thread.sleep(4000); conversationOrderissues
 		Sync.waitElementPresent("xpath", "//div[@id='conversationProductinfoRequest']");
 		Common.clickElement("xpath", "//div[@id='conversationProductinfoRequest']");
 		Common.clickElement("xpath", "//div[@data-path='use_and_care']");
