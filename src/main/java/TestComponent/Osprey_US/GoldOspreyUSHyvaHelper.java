@@ -9224,6 +9224,7 @@ public void MyFavorites_Guestuser(String Dataset) {
 						System.out.println("countryname:   "+countryname);
 						Thread.sleep(3000);	
 						Country = select.get(i).getText();
+						Thread.sleep(2000)
 						System.out.println("Country:   "+Country);
 						select.get(i).click();
 						Thread.sleep(5000);
