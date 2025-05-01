@@ -3552,9 +3552,9 @@ public class OspreyEMEA_HYVA {
 		try {
 
 			Sync.waitElementPresent("xpath",
-					"//a[contains(@class,'level-0')]//span[contains(text(),'"+ header +"')]");
+					"//button[contains(@class,'level-0')]//span[contains(text(),'"+ header +"')]");
 			
-			Common.clickElement("xpath", "//a[contains(@class,'level-0')]//span[contains(text(),'" + header + "')]");
+			Common.clickElement("xpath", "//button[contains(@class,'level-0')]//span[contains(text(),'" + header + "')]");
 			Thread.sleep(2000);
 			try {
 				Common.mouseOver("xpath", "//span[contains(text(),'"+ header +"')]");
