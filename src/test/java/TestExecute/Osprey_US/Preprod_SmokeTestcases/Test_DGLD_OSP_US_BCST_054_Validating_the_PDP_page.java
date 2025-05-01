@@ -25,6 +25,7 @@ public class Test_DGLD_OSP_US_BCST_054_Validating_the_PDP_page {
         Osprey_ReEu.Simple_PDP("Simple product");
         Osprey_ReEu.search_product("Product");  
         Osprey_ReEu.Configurable_PDP("Product");
+        Osprey_ReEu.PDP_Color_Validation();
 
   
         
@@ -38,7 +39,7 @@ public class Test_DGLD_OSP_US_BCST_054_Validating_the_PDP_page {
 
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+		//Common.closeAll();
 
 	}
 
