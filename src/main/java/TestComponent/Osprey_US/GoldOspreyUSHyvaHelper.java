@@ -17402,6 +17402,38 @@ public void deleteProduct_shoppingcart() {
 	}	
 }	
 
+public void PDP_Color_Validation() {
+	// TODO Auto-generated method stub
+	try
+	{
+		Common.actionsKeyPress(Keys.HOME);
+		List<WebElement> ListOfSubproducts = Common.findElements("xpath",
+				"//div[@class='osprey_color']//div[contains(@class,'m-swatch') and @data-option-label]");
+		System.out.println(ListOfSubproducts.size());   //6 displaying
+		for (int i = 1; i < ListOfSubproducts.size(); i++) {    //i<6 i=0
+			int value = i + 1;   //0+1=1
+			ListOfSubproducts.get(i).click();
+			String colorname = Common.getText("xpath","//span[contains(@class, 'm-swatch-group')]");
+			System.out.println(colorname);
+			String Bottleimagecolor =Common.getText("xpath", "(//span[contains(@x-text,'getSwatchText')])['" + value + "']");
+			System.out.println(Bottleimagecolor);
+			Common.assertionCheckwithReport(colorname.contains(Bottleimagecolor), "validating the  selected Color Swatch",
+					"User should select the Color swatch", "Sucessfully Color swatch is selected ",
+					"failed to Select The color swatch");
+	}
+	}
+	catch(Exception | Error e)
+	{
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the  selected Color Swatch",
+				"User should select the Color swatch", "unable to select the Color swatch ", Common.getscreenShot("Sucessfully Color swatch is selected"));
+		Assert.fail();
+	}
+	
+}
+
+
+
 
 public void Accessories_Header1(String Dataset) {
 	// TODO Auto-generated method stub
@@ -17467,6 +17499,7 @@ public void Accessories_Header1(String Dataset) {
 	}
 }
 }
+
 
 
 
