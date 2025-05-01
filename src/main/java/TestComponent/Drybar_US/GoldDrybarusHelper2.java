@@ -1622,10 +1622,14 @@ public class GoldDrybarusHelper2 {
 		try {
 
 		  
-			Sync.waitElementPresent("xpath",
-					"//a[@title='"+ header +"']//span[contains(text(),'"+ header +"')]");
+//			Sync.waitElementPresent("xpath",
+//					"//a[@title='"+ header +"']//span[contains(text(),'"+ header +"')]");
+//			
+//			Common.clickElement("xpath", "//a[@title='"+ header +"']//span[contains(text(),'"+ header +"')]");
 			
-			Common.clickElement("xpath", "//a[@title='"+ header +"']//span[contains(text(),'"+ header +"')]");
+			Sync.waitElementPresent("xpath","//button//span[contains(text(),'"+ header +"')]");
+			
+			Common.clickElement("xpath", "//button//span[contains(text(),'"+ header +"')]");
 
 			Thread.sleep(3000);
 
@@ -1640,7 +1644,8 @@ public class GoldDrybarusHelper2 {
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			expectedResult = "User should select the " + Dataset + "category";
-			int sizebotteles = Common.findElements("xpath", "//a[@title='"+ header +"']//span[contains(text(),'"+ header +"')]").size();
+			//int sizebotteles = Common.findElements("xpath", "//a[@title='"+ header +"']//span[contains(text(),'"+ header +"')]").size();
+			int sizebotteles = Common.findElements("xpath", "//button//span[contains(text(),'"+ header +"')]").size();
 			Common.assertionCheckwithReport(sizebotteles > 0,
 					"validating the product category as" + Dataset + "from navigation menu ", expectedResult,
 					"Selected the " + Dataset + " category", "User unabel to click" + Dataset + "");
@@ -3835,6 +3840,7 @@ public class GoldDrybarusHelper2 {
 			String minicart = Common.findElement("xpath", "//span[@x-html='cart.subtotal']//span[@class='price']").getText();
 			Sync.waitElementPresent("xpath", "//a[@title='View Bag']");
 			Common.clickElement("xpath", "//a[@title='View Bag']");
+			Thread.sleep(5000);
 			String viewcart = Common.findElement("xpath", "//div[@x-text='hyva.formatPrice(totalsData.subtotal)']").getText();
 			Sync.waitPageLoad();
 			Thread.sleep(8000);
@@ -7507,7 +7513,8 @@ public void FUll_Payment(String dataSet) {
 			try {
 				for (i = 0; i < Links.length; i++) {
 					
-					Common.clickElement("xpath", "//a[@title='Hair Products']");
+//					Common.clickElement("xpath", "//a[@title='Hair Products']");
+					Common.clickElement("xpath", "//span[contains(text(),'Hair Products')]");
 					Sync.waitElementPresent("xpath", "(//span[contains(text(),'"+ inspo +"')])");
 					Common.clickElement("xpath", "(//span[contains(text(),'"+ inspo +"')])");
 					Thread.sleep(3000);
