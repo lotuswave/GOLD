@@ -4296,12 +4296,12 @@ public void Validate_retailerlocations() {
 		addPaymentDetails(dataSet);
 		String expectedResult = "It redirects to order confirmation page";
 
-		if (Common.findElements("xpath", "//div[@class='message message-error']").size() > 0) {
-			Thread.sleep(1000);
-			addPaymentDetails(dataSet);
-		}
-
-		Thread.sleep(1000);
+//		if (Common.findElements("xpath", "//div[@class='message message-error']").size() > 0) {
+//			Thread.sleep(1000);
+//			addPaymentDetails(dataSet);
+//		}
+//
+//		Thread.sleep(1000);
 		String url = automation_properties.getInstance().getProperty(automation_properties.BASEURL);
 
 		if (!url.contains("stage") && !url.contains("preprod")) {
