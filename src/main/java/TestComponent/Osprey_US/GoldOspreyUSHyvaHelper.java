@@ -4312,7 +4312,6 @@ public void Validate_retailerlocations() {
 //				Thread.sleep(1000);
 				Sync.waitElementPresent(30, "css", "div[class*='checkout-success'] h1");
 				String sucessMessage = Common.getText("css", "div[class*='checkout-success'] h1");
-
 				// Tell_Your_FriendPop_Up();
 				int sizes = Common.findElements("css", "div[class*='checkout-success'] h1")
 						.size();//
