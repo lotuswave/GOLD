@@ -389,7 +389,8 @@ public void Login_Account(String dataSet) {
 
 	}
 
-	public void stayIntouch() throws Exception {
+	public void stayIntouch (String Dataset) {
+		String Email = Common.genrateRandomEmail(data.get(Dataset).get("Email"));
 
 		  try {
 			if (Common.getCurrentURL().contains("stage") || Common.getCurrentURL().contains("preprod")) {
@@ -402,7 +403,7 @@ public void Login_Account(String dataSet) {
 				Common.actionsKeyPress(Keys.END);
 				Thread.sleep(4000);
 				Sync.waitElementClickable(30, "xpath", "//input[@aria-label='Enter Email Address']");
-				Common.textBoxInput("xpath", "//input[@aria-label='Enter Email Address']", Utils.getEmailid());
+				Common.textBoxInput("xpath", "//input[@aria-label='Enter Email Address']", Email);
 				Thread.sleep(4000);
 				Common.clickElement("xpath", "//button[text()='Sign Up']");
 				Thread.sleep(4000);
@@ -424,7 +425,7 @@ public void Login_Account(String dataSet) {
 				Common.actionsKeyPress(Keys.END);
 				Thread.sleep(4000);
 				Sync.waitElementClickable(30, "xpath", "//input[@aria-label='Enter Email Address']");
-				Common.textBoxInput("xpath", "//input[@aria-label='Enter Email Address']", Utils.getEmailid());
+				Common.textBoxInput("xpath", "//input[@aria-label='Enter Email Address']", Email);
 				Thread.sleep(4000);
 				Common.clickElement("xpath", "//button[text()='Sign Up']");
 				Thread.sleep(4000);
@@ -5929,13 +5930,14 @@ return Number;
 
 	public void newuseraddDeliveryAddress(String dataSet) throws Exception {
 		// TODO Auto-generated method stub
+		String Email = Common.genrateRandomEmail(data.get(dataSet).get("UserName"));
 		try {
 			Thread.sleep(5000);
 			Sync.waitElementVisible("xpath", "//input[@type='email']");
-			Common.textBoxInput("xpath", "//input[@type='email']", Utils.getEmailid());
+			Common.textBoxInput("xpath", "//input[@type='email']", Email);
 		} catch (NoSuchElementException e) {
 			minicart_Checkout();
-			Common.textBoxInput("xpath", "//input[@type='email']", Utils.getEmailid());
+			Common.textBoxInput("xpath", "//input[@type='email']", Email);
 
 		}
 		String expectedResult = "email field will have email address";

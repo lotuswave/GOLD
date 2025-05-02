@@ -22,7 +22,7 @@ public class Test_DGLD_OS_US_ST_046_Guest_User_Create_Account_from_OrderConfirma
         Osprey_ReEu.search_product("Product");
         Osprey_ReEu.addtocart("Product");
         Osprey_ReEu.minicart_Checkout();
-        Osprey_ReEu.newuseraddDeliveryAddress("Account");
+        Osprey_ReEu.newuseraddDeliveryAddress("New Account Details");
         Osprey_ReEu.selectshippingmethod("GroundShipping method");
         Osprey_ReEu.clickSubmitbutton_Shippingpage();
         Osprey_ReEu.updatePaymentAndSubmitOrder("CCVisacard");
