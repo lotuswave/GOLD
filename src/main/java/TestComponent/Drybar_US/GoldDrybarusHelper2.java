@@ -1893,6 +1893,8 @@ public class GoldDrybarusHelper2 {
 	public void review(String Dataset) {
 		// TODO Auto-generated method stub
 		String products = data.get(Dataset).get("Products");
+		String Email = Common.genrateRandomEmail(data.get(Dataset).get("Valid Email")); 
+	
 		System.out.println(products);
 		try {
 			Thread.sleep(4000);
@@ -1960,7 +1962,7 @@ public class GoldDrybarusHelper2 {
 						"Sucessfully error message has been displayed for invalid email",
 						"Failed to display the error message for invaild email");
 				Thread.sleep(4000);
-				Common.textBoxInput("xpath", "//input[@name='email']", Utils.getEmailid());
+				Common.textBoxInput("xpath", "//input[@name='email']",Email);
 				Thread.sleep(3000);
 				if (Common.getCurrentURL().contains("preprod")) {
 				
@@ -2016,7 +2018,7 @@ public class GoldDrybarusHelper2 {
 						"Sucessfully error message has been displayed for invalid email",
 						"Failed to display the error message for invaild email");
 				Thread.sleep(4000);
-				Common.textBoxInput("xpath", "//input[@aria-label='Your email address']", Utils.getEmailid());
+				Common.textBoxInput("xpath", "//input[@aria-label='Your email address']", Email);
 				Thread.sleep(3000);
 				if(Common.getCurrentURL().contains("preprod")) {
 				
@@ -2049,6 +2051,7 @@ public class GoldDrybarusHelper2 {
 		}
 
 	}
+
 	
 	
 	public void score(String score) throws Exception {
@@ -2113,6 +2116,7 @@ public class GoldDrybarusHelper2 {
 		String Question = data.get(Dataset).get("CommetsDrybar");
 		String Name = data.get(Dataset).get("FirstName");
 		String Email = data.get(Dataset).get("Email");
+		String email =Common.genrateRandomEmail(data.get(Dataset).get("Valid Email"));
 		try {
 			int size =Common.findElements("xpath","//div[@class='write-question-review-buttons-container']").size();//
 			if(size > 0) {
@@ -2128,7 +2132,7 @@ public class GoldDrybarusHelper2 {
 				Sync.waitElementPresent(30, "xpath", "//input[@id='yotpo_input_question_username']");
 				Common.textBoxInput("xpath", "//input[@id='yotpo_input_question_username']", Name);
 				Sync.waitElementPresent(30, "xpath", "//input[@id='yotpo_input_question_email']");
-				Common.textBoxInput("xpath", "//input[@id='yotpo_input_question_email']", Utils.getEmailid());
+				Common.textBoxInput("xpath", "//input[@id='yotpo_input_question_email']", email);
 				Thread.sleep(3000);
 				if(Common.getCurrentURL().contains("preprod")){
 				Common.clickElement("xpath", "//input[@data-button-type='submit']");
@@ -2161,7 +2165,7 @@ public class GoldDrybarusHelper2 {
 				Sync.waitElementPresent(30, "xpath", "//input[@aria-label='Enter your name']");
 				Common.textBoxInput("xpath", "//input[@aria-label='Enter your name']", Name);
 				Sync.waitElementPresent(30, "xpath", "//input[@aria-label='Enter your email address']");
-				Common.textBoxInput("xpath", "//input[@aria-label='Enter your email address']", Utils.getEmailid());
+				Common.textBoxInput("xpath", "//input[@aria-label='Enter your email address']", email);
 				Thread.sleep(3000);
 				if(Common.getCurrentURL().contains("preprod")){
 				Common.clickElement("xpath", "//button[@class='yotpo-question-submit']");
@@ -2188,7 +2192,7 @@ public class GoldDrybarusHelper2 {
 		}
 
 	}
-	
+
 	public void search_filter(String Dataset) {
 		// TODO Auto-generated method stub
 		String rating = data.get(Dataset).get("Review");
