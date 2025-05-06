@@ -475,17 +475,18 @@ public void Login_Account(String dataSet) {
 			AssertJUnit.fail();
 
 		}
-
 	}
-
 	
-
-
 
 	public void Account_page_Validation(String Dataset) throws Exception {
 		// TODO Auto-generated method stub
-//				Sync.waitPageLoad();
-//				Thread.sleep(5000);
+
+		Sync.waitElementPresent("xpath", "//button[@id='customer-menu']");
+		Common.clickElement("xpath", "//button[@id='customer-menu']");
+		Sync.waitElementPresent("xpath", "//a[@id='customer.header.dashboard.link']");
+		Common.clickElement("xpath", "//a[@id='customer.header.dashboard.link']");
+		Sync.waitPageLoad();
+		Thread.sleep(2000);
 				if (Common.getCurrentURL().contains("stage")|| Common.getCurrentURL().contains("preprod")|| Common.getCurrentURL().contains("www.osprey.com")) {
 //					Thread.sleep(3000);
 					String Accountlinks = data.get(Dataset).get("Account Links");
@@ -504,7 +505,7 @@ public void Login_Account(String dataSet) {
 							System.out.println(currentUrl);
 							Common.assertionCheckwithReport(
 									currentUrl.contains("customer/account/edit/")|| currentUrl.contains("customer/address/new/")||currentUrl.contains("sales/order/history")
-									|| currentUrl.contains("giftregistry/")|| currentUrl.contains("wishlist")|| currentUrl.contains("amgcard/account/")
+									|| currentUrl.contains("giftregistry/")|| currentUrl.contains("wishlist")|| currentUrl.contains("amgcard/account/") ||currentUrl.contains("customer/address")
 									|| currentUrl.contains("stock/index/")|| currentUrl.contains("storecredit/info/")|| currentUrl.contains("customer/paymentmethods/")
 									|| currentUrl.contains("newsletter/manage/")|| currentUrl.contains("klaviyo/customer/newsletter/"),
 									"verifying Account page links " + Account[i],

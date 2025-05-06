@@ -4,9 +4,9 @@
 <listener class-name="Utilities.TestListener"/>
 </listeners>
 
-	 <test name="Test_DGLD_OSP_US_BCST_001_Create_Account_And_MyAccount_Funtionality" testid="DQA-1873" priority="P1" description="This test case will validate the create account and my account functionality.">
+  <test name="TEST_DGLD_OSP_US_BCST_001_Create_Account_Funtionality" testid="DQA-1873" priority="P1" description="This test case will validate the create account and my account functionality.">
 		<classes>
-				<class name="TestExecute.Osprey_US.Preprod_SmokeTestcases.Test_DGLD_OSP_US_BCST_001_Create_Account_And_MyAccount_Funtionality" />
+				<class name="TestExecute.Osprey_US.Preprod_SmokeTestcases.TEST_DGLD_OSP_US_BCST_001_Create_Account_Funtionality" />
 		  </classes>
 	</test> 
 	
@@ -81,6 +81,7 @@
             <class name="TestExecute.Osprey_US.Preprod_SmokeTestcases.Test_DGLD_OSP_US_BCST_064_Validating_the_Search_Results_Page" />
         </classes>
     </test>
+    
     
    
 </suite>
