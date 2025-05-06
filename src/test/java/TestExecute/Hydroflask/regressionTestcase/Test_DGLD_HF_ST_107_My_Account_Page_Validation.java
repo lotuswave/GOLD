@@ -1,4 +1,4 @@
-package TestExecute.Hydroflask.Preprod_Smoke_TestCases;
+package TestExecute.Hydroflask.regressionTestcase;
 
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;

@@ -57,12 +57,6 @@
 </classes>
 </test>
 
-<test name="Test_DGLD_HF_ST_107_My_Account_Page_Validation" testid="DQA-220" priority="P1" description="This script will cover validating the My Account page">
-<classes>
-<class name="TestExecute.Hydroflask.Preprod_Smoke_TestCases.Test_DGLD_HF_ST_107_My_Account_Page_Validation"/>
-</classes>
-</test>
-
 <test name="Test_DGLD_HF_ST_092_Validating_the_shopping_cart_page" testid="DQA-189" priority="P1" description="This script will cover validating the shopping cart page">
 <classes>
 <class name="TestExecute.Hydroflask.Preprod_Smoke_TestCases.Test_DGLD_HF_ST_092_Validating_the_shopping_cart_page"/>
