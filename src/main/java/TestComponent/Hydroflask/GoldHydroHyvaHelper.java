@@ -161,10 +161,10 @@ public class GoldHydroHyvaHelper {
 		String expectedResult = "User should click the" + category;
 		try {
 
-			Sync.waitElementPresent("xpath", "(//a[contains(@title,'Shop')]//span[contains(text(),'Shop')])[1]");
+			Sync.waitElementPresent("xpath", "//span[contains(text(), ' Shop')]");
 			Thread.sleep(3000);
 //			Common.scrollIntoView("xpath","//a[contains(@class,'level-top')]//span[text()=' Shop']");
-			Common.clickElement("xpath", "(//a[contains(@title,'Shop')]//span[contains(text(),'Shop')])[1]");
+			Common.clickElement("xpath", "//span[contains(text(), ' Shop')]");
 
 			Thread.sleep(3000);
 
@@ -9187,14 +9187,14 @@ catch(Exception | Error e)
 		// TODO Auto-generated method stub
 		String quantity = data.get(Dataset).get("Quantity");
 		try {
-			Common.clickElement("xpath", "(//div[@class='flex h-full']//select)[1]");
-			Common.dropdown("xpath", "(//div[@class='flex h-full']//select)[1]", Common.SelectBy.VALUE, quantity);
+			Common.clickElement("xpath", "(//select[@title='Qty'])[1]");
+			Common.dropdown("xpath", "(//select[@title='Qty'])[1]", Common.SelectBy.VALUE, quantity);
 //			Common.clickElement("xpath", "//span[text()='Update']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Sync.waitPageLoad();
-			Thread.sleep(4000);
-			String productquantity = Common.findElement("xpath", "(//div[@class='flex h-full']//select)[1]")
+			Thread.sleep(5000);
+			String productquantity = Common.findElement("xpath", "(//select[@title='Qty'])[1]")
 					.getAttribute("value");
 			System.out.println(productquantity);
 			Common.assertionCheckwithReport(productquantity.equals(quantity),
