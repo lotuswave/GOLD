@@ -25,7 +25,7 @@ public class Test_DGLD_OS_ES_032_Register_user_Checkout_with_Paypal {
         Osprey_ReEu.addtocart("Product");
         Osprey_ReEu.minicart_Checkout();
         Osprey_ReEu.RegaddDeliveryAddress("es_Address");
-        Osprey_ReEu.selectshippingmethod("Den shippingmethod");
+        Osprey_ReEu.selectshippingmethod("ES shipping method");
         Osprey_ReEu.clickSubmitbutton_Shippingpage();
         Osprey_ReEu.payPal_Payment("NON_UK_PaypalDetails");
         

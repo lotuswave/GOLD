@@ -109,8 +109,8 @@ public class GoldOxoHyvaHelper
 		String expectedResult = "User should click the" + category;
 		try {
 
-			Sync.waitElementClickable(30,"xpath", "//a[contains(@class,'level-0-link')]//span[contains(text(),' Shop')]");
-			Common.mouseOverClick("xpath", "//a[contains(@class,'level-0-link')]//span[contains(text(),' Shop')]");
+			Sync.waitElementClickable(30,"xpath", "//button[contains(@class,'level-0-link')]//span[contains(text(),' Shop')]");
+			Common.mouseOverClick("xpath", "//button[contains(@class,'level-0-link')]//span[contains(text(),' Shop')]");
 			
 
 			try {
@@ -298,9 +298,9 @@ public class GoldOxoHyvaHelper
 		String expectedResult = "User should click the" + category;
 		try {
 
-			Sync.waitElementPresent("xpath", "//a[contains(@class,'level-0-link')]//span[contains(text(),' Shop')]");
+			Sync.waitElementPresent("xpath", "//button[contains(@class,'level-0-link')]//span[contains(text(),' Shop')]");
 			Thread.sleep(3000);
-			Common.clickElement("xpath", "//a[contains(@class,'level-0-link')]//span[contains(text(),' Shop')]");
+			Common.clickElement("xpath", "//button[contains(@class,'level-0-link')]//span[contains(text(),' Shop')]");
 			Thread.sleep(3000);
 
 			try {
@@ -13240,9 +13240,9 @@ public void header_CleaningAndOrganization_ShopAll(String Dataset) {
 //				String[] shopLinks=names.split(",");
 		int i = 0;
 		try {
-			Sync.waitElementClickable("xpath", "//a[contains(@class,'level-0-link hidden')]//span[normalize-space()='Shop']");
+			Sync.waitElementClickable("xpath", "//button[contains(@class,'level-0-link')]//span[contains(text(),' Shop')]");  
 			Thread.sleep(3000);
-			Common.mouseOverClick("xpath", "//a[contains(@class,'level-0-link hidden')]//span[normalize-space()='Shop']");
+			Common.mouseOverClick("xpath", "//button[contains(@class,'level-0-link')]//span[contains(text(),' Shop')]");
 			Thread.sleep(3000);
 			List<WebElement> shop = Common.findElements("xpath", "//li//a[contains(@class,'link group no-underline')]//span[1]");
 
