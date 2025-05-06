@@ -272,7 +272,8 @@ public class OspreyEMEA_HYVA {
 
 	public String Create_Account(String Dataset) {
 		// TODO Auto-generated method stub
-		String email = Common.genrateRandomEmail(data.get(Dataset).get("Email"));
+		String email =data.get(Dataset).get("Email");
+		System.out.println(email);
 		String Store= data.get(Dataset).get("Store");
 		try {
 			Common.textBoxInput("xpath", "//input[@name='firstname']", data.get(Dataset).get("FirstName"));
@@ -441,11 +442,13 @@ public class OspreyEMEA_HYVA {
 	public void stayIntouch() {
 
 		try {
+			String Email=Common.genrateRandomEmail("automationospemea@gmail.com");
+			System.out.println(Email);
 			Thread.sleep(5000);
 			Common.scrollIntoView("xpath", "//input[@aria-label='Enter your email']");
 			Thread.sleep(5000);
 			Sync.waitElementClickable(30, "xpath", "//input[@aria-label='Enter your email']");
-			Common.textBoxInput("xpath", "//input[@aria-label='Enter your email']", Utils.getEmailid());
+			Common.textBoxInput("xpath", "//input[@aria-label='Enter your email']", Email);
 			Thread.sleep(5000);
 			Common.clickElement("xpath", "(//label[@class='needsclick go3431972610 kl-private-reset-css-Xuajs1'])[2]");
 			Common.clickElement("xpath", "//button[text()='Subscribe']");
@@ -5547,7 +5550,7 @@ return Number;
 	}
 
 	public void newuseraddDeliveryAddress(String dataSet) throws Exception {
-		String email = Common.genrateRandomEmail(data.get(dataSet).get("UserName"));
+		String email = data.get(dataSet).get("UserName");
 		try {
 			Thread.sleep(5000);
 			Sync.waitElementVisible("xpath", "//input[@type='email']");
@@ -7194,7 +7197,7 @@ return Number;
 	public String change_Email(String Dataset) {
 		// TODO Auto-generated method stub
 		String newemail = "";
-
+		String Email=Common.genrateRandomEmail("automationospemea@gmail.com");
 		try {
 			
 			Common.clickElement("xpath", "//span[text()='Edit']");
@@ -7202,7 +7205,7 @@ return Number;
 			Sync.waitElementClickable(30, "id", "change-email");
 			Common.clickElement("id", "change-email");
 			Common.textBoxInputClear("xpath", "(//input[@name='email'])[1]");
-			Common.textBoxInputAndVerify("xpath", "(//input[@name='email'])[1]", Utils.getEmailid());
+			Common.textBoxInputAndVerify("xpath", "(//input[@name='email'])[1]", Email);
 			 newemail = Common.findElement("xpath", "(//input[@name='email'])[1]").getAttribute("value");
 			Common.textBoxInput("xpath", "//input[@name='current_password']",
 					data.get(Dataset).get("Confirm Password"));
@@ -7486,7 +7489,7 @@ return Number;
 	public String create_account_With_Product(String Dataset) {
 		// TODO Auto-generated method stub
 		String email = "";
-		String Email = Common.genrateRandomEmail(data.get(Dataset).get("UserName"));
+		String Email = data.get(Dataset).get("UserName");
 		String product = data.get(Dataset).get("Products");
 		try {
 			Common.refreshpage();
@@ -12946,7 +12949,7 @@ public void Guest_Add_Wishlist_Create_account() throws Exception {
 
 public String Create_Account_for_Guest_my_fav(String Dataset) {
 	// TODO Auto-generated method stub
-	String email = Common.genrateRandomEmail(data.get(Dataset).get("Email"));
+	String email =data.get(Dataset).get("Email");
 	try {
         Common.clickElement("xpath", "//a[text()='Create an Account']");
 		Common.textBoxInput("xpath", "//input[@name='firstname']", data.get(Dataset).get("FirstName"));
