@@ -13240,7 +13240,7 @@ public void header_CleaningAndOrganization_ShopAll(String Dataset) {
 //				String[] shopLinks=names.split(",");
 		int i = 0;
 		try {
-			Sync.waitElementClickable("xpath", "//button[contains(@class,'level-0-link')]//span[contains(text(),' Shop')]");
+			Sync.waitElementClickable("xpath", "//button[contains(@class,'level-0-link')]//span[contains(text(),' Shop')]");  
 			Thread.sleep(3000);
 			Common.mouseOverClick("xpath", "//button[contains(@class,'level-0-link')]//span[contains(text(),' Shop')]");
 			Thread.sleep(3000);
