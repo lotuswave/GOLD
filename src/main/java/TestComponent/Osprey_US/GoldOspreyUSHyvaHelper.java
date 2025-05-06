@@ -581,7 +581,15 @@ public void Login_Account(String dataSet) {
 						"//li//a//span[contains(text(),'" + Links[i] + "')]");
 				Sync.waitPageLoad();
 				Thread.sleep(2000);
-				String title = Common.findElement("xpath", "//div[contains(@class,'c-clp-hero')]//h1").getText();
+				String title = "";
+	            if 
+	            (Common.findElements("xpath", "//div[contains(@class,'c-clp-hero')]//h1").size() > 0) {
+	                title = Common.findElement("xpath", "//div[contains(@class,'c-clp-hero')]//h1").getText();
+	            } 
+	            else if (Common.findElements("xpath", "//div[contains(@class,'cms')]//h1").size() > 0) {
+	                title = Common.findElement("xpath", "//div[contains(@class,'cms')]//h1").getText();
+	            }
+//	            title = Common.findElement("xpath", "//div[contains(@class,'c-clp-hero')]//h1").getText();
 //				String breadcrumbs = Common.findElement("xpath", "//div//nav[contains(@class,'breadcrumbs')]").getText();
 //				System.out.println(title);
 //				System.out.println(breadcrumbs);
@@ -671,7 +679,16 @@ public void Login_Account(String dataSet) {
 						"//li[contains(@class,'level2 ')]//a//span[contains(text(),'" + Links[i] + "')]");
 				Sync.waitPageLoad();
 				Thread.sleep(2000);
-				String title = Common.findElement("xpath", "//div[contains(@class,'c-clp-hero')]//h1").getText();
+//				String title = Common.findElement("xpath", "//div[contains(@class,'c-clp-hero')]//h1").getText();
+				String title = "";
+	            if 
+	            (Common.findElements("xpath", "//div[contains(@class,'c-clp-hero')]//h1").size() > 0) {
+	                title = Common.findElement("xpath", "//div[contains(@class,'c-clp-hero')]//h1").getText();
+	            } 
+	            else if (Common.findElements("xpath", "//div[contains(@class,'cms')]//h1").size() > 0) {
+	                title = Common.findElement("xpath", "//div[contains(@class,'cms')]//h1").getText();
+	            }
+ 
 //				String breadcrumbs = Common.findElement("xpath", "//div//nav[contains(@class,'breadcrumbs')]").getText();
 				String products=Common.getText("xpath", "(//div[contains(@class,'flex w-full')]//span)[1]");
 				System.out.println(products);
@@ -4022,8 +4039,10 @@ public void Validate_retailerlocations() {
 			Common.assertionCheckwithReport(size > 0, "validating the email address field", expectedResult,
 					"Filled Email address", "unable to fill the email address");
 //			Common.findElement("xpath", "//div[@class='w-full relative required']//input[@placeholder='Last name']").clear();
+			Thread.sleep(3000);
 			Common.textBoxInput("css", "div[class*='field relative flex items'] input[placeholder='Last name']", 
-					data.get(dataSet).get("LastName"));
+					data.get(dataSet).get("LastName"));			
+			
 			Common.clickElement("css", "section[id='shipping-details'] input[name='street[0]']");
 			Common.textBoxInput("css", "section[id='shipping-details'] input[name='street[0]']", address);
 //			Sync.waitPageLoad();
