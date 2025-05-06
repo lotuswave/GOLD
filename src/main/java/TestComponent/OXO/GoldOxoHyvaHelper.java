@@ -6589,10 +6589,10 @@ catch(Exception | Error e)
 			int size = Common.findElements("xpath", "//div[@id='cart-drawer-title']").size();
 			if(size>0) {
 				Common.clickElement("xpath", "//button[@aria-label='Close minicart']");
-				Thread.sleep(3000);
+				Thread.sleep(1000);
 				Common.actionsKeyPress(Keys.END);
-				Sync.waitElementPresent("xpath", "//div[@x-data='stickyBar()']//div[@aria-label='Color']//div[@data-option-label='" + productcolor + "']");
-				Common.clickElement("xpath", "//div[@x-data='stickyBar()']//div[@aria-label='Color']//div[@data-option-label='" + productcolor +"']");
+				Sync.waitElementPresent("xpath", "//div[@x-show='showStickyBar']//div[@data-option-label='" + productcolor + "']");
+				Common.clickElement("xpath", "//div[@x-show='showStickyBar']//div[@data-option-label='" + productcolor + "']");
 				Common.clickElement("xpath", "//div[@x-data='stickyBar()']//button[@title='Add to Cart']");
 				Thread.sleep(3000);
 				Common.actionsKeyPress(Keys.PAGE_UP);
@@ -6646,6 +6646,8 @@ catch(Exception | Error e)
 	public void Relatedproducts() {
 
 		try {
+			
+			
 			Common.scrollIntoView("xpath", "//h2[normalize-space()='Related products']");
 
 //			Common.clickElement("xpath", "//h2[@data-bind='text: storefrontLabel']");
