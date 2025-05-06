@@ -6648,6 +6648,9 @@ catch(Exception | Error e)
 		try {
 			
 			
+			Common.scrollIntoView("xpath", "//h2[text()='Recommended ']");
+			Thread.sleep(1000);
+			Common.actionsKeyPress(Keys.UP);
 			Common.scrollIntoView("xpath", "//h2[normalize-space()='Related products']");
 
 //			Common.clickElement("xpath", "//h2[@data-bind='text: storefrontLabel']");
