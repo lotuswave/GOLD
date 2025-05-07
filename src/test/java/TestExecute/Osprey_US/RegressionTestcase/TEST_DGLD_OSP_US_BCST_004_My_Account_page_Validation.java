@@ -9,7 +9,7 @@ import TestComponent.Osprey_US.GoldOspreyUSHyvaHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_OSP_US_001_Create_Account_And_MyAccount_Funtionality {
+public class TEST_DGLD_OSP_US_BCST_004_My_Account_page_Validation {
 
 	String datafile = "Osprey_US//GoldOspreyus.xlsx";
 	GoldOspreyUSHyvaHelper Osprey_ReEu = new GoldOspreyUSHyvaHelper(datafile, "CreateAccount");

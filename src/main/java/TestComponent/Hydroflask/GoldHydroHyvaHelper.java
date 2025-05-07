@@ -2210,7 +2210,7 @@ public void FUll_Payment(String dataSet) {
 	public String create_account(String Dataset) {
 		String email="";
 		String Product=data.get(Dataset).get("Products");
-		String Email = Common.genrateRandomEmail(data.get(Dataset).get("Email"));
+		String Email =data.get(Dataset).get("Email");
 		try {
 
 			Sync.waitElementVisible(30, "xpath", "//input[@name='firstname']");
@@ -14547,7 +14547,7 @@ Common.clickElement("xpath", "//span[text()='Edit']");
 	        Common.clickElement("xpath", "//input[@name='firstname']");
 	        Common.textBoxInput("xpath", "//input[@name='firstname']", data.get(DataSet).get("FirstName"));
 	        Common.textBoxInput("xpath", "//input[@name='lastname']", data.get(DataSet).get("LastName"));
-	        Common.textBoxInput("xpath", "//input[@name='email']", Common.genrateRandomEmail(data.get(DataSet).get("UserName")));
+	        Common.textBoxInput("xpath", "//input[@name='email']", data.get(DataSet).get("UserName"));
 	        Common.textBoxInput("xpath", "//input[@name='password']", data.get(DataSet).get("Password"));
 	        Common.textBoxInput("xpath", "//input[@name='password_confirmation']", data.get(DataSet).get("Confirm Password"));
 	        Common.clickElement("xpath", "//span[text()='Sign Up']");

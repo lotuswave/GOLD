@@ -109,8 +109,8 @@ public class GoldOxoHyvaHelper
 		String expectedResult = "User should click the" + category;
 		try {
 
-			Sync.waitElementClickable(30,"xpath", "//a[contains(@class,'level-0-link')]//span[contains(text(),' Shop')]");
-			Common.mouseOverClick("xpath", "//a[contains(@class,'level-0-link')]//span[contains(text(),' Shop')]");
+			Sync.waitElementClickable(30,"xpath", "//button[contains(@class,'level-0-link')]//span[contains(text(),' Shop')]");
+			Common.mouseOverClick("xpath", "//button[contains(@class,'level-0-link')]//span[contains(text(),' Shop')]");
 			
 
 			try {
@@ -298,9 +298,9 @@ public class GoldOxoHyvaHelper
 		String expectedResult = "User should click the" + category;
 		try {
 
-			Sync.waitElementPresent("xpath", "//a[contains(@class,'level-0-link')]//span[contains(text(),' Shop')]");
+			Sync.waitElementPresent("xpath", "//button[contains(@class,'level-0-link')]//span[contains(text(),' Shop')]");
 			Thread.sleep(3000);
-			Common.clickElement("xpath", "//a[contains(@class,'level-0-link')]//span[contains(text(),' Shop')]");
+			Common.clickElement("xpath", "//button[contains(@class,'level-0-link')]//span[contains(text(),' Shop')]");
 			Thread.sleep(3000);
 
 			try {
@@ -6589,10 +6589,10 @@ catch(Exception | Error e)
 			int size = Common.findElements("xpath", "//div[@id='cart-drawer-title']").size();
 			if(size>0) {
 				Common.clickElement("xpath", "//button[@aria-label='Close minicart']");
-				Thread.sleep(3000);
+				Thread.sleep(1000);
 				Common.actionsKeyPress(Keys.END);
-				Sync.waitElementPresent("xpath", "//div[@x-data='stickyBar()']//div[@aria-label='Color']//div[@data-option-label='" + productcolor + "']");
-				Common.clickElement("xpath", "//div[@x-data='stickyBar()']//div[@aria-label='Color']//div[@data-option-label='" + productcolor +"']");
+				Sync.waitElementPresent("xpath", "//div[@x-show='showStickyBar']//div[@data-option-label='" + productcolor + "']");
+				Common.clickElement("xpath", "//div[@x-show='showStickyBar']//div[@data-option-label='" + productcolor + "']");
 				Common.clickElement("xpath", "//div[@x-data='stickyBar()']//button[@title='Add to Cart']");
 				Thread.sleep(3000);
 				Common.actionsKeyPress(Keys.PAGE_UP);
@@ -6646,6 +6646,11 @@ catch(Exception | Error e)
 	public void Relatedproducts() {
 
 		try {
+			
+			
+			Common.scrollIntoView("xpath", "//h2[text()='Recommended ']");
+			Thread.sleep(1000);
+			Common.actionsKeyPress(Keys.UP);
 			Common.scrollIntoView("xpath", "//h2[normalize-space()='Related products']");
 
 //			Common.clickElement("xpath", "//h2[@data-bind='text: storefrontLabel']");
@@ -13240,9 +13245,9 @@ public void header_CleaningAndOrganization_ShopAll(String Dataset) {
 //				String[] shopLinks=names.split(",");
 		int i = 0;
 		try {
-			Sync.waitElementClickable("xpath", "//a[contains(@class,'level-0-link hidden')]//span[normalize-space()='Shop']");
+			Sync.waitElementClickable("xpath", "//button[contains(@class,'level-0-link')]//span[contains(text(),' Shop')]");  
 			Thread.sleep(3000);
-			Common.mouseOverClick("xpath", "//a[contains(@class,'level-0-link hidden')]//span[normalize-space()='Shop']");
+			Common.mouseOverClick("xpath", "//button[contains(@class,'level-0-link')]//span[contains(text(),' Shop')]");
 			Thread.sleep(3000);
 			List<WebElement> shop = Common.findElements("xpath", "//li//a[contains(@class,'link group no-underline')]//span[1]");
 

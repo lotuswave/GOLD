@@ -231,10 +231,10 @@
 <class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_057_Validate_RegisterUser_Checkout_MasterCC_Tax_Discount_Promotion_Single_Product_with_Different_Billing_and_shipping"/>
 </classes>
 </test>
-<test name="TEST_DGLD_DB_US_ST_043_RegisteredUser_Checkout_DiscoverCC_Tax_with_Same_Billing_and_Shipping" testid="DQA-3601" priority="P1" description="This test case is to validate the Register user checkout process with Paypal, Same Billing and Shipping addresses and verify the tax calculation in payment page for Drybar Gold.">
-<classes>
-<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_043_RegisteredUser_Checkout_PayPal_Tax_with_Same_Billing_and_Shipping"/>
-</classes>
+<test name="TEST_DGLD_DB_US_ST_150_Login_from_Shipping_page" testid="DQA-3759" priority="P1" description="This script will cover login from the shipping page">
+        <classes>
+            <class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_150_Login_from_Shipping_page"/>
+        </classes>
 </test>
 <test name="TEST_DGLD_DB_US_SUB_ST_014_Registered_user_checkout_with_Amex_Credit_card" testid="DQA-3600" priority="P1" description="This test case is to validate the Register user checkout process with subscription products with Discover CC, Same Billing and Shipping addresses and verify the tax calculation in payment page ">
 <classes>

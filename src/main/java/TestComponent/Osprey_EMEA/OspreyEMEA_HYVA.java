@@ -3758,11 +3758,11 @@ public class OspreyEMEA_HYVA {
 				Common.clickElement("xpath", "//div[@x-ref='freegift']//button[@aria-label='Close, button.']");
 			}
 			if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
-				Sync.waitElementVisible("css", "input[type='email']");
-				Common.textBoxInput("css", "input[type='email']", data.get(dataSet).get("Email"));
+				Common.findElement("css", "input[placeholder='Enter e-mail address']").sendKeys(data.get(dataSet).get("Email"));
+//				Common.textBoxInput("xpath", "//input[@placeholder='Enter e-mail address']", data.get(dataSet).get("Email"));
 			} else {
-				Sync.waitElementVisible("css", "input[type='email']");
-				Common.textBoxInput("css", "input[type='email']", data.get(dataSet).get("Prod Email"));
+				Sync.waitElementVisible("xpath", "//input[@placeholder='Enter e-mail address']");
+				Common.textBoxInput("xpath", "//input[@placeholder='Enter e-mail address']", data.get(dataSet).get("Prod Email"));
 			}
 
 		} catch (NoSuchElementException e) {

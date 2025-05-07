@@ -23,7 +23,7 @@ public class Test_DGLD_OS_SW_043_Guest_User_Checkout_Visa_card {
         Osprey_ReEu.addtocart("Product");
         Osprey_ReEu.minicart_Checkout();
         Osprey_ReEu.addDeliveryAddress_Guestuser("SW_Address");
-        Osprey_ReEu.selectshippingmethod("Den shippingmethod");
+        Osprey_ReEu.selectshippingmethod("Sw shipping method");
 //        Osprey_ReEu.discountCode("Discount");
         Osprey_ReEu.clickSubmitbutton_Shippingpage();
         Osprey_ReEu.updatePaymentAndSubmitOrder("CCVisacard");

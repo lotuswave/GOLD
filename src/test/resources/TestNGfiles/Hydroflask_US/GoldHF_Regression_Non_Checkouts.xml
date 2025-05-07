@@ -3,6 +3,11 @@
 <listeners>
 <listener class-name="Utilities.TestListener"/>
 </listeners>
+<test name="Test_DGLD_HF_ST_107_My_Account_Page_Validation" testid="DQA-220" priority="P1" description="This script will cover validating the My Account page">
+<classes>
+<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_107_My_Account_Page_Validation"/>
+</classes>
+</test>
 <test name="Test_DGLD_HF_ST_019_Validation_ShippingAddress_form_for_RegisterUesr" testid="DQA-164" priority="P1" description="This script will cover Validation ShippingAddress form for RegisterUesr">
 <classes>
 <class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_019_Validation_ShippingAddress_form_for_RegisterUesr"/>
