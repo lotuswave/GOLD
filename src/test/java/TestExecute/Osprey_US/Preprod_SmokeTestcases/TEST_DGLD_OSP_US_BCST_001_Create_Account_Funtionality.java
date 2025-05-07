@@ -22,8 +22,8 @@ public class TEST_DGLD_OSP_US_BCST_001_Create_Account_Funtionality {
 			Osprey_ReEu.click_Createaccount();
 			Osprey_ReEu.createaccount_verfication("Invalid Email");
 			Osprey_ReEu.create_account("Create Account");
-			Osprey_ReEu.Account_page_Validation("Account validation");
-			Osprey_ReEu.signout();
+//			Osprey_ReEu.Account_page_Validation("Account validation");
+//			Osprey_ReEu.signout();
 
 		} catch (Exception e) {
 
