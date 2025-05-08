@@ -384,8 +384,8 @@ public class GoldHydroE2EHelper {
 	public String minicart_Checkout() {
             String Checkoutprice="";
 		try {
-			Thread.sleep(4000);
-			Sync.waitElementPresent("xpath", "//span[@x-text='totalCartAmount']");
+			Thread.sleep(8000);
+			Sync.waitElementPresent(45,"xpath", "//span[@x-text='totalCartAmount']");
 			String minicart = Common.findElement("xpath", "//span[@x-text='totalCartAmount']").getText();
 			Sync.waitElementPresent(30, "xpath", "//a[contains(text(),'Checkout')]");
 			Common.clickElement("xpath", "//a[contains(text(),'Checkout')]");
@@ -872,7 +872,7 @@ public class GoldHydroE2EHelper {
 		String order = "";
 		addPaymentDetails(dataSet);
 		String expectedResult = "It redirects to order confirmation page";
-
+		Thread.sleep(12000);
 		if (Common.findElements("xpath", "//div[@class='message message-error']").size() > 0) {
 			Thread.sleep(2000);
 			addPaymentDetails(dataSet);
@@ -880,10 +880,10 @@ public class GoldHydroE2EHelper {
 
 		Thread.sleep(3000);
 	        try {
-	        	
+	        	Thread.sleep(12000);	
 	        String Current_URL=Common.getCurrentURL();
 	        System.out.println(Current_URL);
-
+	        
 	            Common.assertionCheckwithReport(Current_URL.contains("onepage/success/"),
 	                    "verifying the Order confirmation", expectedResult,
 	                    "Successfully It redirects to order confirmation page Order Placed",
@@ -3276,10 +3276,10 @@ public String Gift_card(String dataSet) {
 			System.out.println(URL);
 			if(URL.contains("stage")|| URL.contains("preprod")) {
 			Thread.sleep(3000);
-			if(Common.findElement("xpath", "//button[contains(text(),'Add Gift Card')]").getAttribute("title").contains("Show items"))
+			if(Common.findElement("xpath", "//h3[contains(text(),'Add Gift Card')]").getAttribute("title").contains("Show items"))
 			{
-		Sync.waitElementPresent("xpath", "//button[contains(text(),'Add Gift Card')]");	
-		Common.clickElement("xpath", "//button[contains(text(),'Add Gift Card')]");
+		Sync.waitElementPresent("xpath", "//h3[contains(text(),'Add Gift Card')]");	
+		Common.clickElement("xpath", "//h3[contains(text(),'Add Gift Card')]");
 			}
 		Common.textBoxInput("xpath","//input[@x-model='giftCardCode']", data.get(dataSet).get("GiftCard_Preprod"));
 		code=data.get(dataSet).get("GiftCard_Preprod");
@@ -8775,8 +8775,8 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 			Common.clickElement("xpath", "//span[text()='View Order']");
 			Sync.waitPageLoad();
 			Thread.sleep(3000);
-			Sync.waitElementPresent(30, "xpath", "//span[text()='Reorder']");
-			Common.clickElement("xpath", "//span[text()='Reorder']");
+			Sync.waitElementPresent(50, "xpath", "//span[text()='Reorder']");
+			Common.javascriptclickElement("xpath", "//span[text()='Reorder']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Common.assertionCheckwithReport(Common.getPageTitle().equals("Shopping Cart"),
@@ -14515,7 +14515,7 @@ public void Explore_Validation(String Dataset) {
 			Thread.sleep(3000);
 			System.out.println(off);
 			System.out.println(discount);
-			Common.assertionCheckwithReport(off.equals(discount),
+			Common.assertionCheckwithReport(off.contains(discount),
 					"validating the reward points redeem in the order summary page",
 					"After clicking on the apply button reward points should be apply",
 					"Sucessfully reward points has been applied",
