@@ -10389,12 +10389,12 @@ return Number;
 			if(URL.contains("stage")|| URL.contains("preprod")) {
 			Thread.sleep(5000);
 			
-		Sync.waitElementPresent("xpath", "//button[contains(text(),'Add Gift Card')]");	
+		Sync.waitElementPresent("xpath", "//h3[contains(text(),'Add Gift Card')]");	
 		Thread.sleep(4000);
-		String GiftCrad= Common.findElement("xpath", "//button[contains(text(),'Add Gift Card')]").getAttribute("title");
+		String GiftCrad= Common.findElement("xpath", "//h3[contains(text(),'Add Gift Card')]").getAttribute("title");
 		System.out.println(GiftCrad);
 		if (GiftCrad.equals("Show items")) {
-			Common.clickElement("xpath", "//button[contains(text(),'Add Gift Card')]");	
+			Common.clickElement("xpath", "//h3[contains(text(),'Add Gift Card')]");	
 		}
 		else {
 			System.out.println();
@@ -10414,8 +10414,8 @@ return Number;
 			}
 			else
 			{
-				Common.scrollIntoView("xpath", "//button[contains(text(),'Add Gift Card')]");
-				Common.clickElement("xpath","//button[contains(text(),'Add Gift Card')]");
+				Common.scrollIntoView("xpath", "//h3[contains(text(),'Add Gift Card')]");
+				Common.clickElement("xpath","//h3[contains(text(),'Add Gift Card')]");
 				Common.textBoxInput("xpath","//input[@x-model='giftCardCode']", data.get(dataSet).get("GiftCard_Prod"));
 //				Common.actionsKeyPress(Keys.ARROW_UP);
 				Common.clickElement("xpath","//button[@aria-label='Add Code']");
