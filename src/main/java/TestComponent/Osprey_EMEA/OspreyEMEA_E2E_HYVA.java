@@ -3686,8 +3686,8 @@ public class OspreyEMEA_E2E_HYVA {
 				if(URL.contains("stage")|| URL.contains("preprod")) {
 				Thread.sleep(3000);
 					if(Common.getCurrentURL().contains("no_nb")) {
-					  Sync.waitElementPresent("xpath", "//button[contains(text(),'Legg til gavekort')]");
-					  Common.clickElement("xpath", "//button[contains(text(),'Legg til gavekort')]");
+					  Sync.waitElementPresent("xpath", "//h3[contains(text(),'Legg til gavekort')]");
+					  Common.clickElement("xpath", "//h3[contains(text(),'Legg til gavekort')]");
 					 
 					  Sync.waitElementPresent("id", "amcard-input");
 					  Common.textBoxInput("id", "amcard-input", GiftCode);
@@ -3751,8 +3751,8 @@ public class OspreyEMEA_E2E_HYVA {
 						  Common.clickElement("xpath", "//span[contains(text(),'Code hinzufügen')]");
 					}else {
 
-							  Sync.waitElementPresent("xpath", "//button[contains(text(),'Add Gift Card')]");
-							  Common.clickElement("xpath", "//button[contains(text(),'Add Gift Card')]");
+							  Sync.waitElementPresent("xpath", "//h3[contains(text(),'Add Gift Card')]");
+							  Common.clickElement("xpath", "//h3[contains(text(),'Add Gift Card')]");
 							 
 							  Sync.waitElementPresent("id", "amcard-input");
 							  Common.textBoxInput("id", "amcard-input", GiftCode);
