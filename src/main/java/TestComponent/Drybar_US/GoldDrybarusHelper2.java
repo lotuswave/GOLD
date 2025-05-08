@@ -264,9 +264,9 @@ public class GoldDrybarusHelper2 {
 
 			Thread.sleep(3000);
 			Sync.waitElementPresent("xpath",
-					"//a[@title='"+ header +"']//span[contains(text(),'"+ header +"')]");
+					"//span[contains(text(),'"+ header +"')]");
 			
-			Common.clickElement("xpath", "//a[@title='"+ header +"']//span[contains(text(),'"+ header +"')]");
+			Common.clickElement("xpath", "//span[contains(text(),'"+ header +"')]");
 
 			Thread.sleep(3000);
 
@@ -281,7 +281,7 @@ public class GoldDrybarusHelper2 {
 			Sync.waitPageLoad();
 			Thread.sleep(6000);
 			expectedResult = "User should select the " + Dataset + "category";
-			int sizebotteles = Common.findElements("xpath", "//a[@title='"+ header +"']//span[contains(text(),'"+ header +"')]").size();
+			int sizebotteles = Common.findElements("xpath", "//span[contains(text(),'"+ header +"')]").size();
 			System.out.println(sizebotteles);
 			Common.assertionCheckwithReport(sizebotteles > 0,
 					"validating the product category as" + Dataset + "from navigation menu ", expectedResult,
@@ -545,10 +545,10 @@ public class GoldDrybarusHelper2 {
         }
         else {
 
-//            Common.switchFrames("xpath", "//div[@class='preloaded_lightbox']/iframe");
+            Common.switchFrames("xpath", "//div[@class='preloaded_lightbox']/iframe");
             Sync.waitElementPresent("id", "ltkpopup-close-button");
             Common.clickElement("id", "ltkpopup-close-button");
-//            Common.switchToDefault();
+            Common.switchToDefault();
             }
 
 	}
@@ -6999,9 +6999,13 @@ public void FUll_Payment(String dataSet) {
 				String SelectedFilter = Common.findElement("xpath", "//ul[@class='ais-CurrentRefinements-list']//li[@class='ais-CurrentRefinements-item']//span[@class='ais-CurrentRefinements-category']//span").getText();
 				System.out.println(SelectedFilter);
 				System.out.println("SelectedFilter:" + SelectedFilter);
+				Thread.sleep(2000);
+				Common.actionsKeyPress(Keys.ARROW_UP);
+				Common.actionsKeyPress(Keys.ARROW_UP);
+				Common.actionsKeyPress(Keys.ARROW_UP);
 				String RetrivedValue = "hot_toddy";
 				if (SelectedFilter.equals("All Hair Types")) {
-
+					
 					List<WebElement> Series_Filters = Common.findElements("xpath",
 							"(//div[contains(@class,'group/item-image')]//a//img)[1]");
 

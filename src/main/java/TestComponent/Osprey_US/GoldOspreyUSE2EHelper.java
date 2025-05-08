@@ -4426,8 +4426,8 @@ public void Validate_retailerlocations() {
 				Thread.sleep(1000);
 				Common.switchFrames("xpath", "//div[@id='stripe-element']//iframe");
 				
-				Common.scrollIntoView("id", "card-tab");
-				Common.clickElement("id", "card-tab");
+//				Common.scrollIntoView("id", "card-tab");
+//				Common.clickElement("id", "card-tab");
 				
 				Common.scrollIntoView("xpath", "//label[@for='Field-numberInput']");
 				Common.clickElement("xpath", "//label[@for='Field-numberInput']");
