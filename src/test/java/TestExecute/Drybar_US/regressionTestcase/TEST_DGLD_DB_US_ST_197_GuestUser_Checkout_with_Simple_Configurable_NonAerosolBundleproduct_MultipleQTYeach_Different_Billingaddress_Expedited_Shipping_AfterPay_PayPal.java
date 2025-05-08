@@ -9,8 +9,8 @@ import TestComponent.Drybar_US.GoldDrybarusHelper2;
 import TestLib.Common;
 import TestLib.Login;
 
-public class TEST_DGLD_DB_US_ST_110_GuestUser_Checkout_with_Simple_Configurable_NonAerosolBundleproduct_MultipleQTYeach_Different_Billingaddress_Standard_Shipping_Klarna_Payment {
-
+public class TEST_DGLD_DB_US_ST_197_GuestUser_Checkout_with_Simple_Configurable_NonAerosolBundleproduct_MultipleQTYeach_Different_Billingaddress_Expedited_Shipping_AfterPay_PayPal {
+	
 	String datafile = "Drybar_US//GoldDrybarTestData.xlsx";
 	GoldDrybarusHelper2 Drybar = new GoldDrybarusHelper2(datafile,"Bundles");
 
@@ -19,19 +19,21 @@ public class TEST_DGLD_DB_US_ST_110_GuestUser_Checkout_with_Simple_Configurable_
 
 		try {
 		
-			Drybar.Verify_Homepage();
-			Drybar.search_product("Bundle Product");  
-			Drybar.Addtocart_Bundle("Bundle Product");
-			Drybar.search_product("Product");  
-			Drybar.addtocart("Product");
-			Drybar.search_product("Configurable Product");
-			Drybar.Configurable_addtocart("Configurable Product");
-			Drybar.minicart_Checkout();
-			Drybar.addDeliveryAddress_Guestuser("Address");
-			Drybar.selectshippingmethod("GroundShipping method");
-			Drybar.clickSubmitbutton_Shippingpage();
-			Drybar.guest_BillingAddress("BillingDetails");
-			Drybar.Kalrna_Payment("Klarna Visa Payment");
+			    Drybar.Verify_Homepage();
+				Drybar.search_product("Bundle 1");  
+				Drybar.Addtocart_Bundle("Bundle 1"); 
+				Drybar.search_product("Product");  
+				Drybar.addtocart("Product");
+				Drybar.search_product("Configurable Product");
+				Drybar.Configurable_addtocart("Configurable Product");
+				Drybar.minicart_Checkout();
+				Drybar.addDeliveryAddress_Guestuser("Address");
+				Drybar.selectshippingmethod("GroundShipping method");
+				Drybar.clickSubmitbutton_Shippingpage();
+				Drybar.guest_BillingAddress("BillingDetails");
+				Drybar.updatePaymentAndSubmitOrder("PaymentDetails");
+				//Drybar.Kalrna_Payment("Klarna Visa Payment");
+				Drybar.Afterpay_and_paypal_prod_validation();
 			
 			
 			
@@ -58,4 +60,5 @@ public class TEST_DGLD_DB_US_ST_110_GuestUser_Checkout_with_Simple_Configurable_
         
 
 	}
+
 }
