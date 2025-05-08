@@ -264,9 +264,9 @@ public class GoldDrybarusHelper2 {
 
 			Thread.sleep(3000);
 			Sync.waitElementPresent("xpath",
-					"//a[@title='"+ header +"']//span[contains(text(),'"+ header +"')]");
+					"//span[contains(text(),'"+ header +"')]");
 			
-			Common.clickElement("xpath", "//a[@title='"+ header +"']//span[contains(text(),'"+ header +"')]");
+			Common.clickElement("xpath", "//span[contains(text(),'"+ header +"')]");
 
 			Thread.sleep(3000);
 
@@ -281,7 +281,7 @@ public class GoldDrybarusHelper2 {
 			Sync.waitPageLoad();
 			Thread.sleep(6000);
 			expectedResult = "User should select the " + Dataset + "category";
-			int sizebotteles = Common.findElements("xpath", "//a[@title='"+ header +"']//span[contains(text(),'"+ header +"')]").size();
+			int sizebotteles = Common.findElements("xpath", "//span[contains(text(),'"+ header +"')]").size();
 			System.out.println(sizebotteles);
 			Common.assertionCheckwithReport(sizebotteles > 0,
 					"validating the product category as" + Dataset + "from navigation menu ", expectedResult,
