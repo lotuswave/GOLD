@@ -80,13 +80,13 @@ public class GoldDrybarusHelper2 {
 	
 	public void verify_Homepage() {
 		try {
-//			Sync.waitPageLoad();
-//			int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
-//			Common.assertionCheckwithReport(size > 0 && Common.getPageTitle().contains("Home Drybar")
-//					|| Common.getPageTitle().contains("Home Drybar") || Common.getPageTitle().contains("Drybar Home")
-//					|| Common.getPageTitle().contains("Drybar"), "validating store logo",
-//					"System directs the user to the Homepage", "Sucessfully user navigates to the home page",
-//					"Failed to navigate to the homepage");
+			Sync.waitPageLoad();
+			int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
+			Common.assertionCheckwithReport(size > 0 && Common.getPageTitle().contains("Home Drybar")
+					|| Common.getPageTitle().contains("Home Drybar") || Common.getPageTitle().contains("Drybar Home")
+					|| Common.getPageTitle().contains("Drybar"), "validating store logo",
+					"System directs the user to the Homepage", "Sucessfully user navigates to the home page",
+					"Failed to navigate to the homepage");
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("validating store logo", "System directs the user to the Homepage",
@@ -534,22 +534,22 @@ public class GoldDrybarusHelper2 {
 	
 	public void close_add() throws Exception {
         // TODO Auto-generated method stub
-//        Thread.sleep(5000);
-//        int sizesframe = Common.findElements("xpath", "//div[@id='ltkpopup-content']").size();
-//        System.out.println(sizesframe);
-//        if (sizesframe > 0) {
-//            Common.actionsKeyPress(Keys.PAGE_UP);
-//            Thread.sleep(4000);
-//            Sync.waitElementPresent("id", "ltkpopup-close-button");
-//            Common.clickElement("id", "ltkpopup-close-button");
-//        }
-//        else {
-//
-////            Common.switchFrames("xpath", "//div[@class='preloaded_lightbox']/iframe");
-//            Sync.waitElementPresent("id", "ltkpopup-close-button");
-//            Common.clickElement("id", "ltkpopup-close-button");
-////            Common.switchToDefault();
-//            }
+        Thread.sleep(5000);
+        int sizesframe = Common.findElements("xpath", "//div[@id='ltkpopup-content']").size();
+        System.out.println(sizesframe);
+        if (sizesframe > 0) {
+            Common.actionsKeyPress(Keys.PAGE_UP);
+            Thread.sleep(4000);
+            Sync.waitElementPresent("id", "ltkpopup-close-button");
+            Common.clickElement("id", "ltkpopup-close-button");
+        }
+        else {
+
+            Common.switchFrames("xpath", "//div[@class='preloaded_lightbox']/iframe");
+            Sync.waitElementPresent("id", "ltkpopup-close-button");
+            Common.clickElement("id", "ltkpopup-close-button");
+            Common.switchToDefault();
+            }
 
 	}
 
