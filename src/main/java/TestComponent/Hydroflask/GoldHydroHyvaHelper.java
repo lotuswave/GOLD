@@ -203,10 +203,10 @@ public class GoldHydroHyvaHelper {
 		String expectedResult = "User should click the" + category;
 		try {
 
-			Sync.waitElementPresent("xpath", "(//a[contains(@title,'Shop')]//span[contains(text(),'Shop')])[1]");
+			Sync.waitElementPresent("xpath", "(//span[contains(text(),'Shop')])[3]");
 			Thread.sleep(3000);
-//			Common.scrollIntoView("xpath","//a[contains(@class,'level-top')]//span[text()=' Shop']");
-			Common.clickElement("xpath", "(//a[contains(@title,'Shop')]//span[contains(text(),'Shop')])[1]");
+//			Common.scrollIntoView("xpath","//a[contains(@class,'level-top')]//span[text()=' Shop']")//a[contains(@title,'Shop')];
+			Common.clickElement("xpath", "(//span[contains(text(),'Shop')])[3]");
 
 			Thread.sleep(3000);
 			Sync.waitElementPresent("xpath", "(//span[contains(text(),'" + category + "')])[2]");
@@ -3790,8 +3790,8 @@ System.out.println(MyFavorites);
 		String GiftCard = data.get(Dataset).get("Hydrogift");
 		try
 		{
-			
-				Common.clickElement("xpath", "(//a[contains(@title,'Shop')]//span[contains(text(),'Shop')])[1]");
+			Thread.sleep(2000);
+				Common.clickElement("xpath", "//span[contains(text(), ' Shop')]");
 				Sync.waitElementPresent("xpath", "//span[text()='Gift Cards']");
 				Common.clickElement("xpath", "//span[text()='Gift Cards']");
 //				Sync.waitElementPresent("xpath", "//img[contains(@itemprop ,'image')]");
@@ -6060,10 +6060,10 @@ catch(Exception | Error e)
 		String expectedResult = "User should click the" + category;
 		try {
 
-			Sync.waitElementPresent("xpath", "(//a[contains(@title,'Shop')]//span[contains(text(),'Shop')])[1]");
+			Sync.waitElementPresent("xpath", "//span[contains(text(), ' Shop')]");
 			Thread.sleep(3000);
 //			Common.scrollIntoView("xpath","//a[contains(@class,'level-top')]//span[text()=' Shop']");
-			Common.clickElement("xpath", "(//a[contains(@title,'Shop')]//span[contains(text(),'Shop')])[1]");
+			Common.clickElement("xpath", "//span[contains(text(), ' Shop')]");
 			Thread.sleep(3000);
 
 			try {
@@ -7899,7 +7899,7 @@ catch(Exception | Error e)
 			Common.scrollIntoView("xpath", "//div[@class='dl-location-detector-container ']");
 			int currentlocation = Common.findElements("xpath", "//div[@class='dl-location-detector-container ']").size();
 			System.out.println(currentlocation);
-			String address = Common.findElement("xpath", "//h5[contains(@class,'store-address')]").getText();
+			String address = Common.findElement("xpath", "(//h4[@class='conv-section-store-address section-subtitle dl-store-address js-store-location h5'])[1]").getText();
 			Common.assertionCheckwithReport(currentlocation > 0 && address.contains("TX"),
 					"validating current location ", "Should visible retailers in the current location",
 					"Current location Displayed", "Failed to display the current location");
@@ -8024,8 +8024,8 @@ catch(Exception | Error e)
 		try {
 			Common.findElement("xpath", "//a[@aria-label='" + browse + "']").click();
 			Sync.waitPageLoad();
-			Sync.waitElementPresent("xpath", "//header[@aria-label='Department Filters']");
-			int filterSize = Common.findElements("xpath", "//header[@aria-label='Department Filters']").size();
+			Sync.waitElementPresent("xpath", "//div[@aria-label='Department Filters']");
+			int filterSize = Common.findElements("xpath", "//div[@aria-label='Department Filters']").size();
 
 			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
 			Sync.waitPageLoad();
@@ -8075,9 +8075,9 @@ catch(Exception | Error e)
 		// TODO Auto-generated method stub
 		try {
 
-			Sync.waitElementPresent(40, "xpath", "//h5[text()='" + Productname + "']");
-			Common.scrollIntoView("xpath", "//h5[text()='" + Productname + "']");
-			Common.clickElement("xpath", "//h5[text()='" + Productname + "']");
+			Sync.waitElementPresent(40, "xpath", "//div[text()='" + Productname + "']");
+			Common.scrollIntoView("xpath", "//div[text()='" + Productname + "']");
+			Common.clickElement("xpath", "//div[text()='" + Productname + "']");
 			Sync.waitElementVisible("xpath", "//div[@class='stock-status-banner alert success checkmark']");
 			Common.scrollIntoView("xpath", "(//h4[@class='pdp-information-title'])[1]");
 			int product = Common.findElements("xpath", "//div[@class='pdp-information']/p[2]").size();
@@ -9271,8 +9271,8 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 			Thread.sleep(6000);
 			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
 			Common.mouseOver("xpath", "//img[@alt='" + products + "']");
-			Sync.waitElementPresent("xpath", "//span[text()='Add to Cart']");
-			Common.clickElement("xpath", "//span[text()='Add to Cart']");
+			//Sync.waitElementPresent("xpath", "//span[text()='Add to Cart']");
+			//Common.clickElement("xpath", "//span[text()='Add to Cart']");
 //			Sync.waitPageLoad();
 			Thread.sleep(2000);
 //			Common.clickElement("xpath", "//button[@aria-label='Close minicart']");
