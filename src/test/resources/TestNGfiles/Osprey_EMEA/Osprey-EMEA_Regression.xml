@@ -4,6 +4,20 @@
     <listeners>
         <listener class-name="Utilities.TestListener"/>
     </listeners>
+    
+    
+    <test name="Test_DGLD_OS_COMMON_004_My_Account_Page_Validation" testid="DQA-1949" priority="P1" description="This script will cover validating the My Account page">
+        <classes>
+            <class name="TestExecute.Osprey_EMEA.Preprod_Smoke_Testcases.UK_Smoke.Test_DGLD_OS_COMMON_004_My_Account_Page_Validation"/>
+        </classes>
+    </test>
+    
+    <test name="Test_DGLD_OS_COMMON_042_Login_from_Shipping_page" testid="DQA-1975" priority="P1" description="This script will cover login from the shipping page">
+        <classes>
+            <class name="TestExecute.Osprey_EMEA.Preprod_Smoke_Testcases.UK_Smoke.Test_DGLD_OS_COMMON_042_Login_from_Shipping_page"/>
+        </classes>
+    </test>
+    
 <test name="Test_DGLD_OS_COMMON_067_Whishlist_Funtionality" testid="DQA-2746" priority="P1" description="This script will cover wishlist functionality">
         <classes>
             <class name="TestExecute.Osprey_EMEA.regressionTestcase.Test_DGLD_OS_COMMON_067_Whishlist_Funtionality"/>
