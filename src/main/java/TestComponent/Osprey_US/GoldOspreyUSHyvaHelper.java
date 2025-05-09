@@ -573,15 +573,24 @@ public void Login_Account(String dataSet) {
 			for (i = 0; i < Links.length; i++) {
 				Sync.waitElementPresent("xpath", "//span[contains(text(),'"+ bag +"')]");
 				Common.clickElement("xpath", "//span[contains(text(),'"+ bag +"')]");
+				Thread.sleep(2000);
 				Sync.waitElementPresent("xpath", "//span[contains(text(),'"+ outdoor +"')]");
 				Common.clickElement("xpath", "//span[contains(text(),'"+ outdoor +"')]");
 				Thread.sleep(3000);
 				Sync.waitElementPresent("xpath",
-						"//li//a//span[contains(text(),'" + Links[i] + "')]");
+						"//span[contains(text(),'" + Links[i] + "')]");
 				Common.clickElement("xpath",
-						"//li//a//span[contains(text(),'" + Links[i] + "')]");
+						"//span[contains(text(),'" + Links[i] + "')]");
 				Sync.waitPageLoad();
 				Thread.sleep(2000);
+				if(Common.getPageTitle().contains("404"))
+				{
+					Assert.fail();
+					ExtenantReportUtils.addFailedLog("validating the  links navigation from header Links",
+							"After Clicking on" + Links[i] + "it should navigate to the",
+							Links[i]+ "Navigated to the 404 page" + Links[i] + "Links",
+							Common.getscreenShot("Failed to Navigated to the" + Links[i] + "Links"));
+				}
 				String title = "";
 	            if 
 	            (Common.findElements("xpath", "//div[contains(@class,'c-clp-hero')]//h1").size() > 0) {
@@ -673,7 +682,7 @@ public void Login_Account(String dataSet) {
 					Sync.waitElementPresent("xpath", "//span[contains(text(),'Backpacks & Bags')]");
 					Common.clickElement("xpath", "//span[contains(text(),'Backpacks & Bags')]");
 				Common.clickElement("xpath", "//span[contains(text(),'Kids Packs')]");
-				Thread.sleep(1500);
+				Thread.sleep(2000);
 				Sync.waitElementPresent("xpath",
 						"//li[contains(@class,'level2 ')]//a//span[contains(text(),'" + Links[i] + "')]");
 				Common.clickElement("xpath",
@@ -776,14 +785,23 @@ public void Login_Account(String dataSet) {
 			for (i = 0; i < Links.length; i++) {
 				Sync.waitElementPresent("xpath", "//span[contains(text(),'"+ bag +"')]");
 				Common.clickElement("xpath", "//span[contains(text(),'"+ bag +"')]");
+				Thread.sleep(1000);
 				Common.clickElement("xpath", "//span[contains(text(),'"+ day +"')]");
-				Thread.sleep(1500);
+				Thread.sleep(3000);
 				Sync.waitElementPresent("xpath",
 						"//a[contains(@class,'menu-link')]//span[contains(text(),'" + Links[i] + "')]");
 				Common.clickElement("xpath",
 						"//a[contains(@class,'menu-link')]//span[contains(text(),'" + Links[i] + "')]");
 				Sync.waitPageLoad();
 				Thread.sleep(2000);
+				if(Common.getPageTitle().contains("404"))
+				{
+					Assert.fail();
+					ExtenantReportUtils.addFailedLog("validating the  links navigation from header Links",
+							"After Clicking on" + Links[i] + "it should navigate to the",
+							Links[i]+ "Navigated to the 404 page" + Links[i] + "Links",
+							Common.getscreenShot("Failed to Navigated to the" + Links[i] + "Links"));
+				}
 				 String title = "";
 		            if 
 		            (Common.findElements("xpath", "//div[contains(@class,'c-clp-hero')]//h1").size() > 0) {
@@ -847,7 +865,7 @@ public void header_Travel(String Dataset) {
 				for (i = 0; i < Links.length; i++) {
 					Sync.waitElementPresent("xpath", "//span[contains(text(),'Travel')]");
 					Common.clickElement("xpath", "//span[contains(text(),'Travel')]");
-					Thread.sleep(1500);
+					Thread.sleep(3000);
 					Sync.waitElementPresent("xpath",
 							"//li[contains(@class,'level1 ')]//a//span[contains(text(),'" + Links[i] + "')]");
 					Common.clickElement("xpath",
@@ -906,6 +924,14 @@ public void header_Travel(String Dataset) {
 					Common.clickElement("xpath",
 							"//li//a//span[contains(text(),'" + Links[i] + "')]");
 					Sync.waitPageLoad();
+					if(Common.getPageTitle().contains("404"))
+					{
+						Assert.fail();
+						ExtenantReportUtils.addFailedLog("validating the  links navigation from header Links",
+								"After Clicking on" + Links[i] + "it should navigate to the",
+								Links[i] + "Navigated to the 404 page" + Links[i] + "Links",
+								Common.getscreenShot("Failed to Navigated to the" + Links[i] + "Links"));
+					}
 					Thread.sleep(2000);
 					String title = "";
 		            if 
@@ -973,7 +999,7 @@ public void header_Shopbyactivity(String Dataset) {{
 				Sync.waitElementPresent("xpath", "//span[contains(text(),'Featured')]");
 				Common.clickElement("xpath", "//span[contains(text(),'Featured')]");
 				Common.clickElement("xpath", "//span[contains(text(),'Shop by Activity')]");
-				Thread.sleep(1500);
+				Thread.sleep(3000);
 				if(Common.getCurrentURL().contains("prepord"))
 				{
 				Sync.waitElementPresent("xpath",
@@ -981,6 +1007,14 @@ public void header_Shopbyactivity(String Dataset) {{
 				Common.clickElement("xpath",
 						"//li[contains(@class,'level2 ')]//a//span[contains(text(),'" + Links[i] + "')]");
 				Sync.waitPageLoad();
+				if(Common.getPageTitle().contains("404"))
+				{
+					Assert.fail();
+					ExtenantReportUtils.addFailedLog("validating the  links navigation from header Links",
+							"After Clicking on" + Links[i] + "it should navigate to the",
+							Links[i] + "Navigated to the 404 page" + Links[i] + "Links",
+							Common.getscreenShot("Failed to Navigated to the" + Links[i] + "Links"));
+				}
 				Thread.sleep(2000);
 				String title = Common.findElement("xpath", "//div[contains(@class,'c-clp-hero')]//h1").getText();
 //				String breadcrumbs = Common.findElement("xpath", "//p[@class='m-breadcrumb__text']").getText();
@@ -1012,7 +1046,15 @@ public void header_Shopbyactivity(String Dataset) {{
 					Common.clickElement("xpath",
 							"//li[contains(@class,'level2 ')]//a//span[contains(text(),'" + Link1[i] + "')]");
 					Sync.waitPageLoad();
-					Thread.sleep(1500);
+					if(Common.getPageTitle().contains("404"))
+					{
+						Assert.fail();
+						ExtenantReportUtils.addFailedLog("validating the  links navigation from header Links",
+								"After Clicking on" + Links[i] + "it should navigate to the",
+								Links[i] + "Navigated to the 404 page" + Links[i] + "Links",
+								Common.getscreenShot("Failed to Navigated to the" + Links[i] + "Links"));
+					}
+					Thread.sleep(2000);
 					String title = Common.findElement("xpath", "//div[contains(@class,'c-clp-hero')]//h1").getText();
 //					String breadcrumbs = Common.findElement("xpath", "//p[@class='m-breadcrumb__text']").getText();
 					String products=Common.getText("xpath", "//div[@class='a-toolbar-info']//span");
@@ -1063,16 +1105,26 @@ public void header_Shopbyactivity(String Dataset) {{
 			for (i = 0 ; i < Links.length; i++) {
 				Sync.waitElementPresent("xpath", "//span[contains(text(),'"+ Featured +"')]");
 				Common.clickElement("xpath", "//span[contains(text(),'"+ Featured +"')]");
+				Thread.sleep(1000);
 				Common.clickElement("xpath", "//span[contains(text(),'"+ activity +"')]");
 				Thread.sleep(1500);
 				if(Common.getCurrentURL().contains("preprod"))
 				{
+					Thread.sleep(3000);
 				Sync.waitElementPresent("xpath",
 						"//li//a//span[contains(text(),'" + Links[i] + "')]");
 				Common.clickElement("xpath",
 						"//li//a[contains(@href,'shop-by-activity')]//span[contains(text(),'" + Links[i] + "')]");
 				Sync.waitPageLoad();
-				Thread.sleep(1500);
+				if(Common.getPageTitle().contains("404"))
+				{
+					Assert.fail();
+					ExtenantReportUtils.addFailedLog("validating the  links navigation from header Links",
+							"After Clicking on" + Links[i] + "it should navigate to the",
+							Links[i] + "Navigated to the 404 page" + Links[i] + "Links",
+							Common.getscreenShot("Failed to Navigated to the" + Links[i] + "Links"));
+				}
+				Thread.sleep(2000);
 				String title = "";
 				if (Common.findElements("xpath", "//div[contains(@class,'c-clp-hero')]//h1").size() > 0) {
 				    title = Common.findElement("xpath", "//div[contains(@class,'c-clp-hero')]//h1").getText().toLowerCase();
@@ -1117,7 +1169,16 @@ public void header_Shopbyactivity(String Dataset) {{
 					Common.clickElement("xpath",
 							"//li//a[contains(@href,'shop-by-activity')]//span[contains(text(),'" + Link1[i] + "')]");
 					Sync.waitPageLoad();
-					Thread.sleep(1500);
+					Thread.sleep(1000);
+					if(Common.getPageTitle().contains("404"))
+					{
+						Assert.fail();
+						ExtenantReportUtils.addFailedLog("validating the  links navigation from header Links",
+								"After Clicking on" + Links[i] + "it should navigate to the",
+								Links[i] + "Navigated to the 404 page" + Links[i] + "Links",
+								Common.getscreenShot("Failed to Navigated to the" + Links[i] + "Links"));
+					}
+					Thread.sleep(1000);
 					String title = "";
 					if (Common.findElements("xpath", "//div[contains(@class,'c-clp-hero')]//h1").size() > 0) {
 					    title = Common.findElement("xpath", "//div[contains(@class,'c-clp-hero')]//h1").getText().toLowerCase();
@@ -1182,13 +1243,22 @@ public void header_Shopbycollection(String Dataset) { {
 				Sync.waitElementPresent("xpath", "//span[contains(text(),'Featured')]");
 				Common.clickElement("xpath", "//span[contains(text(),'Featured')]");
 				Common.clickElement("xpath", "//span[contains(text(),'Shop by Collections')]");
-				Thread.sleep(1500);
+				Thread.sleep(3000);
 				Sync.waitElementPresent("xpath",
 						"//li[contains(@class,'level2 ')]//a//span[contains(text(),'" + Links[i] + "')]");
 				Common.clickElement("xpath",
 						"//li[contains(@class,'level2 ')]//a//span[contains(text(),'" + Links[i] + "')]");
 				Sync.waitPageLoad();
-				Thread.sleep(1500);
+				Thread.sleep(1000);
+				if(Common.getPageTitle().contains("404"))
+				{
+					Assert.fail();
+					ExtenantReportUtils.addFailedLog("validating the  links navigation from header Links",
+							"After Clicking on" + Links[i] + "it should navigate to the",
+							Links[i] + "Navigated to the 404 page" + Links[i] + "Links",
+							Common.getscreenShot("Failed to Navigated to the" + Links[i] + "Links"));
+				}
+				Thread.sleep(2000);
 				String title = Common.findElement("xpath", "//div[contains(@class,'c-clp-hero')]//h1").getText();
 //		String breadcrumbs = Common.findElement("xpath", "//p[@class='m-breadcrumb__text']").getText();
 				String products=Common.getText("xpath", "//div[@class='a-toolbar-info']//span");
@@ -1246,8 +1316,9 @@ public void header_Shopbycollection(String Dataset) { {
 			for (i = 0; i < Links.length; i++) {
 				Sync.waitElementPresent("xpath", "//span[contains(text(),'"+ Featured+ "')]");
 				Common.clickElement("xpath", "//span[contains(text(),'"+ Featured +"')]");
+				Thread.sleep(1000);
 				Common.clickElement("xpath", "//span[contains(text(),'"+ collections +"')]");
-				Thread.sleep(1500);
+				Thread.sleep(2000);
 				if(Common.getCurrentURL().contains("preprod"))
 				{
 				Sync.waitElementPresent("xpath",
@@ -1255,7 +1326,16 @@ public void header_Shopbycollection(String Dataset) { {
 				Common.clickElement("xpath",
 						"//a[contains(@class,'menu-link')]//span[contains(text(),'" + Links[i] + "')]");
 				Sync.waitPageLoad();
-				Thread.sleep(2000);
+				Thread.sleep(1000);
+				if(Common.getPageTitle().contains("404"))
+				{
+					Assert.fail();
+					ExtenantReportUtils.addFailedLog("validating the  links navigation from header Links",
+							"After Clicking on" + Links[i] + "it should navigate to the",
+							Links[i] + "Navigated to the 404 page" + Links[i] + "Links",
+							Common.getscreenShot("Failed to Navigated to the" + Links[i] + "Links"));
+				}
+				Thread.sleep(1000);				
 				String title = "";
 				if (Common.findElements("xpath", "//div[contains(@class,'c-clp-hero')]//h1").size() > 0) {
 				    title = Common.findElement("xpath", "//div[contains(@class,'c-clp-hero')]//h1").getText().toLowerCase();
@@ -1306,7 +1386,16 @@ public void header_Shopbycollection(String Dataset) { {
 					Common.clickElement("xpath",
 							"//li//a//span[contains(text(),'" + Link1[i] + "')]");
 					Sync.waitPageLoad();
-					Thread.sleep(2000);
+					Thread.sleep(1000);
+					if(Common.getPageTitle().contains("404"))
+					{
+						Assert.fail();
+						ExtenantReportUtils.addFailedLog("validating the  links navigation from header Links",
+								"After Clicking on" + Links[i] + "it should navigate to the",
+								Links[i] + "Navigated to the 404 page" + Links[i] + "Links",
+								Common.getscreenShot("Failed to Navigated to the" + Links[i] + "Links"));
+					}
+					Thread.sleep(1000);
 					String title = "";
 					if (Common.findElements("xpath", "//div[contains(@class,'c-clp-hero')]//h1").size() > 0) {
 					    title = Common.findElement("xpath", "//div[contains(@class,'c-clp-hero')]//h1").getText().toLowerCase();
@@ -1378,15 +1467,24 @@ public void header_Shopbycollection(String Dataset) { {
 				for (i = 0; i < Links.length; i++) {
 					Sync.waitElementPresent("xpath", "//span[contains(text(),'Travel')]");
 					Common.clickElement("xpath", "//span[contains(text(),'Travel')]");
-
+					Thread.sleep(1000);
 					Sync.waitElementPresent("xpath", "//span[contains(text(),'Luggage')]");
 					Common.clickElement("xpath", "//span[contains(text(),'Luggage')]");
-					Thread.sleep(1500);
+					Thread.sleep(2000);
 					Sync.waitElementPresent("xpath",
 							"//li[contains(@class,'level1 ')]//a//span[contains(text(),'" + Links[i] + "')]");
 					Common.clickElement("xpath",
 							"//li[contains(@class,'level1 ')]//a//span[contains(text(),'" + Links[i] + "')]");
 					Sync.waitPageLoad();
+					Thread.sleep(1000);
+					if(Common.getPageTitle().contains("404"))
+					{
+						Assert.fail();
+						ExtenantReportUtils.addFailedLog("validating the  links navigation from header Links",
+								"After Clicking on" + Links[i] + "it should navigate to the",
+								Links[i] + "Navigated to the 404 page" + Links[i] + "Links",
+								Common.getscreenShot("Failed to Navigated to the" + Links[i] + "Links"));
+					}
 					Thread.sleep(2000);
 					String title = Common.findElement("xpath", "//div[contains(@class,'c-clp-hero')]//h1").getText();
 //					String breadcrumbs = Common.findElement("xpath", "//p[@class='m-breadcrumb__text']").getText();
@@ -1441,6 +1539,16 @@ public void header_Shopbycollection(String Dataset) { {
 					Common.clickElement("xpath",
 							"//li//a//span[contains(text(),'" + Links[i] + "')]");
 					Sync.waitPageLoad();
+					Thread.sleep(1000);
+					if(Common.getPageTitle().contains("404"))
+					{
+						Assert.fail();
+						ExtenantReportUtils.addFailedLog("validating the  links navigation from header Links",
+								"After Clicking on" + Links[i] + "it should navigate to the",
+								Links[i] + "Navigated to the 404 page" + Links[i] + "Links",
+								Common.getscreenShot("Failed to Navigated to the" + Links[i] + "Links"));
+					}
+		
 					Thread.sleep(2000);
 					 String title = "";
 			            if (Common.findElements("xpath", "//div[contains(@class,'c-clp-hero')]//h1").size() > 0) {
@@ -1482,12 +1590,9 @@ public void header_Shopbycollection(String Dataset) { {
 						" unable to navigate to the " + Links[i] + "pages",
 						Common.getscreenShot("Failed to navigate to the " + Links[i] + "pages"));
 				Assert.fail();
-		}
-		}
-
+		}}		
+	  }
 	}
-	}
-	
 	
 	public void header_Accessories(String Dataset) {{
 

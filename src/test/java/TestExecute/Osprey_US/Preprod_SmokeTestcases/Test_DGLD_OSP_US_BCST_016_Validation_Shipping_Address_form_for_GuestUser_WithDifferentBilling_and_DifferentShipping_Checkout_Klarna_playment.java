@@ -24,8 +24,9 @@ public class Test_DGLD_OSP_US_BCST_016_Validation_Shipping_Address_form_for_Gues
         Osprey_ReEu.validatingErrormessageShippingpage_negative();
         Osprey_ReEu.addDeliveryAddress_Guestuser("Account");
         Osprey_ReEu.BillingAddress("BillingDetails");
-        Osprey_ReEu.selectshippingmethod("GroundShipping method");
+        Osprey_ReEu.selectshippingmethod("GroundShipping method1");
         Osprey_ReEu.Kalrna_Payment("Klarna Visa Payment");
+        
         
         
 		} catch (Exception e) {
