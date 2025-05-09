@@ -203,10 +203,10 @@ public class GoldHydroHyvaHelper {
 		String expectedResult = "User should click the" + category;
 		try {
 
-			Sync.waitElementPresent("xpath", "(//span[contains(text(),'Shop')])[3]");
+			Sync.waitElementPresent("xpath", "(//span[contains(text(),'Shop')])[5]");
 			Thread.sleep(3000);
 //			Common.scrollIntoView("xpath","//a[contains(@class,'level-top')]//span[text()=' Shop']")//a[contains(@title,'Shop')];
-			Common.clickElement("xpath", "(//span[contains(text(),'Shop')])[3]");
+			Common.clickElement("xpath", "(//span[contains(text(),'Shop')])[5]");
 
 			Thread.sleep(3000);
 			Sync.waitElementPresent("xpath", "(//span[contains(text(),'" + category + "')])[2]");
