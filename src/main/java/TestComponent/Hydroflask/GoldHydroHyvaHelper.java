@@ -2633,10 +2633,10 @@ Common.clickElement("xpath", "//span[contains(text(),'Cancel Coupon')]");
 		try {
 			Thread.sleep(5000);
 			Sync.waitElementVisible("xpath", "//input[@type='email']");
-			Common.textBoxInput("xpath", "//input[@type='email']", Utils.getEmailid());
+			Common.textBoxInput("xpath", "//input[@type='email']",data.get(dataSet).get("Email"));
 		} catch (NoSuchElementException e) {
 			minicart_Checkout();
-			Common.textBoxInput("xpath", "//input[@type='email']", Utils.getEmailid());
+			Common.textBoxInput("xpath", "//input[@type='email']", data.get(dataSet).get("Email"));
 
 		}
 		String expectedResult = "email field will have email address";
@@ -12963,7 +12963,7 @@ Common.clickElement("xpath", "//span[text()='Edit']");
 			Common.clickElement("xpath", "//input[@name='lastname']");
 			Common.textBoxInput("id", "lastname", data.get(Dataset).get("LastName"));
 			Common.clickElement("xpath", "//input[@name='email']");
-			Common.textBoxInput("xpath", "//input[@name='email']", Utils.getEmailid());
+			Common.textBoxInput("xpath", "//input[@name='email']", data.get(Dataset).get("Email"));
 			email = Common.findElement("xpath", "//input[@name='email']").getAttribute("value");
 			System.out.println(email);
 			Common.clickElement("xpath", "//input[@name='password']");
