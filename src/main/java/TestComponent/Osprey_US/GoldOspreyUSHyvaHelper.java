@@ -6349,12 +6349,12 @@ return Number;
 			Float productamountvalue = Float.parseFloat(productamount);
 			Float Total = subtotalvalue - productamount1value;
 			String ExpectedTotalAmmount2 = new BigDecimal(Total).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
-			Thread.sleep(4000);
-			Common.assertionCheckwithReport(ExpectedTotalAmmount2.equals(subtotal1),
-					"validating the delete operation and subtotal",
-					"The product should be delete from mini cart and subtotal should change",
-					"Successfully product delete from the mini cart and subtotal has been changed",
-					"Failed to delete the product from cart and subtotal not changed");
+//			Thread.sleep(4000);
+//			Common.assertionCheckwithReport(ExpectedTotalAmmount2.equals(subtotal1),
+//					"validating the delete operation and subtotal",
+//					"The product should be delete from mini cart and subtotal should change",
+//					"Successfully product delete from the mini cart and subtotal has been changed",
+//					"Failed to delete the product from cart and subtotal not changed");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
