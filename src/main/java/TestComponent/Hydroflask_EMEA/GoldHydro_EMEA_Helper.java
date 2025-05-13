@@ -10813,7 +10813,7 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 					int j=0;
 					if(Number>j)
 					{
-						Common.assertionCheckwithReport(Page_title.contains("Travel Bottle")||Page_title.contains(Links[i])|| title.contains("Shop Travel Bottles"),
+						Common.assertionCheckwithReport(Page_title.contains("Travel Bottle")||Page_title.contains(Links[i])|| title.contains("Shop Travel Tumbler"),
 								"verifying the header link " + Links[i] + "Under Collections",
 								"user should navigate to the " + Links[i] + " page",
 								"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
@@ -11025,8 +11025,15 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 					Common.clickElement("xpath",
 							"//a[contains(@href,'cooler')]/span[contains(text(),'" + Links[i] + "')]");
 					Sync.waitPageLoad();
-					Thread.sleep(4000);
-					String title = Common.findElement("xpath", "//h1[contains(@class,'title')]").getText();
+					Thread.sleep(3000);
+					String title = "";
+		            if 
+		            (Common.findElements("xpath", "//h1[contains(@class,'title')]").size() > 0) {
+		                title = Common.findElement("xpath", "//h1[contains(@class,'title')]").getText();
+		            } 
+		            else if (Common.findElements("xpath", "//h1[contains(@class,'c-clp-hero')]").size() > 0) {
+		                title = Common.findElement("xpath", "//h1[contains(@class,'c-clp-hero')]").getText();
+		            }
 					String breadcrumbs = Common.findElement("xpath", "//nav[contains(@class,'breadcrumb')]").getText();
 					System.out.println(title);
 					System.out.println(Links[i]);	
@@ -11331,7 +11338,7 @@ public void Explore_Validation(String Dataset) {
 			if (Common.getPageTitle().contains("Frequently Asked Questions | Hydro Flask")) {
 				Common.clickElement("xpath", "//div[@class='nav-flex']//a[@id='top']");
 			} else {
-				Common.clickElement("xpath", "//img[@alt='Hydroflask store logo']");
+				Common.clickElement("xpath", "//img[@alt='Store logo']");
 			}
 
 		}
@@ -12512,7 +12519,7 @@ public void Explore_Validation(String Dataset) {
 				Common.clickElement("xpath",
 						"//a//span[text()='New Colors']//following::ul//span[contains(text(),'" + Links[i] + "')]");
 				Sync.waitPageLoad();
-				Thread.sleep(4000);
+				Thread.sleep(3000);
 				
 				String title = "";
 	            if 
