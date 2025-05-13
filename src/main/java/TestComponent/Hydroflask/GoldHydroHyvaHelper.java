@@ -5431,15 +5431,17 @@ public void Remove_GiftCode() {
 			Common.scrollIntoView("xpath", "//h2[contains(text(),'Reviews')]");
 			Sync.waitElementPresent("xpath", "//h2[contains(text(),'Reviews')]");
 			Common.clickElement("xpath", "//h2[contains(text(),'Reviews')]");
+			Common.scrollIntoView("xpath", "//button[@id='yotpo-main-widget-btn']");
+			Sync.waitElementPresent("xpath", "//button[@id='yotpo-main-widget-btn']");
+			Common.clickElement("xpath", "//button[@id='yotpo-main-widget-btn']");
 			Thread.sleep(3000);
-			int form = Common.findElements("xpath", "//div[@id='write-review-tabpanel-main-widget']").size();
+			int form = Common.findElements("xpath", "//div[@id='yotpo-modal']").size();
 			System.out.println(form);
 			Common.assertionCheckwithReport(form>0, "verifying the write a review button",
 					"Write a review should be appear in the PDP page",
 					"Sucessfully write a review button has been displayed in PDP page",
 					"Failed to display the write a review button in PDP page");
-			Sync.waitElementPresent("xpath", "//span[text()='Write A Review']");
-			Common.clickElement("xpath", "//span[text()='Write A Review']");
+			
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
@@ -5450,10 +5452,10 @@ public void Remove_GiftCode() {
 		}
 		try {
 			String expectedResult = "Sucessfully title input box has been displayed";
-			Common.clickElement("xpath", "//input[@value='Post']");
-			String errormessage = Common.findElement("xpath", "//span[@class='form-input-error']").getText();
+			Common.clickElement("xpath", "//button[@class='yotpo-new-review-submit']");
+			String errormessage = Common.findElement("xpath", "//p[@class='yotpo-star-rating-error']").getText();
 			System.out.println(errormessage);
-			Common.assertionCheckwithReport(errormessage.contains("Please enter a star rating for this review"),
+			Common.assertionCheckwithReport(errormessage.contains("A star rating is required"),
 					"verifying the error message in invalid fields",
 					"error message should be display in the invalid fields",
 					"Sucessfully Error message has been displayed in invalid fileds ",
@@ -9348,8 +9350,7 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 				//Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
 				Sync.waitElementPresent("xpath", "//a[@class='product-image-link']");
 
-				List<WebElement> webelementslist = Common.findElements("xpath",
-						"//a[@class='product-image-link']");
+				List<WebElement> webelementslist = Common.findElements("xpath","//a[@class='product-image-link']");
 				String s = webelementslist.get(i).getAttribute("href");
 				System.out.println(s);
 				if (s.isEmpty()) {
@@ -9376,7 +9377,7 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 			Common.scrollIntoView("xpath", "//h1[@itemprop='name']");
 			if(Common.getCurrentURL().contains("mcloud")) {
 				Sync.waitElementClickable("xpath", "(//div[@x-ref='jsThumbSlides']//div)[6]");
-				Common.clickElement("xpath", "(//div[@x-ref='jsThumbSlides']//div)[6]");
+				Common.javascriptclickElement("xpath", "(//div[@x-ref='jsThumbSlides']//div)[6]");
 			}else {
 				Sync.waitElementClickable("xpath", "(//div[@x-ref='jsThumbSlides']//div)[5]");
 				Common.clickElement("xpath", "(//div[@x-ref='jsThumbSlides']//div)[5]");
