@@ -3579,6 +3579,8 @@ System.out.println(MyFavorites);
 				Sync.waitElementPresent("xpath", "//input[@name='street[0]']");
 				Common.textBoxInput("xpath", "//input[@name='street[0]']", data.get(dataSet).get("Street"));
 				Thread.sleep(2000);
+				Common.actionsKeyPress(Keys.SPACE);
+				Thread.sleep(2000);
 
 				if (data.get(dataSet).get("StreetLine2") != null) {
 					Common.textBoxInput("name", "street[1]", data.get(dataSet).get("Street"));
@@ -3587,13 +3589,16 @@ System.out.println(MyFavorites);
 					Common.textBoxInput("name", "street[2]", data.get(dataSet).get("Street"));
 				}
 				Common.actionsKeyPress(Keys.PAGE_DOWN);
-				Thread.sleep(3000);
+				Thread.sleep(2000);
 				Sync.waitElementPresent("id", "shipping-city");
+				Thread.sleep(2000);
 				Common.textBoxInput("id", "shipping-city", data.get(dataSet).get("City"));
 
 				try {
-					Common.dropdown("xpath", "//select[@id='shipping-region']", Common.SelectBy.TEXT,
-							data.get(dataSet).get("Region"));
+					Sync.waitElementPresent(30,"css", "input[id='shipping-region']");
+	//				Common.dropdown("xpath", "//input[@id='shipping-region']", Common.SelectBy.TEXT,
+	//						data.get(dataSet).get("Region"));
+					Common.textBoxInput("css", "input[id='shipping-region']",data.get(dataSet).get("Region"));
 				} catch (ElementClickInterceptedException e) {
 					// TODO: handle exception
 					Thread.sleep(3000);
@@ -7506,12 +7511,13 @@ catch(Exception | Error e)
 	}
 
 	public void Forgot_password(String DateSet) throws Exception {
+		String Email =data.get(DateSet).get("Email");
 		// TODO Auto-generated method stub
 		try {
 			Common.clickElement("xpath", "//span[contains(text(),'Forgot Password?')]");
 			String forgotpassword = Common.findElement("xpath", "//h2[contains(text(),'Forgot Your Password?')]").getText();
 			System.out.println(forgotpassword);
-			Common.textBoxInput("id", "email_address", Utils.getEmailid());
+			Common.textBoxInput("id", "email_address", Email);
 			Common.findElement("id", "email_address").getAttribute("value");
 			Common.clickElement("xpath", "//button[contains(text(),'Reset My Password')]");
 			

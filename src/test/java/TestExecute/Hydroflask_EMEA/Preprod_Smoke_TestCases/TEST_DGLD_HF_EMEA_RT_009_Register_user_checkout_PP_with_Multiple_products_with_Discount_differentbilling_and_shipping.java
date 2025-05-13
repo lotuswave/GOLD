@@ -13,30 +13,28 @@ import TestLib.Login;
 public class TEST_DGLD_HF_EMEA_RT_009_Register_user_checkout_PP_with_Multiple_products_with_Discount_differentbilling_and_shipping {
 
 	String datafile = "Hydroflask_EMEA//GoldHydroEMEA_TestData.xlsx";
-	GoldHydro_EMEA_Helper Hydro = new GoldHydro_EMEA_Helper(datafile,"Engraving");
+	GoldHydro_EMEA_Helper Hydro = new GoldHydro_EMEA_Helper(datafile,"Bundle");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Validate_Checkout_with_GuestUserCC_Simple_Configurable_Engraving_Grouped_My_Hydro_and_Bundle_products () throws Exception {
+	public void Validate_Register_user_checkout_PP_with_Multiple_products_with_Discount_differentbilling_and_shipping () throws Exception {
 
 		try {
 			Hydro.verifingHomePage();
-			Hydro.search_product("Myhydro Product");   
-			Hydro.Add_Myhydro("Myhydro Product");  
-//			Hydro.search_product("Grouped Bundle");    
-//			Hydro.Add_Grouped_Bundle("Grouped Bundle");
+			Hydro.click_singinButton();
+			Hydro.login_Hydroflask("AccountDetails");
+//			Hydro.search_product("Bundle product"); 
+//			Hydro.Addtocart_Bundle("Bundle product");
 			Hydro.search_product("Product");     
 			Hydro.addtocart("Product");
-			Hydro.bottles_headerlinks("Bottles & Drinkware"); 
+			Hydro.bottles_headerlinks("Bottles & Drinkware");
 			Hydro.Configurable_addtocart_pdp("Product");
-			Hydro.search_product("Bundle product"); 
-			Hydro.Addtocart_Bundle("Bundle product");
-			Hydro.search_product("Engraving Product"); 
-			Hydro.Graphic_Engraving("Engraving Product");
-			Hydro.enraving_Checkout("Graphic");
-			Hydro.addDeliveryAddress_Guestuser("AccountDetails");
-            Hydro.selectshippingaddress("2 Day method");
+			Hydro.minicart_Checkout();
+			Hydro.RegaddDeliveryAddress("AccountDetails");
+			Hydro.discountCode("Discount");
+            Hydro.selectshippingaddress("GroundShipping method");
             Hydro.clickSubmitbutton_Shippingpage();
-			Hydro.updatePaymentAndSubmitOrder("PaymentDetails");
+            Hydro.register_billingAddress("BillingDetails");
+            Hydro.payPal_Payment("PaypalDetails");
 
 		} catch (Exception e) {
 
