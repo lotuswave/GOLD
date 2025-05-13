@@ -45,7 +45,7 @@ public class TEST_DGLD_HF_EMEA_RT_009_Register_user_checkout_PP_with_Multiple_pr
 
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+//		Common.closeAll();
 
 	}
 
