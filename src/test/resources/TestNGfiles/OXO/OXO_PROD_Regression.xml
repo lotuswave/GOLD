@@ -43,21 +43,6 @@
 <class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_025_Change_Password_from_Account_Information_Page"/>
 </classes>
 </test>
-<test name="Test_DGLD_OXO_ST_034_Create_and_Edit_Gift_Registery_For_Register_User" testid="DQA-95" priority="P1" description="This Testcase is to verify that the Gift Registery create and edit for the register user in my account page">
-<classes>
-<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_034_Create_and_Edit_Gift_Registery_For_Register_User"/>
-</classes>
-</test>
-<test name="Test_DGLD_OXO_ST_035_Create_share_and_Delete_Gift_Registery_For_Register_User" testid="DQA-93" priority="P1" description="This Testcase is to verify that the Gift Registery create share and delete for the registered user in my account page">
-<classes>
-<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_035_Create_share_and_Delete_Gift_Registery_For_Register_User"/>
-</classes>
-</test>
-<test name="Test_DGLD_OXO_ST_036_Create_Manageitems_and_invalid_Details_Gift_Registery_For_Register_User" testid="DQA-98" priority="P1" description="This Test case is to verify the Gift Registry by Creating ,Managing items, and invalid details in the form for the registered user">
-<classes>
-<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_036_Create_Manageitems_and_invalid_Details_Gift_Registery_For_Register_User"/>
-</classes>
-</test>
 <test name="Test_DGLD_OXO_ST_039_Footer_newsletter_subcription" testid="DQA-469" priority="P1" description="This script will cover valiating Footer newsletter subcription">
 <classes>
 <class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_039_Footer_newsletter_subcription"/>
