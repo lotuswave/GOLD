@@ -375,6 +375,11 @@
 <class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_106_Register_user_checkout_with_Simple_Config_Loyalty_5_Fullredeem"/>
 </classes>
 </test>
+<test name="Test_DGLD_OXO_ST_107_Checkout_From_Coffee_Maker_Finder_Page" testid="DQA-4544" priority="P1" description="This test case is to verify the flow of placing order functionality from Coffee maker finder page.">
+<classes>
+<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_107_Checkout_From_Coffee_Maker_Finder_Page"/>
+</classes>
+</test>
 <test name="Test_DGLD_OXO_US_ST_009_Placeorder_Register_user_validate_Giftcard_Send_Later" testid="DQA-4226" priority="P1" description="This test case is to validate the registered user validate Gift Card PLP page">
 <classes>
 <class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_US_ST_009_Placeorder_Register_user_validate_Giftcard_Send_Later"/>

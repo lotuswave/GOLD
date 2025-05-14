@@ -158,9 +158,14 @@
 <class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_100_Register_User_Checkout_with_Express_Paypal"/>
 </classes>
 </test>
-<test name="TEST_DGLD_OXO_US_ST_018_EmployeeCustomer_Checkout_with_GiftcardItem_UsingPaypalmethod" testid="4233" priority="P1" description="This test case is used to validate the Employee customer checkout with the Gift Card product by using the PayPal method.">
+<test name="TEST_DGLD_OXO_US_ST_018_EmployeeCustomer_Checkout_with_GiftcardItem_UsingPaypalmethod" testid="DQA-4233" priority="P1" description="This test case is used to validate the Employee customer checkout with the Gift Card product by using the PayPal method.">
 <classes>
 <class name="TestExecute.OXO.regressionTestcase.TEST_DGLD_OXO_US_ST_018_EmployeeCustomer_Checkout_with_GiftcardItem_UsingPaypalmethod"/>
+</classes>
+</test>
+<test name="Test_DGLD_OXO_ST_107_Checkout_From_Coffee_Maker_Finder_Page" testid="DQA-4544" priority="P1" description="This test case is to verify the flow of placing order functionality from Coffee maker finder page.">
+<classes>
+<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_107_Checkout_From_Coffee_Maker_Finder_Page"/>
 </classes>
 </test>
 </suite>
