@@ -13947,6 +13947,147 @@ if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contain
 		}
 		return rewardpointsused;
 	}
+	
+	public void header_Coffeefinder() {
+		String Links = "Coffee Maker Finder";
+		try {
+			Common.clickElement("xpath", "//a[contains(@href,'coffee') and contains(@class,'level-0')]");
+			Sync.waitPageLoad();
+			Common.assertionCheckwithReport(Common.getPageTitle().contains("Coffee Maker Finder"),
+					"Validate the header link " + Links,
+					"Click the header link " + Links + "it will navigate to page" + Links,
+					"successfully navigating to " + Links + "page ", "Failed to navigate to" + Links + "page");
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("Validate the Header link " + Links,
+					"Click the header link " + Links + "it will navigate to page" + Links,
+					"Failed to navigate to" + Links + "page",
+					Common.getscreenShotPathforReport("failed to land on " + Links));
+			Assert.fail();
+ 
+		}
+	}
+	public void Coffeefinder_Products() {
+
+		Common.switchFrames("xpath", "//iframe[@title='Product Finder']");
+		try {
+
+		//Sync.waitPageLoad();
+			Thread.sleep(3000);
+		Common.scrollIntoView("xpath", "//button[text()='Get Started']");
+		Thread.sleep(1000);
+		Common.clickElement("xpath", "//button[text()='Get Started']");
+		Thread.sleep(2000);
+	String heading1 = Common.findElement("xpath","//div[@class='qa-header']//h3" ).getText();
+	String heading2 = Common.findElement("xpath","//div[@class='qa-content']//h4" ).getText();
+			if(heading1.equals("How do you like your coffee?") && heading2.equals("Hot"))
+			{
+				Common.clickElement("xpath", "//div[@class='qa-content']//h4[text()='Hot']");
+			}
+			else if (heading1.equals("How do you like your coffee?") && heading2.equals("Cold")) {
+				Common.clickElement("xpath", "//div[@class='qa-content']//h4[text()='Cold']");
+			}
+			ExtenantReportUtils.addPassLog("validating the product finder page",
+					"After clicking on Hot/Cold the page should display to select quantity of coffee",
+					"unable to display the page to select quantity of coffee",
+					Common.getscreenShot("Success to display the page to select quantity of coffee"));
+		}
+			catch(Exception | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("validating the product finder page",
+						"After clicking on Hot/Cold the page should display to select quantity of coffee",
+						"unable to display the page to select quantity of coffee",
+						Common.getscreenShot("Failed to display the page to select quantity of coffee"));
+			}
+
+		try {
+			Thread.sleep(2000);
+		String heading1 = Common.findElement("xpath", "//div[@class='qa-header']//h3").getText();
+		String heading2 = Common.findElement("xpath","//div[@class='qa-content']//h4" ).getText();
+
+		if (heading1.equals("How much coffee do you typically brew?") && heading2.equals("Single Cup")) {
+			Common.clickElement("xpath", "//div[@class='qa-content']//h4[text()='Single Cup']");
+		} else if (heading1.equals("How much coffee do you typically brew?") && heading2.equals("2-4 Cups")) {
+			Common.clickElement("xpath", "//div[@class='qa-content']//h4[text()='2-4 Cups']");
+		}
+ 
+		
+		else if (heading1.equals("How much coffee do you typically brew?") && heading2.equals("8+ Cups")) {
+ 
+			Common.clickElement("xpath", "//div[@class='qa-content']//h4[text()='8+ Cups']");
+		}
+		ExtenantReportUtils.addPassLog("validating the product finder page to select size",
+				"Page should display to select size of coffee maker",
+				"unable to display the page to select size of coffee maker",
+				Common.getscreenShot("Success to display the page to select size of coffee maker"));
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the product finder page to select size",
+					"Page should display to select size of coffee maker",
+					"unable to display the page to select size of coffee maker",
+					Common.getscreenShot("Failed to display the page to select size of coffee maker"));
+		}
+
+		try {
+			Thread.sleep(2000);
+		String heading1 = Common.findElement("xpath", "//div[@class='qa-header']//h3").getText();
+		String heading2 = Common.findElement("xpath","//div[@class='qa-content']//h4" ).getText();
+		if (heading1.equals("Tell us more about your brewing space.") && heading2.equals("Small space"))
+		{
+			Common.clickElement("xpath", "//div[@class='qa-content']//h4[text()='Small space']");
+		}
+		else if (heading1.equals("Tell us more about your brewing space.") && heading2.equals("Moderate size"))
+		{
+			Common.clickElement("xpath", "//div[@class='qa-content']//h4[text()='Moderate size']");
+		}
+		else if (heading1.equals("Tell us more about your brewing space.") && heading2.equals("Large dedicated area")) {
+			Common.clickElement("xpath", "//div[@class='qa-content']//h4[text()='Large dedicated area']");
+		}
+		ExtenantReportUtils.addPassLog("validating the product pdp page",
+				"success to display the product page to add that product to cart",
+				"unable to display the product page to add that product to cart",
+				Common.getscreenShot("Success to display the product page to add that product to cart"));
+		}
+		catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the product pdp page",
+					"success to display the product page to add that product to cart",
+					"unable to display the product page to add that product to cart",
+					Common.getscreenShot("Failed to display the product page to add that product to cart"));
+		}
+
+	try {
+		Thread.sleep(2000);
+		if (Common.findElement("xpath", "//div[@class='qa-header']//h3").getText().equals("Which features are important to you?"))
+		{
+			Common.clickElement("xpath", "//div[@class='qa-content']//h4[text()='Thermal Carafe']");
+			Thread.sleep(1000);
+			Common.clickElement("xpath", "//button[text()='Continue']");
+			Thread.sleep(4000);
+			Common.clickElement("xpath", "//button[text()='Add to Cart']");
+		}
+		else
+		{
+			Thread.sleep(3000);
+			Common.findElement("xpath", "//button[text()='Add to Cart']");
+			Common.clickElement("xpath", "//button[text()='Add to Cart']");
+		}
+		Common.switchToDefault();
+		ExtenantReportUtils.addPassLog("validating the product added to cart",
+				"After clicking on Add to cart button the product should be added to cart",
+				"unable to add the product to cart",
+				Common.getscreenShot("Success to add the product to cart"));
+	}
+	catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the product finder page",
+				"After clicking on Hot/Cold the page should display to select quantity of coffee",
+				"unable to display the page to select quantity of coffee",
+				Common.getscreenShot("Failed to add the product to cart"));
+	}
+	}
 }
 
 
