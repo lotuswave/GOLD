@@ -1952,46 +1952,62 @@ public class GoldHydro_EMEA_Helper {
 	public void createaccount_verfication(String Dataset) {
 		// TODO Auto-generated method stub
 		try {
-			Sync.waitPageLoad();
-			Common.clickElement("xpath", "//input[@name='firstname']");
-			Common.textBoxInput("xpath", "//input[@name='firstname']", data.get(Dataset).get("FirstName"));
-			Common.clickElement("xpath", "//input[@name='lastname']");
+			click_Createaccount();
+			
+			Common.clickElement("css", "input[name='firstname']");
+			Common.textBoxInput("css", "input[name='firstname']", data.get(Dataset).get("FirstName"));
+			
+			Common.clickElement("id", "lastname");
 			Common.textBoxInput("id", "lastname", data.get(Dataset).get("LastName"));
-			Common.clickElement("xpath", "//input[@name='email']");
-			Common.textBoxInput("xpath", "//input[@name='email']", data.get(Dataset).get("Email"));
-			Common.clickElement("xpath", "//input[@name='password']");
-			Common.textBoxInput("xpath", "//input[@name='password']", data.get(Dataset).get("Password"));
-			Common.clickElement("xpath", "//input[@name='password_confirmation']");
-			Common.textBoxInput("xpath", "//input[@name='password_confirmation']",
+			
+			Common.clickElement("id", "email_address");
+			Common.textBoxInput("id", "email_address", data.get(Dataset).get("Email"));
+			
+			Common.clickElement("css", "input[name='password']");
+			Common.textBoxInput("css", "input[name='password']", data.get(Dataset).get("Password"));
+			
+			Common.clickElement("css", "input[name='password_confirmation']");
+			Common.textBoxInput("css", "input[name='password_confirmation']",
 					data.get(Dataset).get("Confirm Password"));
-			Common.clickElement("xpath", "//button[@title='Sign Up']");
-//			String message = Common.findElement("id", "validation-classes").getCssValue("color");
-//			String redcolor = Color.fromString(message).asHex();
-//			System.out.println(redcolor);
-//			String message1 = Common.findElement("id", "validation-length").getCssValue("color");
-//			String greencolor = Color.fromString(message1).asHex();
-//			System.out.println(greencolor);
-			Sync.waitElementPresent("xpath", "//li[@data-msg-field='email']");
-			String emailmessage = Common.findElement("xpath", "//li[@data-msg-field='email']").getText();
-			System.out.println(emailmessage);
-			Sync.waitElementPresent("xpath", "//li[@data-msg-field='password_confirmation']");
-			String confirmpassword = Common.findElement("xpath", "//li[@data-msg-field='password_confirmation']").getText();
-			System.out.println(confirmpassword);
-		
+			
+			Common.clickElement("css", "button[title='Sign Up']");
+			String message = Common.findElement("id", "validation-classes").getCssValue("color");
+			String redcolor = Color.fromString(message).asHex();
+			System.out.println(redcolor);
+			String message1 = Common.findElement("id", "validation-length").getCssValue("color");
+			String greencolor = Color.fromString(message1).asHex();
+			System.out.println(greencolor);
+			
+			Sync.waitElementPresent("css", "li[data-msg-field='email']");
+			String emailErrorMessage  = Common.findElement("css", "li[data-msg-field='email']").getText();
+			System.out.println("Email Error"+ emailErrorMessage);
+			
+			Sync.waitElementPresent("css", "li[data-msg-field='password_confirmation']");
+			String confirmPasswordErrorMessage  = Common.findElement("css", "li[data-msg-field='password_confirmation']").getText();
+			System.out.println("Confirm Password Error: "+ confirmPasswordErrorMessage );
+			
+			 boolean isEmailErrorCorrect = emailErrorMessage.equalsIgnoreCase("Please enter a valid email address.");
+		     boolean isConfirmPasswordErrorCorrect = confirmPasswordErrorMessage.contains("must be the same as");
+		     
+		     String pageTitlename=Common.getText("css", "span[data-ui-id='page-title-wrapper']");
+		 	System.out.println("Page title name: "+ pageTitlename );
+		 	
+		 	  boolean pagetitlename = pageTitlename.contains("Create an Account");
+		     
 			Common.assertionCheckwithReport(
-					emailmessage.equals("Please enter a valid email address.") && confirmpassword.contains("This field value must be the same as") ,
-					"validating the error messages with invalid date in accout creation form",
-					"User should able to get error message when used the invaild data",
-					"Sucessfully error message has been displayed when user use the invalid data",
-					"Failed to get an error message when user used the invalid data");
+					isEmailErrorCorrect && isConfirmPasswordErrorCorrect && pagetitlename,
+					"Validating error messages for invalid data in account creation form",
+		            "User should see appropriate error messages for invalid email and mismatched passwords",
+		            "Error messages displayed correctly for invalid data inputs",
+		            "Error messages not displayed as expected for invalid data inputs");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("validating the error messages with invalid date in accout creation form",
-					"User should able to get error message when used the invaild data",
-					"Unable to get error message has been displayed when user use the invalid data",
+			ExtenantReportUtils.addFailedLog("Validating error messages for invalid data in account creation form",
+		            "User should see appropriate error messages for invalid email and mismatched passwords",
+		            "Error messages displayed correctly for invalid data inputs",
 					Common.getscreenShotPathforReport(
-							"Failed to get an error message when user used the invalid data"));
+							"Error messages is not displayed as expected for invalid data inputs"));
 			Assert.fail();
 
 		}
@@ -2236,36 +2252,49 @@ public void FUll_Payment(String dataSet) {
 		String Email =data.get(Dataset).get("Email");
 		try {
 
-			Sync.waitElementVisible(30, "xpath", "//input[@name='firstname']");
-			Common.textBoxInput("xpath", "//input[@name='firstname']", data.get(Dataset).get("FirstName"));
-			Common.textBoxInput("xpath", "//input[@name='lastname']", data.get(Dataset).get("LastName"));			
-			Common.textBoxInput("xpath", "//input[@id='email_address']", Email);
-			email = Common.findElement("xpath", "//input[@name='email']").getAttribute("value");
-			Common.textBoxInput("xpath", "//input[@name='password']", data.get(Dataset).get("Password"));
-			System.out.println(data.get(Dataset).get("Password"));
-			Common.textBoxInput("xpath", "//input[@name='password_confirmation']",
-					data.get(Dataset).get("Confirm Password"));
-			System.out.println(data.get(Dataset).get("Confirm Password"));
+			Sync.waitElementVisible(30, "css", "input[name='firstname']");
+			Common.textBoxInput("css", "input[name='firstname']", data.get(Dataset).get("FirstName"));
+			Common.textBoxInput("css", "input[name='lastname']", data.get(Dataset).get("LastName"));		
 			
-			Sync.waitElementVisible(30, "xpath", "//button[@title='Sign Up']");
-			Common.clickElement("xpath", "//button[@title='Sign Up']");
-			Sync.waitElementPresent(30, "xpath", "//div[@ui-id='message-success']");
-			String message = Common.findElement("xpath", "//div[@ui-id='message-success']").getText();
-			System.out.println(message);
+			Common.textBoxInput("id", "email_address", Email);
+			email = Common.findElement("id", "email_address").getAttribute("value");
+			
+			Common.textBoxInput("css", "input[name='password']", data.get(Dataset).get("Password"));
+			System.out.println(data.get(Dataset).get("Password"));
+			
+			Common.textBoxInput("css", "input[name='password_confirmation']",
+					data.get(Dataset).get("Confirm Password"));
+			
+			System.out.println("Entered Password: " + data.get(Dataset).get("Confirm Password"));
+			
+			Sync.waitElementVisible(30, "css", "button[title='Sign Up']");
+			Common.clickElement("css", "button[title='Sign Up']");
+			
+			Sync.waitElementPresent(30, "css", "div[ui-id='message-success']");
+			String successMessage = Common.findElement("css", "div[ui-id='message-success']").getText();
+			System.out.println("Success Message: " + successMessage);
+			
+			  boolean isRegistrationSuccess = successMessage.contains("Thank you for registering");
+			    boolean isWishlistMessage = Common.getPageTitle().contains("Wish List Sharing") &&
+			                                 successMessage.contains(Product + " has been added to your Favorites");
+
+			
 			Common.assertionCheckwithReport(
-					message.contains("Thank you for registering") || Common.getPageTitle().contains("Wish List Sharing")&& message.contains(Product+ " has been added to your Favorites. Click here to view your Favorites") ,
-					"validating navigation to the account page after clicking on sign up button",
-					"User should navigate to the My account page after clicking on the Signup",
-					"Sucessfully user navigates to the My account page after clickng on thr signup button",
-					"Failed to navigate to the My account page after clicking on the signup button");
+					isRegistrationSuccess || isWishlistMessage,
+					 "Verifying account creation and redirection after Sign Up",
+				        "User should be redirected to their account or a confirmation page after successful registration",
+				        "User successfully registered and navigated to the expected page",
+				        "User registration failed or did not navigate to the expected page");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog(
-					"validating navigation to the account page after clicking on sign up button",
-					"User should navigate to the My account page after clicking on the Signup",
-					"Unable to navigate to the My account page after clicking on the signup button",
-					"Failed to navigate to the My account page after clicking on the signup button");
+			  Common.assertionCheckwithReport(
+				        false,
+				        "Exception during user registration process",
+				        "Account registration should complete without exceptions",
+				        "Exception occurred during registration: " + e.getMessage(),
+				        "Failed due to an exception during registration: " + e.getMessage()
+				    );
 			Assert.fail();
 		}
 		return email;

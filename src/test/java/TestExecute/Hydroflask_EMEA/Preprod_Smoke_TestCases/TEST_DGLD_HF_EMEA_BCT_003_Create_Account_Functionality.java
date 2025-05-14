@@ -15,11 +15,10 @@ public class TEST_DGLD_HF_EMEA_BCT_003_Create_Account_Functionality {
 	GoldHydro_EMEA_Helper Hydro = new GoldHydro_EMEA_Helper(datafile,"DataSet");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Validating_Create_Account() throws Exception {
+	public void Validating_Create_Account_Functionality() throws Exception {
 
 		try {
 			Hydro.verifingHomePage();
-			Hydro.click_Createaccount();
 			Hydro.createaccount_verfication("Invalid details");
             Hydro.create_account("New Account Details");
 			
