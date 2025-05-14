@@ -13798,12 +13798,12 @@ public void Validateshippingmethods_Reguleruser(String Dataset) {
 		if (size > 0) {
 			// Sync.waitElementPresent(30, "xpath", "//td[contains(text(),'" + method +
 			// "')]");
-			String method1=Common.findElement("xpath", "//span[text()='Free Ground Shipping']").getText();
+			String method1=Common.findElement("xpath", "//span[text()='Sale Ground Shipping']").getText();
 			String shipping1= Common.findElement("xpath", "(//span[@data-label='Incl. Tax'])[1]").getText();
 			String method2=Common.findElement("xpath", "//span[text()='Expedited']").getText();
 			String shipping2= Common.findElement("xpath", "(//span[@data-label='Incl. Tax'])[2]").getText();
 			
-			Common.assertionCheckwithReport(shipping1.equals("$0.00")&&method1.contains("Free Ground Shipping")&&shipping2.equals("$50.00")&&method2.contains("Expedited"),
+			Common.assertionCheckwithReport(shipping1.equals("$0.00")&&method1.contains("Sale Ground Shipping")&&shipping2.equals("$50.00")&&method2.contains("Expedited"),
 					"validating the standard shipping method",
 					"Verifying Shipping methods in Shipping page",
 					"Successfully verifed Standard and Expedited shipping method",
