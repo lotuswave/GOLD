@@ -8093,7 +8093,25 @@ public void updatePaymentAndSubmitOrder(String dataSet) throws Exception {
 
 	}
 
-
+	public void header_Coffeefinder() {
+		String Links = "Coffee Maker Finder";
+		try {
+			Common.clickElement("xpath", "//a[contains(@href,'coffee') and contains(@class,'level-0')]");
+			Sync.waitPageLoad();
+			Common.assertionCheckwithReport(Common.getPageTitle().contains("Coffee Maker Finder"),
+					"Validate the header link " + Links,
+					"Click the header link " + Links + "it will navigate to page" + Links,
+					"successfully navigating to " + Links + "page ", "Failed to navigate to" + Links + "page");
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("Validate the Header link " + Links,
+					"Click the header link " + Links + "it will navigate to page" + Links,
+					"Failed to navigate to" + Links + "page",
+					Common.getscreenShotPathforReport("failed to land on " + Links));
+			Assert.fail();
+ 
+		}
+	}
 
 
 	public void header_Menu_ImageItemblocksLinks(String Dataset) {
