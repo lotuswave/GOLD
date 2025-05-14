@@ -745,7 +745,8 @@ public class GoldHydro_EMEA_Helper {
 
 	        try {
 	            Sync.waitElementVisible("id", "shipping-region");
-	            Common.dropdown("id", "shipping-region", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+//	            Common.dropdown("id", "shipping-region", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+	            Common.textBoxInput("id", "shipping-region",data.get(dataSet).get("Region"));
 	        } catch (ElementClickInterceptedException e) {
 	            Sync.waitElementVisible("id", "shipping-region");
 	            Common.dropdown("id", "shipping-region", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
@@ -1669,11 +1670,12 @@ public class GoldHydro_EMEA_Helper {
 	                }
 
 	                if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
-	                    Sync.waitElementPresent("xpath", "(//button[contains(@class, 'btn-place-order') and contains(text(), 'Place Order')])[2]");
+	                    Sync.waitElementPresent(30,"xpath", "(//button[contains(@class, 'btn-place-order') and contains(text(), 'Place Order')])[2]");
 	                    Common.scrollIntoView("xpath", "(//button[contains(@class, 'btn-place-order') and contains(text(), 'Place Order')])[2]");
+	                    Thread.sleep(2000);
 	                    Common.clickElement("xpath", "(//button[contains(@class, 'btn-place-order') and contains(text(), 'Place Order')])[2]");
 	                    Sync.waitPageLoad();
-	                    Common.switchFrames("css", "iframe[title='Secure payment input frame']");
+	            //        Common.switchFrames("css", "iframe[title='Secure payment input frame']");
 	                    int error= Common.findElements("xpath", "//p[text()='Please provide a mobile phone number.']").size();
 	                    if (error>0) {
 	                        Sync.waitElementPresent(30, "id", "Field-linkMobilePhoneInput");

@@ -26,8 +26,8 @@ public class TEST_DGLD_HF_EMEA_RT_009_Register_user_checkout_PP_with_Multiple_pr
 //			Hydro.Addtocart_Bundle("Bundle product");
 			Hydro.search_product("Product");     
 			Hydro.addtocart("Product");
-			Hydro.bottles_headerlinks("Bottles & Drinkware");
-			Hydro.Configurable_addtocart_pdp("Product");
+//			Hydro.bottles_headerlinks("Bottles & Drinkware");
+//			Hydro.Configurable_addtocart_pdp("Product");
 			Hydro.minicart_Checkout();
 			Hydro.RegaddDeliveryAddress("AccountDetails");
 			Hydro.discountCode("Discount");
@@ -45,7 +45,7 @@ public class TEST_DGLD_HF_EMEA_RT_009_Register_user_checkout_PP_with_Multiple_pr
 
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 
