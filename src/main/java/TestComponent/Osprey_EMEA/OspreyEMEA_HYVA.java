@@ -3196,8 +3196,8 @@ public class OspreyEMEA_HYVA {
 		try {
 			Common.findElement("xpath", "//a[@aria-label='" + browse + "']").click();
 			Sync.waitPageLoad();
-			Sync.waitElementPresent("xpath", "//header[@aria-label='Department Filters']");
-			int filterSize = Common.findElements("xpath", "//header[@aria-label='Department Filters']").size();
+			Sync.waitElementPresent("css", "div[id='cat-filter-container-v3']");
+			int filterSize = Common.findElements("css", "div[id='cat-filter-container-v3']").size();
 
 			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
 			Sync.waitPageLoad();
@@ -3261,7 +3261,7 @@ public class OspreyEMEA_HYVA {
 			Common.scrollIntoView("xpath", "//div[@class='dl-location-detector-container ']");
 			int currentlocation = Common.findElements("xpath", "//div[@class='dl-location-detector-container ']").size();
 			System.out.println(currentlocation);
-			String address = Common.findElement("xpath", "//h5[contains(@class,'store-address')]").getText();
+			String address = Common.findElement("xpath", "//h4[contains(@class,'store-address')]").getText();
 			Common.assertionCheckwithReport(currentlocation > 0 && address.contains("TX"),
 					"validating current location ", "Should visible retailers in the current location",
 					"Current location Displayed", "Failed to display the current location");
