@@ -747,9 +747,11 @@ public class GoldHydro_EMEA_Helper {
 	            Sync.waitElementVisible("id", "shipping-region");
 //	            Common.dropdown("id", "shipping-region", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
 	            Common.textBoxInput("id", "shipping-region",data.get(dataSet).get("Region"));
+	            
 	        } catch (ElementClickInterceptedException e) {
 	            Sync.waitElementVisible("id", "shipping-region");
-	            Common.dropdown("id", "shipping-region", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+//	            Common.dropdown("id", "shipping-region", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+	            Common.textBoxInput("id", "shipping-region",data.get(dataSet).get("Region"));
 	        }
 
 	        Sync.waitElementVisible("css", "input[name='postcode']");
@@ -11493,7 +11495,7 @@ public void Explore_Validation(String Dataset) {
 						|| Common.getPageTitle().contains("Store Locator")
 						|| Common.getPageTitle().contains("Frequently Asked Questions")
 						|| Common.getPageTitle().contains("Contact")
-						|| Common.getPageTitle().contains("Tracking & Returns")
+						|| Common.getPageTitle().contains("Tracking and Returns")
 			|| Common.getPageTitle().contains("Shipping & Handling") ,		
 						"validating the Kustomer links navigation from footer Links",
 						"After Clicking on" + Kustomerlinks[i] + "it should navigate to the",
@@ -11579,11 +11581,10 @@ public void Explore_Validation(String Dataset) {
 						"After Clicking on" + footerlinks[i] + "it should navigate to the",
 						footerlinks[i] + "Sucessfully Navigated to the" + footerlinks[i] + "Links",
 						"Unable to Navigated to the" + footerlinks[i] + "Links"); 
-				Thread.sleep(4000);
 				Common.navigateBack();
 
 			}
-//			Carrers();
+			Carrers();
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("validating the  links navigation from footer Links",
@@ -11598,10 +11599,10 @@ public void Explore_Validation(String Dataset) {
 
 	public void Carrers() {
 		try {
-			Sync.waitElementPresent(30, "xpath", "//ul[@class='m-footer-links__list']//a[contains(text(),'Careers')]");
+			Sync.waitElementPresent(30, "xpath", "//div[contains(@class,'footer-menu')]//a[contains(text(),'Careers')]");
 			Thread.sleep(3000);
-			Common.findElement("xpath", "//ul[@class='m-footer-links__list']//a[contains(text(),'Careers')]");
-			Common.clickElement("xpath", "//ul[@class='m-footer-links__list']//a[contains(text(),'Careers')]");
+			Common.findElement("xpath", "//div[contains(@class,'footer-menu')]//a[contains(text(),'Careers')]");
+			Common.clickElement("xpath", "//div[contains(@class,'footer-menu')]//a[contains(text(),'Careers')]");
 			Thread.sleep(3000);
 			Common.assertionCheckwithReport(Common.getPageTitle().contains("Careers | Helen of Troy"),
 					"validating the links navigation from footer Links",
@@ -11742,7 +11743,7 @@ public void Explore_Validation(String Dataset) {
 			Common.clickElement("xpath", "//a[contains(text(),'Privacy Policy')]");
 			Sync.waitPageLoad();
 			Thread.sleep(3000);
-			Common.assertionCheckwithReport(Common.getPageTitle().contains("Hydro Flask Privacy Policy"),
+			Common.assertionCheckwithReport(Common.getPageTitle().contains("Privacy Policy"),
 					"validating the Terms and privacy page Navigation",
 					"After Clicking Terms and privacy it should navigate to the respective page",
 					"Sucessfully Navigated to the Privacy Policy page", "Failed Navigate to the Privacy Policy page");
@@ -11787,7 +11788,7 @@ public void Explore_Validation(String Dataset) {
 						"After Clicking on" + footerlinks[i] + "it should navigate to the",
 						footerlinks[i] + "Sucessfully Navigated to the" + footerlinks[i] + "Links",
 						"Unable to Navigated to the" + footerlinks[i] + "Links"); 
-				Thread.sleep(4000);
+//				Thread.sleep(2000);
 				Common.navigateBack();
 
 			}
