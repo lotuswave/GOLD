@@ -18,7 +18,7 @@ public class TEST_DGLD_OS_COMMON_126_Product_Registration_form {
 
 		try {
         Osprey_ReEu.verifingHomePage();
-        Osprey_ReEu.click_Product_Registration();;
+        Osprey_ReEu.click_Product_Registration();
         Osprey_ReEu.product_Registration("ProductRegistration");
         
         

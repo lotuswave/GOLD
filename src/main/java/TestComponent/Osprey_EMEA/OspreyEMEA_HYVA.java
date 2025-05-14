@@ -13892,7 +13892,7 @@ public void product_Registration(String dataSet) {
 	String SKUitemNumber = data.get(dataSet).get("SKUitemNumber");
 	String feedback = ("Good Product");
 	try {
-		Common.refreshpage();
+//		Common.refreshpage();
 		Sync.waitPageLoad();
 		/*Common.clickElement("xpath", "//span[text()='Register Your Product']");
 
@@ -13908,7 +13908,7 @@ public void product_Registration(String dataSet) {
 		Common.textBoxInput("xpath", "//input[@id='customerLastName']", data.get(dataSet).get("LastName"));
 		
 		Sync.waitElementPresent("xpath", "//input[@id='conversationDateofbirthforforms']");
-		Common.textBoxInput("xpath", "//input[@id='conversationDateofbirthforforms']", data.get(dataSet).get("DOB1"));	
+		Common.textBoxInput("xpath", "//input[@id='conversationDateofbirthforforms']", data.get(dataSet).get("DOB"));	
 		
 		//Sync.waitElementPresent("xpath", "//div[@id='conversationGender']");
 		Common.clickElement("xpath", "//div[@id='conversationGender']");
@@ -13936,7 +13936,7 @@ public void product_Registration(String dataSet) {
 		Sync.waitElementPresent("xpath", "//input[@id='messageSubject']");
 		Common.textBoxInput("xpath", "//input[@id='messageSubject']", data.get(dataSet).get("Products"));
 				
-		Common.textBoxInput("xpath", "//input[contains(@id,'Whendidyoupurchase')]",data.get(dataSet).get("Date1"));
+		Common.textBoxInput("xpath", "//input[contains(@id,'Whendidyoupurchase')]",data.get(dataSet).get("Date"));
 		
 		Sync.waitElementPresent("xpath", "//div[contains(@id,'Activitiestousetheproduct')]");
 		Common.clickElement("xpath", "//div[contains(@id,'Activitiestousetheproduct')]");
@@ -14006,11 +14006,11 @@ public void product_Registration(String dataSet) {
 		
 		Common.javascriptclickElement("xpath", "//iframe[@title='reCAPTCHA']");
 		Thread.sleep(3000);
-		if(Common.getCurrentURL().contains("https://osprey-emea-prod.kustomer.support/contact/product-registration"))
+		if(Common.getCurrentURL().contains("https://osprey-emea-prod.kustomer.support/en_us/contact/product-registration"))
 			
 		{
 			System.out.println(Common.getCurrentURL());
-			Common.assertionCheckwithReport(Common.getCurrentURL().contains("https://osprey-emea-prod.kustomer.support/contact/product-registration"),
+			Common.assertionCheckwithReport(Common.getCurrentURL().contains("https://osprey-emea-prod.kustomer.support/en_us/contact/product-registration"),
 					"verifying the product registration form fileds filled in the production environment", "On production environment in product registration form filleds should be fill",
 					"successfully Product registration form fileds has been filled in the production environmnet", "failed to fill the Product Registration form on the production environment");
 			
