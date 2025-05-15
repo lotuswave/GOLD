@@ -22,6 +22,8 @@ public class TEST_DGLD_DB_US_ST_137_Stored_Payment_For_Register_User {
 			Drybar.Verify_Homepage();
 			Drybar.ClickCreateAccount();
 			Drybar.create_account("NewAccountDetails");
+//			Drybar.click_singinButton();
+//			Drybar.login_Drybar("AccountDetails");
 			Drybar.HairTools_headerlinks("Hair Tools"); 
 			Drybar.addtocart("PLP Product");
 			Drybar.minicart_Checkout();

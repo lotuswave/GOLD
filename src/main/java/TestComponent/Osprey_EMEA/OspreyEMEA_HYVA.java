@@ -272,7 +272,8 @@ public class OspreyEMEA_HYVA {
 
 	public String Create_Account(String Dataset) {
 		// TODO Auto-generated method stub
-		String email = Common.genrateRandomEmail(data.get(Dataset).get("Email"));
+		String email =data.get(Dataset).get("Email");
+		System.out.println(email);
 		String Store= data.get(Dataset).get("Store");
 		try {
 			Common.textBoxInput("xpath", "//input[@name='firstname']", data.get(Dataset).get("FirstName"));
@@ -441,11 +442,13 @@ public class OspreyEMEA_HYVA {
 	public void stayIntouch() {
 
 		try {
+			String Email=Common.genrateRandomEmail("automationospemea@gmail.com");
+			System.out.println(Email);
 			Thread.sleep(5000);
 			Common.scrollIntoView("xpath", "//input[@aria-label='Enter your email']");
 			Thread.sleep(5000);
 			Sync.waitElementClickable(30, "xpath", "//input[@aria-label='Enter your email']");
-			Common.textBoxInput("xpath", "//input[@aria-label='Enter your email']", Utils.getEmailid());
+			Common.textBoxInput("xpath", "//input[@aria-label='Enter your email']", Email);
 			Thread.sleep(5000);
 			Common.clickElement("xpath", "(//label[@class='needsclick go3431972610 kl-private-reset-css-Xuajs1'])[2]");
 			Common.clickElement("xpath", "//button[text()='Subscribe']");
@@ -3193,8 +3196,8 @@ public class OspreyEMEA_HYVA {
 		try {
 			Common.findElement("xpath", "//a[@aria-label='" + browse + "']").click();
 			Sync.waitPageLoad();
-			Sync.waitElementPresent("xpath", "//header[@aria-label='Department Filters']");
-			int filterSize = Common.findElements("xpath", "//header[@aria-label='Department Filters']").size();
+			Sync.waitElementPresent("css", "div[id='cat-filter-container-v3']");
+			int filterSize = Common.findElements("css", "div[id='cat-filter-container-v3']").size();
 
 			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
 			Sync.waitPageLoad();
@@ -3258,7 +3261,7 @@ public class OspreyEMEA_HYVA {
 			Common.scrollIntoView("xpath", "//div[@class='dl-location-detector-container ']");
 			int currentlocation = Common.findElements("xpath", "//div[@class='dl-location-detector-container ']").size();
 			System.out.println(currentlocation);
-			String address = Common.findElement("xpath", "//h5[contains(@class,'store-address')]").getText();
+			String address = Common.findElement("xpath", "//h4[contains(@class,'store-address')]").getText();
 			Common.assertionCheckwithReport(currentlocation > 0 && address.contains("TX"),
 					"validating current location ", "Should visible retailers in the current location",
 					"Current location Displayed", "Failed to display the current location");
@@ -3552,9 +3555,9 @@ public class OspreyEMEA_HYVA {
 		try {
 
 			Sync.waitElementPresent("xpath",
-					"//a[contains(@class,'level-0')]//span[contains(text(),'"+ header +"')]");
+					"//button[contains(@class,'level-0')]//span[contains(text(),'"+ header +"')]");
 			
-			Common.clickElement("xpath", "//a[contains(@class,'level-0')]//span[contains(text(),'" + header + "')]");
+			Common.clickElement("xpath", "//button[contains(@class,'level-0')]//span[contains(text(),'" + header + "')]");
 			Thread.sleep(2000);
 			try {
 				Common.mouseOver("xpath", "//span[contains(text(),'"+ header +"')]");
@@ -3588,12 +3591,21 @@ public class OspreyEMEA_HYVA {
 	public void social_Links(String dataSet) {
 
 		String socalLinks = data.get(dataSet).get("Links");
+		String SocialLinks= data.get(dataSet).get("ProdLinks");
 		String[] socallinksarry = socalLinks.split(",");
+		String[] socallinksarrys = SocialLinks.split(",");
 		int i = 0;
 		try {
 			for (i = 0; i < socallinksarry.length; i++) {
 				Common.actionsKeyPress(Keys.END);
-				Common.clickElement("xpath", "//img[contains(@src,'" + socallinksarry[i] + "')]");
+			if(Common.getCurrentURL().contains("preprod"))
+			{
+				Common.clickElement("xpath", "//img[@src,'" + socallinksarry[i] + "')]");
+			}
+			else
+			{
+				Common.clickElement("xpath", "//img[@alt='" + socallinksarrys[i] + "']");
+			}
 				Thread.sleep(4000);
 				Common.switchWindows();
 				System.out.println(Common.getCurrentURL());
@@ -3755,11 +3767,11 @@ public class OspreyEMEA_HYVA {
 				Common.clickElement("xpath", "//div[@x-ref='freegift']//button[@aria-label='Close, button.']");
 			}
 			if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
-				Sync.waitElementVisible("css", "input[type='email']");
-				Common.textBoxInput("css", "input[type='email']", data.get(dataSet).get("Email"));
+				Common.findElement("css", "input[placeholder='Enter e-mail address']").sendKeys(data.get(dataSet).get("Email"));
+//				Common.textBoxInput("xpath", "//input[@placeholder='Enter e-mail address']", data.get(dataSet).get("Email"));
 			} else {
-				Sync.waitElementVisible("css", "input[type='email']");
-				Common.textBoxInput("css", "input[type='email']", data.get(dataSet).get("Prod Email"));
+				Sync.waitElementVisible("xpath", "//input[@placeholder='Enter e-mail address']");
+				Common.textBoxInput("xpath", "//input[@placeholder='Enter e-mail address']", data.get(dataSet).get("Prod Email"));
 			}
 
 		} catch (NoSuchElementException e) {
@@ -5547,7 +5559,7 @@ return Number;
 	}
 
 	public void newuseraddDeliveryAddress(String dataSet) throws Exception {
-		String email = Common.genrateRandomEmail(data.get(dataSet).get("UserName"));
+		String email = data.get(dataSet).get("UserName");
 		try {
 			Thread.sleep(5000);
 			Sync.waitElementVisible("xpath", "//input[@type='email']");
@@ -7194,7 +7206,7 @@ return Number;
 	public String change_Email(String Dataset) {
 		// TODO Auto-generated method stub
 		String newemail = "";
-
+		String Email=Common.genrateRandomEmail("automationospemea@gmail.com");
 		try {
 			
 			Common.clickElement("xpath", "//span[text()='Edit']");
@@ -7202,7 +7214,7 @@ return Number;
 			Sync.waitElementClickable(30, "id", "change-email");
 			Common.clickElement("id", "change-email");
 			Common.textBoxInputClear("xpath", "(//input[@name='email'])[1]");
-			Common.textBoxInputAndVerify("xpath", "(//input[@name='email'])[1]", Utils.getEmailid());
+			Common.textBoxInputAndVerify("xpath", "(//input[@name='email'])[1]", Email);
 			 newemail = Common.findElement("xpath", "(//input[@name='email'])[1]").getAttribute("value");
 			Common.textBoxInput("xpath", "//input[@name='current_password']",
 					data.get(Dataset).get("Confirm Password"));
@@ -7486,7 +7498,7 @@ return Number;
 	public String create_account_With_Product(String Dataset) {
 		// TODO Auto-generated method stub
 		String email = "";
-		String Email = Common.genrateRandomEmail(data.get(Dataset).get("UserName"));
+		String Email = data.get(Dataset).get("UserName");
 		String product = data.get(Dataset).get("Products");
 		try {
 			Common.refreshpage();
@@ -12946,7 +12958,7 @@ public void Guest_Add_Wishlist_Create_account() throws Exception {
 
 public String Create_Account_for_Guest_my_fav(String Dataset) {
 	// TODO Auto-generated method stub
-	String email = Common.genrateRandomEmail(data.get(Dataset).get("Email"));
+	String email =data.get(Dataset).get("Email");
 	try {
         Common.clickElement("xpath", "//a[text()='Create an Account']");
 		Common.textBoxInput("xpath", "//input[@name='firstname']", data.get(Dataset).get("FirstName"));
@@ -13889,7 +13901,7 @@ public void product_Registration(String dataSet) {
 	String SKUitemNumber = data.get(dataSet).get("SKUitemNumber");
 	String feedback = ("Good Product");
 	try {
-		Common.refreshpage();
+//		Common.refreshpage();
 		Sync.waitPageLoad();
 		/*Common.clickElement("xpath", "//span[text()='Register Your Product']");
 
@@ -13905,7 +13917,7 @@ public void product_Registration(String dataSet) {
 		Common.textBoxInput("xpath", "//input[@id='customerLastName']", data.get(dataSet).get("LastName"));
 		
 		Sync.waitElementPresent("xpath", "//input[@id='conversationDateofbirthforforms']");
-		Common.textBoxInput("xpath", "//input[@id='conversationDateofbirthforforms']", data.get(dataSet).get("DOB1"));	
+		Common.textBoxInput("xpath", "//input[@id='conversationDateofbirthforforms']", data.get(dataSet).get("DOB"));	
 		
 		//Sync.waitElementPresent("xpath", "//div[@id='conversationGender']");
 		Common.clickElement("xpath", "//div[@id='conversationGender']");
@@ -13933,7 +13945,7 @@ public void product_Registration(String dataSet) {
 		Sync.waitElementPresent("xpath", "//input[@id='messageSubject']");
 		Common.textBoxInput("xpath", "//input[@id='messageSubject']", data.get(dataSet).get("Products"));
 				
-		Common.textBoxInput("xpath", "//input[contains(@id,'Whendidyoupurchase')]",data.get(dataSet).get("Date1"));
+		Common.textBoxInput("xpath", "//input[contains(@id,'Whendidyoupurchase')]",data.get(dataSet).get("Date"));
 		
 		Sync.waitElementPresent("xpath", "//div[contains(@id,'Activitiestousetheproduct')]");
 		Common.clickElement("xpath", "//div[contains(@id,'Activitiestousetheproduct')]");
@@ -14003,11 +14015,11 @@ public void product_Registration(String dataSet) {
 		
 		Common.javascriptclickElement("xpath", "//iframe[@title='reCAPTCHA']");
 		Thread.sleep(3000);
-		if(Common.getCurrentURL().contains("https://osprey-emea-prod.kustomer.support/contact/product-registration"))
+		if(Common.getCurrentURL().contains("https://osprey-emea-prod.kustomer.support/en_us/contact/product-registration"))
 			
 		{
 			System.out.println(Common.getCurrentURL());
-			Common.assertionCheckwithReport(Common.getCurrentURL().contains("https://osprey-emea-prod.kustomer.support/contact/product-registration"),
+			Common.assertionCheckwithReport(Common.getCurrentURL().contains("https://osprey-emea-prod.kustomer.support/en_us/contact/product-registration"),
 					"verifying the product registration form fileds filled in the production environment", "On production environment in product registration form filleds should be fill",
 					"successfully Product registration form fileds has been filled in the production environmnet", "failed to fill the Product Registration form on the production environment");
 			

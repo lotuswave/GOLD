@@ -20,9 +20,6 @@ public class TEST_DGLD_DB_US_ST_110_GuestUser_Checkout_with_Simple_Configurable_
 		try {
 		
 			Drybar.Verify_Homepage();
-			String url = Common.getCurrentURL();
-			if(url.contains("preprod"))
-			{
 			Drybar.search_product("Bundle Product");  
 			Drybar.Addtocart_Bundle("Bundle Product");
 			Drybar.search_product("Product");  
@@ -35,23 +32,7 @@ public class TEST_DGLD_DB_US_ST_110_GuestUser_Checkout_with_Simple_Configurable_
 			Drybar.clickSubmitbutton_Shippingpage();
 			Drybar.guest_BillingAddress("BillingDetails");
 			Drybar.Kalrna_Payment("Klarna Visa Payment");
-			}
-			else
-			{
-				Drybar.search_product("Bundle 1");  
-				Drybar.Addtocart_Bundle("Bundle 1"); 
-				Drybar.search_product("Product");  
-				Drybar.addtocart("Product");
-				Drybar.search_product("Configurable Product");
-				Drybar.Configurable_addtocart("Configurable Product");
-				Drybar.minicart_Checkout();
-				Drybar.addDeliveryAddress_Guestuser("Address");
-				Drybar.selectshippingmethod("GroundShipping method");
-				Drybar.clickSubmitbutton_Shippingpage();
-				Drybar.guest_BillingAddress("BillingDetails");
-				Drybar.Kalrna_Payment("Klarna Visa Payment");
-				Drybar.Afterpay_and_paypal_prod_validation();
-			}
+			
 			
 			
 

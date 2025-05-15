@@ -3686,8 +3686,8 @@ public class OspreyEMEA_E2E_HYVA {
 				if(URL.contains("stage")|| URL.contains("preprod")) {
 				Thread.sleep(3000);
 					if(Common.getCurrentURL().contains("no_nb")) {
-					  Sync.waitElementPresent("xpath", "//button[contains(text(),'Legg til gavekort')]");
-					  Common.clickElement("xpath", "//button[contains(text(),'Legg til gavekort')]");
+					  Sync.waitElementPresent("xpath", "//h3[contains(text(),'Legg til gavekort')]");
+					  Common.clickElement("xpath", "//h3[contains(text(),'Legg til gavekort')]");
 					 
 					  Sync.waitElementPresent("id", "amcard-input");
 					  Common.textBoxInput("id", "amcard-input", GiftCode);
@@ -3719,8 +3719,8 @@ public class OspreyEMEA_E2E_HYVA {
 					}
 					else if(Common.getCurrentURL().contains("che_fr")){
 						
-						Sync.waitElementPresent("xpath", "//button[contains(text(),'Ajouter une carte-cadeau')]");
-						  Common.clickElement("xpath", "//button[contains(text(),'Ajouter une carte-cadeau')]");
+						Sync.waitElementPresent("xpath", "//h3[contains(text(),'Ajouter une carte-cadeau')]");
+						  Common.clickElement("xpath", "//h3[contains(text(),'Ajouter une carte-cadeau')]");
 						 
 						  Sync.waitElementPresent("id", "amcard-input");
 						  Common.textBoxInput("id", "amcard-input", GiftCode);
@@ -3732,8 +3732,8 @@ public class OspreyEMEA_E2E_HYVA {
 					
 					else if(Common.getCurrentURL().contains("che_it"))
 					{
-						Sync.waitElementPresent("xpath", "//button[contains(text(),'Aggiungi Buono Regalo')]");
-						  Common.clickElement("xpath", "//button[contains(text(),'Aggiungi Buono Regalo')]");
+						Sync.waitElementPresent("xpath", "//h3[contains(text(),'Aggiungi Buono Regalo')]");
+						  Common.clickElement("xpath", "//h3[contains(text(),'Aggiungi Buono Regalo')]");
 						 
 						  Sync.waitElementPresent("id", "amcard-input");
 						  Common.textBoxInput("id", "amcard-input", GiftCode);
@@ -3751,8 +3751,8 @@ public class OspreyEMEA_E2E_HYVA {
 						  Common.clickElement("xpath", "//span[contains(text(),'Code hinzufügen')]");
 					}else {
 
-							  Sync.waitElementPresent("xpath", "//button[contains(text(),'Add Gift Card')]");
-							  Common.clickElement("xpath", "//button[contains(text(),'Add Gift Card')]");
+							  Sync.waitElementPresent("xpath", "//h3[contains(text(),'Add Gift Card')]");
+							  Common.clickElement("xpath", "//h3[contains(text(),'Add Gift Card')]");
 							 
 							  Sync.waitElementPresent("id", "amcard-input");
 							  Common.textBoxInput("id", "amcard-input", GiftCode);
@@ -10389,12 +10389,12 @@ return Number;
 			if(URL.contains("stage")|| URL.contains("preprod")) {
 			Thread.sleep(5000);
 			
-		Sync.waitElementPresent("xpath", "//button[contains(text(),'Add Gift Card')]");	
+		Sync.waitElementPresent("xpath", "//h3[contains(text(),'Add Gift Card')]");	
 		Thread.sleep(4000);
-		String GiftCrad= Common.findElement("xpath", "//button[contains(text(),'Add Gift Card')]").getAttribute("title");
+		String GiftCrad= Common.findElement("xpath", "//h3[contains(text(),'Add Gift Card')]").getAttribute("title");
 		System.out.println(GiftCrad);
 		if (GiftCrad.equals("Show items")) {
-			Common.clickElement("xpath", "//button[contains(text(),'Add Gift Card')]");	
+			Common.clickElement("xpath", "//h3[contains(text(),'Add Gift Card')]");	
 		}
 		else {
 			System.out.println();
@@ -10414,8 +10414,8 @@ return Number;
 			}
 			else
 			{
-				Common.scrollIntoView("xpath", "//button[contains(text(),'Add Gift Card')]");
-				Common.clickElement("xpath","//button[contains(text(),'Add Gift Card')]");
+				Common.scrollIntoView("xpath", "//h3[contains(text(),'Add Gift Card')]");
+				Common.clickElement("xpath","//h3[contains(text(),'Add Gift Card')]");
 				Common.textBoxInput("xpath","//input[@x-model='giftCardCode']", data.get(dataSet).get("GiftCard_Prod"));
 //				Common.actionsKeyPress(Keys.ARROW_UP);
 				Common.clickElement("xpath","//button[@aria-label='Add Code']");
@@ -10486,13 +10486,13 @@ return Number;
 			Thread.sleep(4000);
    if(Common.getCurrentURL().contains("stage") ||Common.getCurrentURL().contains("preprod") )
    {
-	   Common.refreshpage();
+//	   Common.refreshpage();
 	   Thread.sleep(4000);
 	   Common.clickElement("xpath", "(//input[contains(@id,'agreement_5')])[3]");
 	   Thread.sleep(4000);
 	   if(Common.getCurrentURL().contains("/che_fr/"))
 	   {
-		   Common.clickElement("xpath", "//button[contains(text(),'Valider la Commande')]");
+		   Common.clickElement("xpath", "(//button[contains(text(),'Valider la Commande')])[2]");
 		   Thread.sleep(3000);  
 	   }else
 	   {

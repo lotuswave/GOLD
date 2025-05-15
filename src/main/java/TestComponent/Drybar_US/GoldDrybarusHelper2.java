@@ -264,9 +264,9 @@ public class GoldDrybarusHelper2 {
 
 			Thread.sleep(3000);
 			Sync.waitElementPresent("xpath",
-					"//a[@title='"+ header +"']//span[contains(text(),'"+ header +"')]");
+					"//span[contains(text(),'"+ header +"')]");
 			
-			Common.clickElement("xpath", "//a[@title='"+ header +"']//span[contains(text(),'"+ header +"')]");
+			Common.clickElement("xpath", "//span[contains(text(),'"+ header +"')]");
 
 			Thread.sleep(3000);
 
@@ -281,7 +281,7 @@ public class GoldDrybarusHelper2 {
 			Sync.waitPageLoad();
 			Thread.sleep(6000);
 			expectedResult = "User should select the " + Dataset + "category";
-			int sizebotteles = Common.findElements("xpath", "//a[@title='"+ header +"']//span[contains(text(),'"+ header +"')]").size();
+			int sizebotteles = Common.findElements("xpath", "//span[contains(text(),'"+ header +"')]").size();
 			System.out.println(sizebotteles);
 			Common.assertionCheckwithReport(sizebotteles > 0,
 					"validating the product category as" + Dataset + "from navigation menu ", expectedResult,
@@ -545,10 +545,10 @@ public class GoldDrybarusHelper2 {
         }
         else {
 
-//            Common.switchFrames("xpath", "//div[@class='preloaded_lightbox']/iframe");
+            Common.switchFrames("xpath", "//div[@class='preloaded_lightbox']/iframe");
             Sync.waitElementPresent("id", "ltkpopup-close-button");
             Common.clickElement("id", "ltkpopup-close-button");
-//            Common.switchToDefault();
+            Common.switchToDefault();
             }
 
 	}
@@ -1622,10 +1622,14 @@ public class GoldDrybarusHelper2 {
 		try {
 
 		  
-			Sync.waitElementPresent("xpath",
-					"//a[@title='"+ header +"']//span[contains(text(),'"+ header +"')]");
+//			Sync.waitElementPresent("xpath",
+//					"//a[@title='"+ header +"']//span[contains(text(),'"+ header +"')]");
+//			
+//			Common.clickElement("xpath", "//a[@title='"+ header +"']//span[contains(text(),'"+ header +"')]");
 			
-			Common.clickElement("xpath", "//a[@title='"+ header +"']//span[contains(text(),'"+ header +"')]");
+			Sync.waitElementPresent("xpath","//button//span[contains(text(),'"+ header +"')]");
+			
+			Common.clickElement("xpath", "//button//span[contains(text(),'"+ header +"')]");
 
 			Thread.sleep(3000);
 
@@ -1640,7 +1644,8 @@ public class GoldDrybarusHelper2 {
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			expectedResult = "User should select the " + Dataset + "category";
-			int sizebotteles = Common.findElements("xpath", "//a[@title='"+ header +"']//span[contains(text(),'"+ header +"')]").size();
+			//int sizebotteles = Common.findElements("xpath", "//a[@title='"+ header +"']//span[contains(text(),'"+ header +"')]").size();
+			int sizebotteles = Common.findElements("xpath", "//button//span[contains(text(),'"+ header +"')]").size();
 			Common.assertionCheckwithReport(sizebotteles > 0,
 					"validating the product category as" + Dataset + "from navigation menu ", expectedResult,
 					"Selected the " + Dataset + " category", "User unabel to click" + Dataset + "");
@@ -1888,6 +1893,8 @@ public class GoldDrybarusHelper2 {
 	public void review(String Dataset) {
 		// TODO Auto-generated method stub
 		String products = data.get(Dataset).get("Products");
+		String Email = Common.genrateRandomEmail(data.get(Dataset).get("Valid Email")); 
+	
 		System.out.println(products);
 		try {
 			Thread.sleep(4000);
@@ -1955,7 +1962,7 @@ public class GoldDrybarusHelper2 {
 						"Sucessfully error message has been displayed for invalid email",
 						"Failed to display the error message for invaild email");
 				Thread.sleep(4000);
-				Common.textBoxInput("xpath", "//input[@name='email']", Utils.getEmailid());
+				Common.textBoxInput("xpath", "//input[@name='email']",Email);
 				Thread.sleep(3000);
 				if (Common.getCurrentURL().contains("preprod")) {
 				
@@ -2011,7 +2018,7 @@ public class GoldDrybarusHelper2 {
 						"Sucessfully error message has been displayed for invalid email",
 						"Failed to display the error message for invaild email");
 				Thread.sleep(4000);
-				Common.textBoxInput("xpath", "//input[@aria-label='Your email address']", Utils.getEmailid());
+				Common.textBoxInput("xpath", "//input[@aria-label='Your email address']", Email);
 				Thread.sleep(3000);
 				if(Common.getCurrentURL().contains("preprod")) {
 				
@@ -2044,6 +2051,7 @@ public class GoldDrybarusHelper2 {
 		}
 
 	}
+
 	
 	
 	public void score(String score) throws Exception {
@@ -2108,6 +2116,7 @@ public class GoldDrybarusHelper2 {
 		String Question = data.get(Dataset).get("CommetsDrybar");
 		String Name = data.get(Dataset).get("FirstName");
 		String Email = data.get(Dataset).get("Email");
+		String email =Common.genrateRandomEmail(data.get(Dataset).get("Valid Email"));
 		try {
 			int size =Common.findElements("xpath","//div[@class='write-question-review-buttons-container']").size();//
 			if(size > 0) {
@@ -2123,7 +2132,7 @@ public class GoldDrybarusHelper2 {
 				Sync.waitElementPresent(30, "xpath", "//input[@id='yotpo_input_question_username']");
 				Common.textBoxInput("xpath", "//input[@id='yotpo_input_question_username']", Name);
 				Sync.waitElementPresent(30, "xpath", "//input[@id='yotpo_input_question_email']");
-				Common.textBoxInput("xpath", "//input[@id='yotpo_input_question_email']", Utils.getEmailid());
+				Common.textBoxInput("xpath", "//input[@id='yotpo_input_question_email']", email);
 				Thread.sleep(3000);
 				if(Common.getCurrentURL().contains("preprod")){
 				Common.clickElement("xpath", "//input[@data-button-type='submit']");
@@ -2156,7 +2165,7 @@ public class GoldDrybarusHelper2 {
 				Sync.waitElementPresent(30, "xpath", "//input[@aria-label='Enter your name']");
 				Common.textBoxInput("xpath", "//input[@aria-label='Enter your name']", Name);
 				Sync.waitElementPresent(30, "xpath", "//input[@aria-label='Enter your email address']");
-				Common.textBoxInput("xpath", "//input[@aria-label='Enter your email address']", Utils.getEmailid());
+				Common.textBoxInput("xpath", "//input[@aria-label='Enter your email address']", email);
 				Thread.sleep(3000);
 				if(Common.getCurrentURL().contains("preprod")){
 				Common.clickElement("xpath", "//button[@class='yotpo-question-submit']");
@@ -2183,7 +2192,7 @@ public class GoldDrybarusHelper2 {
 		}
 
 	}
-	
+
 	public void search_filter(String Dataset) {
 		// TODO Auto-generated method stub
 		String rating = data.get(Dataset).get("Review");
@@ -3835,6 +3844,7 @@ public class GoldDrybarusHelper2 {
 			String minicart = Common.findElement("xpath", "//span[@x-html='cart.subtotal']//span[@class='price']").getText();
 			Sync.waitElementPresent("xpath", "//a[@title='View Bag']");
 			Common.clickElement("xpath", "//a[@title='View Bag']");
+			Thread.sleep(5000);
 			String viewcart = Common.findElement("xpath", "//div[@x-text='hyva.formatPrice(totalsData.subtotal)']").getText();
 			Sync.waitPageLoad();
 			Thread.sleep(8000);
@@ -6989,9 +6999,13 @@ public void FUll_Payment(String dataSet) {
 				String SelectedFilter = Common.findElement("xpath", "//ul[@class='ais-CurrentRefinements-list']//li[@class='ais-CurrentRefinements-item']//span[@class='ais-CurrentRefinements-category']//span").getText();
 				System.out.println(SelectedFilter);
 				System.out.println("SelectedFilter:" + SelectedFilter);
+				Thread.sleep(2000);
+				Common.actionsKeyPress(Keys.ARROW_UP);
+				Common.actionsKeyPress(Keys.ARROW_UP);
+				Common.actionsKeyPress(Keys.ARROW_UP);
 				String RetrivedValue = "hot_toddy";
 				if (SelectedFilter.equals("All Hair Types")) {
-
+					
 					List<WebElement> Series_Filters = Common.findElements("xpath",
 							"(//div[contains(@class,'group/item-image')]//a//img)[1]");
 
@@ -7507,7 +7521,8 @@ public void FUll_Payment(String dataSet) {
 			try {
 				for (i = 0; i < Links.length; i++) {
 					
-					Common.clickElement("xpath", "//a[@title='Hair Products']");
+//					Common.clickElement("xpath", "//a[@title='Hair Products']");
+					Common.clickElement("xpath", "//span[contains(text(),'Hair Products')]");
 					Sync.waitElementPresent("xpath", "(//span[contains(text(),'"+ inspo +"')])");
 					Common.clickElement("xpath", "(//span[contains(text(),'"+ inspo +"')])");
 					Thread.sleep(3000);

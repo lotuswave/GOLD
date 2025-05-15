@@ -16,9 +16,9 @@
         </classes>
     </test>
     
-      <test name="TEST_DGLD_DB_US_ST_017_Guest_user_checkout_with_Expedited_shipping_method" testid="DQA-3621" priority="P1" description="This script will cover guest user checkout with the expedited shipping method">
+      <test name="TEST_DGLD_DB_US_ST_197_GuestUser_Checkout_with_Simple_NonAerosolBundleproduct_MultipleQTYeach_Different_Billingaddress_Expedited_Shipping_CC_AfterPay_PayPal" testid="DQA-4543" priority="P1" description="This script will cover guest user checkout with the expedited shipping method using cc After pay and PayPal">
         <classes>
-            <class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_017_Guest_user_checkout_with_Expedited_shipping_method"/>
+            <class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_197_GuestUser_Checkout_with_Simple_NonAerosolBundleproduct_MultipleQTYeach_Different_Billingaddress_Expedited_Shipping_CC_AfterPay_PayPal"/>
         </classes>
     </test>
    
@@ -59,12 +59,6 @@
             <class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_151_Validating_the_Search_Results_Page"/>
         </classes>
     </test>
-    
-  <!--    <test name="TEST_DGLD_DB_US_ST_158_My_Account_Page_Validation" testid="DQA-3768" priority="P1" description="This script will cover validating the My Account page">
-        <classes>
-            <class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_158_My_Account_Page_Validation"/>
-        </classes>
-    </test> -->
     
     <test name="TEST_DGLD_DB_US_ST_161_Minicart_Page_Validation" testid="DQA-3770" priority="P1" description="This script will cover validating the minicart page functionality">
         <classes>

@@ -24,7 +24,6 @@ public class Test_DGLD_OSP_US_BCST_031_Validating_the_shopping_cart_page {
 	        Osprey_ReEu.search_product("Product");     
 	        Osprey_ReEu.addtocart("Product");
 	        Osprey_ReEu.click_minicart();
-	        Osprey_ReEu.Remove_minicart_Free_Product();               //use only whenever we have free products in minicart
 	        Osprey_ReEu.minicart_viewcart();
 	        Osprey_ReEu.Remove_Product("Product");
 	        Osprey_ReEu.update_shoppingcart("Product Qunatity");
@@ -43,7 +42,7 @@ public class Test_DGLD_OSP_US_BCST_031_Validating_the_shopping_cart_page {
 
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+		//Common.closeAll();
 
 	}
 

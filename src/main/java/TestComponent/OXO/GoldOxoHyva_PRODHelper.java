@@ -106,15 +106,15 @@ public class GoldOxoHyva_PRODHelper {
 		String expectedResult = "User should click the" + category;
 		try {
 
-			Sync.waitElementClickable("xpath", "//a[contains(@class,'level-0-link')]//span[contains(text(),' Shop')]");
+			Sync.waitElementClickable("xpath", "//button[contains(@class,'level-0-link')]//span[contains(text(),' Shop')]");
 			Thread.sleep(3000);
-			Common.mouseOverClick("xpath", "//a[contains(@class,'level-0-link')]//span[contains(text(),' Shop')]");
+			Common.mouseOverClick("xpath", "//button[contains(@class,'level-0-link')]//span[contains(text(),' Shop')]");
 			Thread.sleep(3000);
 
 			try {
 				Common.mouseOver("xpath", "//span[contains(text(),'" + category + "')]");
 			} catch (Exception e) {
-				Common.clickElement("xpath", "//a[contains(@class,'level-0-link')]//span[contains(text(),' Shop')]");
+				Common.clickElement("xpath", "//button[contains(@class,'level-0-link')]//span[contains(text(),' Shop')]");
 			}
 			Common.clickElement("xpath", "//span[contains(text(),'" + category + "')]");
 			// Common.clickElement("xpath", "//span[text()='Shop All']");
@@ -8093,7 +8093,25 @@ public void updatePaymentAndSubmitOrder(String dataSet) throws Exception {
 
 	}
 
-
+	public void header_Coffeefinder() {
+		String Links = "Coffee Maker Finder";
+		try {
+			Common.clickElement("xpath", "//a[contains(@href,'coffee') and contains(@class,'level-0')]");
+			Sync.waitPageLoad();
+			Common.assertionCheckwithReport(Common.getPageTitle().contains("Coffee Maker Finder"),
+					"Validate the header link " + Links,
+					"Click the header link " + Links + "it will navigate to page" + Links,
+					"successfully navigating to " + Links + "page ", "Failed to navigate to" + Links + "page");
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("Validate the Header link " + Links,
+					"Click the header link " + Links + "it will navigate to page" + Links,
+					"Failed to navigate to" + Links + "page",
+					Common.getscreenShotPathforReport("failed to land on " + Links));
+			Assert.fail();
+ 
+		}
+	}
 
 
 	public void header_Menu_ImageItemblocksLinks(String Dataset) {
@@ -11177,7 +11195,7 @@ public void header_1_Percent_Planet() {
 								|| Common.getCurrentURL().contains("Blog")
 								|| Common.getCurrentURL().contains("inventor-submissions")
 								|| Common.getCurrentURL().contains("oxo-affiliate-program")
-								|| Common.getCurrentURL().contains("1-percent/")
+								|| Common.getCurrentURL().contains("1-percent")
 								|| Common.getCurrentURL().contains("corporate-responsibility")
 								|| Common.getCurrentURL().contains("exclusive-savings"),
 						"validating the links navigation from footer Links",
@@ -12772,9 +12790,9 @@ public void header_CleaningAndOrganization_ShopAll(String Dataset) {
 //				String[] shopLinks=names.split(",");
 		int i = 0;
 		try {
-			Sync.waitElementClickable("xpath", "//a[contains(@class,'level-0-link hidden')]//span[normalize-space()='Shop']");
+			Sync.waitElementClickable("xpath", "//button[contains(@class,'level-0-link hidden')]//span[normalize-space()='Shop']");
 			Thread.sleep(3000);
-			Common.mouseOverClick("xpath", "//a[contains(@class,'level-0-link hidden')]//span[normalize-space()='Shop']");
+			Common.mouseOverClick("xpath", "//button[contains(@class,'level-0-link hidden')]//span[normalize-space()='Shop']");
 			Thread.sleep(3000);
 			List<WebElement> shop = Common.findElements("xpath", "//li//a[contains(@class,'link group no-underline')]//span[1]");
 

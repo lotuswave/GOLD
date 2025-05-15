@@ -138,26 +138,6 @@
 <class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_033_Register_user_Checkout_Funtionality_with_Paypal" />
 </classes>
 </test>
-<test name="Test_DGLD_OXO_ST_034_Create_and_Edit_Gift_Registery_For_Register_User" testid="DQA-95" priority="P1" description="This Testcase is to verify that the Gift Registery create and edit for the register user in my account page">
-<classes>
-<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_034_Create_and_Edit_Gift_Registery_For_Register_User"/>
-</classes>
-</test>
-<test name="Test_DGLD_OXO_ST_035_Create_share_and_Delete_Gift_Registery_For_Register_User" testid="DQA-93" priority="P1" description="This Testcase is to verify that the Gift Registery create share and delete for the registered user in my account page">
-<classes>
-<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_035_Create_share_and_Delete_Gift_Registery_For_Register_User"/>
-</classes>
-</test>
-<test name="Test_DGLD_OXO_ST_036_Create_Manageitems_and_invalid_Details_Gift_Registery_For_Register_User" testid="DQA-98" priority="P1" description="This Test case is to verify the Gift Registry by Creating ,Managing items, and invalid details in the form for the registered user">
-<classes>
-<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_036_Create_Manageitems_and_invalid_Details_Gift_Registery_For_Register_User"/>
-</classes>
-</test>
-<test name="Test_DGLD_OXO_ST_037_Write_a_Review" testid="DQA-158" priority="P1" description="This test case is to verify user able to submit reviews for a product in PDP Page">
-<classes>
-<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_037_Write_a_Review"/>
-</classes>
-</test>
 <test name="Test_DGLD_OXO_ST_038_Guest_User_Checkout_Functionality_Afterpay_Payment" testid="DQA-138" priority="P1" description="This test case is to verify the flow of placing order functionality with Afterpay Payment method as a Guest user">
 <classes>
 <class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_038_Guest_User_Checkout_Functionality_Afterpay_Payment"/>
@@ -393,6 +373,11 @@
 <test name="Test_DGLD_OXO_ST_106_Register_user_checkout_with_Simple_Config_Loyalty_5_Fullredeem" testid="DQA-4286" priority="P1" description="The testcase is to verify the Register user checkout with simple + configurable  by applying $5 loyalty points with Full redeem payment method">
 <classes>
 <class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_106_Register_user_checkout_with_Simple_Config_Loyalty_5_Fullredeem"/>
+</classes>
+</test>
+<test name="Test_DGLD_OXO_ST_107_Checkout_From_Coffee_Maker_Finder_Page" testid="DQA-4544" priority="P1" description="This test case is to verify the flow of placing order functionality from Coffee maker finder page.">
+<classes>
+<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_107_Checkout_From_Coffee_Maker_Finder_Page"/>
 </classes>
 </test>
 <test name="Test_DGLD_OXO_US_ST_009_Placeorder_Register_user_validate_Giftcard_Send_Later" testid="DQA-4226" priority="P1" description="This test case is to validate the registered user validate Gift Card PLP page">

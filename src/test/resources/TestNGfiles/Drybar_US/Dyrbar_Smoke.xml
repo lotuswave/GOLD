@@ -65,11 +65,11 @@
         </classes>
     </test>
     
-    <test name="TEST_DGLD_DB_US_ST_150_Login_from_Shipping_page" testid="DQA-3759" priority="P1" description="This script will cover login from the shipping page">
-        <classes>
-            <class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_150_Login_from_Shipping_page"/>
-        </classes>
-    </test>
+   <test name="TEST_DGLD_DB_US_ST_043_RegisteredUser_Checkout_PayPal_Tax_with_Same_Billing_and_Shipping" testid="DQA-3601" priority="P1" description="This test case is to validate the Register user checkout process with Paypal, Same Billing and Shipping addresses and verify the tax calculation in payment page for Drybar Gold.">
+<classes>
+<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_043_RegisteredUser_Checkout_PayPal_Tax_with_Same_Billing_and_Shipping"/>
+</classes>
+</test>
     
     <test name="TEST_DGLD_DB_US_ST_151_Validating_the_Search_Results_Page" testid="DQA-3760" priority="P1" description="This script will cover validating the search results page functionality">
         <classes>

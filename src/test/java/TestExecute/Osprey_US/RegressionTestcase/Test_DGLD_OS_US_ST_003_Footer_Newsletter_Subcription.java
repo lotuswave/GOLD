@@ -19,7 +19,7 @@ public class Test_DGLD_OS_US_ST_003_Footer_Newsletter_Subcription {
 
 		try {
         Osprey_ReEu.verifingHomePage();
-        Osprey_ReEu.stayIntouch();
+        Osprey_ReEu.stayIntouch("Create Account");
         
 		} catch (Exception e) {
 
@@ -30,7 +30,7 @@ public class Test_DGLD_OS_US_ST_003_Footer_Newsletter_Subcription {
 
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+		 Common.closeAll();
 
 	}
 
