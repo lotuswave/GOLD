@@ -9922,35 +9922,38 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 	public void Configurableproduct_addtocart_pdppage(String Dataset) {
 		String product = data.get(Dataset).get("Products");
 		try {
+			  final int MAX_RETRIES = 10;
+		        final int WAIT_TIME_MS = 6000;
 			
-			for (int i = 0; i <= 10; i++) {
-				Thread.sleep(6000);
+			for (int i = 0; i <= MAX_RETRIES; i++) {
+				Thread.sleep(WAIT_TIME_MS);
 				Sync.waitElementPresent("xpath", "//img[contains(@class,'group-hover/item-image:') or @loading='lazy' and @itemprop]");
-//				Sync.waitElementPresent("xpath", "(//img[contains(@class,'m-product-card__image')])[2]");
 				List<WebElement> webelementslist = Common.findElements("xpath",
 						"//img[contains(@class,'group-hover/item-image:') or @loading='lazy' and @itemprop]");
-				String s = webelementslist.get(i).getAttribute("src");
-				System.out.println(s);
-				if (s.isEmpty()) {
+				if (webelementslist.size()>i) {
+					String s = webelementslist.get(i).getAttribute("src");
+					System.out.println("Image src: "+ s);
+					if(s!=null && s.trim().isEmpty())
+					{
+						break;
+					}
 
-				} else {
-					break;
 				}
 			}
 			Common.javascriptclickElement("xpath", "//img[@alt='" + product + "']");
 			Thread.sleep(4000);
-			System.out.println(product);
-			//String name = Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText().replace("Water Bottle", "").replace(" - ", "");
+			System.out.println("Clicked Product: "+product);
+
 			String name = Common.findElement("xpath", "//h1[contains(@class, 'pdp-grid-title title text')]").getText();
 			System.out.println(name);
 			Common.assertionCheckwithReport(name.contains(product),
 					"validating the product should navigate to the PDP page",
 					"When we click on the product is should navigate to the PDP page",
 					"Sucessfully Product navigate to the PDP page", "Failed product to the PDP page");
-			Sync.waitPageLoad();
+	
 			List<WebElement> ListOfSubproducts = Common.findElements("xpath",
 					"//div[@class='hf_color']//div[@class='m-swatch']");
-			System.out.println(ListOfSubproducts.size());
+			System.out.println("swatch count: "+ListOfSubproducts.size());
 			for (int i = 0; i < ListOfSubproducts.size(); i++) {
 				int value = i + 1;
 				ListOfSubproducts.get(i).click();
@@ -9960,9 +9963,10 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 				String Bottleimagecolor =Common.getText("xpath", "(//span[contains(@x-text,'getSwatchText')])['" + value + "']");
 				System.out.println(Bottleimagecolor);
 
-				Common.assertionCheckwithReport(colorname.contains(Bottleimagecolor), "validating the  selected Color Swatch",
-						"User should select the Color swatch", "Sucessfully Color swatch is selected ",
-						"failed to Select The color swatch");
+				Common.assertionCheckwithReport(colorname !=null && colorname.contains(Bottleimagecolor), "Validate Selected Color Swatch",
+		                "User should be able to select color swatch",
+		                "Color swatch selected successfully: " + colorname,
+		                "Failed to select color swatch");
 
 			}
 			Sync.waitElementPresent("css", "button[title='Add to Cart']");
@@ -9971,8 +9975,11 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 
 		catch (Exception | Error e) {
 			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("validating the  product add to the cart", "Product should be add to cart",
-					"Unable to add product to the cart ", Common.getscreenShot("Failed to add product to the cart"));
+			  Common.assertionCheckwithReport(false,
+			            "Unexpected Exception during Configurable Product Add to Cart",
+			            "Exception thrown: " + e.getMessage(),
+			            "",
+			            "Test failed due to exception: " + e.getMessage());
 			Assert.fail();
 		}
 
