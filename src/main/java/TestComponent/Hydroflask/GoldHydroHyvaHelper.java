@@ -127,14 +127,14 @@ public class GoldHydroHyvaHelper {
 		String expectedResult = "User should click the" + category;
 		try {
 
-			Sync.waitElementClickable("xpath", "//a[contains(@class,'level-top')]//span[text()=' Shop']");
+			Sync.waitElementClickable("xpath", "//span[contains(text(), ' Shop')]");
 			Thread.sleep(3000);
-			Common.mouseOverClick("xpath", "//a[contains(@class,'level-top')]//span[text()=' Shop']");
+			Common.mouseOverClick("xpath", "//span[contains(text(), ' Shop')]");
 			Thread.sleep(3000);
 			try {
 				Common.mouseOver("xpath", "//span[contains(text(),'" + category + "')]");
 			} catch (Exception e) {
-				Common.clickElement("xpath", "//a[@class='level-top ui-corner-all']//span[text()=' Shop']");
+				Common.clickElement("xpath", "//span[contains(text(), ' Shop')]");
 			}
 			Common.clickElement("xpath", "//span[contains(text(),'" + category + "')]");
 			Common.clickElement("xpath", "//a[text()='Shop All']");
@@ -238,17 +238,17 @@ public class GoldHydroHyvaHelper {
 		String expectedResult = "User should click the" + category;
 		try {
 
-			Sync.waitElementPresent("xpath", "(//a[contains(@title,'Shop')]//span[contains(text(),'Shop')])[3]");
+			Sync.waitElementPresent("xpath", "//span[contains(text(), ' Shop')]");
 			Thread.sleep(3000);
 //			Common.scrollIntoView("xpath","//a[contains(@class,'level-top')]//span[text()=' Shop']");
-			Common.clickElement("xpath", "(//a[contains(@title,'Shop')]//span[contains(text(),'Shop')])[3]");
+			Common.clickElement("xpath", "//span[contains(text(), ' Shop')]");
 
 			Thread.sleep(3000);
 
 			try {
 				Common.mouseOver("xpath", "//span[contains(text(),'" + category + "')]");
 			} catch (Exception e) {
-				Common.clickElement("xpath", "//a[@class='level-top ui-corner-all']//span[text()=' Shop']");
+				Common.clickElement("xpath", "//span[contains(text(), ' Shop')]");
 			}
 			Common.clickElement("xpath", "//span[contains(text(),'" + category + "')]");
 			Thread.sleep(4000);
@@ -279,17 +279,17 @@ public class GoldHydroHyvaHelper {
 		String expectedResult = "User should click the" + category;
 		try {
 
-			Sync.waitElementPresent("xpath", "(//a[contains(@title,'Shop')]//span[contains(text(),'Shop')])[1]");
+			Sync.waitElementPresent("xpath", "(//span[contains(text(), ' Shop')])[2]");
 			Thread.sleep(3000);
 //			Common.scrollIntoView("xpath","//a[contains(@class,'level-top')]//span[text()=' Shop']");
-			Common.clickElement("xpath", "(//a[contains(@title,'Shop')]//span[contains(text(),'Shop')])[1]");
+			Common.clickElement("xpath", "(//span[contains(text(), ' Shop')])[2]");
 
 			Thread.sleep(3000);
 
 			try {
 				Common.mouseOver("xpath", "//span[contains(text(),'" + category + "')]");
 			} catch (Exception e) {
-				Common.clickElement("xpath", "//a[@class='level-top ui-corner-all']//span[text()=' Shop']");
+				Common.clickElement("xpath", "(//span[contains(text(), ' Shop')])[2]");
 			}
 			Common.clickElement("xpath", "//span[contains(text(),'" + category + "')]");
 			Thread.sleep(4000);
@@ -6603,9 +6603,9 @@ catch(Exception | Error e)
 			if (Common.getPageTitle().contains("Bottle")) {
 				Sync.waitPageLoad();
 				for (int i = 0; i <= 10; i++) {
-					Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
+					Sync.waitElementPresent("xpath", "//li[@class='ais-InfiniteHits-item']//img[1]");
 					List<WebElement> webelementslist = Common.findElements("xpath",
-							"//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
+							"//li[@class='ais-InfiniteHits-item']//img[1]");
 
 					String s = webelementslist.get(i).getAttribute("src");
 					System.out.println(s);
@@ -7309,10 +7309,10 @@ catch(Exception | Error e)
 //				List<WebElement> webelementslist = Common.findElements("xpath",
 //						"//img[contains(@class,'m-product-card__image product')]");
 //				String s = webelementslist.get(i).getAttribute("src");
-				Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
+				Sync.waitElementPresent("xpath", "//li[@class='ais-InfiniteHits-item']//img[1]");
 //				Sync.waitElementPresent("xpath", "(//img[contains(@class,'m-product-card__image')])[2]");
 				List<WebElement> webelementslist = Common.findElements("xpath",
-						"//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
+						"//li[@class='ais-InfiniteHits-item']//img[1]");
 				String s = webelementslist.get(i).getAttribute("src");
 				System.out.println(s);
 				if (s.isEmpty()) {
@@ -8736,9 +8736,9 @@ catch(Exception | Error e)
 		try {
 			Sync.waitPageLoad();
 			for (int i = 0; i <= 10; i++) {
-				Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
+				Sync.waitElementPresent("xpath", "//li[@class='ais-InfiniteHits-item']//img[1]");
 				List<WebElement> webelementslist = Common.findElements("xpath",
-						"//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
+						"//li[@class='ais-InfiniteHits-item']//img[1]");
 
 				String s = webelementslist.get(i).getAttribute("src");
 				System.out.println(s);
@@ -8799,9 +8799,9 @@ catch(Exception | Error e)
 		try {
 			Sync.waitPageLoad();
 			for (int i = 0; i <= 10; i++) {
-				Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
+				Sync.waitElementPresent("xpath", "//li[@class='ais-InfiniteHits-item']//img[1]");
 				List<WebElement> webelementslist = Common.findElements("xpath",
-						"//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
+						"//li[@class='ais-InfiniteHits-item']//img[1]");
 
 				String s = webelementslist.get(i).getAttribute("src");
 				System.out.println(s);
@@ -9349,7 +9349,7 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 		try {
 			Sync.waitPageLoad();
 			for (int i = 0; i <= 10; i++) {
-				//Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
+				//Sync.waitElementPresent("xpath", "//li[@class='ais-InfiniteHits-item']//img[1]");
 				Sync.waitElementPresent("xpath", "//a[@class='product-image-link']");
 
 				List<WebElement> webelementslist = Common.findElements("xpath","//a[@class='product-image-link']");
@@ -9418,9 +9418,9 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 		try {
 			Sync.waitPageLoad();
 			for (int i = 0; i <= 10; i++) {
-				Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
+				Sync.waitElementPresent("xpath", "//li[@class='ais-InfiniteHits-item']//img[1]");
 				List<WebElement> webelementslist = Common.findElements("xpath",
-						"//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
+						"//li[@class='ais-InfiniteHits-item']//img[1]");
 				String s = webelementslist.get(i).getAttribute("src");
 				System.out.println(s);
 				if (s.isEmpty()) {
@@ -9935,9 +9935,9 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 		try {
 			Sync.waitPageLoad();
 			for (int i = 0; i <= 10; i++) {
-				Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
+				Sync.waitElementPresent("xpath", "//li[@class='ais-InfiniteHits-item']//img[1]");
 				List<WebElement> webelementslist = Common.findElements("xpath",
-						"//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
+						"//li[@class='ais-InfiniteHits-item']//img[1]");
 
 				String s = webelementslist.get(i).getAttribute("src");
 				System.out.println(s);
@@ -9958,7 +9958,7 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 //					"failed to Navigate to the PDP page");
 			Sync.waitElementPresent(30, "xpath", "//div[@data-option-label='" + color + "']");
 			Common.clickElement("xpath", "//div[@data-option-label='" + color + "']");
-			Common.clickElement("xpath", "//span[contains(text(),'Engraving')]");
+			Common.clickElement("xpath", "//span[contains(text(),'Engrave Now')]");
 			Sync.waitElementPresent(30, "css", "button[id='Text-category-button']");
 			Common.clickElement("css", "button[id='Text-category-button']");
 			Thread.sleep(6000);
@@ -10087,9 +10087,9 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 		try {
 			Sync.waitPageLoad();
 			for (int i = 0; i <= 10; i++) {
-				Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
+				Sync.waitElementPresent("xpath", "//li[@class='ais-InfiniteHits-item']//img[1]");
 				List<WebElement> webelementslist = Common.findElements("xpath",
-						"//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
+						"//li[@class='ais-InfiniteHits-item']//img[1]");
 
 				String s = webelementslist.get(i).getAttribute("src");
 				System.out.println(s);
@@ -10110,7 +10110,7 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 //					"failed to Navigate to the PDP page");
 			Sync.waitElementPresent(30, "xpath", "//div[@data-option-label='" + color + "']");
 			Common.clickElement("xpath", "//div[@data-option-label='" + color + "']");
-			Common.clickElement("xpath", "//span[contains(text(),'Engraving')]");
+			Common.clickElement("xpath", "//span[contains(text(),'Engrave Now')]");
 //			engraving_color();
 			engraving_graphic("Graphic");
 			Common.clickElement("xpath", "//button[@class='ATC__btn']");
@@ -10244,9 +10244,9 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 		try {
 			Sync.waitPageLoad();
 			for (int i = 0; i <= 10; i++) {
-				Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
+				Sync.waitElementPresent("xpath", "//li[@class='ais-InfiniteHits-item']//img[1]");
 				List<WebElement> webelementslist = Common.findElements("xpath",
-						"//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
+						"//li[@class='ais-InfiniteHits-item']//img[1]");
 
 				String s = webelementslist.get(i).getAttribute("src");
 				System.out.println(s);
@@ -10468,9 +10468,9 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 		try {
 			Sync.waitPageLoad();
 			for (int i = 0; i <= 10; i++) {
-				Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
+				Sync.waitElementPresent("xpath", "//li[@class='ais-InfiniteHits-item']//img[1]");
 				List<WebElement> webelementslist = Common.findElements("xpath",
-						"//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
+						"//li[@class='ais-InfiniteHits-item']//img[1]");
 
 				String s = webelementslist.get(i).getAttribute("src");
 				System.out.println(s);
@@ -10491,7 +10491,7 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 //					"failed to Navigate to the PDP page");
 			Sync.waitElementPresent(30, "xpath", "//div[@data-option-label='" + color + "']");
 			Common.clickElement("xpath", "//div[@data-option-label='" + color + "']");
-			Common.clickElement("xpath", "//span[contains(text(),'Engraving')]");
+			Common.clickElement("xpath", "//span[contains(text(),'Engrave Now')]");
 //			engraving_color();
 			engraving_Text("Multiline Horizontal");
 			product_quantity(Dataset);
@@ -10521,9 +10521,9 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 		try {
 			Sync.waitPageLoad();
 			for (int i = 0; i <= 10; i++) {
-				Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
+				Sync.waitElementPresent("xpath", "//li[@class='ais-InfiniteHits-item']//img[1]");
 				List<WebElement> webelementslist = Common.findElements("xpath",
-						"//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
+						"//li[@class='ais-InfiniteHits-item']//img[1]");
 
 				String s = webelementslist.get(i).getAttribute("src");
 				System.out.println(s);
@@ -13033,9 +13033,9 @@ Common.clickElement("xpath", "//span[text()='Edit']");
 		try {
 			Sync.waitPageLoad();
 			for (int i = 0; i <= 10; i++) {
-				Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
+				Sync.waitElementPresent("xpath", "//li[@class='ais-InfiniteHits-item']//img[1]");
 				List<WebElement> webelementslist = Common.findElements("xpath",
-						"//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
+						"//li[@class='ais-InfiniteHits-item']//img[1]");
 
 				String s = webelementslist.get(i).getAttribute("src");
 				System.out.println(s);
