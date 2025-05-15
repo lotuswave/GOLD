@@ -921,7 +921,8 @@ public class GoldDrybarusHelper2 {
 			} else {
 				Sync.waitElementVisible("xpath", "//input[@type='email']");
 				Common.textBoxInput("xpath", "//input[@type='email']", data.get(dataSet).get("Prod Email"));
-			}
+				Thread.sleep(1000);
+				}
 
 		} catch (NoSuchElementException e) {
 			minicart_Checkout();
