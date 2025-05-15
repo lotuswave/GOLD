@@ -14937,82 +14937,163 @@ public void verfy_miscellaneous_pages(String dataSet) throws Exception, IOExcept
 
     String urls = data.get(dataSet).get("Links");
     int j = 0;
+    String Urls = data.get(dataSet).get("ProdLinks");
 
-    String[] strArray = urls.split("\\r?\\n");
-    for (int i = 0; i < strArray.length; i++) {
-        System.out.println(strArray[i]);
-
-        if (Common.getCurrentURL().contains("pre")) {
-
-            Common.oppenURL((strArray[i]));
-            int responcecode = getpageresponce(Common.getCurrentURL());
-            System.out.println(responcecode);
-            Common.refreshpage();
-            System.out.println(responcecode);
-            
-            if(Common.findElements("xpath", "//button[@aria-label='Close dialog']").size() > 0) {
-                Common.clickElement("xpath", "//button[@aria-label='Close dialog']");
-            }
-
-            if (responcecode == 200) {
-                ExtenantReportUtils.addPassLog("Validating Page URL ", "page configured with products ",
-                        "successfully page configured with products",
-                        Common.getscreenShotPathforReport("link" + i));
-            }
-
-            Common.oppenURL((strArray[i]));
-            int responcecode1 = getpageresponce(Common.getCurrentURL());
-            System.out.println(responcecode1);
-            Common.refreshpage();
-            System.out.println(responcecode1);
-            
-            if(Common.findElements("xpath", "//button[@aria-label='Close dialog']").size() > 0) {
-                Common.clickElement("xpath", "//button[@aria-label='Close dialog']");
-            } 
-            
-            if (responcecode1 == 404) {  
-                ExtenantReportUtils.addPassLog("Validating Page URL ", "page configured with products ",
-                        "successfully page configured with products",
-                        Common.getscreenShotPathforReport("link" + i));
-            } 
-            
-        } else {
-
-            j++;
-
-            ExtenantReportUtils.addFailedLog("Validating Page URL  " + Common.getCurrentURL(),
-                    "page configured with products ", "unable to find page it showing 404 error",
-                    Common.getscreenShotPathforReport("link" + i));
-}
-
-        if (Common.getCurrentURL().contains("https://mcloud-na-preprod.osprey.com")) {
-
-            Common.oppenURL(strArray[i].replace("mcloud-na-stage", "www"));
-
-            int responcecode = getpageresponce(Common.getCurrentURL());
-            System.out.println(responcecode);
-
-            if (responcecode == 200) {
-                ExtenantReportUtils.addPassLog("Validating Page URL ", "page configured with products ",
-                        "successfully page configured with products",
-                        Common.getscreenShotPathforReport("link" + i));
-            } else {
-
-                j++;
-                if(Common.getPageTitle().contains("404"))
-    			{
-    				Assert.fail();
-
-                ExtenantReportUtils.addFailedLog("Validating Page URL  " + Common.getCurrentURL(),
-                        "page configured with products ", "unable to find page it showing 404 error",
-                        Common.getscreenShotPathforReport("link" + i));
-            } }
+    String[] strArray = Urls.split("\\r?\\n");
+    String[] strArrays = urls.split("\\r?\\n");
+   
+   if(Common.getCurrentURL().contains("www.osprey.com")) {
+	    for (int i = 0; i < strArray.length; i++) {
+	        System.out.println(strArray[i]);
+	
+	        if (Common.getCurrentURL().contains("pre")) {
+	
+	            Common.oppenURL((strArray[i]));
+	            int responcecode = getpageresponce(Common.getCurrentURL());
+	            System.out.println(responcecode);
+	            Common.refreshpage();
+	            System.out.println(responcecode);
+	            
+	            if(Common.findElements("xpath", "//button[@aria-label='Close dialog']").size() > 0) {
+	                Common.clickElement("xpath", "//button[@aria-label='Close dialog']");
+	            }
+	
+	            if (responcecode == 200) {
+	                ExtenantReportUtils.addPassLog("Validating Page URL ", "page configured with products ",
+	                        "successfully page configured with products",
+	                        Common.getscreenShotPathforReport("link" + i));
+	            }
+	
+	            Common.oppenURL((strArray[i]));
+	            int responcecode1 = getpageresponce(Common.getCurrentURL());
+	            System.out.println(responcecode1);
+	            Common.refreshpage();
+	            System.out.println(responcecode1);
+	            
+	            if(Common.findElements("xpath", "//button[@aria-label='Close dialog']").size() > 0) {
+	                Common.clickElement("xpath", "//button[@aria-label='Close dialog']");
+	            } 
+	            
+	            if (responcecode1 == 404) {  
+	                ExtenantReportUtils.addPassLog("Validating Page URL ", "page configured with products ",
+	                        "successfully page configured with products",
+	                        Common.getscreenShotPathforReport("link" + i));
+	            } 
+	            
+	        } else {
+	
+	            j++;
+	
+	            ExtenantReportUtils.addFailedLog("Validating Page URL  " + Common.getCurrentURL(),
+	                    "page configured with products ", "unable to find page it showing 404 error",
+	                    Common.getscreenShotPathforReport("link" + i));
+	}
+	
+	        if (Common.getCurrentURL().contains("https://mcloud-na-preprod.osprey.com")) {
+	
+	            Common.oppenURL(strArray[i].replace("mcloud-na-stage", "www"));
+	
+	            int responcecode = getpageresponce(Common.getCurrentURL());
+	            System.out.println(responcecode);
+	
+	            if (responcecode == 200) {
+	                ExtenantReportUtils.addPassLog("Validating Page URL ", "page configured with products ",
+	                        "successfully page configured with products",
+	                        Common.getscreenShotPathforReport("link" + i));
+	            } else {
+	
+	                j++;
+	                if(Common.getPageTitle().contains("404"))
+	    			{
+	    				Assert.fail();
+	
+	                ExtenantReportUtils.addFailedLog("Validating Page URL  " + Common.getCurrentURL(),
+	                        "page configured with products ", "unable to find page it showing 404 error",
+	                        Common.getscreenShotPathforReport("link" + i));
+	            } }
+	    }
+	
+	    if (j > 1) {
+	        AssertJUnit.fail();
+	    }
+	    }
+   }else {
+	   for (int i = 0; i < strArrays.length; i++) {
+	        System.out.println(strArrays[i]);
+	
+	        if (Common.getCurrentURL().contains("pre")) {
+	
+	            Common.oppenURL((strArrays[i]));
+	            int responcecode = getpageresponce(Common.getCurrentURL());
+	            System.out.println(responcecode);
+	            Common.refreshpage();
+	            System.out.println(responcecode);
+	            
+//	            if(Common.findElements("xpath", "//button[@aria-label='Close dialog']").size() > 0) {
+//	                Common.clickElement("xpath", "//button[@aria-label='Close dialog']");
+//	            }
+//	
+	            if (responcecode == 200) {
+	                ExtenantReportUtils.addPassLog("Validating Page URL ", "page configured with products ",
+	                        "successfully page configured with products",
+	                        Common.getscreenShotPathforReport("link" + i));
+	            }
+	
+	            Common.oppenURL((strArrays[i]));
+	            int responcecode1 = getpageresponce(Common.getCurrentURL());
+	            System.out.println(responcecode1);
+	            Common.refreshpage();
+	            System.out.println(responcecode1);
+	            
+//	            if(Common.findElements("xpath", "//button[@aria-label='Close dialog']").size() > 0) {
+//	                 Common.clickElement("xpath", "//button[@aria-label='Close dialog']");
+//	            } 
+	            
+	            if (responcecode1 == 404) {  
+	                ExtenantReportUtils.addPassLog("Validating Page URL ", "page configured with products ",
+	                        "successfully page configured with products",
+	                        Common.getscreenShotPathforReport("link" + i));
+	            } 
+	            
+	        } else {
+	
+	            j++;
+	
+	            ExtenantReportUtils.addFailedLog("Validating Page URL  " + Common.getCurrentURL(),
+	                    "page configured with products ", "unable to find page it showing 404 error",
+	                    Common.getscreenShotPathforReport("link" + i));
+	}
+	
+	        if (Common.getCurrentURL().contains("https://mcloud-na-preprod.osprey.com")) {
+	
+	            Common.oppenURL(strArrays[i].replace("mcloud-na-stage", "www"));
+	
+	            int responcecode = getpageresponce(Common.getCurrentURL());
+	            System.out.println(responcecode);
+	
+	            if (responcecode == 404) {
+	                ExtenantReportUtils.addPassLog("Validating Page URL ", "page configured with products ",
+	                        "successfully page configured with products",
+	                        Common.getscreenShotPathforReport("link" + i));
+	            } else {
+	
+	                j++;
+	                if(Common.getPageTitle().contains("404"))
+	    			{
+	    				Assert.fail();
+	
+	                ExtenantReportUtils.addFailedLog("Validating Page URL  " + Common.getCurrentURL(),
+	                        "page configured with products ", "unable to find page it showing 404 error",
+	                        Common.getscreenShotPathforReport("link" + i));
+	            } }
+	    }
+	
+	    if (j > 1) {
+	        AssertJUnit.fail();
+	    }
+	    }
+   }
     }
-
-    if (j > 1) {
-        AssertJUnit.fail();
-    }
-}}
 
 public void verfy_links(String dataSet) throws Exception, IOException {
 	// TODO Auto-generated method stub
