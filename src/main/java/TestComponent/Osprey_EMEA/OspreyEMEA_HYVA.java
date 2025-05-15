@@ -3591,12 +3591,21 @@ public class OspreyEMEA_HYVA {
 	public void social_Links(String dataSet) {
 
 		String socalLinks = data.get(dataSet).get("Links");
+		String SocialLinks= data.get(dataSet).get("ProdLinks");
 		String[] socallinksarry = socalLinks.split(",");
+		String[] socallinksarrys = SocialLinks.split(",");
 		int i = 0;
 		try {
 			for (i = 0; i < socallinksarry.length; i++) {
 				Common.actionsKeyPress(Keys.END);
-				Common.clickElement("xpath", "//img[contains(@src,'" + socallinksarry[i] + "')]");
+			if(Common.getCurrentURL().contains("preprod"))
+			{
+				Common.clickElement("xpath", "//img[@src,'" + socallinksarry[i] + "')]");
+			}
+			else
+			{
+				Common.clickElement("xpath", "//img[@alt='" + socallinksarrys[i] + "']");
+			}
 				Thread.sleep(4000);
 				Common.switchWindows();
 				System.out.println(Common.getCurrentURL());
