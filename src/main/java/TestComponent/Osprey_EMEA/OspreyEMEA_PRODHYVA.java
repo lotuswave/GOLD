@@ -3577,13 +3577,12 @@ public class OspreyEMEA_PRODHYVA {
 		String symbol=data.get(dataSet).get("Symbol");
 
 		try {
+			Sync.waitPageLoad();
 			Thread.sleep(5000);
 			if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
-				Sync.waitElementVisible("xpath", "//input[@type='email']");
-				Common.textBoxInput("xpath", "//input[@type='email']", data.get(dataSet).get("Email"));
+				Common.findElement("css", "input[placeholder='Enter e-mail address']").sendKeys(data.get(dataSet).get("Email"));
 			} else {
-				Sync.waitElementVisible("xpath", "//input[@type='email']");
-				Common.textBoxInput("xpath", "//input[@type='email']", data.get(dataSet).get("Prod Email"));
+				Common.findElement("css", "input[placeholder='Enter e-mail address']").sendKeys(data.get(dataSet).get("Prod Email"));
 			}
 
 		} catch (NoSuchElementException e) {
