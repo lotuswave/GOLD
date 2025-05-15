@@ -136,10 +136,10 @@ public class GoldHydroHyva_PRODHelper {
 		String expectedResult = "User should click the" + category;
 		try {
 
-			Sync.waitElementPresent("xpath", "(//a[contains(@title,'Shop')]//span[contains(text(),'Shop')])[1]");
+			Sync.waitElementPresent("xpath", "//nav[@aria-label='Main menu']//span[contains(text(),'Shop')] ");
 			Thread.sleep(3000);
 //			Common.scrollIntoView("xpath","//a[contains(@class,'level-top')]//span[text()=' Shop']");
-			Common.clickElement("xpath", "(//a[contains(@title,'Shop')]//span[contains(text(),'Shop')])[1]");
+			Common.clickElement("xpath", "//nav[@aria-label='Main menu']//span[contains(text(),'Shop')] ");
 
 			Thread.sleep(3000);
 
@@ -178,10 +178,10 @@ public class GoldHydroHyva_PRODHelper {
 		String expectedResult = "User should click the" + category;
 		try {
 
-			Sync.waitElementPresent("xpath", "(//a[contains(@title,'Shop')]//span[contains(text(),'Shop')])[1]");
+			Sync.waitElementPresent("xpath", "//nav[@aria-label='Main menu']//span[contains(text(),'Shop')] ");
 			Thread.sleep(3000);
 //			Common.scrollIntoView("xpath","//a[contains(@class,'level-top')]//span[text()=' Shop']");
-			Common.clickElement("xpath", "(//a[contains(@title,'Shop')]//span[contains(text(),'Shop')])[1]");
+			Common.clickElement("xpath", "//nav[@aria-label='Main menu']//span[contains(text(),'Shop')] ");
 
 			Thread.sleep(3000);
 			Sync.waitElementPresent("xpath", "(//span[contains(text(),'" + category + "')])[2]");
@@ -211,10 +211,10 @@ public class GoldHydroHyva_PRODHelper {
 		String expectedResult = "User should click the" + category;
 		try {
 
-			Sync.waitElementPresent("xpath", "(//a[contains(@title,'Shop')]//span[contains(text(),'Shop')])[1]");
+			Sync.waitElementPresent("xpath", "//nav[@aria-label='Main menu']//span[contains(text(),'Shop')] ");
 			Thread.sleep(3000);
 //			Common.scrollIntoView("xpath","//a[contains(@class,'level-top')]//span[text()=' Shop']");
-			Common.clickElement("xpath", "(//a[contains(@title,'Shop')]//span[contains(text(),'Shop')])[1]");
+			Common.clickElement("xpath", "//nav[@aria-label='Main menu']//span[contains(text(),'Shop')] ");
 
 			Thread.sleep(3000);
 
@@ -252,10 +252,10 @@ public class GoldHydroHyva_PRODHelper {
 		String expectedResult = "User should click the" + category;
 		try {
 
-			Sync.waitElementPresent("xpath", "(//a[contains(@title,'Shop')]//span[contains(text(),'Shop')])[1]");
+			Sync.waitElementPresent("xpath", "//nav[@aria-label='Main menu']//span[contains(text(),'Shop')] ");
 			Thread.sleep(3000);
 //			Common.scrollIntoView("xpath","//a[contains(@class,'level-top')]//span[text()=' Shop']");
-			Common.clickElement("xpath", "(//a[contains(@title,'Shop')]//span[contains(text(),'Shop')])[1]");
+			Common.clickElement("xpath", "//nav[@aria-label='Main menu']//span[contains(text(),'Shop')] ");
 
 			Thread.sleep(3000);
 
@@ -293,10 +293,10 @@ public class GoldHydroHyva_PRODHelper {
 		String expectedResult = "User should click the" + category;
 		try {
 
-			Sync.waitElementPresent("xpath", "(//a[contains(@title,'Shop')]//span[contains(text(),'Shop')])[1]");
+			Sync.waitElementPresent("xpath", "//nav[@aria-label='Main menu']//span[contains(text(),'Shop')] ");
 			Thread.sleep(3000);
 //			Common.scrollIntoView("xpath","//a[contains(@class,'level-top')]//span[text()=' Shop']");
-			Common.clickElement("xpath", "(//a[contains(@title,'Shop')]//span[contains(text(),'Shop')])[1]");
+			Common.clickElement("xpath", "//nav[@aria-label='Main menu']//span[contains(text(),'Shop')] ");
 
 			Thread.sleep(3000);
 
@@ -338,10 +338,10 @@ public class GoldHydroHyva_PRODHelper {
 			for (int i = 0; i <= 10; i++) {
 				Thread.sleep(3000);
 				Sync.waitElementPresent("xpath",
-						"//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
+						"//li[@class='ais-InfiniteHits-item']//img[1]");
 //				Sync.waitElementPresent("xpath", "(//img[contains(@class,'m-product-card__image')])[2]");
 				List<WebElement> webelementslist = Common.findElements("xpath",
-						"//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
+						"//li[@class='ais-InfiniteHits-item']//img[1]");
 				String s = webelementslist.get(i).getAttribute("src");
 				System.out.println(s);
 				if (s.isEmpty()) {
@@ -1568,7 +1568,7 @@ public class GoldHydroHyva_PRODHelper {
 	public String create_account(String Dataset) {
 		String email = "";
 		String Product = data.get(Dataset).get("Products");
-		String Email = Common.genrateRandomEmail(data.get(Dataset).get("Email"));
+		String Email = "gaddamramyasree0809+automation2@gmail.com";
 		try {
 
 			Common.textBoxInput("xpath", "//input[@name='firstname']", data.get(Dataset).get("FirstName"));
@@ -1876,8 +1876,8 @@ public class GoldHydroHyva_PRODHelper {
 
 		try {
 
-			Sync.waitElementPresent("xpath", "//button[contains(text(),'Add Discount Code')]");
-			Common.clickElement("xpath", "//button[contains(text(),'Add Discount Code')]");
+			Sync.waitElementPresent("xpath", "//h3[contains(text(),'Add Discount Code')]");
+			Common.clickElement("xpath", "//h3[contains(text(),'Add Discount Code')]");
 			if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
 				Sync.waitElementPresent("id", "discount-code");
 
@@ -3213,27 +3213,13 @@ public class GoldHydroHyva_PRODHelper {
 		String GiftCard = data.get(Dataset).get("Hydrogift");
 		try {
 
-			Common.clickElement("xpath", "//a[contains(@title,'Shop')]");
+			Common.clickElement("xpath", "//nav[@aria-label='Main menu']//span[contains(text(),'Shop')] ");
 			Sync.waitElementPresent("xpath", "//span[text()='Gift Cards']");
 			Common.clickElement("xpath", "//span[text()='Gift Cards']");
-//				Sync.waitElementPresent("xpath", "//img[contains(@itemprop ,'image')]");
-//				List<WebElement> webelementslist = Common.findElements("xpath",
-//						"//img[contains(@itemprop ,'image')]");
-//
-//				String s = webelementslist.get(i).getAttribute("src");
-//				System.out.println(s);
-//				if (s.isEmpty()) {
-//
-//				} else {
-//					break;
-//				}
-//			}
+
 			Sync.waitPageLoad(30);
 			Thread.sleep(6000);
-//			Sync.waitElementPresent(30, "xpath", "//img[contains(@alt,'" + GiftCard + "')]");
-//			Common.clickElement("xpath", "//img[contains(@alt,'" + GiftCard + "')]");
-//			Sync.waitPageLoad();
-//			Thread.sleep(6000);
+
 			Common.assertionCheckwithReport(Common.getCurrentURL().contains("/gift-card"),
 					"validating the gift card page navigation",
 					"After clicking on the gift card it sholud navigate to the PDP page",
@@ -4076,8 +4062,8 @@ public class GoldHydroHyva_PRODHelper {
 	public void minicart_viewcart() {
 		// TODO Auto-generated method stub
 		try {
-			Sync.waitElementPresent("xpath", "//div[@id='cart-drawer-title']/span/span");
-			String minicart = Common.findElement("xpath", "//div[@id='cart-drawer-title']/span/span").getText();
+			Sync.waitElementPresent("xpath", "//span[@x-text='totalCartAmount']");
+			String minicart = Common.findElement("xpath", "//span[@x-text='totalCartAmount']").getText();
 			Sync.waitElementPresent("xpath", "//a[@title='View Cart']");
 			Common.clickElement("xpath", "//a[@title='View Cart']");
 			Sync.waitElementPresent(30, "xpath", "//span[contains(@class,'ml-7 title-xs hf:title')]");
@@ -5238,10 +5224,10 @@ public class GoldHydroHyva_PRODHelper {
 		String expectedResult = "User should click the" + category;
 		try {
 
-			Sync.waitElementPresent("xpath", "(//a[contains(@title,'Shop')]//span[contains(text(),'Shop')])[1]");
+			Sync.waitElementPresent("xpath", "//nav[@aria-label='Main menu']//span[contains(text(),'Shop')] ");
 			Thread.sleep(3000);
 //			Common.scrollIntoView("xpath","//a[contains(@class,'level-top')]//span[text()=' Shop']");
-			Common.clickElement("xpath", "(//a[contains(@title,'Shop')]//span[contains(text(),'Shop')])[1]");
+			Common.clickElement("xpath", "//nav[@aria-label='Main menu']//span[contains(text(),'Shop')] ");
 			Thread.sleep(3000);
 
 			try {
@@ -5697,9 +5683,9 @@ public class GoldHydroHyva_PRODHelper {
 				Sync.waitPageLoad();
 				for (int i = 0; i <= 10; i++) {
 					Sync.waitElementPresent("xpath",
-							"//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
+							"//li[@class='ais-InfiniteHits-item']//img[1]");
 					List<WebElement> webelementslist = Common.findElements("xpath",
-							"//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
+							"//li[@class='ais-InfiniteHits-item']//img[1]");
 
 					String s = webelementslist.get(i).getAttribute("src");
 					System.out.println(s);
@@ -5736,9 +5722,9 @@ public class GoldHydroHyva_PRODHelper {
 				Sync.waitPageLoad();
 				for (int i = 0; i <= 10; i++) {
 					Sync.waitElementPresent("xpath",
-							"//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
+							"//li[@class='ais-InfiniteHits-item']//img[1]");
 					List<WebElement> webelementslist = Common.findElements("xpath",
-							"//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
+							"//li[@class='ais-InfiniteHits-item']//img[1]");
 
 					String s = webelementslist.get(i).getAttribute("src");
 					System.out.println(s);
@@ -6402,11 +6388,11 @@ public class GoldHydroHyva_PRODHelper {
 			 * List<WebElement> webelementslist = Common.findElements("xpath", //
 			 * "//img[contains(@class,'m-product-card__image product')]"); // String s =
 			 * webelementslist.get(i).getAttribute("src"); Sync.waitElementPresent("xpath",
-			 * "//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]"
+			 * "//li[@class='ais-InfiniteHits-item']//img[1]"
 			 * ); // Sync.waitElementPresent("xpath",
 			 * "(//img[contains(@class,'m-product-card__image')])[2]"); List<WebElement>
 			 * webelementslist = Common.findElements("xpath",
-			 * "//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]"
+			 * "//li[@class='ais-InfiniteHits-item']//img[1]"
 			 * ); String s = webelementslist.get(i).getAttribute("src");
 			 * System.out.println(s); if (s.isEmpty()) {
 			 * 
@@ -6801,7 +6787,7 @@ public class GoldHydroHyva_PRODHelper {
 		try {
 			String title = Common.findElement("xpath", "//h1[@class='title-2xl min-w-56']").getAttribute("Class");
 			String breadcrumbs = Common.findElement("xpath", "//nav[@id='breadcrumbs']").getAttribute("aria-label");
-			String filter = Common.findElement("xpath", "//span[contains(@class,'flex-grow title')]").getText();
+			String filter = Common.findElement("xpath", "//h3[contains(@class,'flex-grow title')]").getText();
 			String Sort = Common.findElement("xpath", "//span[contains(@class,'pr-2.5 title-panel-sm')]").getText()
 					.trim();
 			Common.assertionCheckwithReport(
@@ -7860,9 +7846,9 @@ public class GoldHydroHyva_PRODHelper {
 			Sync.waitPageLoad();
 			for (int i = 0; i <= 10; i++) {
 				Sync.waitElementPresent("xpath",
-						"//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
+						"//li[@class='ais-InfiniteHits-item']//img[1]");
 				List<WebElement> webelementslist = Common.findElements("xpath",
-						"//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
+						"//li[@class='ais-InfiniteHits-item']//img[1]");
 
 				String s = webelementslist.get(i).getAttribute("src");
 				System.out.println(s);
@@ -7923,9 +7909,9 @@ public class GoldHydroHyva_PRODHelper {
 			Sync.waitPageLoad();
 			for (int i = 0; i <= 10; i++) {
 				Sync.waitElementPresent("xpath",
-						"//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
+						"//li[@class='ais-InfiniteHits-item']//img[1]");
 				List<WebElement> webelementslist = Common.findElements("xpath",
-						"//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
+						"//li[@class='ais-InfiniteHits-item']//img[1]");
 
 				String s = webelementslist.get(i).getAttribute("src");
 				System.out.println(s);
@@ -8319,14 +8305,14 @@ public class GoldHydroHyva_PRODHelper {
 		// TODO Auto-generated method stub
 		String quantity = data.get(Dataset).get("Quantity");
 		try {
-			Common.clickElement("xpath", "(//div[@class='flex h-full']//select)[1]");
-			Common.dropdown("xpath", "(//div[@class='flex h-full']//select)[1]", Common.SelectBy.VALUE, quantity);
+			Common.clickElement("xpath", "//select[@title='Qty']");
+			Common.dropdown("xpath", "//select[@title='Qty']", Common.SelectBy.VALUE, quantity);
 			Common.clickElement("xpath", "//span[text()='Update']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			String productquantity = Common.findElement("xpath", "(//div[@class='flex h-full']//select)[1]")
+			String productquantity = Common.findElement("xpath", "//select[@title='Qty']")
 					.getAttribute("value");
 			System.out.println(productquantity);
 			Common.assertionCheckwithReport(productquantity.equals(quantity),
@@ -8472,9 +8458,9 @@ public class GoldHydroHyva_PRODHelper {
 			Sync.waitPageLoad();
 			for (int i = 0; i <= 10; i++) {
 				Sync.waitElementPresent("xpath",
-						"//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
+						"//li[@class='ais-InfiniteHits-item']//img[1]");
 				List<WebElement> webelementslist = Common.findElements("xpath",
-						"//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
+						"//li[@class='ais-InfiniteHits-item']//img[1]");
 				String s = webelementslist.get(i).getAttribute("src");
 				System.out.println(s);
 				if (s.isEmpty()) {
@@ -8559,8 +8545,8 @@ public class GoldHydroHyva_PRODHelper {
 				Sync.waitElementVisible("xpath", "//div[@x-ref='freegift']//button[@aria-label='Close']");
 				Common.clickElement("xpath", "//div[@x-ref='freegift']//button[@aria-label='Close']");
 			}
-			Sync.waitElementPresent("xpath", "//button[contains(text(),'Add Discount Code')]");
-			Common.clickElement("xpath", "//button[contains(text(),'Add Discount Code')]");
+			Sync.waitElementPresent("xpath", "//h3[contains(text(),'Add Discount Code')]");
+			Common.clickElement("xpath", "//h3[contains(text(),'Add Discount Code')]");
 
 			Sync.waitElementPresent(30, "xpath", "//input[@id='discount-code' or @id='coupon_code']");
 			Common.textBoxInput("xpath", "//input[@id='discount-code' or @id='coupon_code']", data.get(Dataset).get("prodDiscountcode"));
@@ -8573,7 +8559,7 @@ public class GoldHydroHyva_PRODHelper {
 			Sync.waitPageLoad();
 			expectedResult = "It should apply discount on your price.If user enters invalid promocode it should display coupon code is not valid message.";
 			Thread.sleep(2000);
-			int discountcodemsg1 = Common.findElements("xpath", "//button[contains(text(),'Cancel Coupon')]").size();
+			int discountcodemsg1 = Common.findElements("xpath", "//span[contains(text(),'Cancel Coupon')]").size();
 			Common.assertionCheckwithReport(discountcodemsg1 > 0, "verifying pomocode", expectedResult,
 					"promotion code working as expected", "Promation code is not applied");
 		} catch (Exception | Error e) {
@@ -8809,10 +8795,10 @@ public class GoldHydroHyva_PRODHelper {
 			for (int i = 0; i <= 10; i++) {
 				Thread.sleep(6000);
 				Sync.waitElementPresent("xpath",
-						"//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
+						"//li[@class='ais-InfiniteHits-item']//img[1]");
 //				Sync.waitElementPresent("xpath", "(//img[contains(@class,'m-product-card__image')])[2]");
 				List<WebElement> webelementslist = Common.findElements("xpath",
-						"//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
+						"//li[@class='ais-InfiniteHits-item']//img[1]");
 				String s = webelementslist.get(i).getAttribute("src");
 				System.out.println(s);
 				if (s.isEmpty()) {
@@ -8878,9 +8864,9 @@ public class GoldHydroHyva_PRODHelper {
 			Sync.waitPageLoad();
 			for (int i = 0; i <= 10; i++) {
 				Sync.waitElementPresent("xpath",
-						"//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
+						"//li[@class='ais-InfiniteHits-item']//img[1]");
 				List<WebElement> webelementslist = Common.findElements("xpath",
-						"//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
+						"//li[@class='ais-InfiniteHits-item']//img[1]");
 
 				String s = webelementslist.get(i).getAttribute("src");
 				System.out.println(s);
@@ -9029,9 +9015,9 @@ public class GoldHydroHyva_PRODHelper {
 			Sync.waitPageLoad();
 			for (int i = 0; i <= 10; i++) {
 				Sync.waitElementPresent("xpath",
-						"//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
+						"//li[@class='ais-InfiniteHits-item']//img[1]");
 				List<WebElement> webelementslist = Common.findElements("xpath",
-						"//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
+						"//li[@class='ais-InfiniteHits-item']//img[1]");
 
 				String s = webelementslist.get(i).getAttribute("src");
 				System.out.println(s);
@@ -9188,9 +9174,9 @@ public class GoldHydroHyva_PRODHelper {
 			Sync.waitPageLoad();
 			for (int i = 0; i <= 10; i++) {
 				Sync.waitElementPresent("xpath",
-						"//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
+						"//li[@class='ais-InfiniteHits-item']//img[1]");
 				List<WebElement> webelementslist = Common.findElements("xpath",
-						"//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
+						"//li[@class='ais-InfiniteHits-item']//img[1]");
 
 				String s = webelementslist.get(i).getAttribute("src");
 				System.out.println(s);
@@ -9405,9 +9391,9 @@ public class GoldHydroHyva_PRODHelper {
 			Sync.waitPageLoad();
 			for (int i = 0; i <= 10; i++) {
 				Sync.waitElementPresent("xpath",
-						"//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
+						"//li[@class='ais-InfiniteHits-item']//img[1]");
 				List<WebElement> webelementslist = Common.findElements("xpath",
-						"//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
+						"//li[@class='ais-InfiniteHits-item']//img[1]");
 
 				String s = webelementslist.get(i).getAttribute("src");
 				System.out.println(s);
@@ -9460,9 +9446,9 @@ public class GoldHydroHyva_PRODHelper {
 			Sync.waitPageLoad();
 			for (int i = 0; i <= 10; i++) {
 				Sync.waitElementPresent("xpath",
-						"//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
+						"//li[@class='ais-InfiniteHits-item']//img[1]");
 				List<WebElement> webelementslist = Common.findElements("xpath",
-						"//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
+						"//li[@class='ais-InfiniteHits-item']//img[1]");
 
 				String s = webelementslist.get(i).getAttribute("src");
 				System.out.println(s);
@@ -10045,7 +10031,7 @@ public class GoldHydroHyva_PRODHelper {
 				if (Common.getPageTitle().contains("Frequently Asked Questions | Hydro Flask")) {
 					Common.clickElement("xpath", "//div[@class='nav-flex']//a[@id='top']");
 				} else {
-					Common.clickElement("xpath", "//img[@alt='Store logo']");
+					Common.clickElement("xpath", "//img[@alt='Hydroflask store logo']");
 				}
 
 			}
@@ -11599,9 +11585,9 @@ public class GoldHydroHyva_PRODHelper {
 			Sync.waitPageLoad();
 			for (int i = 0; i <= 10; i++) {
 				Sync.waitElementPresent("xpath",
-						"//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
+						"//li[@class='ais-InfiniteHits-item']//img[1]");
 				List<WebElement> webelementslist = Common.findElements("xpath",
-						"//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
+						"//li[@class='ais-InfiniteHits-item']//img[1]");
 
 				String s = webelementslist.get(i).getAttribute("src");
 				System.out.println(s);

@@ -40,9 +40,9 @@
 <class name="TestExecute.Hydroflask.Prod_Smoke_TestCases.Test_DGLD_HYF_ST_053_Validate_PLP_and_PDP_page_Giftcard_Addtocart"/>
 </classes>
 </test>
-<test name="Test_DGLD_HYF_ST_094_Create_Account_and_My_Account_Page_Validation" testid="DQA-4532" priority="P1" description="This script will cover validating the Create account and my account page validation">
+<test name="Test_DGLD_HYF_ST_094_Create_Account_Validation" testid="DQA-4532" priority="P1" description="This script will cover validating the Create account and my account page validation">
 <classes>
-<class name="TestExecute.Hydroflask.Prod_Smoke_TestCases.Test_DGLD_HYF_ST_094_Create_Account_and_My_Account_Page_Validation"/>
+<class name="TestExecute.Hydroflask.Prod_Smoke_TestCases.Test_DGLD_HYF_ST_094_Create_Account_Validation"/>
 </classes>
 </test>
    	</suite>  
