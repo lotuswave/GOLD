@@ -18,11 +18,6 @@
 <class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HYF_US_ST_006_GiftCard_And_ConfigurableProduct_Checkout_With_PromoCode_Applied"/>
 </classes>
 </test>
-<test name="TEST_DGLD_HYF_ST_007_Add_Gift_Card_Code_in_My_Account_Page_and_Select_the_Gift_Card_Code_at_Payment_Page_and_Place_an_Order" testid="DQA-4246" priority="P1" description="This script will cover add giftcard code in my account page and select the gift card code at payment page and place order">
-<classes>
-<class name="TestExecute.Hydroflask.regressionTestcase.TEST_DGLD_HYF_ST_007_Add_Gift_Card_Code_in_My_Account_Page_and_Select_the_Gift_Card_Code_at_Payment_Page_and_Place_an_Order"/>
-</classes>
-</test>
 <test name="TEST_DGLD_HYF_US_ST_009_Placeorder_Register_user_validate_Giftcard_Send_Later" testid="DQA-4248" priority="P1" description="This script will cover Register user order checkout functionality of Hydroflask Giftcard Send Later">
 <classes>
 <class name="TestExecute.Hydroflask.regressionTestcase.TEST_DGLD_HYF_US_ST_009_Placeorder_Register_user_validate_Giftcard_Send_Later"/>

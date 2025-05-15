@@ -59,21 +59,6 @@
 <class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_031_Track_My_Order_For_Register_User"/>
 </classes>
 </test>
-<test name="Test_DGLD_HF_ST_036_Create_and_Edit_Gift_Registery_For_Register_User" testid="DQA-211" priority="P1" description="This script will cover validating Create and Edit Gift Registery For Register User">
-<classes>
-<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_036_Create_and_Edit_Gift_Registery_For_Register_User"/>
-</classes>
-</test>
-<test name="Test_DGLD_HF_ST_037_Create_share_and_Delete_Gift_Registery_For_Register_User" testid="DQA-228" priority="P1" description="This script will cover validating Create share and Delete Gift Registery For Register User">
-<classes>
-<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_037_Create_share_and_Delete_Gift_Registery_For_Register_User"/>
-</classes>
-</test>
-<test name="Test_DGLD_HF_ST_038_Create_Manageitems_and_invalid_Details_Gift_Registery_For_Register_User" testid="DQA-227" priority="P1" description="This script will cover validating Create Manageitems and invalid Details Gift Registery For Register User">
-<classes>
-<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_038_Create_Manageitems_and_invalid_Details_Gift_Registery_For_Register_User"/>
-</classes>
-</test>
 <test name="Test_DGLD_HF_ST_040_CorporatePurchasing_UserViews_CorporatePurchasingPage_and_Use_selects_NewCustomers_and_ExistingCustomers_and_ASI_PPAI_Customers_CTA" testid="DQA-233" priority="P1" description="This script will cover Validating the user views corporate purchasing page and user selects the new customer and existing customers ASI/PPAI customers CTA">
 <classes>
 <class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_040_CorporatePurchasing_UserViews_CorporatePurchasingPage_and_Use_selects_NewCustomers_and_ExistingCustomers_and_ASI_PPAI_Customers_CTA"/>
