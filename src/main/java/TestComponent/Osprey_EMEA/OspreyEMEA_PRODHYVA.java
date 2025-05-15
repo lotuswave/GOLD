@@ -3375,9 +3375,9 @@ public class OspreyEMEA_PRODHYVA {
 
 			Thread.sleep(3000);
 			Sync.waitElementPresent("xpath",
-					"//a[contains(@class,'level-0')]//span[contains(text(),'"+ header +"')]");
+					"//button[contains(@class,'level-0')]//span[contains(text(),'"+ header +"')]");
 			
-			Common.clickElement("xpath", "//a[contains(@class,'level-0')]//span[contains(text(),'" + header + "')]");
+			Common.clickElement("xpath", "//button[contains(@class,'level-0')]//span[contains(text(),'" + header + "')]");
 
 			Thread.sleep(3000);
 
@@ -4463,7 +4463,7 @@ return Number;
 			String title = Common.findElement("xpath", "//h1[@class='title-2xl min-w-56']").getAttribute("Class");
 			String breadcrumbs = Common.findElement("xpath", "//nav[@id='breadcrumbs']")
 					.getAttribute("aria-label");
-			String filter = Common.findElement("xpath", "//span[contains(@class,'flex-grow title')]").getText();
+			String filter = Common.findElement("xpath", "//h3[contains(@class,'flex-grow title')]").getText();
 			String Sort = Common
 					.findElement("xpath",
 							"//span[contains(@class,'pr-2.5 title-panel-sm')]")
