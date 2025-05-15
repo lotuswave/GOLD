@@ -3547,7 +3547,7 @@ public void CLick_Usemylocation() {
 		Common.scrollIntoView("xpath", "//div[@class='dl-location-detector-container ']");
 		int currentlocation = Common.findElements("xpath", "//div[@class='dl-location-detector-container ']").size();
 		System.out.println(currentlocation);
-		String address = Common.findElement("xpath", "//h5[contains(@class,'store-address')]").getText();
+		String address = Common.findElement("xpath", "//h4[contains(@class,'store-address')]").getText();
 		Common.assertionCheckwithReport(currentlocation > 0 && address.contains("TX"),
 				"validating current location ", "Should visible retailers in the current location",
 				"Current location Displayed", "Failed to display the current location");
@@ -3727,9 +3727,10 @@ public void Validate_retailerlocations() {
 		// TODO Auto-generated method stub
 		try {
 
-			Sync.waitElementPresent(40, "xpath", "//h5[text()='" + Productname + "']");
-			Common.scrollIntoView("xpath", "//h5[text()='" + Productname + "']");
-			Common.javascriptclickElement("xpath", "//h5[text()='" + Productname + "']");
+			Sync.waitElementPresent(40, "xpath", "//div[contains(text(),'" + Productname + "')]");
+			Common.scrollIntoView("xpath", "//div[contains(text(),'" + Productname + "')]");
+			Common.javascriptclickElement("xpath", "//div[contains(text(),'" + Productname + "')]");
+			
 			Sync.waitElementVisible("xpath", "//div[@class='stock-status-banner alert success checkmark']");
 			Common.scrollIntoView("xpath", "(//h4[@class='pdp-information-title'])[1]");
 			int product = Common.findElements("xpath", "//div[@class='pdp-information']/p[2]").size();
@@ -8737,7 +8738,7 @@ public void MyFavorites_Guestuser(String Dataset) {
 		String products = data.get(Dataset).get("Products");
 		System.out.println(products);
 		String email = data.get(Dataset).get("Notifyme");
-		String prod = data.get(Dataset).get("prod product");
+		String prod = data.get(Dataset).get("Prod Product");
 		String productcolor = data.get(Dataset).get("Color");
 		try {
 			Sync.waitPageLoad();
@@ -8789,7 +8790,7 @@ public void MyFavorites_Guestuser(String Dataset) {
 				Common.textBoxInput("xpath", "//input[@placeholder='Insert your email']", email);
 				Common.clickElement("xpath", "//span[text()='Subscribe']");
 				Sync.waitPageLoad();
-				Thread.sleep(1000);
+				Thread.sleep(2000);
 				String newsubcribe = Common.findElement("xpath", "//div[@ui-id='message-success']//span").getText();
 				Common.assertionCheckwithReport(
 						newsubcribe.contains("Alert subscription has been saved.")
@@ -8810,7 +8811,7 @@ public void MyFavorites_Guestuser(String Dataset) {
 				Common.textBoxInput("xpath", "//input[@placeholder='Insert your email']", email);
 				Common.clickElement("xpath", "//span[text()='Subscribe']");
 				Sync.waitPageLoad();
-				Thread.sleep(1000);
+				Thread.sleep(2000);
 				String oldsubcribe = Common.findElement("xpath", "//div[@ui-id='message-success']//span").getText();
 				Common.assertionCheckwithReport(
 						oldsubcribe.contains("Thank you! You are already subscribed to this product."),
@@ -8820,28 +8821,34 @@ public void MyFavorites_Guestuser(String Dataset) {
 						"Failed to display the message after subcribtion");
 
 			} else {
-				Sync.waitElementPresent(30, "xpath", "//img[@class='m-product-card__image product-image-photo']");
-				String productprice = Common.findElement("xpath", "//span[@class='price-wrapper is-special-price']")
+				Sync.waitElementPresent(30, "xpath", "//div[contains(@class,'flex relative justify-center items-center')]");
+				String productprice = Common.findElement("xpath", "//span[@class='title-2xs leading-none']")
 						.getAttribute("data-price-amount");
-				Common.clickElement("xpath", "//img[@class='m-product-card__image product-image-photo']");
+				System.out.println(productprice);
+				Thread.sleep(2000);
+				Common.javascriptclickElement("xpath", "//a[contains(@class,'product-image-link')]");
 				Sync.waitPageLoad();
 				Thread.sleep(3000);
 				String PLPprice = Common
 						.findElement("xpath",
-								"//div[@class='m-product-overview__prices']//span[@class='price-wrapper is-special-price']")
-						.getAttribute("data-price-amount");
-				String name = Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
+								"(//div[contains(@class,'final-price flex')]//span[@x-html='getFormattedFinalPrice()'])[2]")
+						.getText().replace("$","");			
+				String name = Common.findElement("xpath", "//div[contains(@class,'pdp-grid-areas grid')]//h1").getText();
 				Common.assertionCheckwithReport(
 						name.contains(products) && productprice.equals(PLPprice)
 								|| name.contains(prod) && productprice.equals(PLPprice),
 						"validating the  product navigates to PDP page", "It should be navigate to the PDP page",
 						"Sucessfully Navigates to the PDP page", "failed to Navigate to the PDP page");
-				Common.clickElement("xpath", "(//span[text()=' Notify Me When Available'])[1]");
+				Thread.sleep(2000);
+				Common.clickElement("xpath", "(//button[normalize-space()='Notify Me When Available'])[1]");
+				Thread.sleep(2000);
 				Common.textBoxInput("xpath", "//input[@placeholder='Insert your email']", email);
 				Common.clickElement("xpath", "//span[text()='Subscribe']");
 				Sync.waitPageLoad();
 				Thread.sleep(2000);
-				String newsubcribe = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+				Sync.waitElementPresent(30,"xpath","//div[@class='container']//div[@class='relative flex w-full']/span");
+				String newsubcribe = Common.findElement("xpath", "//div[@class='container']//div[@class='relative flex w-full']/span").getText();
+				System.out.println(newsubcribe);
 				Common.assertionCheckwithReport(
 						newsubcribe.contains("Alert subscription has been saved.")
 								|| newsubcribe.contains("Thank you! You are already subscribed to this product."),
@@ -8850,12 +8857,13 @@ public void MyFavorites_Guestuser(String Dataset) {
 						"Sucessfully message has been displayed when we click on the subcribe button ",
 						"Failed to display the message after subcribtion");
 				Common.actionsKeyPress(Keys.END);
-				Common.clickElement("xpath", "(//span[text()=' Notify Me When Available'])[1]");
+				Common.clickElement("xpath", "(//button[normalize-space()='Notify Me When Available'])[1]");			
 				Common.textBoxInput("xpath", "//input[@placeholder='Insert your email']", email);
 				Common.clickElement("xpath", "//span[text()='Subscribe']");
 				Sync.waitPageLoad();
 				Thread.sleep(2000);
-				String oldsubcribe = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+				Sync.waitElementPresent(30,"xpath","//div[@class='container']//div[@class='relative flex w-full']/span");
+				String oldsubcribe = Common.findElement("xpath", "//div[@class='container']//div[@class='relative flex w-full']/span").getText();
 				Common.assertionCheckwithReport(
 						oldsubcribe.contains("Thank you! You are already subscribed to this product."),
 						"verifying the out of stock subcription",
@@ -8877,6 +8885,7 @@ public void MyFavorites_Guestuser(String Dataset) {
 		}
 
 	}
+
 
 	public void Loginpage_validation(String dataSet) {
 		// TODO Auto-generated method stub
