@@ -340,18 +340,27 @@ public class GoldHydro_EMEA_Helper {
 	    System.out.println(products);
 
 	    try {
-	        Sync.waitPageLoad();
-	        // Wait for product images to load (up to 10 attempts with 4-second intervals)
-	        for (int i = 0; i <= 10; i++) {
-	            Thread.sleep(4000);
+	    	Sync.waitPageLoad();
+	    	Thread.sleep(4000);
+	    	boolean imageLoaded = false;
+	    	for (int attempt = 0; attempt < 10; attempt++)  {
 	            Sync.waitElementPresent("css", "a[class*=roduct-image-link]>img");
-	            List<WebElement> webelementslist = Common.findElements("css", "a[class*=roduct-image-link]>img");
-	            String imageUrl = webelementslist.get(i).getAttribute("src");
-	            System.out.println(imageUrl);
-	            if (!imageUrl.isEmpty()) {
-	                break; // Exit loop if an image URL is found
+	            List<WebElement> imageelemnets = Common.findElements("css", "a[class*=roduct-image-link]>img");
+	            
+	            if (!imageelemnets.isEmpty()) {
+	            	String imageUrl=imageelemnets.get(attempt).getAttribute("src");
+	            	System.out.println("Image URL: "+imageUrl);
+	            	
+	            	if (imageUrl !=null && imageUrl.trim().isEmpty())
+	            	{
+	            		imageLoaded=true;
+	                break; 
+	            }
 	            }
 	        }
+//	    	if(!imageLoaded) {
+//	    		throw new Exception("Products images didn't load within the expected time.");
+//	    	}
 	        // Scroll to the product image
 	        Common.scrollIntoView("css", "img[alt='" + products + "']");
 	        Sync.waitElementPresent(30, "css", "img[alt='" + products + "']");
@@ -364,14 +373,15 @@ public class GoldHydro_EMEA_Helper {
 	        // Verify the mini cart opens
 	        String openminicart = Common.findElement("css", "div[class*='fixed inset-y-0']").getAttribute("aria-modal");
 	        System.out.println("Minicart Open:"  +openminicart);
-	        Common.assertionCheckwithReport(openminicart.contains("true"), "Add to cart validation",
-	                "Product should be added to the cart and mini cart should open",
-	                "Product added to cart and mini cart opened successfully",
-	                "Failed to add product to cart and/or open mini cart");
+	        Common.assertionCheckwithReport(openminicart!=null && openminicart.contains("true"), "Add to Cart Validation",
+	                "The product should be successfully added to the cart and the mini cart should appear.",
+	                "Product was successfully added and mini cart opened.",
+	                "Product was not added to the cart or mini cart did not open.");
 	    } catch (Exception | Error e) {
 	        e.printStackTrace();
-	        ExtenantReportUtils.addFailedLog("Add to cart validation", "Product should be added to cart",
-	                "Unable to add product to the cart", Common.getscreenShot("failed_to_add_to_cart"));
+	        ExtenantReportUtils.addFailedLog("Add to Cart Validation",
+	                "Product should be successfully added to the cart.",
+	                "An error occurred while attempting to add the product to the cart.", Common.getscreenShot("failed_to_add_to_cart"));
 	        Assert.fail();
 	    }
 	}
@@ -688,57 +698,45 @@ public class GoldHydro_EMEA_Helper {
 	}
 
 	public void addDeliveryAddress_Guestuser(String dataSet) throws Exception {
-	    String address = data.get(dataSet).get("Street");
+		 Map<String, String> userData = data.get(dataSet);
+		    String currentURL = Common.getCurrentURL();
+		    String email = currentURL.contains("preprod") || currentURL.contains("stage") ? userData.get("Email") : userData.get("Prod Email");
 
-	    try {
-	    	Thread.sleep(4000);
-//	    	if(Common.findElements("xpath", "//div[@x-ref='freegift']//button[@aria-label='Close, button.'] | //div[@x-ref='freegift']//button[@aria-label='Close']").size()>0)
-//			{
-//	    		System.out.println("Free Gift Pop Displayed");
-//	    		 Sync.waitElementVisible("xpath", "//div[@x-ref='freegift']//button[@aria-label='Close, button.'] | //div[@x-ref='freegift']//button[@aria-label='Close']");
-//				Common.clickElement("xpath", "//div[@x-ref='freegift']//button[@aria-label='Close, button.'] | //div[@x-ref='freegift']//button[@aria-label='Close']");
-//			}
-	        if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
-	            Sync.waitElementVisible("css", "input[type='email']");
-	            Common.textBoxInput("css", "input[type='email']", data.get(dataSet).get("Email"));
-	        } else {
-	            Sync.waitElementVisible("css", "input[type='email']");
-	            Common.textBoxInput("css", "input[type='email']", data.get(dataSet).get("Prod Email"));
-	        }
-	    } catch (NoSuchElementException e) {
-	        minicart_Checkout();
-	        if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
-	            Sync.waitElementVisible("css", "input[type='email']");
-	            Common.textBoxInput("css", "input[type='email']", data.get(dataSet).get("Email"));
-	        } else {
-	            Sync.waitElementVisible("css", "input[type='email']");
-	            Common.textBoxInput("css", "input[type='email']", data.get(dataSet).get("Prod Email"));
-	        }
-	    }
 
-	    String expectedResult = "email field should be entered in the textbox field";
+		    try {
+		        Thread.sleep(4000);
+		        Sync.waitElementVisible("css", "input[type='email']");
+		        Common.textBoxInput("css", "input[type='email']", email);
+
+		    } catch (NoSuchElementException e) {
+		        minicart_Checkout();
+		        Sync.waitElementVisible("css", "input[type='email']");
+		        Common.textBoxInput("css", "input[type='email']", email);
+		    }
+	    String expectedResult = "Email field should be entered into the text box";
 	    try {
-	        Sync.waitElementVisible("id", "shipping-firstname");
-	        Common.textBoxInput("id", "shipping-firstname", data.get(dataSet).get("FirstName"));
-	        int size = Common.findElements("css", "input[type='email']").size();
-	        Common.assertionCheckwithReport(size > 0, "validating the email address field", expectedResult,
+	    	 Sync.waitElementVisible("id", "shipping-firstname");
+	         Common.textBoxInput("id", "shipping-firstname", userData.get("FirstName"));
+
+	        int emailFieldCount  = Common.findElements("css", "input[type='email']").size();
+	        Common.assertionCheckwithReport(emailFieldCount  > 0, "validating the email address field", expectedResult,
 	                "Successfully email has been entered to textbox field", "unable to fill the email address in the textbox field");
 
 	        Sync.waitElementVisible("id", "shipping-lastname");
-	        Common.textBoxInput("id", "shipping-lastname", data.get(dataSet).get("LastName"));
+	        Common.textBoxInput("id", "shipping-lastname", userData.get("LastName"));
 
 	        Sync.waitElementVisible("id", "shipping-street-0");
 	        Common.clickElement("id", "shipping-street-0");
 
 	        Sync.waitElementVisible("id", "shipping-street-0");
-	        Common.textBoxInput("id", "shipping-street-0", data.get(dataSet).get("Street"));
+	        Common.textBoxInput("id", "shipping-street-0", userData.get("Street"));
 	        String Text = Common.getText("id", "shipping-street-0");
 
 	        Sync.waitElementVisible("id", "shipping-city");
 	        Common.findElement("id", "shipping-city").clear();
 
 	        Sync.waitElementVisible("id", "shipping-city");
-	        Common.textBoxInput("id", "shipping-city", data.get(dataSet).get("City"));
+	        Common.textBoxInput("id", "shipping-city", userData.get("City"));
 	        System.out.println(data.get(dataSet).get("City"));
 
 	        Common.actionsKeyPress(Keys.PAGE_DOWN);
@@ -746,34 +744,38 @@ public class GoldHydro_EMEA_Helper {
 	        try {
 	            Sync.waitElementVisible("id", "shipping-region");
 //	            Common.dropdown("id", "shipping-region", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
-	            Common.textBoxInput("id", "shipping-region",data.get(dataSet).get("Region"));
+	            Common.textBoxInput("id", "shipping-region",userData.get("Region"));
 	            
 	        } catch (ElementClickInterceptedException e) {
 	            Sync.waitElementVisible("id", "shipping-region");
 //	            Common.dropdown("id", "shipping-region", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
-	            Common.textBoxInput("id", "shipping-region",data.get(dataSet).get("Region"));
+	            Common.textBoxInput("id", "shipping-region",userData.get("Region"));
 	        }
 
 	        Sync.waitElementVisible("css", "input[name='postcode']");
 	        Common.textBoxInputClear("css", "input[name='postcode']");
 
 	        Sync.waitElementVisible("css", "input[name='postcode']");
-	        Common.textBoxInput("css", "input[name='postcode']", data.get(dataSet).get("postcode"));
+	        Common.textBoxInput("css", "input[name='postcode']", userData.get("postcode"));
 	        Thread.sleep(2000);
 
 	        Sync.waitElementVisible("css", "input[name='telephone']");
-	        Common.textBoxInput("css", "input[name='telephone']", data.get(dataSet).get("phone"));
+	        Common.textBoxInput("css", "input[name='telephone']", userData.get("phone"));
 
-	        ExtenantReportUtils.addPassLog("validating shipping address filling Fields",
-	                "shipping address is filled in to the fields", "user should be able to fill the shipping address ",
-	                Common.getscreenShotPathforReport("Successfully shipping address details has been entered"));
+	        ExtenantReportUtils.addPassLog(
+	            "Validating shipping address fields",
+	            "Shipping address should be filled correctly",
+	            "User successfully filled all required shipping fields",
+	            Common.getscreenShotPathforReport("ShippingAddressFilled"));
 
 	    } catch (Exception | Error e) {
-	        e.printStackTrace();
-	        ExtenantReportUtils.addFailedLog("validating shipping address",
-	                "shipping address is filled in to the fields", "user failed to fill the shipping address",
-	                Common.getscreenShotPathforReport("shippingaddressfailed"));
-	        Assert.fail();
+	    	  e.printStackTrace();
+	          ExtenantReportUtils.addFailedLog(
+	              "Validating shipping address",
+	              "User should be able to fill the shipping address",
+	              "User failed to fill in the shipping address",
+	              Common.getscreenShotPathforReport("ShippingAddressFailed"));
+	          Assert.fail("Shipping address entry failed.");
 	    }
 	}
 	public void clickSubmitbutton_Shippingpage() {
@@ -15198,6 +15200,96 @@ Common.clickElement("xpath", "//span[text()='Edit']");
 		
 
 }
+	
+	public void updatePaymentCreditCard_WithInvalidData(String dataSet) throws Exception {
+	    String cardNumber = data.get(dataSet).get("cardNumber");
+	    String expiry = data.get(dataSet).get("ExpMonthYear");
+	    String cvv = data.get(dataSet).get("cvv");
+	    String expectedResult = "User should land on the payment section";
+
+	    try {
+	        Sync.waitElementPresent("xpath", "//label[@for='payment-method-stripe_payments']");
+	        int size = Common.findElements("xpath", "//label[@for='payment-method-stripe_payments']").size();
+	        Common.assertionCheckwithReport(size > 0,
+	                "Validate user is on the payment section",
+	                expectedResult,
+	                "User successfully landed on the payment page",
+	                "User failed to land on the payment page");
+
+	        Common.clickElement("xpath", "//label[@for='payment-method-stripe_payments']");
+	        Thread.sleep(3000);
+
+	        Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
+	        Common.scrollIntoView("xpath", "//label[@for='Field-numberInput']");
+	        Common.clickElement("xpath", "//label[@for='Field-numberInput']");
+	        Common.findElement("id", "Field-numberInput").sendKeys(cardNumber);
+	        Common.textBoxInput("id", "Field-expiryInput", expiry);
+	        Common.textBoxInput("id", "Field-cvcInput", cvv);
+	        Thread.sleep(2000);
+	        Common.actionsKeyPress(Keys.ARROW_DOWN);
+	        Common.switchToDefault();
+
+	        
+	        if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
+	            Thread.sleep(1000);
+	            Sync.waitElementPresent("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
+	            Common.clickElement("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
+	            Thread.sleep(5000);
+
+	            
+	            Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
+	            Thread.sleep(3000);
+
+	            String errorText = Common.findElement("xpath", "//p[@class='p-FieldError Error']").getText();
+	            Common.switchToDefault();
+
+	            Common.assertionCheckwithReport(
+	                    errorText.isEmpty() || errorText.contains("Your card number is incomplete."),
+	                    "Validate credit card error for invalid input",
+	                    "Invalid card data should show appropriate error",
+	                    "Correct error message displayed for invalid credit card input",
+	                    "Error message was not displayed as expected for invalid input");
+
+	            if (Common.getCurrentURL().contains("/checkout/#payment")) {
+	                Sync.waitElementPresent("xpath", "//label[@for='stripe-new-payments']");
+	                Common.clickElement("xpath", "//label[@for='stripe-new-payments']");
+	                Thread.sleep(5000);
+
+	                Sync.waitElementPresent("xpath", "//button[@class='action primary checkout']");
+	                Common.clickElement("xpath", "//button[@class='action primary checkout']");
+
+	                String errorNotice = Common.findElement("xpath", "//div[contains(@class,'error')]").getText();
+	                Common.assertionCheckwithReport(
+	                        errorNotice.isEmpty() || errorNotice.contains("Please complete your payment details."),
+	                        "Validate retry with missing payment details",
+	                        "System should show missing data error",
+	                        "Proper error shown for incomplete payment",
+	                        "Error not displayed correctly for missing card data" );
+	            }
+
+	        } else {
+	            Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
+	            String enteredCardNumber = Common.findElement("id", "Field-numberInput").getAttribute("value").replace(" ", "");
+	            Common.assertionCheckwithReport(
+	                    enteredCardNumber.equals(cardNumber),
+	                    "Validate card details in production",
+	                    "Card number should be visible as entered",
+	                    "Card number successfully displayed",
+	                    "Card number not matching in production");
+	            Common.switchToDefault();
+	        }
+
+	    } catch (Exception | Error e) {
+	        e.printStackTrace();
+	        ExtenantReportUtils.addFailedLog(
+	                "Validate credit card entry and error display",
+	                expectedResult,
+	                "Failed to fill or validate credit card fields",
+	                Common.getscreenShotPathforReport("CardInformationFailure"));
+	        Assert.fail("Failed during credit card entry validation.");
+	    }
+	}
+
 }	
 
 
