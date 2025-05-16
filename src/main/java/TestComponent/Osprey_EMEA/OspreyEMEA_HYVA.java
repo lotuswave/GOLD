@@ -5811,7 +5811,7 @@ return Number;
 					.replace(symbol, "");
 			Float subtotalvalue = Float.parseFloat(subtotal);
 			String productname = Common
-					.findElement("xpath", "(//p[@class='text-md font-bold dr:title-sm']//a)[1]")
+					.findElement("xpath", "(//p[contains(@class,'text-md font-bold dr:title-sm')]//a)[1]")
 					.getText();
 			String productamount1 = Common.getText("xpath", "(//span[@x-html='item.product_price']//span[@class='price'])[1]").replace(symbol,
 					"");
