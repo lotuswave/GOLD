@@ -4976,9 +4976,9 @@ public void Remove_GiftCode() {
 			Common.clickElement("xpath", "//button[@type='submit']//span[text()='Search']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			String orderid = Common.findElement("id", "oar-order-id").getText().trim();
+			String orderid = Common.findElement("css", "span[class='title-xs md:title-lg']").getText().trim();
 			System.out.println(orderid);
-			String ID=Common.findElement("id", "oar-order-id").getText().replace("Order #", "").trim();
+			String ID=Common.findElement("css", "span[class='title-xs md:title-lg']").getText().replace("Order #", "").trim();
 			System.out.println(ID);
 			System.out.println(ordernumber);
 			Common.assertionCheckwithReport(Common.getPageTitle().contains(orderid) || ID.equals(ordernumber), "verifying order status form",
@@ -5004,7 +5004,7 @@ public void Remove_GiftCode() {
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Common.assertionCheckwithReport(
-					Common.getPageTitle().equals("Tracking & Returns") || Common.getPageTitle().equals("My Orders"),
+					Common.getPageTitle().equals("Tracking and Returns") || Common.getPageTitle().equals("My Orders"),
 					"Verifying the track order page navigation ",
 					"after clicking on the track order it should navigate to the orders and return page",
 					"successfully Navigated to the orders and return page",
