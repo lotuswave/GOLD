@@ -361,7 +361,7 @@ public class GoldHydro_EMEA_Helper {
 //	    	if(!imageLoaded) {
 //	    		throw new Exception("Products images didn't load within the expected time.");
 //	    	}
-	        // Scroll to the product image
+	      
 	        Common.scrollIntoView("css", "img[alt='" + products + "']");
 	        Sync.waitElementPresent(30, "css", "img[alt='" + products + "']");
 	        Thread.sleep(3000);
@@ -370,7 +370,7 @@ public class GoldHydro_EMEA_Helper {
 	        Sync.waitElementPresent("css", "button[title='Add to Cart']");
 	        Common.javascriptclickElement("css", "button[title='Add to Cart']");
 	        Thread.sleep(3000);
-	        // Verify the mini cart opens
+	      
 	        String openminicart = Common.findElement("css", "div[class*='fixed inset-y-0']").getAttribute("aria-modal");
 	        System.out.println("Minicart Open:"  +openminicart);
 	        Common.assertionCheckwithReport(openminicart!=null && openminicart.contains("true"), "Add to Cart Validation",
