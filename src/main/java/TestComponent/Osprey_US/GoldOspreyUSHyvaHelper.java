@@ -3007,8 +3007,8 @@ public void Addtocart_From_MyFavorites(String Dataset) {
 			Sync.waitElementPresent("css", "span[x-text='totalCartAmount']");
 			String minicart = Common.findElement("css", "span[x-text='totalCartAmount']").getText();
 			System.out.println(minicart);
-			Sync.waitElementPresent(30, "css", "a[class*='inline-flex btn btn-primary text']");
-			Common.clickElement("css", "a[class*='inline-flex btn btn-primary text']");
+			Sync.waitElementPresent(30, "css", "button[class*='inline-flex btn btn-primary text']");
+			Common.clickElement("css", "button[class*='inline-flex btn btn-primary text']");
 //			Sync.waitPageLoad();
 			Thread.sleep(1000);
 //			Sync.waitElementPresent(30, "xpath", "//strong[@role='heading']");
