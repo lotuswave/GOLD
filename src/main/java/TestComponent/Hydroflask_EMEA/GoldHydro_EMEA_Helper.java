@@ -348,7 +348,7 @@ public class GoldHydro_EMEA_Helper {
 	            List<WebElement> imageelemnets = Common.findElements("css", "a[class*=roduct-image-link]>img");
 	            
 	            if (!imageelemnets.isEmpty()) {
-	            	String imageUrl=imageelemnets.get(attempt).getAttribute("src");
+	            	String imageUrl=imageelemnets.get(0).getAttribute("src");
 	            	System.out.println("Image URL: "+imageUrl);
 	            	
 	            	if (imageUrl !=null && imageUrl.trim().isEmpty())
