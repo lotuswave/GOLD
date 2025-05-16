@@ -2185,7 +2185,6 @@ public class OspreyEMEA_HYVA {
 					break;
 				}
 			}
-
 			if(Common.findElements("css", "button[aria-label='Close dialog']").size()>0)
 			{
 				Common.clickElement("css", "button[aria-label='Close dialog']");
