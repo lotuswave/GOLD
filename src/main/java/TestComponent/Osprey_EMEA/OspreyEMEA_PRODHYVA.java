@@ -6559,6 +6559,10 @@ return Number;
 				Common.scrollIntoView("xpath", "//input[@id='payment-method-paypal_express']");
 				Common.clickElement("xpath", "//input[@id='payment-method-paypal_express']");
 				Common.clickElement("xpath", "//div[@id='paypal-button-paypal_express']");
+				Common.switchFrames("xpath", "//iframe[contains(@class,'component-frame visible')]");
+				Sync.waitElementPresent("css", "div[class='paypal-button-label-container']");
+				Common.clickElement("css", "div[class='paypal-button-label-container']");
+				Common.switchToDefault();
 			}
             
 			
