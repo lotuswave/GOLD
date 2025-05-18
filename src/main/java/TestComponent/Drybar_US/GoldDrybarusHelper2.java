@@ -789,8 +789,8 @@ public class GoldDrybarusHelper2 {
 		Sync.waitElementPresent("css", "span[x-text='totalCartAmount']");
 		String minicart = Common.findElement("css", "span[x-text='totalCartAmount']").getText();
 	
-		Sync.waitElementPresent(30, "xpath", "//a[contains(text(),'Checkout')]");
-		Common.clickElement("xpath", "//a[contains(text(),'Checkout')]");
+		Sync.waitElementPresent(30, "xpath", "//button[contains(text(),'Checkout')]");
+		Common.clickElement("xpath", "//button[contains(text(),'Checkout')]");
 		Sync.waitPageLoad();
 	Thread.sleep(4000);
 		Common.assertionCheckwithReport(Common.getCurrentURL().contains("checkout"),
@@ -7905,7 +7905,7 @@ public void FUll_Payment(String dataSet) {
 							.replace(symbol, "");
 					Float subtotalvalue = Float.parseFloat(subtotal);
 					String productname = Common
-							.findElement("xpath", "(//p[@class='text-md font-bold dr:title-sm']//a)[1]")
+							.findElement("xpath", "(//p[@class='text-md font-bold dr:title-sm lg:flex-shrink-1']//a)[1]")
 							.getText();
 					String productamount1 = Common.getText("xpath", "(//span[@x-html='item.product_price']//span[@class='price'])[1]").replace(symbol,
 							"");
