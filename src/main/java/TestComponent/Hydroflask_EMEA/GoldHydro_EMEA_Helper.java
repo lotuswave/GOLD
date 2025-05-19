@@ -9045,21 +9045,19 @@ catch(Exception | Error e)
 		// TODO Auto-generated method stub
 		String product = data.get(Dataset).get("Colorproduct");
 		try {
-			Sync.waitPageLoad();
 			for (int i = 0; i <= 10; i++) {
-				Sync.waitElementPresent("xpath", "//a[@class='product-image-link']");
-				List<WebElement> webelementslist = Common.findElements("xpath",
-						"//a[@class='product-image-link']");
+				Sync.waitElementPresent("css", "a[class='product-image-link']");
+				List<WebElement> webelementslist = Common.findElements("css",
+						"a[class='product-image-link']");
 				String s = webelementslist.get(i).getAttribute("href");
 				System.out.println(s);
-				if (s.isEmpty()) {
-
-				} else {
+				if (!s.isEmpty()) {
 					break;
-				}
+				} 
 			}
 			Common.clickElement("xpath", "//img[@alt='" + product + "']");
-			Thread.sleep(4000);
+			Sync.waitPageLoad();
+			Thread.sleep(2000);
 	}
 		
 		catch (Exception | Error e) {
@@ -9068,16 +9066,15 @@ catch(Exception | Error e)
 					"When we click on the product is should navigate to the PDP page",
 					"Unable to Navigate the product to the PDP page",
 					Common.getscreenShot("Failed to Navigate the product to the PDP page"));
-			AssertJUnit.fail();
+			Assert.fail();
 		}
 
 		
 		try
 		{
 			
-			List<WebElement> pdpcolors = Common.findElements("xpath",
-					"//div[@aria-label='Color']//div[@x-id]");
-//			 Common.clickElement("xpath", "//div[@aria-label='Color']//div[@x-id]");
+			List<WebElement> pdpcolors = Common.findElements("css",
+					"div[aria-label='Colour'] div[x-id]");
 			Common.actionsKeyPress(Keys.PAGE_UP);
 			for (int i =1; i < pdpcolors.size(); i++) { 
 	           Thread.sleep(4000);
@@ -9087,9 +9084,9 @@ catch(Exception | Error e)
 				System.out.println(clicked_Color + " selected color");
 	            Thread.sleep(4000);
 				System.out.println(Common.getCurrentURL());
-				String URL=Common.getCurrentURL().replace("+", " ");
-				System.out.println(URL);
-				Common.assertionCheckwithReport(URL.contains(clicked_Color),
+				String CurrentURL=Common.getCurrentURL().replace("+", " ");
+				System.out.println(CurrentURL);
+				Common.assertionCheckwithReport(CurrentURL.contains(clicked_Color),
 						"Validating PDP page url Color name is passing to url",
 						"select the color of product is " + clicked_Color + " it must pass throw url",
 						" Selected color " + clicked_Color + "passing throw url",
@@ -9104,7 +9101,7 @@ catch(Exception | Error e)
 					"When we click on the color the color name should reflect in url",
 					"Unable to display thee color name in the url",
 					Common.getscreenShot("Failed to display thee color name in the url"));
-			AssertJUnit.fail();
+			Assert.fail();
 		}
 	}
 
