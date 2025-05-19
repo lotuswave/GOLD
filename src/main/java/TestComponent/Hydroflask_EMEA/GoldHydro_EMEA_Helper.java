@@ -3931,16 +3931,17 @@ public void Gift_card(String dataSet) {
 	        boolean isStageOrPreprod = URL.contains("stage") || URL.contains("preprod");
 	        
      if (isStageOrPreprod) {
-	        	Sync.waitElementPresent("xpath", "//button[contains(text(),'Add Gift Card')]");
+	        	Sync.waitElementPresent("xpath", "//h1[contains(text(),'Add Gift Card')]");
 
-			if(Common.findElement("xpath", "//button[contains(text(),'Add Gift Card')]").getAttribute("title").contains("Show items"))
+			if(Common.findElement("xpath", "//h1[contains(text(),'Add Gift Card')]").getAttribute("title").contains("Show items"))
 			{
-		Sync.waitElementPresent("xpath", "//button[contains(text(),'Add Gift Card')]");	
-		Common.clickElement("xpath", "//button[contains(text(),'Add Gift Card')]");
+		Sync.waitElementPresent("xpath", "//h1[contains(text(),'Add Gift Card')]");	
+		Common.clickElement("xpath", "//h1[contains(text(),'Add Gift Card')]");
 			}
 		Common.textBoxInput("xpath","//input[@x-model='giftCardCode']", data.get(dataSet).get("GiftCard_Preprod"));
 		Common.actionsKeyPress(Keys.ARROW_UP);
 		Sync.waitElementPresent("xpath", "//button[@aria-label='Add Code']");
+		Thread.sleep(2000);
 		Common.clickElement("xpath","//button[@aria-label='Add Code']");
 		Sync.waitElementPresent(30,"xpath", "//div[@ui-id='message-success']");	
 		String successmsg=Common.findElement("xpath", "//div[@ui-id='message-success']").getText();
@@ -3950,7 +3951,7 @@ public void Gift_card(String dataSet) {
 				"Success message should be displayed after the applying of gift card",
 				"Sucessfully gift card has been applyed","Failed to apply the gift card");
 			}
-else
+     else
 			{
 				Common.scrollIntoView("xpath", "//button[contains(text(),'Add Gift Card')]");
 				Common.clickElement("xpath","//button[contains(text(),'Add Gift Card')]");
@@ -3986,14 +3987,17 @@ public String giftCardSubmitOrder() throws Exception {
 	Common.actionsKeyPress(Keys.PAGE_UP);
 	Thread.sleep(3000);
 	int placeordercount = Common.findElements("xpath", "//button[@class='action primary checkout']").size();
-		Thread.sleep(4000);
+	Thread.sleep(4000);
+if (Common.findElements("xpath","//div[@class='flex items-center']//input[@type='checkbox']").size()>0) {
+	Common.clickElement("xpath","//div[@class='flex items-center']//input[@type='checkbox']");
+}
 if(Common.getCurrentURL().contains("stage") ||Common.getCurrentURL().contains("preprod") )
 {
 //   Common.refreshpage();
    Thread.sleep(4000);
    Common.clickElement("xpath", "//input[@id='payment-method-free']");
    Thread.sleep(4000);
-   Common.clickElement("xpath", "//button[contains(text(),'Place Order')]");
+   Common.clickElement("xpath", "(//button[contains(text(),'Place Order')])[2]");
 		//Common.refreshpage();
 	Thread.sleep(3000);
 }
@@ -13647,12 +13651,16 @@ Common.clickElement("xpath", "//span[text()='Edit']");
 				Thread.sleep(4000);
 			}
 			
+			if (Common.findElements("xpath","//div[@class='flex items-center']//input[@type='checkbox']").size()>0) {
+            	Common.clickElement("xpath","//div[@class='flex items-center']//input[@type='checkbox']");
+            }
+			
 			if (Common.getText("xpath", "//div[@id='payment-method-view-paypal_express']//p[2]").contains("Paypal")||Common.getCurrentURL().contains("preprod")) {
-				Common.scrollIntoView("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
+				Common.scrollIntoView("xpath", "(//button[contains(@class,'btn-place-order')])[2]");
 				// Sync.waitElementPresent("xpath", "//button[@value='Place Order']");
 				
 				Thread.sleep(8000);
-				Common.clickElement("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
+				Common.clickElement("xpath", "(//button[contains(@class,'btn-place-order')])[2]");
 			}
 				try {
 					Thread.sleep(6000);
@@ -14023,27 +14031,29 @@ Common.clickElement("xpath", "//span[text()='Edit']");
 					}
 					Common.actionsKeyPress(Keys.ARROW_DOWN);
 					Common.switchToDefault();
+					
+					if (Common.findElements("xpath","//div[@class='flex items-center']//input[@type='checkbox']").size()>0) {
+		            	Common.clickElement("xpath","//div[@class='flex items-center']//input[@type='checkbox']");
+		            }
+					
 					if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
 
 						 if(Common.getCurrentURL().contains("/gb"))
-		                 {
-		              	   Sync.waitElementPresent("xpath", "//input[@id='agreement_stripe_payments_2']");
-		              	   Common.clickElement("xpath", "//input[@id='agreement_stripe_payments_2']");
-		              	   
-		              	   Sync.waitElementPresent("xpath", "//button[@class='action primary checkout']");
-		              	   Common.clickElement("xpath", "//button[@class='action primary checkout']");
-		              	 Thread.sleep(8000);
-		          	   String frameid=Common.findElement("xpath", "(//iframe[@role='presentation' and contains(@src,'https://js.stripe.com/v3/three-ds')])[1]").getAttribute("name");
-		          	   System.out.println(frameid);
-		          	   Thread.sleep(4000);
-		          	   Common.switchFrames("xpath","//iframe[@name='"+ frameid +"']");
-		          	  Thread.sleep(4000);
-		     			Common.switchFrames("xpath", "//iframe[@id='challengeFrame']");
-		         		Thread.sleep(4000);
-		         		Common.clickElement("xpath", "//button[contains(text(),'Complete')]");
-		         		Common.switchToDefault();
-		         		Common.switchToDefault();
-		                 }
+						 {
+//			              	   Sync.waitElementPresent("xpath", "(//input[contains(@id,'agreement_5')])[3]");
+//			              	   Common.clickElement("xpath", "(//input[contains(@id,'agreement_5')])[3]");
+			              	 Thread.sleep(4000);
+			              	   Sync.waitElementPresent("xpath", "(//button[contains(text(),'Place Order')])[2]");
+			              	   Common.clickElement("xpath", "(//button[contains(text(),'Place Order')])[2]");
+			              	 Thread.sleep(12000);
+			          	   String frameid=Common.findElement("xpath", "(//iframe[@role='presentation' and contains(@src,'https://js.stripe.com/v3/three-ds')])[1]").getAttribute("name");
+			          	   System.out.println(frameid);
+			          	   Common.switchFrames("css","iframe[name='"+ frameid +"']");
+			     			Common.switchFrames("css", "iframe[id='challengeFrame']");
+			         		Common.clickElement("xpath", "//button[contains(text(),'Complete')]");
+			         		Common.switchToDefault();
+			         		Common.switchToDefault();
+			                 }
 		                 else
 		                 {
 		                	 Thread.sleep(4000);
