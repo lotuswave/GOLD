@@ -9,10 +9,10 @@ import TestComponent.Hydroflask_EMEA.GoldHydro_EMEA_Helper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class TEST_DGLD_HF_EMEA_RT_021_Create_and_Edit_Gift_Registery_For_Register_User {
+public class Test_DGLD_HF_EMEA_RT_031_Register_user_Checkout_With_Discount_Visa_card {
 
 	String datafile = "Hydroflask_EMEA//GoldHydroEMEA_TestData.xlsx";
-	GoldHydro_EMEA_Helper Hydro = new GoldHydro_EMEA_Helper(datafile,"Sheet1");
+	GoldHydro_EMEA_Helper Hydro = new GoldHydro_EMEA_Helper(datafile,"DataSet");
 	
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
@@ -22,9 +22,16 @@ public class TEST_DGLD_HF_EMEA_RT_021_Create_and_Edit_Gift_Registery_For_Registe
 			
 			Hydro.verifingHomePage();
 			Hydro.click_singinButton();
-			Hydro.login_Hydroflask("Giftaccount");
-			Hydro.giftCreation("Birthday");
-			Hydro.edit_gift("AccountDetails");
+			Hydro.login_Hydroflask("AccountDetails");
+			Hydro.bottles_headerlinks("Bottles & Drinkware"); 
+			Hydro.Configurable_addtocart_pdp("Product");
+			Hydro.search_product("Product");       
+			Hydro.addtocart("Product");
+			Hydro.minicart_Checkout();
+            Hydro.selectshippingaddress("GroundShipping method");
+            Hydro.clickSubmitbutton_Shippingpage();
+            Hydro.discountCode("Discount");
+			Hydro.updatePaymentAndSubmitOrder("PaymentDetails");
       
 		} catch (Exception e) {
 

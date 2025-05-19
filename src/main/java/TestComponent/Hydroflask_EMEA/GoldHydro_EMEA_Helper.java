@@ -4342,8 +4342,9 @@ public void Remove_GiftCode() {
 				
 				String eventname = Common.findElement("xpath", "(//p[contains(@class,'giftregistry-type text')]//span)[2]").getText();
 				if (eventname.equals("Birthday")) {
-					Common.dropdown("xpath", "//select[@id='event_country_region']", SelectBy.TEXT,
-							data.get(Dataset).get("Region"));
+//					Common.dropdown("xpath", "//select[@id='event_country_region']", SelectBy.TEXT,
+//							data.get(Dataset).get("Region"));
+					Common.textBoxInput("xpath", "//input[@id='event_region']", data.get(Dataset).get("Region"));
 					Thread.sleep(1000);
 					Common.scrollIntoView("id", "event_date");
 					Common.clickElement("id", "event_date");
@@ -4366,8 +4367,10 @@ public void Remove_GiftCode() {
 							data.get(Dataset).get("GropName"));
 
 				} else {
-					Common.dropdown("xpath", "//select[@id='event_country_region']", SelectBy.TEXT,
-							data.get(Dataset).get("Region"));
+//					Common.dropdown("xpath", "//select[@id='event_country_region']", SelectBy.TEXT,
+//							data.get(Dataset).get("Region"));
+					
+					Common.textBoxInput("xpath", "//input[@id='event_region']", data.get(Dataset).get("Region"));
 					Common.textBoxInput("xpath", "//input[@name='event_location']", data.get(Dataset).get("Location"));
 				}
 //		        Baby_Registry("Baby Registry");
@@ -9596,7 +9599,7 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 		for (int i = 0; i < strArray.length; i++) {
 			System.out.println(strArray[i]);
 
-			if (Common.getCurrentURL().contains("preprod")) {
+			if (Common.getCurrentURL().contains("stage") || Common.getCurrentURL().contains("preprod")) {
 
 				Common.oppenURL((strArray[i]));
 				int responcecode = getpageresponce(Common.getCurrentURL());

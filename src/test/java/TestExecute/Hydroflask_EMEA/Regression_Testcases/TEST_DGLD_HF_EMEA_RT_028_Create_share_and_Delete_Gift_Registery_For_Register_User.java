@@ -9,14 +9,14 @@ import TestComponent.Hydroflask_EMEA.GoldHydro_EMEA_Helper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class TEST_DGLD_HF_EMEA_RT_021_Create_and_Edit_Gift_Registery_For_Register_User {
+public class TEST_DGLD_HF_EMEA_RT_028_Create_share_and_Delete_Gift_Registery_For_Register_User {
 
 	String datafile = "Hydroflask_EMEA//GoldHydroEMEA_TestData.xlsx";
 	GoldHydro_EMEA_Helper Hydro = new GoldHydro_EMEA_Helper(datafile,"Sheet1");
 	
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Validating_Create_and_Edit_Gift_Registery_For_Register_User () throws Exception {
+	public void Validating_Validating_Create_and_Edit_Gift_Registery_For_Register_User () throws Exception {
 
 		try {
 			
@@ -24,7 +24,8 @@ public class TEST_DGLD_HF_EMEA_RT_021_Create_and_Edit_Gift_Registery_For_Registe
 			Hydro.click_singinButton();
 			Hydro.login_Hydroflask("Giftaccount");
 			Hydro.giftCreation("Birthday");
-			Hydro.edit_gift("AccountDetails");
+			Hydro.share_giftcard("AccountDetails");
+			Hydro.delete_giftcard();
       
 		} catch (Exception e) {
 
