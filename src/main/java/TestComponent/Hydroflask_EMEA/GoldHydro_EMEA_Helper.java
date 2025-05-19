@@ -4356,8 +4356,10 @@ public void Remove_GiftCode() {
 					
 				} else if (eventname.equals("Wedding")) {
 
-					Common.dropdown("xpath", "//select[@id='event_country_region']", SelectBy.TEXT,
-							data.get(Dataset).get("Region"));
+//					Common.dropdown("xpath", "//select[@id='event_country_region']", SelectBy.TEXT,
+//							data.get(Dataset).get("Region"));
+					
+					Common.textBoxInput("xpath", "//input[@id='event_region']", data.get(Dataset).get("Region"));
 					Common.textBoxInput("xpath", "//input[@id='event_date']", data.get(Dataset).get("Date"));
 					Common.textBoxInput("xpath", "//input[@name='event_location']", data.get(Dataset).get("Location"));
 					Common.textBoxInput("xpath", "//input[@name='registry[number_of_guests]']",
@@ -4375,7 +4377,8 @@ public void Remove_GiftCode() {
 				Common.textBoxInput("xpath", "//input[@id='lastname']", data.get(Dataset).get("LastName"));
 				Common.textBoxInput("xpath", "//input[@id='address_street1']", data.get(Dataset).get("Street"));
 				Common.textBoxInput("xpath", "//input[@id='address_city']", data.get(Dataset).get("City"));
-				Common.dropdown("xpath", "//select[@id='region_id']", SelectBy.TEXT, data.get(Dataset).get("Region"));
+//				Common.dropdown("xpath", "//select[@id='region_id']", SelectBy.TEXT, data.get(Dataset).get("Region"));
+				Common.textBoxInput("xpath", "//input[@id='region']", data.get(Dataset).get("Region"));
 				Common.textBoxInput("xpath", "//input[@id='address_postcode']", data.get(Dataset).get("postcode"));
 				Common.textBoxInput("xpath", "//input[@id='address_telephone']", data.get(Dataset).get("phone"));
 				Sync.waitElementPresent(30, "id", "submit.save");
