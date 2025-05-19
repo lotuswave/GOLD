@@ -8476,123 +8476,90 @@ catch(Exception | Error e)
 		String products = data.get(Dataset).get("Products");
 		String prod = data.get(Dataset).get("prod product");
 		String price = "";
+		String symbol=data.get(Dataset).get("Symbol");
 
 		try {
-			Sync.waitPageLoad();
-			for (int i = 0; i <= 10; i++) {
-				Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image')]");
-				List<WebElement> webelementslist = Common.findElements("xpath",
-						"//img[contains(@class,'m-product-card__image')]");
+		
+		    for (int i = 0; i <= 10; i++) {
+		        Sync.waitElementPresent("css", "img[itemprop='image']");
+		        List<WebElement> productImages = Common.findElements("css", "img[itemprop='image']");
+		        String imageSrc = productImages.get(i).getAttribute("src");
+		        System.out.println(imageSrc);
 
-				String s = webelementslist.get(i).getAttribute("src");
-				System.out.println(s);
-				if (s.isEmpty()) {
+		        if (!imageSrc.isEmpty()) {
+		            break;
+		        }
+		    }
+		    boolean isPreprod = Common.getCurrentURL().contains("preprod");
+		    String productName = isPreprod ? products : prod;
 
-				} else {
-					break;
-				}
-			}
-			Thread.sleep(6000);
-			if (Common.getCurrentURL().contains("preprod")) {
-				Sync.waitElementPresent(30, "xpath", "//img[contains(@alt,'" + products + "')]");
-				String productprice = Common.findElement("xpath", "//span[@class='price-wrapper']")
-						.getAttribute("data-price-amount");
-				Common.clickElement("xpath", "//img[contains(@alt,'" + products + "')]");
-				Sync.waitPageLoad();
-				Thread.sleep(3000);
-				String PLPprice = Common
-						.findElement("xpath",
-								"//div[@class='m-product-overview__prices']//span[@class='price-wrapper ']")
-						.getAttribute("data-price-amount");
-				String name = Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
-				Common.assertionCheckwithReport(
-						name.contains(products) && productprice.equals(PLPprice)
-								|| name.contains(prod) && productprice.equals(PLPprice),
-						"validating the  product navigates to PDP page", "It should be navigate to the PDP page",
-						"Sucessfully Navigates to the PDP page", "failed to Navigate to the PDP page");
-				Common.clickElement("xpath", "//a[text()='Notify Me When Available']");
-				Sync.waitPageLoad();
-				Thread.sleep(4000);
-				String newsubcribe = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
-				System.out.println(newsubcribe);
-				Common.assertionCheckwithReport(
-						newsubcribe.contains("Alert subscription has been saved.")
-								|| newsubcribe.contains("Thank you! You are already subscribed to this product."),
-						"verifying the out of stock subcription",
-						"after click on subcribe button message should be appear",
-						"Sucessfully message has been displayed when we click on the subcribe button ",
-						"Failed to display the message after subcribtion");
-				Common.actionsKeyPress(Keys.END);
-				Common.clickElement("xpath", "//a[text()='Notify Me When Available']");
-				Sync.waitPageLoad();
-				Thread.sleep(4000);
-				String oldsubcribe = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
-				System.out.println(oldsubcribe);
-				Common.assertionCheckwithReport(
-						oldsubcribe.contains("Thank you! You are already subscribed to this product."),
-						"verifying the out of stock subcription",
-						"after click on subcribe button message should be appear",
-						"Sucessfully message has been displayed when we click on the subcribe button ",
-						"Failed to display the message after subcribtion");
-				price = Common.findElement("xpath", "//span[@data-price-type='finalPrice']")
-						.getAttribute("data-price-amount");
-			} else {
-				Sync.waitElementPresent(30, "xpath", "//img[contains(@alt,'" + prod + "')]");
-				String productprice = Common.findElement("xpath", "//span[@class='price-wrapper']")
-						.getAttribute("data-price-amount");
-				Common.clickElement("xpath", "//img[contains(@alt,'" + prod + "')]");
-				Sync.waitPageLoad();
-				Thread.sleep(3000);
-				String PLPprice = Common
-						.findElement("xpath",
-								"//div[@class='m-product-overview__prices']//span[@class='price-wrapper ']")
-						.getAttribute("data-price-amount");
-				String name = Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
-				Common.assertionCheckwithReport(
-						name.contains(products) && productprice.equals(PLPprice)
-								|| name.contains(prod) && productprice.equals(PLPprice),
-						"validating the  product navigates to PDP page", "It should be navigate to the PDP page",
-						"Sucessfully Navigates to the PDP page", "failed to Navigate to the PDP page");
-				Common.clickElement("xpath", "//a[text()='Notify Me When Available']");
-				Sync.waitPageLoad();
-				Thread.sleep(4000);
-				String newsubcribe = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
-				System.out.println(newsubcribe);
-				Common.assertionCheckwithReport(
-						newsubcribe.contains("Alert subscription has been saved.")
-								|| newsubcribe.contains("Thank you! You are already subscribed to this product."),
-						"verifying the out of stock subcription",
-						"after click on subcribe button message should be appear",
-						"Sucessfully message has been displayed when we click on the subcribe button ",
-						"Failed to display the message after subcribtion");
-				Common.actionsKeyPress(Keys.END);
-				Common.clickElement("xpath", "//a[text()='Notify Me When Available']");
-				Sync.waitPageLoad();
-				Thread.sleep(4000);
-				String oldsubcribe = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
-				System.out.println(oldsubcribe);
-				Common.assertionCheckwithReport(
-						oldsubcribe.contains("Thank you! You are already subscribed to this product."),
-						"verifying the out of stock subcription",
-						"after click on subcribe button message should be appear",
-						"Sucessfully message has been displayed when we click on the subcribe button ",
-						"Failed to display the message after subcribtion");
-				price = Common.findElement("xpath", "//span[@data-price-type='finalPrice']")
-						.getAttribute("data-price-amount");
-			}
+		  
+		    Sync.waitElementPresent(30, "xpath", "//img[contains(@alt,'" + productName + "')]");
+		    String plpPrice = Common.findElement("css", "span[x-ref='normalPrice']")
+                    ./*getAttribute("data-price-amount")*/getText().replace(symbol, "").trim();
 
+		    Common.clickElement("xpath", "//img[contains(@alt,'" + productName + "')]");
+		    Sync.waitPageLoad();
+		    Thread.sleep(3000);
+
+		    String productPrice = Common.findElement("xpath","//span[@class='price']")./*getAttribute("data-price-amount")*/getText().replace(symbol, "").trim();
+
+		    String pdpName = Common.findElement("css","div[class*='product-info-main'] h1").getText();
+
+		    Common.assertionCheckwithReport(
+		        (pdpName.contains(products) && productPrice.equals(plpPrice)) || 
+		        (pdpName.contains(prod) && productPrice.equals(plpPrice)),
+		        "Validating navigation to PDP",
+		        "User should be redirected to the Product Detail Page",
+		        "Successfully navigated to the PDP",
+		        "Failed to navigate to the PDP" );
+
+		    Common.clickElement("css", "button[title='Notify Me When Available']");
+		    Sync.waitPageLoad();
+
+		    String newSubscriptionMessage = Common.findElement("xpath", "//div[contains(@class,'message')]//span").getText();
+		    System.out.println(newSubscriptionMessage);
+
+		    Common.assertionCheckwithReport(
+		        newSubscriptionMessage.contains("Alert subscription has been saved.") ||
+		        newSubscriptionMessage.contains("Thank you! You are already subscribed to this product."),
+		        "Verifying out-of-stock subscription (first click)",
+		        "A confirmation message should be displayed after clicking Subscribe",
+		        "Successfully displayed subscription confirmation message",
+		        "Failed to display subscription confirmation message");
+
+		
+		    Common.actionsKeyPress(Keys.END);
+		    Common.clickElement("css", "button[title='Notify Me When Available']");
+		    Sync.waitPageLoad();
+		
+
+		    String repeatSubscriptionMessage = Common.findElement("xpath", "//div[contains(@class,'message')]//span").getText();
+		    System.out.println(repeatSubscriptionMessage);
+
+		    Common.assertionCheckwithReport(
+		        repeatSubscriptionMessage.contains("Thank you! You are already subscribed to this product."),
+		        "Verifying out-of-stock subscription (repeat click)",
+		        "Message should confirm that user is already subscribed",
+		        "Correct message shown for repeat subscription",
+		        "Failed to show message for repeat subscription"
+		    );
+
+		    price = Common.findElement("xpath", "//span[@data-price-type='finalPrice']")
+		                  .getAttribute("data-price-amount");
 		}
-
 		catch (Exception | Error e) {
-			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("verifying the out of stock subcription",
-					"after click on subcribe button message should be appear",
-					"Unable to display the message after subcribtion ",
-					Common.getscreenShot("Failed to display the message after subcribtion"));
-			Assert.fail();
+		    e.printStackTrace();
+		    ExtenantReportUtils.addFailedLog(
+		        "Verifying out-of-stock subscription",
+		        "A confirmation message should be displayed after clicking Subscribe",
+		        "Unable to display the subscription confirmation message",
+		        Common.getscreenShot("Failed to display the subscription confirmation message")
+		    );
+		    Assert.fail();
 		}
-		return price;
 
+		return price;
 	}
 
 	public void share_whishlist(String Dataset) {
