@@ -3170,8 +3170,9 @@ Common.clickElement("xpath", "//span[contains(text(),'Cancel Coupon')]");
 				Common.textBoxInput("xpath", "//input[@name='street[0]']", data.get(dataSet).get("Street"));
 
 				try {
-					Common.dropdown("xpath", "//select[@name='region_id']", Common.SelectBy.TEXT,
-							data.get(dataSet).get("Region"));
+//					Common.dropdown("xpath", "//select[@name='region_id']", Common.SelectBy.TEXT,data.get(dataSet).get("Region"));					
+					Common.textBoxInput("xpath", "//input[@name='region']", data.get(dataSet).get("Region"));
+					
 				} catch (ElementClickInterceptedException e) {
 
 					Thread.sleep(3000);
