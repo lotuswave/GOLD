@@ -204,10 +204,10 @@ public class GoldHydroHyvaHelper {
 		String expectedResult = "User should click the" + category;
 		try {
 
-			Sync.waitElementPresent("xpath", "(//span[contains(text(),'Shop')])[5]");
+			Sync.waitElementPresent("css", "button[class*='main-nav__link-0-level-button'] span[class*='main-nav__link-0-level-text']");
 			Thread.sleep(3000);
 //			Common.scrollIntoView("xpath","//a[contains(@class,'level-top')]//span[text()=' Shop']")//a[contains(@title,'Shop')];
-			Common.clickElement("xpath", "(//span[contains(text(),'Shop')])[5]");
+			Common.clickElement("css", "button[class*='main-nav__link-0-level-button'] span[class*='main-nav__link-0-level-text']");
 
 			Thread.sleep(3000);
 			Sync.waitElementPresent("xpath", "(//span[contains(text(),'" + category + "')])[2]");
@@ -454,8 +454,8 @@ public class GoldHydroHyvaHelper {
 			Sync.waitElementPresent(30,"css", "span[x-text='totalCartAmount']");
 			String minicart = Common.findElement("css", "span[x-text='totalCartAmount']").getText();
 		
-			Sync.waitElementPresent(30, "xpath", "//a[contains(text(),'Checkout')]");
-			Common.clickElement("xpath", "//a[contains(text(),'Checkout')]");
+			Sync.waitElementPresent(30, "xpath", "//button[contains(text(),'Checkout')]");
+			Common.clickElement("xpath", "//button[contains(text(),'Checkout')]");
 			Sync.waitPageLoad();
 		Thread.sleep(2000);
 		try {
@@ -466,7 +466,7 @@ public class GoldHydroHyvaHelper {
 		}
 		catch (Exception | Error e) {
 			Thread.sleep(5000);
-			int Checkout_button= Common.findElements("xpath", "//a[contains(text(),'Checkout')]").size();
+			int Checkout_button= Common.findElements("xpath", "//button[contains(text(),'Checkout')]").size();
 			if(Checkout_button>0) {
 	
 			Common.javascriptclickElement("xpath", "//a[contains(text(),'Checkout')]");
@@ -3539,8 +3539,8 @@ System.out.println(MyFavorites);
 //				Common.clickElement("xpath", "//input[@id='shipping-save']");
 
 				Thread.sleep(2000);
-				Common.clickElement("css", "button[class='btn btn-primary w-full os:uppercase']");
-
+				Common.clickElement("css", "button[class='checkout-address-form__buttons-save btn btn-primary w-full os:uppercase']");
+				 
 			} catch (Exception | Error e) {
 				e.printStackTrace();
 
@@ -9378,11 +9378,11 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 			Thread.sleep(3000);
 			Common.scrollIntoView("xpath", "//h1[@itemprop='name']");
 			if(Common.getCurrentURL().contains("mcloud")) {
-				Sync.waitElementClickable("xpath", "(//div[@x-ref='jsThumbSlides']//div)[6]");
-				Common.javascriptclickElement("xpath", "(//div[@x-ref='jsThumbSlides']//div)[6]");
+				Sync.waitElementClickable("xpath", "(//div[@x-ref='jsThumbSlides']//div)[5]");
+				Common.javascriptclickElement("xpath", "(//div[@x-ref='jsThumbSlides']//div)[5]");
 			}else {
-				Sync.waitElementClickable("xpath", "(//div[@x-ref='jsThumbSlides']//div[6]");
-				Common.clickElement("xpath", "(//div[@x-ref='jsThumbSlides']//div[6]");
+				Sync.waitElementClickable("xpath", "(//div[@x-ref='jsThumbSlides']//div[5]");
+				Common.clickElement("xpath", "(//div[@x-ref='jsThumbSlides']//div[5]");
 			}
 		Thread.sleep(2000);
 				//Common.switchFrames("xpath", "//iframe[contains(@id,'vimeo')]");
