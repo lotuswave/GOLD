@@ -5622,13 +5622,13 @@ public void Remove_GiftCode() {
 	}
 
 	public void valid_email_newsletter(String Dataset) {
-
+		String Email = Common.genrateRandomEmail(data.get(Dataset).get("Email"));
 		try {
 			Thread.sleep(5000);
 			Common.actionsKeyPress(Keys.END);
 			Thread.sleep(5000);
 			Sync.waitElementClickable(30, "xpath", "(//input[@id='subscribe-email' or @name='email'])[1]");
-			Common.textBoxInput("xpath", "(//input[@id='subscribe-email' or @name='email'])[1]", Utils.getEmailid());
+			Common.textBoxInput("xpath", "(//input[@id='subscribe-email' or @name='email'])[1]", Email);
 			Thread.sleep(5000);
 			Common.clickElement("xpath", "(//button[text()='Submit' or @type='submit'])[2]");
 			Sync.waitPageLoad();
@@ -9331,29 +9331,29 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 
 	public void PDP_video_validation(String Dataset) {
 		// TODO Auto-generated method stub
-		String product = data.get(Dataset).get("Colorproduct");
+		String product = data.get(Dataset).get("Products");
 		String color = data.get(Dataset).get("Color");
 		try {
 			Sync.waitPageLoad();
-			for (int i = 0; i <= 10; i++) {
-				//Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
-				Sync.waitElementPresent("xpath", "//a[@class='product-image-link']");
-
-				List<WebElement> webelementslist = Common.findElements("xpath",
-						"//a[@class='product-image-link']");
-				String s = webelementslist.get(i).getAttribute("href");
-				System.out.println(s);
-				if (s.isEmpty()) {
-
-				} else {
-					break;
-				}
-			}
-			
-			Sync.waitElementPresent("xpath", "//img[@alt='" + product + "']");
-			Common.javascriptclickElement("xpath", "//img[@alt='" + product + "']");
-			Sync.waitElementPresent(30, "xpath", "//div[@data-option-label='" + color + "']");
-			Common.clickElement("xpath", "//div[@data-option-label='" + color + "']");
+//			for (int i = 0; i <= 10; i++) {
+//				//Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
+//				Sync.waitElementPresent("xpath", "//a[@class='product-image-link']");
+//
+//				List<WebElement> webelementslist = Common.findElements("xpath",
+//						"//a[@class='product-image-link']");
+//				String s = webelementslist.get(i).getAttribute("href");
+//				System.out.println(s);
+//				if (s.isEmpty()) {
+//
+//				} else {
+//					break;
+//				}
+//			}
+//			
+//			Sync.waitElementPresent("xpath", "//img[@alt='" + product + "']");
+//			Common.javascriptclickElement("xpath", "//img[@alt='" + product + "']");
+//			Sync.waitElementPresent(30, "xpath", "//div[@data-option-label='" + color + "']");
+//			Common.clickElement("xpath", "//div[@data-option-label='" + color + "']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			System.out.println(product);
@@ -9366,8 +9366,8 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 			Thread.sleep(3000);
 			Common.scrollIntoView("xpath", "//h1[@itemprop='name']");
 			if(Common.getCurrentURL().contains("mcloud")) {
-				Sync.waitElementClickable("xpath", "(//div[@x-ref='jsThumbSlides']//div)[6]");
-				Common.clickElement("xpath", "(//div[@x-ref='jsThumbSlides']//div)[6]");
+				Sync.waitElementClickable("xpath", "(//div[@x-ref='jsThumbSlides']//div)[4]");
+				Common.clickElement("xpath", "(//div[@x-ref='jsThumbSlides']//div)[4]");
 			}else {
 				Sync.waitElementClickable("xpath", "(//div[@x-ref='jsThumbSlides']//div)[5]");
 				Common.clickElement("xpath", "(//div[@x-ref='jsThumbSlides']//div)[5]");
@@ -15217,6 +15217,21 @@ Common.clickElement("xpath", "//span[text()='Edit']");
 	                Common.getscreenShotPathforReport("CardInformationFailure"));
 	        Assert.fail("Failed during credit card entry validation.");
 	    }
+	}
+
+	public void Select_Product_Search(String Dataset) {
+		 String products = data.get(Dataset).get("Products");
+		    System.out.println(products);
+		try {
+			  Common.scrollIntoView("css", "img[alt='" + products + "']");
+		        Sync.waitElementPresent(30, "css", "img[alt='" + products + "']");
+		        Thread.sleep(3000);
+		       
+		        Common.clickElement("css", "img[alt='" + products + "']");
+		}
+		catch(Exception | Error e){
+			
+		}
 	}
 
 }	
