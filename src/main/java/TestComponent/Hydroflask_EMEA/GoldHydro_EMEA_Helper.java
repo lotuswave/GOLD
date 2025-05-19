@@ -3931,12 +3931,12 @@ public void Gift_card(String dataSet) {
 	        boolean isStageOrPreprod = URL.contains("stage") || URL.contains("preprod");
 	        
      if (isStageOrPreprod) {
-	        	Sync.waitElementPresent("xpath", "//h1[contains(text(),'Add Gift Card')]");
+	        	Sync.waitElementPresent("xpath", "//h3[contains(text(),'Add Gift Card')]");
 
-			if(Common.findElement("xpath", "//h1[contains(text(),'Add Gift Card')]").getAttribute("title").contains("Show items"))
+			if(Common.findElement("xpath", "//h3[contains(text(),'Add Gift Card')]").getAttribute("title").contains("Show items"))
 			{
-		Sync.waitElementPresent("xpath", "//h1[contains(text(),'Add Gift Card')]");	
-		Common.clickElement("xpath", "//h1[contains(text(),'Add Gift Card')]");
+		Sync.waitElementPresent("xpath", "//h3[contains(text(),'Add Gift Card')]");	
+		Common.clickElement("xpath", "//h3[contains(text(),'Add Gift Card')]");
 			}
 		Common.textBoxInput("xpath","//input[@x-model='giftCardCode']", data.get(dataSet).get("GiftCard_Preprod"));
 		Common.actionsKeyPress(Keys.ARROW_UP);
@@ -14007,11 +14007,11 @@ Common.clickElement("xpath", "//span[text()='Edit']");
 					
 					Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
 					Thread.sleep(5000);
-					String Isselected = Common.findElementBy("id", "card-tab").getAttribute("aria-selected");
-					if(Isselected.contains("false")) {
-						Sync.waitElementPresent("id", "card-tab");
-						Common.clickElement("id", "card-tab");
-					}
+//					String Isselected = Common.findElementBy("id", "card-tab").getAttribute("aria-selected");
+//					if(Isselected.contains("false")) {
+//						Sync.waitElementPresent("id", "card-tab");
+//						Common.clickElement("id", "card-tab");
+//					}
 					Common.scrollIntoView("xpath", "//label[@for='Field-numberInput']");
 					Common.clickElement("xpath", "//label[@for='Field-numberInput']");
 					Common.findElement("id", "Field-numberInput").sendKeys(cardnumber);
