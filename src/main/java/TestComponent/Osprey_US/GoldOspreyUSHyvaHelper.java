@@ -3161,7 +3161,7 @@ public void Addtocart_From_MyFavorites(String Dataset) {
 //				Common.clickElement("xpath", "//input[@id='shipping-save']");
 
 				Thread.sleep(2000);
-				Common.clickElement("xpath", "//button[@class='btn btn-primary w-full os:uppercase']");
+				Common.clickElement("css", "button[class*='checkout-address-form__buttons-save']");
 
 //				
 //                ExtenantReportUtils.addPassLog("verifying shipping addres filling ",
