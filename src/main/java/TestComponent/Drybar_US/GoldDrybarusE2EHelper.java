@@ -693,8 +693,10 @@ public class GoldDrybarusE2EHelper {
 			Sync.waitElementPresent("xpath", "//span[@x-text='totalCartAmount']");
 			String minicart = Common.findElement("xpath", "//span[@x-text='totalCartAmount']").getText();
 			System.out.println(minicart);
-			Sync.waitElementPresent(30, "xpath", "//a[contains(text(),'Checkout')]");
-			Common.clickElement("xpath", "//a[contains(text(),'Checkout')]");
+//			Sync.waitElementPresent(30, "xpath", "//a[contains(text(),'Checkout')]");
+//			Common.clickElement("xpath", "//a[contains(text(),'Checkout')]");
+			Sync.waitElementPresent(30, "xpath", "//button[contains(text(),'Checkout')]");
+			Common.clickElement("xpath", "//button[contains(text(),'Checkout')]");
 			Sync.waitPageLoad();	
 
 		} catch (Exception | Error e) {
@@ -2380,13 +2382,15 @@ public class GoldDrybarusE2EHelper {
 			}
 			else
 			{
-			String Subtotal = Common.getText("xpath", "//div[@class='item subtotal']//span[@class='value']").replace(Symbol,
-					"").replace(",", "");
+//			String Subtotal = Common.getText("xpath", "//div[@class='item subtotal']//span[@class='value']").replace(Symbol,
+//					"").replace(",", "");
+			String Subtotal = Common.getText("xpath", "(//div[@class='item subtotal']//span[@class='value'])[1]").replace("$",
+					"");
 			
 			Float subtotalvalue = Float.parseFloat(Subtotal);
 			
-			String shipping = Common.getText("xpath", "(//span[@class='value'])[2]")
-					.replace(Symbol, "");
+//			String shipping = Common.getText("xpath", "(//span[@class='value'])[2]").replace(Symbol, "");
+			String shipping = Common.getText("xpath", "(//div[@class='item shipping']//span[@class='checkout-total-segments__shipping-value value'])[1]");
 			Float shippingvalue = Float.parseFloat(shipping);
 			
 			
@@ -7999,8 +8003,9 @@ public void FUll_Payment(String dataSet) {
 					Sync.waitElementPresent(30, "xpath", "//span[@x-html='cart.subtotal']//span[@class='price']");
 					String subtotal = Common.getText("xpath", "//span[@x-html='cart.subtotal']//span[@class='price']").replace(symbol, "");
 					Float subtotalvalue = Float.parseFloat(subtotal);
-					String productname = Common
-							.findElement("xpath", "//p[@class='title-sm']//a[text()='" + deleteproduct + "']").getText();
+//					String productname = Common
+//							.findElement("xpath", "//p[@class='title-sm']//a[text()='" + deleteproduct + "']").getText();
+					String productname=Common.findElement("xpath", "(//p[@class='text-md font-bold dr:title-sm lg:flex-shrink-1']//a)[1]").getText();
 					String productamount1 = Common.getText("xpath", "(//span[@x-html='item.product_price']//span[@class='price'])[1]").replace(symbol,"");
 					Float productamount1value = Float.parseFloat(productamount1);
 					if (productname.equals(deleteproduct)) {
