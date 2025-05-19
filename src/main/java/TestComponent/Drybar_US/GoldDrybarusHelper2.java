@@ -1808,21 +1808,21 @@ public class GoldDrybarusHelper2 {
 			else
 			{
 			Thread.sleep(4000);
-			String Subtotal = Common.getText("xpath", "//div[@class='item subtotal']//span[@class='value']").replace("$",
+			String Subtotal = Common.getText("xpath", "(//div[@class='item subtotal']//span[@class='value'])[1]").replace("$",
 					"");
 			System.out.println(Subtotal);
 			Float subtotalvalue = Float.parseFloat(Subtotal);
-			String shipping = Common.getText("xpath", "//div[@class='item shipping']//span[@class='value']")
+			String shipping = Common.getText("xpath", "(//div[@class='item shipping']//span[@class='checkout-total-segments__shipping-value value'])[1]")
 					.replace(Symbol, "");
 			Float shippingvalue = Float.parseFloat(shipping);
 			
 			
-			String Tax = Common.getText("xpath", "//div[@class='item tax']//span[@class='value']").replace(Symbol, "");
+			String Tax = Common.getText("xpath", "(//div[@class='item tax']//span[@class='value'])[1]").replace(Symbol, "");
 			
 			Float Taxvalue = Float.parseFloat(Tax);
 			Thread.sleep(4000);
 
-			String ordertotal = Common.getText("xpath", "//div[@class='item grand_total']//span[contains(@class,'value')]")
+			String ordertotal = Common.getText("xpath", "(//div[@class='item grand_total']//span[contains(@class,'value')])[1]")
 					.replace(Symbol, "");
 			Float ordertotalvalue = Float.parseFloat(ordertotal);
 			Thread.sleep(4000);
@@ -5556,18 +5556,18 @@ public void FUll_Payment(String dataSet) {
     			String Subtotal = Common.getText("xpath", "//div[@class='item subtotal']//span[@class='value']").replace(Symbol,
     					"");
     			Float subtotalvalue = Float.parseFloat(Subtotal);
-    			String shipping = Common.getText("xpath", "//div[@class='item shipping']//span[@class='value']")
+    			String shipping = Common.getText("xpath", "(//div[@class='item shipping']//span[@class='checkout-total-segments__shipping-value value'])[1]")
     					.replace(Symbol, "");
     			Float shippingvalue = Float.parseFloat(shipping);
-    			String Tax = Common.getText("xpath", "//div[@class='item tax']//span[@class='value']").replace(Symbol, "");
+    			String Tax = Common.getText("xpath", "(//div[@class='item tax']//span[@class='value'])[1]").replace(Symbol, "");
     			Float Taxvalue = Float.parseFloat(Tax);
     			Thread.sleep(4000);
-    			String Discount = Common.getText("xpath", "//div[@class='item discount']//span[@class='value']")
+    			String Discount = Common.getText("xpath", "(//div[@class='item discount']//span[@class='checkout-total-segments__discount-value value'])[1]")
     					.replace(Symbol, "");
     			Float Discountvalue = Float.parseFloat(Discount);
     			System.out.println(Discountvalue);
 
-    			String ordertotal = Common.getText("xpath", "//div[@class='item grand_total']//span[contains(@class,'value')]")
+    			String ordertotal = Common.getText("xpath", "(//div[@class='item grand_total']//span[contains(@class,'value')])[1]")
     					.replace(Symbol, "");
     			Float ordertotalvalue = Float.parseFloat(ordertotal);
     			Thread.sleep(4000);
@@ -7905,7 +7905,7 @@ public void FUll_Payment(String dataSet) {
 							.replace(symbol, "");
 					Float subtotalvalue = Float.parseFloat(subtotal);
 					String productname = Common
-							.findElement("xpath", "(//p[@class='text-md font-bold dr:title-sm lg:flex-shrink-1']//a)[1]")
+							.findElement("xpath", "(//p[@class='cart-drawer__item-content-description-header-text text-md font-bold dr:title-sm lg:flex-shrink-1']//a)[1]")
 							.getText();
 					String productamount1 = Common.getText("xpath", "(//span[@x-html='item.product_price']//span[@class='price'])[1]").replace(symbol,
 							"");
@@ -7917,7 +7917,9 @@ public void FUll_Payment(String dataSet) {
 								"(//a[contains(@aria-label,'Edit product')]//parent::div//button)[1]");
 						Common.clickElement("xpath",
 								"(//a[contains(@aria-label,'Edit product')]//parent::div//button)[1]");
+						
 						Sync.waitElementPresent("xpath", "//button[contains(text(),'OK')]");
+						Thread.sleep(3000);
 						Common.clickElement("xpath", "//button[contains(text(),'OK')]");
 					} else {
 						Assert.fail();
