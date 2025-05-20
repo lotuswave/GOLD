@@ -26,9 +26,7 @@ public class Test_DGLD_HF_ST_059_Validate_PLP_page {
 			Hydro.color_validation("Black");
 			Hydro.price_filter_validation();
 			Hydro.addtocart_PLP("Product");
-			 
 			
-
 		} catch (Exception e) {
 
 			Assert.fail(e.getMessage(), e);

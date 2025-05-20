@@ -204,10 +204,10 @@ public class GoldHydroHyvaHelper {
 		String expectedResult = "User should click the" + category;
 		try {
 
-			Sync.waitElementPresent("css", "button[class*='main-nav__link-0-level-button'] span[class*='main-nav__link-0-level-text']");
+			Sync.waitElementPresent("xpath", "//nav[@aria-label='Main menu']//span[contains(text(),'Shop')] ");
 			Thread.sleep(3000);
 //			Common.scrollIntoView("xpath","//a[contains(@class,'level-top')]//span[text()=' Shop']")//a[contains(@title,'Shop')];
-			Common.clickElement("css", "button[class*='main-nav__link-0-level-button'] span[class*='main-nav__link-0-level-text']");
+			Common.clickElement("xpath", "//nav[@aria-label='Main menu']//span[contains(text(),'Shop')] ");
 
 			Thread.sleep(3000);
 			Sync.waitElementPresent("xpath", "(//span[contains(text(),'" + category + "')])[2]");
@@ -454,8 +454,8 @@ public class GoldHydroHyvaHelper {
 			Sync.waitElementPresent(30,"css", "span[x-text='totalCartAmount']");
 			String minicart = Common.findElement("css", "span[x-text='totalCartAmount']").getText();
 		
-			Sync.waitElementPresent(30, "xpath", "//button[contains(text(),'Checkout')]");
-			Common.clickElement("xpath", "//button[contains(text(),'Checkout')]");
+			Sync.waitElementPresent(30, "xpath", "//a[contains(text(),'Checkout')]");
+			Common.clickElement("xpath", "//a[contains(text(),'Checkout')]");
 			Sync.waitPageLoad();
 		Thread.sleep(2000);
 		try {
@@ -466,7 +466,7 @@ public class GoldHydroHyvaHelper {
 		}
 		catch (Exception | Error e) {
 			Thread.sleep(5000);
-			int Checkout_button= Common.findElements("xpath", "//button[contains(text(),'Checkout')]").size();
+			int Checkout_button= Common.findElements("xpath", "//a[contains(text(),'Checkout')]").size();
 			if(Checkout_button>0) {
 	
 			Common.javascriptclickElement("xpath", "//a[contains(text(),'Checkout')]");
@@ -3791,31 +3791,22 @@ System.out.println(MyFavorites);
 	
 	public void Gift_cards(String Dataset) {
 		// TODO Auto-generated method stub
-		String GiftCard = data.get(Dataset).get("Hydrogift");
+//		String GiftCard = data.get(Dataset).get("Hydrogift");
 		try
 		{
-			Thread.sleep(2000);
+			Thread.sleep(4000);
+			int size=Common.findElements("xpath", "//span[contains(text(), ' Shop')]").size();
+			if(size>0) {
 				Common.clickElement("xpath", "//span[contains(text(), ' Shop')]");
+			}else {
+				Common.javascriptclickElement("xpath","//nav[@aria-label='Main menu']//span[contains(text(),'Shop')] ");
+			}
 				Sync.waitElementPresent("xpath", "//span[text()='Gift Cards']");
 				Common.clickElement("xpath", "//span[text()='Gift Cards']");
-//				Sync.waitElementPresent("xpath", "//img[contains(@itemprop ,'image')]");
-//				List<WebElement> webelementslist = Common.findElements("xpath",
-//						"//img[contains(@itemprop ,'image')]");
-//
-//				String s = webelementslist.get(i).getAttribute("src");
-//				System.out.println(s);
-//				if (s.isEmpty()) {
-//
-//				} else {
-//					break;
-//				}
-//			}
+
 			Sync.waitPageLoad(30);
 			Thread.sleep(6000);
-//			Sync.waitElementPresent(30, "xpath", "//img[contains(@alt,'" + GiftCard + "')]");
-//			Common.clickElement("xpath", "//img[contains(@alt,'" + GiftCard + "')]");
-//			Sync.waitPageLoad();
-//			Thread.sleep(6000);
+		
 			Common.assertionCheckwithReport(Common.getCurrentURL().contains("/gift-card"),
 					"validating the gift card page navigation",
 					"After clicking on the gift card it sholud navigate to the PDP page",
@@ -6551,9 +6542,9 @@ catch(Exception | Error e)
 		try {
 			Sync.waitPageLoad();
 			for (int i = 0; i <= 10; i++) {
-				Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image product')]");
+				Sync.waitElementPresent("xpath", "//img[contains(@class,'group-hover/item-image:') or @loading='lazy' and @itemprop]");
 				List<WebElement> webelementslist = Common.findElements("xpath",
-						"//img[contains(@class,'m-product-card__image product')]");
+						"//img[contains(@class,'group-hover/item-image:') or @loading='lazy' and @itemprop]");
 				String s = webelementslist.get(i).getAttribute("src");
 				System.out.println(s);
 				if (s.isEmpty()) {
@@ -7499,11 +7490,12 @@ catch(Exception | Error e)
 
 	public void Forgot_password(String DateSet) throws Exception {
 		// TODO Auto-generated method stub
+		
 		try {
 			Common.clickElement("xpath", "//span[contains(text(),'Forgot Password?')]");
 			String forgotpassword = Common.findElement("xpath", "//h2[contains(text(),'Forgot Your Password?')]").getText();
 			System.out.println(forgotpassword);
-			Common.textBoxInput("id", "email_address", Utils.getEmailid());
+			Common.textBoxInput("id", "email_address", data.get(DateSet).get("UserName"));
 			Common.findElement("id", "email_address").getAttribute("value");
 			Common.clickElement("xpath", "//button[contains(text(),'Reset My Password')]");
 			

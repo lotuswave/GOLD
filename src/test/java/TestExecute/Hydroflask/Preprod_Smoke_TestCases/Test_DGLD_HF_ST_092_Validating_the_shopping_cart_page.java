@@ -18,19 +18,34 @@ public class Test_DGLD_HF_ST_092_Validating_the_shopping_cart_page {
 	public void Validating_the_shopping_cart_page() throws Exception {
 
 		try {
-			Hydro.verifingHomePage();    
-			Hydro.bottles_headerlinks("Bottles & Drinkware"); 
-			Hydro.Configurable_addtocart_pdp("Product");
-			Hydro.search_product("Product");      
-			Hydro.addtocart("Product"); 
-			Hydro.click_minicart();
-			Hydro.minicart_viewcart();
-			Hydro.Remove_Product("Product");
-			Hydro.update_shoppingcart("Product Qunatity");
-			Hydro.minicart_Checkout();
-            Hydro.Shoppingcart_page();
-			Hydro.minicart_ordersummary_discount("Discount");
-		    
+			Hydro.verifingHomePage();
+			/*
+			 * Minicart Validation:			
+			 */
+						Hydro.search_product("Product");      
+						Hydro.addtocart("Product");
+						Hydro.bottles_headerlinks("Bottles & Drinkware"); 
+						Hydro.Configurable_addtocart_pdp("Product");
+						Hydro.click_minicart();
+						Hydro.clickontheproduct_and_image("Product");
+						Hydro.minicart_freeshipping();
+						Hydro.minicart_delete("Product");
+						Hydro.minicart_product_close();
+			/*
+			 * Shopping cart validation			
+			 */
+						Hydro.minicart_validation("Product Qunatity");
+						Hydro.bottles_headerlinks("Bottles & Drinkware"); 
+						Hydro.Configurable_addtocart_pdp("Product");
+						Hydro.click_minicart();
+						Hydro.minicart_viewcart();
+						Hydro.Remove_Product("Product");
+						Hydro.update_shoppingcart("Product Qunatity");
+						Hydro.click_minicart();
+						Hydro.minicart_Checkout();
+						Hydro.Shoppingcart_page();
+						Hydro.minicart_ordersummary_discount("Discount");
+						
 		    
 			
 		} catch (Exception e) {
