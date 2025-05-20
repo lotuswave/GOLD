@@ -3789,8 +3789,17 @@ System.out.println(MyFavorites);
 		{
 			Thread.sleep(2000);
 				Common.clickElement("xpath", "//span[contains(text(), ' Shop')]");
-				Sync.waitElementPresent("xpath", "//span[text()='Gift Cards']");
-				Common.clickElement("xpath", "//span[text()='Gift Cards']");
+				if(Common.findElements("xpath","//span[text()='Gift Cards']").size()>0) {
+					Sync.waitElementPresent("xpath", "//span[text()='Gift Cards']");
+					Common.clickElement("xpath", "//span[text()='Gift Cards']");
+				} else {
+//					Common.clickElement("css","button[aria-label='Close minicart']");
+					Thread.sleep(2000);
+					Common.clickElement("id","menu-search-icon");
+					Common.textBoxInput("id", "autocomplete-0-input", GiftCard);
+					Thread.sleep(2000);
+					Common.clickElement("css","img[alt='" + GiftCard + "']");
+				}
 //				Sync.waitElementPresent("xpath", "//img[contains(@itemprop ,'image')]");
 //				List<WebElement> webelementslist = Common.findElements("xpath",
 //						"//img[contains(@itemprop ,'image')]");
@@ -3804,7 +3813,7 @@ System.out.println(MyFavorites);
 //				}
 //			}
 			Sync.waitPageLoad(30);
-			Thread.sleep(6000);
+			Thread.sleep(4000);
 //			Sync.waitElementPresent(30, "xpath", "//img[contains(@alt,'" + GiftCard + "')]");
 //			Common.clickElement("xpath", "//img[contains(@alt,'" + GiftCard + "')]");
 //			Sync.waitPageLoad();
@@ -3829,8 +3838,9 @@ System.out.println(MyFavorites);
 		}
 		
 	}
-	
-	
+
+
+
 	
 	public void Card_Value(String Dataset) {
 		// TODO Auto-generated method stub
