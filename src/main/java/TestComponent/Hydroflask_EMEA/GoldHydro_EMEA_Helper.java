@@ -1812,8 +1812,10 @@ public class GoldHydro_EMEA_Helper {
 
 	public String Stored_PaymentDetails(String dataSet) throws Exception {
         HashMap<String, String> Paymentmethod = new HashMap<>();
-        String Number = "";
+        String enteredCardNumber  = "";
         String cardnumber = data.get(dataSet).get("cardNumber");
+        String expiryDate = data.get(dataSet).get("ExpMonthYear");
+        String cvv = data.get(dataSet).get("cvv");
         String expectedResult = "user should be land on the payment section";
 
         try {
@@ -1839,21 +1841,22 @@ public class GoldHydro_EMEA_Helper {
                 Common.clickElement("css", "label[for='Field-numberInput']");
                 Common.findElement("id", "Field-numberInput").sendKeys(cardnumber);
 
-                Number = Common.findElement("id", "Field-numberInput").getAttribute("value").replace(" ", "");
+                enteredCardNumber = Common.findElement("id", "Field-numberInput").getAttribute("value").replace(" ", "");
 
                 Sync.waitElementPresent("id", "Field-expiryInput");
-                Common.textBoxInput("id", "Field-expiryInput", data.get(dataSet).get("ExpMonthYear"));
+                Common.textBoxInput("id", "Field-expiryInput", expiryDate);
 
                 Sync.waitElementPresent("id", "Field-cvcInput");
-                Common.textBoxInput("id", "Field-cvcInput", data.get(dataSet).get("cvv"));
+                Common.textBoxInput("id", "Field-cvcInput", cvv);
 
                 Common.actionsKeyPress(Keys.ARROW_DOWN);
-                Sync.waitElementPresent("id", "checkbox-linkOptIn");
-                Common.clickElement("id", "checkbox-linkOptIn");
                 Common.switchToDefault();
 
                 if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
-                    Sync.waitElementPresent("xpath", "(//button[contains(@class, 'btn-place-order') and contains(text(), 'Place Order')])[2]");
+                	Sync.waitElementPresent("css", "input[class='flex-none disabled:opacity-25']");
+                	Common.clickElement("css", "input[class='flex-none disabled:opacity-25']");
+
+                	Sync.waitElementPresent("xpath", "(//button[contains(@class, 'btn-place-order') and contains(text(), 'Place Order')])[2]");
                     Common.scrollIntoView("xpath", "(//button[contains(@class, 'btn-place-order') and contains(text(), 'Place Order')])[2]");
                     Common.clickElement("xpath", "(//button[contains(@class, 'btn-place-order') and contains(text(), 'Place Order')])[2]");
                     Sync.waitPageLoad();
@@ -1892,7 +1895,7 @@ public class GoldHydro_EMEA_Helper {
             Assert.fail("Failed to add payment details");
         }
 
-        return Number;
+        return enteredCardNumber;
     }
 
 	
@@ -2225,29 +2228,30 @@ public void FUll_Payment(String dataSet) {
 		}
 		
 	}
-	public void click_Createaccount() {
+public void click_Createaccount() {
 
-		try {
-			Sync.waitElementPresent("xpath", "//button[@id='customer-menu']");
-			Common.clickElement("xpath", "//button[@id='customer-menu']");
-			Sync.waitElementPresent("xpath", "//a[@title='Create an Account']");
-			Common.clickElement("xpath", "//a[@title='Create an Account']");
-			Sync.waitPageLoad();
-			Thread.sleep(3000);
-			Common.assertionCheckwithReport(Common.getPageTitle().equals("Create an Account"),
-					"Validating Create New Customer Account page navigation",
-					"after Clicking on Create New Customer Account page it will navigate account creation page",
-					"Successfully navigate to the create account page",
-					"Failed to Navigate to the account create page ");
-		} catch (Exception | Error e) {
-			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("Validating Create New Customer Account page navigation ",
-					"after Clicking on Create New Customer Account page it will navigate account creation page",
-					"unable to navigate to the craete account page",
-					Common.getscreenShotPathforReport("Failed to navigate to the account create page"));
-			Assert.fail();
-		}
+	try {
+		Sync.waitElementPresent("css", "button[id='customer-menu']");
+		Common.clickElement("css", "button[id='customer-menu']");
+		Sync.waitElementPresent("css", "a[title='Create an Account']");
+		Common.clickElement("css", "a[title='Create an Account']");
+		Sync.waitPageLoad();
+		Thread.sleep(3000);
+		Common.assertionCheckwithReport(Common.getPageTitle().equals("Create an Account"),
+				"Validating Create New Customer Account page navigation",
+				"after Clicking on Create New Customer Account page it will navigate account creation page",
+				"Successfully navigate to the create account page",
+				"Failed to Navigate to the account create page ");
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("Validating Create New Customer Account page navigation ",
+				"after Clicking on Create New Customer Account page it will navigate account creation page",
+				"unable to navigate to the craete account page",
+				Common.getscreenShotPathforReport("Failed to navigate to the account create page"));
+		Assert.fail();
 	}
+}
+
 	public String create_account(String Dataset) {
 		String email="";
 		String Product=data.get(Dataset).get("Products");
@@ -5962,9 +5966,9 @@ catch(Exception | Error e)
 	public void Stored_Payment(String Dataset) {
 		// TODO Auto-generated method stub
 		try {
-			Common.clickElement("xpath", "//button[@id='customer-menu']");
-			Sync.waitElementPresent(30, "xpath", "//a[@title='My Account']");
-			Common.clickElement("xpath", "//a[@title='My Account']");
+			Common.clickElement("css", "button[id='customer-menu']");
+			Sync.waitElementPresent(30, "css", "a[title='My Account']");
+			Common.clickElement("css", "a[title='My Account']");
 			Common.assertionCheckwithReport(Common.getPageTitle().equals("Dashboard"),
 					"validating the Navigation to the My account page",
 					"After Clicking on My account CTA user should be navigate to the my account page",
@@ -5981,29 +5985,28 @@ catch(Exception | Error e)
 		}
 		try {
 			Sync.waitPageLoad();
-			Sync.waitElementPresent("xpath", "//a[@title='Stored Payment Methods']");
-			Common.clickElement("xpath", "//a[@title='Stored Payment Methods']");
-			Sync.waitPageLoad(30);
+			Sync.waitElementPresent("css", "a[title='Stored Payment Methods']");
+			Common.clickElement("css", "a[title='Stored Payment Methods']");
+			Sync.waitPageLoad();
+			Thread.sleep(2000);
 			Common.assertionCheckwithReport(Common.getPageTitle().equals("My Payment Methods"),
 					"validating the Navigation to the My Payment Methods page",
 					"After Clicking on stored methods CTA user should be navigate to the My Payment Methods page",
 					"Sucessfully User Navigates to the My Payment Methods page after clicking on the stored methods  CTA",
 					"Failed to Navigate to the My Payment Methods page after Clicking on my stored methods  CTA");
-			int size = Common.findElements("xpath", "//div[@class='divide-y divide-border']").size();
+			int size = Common.findElements("css", "div[class='divide-y divide-border']").size();
 			if (size > 0) {
-				Thread.sleep(5000);
-				String number = Common.findElement("xpath", "(//div[@class='flex items-center']//span)[1]").getText()
-						.replace("•••• ", "");
-				System.out.println(number);
-				System.out.println(Dataset);
-				Thread.sleep(5000);
+				Thread.sleep(2000);
+				String number = Common.findElement("xpath", "(//div[@class='flex items-center']//span)[1]").getText().replace("•••• ", "");
+				System.out.println("Card details from the stored payment: "+number);
+				System.out.println("Given card details from the excel data: "+Dataset);
 				Common.assertionCheckwithReport(number.contains("4242") && Dataset.contains("4242"),
 						"validating the card details in the my orders page",
 						"After Clicking on My payments methods and payment method should be appear in payment methods",
 						"Sucessfully payment method is appeared in my payments methods",
 						"Failed to display the payment methods in the my payments methods");
 			} else {
-				Assert.fail();
+				 Assert.fail("No stored CC payments methods found in the stored payment");
 			}
 
 		} catch (Exception | Error e) {
@@ -11344,15 +11347,16 @@ public void Explore_Validation(String Dataset) {
 
 		try {
 			Sync.waitPageLoad();
-			Sync.waitElementPresent("xpath", "//a[@title='Stored Payment Methods']");
-			Common.clickElement("xpath", "//a[@title='Stored Payment Methods']");
-			Sync.waitPageLoad(30);
+			Sync.waitElementPresent("css", "a[title='Stored Payment Methods']");
+			Common.clickElement("css", "a[title='Stored Payment Methods']");
+			Sync.waitPageLoad();
+			Thread.sleep(2000);
 			Common.assertionCheckwithReport(Common.getPageTitle().equals("My Payment Methods"),
 					"validating the Navigation to the My Payment Methods page",
 					"After Clicking on stored methods CTA user should be navigate to the My Payment Methods page",
 					"Sucessfully User Navigates to the My Payment Methods page after clicking on the stored methods  CTA",
 					"Failed to Navigate to the My Payment Methods page after Clicking on my stored methods  CTA");
-			String card = Common.findElement("xpath", "//div[@class='w-full']//p").getText().trim();
+			String card = Common.findElement("css", "div[class='w-full'] p").getText().trim();
 			Common.assertionCheckwithReport(card.contains("You do not have any saved payment methods."),
 					"validating the no saved payments in stored credit card",
 					"After Clicking on stored methods CTA stored credit cart should be empty",
@@ -11368,6 +11372,7 @@ public void Explore_Validation(String Dataset) {
 			Assert.fail();
 		}
 	}
+
 
 	public void Kustomer_Links(String Dataset) {
 		// TODO Auto-generated method stub
