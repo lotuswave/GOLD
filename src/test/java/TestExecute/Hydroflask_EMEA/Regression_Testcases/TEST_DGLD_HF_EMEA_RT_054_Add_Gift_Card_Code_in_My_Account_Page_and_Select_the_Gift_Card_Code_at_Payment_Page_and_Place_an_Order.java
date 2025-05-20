@@ -9,23 +9,30 @@ import TestComponent.Hydroflask_EMEA.GoldHydro_EMEA_Helper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class TEST_DGLD_HF_EMEA_RT_028_Create_share_and_Delete_Gift_Registery_For_Register_User {
+public class TEST_DGLD_HF_EMEA_RT_054_Add_Gift_Card_Code_in_My_Account_Page_and_Select_the_Gift_Card_Code_at_Payment_Page_and_Place_an_Order {
 
 	String datafile = "Hydroflask_EMEA//GoldHydroEMEA_TestData.xlsx";
-	GoldHydro_EMEA_Helper Hydro = new GoldHydro_EMEA_Helper(datafile,"Sheet1");
-	
+	GoldHydro_EMEA_Helper Hydro = new GoldHydro_EMEA_Helper(datafile,"DataSet");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Validating_Create_share_and_Delete_Gift_Registery_For_Register_User () throws Exception {
+	public void verifying_Add_Gift_Card_Code_in_My_Account_Page_and_Select_the_Gift_Card_Code_at_Payment_Page_and_Place_an_Order () throws Exception {
 
 		try {
 			
 			Hydro.verifingHomePage();
 			Hydro.click_singinButton();
-			Hydro.login_Hydroflask("Giftaccount");
-			Hydro.giftCreation("Birthday");
-			Hydro.share_giftcard("AccountDetails");
-			Hydro.delete_giftcard();
+			Hydro.login_Hydroflask("AccountDetails");
+			Hydro.Add_GiftCode_Myaccount("Giftcard");
+			Hydro.search_product("Product");       
+			Hydro.addtocart("Product");
+			Hydro.minicart_Checkout();
+			Hydro.RegaddDeliveryAddress("AccountDetails");
+            Hydro.selectshippingaddress("GroundShipping method");
+            Hydro.clickSubmitbutton_Shippingpage();
+			Hydro.Select_Gift_Code("Giftcard");
+			Hydro.giftCardSubmitOrder();
+            Hydro.Remove_GiftCode();
+            
       
 		} catch (Exception e) {
 
@@ -48,3 +55,4 @@ public class TEST_DGLD_HF_EMEA_RT_028_Create_share_and_Delete_Gift_Registery_For
 	}
 
 }
+
