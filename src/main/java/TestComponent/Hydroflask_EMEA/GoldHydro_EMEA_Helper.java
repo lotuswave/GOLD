@@ -1855,7 +1855,8 @@ public class GoldHydro_EMEA_Helper {
                 if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
                 	Sync.waitElementPresent("css", "input[class='flex-none disabled:opacity-25']");
                 	Common.clickElement("css", "input[class='flex-none disabled:opacity-25']");
-
+                	Sync.waitPageLoad();
+                	Thread.sleep(4000);
                 	Sync.waitElementPresent("xpath", "(//button[contains(@class, 'btn-place-order') and contains(text(), 'Place Order')])[2]");
                     Common.scrollIntoView("xpath", "(//button[contains(@class, 'btn-place-order') and contains(text(), 'Place Order')])[2]");
                     Common.clickElement("xpath", "(//button[contains(@class, 'btn-place-order') and contains(text(), 'Place Order')])[2]");
