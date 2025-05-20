@@ -2984,11 +2984,20 @@ Common.clickElement("xpath", "//span[contains(text(),'Cancel Coupon')]");
 	
 	public void decline_All() {
 		try {
-			Sync.waitElementPresent("id", "truste-consent-required");
-			Common.clickElement("id", "truste-consent-required");
-			System.out.println("Decline all has been clicked");
+			Sync.waitElementPresent("css", "button[class='truste-button truste-manage-btn']");
+			Common.clickElement("css", "button[class='truste-button truste-manage-btn']");
+			Thread.sleep(4000);
+			Common.switchFrames("css", "iframe[title='TrustArc Cookie Consent Manager']");
+			Common.clickElement("css", "span[aria-label='Refuse all Functional Cookies']");
+			Common.clickElement("css", "span[aria-label='Refuse all Advertising Cookies']");
+			Sync.waitElementPresent("css", "button[class='declineAllButtonLower']");
+			Common.clickElement("css", "button[class='declineAllButtonLower']");
+			Thread.sleep(2000);
+			Common.clickElement("css", "button[id='gwt-debug-close_id']");
+			Common.switchToDefault();
 		} catch (Exception e) {
-			Common.clickElement("id", "truste-consent-required");
+			e.printStackTrace();
+			Assert.fail();
 		}
 		
 	}
@@ -14125,10 +14134,9 @@ Common.clickElement("xpath", "//span[text()='Edit']");
 				Sync.waitElementPresent("xpath", "//a[@title='Sign Out']");
 				Common.clickElement("xpath", "//a[@title='Sign Out']");
 				Sync.waitPageLoad();
-				Thread.sleep(5000);
-				String homepage= Common.findElementBy("xpath", "//meta[@content='Hydroflask Current Homepage']").getAttribute("content");
-				System.out.println(homepage);
-				Common.assertionCheckwithReport(homepage.contains("Hydroflask Current Homepage") ,
+				Thread.sleep(4000);
+				System.out.println(Common.getPageTitle());
+				Common.assertionCheckwithReport(Common.getPageTitle().contains("Hydro Flask") ,
 						"validating store logo", "System directs the user to the Homepage",
 						"Sucessfully user navigates to the home page", "Failed to navigate to the homepage");
 			} catch (Exception | Error e) {
@@ -15182,7 +15190,52 @@ Common.clickElement("xpath", "//span[text()='Edit']");
 			
 		}
 	}
+	public String EmailID_from_successpage() {
+		// TODO Auto-generated method stub
+		String Email="";
+		try
+		{
+			 Email=Common.findElement("xpath", "//div[contains(@class,'checkout-success')]//strong").getText().replace("Executed In PRE-PROD Environment", "");
+			System.out.println(Email);
+		}
+		catch(Exception | Error e)
+		{
+			Assert.fail();
+		}
+		return Email;
+		
+	}
+	public void Login_with_Create_Account_Email(String dataSet) {
+		// TODO Auto-generated method stub
+		try {
+			if (Common.getCurrentURL().contains("stage") || Common.getCurrentURL().contains("hydroflask.com/gb/") || Common.getCurrentURL().contains("preprod")) {
+				Sync.waitPageLoad();
+				Common.textBoxInput("id", "email", dataSet);
+			} else {
+				Common.textBoxInput("id", "email", dataSet);
+			}
+			Common.textBoxInput("id", "pass", "Lotuswave@123");
+			Common.clickElement("xpath", "//button[contains(@class,'btn btn-primary')]");
+			Sync.waitPageLoad();
+			Thread.sleep(2000);
+			Common.assertionCheckwithReport(
+					Common.getPageTitle().contains("Home Page") || Common.getPageTitle().contains("Hydro Flask"),
+					"To validate the user lands on Home page after successfull login",
+					"After clicking on the signIn button it should navigate to the Home page",
+					"user Sucessfully navigate to the Home page after clicking on the signIn button",
+					"Failed to signIn and not navigated to the Home page ");
 
+		} catch (Exception e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("To validate the user Navigate to Home page after successfull login",
+					"After clicking on the signin button it should navigate to the Home page",
+					"Unable to navigate the user to the home after clicking on the SignIn button",
+					Common.getscreenShotPathforReport("Failed to signIn and not navigated to the Home page "));
+
+			Assert.fail();
+		}
+
+	}
 }	
 
 

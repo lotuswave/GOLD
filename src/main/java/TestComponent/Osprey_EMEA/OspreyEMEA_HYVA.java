@@ -8225,8 +8225,24 @@ return Number;
 	}
 
 	public void Decline_All() {
-		Common.clickElement("xpath", "//button[@id='truste-consent-required']");
-	}
+			try {
+				Sync.waitElementPresent("css", "button[class='truste-button truste-manage-btn']");
+				Common.clickElement("css", "button[class='truste-button truste-manage-btn']");
+				Thread.sleep(4000);
+				Common.switchFrames("css", "iframe[title='TrustArc Cookie Consent Manager']");
+				Common.clickElement("css", "span[aria-label='Refuse all Functional Cookies']");
+				Common.clickElement("css", "span[aria-label='Refuse all Advertising Cookies']");
+				Sync.waitElementPresent("css", "button[class='declineAllButtonLower']");
+				Common.clickElement("css", "button[class='declineAllButtonLower']");
+				Thread.sleep(2000);
+				Common.clickElement("css", "button[id='gwt-debug-close_id']");
+				Common.switchToDefault();
+			} catch (Exception e) {
+				e.printStackTrace();
+				Assert.fail();
+			}
+			
+		}
 
 	public void Edit_Name(String Dataset) {
 		// TODO Auto-generated method stub
