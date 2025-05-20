@@ -30,7 +30,7 @@ public class TEST_DGLD_HF_EMEA_RT_046_Placeorder_Register_user_multipleproducts_
             Hydro.selectshippingaddress("GroundShipping method");
             Hydro.clickSubmitbutton_Shippingpage();
             Hydro.discountCode("Discount");
-            Hydro.Gift_card("Giftcard");
+            Hydro.Gift_card("Giftcard_Partial_3");
             Hydro.Secure_Payment_details("3d_Secure");
 
 		} catch (Exception e) {

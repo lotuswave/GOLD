@@ -23,6 +23,7 @@ public class TEST_DGLD_HF_EMEA_RT_051_RegisterUser_Checkout_using_GiftCard_and_P
 			Hydro.bottles_headerlinks("Bottles & Drinkware"); 
 			Hydro.Configurable_addtocart_pdp("Product");
 			Hydro.minicart_Checkout();
+			Hydro.RegaddDeliveryAddress("AccountDetails");
             Hydro.selectshippingaddress("GroundShipping method");
             Hydro.clickSubmitbutton_Shippingpage();
             Hydro.Gift_card("Giftcard_Partial_2");
