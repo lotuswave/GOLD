@@ -24,7 +24,7 @@
 <classes>
 <class name="TestExecute.OXO.SmokeTestCases.Test_DGLD_OXO_ST_005_Reset_Password_Validate_search_GuestCheckout_validate_Minicart_and_Login_from_shipping_Page" />
 </classes>
-</test>
+</test> 
 <test name="Test_DGLD_OXO_ST_007_Checkout_With_Different_Billing_and_Different_Shipping_validate_Discount" testid="DQA-4365" priority="P1" description="This test case is used to validate the Checkout with Different Billing and Shipping and Validating with Discount">
 <classes>
 <class name="TestExecute.OXO.SmokeTestCases.Test_DGLD_OXO_ST_007_Checkout_With_Different_Billing_and_Different_Shipping_validate_Discount" />
