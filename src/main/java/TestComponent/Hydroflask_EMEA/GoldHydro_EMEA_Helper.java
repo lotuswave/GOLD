@@ -2251,7 +2251,7 @@ public void FUll_Payment(String dataSet) {
 	public String create_account(String Dataset) {
 		String email="";
 		String Product=data.get(Dataset).get("Products");
-		String Email =data.get(Dataset).get("Email");
+		String Email =Common.genrateRandomEmail(data.get(Dataset).get("Email"));
 		try {
 
 			Sync.waitElementVisible(30, "css", "input[name='firstname']");
@@ -2712,7 +2712,7 @@ Common.clickElement("xpath", "//span[contains(text(),'Cancel Coupon')]");
 			Common.actionsKeyPress(Keys.PAGE_DOWN);
 			Thread.sleep(3000);
 			try {
-				Common.dropdown("id", "shipping-region", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+				Common.textBoxInput("id", "shipping-region",data.get(dataSet).get("Region"));
 			} catch (ElementClickInterceptedException e) {
 				Thread.sleep(3000);
 				Common.dropdown("id", "shipping-region", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
