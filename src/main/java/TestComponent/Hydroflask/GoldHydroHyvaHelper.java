@@ -14199,7 +14199,7 @@ Common.clickElement("xpath", "//span[text()='Edit']");
 			// TODO Auto-generated method stub
 
 		
-			String names = data.get(Dataset).get("collections");		
+			String names = data.get(Dataset).get("prod collections");		
 			String[] Links = names.split(",");
 			int i = 0;
 		
@@ -15132,6 +15132,57 @@ Common.clickElement("xpath", "//span[text()='Edit']");
 		
 
 }
+
+	public void Coolers_LunchBoxes_Validation(String Dataset) {
+		// TODO Auto-generated method stub
+
+		String names = data.get(Dataset).get("Kitchen");
+		String[] Links = names.split(",");
+		int i = 0;
+		try {
+			Thread.sleep(4000);
+			for (i = 0; i < Links.length; i++) {
+				Sync.waitElementPresent("xpath", "//span[normalize-space()='Shop']");
+				Common.clickElement("xpath", "//span[normalize-space()='Shop']");
+				Common.clickElement("xpath", "//span[contains(text(),'Coolers')]");
+				Thread.sleep(3000);
+				Sync.waitElementPresent("xpath",
+						"//a[contains(@href,'cooler')]/span[contains(text(),'" + Links[i] + "')]");
+				Common.clickElement("xpath", "//a[contains(@href,'cooler')]/span[contains(text(),'" + Links[i] + "')]");
+				Sync.waitPageLoad();
+				Thread.sleep(4000);
+				String title = Common.findElement("xpath", "//h1[contains(@class,'title')]").getText();
+				String breadcrumbs = Common.findElement("xpath", "//nav[contains(@class,'breadcrumb')]").getText();
+				System.out.println(title);
+				System.out.println(Links[i]);
+				String products = Common.getText("xpath", "(//div[contains(@class,'flex w-full')]//span)[1]");
+				System.out.println(products);
+				int Number = Integer.parseInt(products);
+				int j = 0;
+				if (Number > j) {
+					Common.assertionCheckwithReport(
+							title.contains(Links[i]) || breadcrumbs.contains(Links[i]) || breadcrumbs.contains(Links[i])
+									|| Common.getCurrentURL().contains("coolers"),
+							"verifying the header link " + Links[i] + "Under Outdoor Packs",
+							"user should navigate to the " + Links[i] + " page",
+							"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
+				} else {
+					ExtenantReportUtils.addFailedLog("validating the the products in the plp ",
+							"User should able to see the products in plp", "unable to see the products in the PLP",
+							Common.getscreenShot("Failed to see products in PLP"));
+					Assert.fail();
+				}
+
+			}
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("verifying the header link for coolers ",
+					"user should navigate to the coolers page", "user Unable to Navigated to the coolers",
+					Common.getscreenShot(" Failed to Navigated to the coolers"));
+			Assert.fail();
+		}
+
+	}
 }	
 
 

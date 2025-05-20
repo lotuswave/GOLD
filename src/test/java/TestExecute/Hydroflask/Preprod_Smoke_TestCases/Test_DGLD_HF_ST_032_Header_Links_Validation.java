@@ -20,6 +20,7 @@ public class Test_DGLD_HF_ST_032_Header_Links_Validation {
 
 		try {
 			Hydro.verifingHomePage();
+			if(Common.getCurrentURL().contains("https://mcloud-na-preprod.hydroflask.com/")) {
 			Hydro.New_Arrivals_validation("New Arrivals");
 		    Hydro.travel_Bottles_validation("travel Bottles");
 		    Hydro.Travel_Tumbler_validation("Travel Tumbler");			
@@ -31,7 +32,17 @@ public class Test_DGLD_HF_ST_032_Header_Links_Validation {
             Hydro.Collections_validation("Collections");        
 			Hydro.Explore_Validation("Explore Links");
 //			Hydro.Customize_validation("Customize");
-			
+			}else {
+			    Hydro.New_Color_Destination("Colors");
+	           	Hydro.bottles_validation("Bottle and drinkware");
+	        	Hydro.Coolers_LunchBoxes_Validation("Coolers"); 
+	         	Hydro.kitchenware_validation("kitchenware");
+	      		Hydro.Accessories_validation("Accessories");
+	            Hydro.featured_validation("Featured");
+	            Hydro.Collections_validation("Collections");
+				Hydro.Explore_Validation("Explore Links");
+//				Hydro.Customize_validation("Customize");
+			}
 			 // Hydro.New_Color_Destination("Colors");
 		     //  Hydro.featured_validation("Featured"); 
 						
