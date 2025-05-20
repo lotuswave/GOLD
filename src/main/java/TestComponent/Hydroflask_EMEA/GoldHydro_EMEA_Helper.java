@@ -6164,30 +6164,28 @@ catch(Exception | Error e)
 
 		try {
 			Sync.waitPageLoad();
-			Thread.sleep(4000);
-			List<WebElement> sub_category = Common.findElements("xpath",
-					"//div[@class='segmented-categories-item-image']");
-			System.out.println(sub_category.size());
-			for (int i = 0; i < sub_category.size() - 3; i++) {
-				List<WebElement> Image = Common.findElements("xpath", "//div[contains(@class,'segmented-categories-item-n')]//span");
-				Sync.waitPageLoad();
-				Sync.waitImplicit(10);
-//			Thread.sleep(4000);
+			Thread.sleep(2000);
+			List<WebElement> sub_category = Common.findElements("css",
+					"div[class='segmented-categories-item-image']");
+			System.out.println("Total sub-categories found: "+sub_category.size());
+			for (int i = 0; i < sub_category.size(); i++) {
+				List<WebElement> Image = Common.findElements("css", "div[class*='segmented-categories-item-n'] span");
 				product = Image.get(i).getText();
 				System.out.println(product);
-				Thread.sleep(3000);
-				String Product=Common.findElement("xpath", "//div[@class='text-sm']//span").getText().trim();
+				String Product=Common.findElement("css", "div[class='text-sm'] span").getText().trim();
 				System.out.println(Product);
 				Image.get(i).click();
+				Sync.waitPageLoad();
 				Thread.sleep(4000);
-				String Products=Common.findElement("xpath", "//div[@class='text-sm']//span").getText().trim();
+				String Products=Common.findElement("css", "div[class='text-sm'] span").getText().trim();
 				System.out.println(Products);
-				if(Products!=Product)
+				if(!Products.equals("0"))
 				{
-					ExtenantReportUtils.addPassLog("Validating" + product + "Page  ",
+					Common.assertionCheckwithReport(!Products.equals("0"),
+							"Validating" + product + "Page  ",
 							"click the sub category should navigate to the  " + product + "Page",
 							"successfully page navigating to " + product + "PAGE",
-							Common.getscreenShotPathforReport(product));
+							"unable to load the  Dealer Central page");
 				}
 				else {
 					Assert.fail();
