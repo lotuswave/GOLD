@@ -15307,9 +15307,61 @@ Common.clickElement("xpath", "//span[text()='Edit']");
 			AssertJUnit.fail();
 		}
 	}
-  }
 
 
+public void Change_Password_and_Email(String Dataset) {
+	// TODO Auto-generated method stub
+
+		String email = data.get(Dataset).get("UserName");
+		String pass = data.get(Dataset).get("Password");
+	try {
+		
+		Sync.waitElementPresent("xpath", "//button[@id='customer-menu']");
+		Common.clickElement("xpath", "//button[@id='customer-menu']");
+		Sync.waitElementPresent("xpath", "//a[@title='My Account']");
+		Common.clickElement("xpath", "//a[@title='My Account']");
+		Thread.sleep(3000);
+		
+		Common.clickElement("xpath", "//span[text()='Edit']");
+		
+		Sync.waitElementClickable(30, "id", "change-email");
+		Common.clickElement("id", "change-email");
+		
+		Sync.waitElementPresent("id", "email");
+		Common.textBoxInput("id", "email",email);
+		
+		Sync.waitElementClickable(30, "id", "change-password");
+		Common.clickElement("id", "change-password");	
+
+		Common.textBoxInput("name", "current_password",pass); 
+
+		Common.textBoxInput("id","password",pass);
+		
+		Common.textBoxInput("id", "password-confirmation",data.get(Dataset).get("Confirm Password"));
+		Common.clickElement("xpath", "//span[text()='Save Account Information']");
+		Sync.waitPageLoad();
+		Thread.sleep(3000);
+		String successmessage = Common.findElement("xpath", "//div[@ui-id='message-success']").getText();
+		Common.assertionCheckwithReport(
+				successmessage.contains("You saved the account information.")
+						|| Common.getPageTitle().contains("Customer Login"),
+				"verifying the Success message for the Change email",
+				"user should get the success message and navigate back to the Login page",
+				"Successfully user gets the success message and navigated to the Login page",
+				"Failed to get the success message and unable to navigate to the login page");
+
+	} catch (Exception e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("To validate the user Navigate to My Account page after successfull login",
+				"After clicking on the signin button it should navigate to the My Account page",
+				"Unable to navigate the user to the My Account after clicking on the SignIn button",
+				Common.getscreenShotPathforReport("Failed to signIn and not navigated to the My Account page "));
+
+		Assert.fail();
+
+	}
+}
+}
 
 
 
