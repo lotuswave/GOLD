@@ -1647,8 +1647,8 @@ public class GoldHydro_EMEA_Helper {
 	            } else {
 	                int savedCard = Common.findElements("xpath", "//div[@class='mb-4' and @x-show]").size();
 	                if (savedCard > 0) {
-	                    Sync.waitElementPresent("xpath", "(//input[@class='checkbox mr-4'])[2]");
-	                    Common.clickElement("xpath", "(//input[@class='checkbox mr-4'])[2]");
+	                	Sync.waitElementPresent("xpath", "(//div[@class='field choice']//input)[3]");
+	                    Common.javascriptclickElement("xpath", "(//div[@class='field choice']//input)[3]");
 	                }
 
 	                Sync.waitElementPresent("css", "iframe[title='Secure payment input frame']");
@@ -15237,6 +15237,36 @@ Common.clickElement("xpath", "//span[text()='Edit']");
 		}
 
 	}
-}	
+	
+	public void Verify_ShippingAmount_Lessthan_Or_Equal_30() {
+		// TODO Auto-generated method stub
+		try {
+		
+				String Shipping_Method = Common.getText("xpath", "(//span[@data-label='Incl. Tax'])[3]");
+				System.out.println(Shipping_Method);
+				Common.assertionCheckwithReport(Shipping_Method.equals("£5.00"),
+						"validating Shipping amount is displayed $5",
+						"Shippping method ammount should display $5",
+						"Unable to display $5 in shipping page",
+						"Failed to  display $5 in shipping page ");
+				
+			
+		}
+	 catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog(
+				"validating Shipping amount is displayed $5",
+				"Shippping method ammount should display $5",
+				"Unable to display $5 in shipping page",
+				"Failed to  display $5 in shipping page ");
+		AssertJUnit.fail();
+	   }
+	 }
+  }
+
+
+
+
+
 
 
