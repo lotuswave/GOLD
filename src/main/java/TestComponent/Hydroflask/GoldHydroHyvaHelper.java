@@ -454,8 +454,8 @@ public class GoldHydroHyvaHelper {
 			Sync.waitElementPresent(30,"css", "span[x-text='totalCartAmount']");
 			String minicart = Common.findElement("css", "span[x-text='totalCartAmount']").getText();
 		
-			Sync.waitElementPresent(30, "xpath", "//a[contains(text(),'Checkout')]");
-			Common.clickElement("xpath", "//a[contains(text(),'Checkout')]");
+			Sync.waitElementPresent(30, "xpath", "//button[contains(text(),'Checkout')] | //a[contains(text(),'Checkout')]");
+			Common.clickElement("xpath", "//button[contains(text(),'Checkout')] | //a[contains(text(),'Checkout')]");
 			Sync.waitPageLoad();
 		Thread.sleep(2000);
 		try {
@@ -466,10 +466,10 @@ public class GoldHydroHyvaHelper {
 		}
 		catch (Exception | Error e) {
 			Thread.sleep(5000);
-			int Checkout_button= Common.findElements("xpath", "//a[contains(text(),'Checkout')]").size();
+			int Checkout_button= Common.findElements("xpath", "//button[contains(text(),'Checkout')] | //a[contains(text(),'Checkout')]").size();
 			if(Checkout_button>0) {
 	
-			Common.javascriptclickElement("xpath", "//a[contains(text(),'Checkout')]");
+			Common.javascriptclickElement("xpath", "//button[contains(text(),'Checkout')] | //a[contains(text(),'Checkout')]");
 			Thread.sleep(5000);
 			Common.assertionCheckwithReport(Common.getCurrentURL().contains("checkout"),
 					"validating the navigation to the shipping page when we click on the checkout",
@@ -3539,7 +3539,7 @@ System.out.println(MyFavorites);
 //				Common.clickElement("xpath", "//input[@id='shipping-save']");
 
 				Thread.sleep(2000);
-				Common.clickElement("css", "button[class='checkout-address-form__buttons-save btn btn-primary w-full os:uppercase']");
+				Common.clickElement("xpath", "//button[@class='btn btn-primary w-full os:uppercase']");
 				 
 			} catch (Exception | Error e) {
 				e.printStackTrace();
@@ -9496,29 +9496,32 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 		String Symbol="$";
 		String expectedResult = "It should opens textbox input to enter discount.";
 		try {
-			Sync.waitElementPresent("xpath", "//button[contains(text(),'Add Discount Code')]");
-			Common.clickElement("xpath", "//button[contains(text(),'Add Discount Code')]");
+			Sync.waitElementPresent("xpath", "//h3[contains(text(),'Add Discount Code')]");
+			Common.clickElement("xpath", "//h3[contains(text(),'Add Discount Code')]");
 
-			Sync.waitElementPresent("xpath", "//input[@name='coupon_code']");
+			Sync.waitElementPresent("xpath", "//input[@id='discount-code']");
 			if (Common.getCurrentURL().contains("preprod")) {
-				Common.textBoxInput("xpath", "//input[@name='coupon_code']", data.get(Dataset).get("Discountcode"));
+				Common.textBoxInput("xpath", "//input[@id='discount-code']", data.get(Dataset).get("Discountcode"));
 			} else {
-				Common.textBoxInput("xpath", "//input[@name='coupon_code']", data.get(Dataset).get("prodDiscountcode"));
+				Common.textBoxInput("xpath", "//input[@id='discount-code']", data.get(Dataset).get("prodDiscountcode"));
 			}
-			int size = Common.findElements("xpath", "//input[@name='coupon_code']").size();
+			int size = Common.findElements("xpath", "//input[@id='discount-code']").size();
 			Common.assertionCheckwithReport(size > 0, "verifying the Discount Code label", expectedResult,
 					"Successfully open the discount input box", "User unable enter Discount Code");
-			Sync.waitElementClickable("xpath", "//button[@value='Apply Discount']");
-			Common.clickElement("xpath", "//button[@value='Apply Discount']");
+			Sync.waitElementClickable("xpath", "(//button[contains(@class, 'btn btn-primary')])[1]");
+			Common.clickElement("xpath", "(//button[contains(@class, 'btn btn-primary')])[1]");
 			Sync.waitPageLoad();
 			expectedResult = "It should apply discount on your price.If user enters invalid promocode it should display coupon code is not valid message.";
 			if (Common.getCurrentURL().contains("preprod")) {
+				
 				String discountcodemsg = Common.getText("xpath", "//div[@class='container']//div[@class='relative flex w-full']/span");
-				Common.assertionCheckwithReport(discountcodemsg.contains("You used coupon code"), "verifying pomocode",
+				System.out.println(discountcodemsg);
+				Common.assertionCheckwithReport(discountcodemsg.contains("Your coupon was successfully applied."), "verifying pomocode",
 						expectedResult, "promotion code working as expected", "Promation code is not applied");
 			} else {
 				String discountcodemsg = Common.getText("xpath", "//div[@class='container']//div[@class='relative flex w-full']/span");
-				Common.assertionCheckwithReport(discountcodemsg.contains("You used coupon code"), "verifying pomocode",
+				System.out.println(discountcodemsg);
+				Common.assertionCheckwithReport(discountcodemsg.contains("Your coupon was successfully applied."), "verifying pomocode",
 						expectedResult, "promotion code working as expected", "Promation code is not applied");
 			}
 		} catch (Exception | Error e) {

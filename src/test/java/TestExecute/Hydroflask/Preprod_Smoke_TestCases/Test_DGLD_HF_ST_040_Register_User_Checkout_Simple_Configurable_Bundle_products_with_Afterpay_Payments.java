@@ -31,7 +31,14 @@ public class Test_DGLD_HF_ST_040_Register_User_Checkout_Simple_Configurable_Bund
 			Hydro.minicart_Checkout();
 			Hydro.RegaddDeliveryAddress("AccountDetails");
 			Hydro.selectshippingaddress("GroundShipping method");
+			if(Common.getCurrentURL().contains("https://mcloud-na-preprod.hydroflask.com/")) {
 			Hydro.After_Pay_payment("Afterpay");
+			}else {
+		            Hydro.selectshippingaddress("2 Day method");
+		            Hydro.clickSubmitbutton_Shippingpage();
+					Hydro.After_Pay_payment("Afterpay");
+					Hydro.Kalrna_Payment("Klarna Visa Payment");
+			}
 		} catch (Exception e) {
 
 			Assert.fail(e.getMessage(), e);
@@ -40,7 +47,7 @@ public class Test_DGLD_HF_ST_040_Register_User_Checkout_Simple_Configurable_Bund
 
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+		//Common.closeAll();
 
 	}
 
