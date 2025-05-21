@@ -15279,7 +15279,7 @@ Common.clickElement("xpath", "//span[text()='Edit']");
 			Thread.sleep(2000);
 			List<WebElement> Card_Value = Common.findElements("css","label[class*='amcard-label-block -price']");
 			System.out.println(Card_Value.size());
-			for (int i = 0; i < Card_Value.size()-5; i++) {
+			for (int i = 0; i < Card_Value.size(); i++) {
 				List<WebElement> Different_Amount = Common.findElements("css","label[class*='amcard-label-block -price'] span");
 				Giftcardamount = Different_Amount.get(i).getText();
 				System.out.println(Giftcardamount);
