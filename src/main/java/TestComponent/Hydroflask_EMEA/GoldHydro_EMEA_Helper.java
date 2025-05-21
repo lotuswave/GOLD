@@ -1645,11 +1645,11 @@ public class GoldHydro_EMEA_Helper {
 	                }
 
 	            } else {
-	                int savedCard = Common.findElements("xpath", "//div[@class='mb-4' and @x-show]").size();
-	                if (savedCard > 0) {
-	                	Sync.waitElementPresent("xpath", "(//div[@class='field choice']//input)[3]");
-	                    Common.javascriptclickElement("xpath", "(//div[@class='field choice']//input)[3]");
-	                }
+	            	 int savedCard = Common.findElements("xpath", "//div[@class='mb-4' and @x-show]").size();
+		                if (savedCard > 0) {
+		                    Sync.waitElementPresent("xpath", "(//input[@class='checkbox mr-4'])[2]");
+		                    Common.clickElement("xpath", "(//input[@class='checkbox mr-4'])[2]");
+		                }
 
 	                Sync.waitElementPresent("css", "iframe[title='Secure payment input frame']");
 	                Common.switchFrames("css", "iframe[title='Secure payment input frame']");
@@ -1669,8 +1669,8 @@ public class GoldHydro_EMEA_Helper {
 
 	                Common.actionsKeyPress(Keys.ARROW_DOWN);
 	                Common.switchToDefault();
-	                if (Common.findElements("xpath","//div[@class='flex items-center']//input[@type='checkbox']").size()>0) {
-	                	Common.clickElement("xpath","//div[@class='flex items-center']//input[@type='checkbox']");
+	                if (Common.findElements("xpath","(//div[@class='field choice']//input)[3]").size()>0) {
+	                	Common.clickElement("xpath","(//div[@class='field choice']//input)[3]");
 	                }
 
 	                if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
