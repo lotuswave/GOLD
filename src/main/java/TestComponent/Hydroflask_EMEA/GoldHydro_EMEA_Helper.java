@@ -4019,6 +4019,7 @@ if(Common.getCurrentURL().contains("stage") ||Common.getCurrentURL().contains("p
    Thread.sleep(4000);
    Common.clickElement("xpath", "//input[@id='payment-method-free']");
    Thread.sleep(4000);
+   Common.clickElement("xpath", "(//input[contains(@id,'agreement')])[3]");
    Common.clickElement("xpath", "(//button[contains(text(),'Place Order')])[2]");
 		//Common.refreshpage();
 	Thread.sleep(3000);
