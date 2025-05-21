@@ -13667,10 +13667,12 @@ Common.clickElement("xpath", "//span[text()='Edit']");
             }
 			
 			if (Common.getText("xpath", "//div[@id='payment-method-view-paypal_express']//p[2]").contains("Paypal")||Common.getCurrentURL().contains("preprod")) {
+				Sync.waitElementPresent("css", "input[class='flex-none disabled:opacity-25']");
+            	Common.clickElement("css", "input[class='flex-none disabled:opacity-25']");
+            	Sync.waitPageLoad();
+            	Thread.sleep(4000);
 				Common.scrollIntoView("xpath", "(//button[contains(@class,'btn-place-order')])[2]");
 				// Sync.waitElementPresent("xpath", "//button[@value='Place Order']");
-				
-				Thread.sleep(8000);
 				Common.clickElement("xpath", "(//button[contains(@class,'btn-place-order')])[2]");
 			}
 				try {
@@ -13706,41 +13708,41 @@ Common.clickElement("xpath", "//span[text()='Edit']");
 		return order;
 	}
 
-		public void Paypal_Address_Verification(String Dataset) {
-			// TODO Auto-generated method stub
+	public void Paypal_Address_Verification(String Dataset) {
+		// TODO Auto-generated method stub
 
-			try {
-				Sync.waitElementPresent("xpath", "//p[@data-testid='ship-to-address']");
+		try {
+			Sync.waitElementPresent("xpath", "//p[@data-testid='ship-to-address']");
+			Thread.sleep(4000);
+			String address = Common.findElement("xpath", "//p[@data-testid='ship-to-address']").getText();
+			if (address.contains("united states") || address.contains("844")) {
 				Thread.sleep(4000);
-				String address = Common.findElement("xpath", "//p[@data-testid='ship-to-address']").getText();
-				if (address.contains("united states")) {
-					Thread.sleep(4000);
-					Sync.waitElementPresent("xpath", "//button[@data-testid='change-shipping']");
-					Common.clickElement("xpath", "//button[@data-testid='change-shipping']");
-//								Common.clickElement("xpath", "//select[@data-testid='shipping-dropdown']");
-					Common.dropdown("xpath", "//select[@data-testid='shipping-dropdown']", SelectBy.TEXT,
-							data.get(Dataset).get("Street"));
-					Thread.sleep(3000);
-					String Ukaddress = Common.findElement("xpath", "//p[@data-testid='ship-to-address']").getText();
-					System.out.println(Ukaddress);
-					String UK = data.get(Dataset).get("Street").replace("QA TEST - ", "");
-					System.out.println(UK);
-					Common.assertionCheckwithReport(Ukaddress.contains(UK),
-							"validating the address selection from the drop down",
-							"Address should be select from the dropdown ",
-							"Sucessfully address has been selected from the dropdown",
-							"Failed to select the Address from the dropdown");
+				Sync.waitElementPresent("xpath", "//button[@data-testid='change-shipping']");
+				Common.clickElement("xpath", "//button[@data-testid='change-shipping']");
+//							Common.clickElement("xpath", "//select[@data-testid='shipping-dropdown']");
+				Common.dropdown("xpath", "//select[@data-testid='shipping-dropdown']", SelectBy.TEXT,
+						data.get(Dataset).get("Street"));
+				Thread.sleep(3000);
+				String Ukaddress = Common.findElement("xpath", "//p[@data-testid='ship-to-address']").getText();
+				System.out.println(Ukaddress);
+				String UK = data.get(Dataset).get("Street").replace("Qa Test - ", "");
+				System.out.println(UK);
+				Common.assertionCheckwithReport(Ukaddress.contains(UK),
+						"validating the address selection from the drop down",
+						"Address should be select from the dropdown ",
+						"Sucessfully address has been selected from the dropdown",
+						"Failed to select the Address from the dropdown");
 
-				}
-			} catch (Exception | Error e) {
-				e.printStackTrace();
-				ExtenantReportUtils.addFailedLog("validating the address selection from the drop down",
-						"Address should be select from the dropdown ", "Unable to select the Address from the dropdown",
-						Common.getscreenShotPathforReport("Failed to select the Address from the dropdown"));
-				Assert.fail();
 			}
-
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the address selection from the drop down",
+					"Address should be select from the dropdown ", "Unable to select the Address from the dropdown",
+					Common.getscreenShotPathforReport("Failed to select the Address from the dropdown"));
+			Assert.fail();
 		}
+
+	}
 
 		public void deleteProduct_shoppingcart() {
 		// TODO Auto-generated method stub
