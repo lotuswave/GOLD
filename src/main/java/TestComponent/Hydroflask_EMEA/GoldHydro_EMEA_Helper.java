@@ -599,14 +599,14 @@ public class GoldHydro_EMEA_Helper {
 				System.out.println(data.get(dataSet).get("City"));
 
 					 Thread.sleep(4000);
-	                 Common.scrollIntoView("xpath", "//select[@id='billing-region']");
-	                 Common.dropdown("xpath", "//select[@id='billing-region']",Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+	                 Common.scrollIntoView("css", "input[id='billing-region']");
+	                 Common.textBoxInput("css", "input[id='billing-region']", data.get(dataSet).get("Region"));
 	                 Thread.sleep(3000);
-	                 String Shippingvalue = Common.findElement("xpath", "//select[@id='billing-region']")
-	                         .getAttribute("value");
+//	                 String Shippingvalue = Common.findElement("xpath", "//select[@id='billing-region']")
+//	                         .getAttribute("value");
 //	                 Shipping=Common.findElement("xpath", "//option[@value='"+Shippingvalue+"']").getAttribute("data-title");
 //		              System.out.println(Shipping);
-	                 System.out.println(Shippingvalue);
+//	                 System.out.println(Shippingvalue);
 				Thread.sleep(2000);
 				Common.textBoxInput("xpath", "//input[@name='postcode']",
 						data.get(dataSet).get("postcode"));
@@ -629,8 +629,6 @@ public class GoldHydro_EMEA_Helper {
 			}
 			return Shipping;
 		}
-
-
 
 	public void addDeliveryAddress_Gustuser(String dataSet) throws Exception {
 
@@ -15262,6 +15260,25 @@ Common.clickElement("xpath", "//span[text()='Edit']");
 		AssertJUnit.fail();
 	   }
 	 }
+
+	public void search_Gift_Card() {
+		try {
+			Common.clickElement("id", "menu-search-icon");
+			boolean isSearchOpen = Common.findElement("id", "menu-search-icon").getAttribute("aria-expanded")
+					.contains("true");
+			Common.assertionCheckwithReport(isSearchOpen, "Search functionality validation",
+					"User should be able to click the search button", "Search bar expanded successfully",
+					"Failed to open the search bar");
+			Common.textBoxInput("id", "autocomplete-0-input", "Giftcard");
+			Common.actionsKeyPress(Keys.ENTER);
+			Sync.waitElementPresent("css", "img[alt='Hydro Flask Gift Card']");
+			Common.clickElement("css", "img[alt='Hydro Flask Gift Card']");
+		}
+		catch(Exception |Error e) {
+			
+		}
+		
+	}
   }
 
 
