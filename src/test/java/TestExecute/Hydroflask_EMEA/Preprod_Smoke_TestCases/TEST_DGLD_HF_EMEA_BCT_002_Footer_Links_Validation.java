@@ -34,7 +34,7 @@ public class TEST_DGLD_HF_EMEA_BCT_002_Footer_Links_Validation {
 
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 

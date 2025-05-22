@@ -11580,14 +11580,15 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 	public void Carrers() {
 		try {
 			Sync.waitElementPresent(30, "xpath", "//div[contains(@class,'footer-menu')]//a[contains(text(),'Careers')]");
-			Thread.sleep(3000);
 			Common.findElement("xpath", "//div[contains(@class,'footer-menu')]//a[contains(text(),'Careers')]");
 			Common.clickElement("xpath", "//div[contains(@class,'footer-menu')]//a[contains(text(),'Careers')]");
 			Thread.sleep(3000);
+			Common.switchToSecondTab();
 			Common.assertionCheckwithReport(Common.getPageTitle().contains("Careers | Helen of Troy"),
 					"validating the links navigation from footer Links",
 					"After Clicking on carrers it should navigate to the page",
 					"Sucessfully Navigated to thecarrers Link", "Unable to Navigated to the Link");
+			Common.switchToFirstTab();
 		}
 
 		catch (Exception | Error e) {
