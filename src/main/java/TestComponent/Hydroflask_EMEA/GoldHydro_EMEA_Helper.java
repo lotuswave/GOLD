@@ -3672,7 +3672,7 @@ System.out.println(MyFavorites);
 		try {
 			Sync.waitPageLoad();
 			Common.textBoxInput("id", "email", Dataset);
-			Common.textBoxInput("id", "pass", "Hydro@123");
+			Common.textBoxInput("id", "pass", "Lotuswave@1234");
 			Common.clickElement("xpath", "//span[text()='Sign In']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
@@ -3693,6 +3693,7 @@ System.out.println(MyFavorites);
 
 		}
 	}
+
 
 	public void Prodeler_Application_Page(String dataSet) {
 		// TODO Auto-generated method stub
@@ -12755,6 +12756,7 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 	public String change_Email(String Dataset) {
 		// TODO Auto-generated method stub
 		String newemail = "";
+		String email=Common.genrateRandomEmail(data.get(Dataset).get("Email"));
 
 		try {
 			
@@ -12763,7 +12765,7 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 			Sync.waitElementClickable(30, "id", "change-email");
 			Common.clickElement("id", "change-email");
 			Common.textBoxInputClear("xpath", "(//input[@name='email'])[1]");
-			Common.textBoxInputAndVerify("xpath", "(//input[@name='email'])[1]", Utils.getEmailid());
+			Common.textBoxInputAndVerify("xpath", "(//input[@name='email'])[1]", email);
 			 newemail = Common.findElement("xpath", "(//input[@name='email'])[1]").getAttribute("value");
 			Common.textBoxInput("xpath", "//input[@name='current_password']",
 					data.get(Dataset).get("Confirm Password"));
@@ -12800,7 +12802,7 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 		}
 		return newemail;
 	}
-
+	
 	public void Change_to_Existingemail(String newemail) {
 		// TODO Auto-generated method stub
 		try {
@@ -12811,7 +12813,7 @@ Common.clickElement("xpath", "//span[text()='Edit']");
 			Common.clickElement("id", "change-email");
 			Common.textBoxInputClear("xpath", "(//input[@name='email'])[1]");
 			Common.textBoxInputAndVerify("xpath", "(//input[@name='email'])[1]", newemail);
-			Common.textBoxInput("xpath", "//input[@name='current_password']", "Hydro@123");
+			Common.textBoxInput("xpath", "//input[@name='current_password']", "Lotuswave@1234");
 			Common.clickElement("xpath", "//span[text()='Save Account Information']");
 			Sync.waitPageLoad();
 			Thread.sleep(1000);
@@ -12825,7 +12827,7 @@ Common.clickElement("xpath", "//span[text()='Edit']");
 					"Failed to get the success message and unable to navigate to the login page");
 			Sync.waitPageLoad();
 			Common.textBoxInput("id", "email", newemail);
-			Common.textBoxInput("id", "pass", "Hydro@123");
+			Common.textBoxInput("id", "pass", "Lotuswave@1234");
 			Common.clickElement("xpath", "//span[text()='Sign In']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
@@ -12845,6 +12847,7 @@ Common.clickElement("xpath", "//span[text()='Edit']");
 		}
 
 	}
+
 
 	public void MyFavorites_Guestuser(String Dataset) {
 		// TODO Auto-generated method stub
