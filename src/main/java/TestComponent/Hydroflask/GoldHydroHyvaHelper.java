@@ -12750,6 +12750,7 @@ public void Explore_Validation(String Dataset) {
 	public String change_Email(String Dataset) {
 		// TODO Auto-generated method stub
 		String newemail = "";
+		String Email=Common.genrateRandomEmail("hydroflaskqa@gmail.com");
 
 		try {
 			
@@ -12758,7 +12759,7 @@ public void Explore_Validation(String Dataset) {
 			Sync.waitElementClickable(30, "id", "change-email");
 			Common.clickElement("id", "change-email");
 			Common.textBoxInputClear("xpath", "(//input[@name='email'])[1]");
-			Common.textBoxInputAndVerify("xpath", "(//input[@name='email'])[1]", Utils.getEmailid());
+			Common.textBoxInputAndVerify("xpath", "(//input[@name='email'])[1]",Email);
 			 newemail = Common.findElement("xpath", "(//input[@name='email'])[1]").getAttribute("value");
 			Common.textBoxInput("xpath", "//input[@name='current_password']",
 					data.get(Dataset).get("Confirm Password"));
