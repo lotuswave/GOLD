@@ -16370,6 +16370,32 @@ public void deleteProduct_shoppingcart() {
 		
 	}
 
+	public void reviews_colorcount_banner_Ribbon() {
+		// TODO Auto-generated method stub
+		try
+		{
+			int Reviews=Common.findElements("css", "div[class*='yotpo-reviews-star-ratings']").size();
+			int colorcount=Common.findElements("css", "div[class*='flex-shrink']").size();
+			int ribbon=Common.findElements("css","span[class*='ribbon-bg']").size();
+			int promobanner=Common.findElements("css", "div[class='hero-container']").size();
+			Common.assertionCheckwithReport(Reviews>0 && colorcount>0 && ribbon>0 && promobanner>0 ,
+					"verifying the products reviews color count ribbon and promo banner on the PLP page  ",
+					"user should able to see the products reviews color count ribbon and promo banner on the PLP page",
+					"user successfully see the products reviews color count ribbon and promo banner on the PLP page", "Failed to see the products reviews color count ribbon and promo banner on the PLP page");
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("verifying the products reviews color count ribbon and promo banner on the PLP page  ",
+					"user should able to see the products reviews color count ribbon and promo banner on the PLP page",
+					"user unable to see the products reviews color count ribbon and promo banner on the PLP page",
+					Common.getscreenShot("Failed to see the products reviews color count ribbon and promo banner on the PLP page"));
+			Assert.fail();
+		}
+		
+	}
+
 	
 }
 
