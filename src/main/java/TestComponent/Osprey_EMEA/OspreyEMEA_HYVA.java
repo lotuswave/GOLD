@@ -16265,6 +16265,66 @@ public void deleteProduct_shoppingcart() {
 		
 	}
 
+	public void chain_Act_Access_Cookie() {
+		// TODO Auto-generated method stub
+		String ChainAct="UK Modern Slavery Act Statement";
+		String cookie="Cookie Preferences";
+		String AMG="AMG Declaration";
+		try
+		{
+			Sync.waitElementPresent("css", "a[title='" + ChainAct +"']");
+			Common.clickElement("css", "a[title='" + ChainAct +"']");
+			Sync.waitPageLoad();
+			Thread.sleep(2000);
+			Common.switchWindows();
+			Common.assertionCheckwithReport(Common.getCurrentURL().contains("anti-human-trafficking"), "validating the chain act link on the footer links",
+					"After clicking on the link it should be navigate to the act statement", "Sucessfully Navigated to the act statement page ",
+					"failed to navigate to the act statement page");
+			Common.closeCurrentWindow();
+			Common.switchToFirstTab();
+			Thread.sleep(2000);
+			Sync.waitElementPresent("css", "a[title='" + AMG +"']");
+			Common.clickElement("css", "a[title='" + AMG +"']");
+			Sync.waitPageLoad();
+			Thread.sleep(2000);
+			Common.switchWindows();
+			Common.assertionCheckwithReport(Common.getCurrentURL().contains("amg-declaration"), "validating the amg-declaration link on the footer links",
+					"After clicking on the link it should be navigate to the amg-declaration", "Sucessfully Navigated to the amg-declaration page ",
+					"failed to navigate to the amg-declaration page");
+			Common.closeCurrentWindow();
+			Common.switchToFirstTab();
+			Thread.sleep(2000);
+			Sync.waitElementPresent("css", "a[title*='Essential Accessibility']");
+			Common.clickElement("css", "a[title*='Essential Accessibility']");
+			Sync.waitPageLoad();
+			Thread.sleep(2000);
+			Common.assertionCheckwithReport(Common.getCurrentURL().contains("levelaccess"), "validating the levelaccess link on the footer links",
+					"After clicking on the link it should be navigate to the levelaccess", "Sucessfully Navigated to the levelaccess page ",
+					"failed to navigate to the levelaccess page");
+			Common.navigateBack();
+			Sync.waitElementPresent("xpath", "//a[text()='Cookie Preferences']");
+			Common.clickElement("xpath", "//a[text()='Cookie Preferences']");
+			Thread.sleep(4000);
+			Common.switchFrames("xpath", "//iframe[@class='truste_popframe']");
+			String logo=Common.findElement("xpath", "//img[@alt='Osprey Europe Logo']").getAttribute("alt");
+			Common.assertionCheckwithReport(logo.contains("Osprey Europe Logo"), "validating the Cookie Preferences on the footer links",
+					"After clicking on the Cookie Preferences Popup should be open", "Sucessfully Cookie Preferences popup has been opened",
+					"failed to open the Cookie Preferences popup after clicking from the fotter");
+			Common.switchToDefault();
+			Common.clickElement("css", "img[class='truste-close-button-img']");
+			
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the links from the footer links",
+					"User should able to navigate the links", "unable to navigate the links from the footer ", Common.getscreenShot("Failed to navigate to the selected links from the footer"));
+			Assert.fail();
+		}
+		
+	}
+
 	
 }
 

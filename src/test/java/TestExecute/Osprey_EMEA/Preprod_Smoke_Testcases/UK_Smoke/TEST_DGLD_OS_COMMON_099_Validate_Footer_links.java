@@ -26,6 +26,7 @@ public class TEST_DGLD_OS_COMMON_099_Validate_Footer_links {
         Osprey_ReEu.Footer_Links_Resources("Footer");			//Footer,Sw Footer,es Footer,It Footer,fr Footer
         Osprey_ReEu.Footer_Links_BrandTeam("Footer");  			//Footer,Sw Footer,es Footer,It Footer,fr Footer
         Osprey_ReEu.Footer_Links_Repair_And_Replacement("Footer");    //recaptcha issue while login
+        Osprey_ReEu.chain_Act_Access_Cookie();
        
         
 		} catch (Exception e) {
