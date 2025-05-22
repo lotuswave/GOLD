@@ -3,6 +3,9 @@
     <listeners>
         <listener class-name="Utilities.TestListener"/>
     </listeners>
+    
+     
+     
 
     <test name="Test_DGLD_DB_E2E_002_Registeruser_checkout_with_MultipleItems_standard_Shiping_with_Aerosal_Product_Gift_code_Partial_Redeem_CCMaster_PO_Box_address" testid="DQA3707" priority="P1" description="This script will cover Reg with Aerosal Product Gift code Partial Redeem CCMaster PO Box address">
         <classes>
@@ -16,11 +19,13 @@
         </classes>
     </test>
     
-    <test name="Test_DGLD_DB_E2E_004_Reg  Non_aerosal bundleItem Aerosalproduct config StandardShipping differentbilling and ShippingAddress Discount Giftcode PartialRedeem CC Discover">
+   <test name="Test_DGLD_DB_E2E_004_Reg  Non_aerosal bundleItem Aerosalproduct config StandardShipping differentbilling and ShippingAddress Discount Giftcode PartialRedeem CC Discover" testid="DQA-3710" priority="P1" description="This script will cover Registeruser_checkout_with_Non_aerosal_bundle_Aerosalproduct_config_Standard_diff_billing_and_ShippingAddress_Discount_GC_PartialRedeem_CC_Discover">
         <classes>
             <class name="TestExecute.Drybar_US.Drybar_O2C_E2E.Test_DGLD_DB_E2E_004_Registeruser_checkout_with_Non_aerosal_bundleItem_Aerosalproduct_config_StandardShipping_differentbilling_and_ShippingAddress_Discount_Giftcode_PartialRedeem_CC_Discover"/>
         </classes>
     </test>
+    
+    
     
     <test name="Test_DGLD_DB_E2E_006_Guestuser_checkout_3items_Expeditedshipping_GiftCode_redeeem_Partial_Paypal" testid="DQA-3703" priority="P1" description="This script will cover Guestuser checkout 3items Expeditedshipping GiftCode redeeem Partial Paypal">
         <classes>
