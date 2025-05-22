@@ -10929,6 +10929,7 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 	}
 
 
+
 	
 	
 	public void Coolers_validation(String Dataset) {
@@ -10944,7 +10945,7 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 							Sync.waitElementPresent(50,"xpath", "(//span[normalize-space()='Shop'])[1]");
 							Common.javascriptclickElement("xpath", "(//span[normalize-space()='Shop'])[1]");
 					
-					Common.clickElement("xpath", "(//a[@title='Coolers & Lunch Boxes'])[1]");
+					Common.clickElement("xpath", "//a[contains(@title,'Food & Coolers​')]");
 					Thread.sleep(3000);
 					Sync.waitElementPresent(30,"xpath",
 							"//a[contains(@href,'cooler')]/span[contains(text(),'" + Links[i] + "')]");
@@ -10996,6 +10997,7 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 		}
 
 	}
+
 
 
 	public void kitchenware_validation(String Dataset) {
@@ -11103,7 +11105,8 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 		String[] Links = names.split(",");
 		int i = 0;
 		try {
-			for (i = 0; i < Links.length; i++) {
+			for (i = 0; i < Links.length; i++)
+			{
 				
 					
 					Sync.waitElementPresent(50,"xpath", "(//span[normalize-space()='Shop'])[1]");
@@ -11119,7 +11122,7 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 					Sync.waitElementPresent(50,"xpath", "//span[normalize-space()='Shop']");
 					Common.javascriptclickElement("xpath", "//span[normalize-space()='Shop']");
 			}
-				Common.clickElement("xpath", "//span[text()='Featured']");
+				Common.clickElement("xpath", "//span[contains(text(),'Featured')]");
 				Thread.sleep(3000);
 				Sync.waitElementPresent("xpath",
 						"(//a[contains(@title,'" + Links[i] + "')]//span[contains(text(),'" + Links[i] + "')])[1]");
@@ -11162,6 +11165,73 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 		}
 
 	}
+
+	public void featured_Shopby_Collections(String Dataset) {
+		// TODO Auto-generated method stub
+		String names = data.get(Dataset).get("Featured links");
+		String[] Links = names.split(",");
+		int i = 0;
+		try {
+			for (i = 0; i < Links.length; i++) {
+				
+					
+					Sync.waitElementPresent(50,"xpath", "(//span[normalize-space()='Shop'])[1]");
+//					WebElement web=	Common.findElementBy("xpath", "(//span[normalize-space()='Shop'])[1]");
+//					web.click();
+					Common.javascriptclickElement("xpath", "(//span[normalize-space()='Shop'])[1]");
+					Thread.sleep(3000);
+					int size=Common.findElements("xpath", "(//div[@x-init='$nextTick(() => {show = true })'])[2]").size();
+					if(size <=0) 
+					{
+						Common.javascriptclickElement("xpath", "//img[@alt='Hydroflask store logo']");
+					
+					Sync.waitElementPresent(50,"xpath", "//span[normalize-space()='Shop']");
+					Common.javascriptclickElement("xpath", "//span[normalize-space()='Shop']");
+			}
+				Common.clickElement("xpath", "//span[contains(text(),'Featured')]");
+				Thread.sleep(3000);
+				Sync.waitElementPresent("xpath",
+						"(//a[contains(@title,'" + Links[i] + "')]//span[contains(text(),'" + Links[i] + "')])[1]");
+				Common.clickElement("xpath",
+						"(//a[contains(@title,'" + Links[i] + "')]//span[contains(text(),'" + Links[i] + "')])[1]");
+				Sync.waitPageLoad();
+				Thread.sleep(4000);
+				String title = Common.findElement("xpath", "//h1[@class='hero-heading']").getText();
+				String breadcrumbs = Common.findElement("xpath", "//nav[contains(@class,'breadcrumb')]").getText();
+				System.out.println(title);
+				System.out.println(Links[i]);			
+				String products=Common.getText("xpath", "(//div[contains(@class,'flex w-full')]//span)[1]");
+				System.out.println(products);
+				int Number = Integer.parseInt(products);
+				int j=0;
+				if(Number>=j)
+				{
+				Common.assertionCheckwithReport(title.contains(Links[i]) || breadcrumbs.contains(Links[i]),
+						"verifying the header link " + Links[i] + "Under Featured",
+						"user should navigate to the " + Links[i] + " page",
+						"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
+				}
+				else
+				{
+					ExtenantReportUtils.addFailedLog(
+							"validating the the products in the plp ",
+							"User should able to see the products in plp", "unable to see the products in the PLP",
+							Common.getscreenShot("Failed to see products in PLP"));
+					Assert.fail();
+				}		
+			}
+		}
+		catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("verifying the header link " + Links[i] + "Under Featured",
+					"User should navigate to the " + Links[i] + "pages",
+					" unable to navigate to the " + Links[i] + "pages",
+					Common.getscreenShot("Failed to navigate to the " + Links[i] + "pages"));
+			Assert.fail();
+		}
+
+	}
+
 
 	public void shopall(String Dataset) {
 		// TODO Auto-generated method stub
@@ -11228,59 +11298,60 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 
 	}
 
-public void Explore_Validation(String Dataset) {
-	// TODO Auto-generated method stub
-	String names = data.get(Dataset).get("Explore");
-	String[] Links = names.split(",");
-	String name = data.get(Dataset).get("Explore").toUpperCase();
-	String[] Link = name.split(",");
-	String name1 = data.get(Dataset).get("Explore").toLowerCase();
-	String[] Link1 = name1.split(",");
-	System.out.println(Link1);
-	int i = 0;
-	try {
-		for (i = 0; i < Links.length; i++) {
-			Sync.waitElementPresent("xpath", "(//span[contains(text(),'Explore')])[1]");
-			Common.clickElement("xpath", "(//span[contains(text(),'Explore')])[1]");
-			Thread.sleep(3000);
-			Sync.waitElementPresent("xpath",
-					"//a[contains(@class,'link group no-underline')]//span[contains(text(),'" + Links[i] + "')]");
-			Common.clickElement("xpath", "//a[contains(@class,'link group no-underline')]//span[contains(text(),'" + Links[i] + "')]");
-			Sync.waitPageLoad();
-			Thread.sleep(4000);
-			String page = Common.getPageTitle();
-			System.out.println(Common.getCurrentURL());
-			System.out.println(page.contains(Links[i]));
-			System.out.println(Common.getCurrentURL().contains(Links[i]));
-			Common.assertionCheckwithReport(Common.getPageTitle().contains("We are Hydro Flask") || Common.getPageTitle().contains(Links[i])
-					|| Common.getPageTitle().contains("Frequently Asked Questions | Hydro Flask")
-					|| Common.getPageTitle().contains("Refer-A-Friend") || Common.getPageTitle().contains("Let’s Go!")
-					|| Common.getPageTitle().contains("Refill For Good")
-					|| Common.getPageTitle().contains("Parks For All")
-					|| Common.getPageTitle().contains("Trade In"), "verifying the explore links navigation",
-					"user should navigate to the " + Links[i] + " page",
-					"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
-			Thread.sleep(3000);
-			if (Common.getPageTitle().contains("Frequently Asked Questions | Hydro Flask")) {
-				Common.clickElement("xpath", "//div[@class='nav-flex']//a[@id='top']");
-			} else {
-				Common.clickElement("xpath", "//img[@alt='Store logo']");
+	public void Explore_Validation(String Dataset) {
+		// TODO Auto-generated method stub
+		String names = data.get(Dataset).get("Explore");
+		String[] Links = names.split(",");
+		String name = data.get(Dataset).get("Explore").toUpperCase();
+		String[] Link = name.split(",");
+		String name1 = data.get(Dataset).get("Explore").toLowerCase();
+		String[] Link1 = name1.split(",");
+		System.out.println(Link1);
+		int i = 0;
+		try {
+			for (i = 0; i < Links.length; i++) {
+				Sync.waitElementPresent("xpath", "(//span[contains(text(),'Explore')])[1]");
+				Common.clickElement("xpath", "(//span[contains(text(),'Explore')])[1]");
+				Thread.sleep(3000);
+				Sync.waitElementPresent("xpath",
+						"//a[contains(@class,'link group no-underline')]//span[contains(text(),'" + Links[i] + "')]");
+				Common.clickElement("xpath", "//a[contains(@class,'link group no-underline')]//span[contains(text(),'" + Links[i] + "')]");
+				Sync.waitPageLoad();
+				Thread.sleep(4000);
+				String page = Common.getPageTitle();
+				System.out.println(Common.getCurrentURL());
+				System.out.println(page.contains(Links[i]));
+				System.out.println(Common.getCurrentURL().contains(Links[i]));
+				Common.assertionCheckwithReport(Common.getPageTitle().contains("We are Hydro Flask") || Common.getPageTitle().contains(Links[i])
+						|| Common.getPageTitle().contains("Frequently Asked Questions | Hydro Flask")
+						|| Common.getPageTitle().contains("Refer-A-Friend") || Common.getPageTitle().contains("Let’s Go!")
+						|| Common.getPageTitle().contains("Refill For Good")
+						|| Common.getPageTitle().contains("Parks For All")
+						|| Common.getPageTitle().contains("Trade In"), "verifying the explore links navigation",
+						"user should navigate to the " + Links[i] + " page",
+						"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
+				Thread.sleep(3000);
+				if (Common.getPageTitle().contains("Frequently Asked Questions | Hydro Flask")) {
+					Common.clickElement("xpath", "//div[@class='nav-flex']//a[@id='top']");
+				} else {
+					Common.clickElement("xpath", "//img[@alt='Store logo']");
+				}
+
 			}
 
 		}
 
+		catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("verifying the header link " + Links[i],
+					"User should navigate to the " + Links[i] + "pages",
+					" unable to navigate to the " + Links[i] + "pages",
+					Common.getscreenShot("Failed to navigate to the " + Links[i] + "pages"));
+			Assert.fail();
+		}
+
 	}
 
-	catch (Exception | Error e) {
-		e.printStackTrace();
-		ExtenantReportUtils.addFailedLog("verifying the header link " + Links[i],
-				"User should navigate to the " + Links[i] + "pages",
-				" unable to navigate to the " + Links[i] + "pages",
-				Common.getscreenShot("Failed to navigate to the " + Links[i] + "pages"));
-		Assert.fail();
-	}
-
-}
 
 
 	
@@ -12439,12 +12510,12 @@ public void Explore_Validation(String Dataset) {
 				Common.javascriptclickElement("xpath", "//span[normalize-space()='Shop']");
 		       }
 			Thread.sleep(3000);	
-				Common.clickElement("xpath", "//span[contains(text(),'New Colors')]");
+				Common.clickElement("xpath", "//span[contains(text(),'New Colours')]");
 				Thread.sleep(3000);
 				Sync.waitElementPresent("xpath",
-						"//a[contains(@href,'new-color')]//span[contains(text(),'" + Links[i] + "')]");
+						"//div[contains(@class,'segmented-categories')]//span[contains(text(),'" + Links[i] + "')]");
 				Common.clickElement("xpath",
-						"//a//span[text()='New Colors']//following::ul//span[contains(text(),'" + Links[i] + "')]");
+						"//div[contains(@class,'segmented-categories')]//span[contains(text(),'" + Links[i] + "')]");
 				Sync.waitPageLoad();
 				Thread.sleep(3000);
 				
@@ -12655,7 +12726,6 @@ public void Explore_Validation(String Dataset) {
 	        }
 	    }
 	}
-
 	
 	public void remove_outofstock_subcribtion(String Dataset) {
 		// TODO Auto-generated method stub
