@@ -823,8 +823,8 @@ public class GoldDrybarusHelper2 {
 			Sync.waitElementPresent("xpath", "//span[@x-text='totalCartAmount']");
 			String minicart = Common.findElement("xpath", "//span[@x-text='totalCartAmount']").getText();
 			System.out.println(minicart);
-			Sync.waitElementPresent(30, "xpath", "//a[contains(text(),'Checkout')]");
-			Common.clickElement("xpath", "//a[contains(text(),'Checkout')]");
+			Sync.waitElementPresent(30, "xpath", "//button[contains(text(),'Checkout')]");
+			Common.clickElement("xpath", "//button[contains(text(),'Checkout')]");
 			Sync.waitPageLoad();
 			Thread.sleep(7000);
 //			Sync.waitElementPresent(30, "xpath", "//strong[@role='heading']");
@@ -2630,12 +2630,12 @@ public class GoldDrybarusHelper2 {
 					"open paypal site window", "faild to open paypal account");
 		} else {
 
-			Common.clickElement("id", "login_emaildiv");
-			Common.textBoxInput("id", "email", data.get(dataSet).get("Email"));
-			Common.clickElement("id", "btnNext");
-			int size = Common.findElements("xpath", "//a[text()='Log in with a password instead']").size();
+			Common.clickElement("id", "login_email");
+			Common.textBoxInput("id", "login_email", data.get(dataSet).get("Email"));
+			Common.clickElement("xpath", "//button[text()='Next']");
+			int size = Common.findElements("xpath", "//button[text()='Use Password Instead']").size();
 			if(size>0) {
-				Common.clickElement("xpath", "//a[text()='Log in with a password instead']");
+				Common.clickElement("xpath", "//button[text()='Use Password Instead']");
 				Common.textBoxInput("id", "password", data.get(dataSet).get("Password"));
 			}
 			else {
@@ -2648,13 +2648,16 @@ public class GoldDrybarusHelper2 {
 					"open paypal site window", "faild to open paypal account");
 			}
 			try {
-				Common.clickElement("id", "btnLogin");
+				Common.clickElement("xpath", "//button[text()='Log In']");
 				Thread.sleep(5000);
-				Common.actionsKeyPress(Keys.END);
-				Thread.sleep(5000);
-				Common.clickElement("id", "payment-submit-btn");
-				Thread.sleep(8000);
+				Common.clickElement("xpath", "//div[text()='Pay']");
 				Common.switchToFirstTab();
+				Thread.sleep(5000);
+			//	Common.actionsKeyPress(Keys.END);
+			//	Thread.sleep(5000);
+//				Common.clickElement("id", "payment-submit-btn");
+				Thread.sleep(8000);
+				
 			} catch (Exception | Error e) {
 				e.printStackTrace();
 				ExtenantReportUtils.addFailedLog("verifying the paypal payment ", expectedResult,
@@ -7011,7 +7014,7 @@ public void FUll_Payment(String dataSet) {
 				Common.actionsKeyPress(Keys.ARROW_UP);
 				Common.actionsKeyPress(Keys.ARROW_UP);
 				Common.actionsKeyPress(Keys.ARROW_UP);
-				String RetrivedValue = "hot_toddy";
+				String RetrivedValue = "hottoddy";
 				if (SelectedFilter.equals("All Hair Types")) {
 					
 					List<WebElement> Series_Filters = Common.findElements("xpath",

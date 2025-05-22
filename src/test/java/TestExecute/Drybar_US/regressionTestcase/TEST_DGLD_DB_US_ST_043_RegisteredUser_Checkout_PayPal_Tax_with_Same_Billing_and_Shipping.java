@@ -15,7 +15,7 @@ public class TEST_DGLD_DB_US_ST_043_RegisteredUser_Checkout_PayPal_Tax_with_Same
 	GoldDrybarusHelper2 Drybar = new GoldDrybarusHelper2(datafile,"DataSet");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Validate_RegisteredUser_Checkout_DiscoverCC_Tax_with_Same_Billing_and_Shipping () throws Exception {
+	public void Validate_RegisteredUser_Checkout_Paypal_Tax_with_Same_Billing_and_Shipping () throws Exception {
 
 		try {
 		
@@ -29,7 +29,7 @@ public class TEST_DGLD_DB_US_ST_043_RegisteredUser_Checkout_PayPal_Tax_with_Same
 			Drybar.selectshippingmethod("GroundShipping method");
 			Drybar.clickSubmitbutton_Shippingpage();
 			Drybar.tax_validation_Paymentpage("Address");
-			//Drybar.same_Blling_and_Shipping_SubmitOrder("CCDiscovercard");
+		//	Drybar.same_Blling_and_Shipping_SubmitOrder("CCDiscovercard");
 			Drybar.payPal_Payment("PaypalDetails");
 			
 
