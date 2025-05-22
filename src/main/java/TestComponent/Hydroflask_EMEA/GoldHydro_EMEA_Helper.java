@@ -216,37 +216,40 @@ public class GoldHydro_EMEA_Helper {
 	public void bottle_Accessories_headerlinks(String Dataset) {
 		// TODO Auto-generated method stub
 		String category =data.get(Dataset).get("Category");
-		String expectedResult = "User should click the" + category;
+		String subcategory =data.get(Dataset).get("Sub Category");
+		String expectedResult = "User should click the" + subcategory;
 		try {
-
-			Sync.waitElementPresent("xpath", "(//span[contains(text(),'Shop')])[5]");
+ 
+			Sync.waitElementPresent("xpath", "//button[contains(@class,'level-0-link')]//span[contains(text(),'Shop')]");
 			Thread.sleep(3000);
 //			Common.scrollIntoView("xpath","//a[contains(@class,'level-top')]//span[text()=' Shop']")//a[contains(@title,'Shop')];
-			Common.clickElement("xpath", "(//span[contains(text(),'Shop')])[5]");
-
+			Common.clickElement("xpath", "//button[contains(@class,'level-0-link')]//span[contains(text(),'Shop')]");
+ 
 			Thread.sleep(3000);
-			Sync.waitElementPresent("xpath", "(//span[contains(text(),'" + category + "')])[2]");
-			Common.clickElement("xpath", "(//span[contains(text(),'" + category + "')])[2]");
+			Sync.waitElementPresent("xpath", "(//span[contains(text(),'" + category + "')])[1]");
+			Common.clickElement("xpath", "(//span[contains(text(),'" + category + "')])[1]");
+			Thread.sleep(3000);
+			Sync.waitElementPresent("xpath", "(//span[contains(text(),'" + subcategory + "')])[1]");
+			Common.clickElement("xpath", "(//span[contains(text(),'" + subcategory + "')])[1]");
 			Thread.sleep(6000);
-			expectedResult = "User should select the " + category + "category";
-			int sizebotteles = Common.findElements("xpath", "//span[contains(text(),'" + category + "')]").size();
+			expectedResult = "User should select the " + subcategory+ "subcategory";
+			int sizebotteles = Common.findElements("xpath", "//span[contains(text(),'" + subcategory + "')]").size();
 			Common.assertionCheckwithReport(sizebotteles > 0,
-					"validating the product category as" + category + "from navigation menu ", expectedResult,
-					"Selected the " + category + " category", "User unabel to click" + category + "");
-
+					"validating the product category as" + subcategory + "from navigation menu ", expectedResult,
+					"Selected the " + subcategory + " category", "User unabel to click" + subcategory + "");
+ 
 		}
-
+ 
 		catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("validating the product category as" + category + "from navigation menu ",
 					expectedResult, "Unable to Selected the " + category + " category",
 					Common.getscreenShot("Failed to click on the" + category + ""));
-
+ 
 			Assert.fail();
 		}
-
-	}
-	
+ 
+	}	
 	
 	public void Bottles_headerlinks(String category) {
 		// TODO Auto-generated method stub
@@ -7739,8 +7742,10 @@ catch(Exception | Error e)
 	public void filter_By(String category) {
 
 		try {
-
-			String text = Common.findElement("xpath", "(//span[text()='" + category + "']//following-sibling::span)[2]").getText().replace("(", "").replace(")", "");
+			Thread.sleep(2000);
+			Common.clickElement("css","div[id='categories']");
+			Thread.sleep(4000);			
+			String text = Common.findElement("xpath", "(//span[text()='" + category + "']//following-sibling::span)").getText().replace("(", "").replace(")", "");
 			System.out.println(text);
 			Common.clickElement("xpath", "//span[text()='" + category + "']");
 			int textValue = Integer.parseInt(text);
@@ -7755,7 +7760,7 @@ catch(Exception | Error e)
 			System.out.println("categoryvalue:"+categoryvalue);
 			System.out.println("items:"+ items);
 
-			Common.assertionCheckwithReport(categoryvalue.equals(textValueAfterFilter),
+			Common.assertionCheckwithReport(categoryvalue.equals(text),
 					"To validate the filter in Product Listing Page",
 					"User should able to filter in Product Listing Page",
 					"Sucessfully filters in the Product Listing Page", "Failed to filter in Product Listing Page");
@@ -12311,7 +12316,7 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 		// TODO Auto-generated method stub
 		try {
 
-			Common.clickElement("xpath", "//div[@class='ais-Panel-header']//span//div[text()='Colors']");
+			Common.clickElement("xpath", "//div[@class='ais-Panel-header']//span//div[text()='Colours']");
 			Sync.implicitWait();
 			Sync.waitElementPresent("xpath",
 					"//ul[contains(@class,'ais-RefinementList')]//input[@value='" + colorname + "']");
@@ -12347,7 +12352,7 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 			Common.clickElement("xpath", "//div[@class='ais-Panel-header']//div[text()='Price']");
 			Thread.sleep(3000);
 			String lastvalue = Common.findElement("xpath", "//div[@class='value end active']").getText()
-					.replace("$", "").replace(".00", "");
+					.replace("£", "").replace(".00", "");
 			System.out.println(lastvalue);
 			Sync.waitElementPresent("xpath", "//div[@aria-valuemax='" + lastvalue + "' and @data-handle-key='0']");
 			WebElement price = Common.findElement("xpath",

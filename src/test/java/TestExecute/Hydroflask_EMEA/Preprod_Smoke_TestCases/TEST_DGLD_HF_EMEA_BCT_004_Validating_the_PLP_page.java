@@ -25,7 +25,7 @@ public class TEST_DGLD_HF_EMEA_BCT_004_Validating_the_PLP_page {
 			Hydro.filter_By("Accessories");
 			Hydro.color_validation("Black");
 			Hydro.price_filter_validation();
-			Hydro.addtocart_PLP("Product");
+			Hydro.addtocart_PLP("PLP Product");
 			 
 			
 
