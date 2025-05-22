@@ -31,7 +31,7 @@ public class Test_DGLD_HF_ST_032_Header_Links_Validation {
             Hydro.Accessories_validation("Accessories");
             Hydro.Collections_validation("Collections");        
 			Hydro.Explore_Validation("Explore Links");
-//			Hydro.Customize_validation("Customize");
+			Hydro.Customize_validation("Customize");
 			}else {
 			    Hydro.New_Color_Destination("Colors");
 	           	Hydro.bottles_validation("Bottle and drinkware");
@@ -41,7 +41,7 @@ public class Test_DGLD_HF_ST_032_Header_Links_Validation {
 	            Hydro.featured_validation("Featured");
 	            Hydro.Collections_validation("Collections");
 				Hydro.Explore_Validation("Explore Links");
-//				Hydro.Customize_validation("Customize");
+				Hydro.Customize_validation("Customize");
 			}
 			 // Hydro.New_Color_Destination("Colors");
 		     //  Hydro.featured_validation("Featured"); 
@@ -57,7 +57,7 @@ public class Test_DGLD_HF_ST_032_Header_Links_Validation {
 
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+//		Common.closeAll();
 
 	}
 

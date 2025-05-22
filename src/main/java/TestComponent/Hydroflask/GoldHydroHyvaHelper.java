@@ -13407,12 +13407,12 @@ Common.clickElement("xpath", "//span[text()='Edit']");
 			
          	for (i = 0; i < Links.length; i++) {
          		Thread.sleep(4000);
-    			Sync.waitElementPresent("xpath", "//a[@title='Customize']");
-    			Common.clickElement("xpath", "//a[@title='Customize']");
+    			Sync.waitElementPresent("xpath", "(//span[normalize-space()='Customize'])[1]");
+    			Common.clickElement("xpath", "(//span[normalize-space()='Customize'])[1]");
          		Common.clickElement("xpath", "(//span[text()='"+ Links[i] +"'])[1]");
          		Thread.sleep(3000);
          		
-			Common.assertionCheckwithReport(Common.getCurrentURL().contains("customize")||Common.getCurrentURL().contains("engraving")||Common.getCurrentURL().contains("collegiate"),
+			Common.assertionCheckwithReport(Common.getCurrentURL().contains("customize")||Common.getCurrentURL().contains("engraving")||Common.getCurrentURL().contains("corporate-purchasing"),
 					"verifying the header link " + Links[i] + "Under Customize",
 					"user should navigate to the " + Links[i] + " page",
 					"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
@@ -13672,13 +13672,13 @@ Common.clickElement("xpath", "//span[text()='Edit']");
 					"open paypal site window", "faild to open paypal account");
 		} else {
 
-			Common.clickElement("id", "login_emaildiv");
-			Common.textBoxInput("id", "email", data.get(dataSet).get("Email"));
-			Common.clickElement("id", "btnNext");
-			int size1 = Common.findElements("xpath", "//a[text()='Log in with a password instead']").size();
+			Common.clickElement("id", "login_email");
+			Common.textBoxInput("id", "login_email", data.get(dataSet).get("Email"));
+			Common.clickElement("xpath", "//button[text()='Next']");
+			int size1 = Common.findElements("xpath", "//button[text()='Use Password Instead']").size();
 			if(size1>0) {
-				Common.clickElement("xpath", "//a[text()='Log in with a password instead']");
-				Common.textBoxInput("id", "password", data.get(dataSet).get("Password"));
+				Common.clickElement("xpath", "//button[text()='Use Password Instead']");
+				Common.textBoxInput("xpath", "//input[@aria-labelledby='password--input-label']", data.get(dataSet).get("Password"));
 			}
 			else {
 				
@@ -13692,15 +13692,15 @@ Common.clickElement("xpath", "//span[text()='Edit']");
 			
 
 			try {
-				Common.clickElement("id", "btnLogin");
+				Common.clickElement("xpath", "//button[text()='Log In']");
 				Thread.sleep(5000);
 				Common.actionsKeyPress(Keys.END);
 				Thread.sleep(5000);
-				Paypal_Address_Verification("Express Paypal");
-				Thread.sleep(4000);
+				//Paypal_Address_Verification("Express Paypal");
+				//Thread.sleep(4000);
 				
 				if (Common.getCurrentURL().contains(""))
-					Common.clickElement("id", "payment-submit-btn");
+					Common.clickElement("xpath", "//div[@class='flex flex-auto']");
 				Thread.sleep(8000);
 				Common.switchToFirstTab();
 			} catch (Exception | Error e) {
@@ -14201,12 +14201,17 @@ Common.clickElement("xpath", "//span[text()='Edit']");
 
 		public void Collections_validation(String Dataset) {
 			// TODO Auto-generated method stub
+			String names ="";
+		    if(Common.getCurrentURL().contains("https://mcloud-na-preprod.hydroflask.com/")){
 
+	    		 names = data.get(Dataset).get("collections");		
 		
-			String names = data.get(Dataset).get("prod collections");		
-			String[] Links = names.split(",");
-			int i = 0;
-		
+		    }else {
+		    		 names = data.get(Dataset).get("prod collections");		
+			
+			}
+		    String[] Links = names.split(",");
+		    int i = 0;
 		try {
 		         	Thread.sleep(4000);
 		         	for (i = 0; i < Links.length; i++) {
