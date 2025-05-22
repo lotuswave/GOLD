@@ -16325,6 +16325,51 @@ public void deleteProduct_shoppingcart() {
 		
 	}
 
+	public void TopLinkvalidations(String Dataset) {
+		// TODO Auto-generated method stub
+		String Link=data.get(Dataset).get("Above Promobanner");
+		String Links[]=Link.split(",");
+		int i=0;
+		try
+		{
+			for (i = 0; i < Links.length; i++) {
+				Thread.sleep(2000);
+				Sync.waitElementPresent("xpath", "//span[contains(text(),'"+Links[i]+"')]");
+				Common.clickElement("xpath", "(//span[contains(text(),'"+Links[i]+"')])[1]");
+				Sync.waitPageLoad();
+				Thread.sleep(2000);
+				Common.assertionCheckwithReport( Common.getPageTitle().contains(Links[i])
+						|| Common.getCurrentURL().contains("sandbox.kustomer.support") || Common.getPageTitle().contains(Links[i])
+						|| Common.getCurrentURL().contains("what-are-your-delivery-charge") || Common.getCurrentURL().contains("/new-season"),
+						"verifying the header link " + Links[i] + "above the promo banner",
+						"user should navigate to the " + Links[i] + " page",
+						"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
+				Common.navigateBack();
+				Sync.waitPageLoad();
+			
+			}
+			Sync.waitElementPresent("xpath", "(//li[@class='m-header-links__item']//a)[1]");
+			Common.clickElement("xpath", "(//li[@class='m-header-links__item']//a)[1]");
+			Thread.sleep(2000);
+			Common.assertionCheckwithReport(Common.getCurrentURL().contains("sandbox.kustomer.support"),
+					"verifying the header link Customer service center above the promo banner",
+					"user should navigate to the Customer service center page",
+					"user successfully Navigated to the Customer service center ", "Failed to navigate to the Customer service center");
+			
+			
+     	}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("verifying the header link " + Links[i] + "above the promo banner",
+					"User should navigate to the " + Links[i] + "pages",
+					" unable to navigate to the " + Links[i] + "pages",
+					Common.getscreenShot("Failed to navigate to the " + Links[i] + "pages"));
+			Assert.fail();
+		}
+		
+	}
+
 	
 }
 
