@@ -9212,22 +9212,20 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 			Thread.sleep(6000);
 			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
 			Common.mouseOver("xpath", "//img[@alt='" + products + "']");
-			//Sync.waitElementPresent("xpath", "//span[text()='Add to Cart']");
-			//Common.clickElement("xpath", "//span[text()='Add to Cart']");
+			Sync.waitElementPresent("xpath", "//span[text()='Add to Cart']");
+			Common.clickElement("xpath", "//span[text()='Add to Cart']");
 //			Sync.waitPageLoad();
 			Thread.sleep(2000);
 //			Common.clickElement("xpath", "//button[@aria-label='Close minicart']");
-//			String message = Common.findElement("xpath", "//div[@ui-id='message-success']")
-//					.getAttribute("ui-id");
-//			System.out.println(message);
-//			Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
-//					"Product should be add to cart", "Sucessfully product added to the cart ",
-//					"failed to add product to the cart");
+			int Size = Common.findElements("id", "cart-drawer-title").size();
+			
+			Common.assertionCheckwithReport(Size>0, "validating the  product add to the cart",
+					"Product should be add to cart", "Sucessfully product added to the cart ",
+					"failed to add product to the cart");
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("validating the  product add to the cart", "Product should be add to cart",
 					"unable to add product to the cart", Common.getscreenShot("failed to add product to the cart"));
-
 			Assert.fail();
 		}
 	}
@@ -9672,7 +9670,7 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 		Sync.waitElementPresent("xpath", "//a[@title='My Account']");
 		Common.clickElement("xpath", "//a[@title='My Account']");
 		Sync.waitPageLoad();
-		if (Common.getCurrentURL().contains("preprod")) {
+		if (Common.getCurrentURL().contains("preprod")||Common.getCurrentURL().contains("stage4")) {
 			String Accountlinks = data.get(Dataset).get("Account Links");
 			String[] Account = Accountlinks.split(",");
 			int i = 0;
@@ -9689,7 +9687,7 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 					{
 					String title = Common.findElement("xpath", "//h1[@class='title-2xl']//span").getText();
 					System.out.println(title);
-					Common.assertionCheckwithReport(title.contains(Account[i]) || title.contains("My Out Of Stock Subscriptions") || title.contains("My Payment Methods") 
+					Common.assertionCheckwithReport(title.contains(Account[i]) || title.contains("My Back in Stock Subscriptions") || title.contains("My Payment Methods") 
 							|| title.contains("Newsletter Subscription"),
 							"verifying Account page links " + Account[i],
 							"user should navigate to the " + Account[i] + " page",
@@ -12379,7 +12377,7 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 						Common.assertionCheckwithReport(value1.equals(name1), "verifying the price filters in PLP page",
 								"When we select the range of price filters between the range only products should display",
 								"Successfully are displayed in the pricing range",
-								"unable to display the procing range after pricing filter applied");
+								"unable to display the pricing range after pricing filter applied");
 					} else {
 						Assert.fail();
 					}
