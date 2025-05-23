@@ -31,8 +31,8 @@ public class TEST_DGLD_HF_EMEA_BCT_001_Header_Links_Validation {
     //        Hydro.Collections_validation("Collections");            //working fine needsto commit  and add one zero product
 			Hydro.Explore_Validation("Explore Links");                
 			Hydro.featured_validation("Featured");                       
-	//		Hydro.New_Color_Destination("Colors");
-			Hydro.featured_Shopby_Collections("Shopby_Collections");
+			Hydro.New_Color_Destination("Colors");
+			Hydro.featured_Shopby_Collections("Shopby Collections");
 			
 //			Hydro.Customize_validation("Customize");			
 //			Hydro.Holiday_shop_validation("Holiday Sale"); 
