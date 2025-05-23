@@ -4250,6 +4250,10 @@ public void Remove_GiftCode() {
 	                	Common.clickElement("xpath","//div[@class='flex items-center']//input[@type='checkbox']");
 	                }
 					Thread.sleep(6000);
+					Sync.waitElementPresent("css", "input[class='flex-none disabled:opacity-25']");
+                	Common.clickElement("css", "input[class='flex-none disabled:opacity-25']");
+                	Sync.waitPageLoad();
+                	Thread.sleep(4000);
 					Common.scrollIntoView("xpath", "(//button[contains(@class,'btn btn-primary place-order')])[2]");	
 					Common.clickElement("xpath", "(//button[contains(@class,'btn btn-primary place-order')])[2]");
 					Thread.sleep(8000);
