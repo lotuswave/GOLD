@@ -16396,6 +16396,43 @@ public void deleteProduct_shoppingcart() {
 		
 	}
 
+	public void Prodeal_form_verification() {
+		// TODO Auto-generated method stub
+		try
+		{
+			Sync.waitElementPresent("id", "customer-menu");
+			Common.clickElement("id", "customer-menu");
+			Sync.waitElementPresent("css", "a[title='My Account']");
+			Common.clickElement("css", "a[title='My Account']");
+			Sync.waitPageLoad();
+			Thread.sleep(2000);
+			Common.assertionCheckwithReport(Common.getCurrentURL().contains("customer/account/"),
+					"Verfying the page navigated to the account information",
+					"User should able to navigate to the account information page",
+					"Successfully navigated to the account information page",
+					"Failed to navigate to the account information page");
+			Common.clickElement("css", "a[title='Pro Deal']");
+			Sync.waitPageLoad();
+			Thread.sleep(2000);
+			String prodeal_membership=Common.findElement("xpath", "(//h6//parent::div//parent::div//child::div//p)[1]").getText().trim();
+			Common.assertionCheckwithReport(prodeal_membership.contains("Welcome to the Osprey PRO Programme"),
+					"Verfying the prod deal in the account navigations after submitting the pro deal form",
+					"User should able to see the prod deal in the account information",
+					"Successfully pro deal diapled in the account information page after submitting the pro deal form",
+					"Failed to display the pro deal in the account information page");
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("Verfying the prod deal in the account navigations after submitting the pro deal form",
+					"User should able to see the prod deal in the account information",
+					"Unable to display the pro deal  in the account information page after submitting the pro deal form",
+					Common.getscreenShot("Failed to display the pro deal in the account information page"));
+			Assert.fail();
+		}
+		
+	}
+
 	
 }
 
