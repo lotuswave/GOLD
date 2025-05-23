@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<suite name="Gold-Hydroflask US Regression execution">
+<suite name="Gold-Hydroflask EMEA Regression execution">
     <listeners>
         <listener class-name="Utilities.TestListener"/>
     </listeners>

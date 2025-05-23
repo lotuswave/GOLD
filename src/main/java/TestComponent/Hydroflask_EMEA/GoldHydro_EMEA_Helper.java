@@ -14995,7 +14995,7 @@ Common.clickElement("xpath", "//span[text()='Edit']");
 	public void Remove_Product(String dataSet) {
 		// TODO Auto-generated method stub
 		String Symbol = data.get(dataSet).get("Symbol");
-		String products = data.get(dataSet).get("Products");
+		String products = data.get(dataSet).get("Products").replace("Mouth ", "").trim();
 		System.out.println(products);
 
 		try {

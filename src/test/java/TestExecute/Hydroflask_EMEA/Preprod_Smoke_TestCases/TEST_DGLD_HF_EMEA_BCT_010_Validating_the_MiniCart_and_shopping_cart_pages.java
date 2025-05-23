@@ -28,6 +28,8 @@ public class TEST_DGLD_HF_EMEA_BCT_010_Validating_the_MiniCart_and_shopping_cart
 			Hydro.Remove_Product("Product");
 			Hydro.update_shoppingcart("Product Qunatity");
 			Hydro.minicart_Checkout();
+			Hydro.addDeliveryAddress_Guestuser("AccountDetails");
+            Hydro.selectshippingaddress("GroundShipping method");
             Hydro.Shoppingcart_page();
 			Hydro.minicart_ordersummary_discount("Discount");
 		    
