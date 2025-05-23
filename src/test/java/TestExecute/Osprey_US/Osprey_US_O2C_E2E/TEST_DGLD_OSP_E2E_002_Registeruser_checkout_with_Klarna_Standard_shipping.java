@@ -30,7 +30,7 @@ public class TEST_DGLD_OSP_E2E_002_Registeruser_checkout_with_Klarna_Standard_sh
 		     Osprey_ReEu.addtocart("SKU-10005235 -4QTY");
 		     Osprey_ReEu.minicart_Checkout();
 		     Osprey_ReEu.RegaddDeliveryAddress("Account");
-		     Osprey_ReEu.selectshippingmethod("GroundShipping method");
+		     Osprey_ReEu.selectshippingmethod("reg shipping");
 		     String Used_GiftCode="NULL";
 		     Osprey_ReEu.clickSubmitbutton_Shippingpage();
 		     HashMap<String,String> Details=Osprey_ReEu.ordersummary_Details();
