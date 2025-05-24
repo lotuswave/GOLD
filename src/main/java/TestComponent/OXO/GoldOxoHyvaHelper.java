@@ -682,8 +682,8 @@ public class GoldOxoHyvaHelper
 	        String minicart = Common.findElement("xpath", "//span[@x-text='totalCartAmount']").getText();
 	        System.out.println("Minicart total: " + minicart);
             Thread.sleep(4000);
-            Sync.waitElementPresent(30, "xpath", "//div[@class='cart-drawer__totals-content-checkout relative grid bg-white']");
-	        Common.clickElement("xpath", "//div[@class='cart-drawer__totals-content-checkout relative grid bg-white']");
+            Sync.waitElementPresent(30, "xpath", "//button[contains(@class, 'cart-drawer__totals-content-checkout-button') and contains(text(), 'Checkout')]");
+	        Common.clickElement("xpath", "//button[contains(@class, 'cart-drawer__totals-content-checkout-button') and contains(text(), 'Checkout')]");
 	       Thread.sleep(5000);
 	        
 	        String currentURL = Common.getCurrentURL();
