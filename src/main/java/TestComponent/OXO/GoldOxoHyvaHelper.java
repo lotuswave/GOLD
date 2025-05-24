@@ -1079,7 +1079,7 @@ public class GoldOxoHyvaHelper
 
 			{
 
-			Common.clickElement("xpath", "//div[@class='flex justify-end']//a[@title='Edit Perch Booster Seat With Straps']");      // need to click on the color product
+			Common.clickElement("xpath", "//a[@aria-label='Edit Nest Booster Seat with Removable Cushion']");      // need to click on the color product
 
 			Sync.waitPageLoad();
 
@@ -1121,7 +1121,7 @@ public class GoldOxoHyvaHelper
 
 			Thread.sleep(4000);
 
-			String getProductColor =Common.findElement("xpath","(//div[@class='mt-2 title-xs hf:title-2xs os:text-sm']//span)[2]").getText().trim();
+			String getProductColor =Common.findElement("xpath","//span[@class='checkout-cart-item-info-table__cell-content-title-options-option-value os:font-normal']").getText().trim();
 
 			System.out.println(getProductColor);
 
@@ -7499,7 +7499,7 @@ catch(Exception | Error e)
 			Sync.waitPageLoad();
 			Thread.sleep(6000);
 			expectedResult = "It should apply discount on your price.If user enters invalid promocode it should display coupon code is not valid message.";
-			String discountcodemsg = Common.getText("xpath", "//span[@x-html='message.text']");
+			String discountcodemsg = Common.getText("xpath", "//span[contains(text(), 'You used coupon code')]");
 			Common.assertionCheckwithReport(discountcodemsg.contains("You used coupon code"), "verifying pomocode",
 					expectedResult, "promotion code working as expected", "Promation code is not applied");
 		} catch (Exception | Error e) {
@@ -8971,15 +8971,15 @@ public void header_1_Percent_Planet() {
 			String productname = Common
 					.findElement("xpath", "(//p[@class='cart-drawer__item-content-description-header-text text-md font-bold dr:title-sm lg:flex-shrink-1'])[1]")
 					.getText();
-			String productamount1 = Common.getText("xpath", "(//span[@x-html='item.product_price']//span[@class='price'])[1]").replace(symbol,
+			String productamount1 = Common.getText("xpath", "(//span[@x-html='item.product_price'])[1]").replace(symbol,
 					"");
 			Float productamount1value = Float.parseFloat(productamount1);
 			Thread.sleep(4000);
 			if (productname.equals(deleteproduct)) {
 				Sync.waitElementPresent(30, "xpath",
-						"(//a[contains(@aria-label,'Edit product')]//parent::div//button)[1]");
+						"(//button[@type='button' and contains(@class, 'cart-drawer__item-content-description-actions-edit-button')])[1]");
 				Common.clickElement("xpath",
-						"(//a[contains(@aria-label,'Edit product')]//parent::div//button)[1]");
+						"(//button[@type='button' and contains(@class, 'cart-drawer__item-content-description-actions-edit-button')])[1]");
 				Sync.waitElementPresent("xpath", "//button[contains(text(),'OK')]");
 				Common.clickElement("xpath", "//button[contains(text(),'OK')]");
 			} else {
