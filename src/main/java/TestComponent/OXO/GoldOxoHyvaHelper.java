@@ -116,7 +116,7 @@ public class GoldOxoHyvaHelper
 			try {
 				Common.mouseOver("xpath", "//span[contains(text(),'" + category + "')]");
 			} catch (Exception e) {
-				Common.clickElement("xpath", "//a[contains(@class,'level-0-link')]//span[contains(text(),' Shop')]");
+				Common.clickElement("xpath", "//button[@type='button']//span[contains(text(),' Shop')]");
 			}
 			Common.clickElement("xpath", "//span[contains(text(),'" + category + "')]");
 			// Common.clickElement("xpath", "//span[text()='Shop All']");
@@ -682,8 +682,8 @@ public class GoldOxoHyvaHelper
 	        String minicart = Common.findElement("xpath", "//span[@x-text='totalCartAmount']").getText();
 	        System.out.println("Minicart total: " + minicart);
             Thread.sleep(4000);
-            Sync.waitElementPresent(30, "xpath", "//a[contains(text(),'Checkout')]");
-	        Common.clickElement("xpath", "//a[contains(text(),'Checkout')]");
+            Sync.waitElementPresent(30, "xpath", "//div[@class='cart-drawer__totals-content-checkout relative grid bg-white']");
+	        Common.clickElement("xpath", "//div[@class='cart-drawer__totals-content-checkout relative grid bg-white']");
 	       Thread.sleep(5000);
 	        
 	        String currentURL = Common.getCurrentURL();
@@ -2011,7 +2011,7 @@ public String create_account(String Dataset) {
 			Sync.waitElementClickable("xpath", "//button[@title='Sign Up']");
 			Common.clickElement("xpath", "//button[@title='Sign Up']");
 			Sync.waitImplicit(5);
-			String message = Common.findElement("xpath", "//span[@x-html='message.text']").getText();
+			String message = Common.findElement("xpath", "//span[text()='Thank you for registering with OXO Store.']").getText();
 			System.out.println(message);
 			Common.assertionCheckwithReport(
 					message.contains("Thank you for registering") || Common.getPageTitle().contains("Wish List Sharing") && message.contains(Product + " has been added to your Favorites. Click here to view your Favorites"),
@@ -7316,8 +7316,8 @@ catch(Exception | Error e)
 				Common.scrollIntoView("xpath", "//button[contains(@class, 'group/wishlist')]");
 				Common.clickElement("xpath", "//button[contains(@class, 'group/wishlist')]");
 				
-				Sync.waitElementPresent(30, "xpath", "//span[@x-html='message.text']");
-				String message = Common.findElement("xpath", "//span[@x-html='message.text']").getText();
+				Sync.waitElementPresent(30, "xpath", "//div[@class='message mb-0 os:py-4 success bg-success']");
+				String message = Common.findElement("xpath", "//div[@class='message mb-0 os:py-4 success bg-success']").getText();
 				System.out.println(message);
 				Common.assertionCheckwithReport(message.contains("Click here to view your Favorites."),
 						"validating the  product add to the Whishlist", "Product should be add to whishlist",
@@ -8887,8 +8887,8 @@ public void header_1_Percent_Planet() {
 		String products = data.get(Dataset).get("Products");
 		try {
 			String minicartproduct = Common
-					.findElement("xpath", "//a[@class='product-item-link hover:underline inline-block' and text()='"+ products +"']").getText();
-			Common.clickElement("xpath", "//a[@class='product-item-link hover:underline inline-block' and text()='"+ products +"']");
+					.findElement("xpath", "//a[@class='cart-drawer__item-content-description-header-link product-item-link hover:underline inline-block' and text()='"+ products +"']").getText();
+			Common.clickElement("xpath", "//a[@class='cart-drawer__item-content-description-header-link product-item-link hover:underline inline-block' and text()='" + products +"']");
 			Sync.waitPageLoad();
 			Thread.sleep(3000);
 			Common.assertionCheckwithReport(Common.getPageTitle().contains(minicartproduct),
@@ -8969,7 +8969,7 @@ public void header_1_Percent_Planet() {
 					.replace(symbol, "");
 			Float subtotalvalue = Float.parseFloat(subtotal);
 			String productname = Common
-					.findElement("xpath", "(//p[@class='text-md font-bold dr:title-sm']//a)[1]")
+					.findElement("xpath", "(//p[@class='cart-drawer__item-content-description-header-text text-md font-bold dr:title-sm lg:flex-shrink-1'])[1]")
 					.getText();
 			String productamount1 = Common.getText("xpath", "(//span[@x-html='item.product_price']//span[@class='price'])[1]").replace(symbol,
 					"");
