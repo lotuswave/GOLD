@@ -15444,6 +15444,37 @@ public void Change_Password_and_Email(String Dataset) {
 
 	}
 }
+
+public void verifying_Shipping_Amount(String Dataset) {
+	// TODO Auto-generated method stub
+	String Symbol=data.get(Dataset).get("Symbol");
+	try
+	{
+		String below30=Common.findElement("css", "span[class='price-including-tax']").getText().replace(Symbol, "").replace(".00", "").trim();
+		System.out.println(below30);
+		 int shippingprice= Integer.parseInt(below30);
+		if(5==shippingprice)
+		{
+			Common.assertionCheckwithReport(
+					below30.equals("5"),
+					"verifying the shipping amount prive for below 30 product",
+					"user should see the 5 shipping method for below 30 product",
+					"Successfully 5 shipping method has been appeared for below 30 product",
+					"Failed to get the 5 shipping method for below 30 product");
+		}
+		
+	}
+	catch(Exception | Error e)
+	{
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("verifying the shipping amount prive for below 30 product",
+				"user should see the 5 shipping method for below 30 product",
+				"Unable to get the 5 shipping method for below 30 product",
+				Common.getscreenShotPathforReport("Failed to get the 5 shipping method for below 30 product"));
+		Assert.fail();
+	}
+	
+}
 }
 
 
