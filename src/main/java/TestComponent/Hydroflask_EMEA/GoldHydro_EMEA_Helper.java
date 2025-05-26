@@ -4898,8 +4898,8 @@ System.out.println(MyFavorites);
 
 	public void click_regtrackorder() {
 		try {
-			Sync.waitElementPresent(30, "xpath", "//button[@aria-label='My Account']");
-			Common.clickElement("xpath", "//button[@aria-label='My Account']");
+			Sync.waitElementPresent(30, "css", "button[aria-label='My Account']");
+			Common.clickElement("css", "button[aria-label='My Account']");
 			Common.clickElement("xpath", "//a[contains(text(),'My Orders')]");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
@@ -4928,7 +4928,7 @@ System.out.println(MyFavorites);
 
 		try {
 			Sync.waitPageLoad();
-			int size = Common.findElements("xpath", "//div[@class='column main']").size();
+			int size = Common.findElements("css", "div[class='column main']").size();
 			Common.assertionCheckwithReport(size > 0, "Verifying the order numbers in my orders page ",
 					"after clicking on the track my orders order numbers  should be displayed in the my orders page",
 					"successfully order numbers has been displayed in the my orders page",
@@ -5921,17 +5921,17 @@ System.out.println(MyFavorites);
 			Sync.waitElementPresent("xpath", "//span[text()='View Order']");
 			Common.clickElement("xpath", "//span[text()='View Order']");
 			Sync.waitPageLoad();
-			Sync.waitElementPresent(40, "xpath", "//span[contains(@class,'title-lg')]");
-			String Ordernumber = Common.findElement("xpath", "//span[contains(@class,'title-lg')]").getText();
-			Common.findElement("xpath", "//span[@class='order-status inline-block']//div");
+			Sync.waitElementPresent(40, "css", "span[class*='title-lg']");
+			String Ordernumber = Common.findElement("css", "span[class*='title-lg']").getText();
+			Common.findElement("css", "span[class='order-status inline-block'] div");
 			String reorder = Common.findElement("xpath", "//span[text()='Reorder']").getText();
-			String backCTA = Common.findElement("xpath", "//a[@class='hidden lg:flex btn btn-link']").getText().trim();
-			String orderdate = Common.findElement("xpath", "//div[@class='mt-1']//span").getText();
+			String backCTA = Common.findElement("css", "a[class='hidden lg:flex btn btn-link']").getText().trim();
+			String orderdate = Common.findElement("css", "div[class='mt-1'] span").getText();
 			String shippingAdd = Common.findElement("xpath", "//p[contains(text(),'Shipping Address')]").getText();
 			String billingAdd = Common.findElement("xpath", "//p[contains(text(),'Billing Address')]").getText();
 			String shippingmethod = Common.findElement("xpath", "//p[contains(text(),'Shipping Method')]").getText();
 			String ordersummary = Common.findElement("xpath", "//p[contains(text(),'Shipping Method')]").getText();
-			String itemsordered = Common.findElement("xpath", "//span[@class='text-sm']").getText();
+			String itemsordered = Common.findElement("css", "span[class='text-sm']").getText();
 			System.out.println(itemsordered);
 
 			Common.assertionCheckwithReport(
