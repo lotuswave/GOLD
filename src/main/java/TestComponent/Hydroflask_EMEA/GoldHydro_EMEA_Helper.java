@@ -8459,43 +8459,30 @@ System.out.println(MyFavorites);
 		// TODO Auto-generated method stub
 		try {
 			Sync.waitPageLoad();
-			int MyFavorites = Common.findElements("xpath", "//div[contains(@class,'message')]//span").size();
+			int MyFavorites = Common.findElements("css", "div[class*='message'] span").size();
 
 			if (MyFavorites != 0) {
 				search_product("Product");
-				Sync.waitElementPresent(30, "xpath", "//button[contains(@class, 'group/wishlist')]");
-				Common.scrollIntoView("xpath", "//button[contains(@class, 'group/wishlist')]");
-				Common.clickElement("xpath", "//button[contains(@class, 'group/wishlist')]");
-				Common.clickElement("xpath", "//span[@x-text='customerGreeting']");
-				Sync.waitElementPresent(30, "id", "customer-menu");
-				Common.clickElement("id", "customer-menu");
-				Sync.waitElementPresent(30, "xpath", "//a[@title='My Favorites']");
-				Common.clickElement("xpath", "//a[@title='My Favorites']");
-
+				Sync.waitElementPresent(30, "css", "button[class*='group/wishlist']");
+				Common.scrollIntoView("css", "button[class*='group/wishlist']");
+				Common.clickElement("css", "button[class*='group/wishlist']");
+				My_Favorites();
+				Common.findElements("css", "span[class*='a-wishlist']");
 				Sync.waitPageLoad();
-				Thread.sleep(4000);
-				Common.assertionCheckwithReport(Common.getPageTitle().equals("Wish List Sharing"),
-						"validating the Navigation to the My Favorites page",
-						"After Clicking on My Favorites CTA user should be navigate to the My Favorites page",
-						"Sucessfully User Navigates to the My Favorites page after clicking on the My Favorites CTA",
-						"Failed to Navigate to the My Favorites page after Clicking on My Favorites button");
-				Common.findElements("xpath", "//span[contains(@class,'a-wishlist')]");
-				Sync.waitPageLoad();
-				Thread.sleep(4000);
-//				String message = Common.findElement("xpath", "//span[@class='w-full text-center pr-10']").getText();
-//				System.out.println(message);
-//				Common.assertionCheckwithReport(message.contains("Click here to view your Favorites."),
-//						"validating the  product add to the Whishlist", "Product should be add to whishlist",
-//						"Sucessfully product added to the Whishlist ", "failed to add product to the Whishlist");
+				// Thread.sleep(4000);
+				String message = Common.findElement("css", "span[class='w-full text-center pr-10']").getText();
+				System.out.println(message);
+				Common.assertionCheckwithReport(message.contains("Click here to view your Favorites."),
+						"validating the  product add to the Whishlist", "Product should be add to whishlist",
+						"Sucessfully product added to the Whishlist ", "failed to add product to the Whishlist");
 				Common.clickElement("xpath", "(//button[@aria-haspopup='dialog'])[2]");
 				Sync.waitPageLoad();
 				Thread.sleep(2000);
-				Common.textBoxInput("xpath", "//textarea[@name='emails']", data.get(Dataset).get("Email"));
-				Common.textBoxInput("xpath", "//textarea[@name='message']", data.get(Dataset).get("message"));
-				Thread.sleep(4000);
-				Common.clickElement("xpath", "//button[@title='Share Wish List']");
+				Common.textBoxInput("css", "textarea[name='emails']", data.get(Dataset).get("Email"));
+				Common.textBoxInput("css", "textarea[name='message']", data.get(Dataset).get("message"));
+				Common.clickElement("css", "button[title='Share Wish List']");
 				Sync.waitPageLoad();
-				Thread.sleep(3000);
+				 Thread.sleep(3000);
 				String message1 = Common.findElement("xpath", "//span[text()='Your wish list has been shared.']")
 						.getText();
 				System.out.println(message1);
@@ -8505,16 +8492,15 @@ System.out.println(MyFavorites);
 						"Sucessfully message has been displayed for whishlist",
 						"failed to display the message for whishlist");
 			} else {
-				Common.clickElement("xpath",
-						"//button[@aria-haspopup='dialog']//parent::div[contains(@x-data,'hyva')]");
+				Common.clickElement("css", "div[class='column main'] button");
 				Sync.waitPageLoad();
-				Thread.sleep(4000);
-				Common.textBoxInput("xpath", "//textarea[@name='emails']", data.get(Dataset).get("Email"));
-				Common.textBoxInput("xpath", "//textarea[@name='message']", data.get(Dataset).get("message"));
-				Thread.sleep(4000);
-				Common.clickElement("xpath", "//button[@title='Share Wish List']");
-				Sync.waitElementPresent(30, "xpath", "//div[@ui-id='message-success']");
-				String message1 = Common.findElement("xpath", "//div[@ui-id='message-success']").getText();
+				Thread.sleep(2000);
+				Common.textBoxInput("css", "textarea[name='emails']", data.get(Dataset).get("Email"));
+				Common.textBoxInput("css", "textarea[name='message']", data.get(Dataset).get("message"));
+				Common.clickElement("css", "button[title='Share Wish List']");
+				Sync.waitPageLoad();
+				 Thread.sleep(3000);
+				String message1 = Common.findElement("css", "div[class*='message'] span").getText();
 				System.out.println(message1);
 				Common.assertionCheckwithReport(message1.contains("Your wish list has been shared."),
 						"validating the shared whishlist functionality",
