@@ -10942,9 +10942,8 @@ public void Gift_card(String dataSet) {
 			if(URL.contains("stage")|| URL.contains("preprod")) {
 			Thread.sleep(1000);
 			
-		Sync.waitElementPresent("xpath", "//h3[contains(text(),'Add Gift Card')]");	
-	
-		Common.clickElement("xpath", "//h3[contains(text(),'Add Gift Card')]");
+		Sync.waitElementPresent("xpath", "//div[contains(@class,'amcard-field')]");	
+		Common.clickElement("xpath", "//div[contains(@class,'amcard-field')]");
 		Common.textBoxInput("xpath","//input[@x-model='giftCardCode']", data.get(dataSet).get("GiftCard3_Stage"));
 		Common.actionsKeyPress(Keys.ARROW_UP);
 		Common.clickElement("xpath","(//button[contains(@class,'btn btn-primary')])[2]"); 
