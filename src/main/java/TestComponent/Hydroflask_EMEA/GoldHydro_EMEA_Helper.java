@@ -2435,27 +2435,36 @@ public class GoldHydro_EMEA_Helper {
 
 	public void createAccountFromOrderSummaryPage(String Dataset) {
 		// TODO Auto-generated method stub
+		Map<String, String> userData = data.get(Dataset);
+		String Email = Common.genrateRandomEmail(userData.get("Email"));
 		try {
 //			String shop=Common.findElement("xpath", "//span[text()='Shop Accessories']//parent::a").getAttribute("href");
 //			String kitchen=Common.findElement("xpath", "//span[text()='Shop Kitchenware']//parent::a").getAttribute("href");
-			Common.clickElement("xpath", "//input[@name='password']");
-			Common.textBoxInput("xpath", "//input[@name='password']", data.get(Dataset).get("Password"));
+			Sync.waitElementPresent("id", "customer-menu");
+			Common.clickElement("id", "customer-menu");
+			Common.clickElement("css", "a[title='Create an Account']");
+			Thread.sleep(3000);
+			Common.textBoxInput("css", "input[id='firstname']",userData.get("FirstName"));
+			Common.textBoxInput("css", "input[id='lastname']",userData.get("LastName"));
+			Common.textBoxInput("css", "input[id='email_address']",Email);
+			Common.clickElement("css", "input[name='password']");
+			Common.textBoxInput("css", "input[name='password']", userData.get("Password"));
 			Common.clickElement("xpath", "(//button[@aria-label='Show Password'])[1]");
-			Sync.waitElementPresent(30, "xpath", "//input[@name='password_confirmation']");
-			Common.clickElement("xpath", "//input[@name='password_confirmation']");
-			Common.textBoxInput("xpath", "//input[@name='password_confirmation']",
+			Sync.waitElementPresent(30, "css", "input[name='password_confirmation']");
+			Common.clickElement("css", "input[name='password_confirmation']");
+			Common.textBoxInput("css", "input[name='password_confirmation']",
 					data.get(Dataset).get("Confirm Password"));
 			Common.clickElement("xpath", "//button[@aria-label='Show Password']");
 
-			Sync.waitElementPresent("xpath", "//label[@for='is_subscribed']");
-			Common.clickElement("xpath", "//label[@for='is_subscribed']");
-			Common.findElement("xpath", "//label[@for='is_subscribed']").isSelected();
+			Sync.waitElementPresent("css", "label[for='is_subscribed']");
+			Common.clickElement("css", "label[for='is_subscribed']");
+			Common.findElement("css", "label[for='is_subscribed']").isSelected();
 
 			Sync.waitElementPresent(30, "xpath", "//span[text()='Sign Up']");
 			Common.clickElement("xpath", "//span[text()='Sign Up']");
 			Sync.waitPageLoad();
-			Thread.sleep(4000);
-			Sync.waitElementPresent("xpath", "//div[@ui-id='message-success']");
+			Thread.sleep(2000);
+			Sync.waitElementPresent(30,"xpath", "//div[@ui-id='message-success']");
 			String message = Common.findElement("xpath", "//div[@ui-id='message-success']").getText();
 			Common.assertionCheckwithReport(
 					Common.getPageTitle().equals("Dashboard") && message.contains("Thank you for registering"),
