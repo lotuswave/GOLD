@@ -9312,9 +9312,9 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 					"Sucessfully Product navigate to the PDP page", "Failed product to the PDP page");
 			Thread.sleep(3000);
 			Common.scrollIntoView("xpath", "//h1[@itemprop='name']");
-			if(Common.getCurrentURL().contains("mcloud")) {
-				Sync.waitElementClickable("xpath", "(//div[@x-ref='jsThumbSlides']//div)[4]");
-				Common.clickElement("xpath", "(//div[@x-ref='jsThumbSlides']//div)[4]");
+			if(Common.getCurrentURL().contains("stage")) {
+				Sync.waitElementClickable("xpath", "(//button[contains(@class,'relative block after') and @type='button'])[2]");
+				Common.clickElement("xpath", "(//button[contains(@class,'relative block after') and @type='button'])[2]");
 			}else {
 				Sync.waitElementClickable("xpath", "(//div[@x-ref='jsThumbSlides']//div)[5]");
 				Common.clickElement("xpath", "(//div[@x-ref='jsThumbSlides']//div)[5]");
