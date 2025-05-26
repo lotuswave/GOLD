@@ -295,5 +295,10 @@
   </classes>
 </test>
 
+<test name="Test_DGLD_HF_EMEA_RT_069_Place_Order_Validate_ShippingMethods_for_Non_Pro_or_Employee_subtotal_amount_lessthan_or_equal_to_35_Euros_Standard_Shipping_5" testid="DQA-4559" description="This testcase is to verify that the Shipping methods for a customer are Non-Pro or Employee, and the sub-total amount is less than or equal to 35 Euros">
+  <classes>
+    <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.Test_DGLD_HF_EMEA_RT_069_Place_Order_Validate_ShippingMethods_for_Non_Pro_or_Employee_subtotal_amount_lessthan_or_equal_to_35_Euros_Standard_Shipping_5"/>
+  </classes>
+</test>
 </suite>
 
