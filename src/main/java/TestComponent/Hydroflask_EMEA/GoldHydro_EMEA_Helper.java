@@ -3262,10 +3262,10 @@ public class GoldHydro_EMEA_Helper {
 		String product = data.get(Dataset).get("Products");
 		try {
 			Sync.waitPageLoad();
-			int MyFavorites = Common.findElements("xpath", "//span[text()='You have no items in your wish list.']")
-					.size();
-			System.out.println(MyFavorites);
-			if (MyFavorites != 0) {
+			int MyFavorites = Common.findElements("xpath", "//span[text()='You have no items in your wish list.']").size();
+System.out.println(MyFavorites);
+			if (MyFavorites == 1) {
+				System.out.println("No products are added to MyFavorites ");
 				search_product("Product");
 				Sync.waitElementPresent(30, "xpath", "//img[@alt='" + product + "']");
 				Common.clickElement("xpath", "//img[@alt='" + product + "']");
@@ -3274,59 +3274,31 @@ public class GoldHydro_EMEA_Helper {
 				Sync.waitPageLoad();
 				Thread.sleep(3000);
 				My_Favorites();
-				String Whishlistproduct = Common.findElement("xpath", "//a[@title='" + product + "']").getText();
+				String Whishlistproduct = Common
+						.findElement("xpath", "//a[@title='"+product+"']").getText();
 				System.out.println(Whishlistproduct);
 
 				if (Whishlistproduct.equals(product)) {
 					Sync.waitElementPresent(30, "xpath", "//a[@title='" + product + "']");
 					Common.mouseOver("xpath", "//a[@title='" + product + "']");
-
+					
 					Sync.waitElementPresent("xpath", "//span[text()='See options']");
 					Common.clickElement("xpath", "//span[text()='See options']");
 					Sync.waitElementPresent("id", "product-addtocart-button");
 					Common.clickElement("id", "product-addtocart-button");
 					Sync.waitPageLoad();
-
-//					Thread.sleep(5000);
-//					String message1 = Common.findElement("xpath", "//div[@ui-id='message-success']").getText();
-//					System.out.println(message1);
-//					Common.assertionCheckwithReport(message1.contains("You added "),
-//							"validating the  product add to the cart", "Product should be add to cart",
-//							"Sucessfully product added to the cart ", "failed to add product to the cart");
-//					
-//					int minicart = Common.findElements("xpath", "//div[@x-show='cartSummaryCount']").size();
-//					System.out.println(minicart);
-//					Common.clickElement("xpath", "//div[@x-show='cartSummaryCount']");
-//					if (minicart > 0) {
-//						minicart_Checkout();
-//					} else {
-//						Assert.fail();
-//					}
+					
 				} else {
 					Assert.fail();
 				}
 
 			} else {
+				System.out.println("Products are already added to MyFavorites ");
+				Sync.waitElementPresent(30, "xpath", "(//a[contains(@class,'product photo ')])[1]");
+				Common.clickElementStale("xpath", "(//a[contains(@class,'product photo ')])[1]");
+				Sync.waitElementPresent("id", "product-addtocart-button");
+				Common.clickElement("id", "product-addtocart-button");
 				Sync.waitPageLoad();
-				search_product("Product");
-				Thread.sleep(2000);
-				Common.refreshpage();
-				Thread.sleep(2000);
-				Sync.waitElementPresent(30, "xpath", "(//a[contains(@class,'product-image')])[1]");
-				Common.clickElementStale("xpath", "(//a[contains(@class,'product-image')])[1]");
-
-				Sync.waitElementPresent(30, "id", "customer-menu");
-				Common.clickElement("id", "customer-menu");
-				Sync.waitElementPresent("id", "customer.header.wishlist.nav.link");
-				Common.clickElement("id", "customer.header.wishlist.nav.link");
-
-				see_options("Product");
-//				int minicart = Common.findElements("xpath", "//span[@x-text='totalCartAmount']").size();
-//				System.out.println(minicart);
-//				if (minicart > 0) {
-//					minicart_Checkout();
-//				}
-
 			}
 
 		} catch (Exception | Error e) {
