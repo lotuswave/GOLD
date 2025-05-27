@@ -2859,7 +2859,7 @@ public class OspreyEMEA_HYVA {
 //				Sync.waitElementPresent("xpath", "//input[@id='shipping-save']");
 //				Common.clickElement("xpath", "//input[@id='shipping-save']");
 				Thread.sleep(4000);
-				Common.clickElement("css", "button[class='btn btn-primary w-full os:uppercase']");
+				Common.clickElement("xpath", "//button[contains(@class,'btn btn-primary w-full os:uppercase')]");
 
 //				
 //                ExtenantReportUtils.addPassLog("verifying shipping addres filling ",
@@ -7739,7 +7739,7 @@ public class OspreyEMEA_HYVA {
 //				Sync.waitElementPresent("xpath", "//input[@id='shipping-save']");
 //				Common.clickElement("xpath", "//input[@id='shipping-save']");
 					Thread.sleep(4000);
-					Common.clickElement("css", "button[class='btn btn-primary w-full os:uppercase']");
+					Common.clickElement("xpath", "//button[contains(@class,'btn btn-primary w-full os:uppercase')]");
 
 				} catch (Exception | Error e) {
 					e.printStackTrace();
