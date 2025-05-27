@@ -1,3 +1,4 @@
+
 package TestExecute.Hydroflask_EMEA.Regression_Testcases;
 
 import org.testng.Assert;
@@ -29,7 +30,7 @@ public class TEST_DGLD_HF_EMEA_RT_054_Add_Gift_Card_Code_in_My_Account_Page_and_
 			Hydro.RegaddDeliveryAddress("AccountDetails");
             Hydro.selectshippingaddress("GroundShipping method");
             Hydro.clickSubmitbutton_Shippingpage();
-			Hydro.Select_Gift_Code("Giftcard");
+			Hydro.Select_Gift_Code("Full_RedeemGiftcard");
 			Hydro.giftCardSubmitOrder();
             Hydro.Remove_GiftCode();
             

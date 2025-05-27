@@ -7957,7 +7957,7 @@ System.out.println(MyFavorites);
 			// "//a[@id='dealer-navigation-inventory']");
 			Common.clickElement("xpath", "//a[@id='dealer-navigation-inventory']");
 
-			int stock = Common.findElements("xpath", "//div[@id='dealer-tab-inventory-grid-container-desktop']").size();
+			int stock = Common.findElements("css", "a[id='dealer-navigation-inventory']").size();
 			System.out.println(stock);
 
 			Common.assertionCheckwithReport(stock > 0, "validating instock page", "user navigates to instock page",
@@ -13899,9 +13899,9 @@ System.out.println(MyFavorites);
 				Common.actionsKeyPress(Keys.ARROW_DOWN);
 				Common.switchToDefault();
 
-				if (Common.findElements("xpath", "//div[@class='flex items-center']//input[@type='checkbox']")
+				if (Common.findElements("css", "input[class='flex-none disabled:opacity-25']")
 						.size() > 0) {
-					Common.clickElement("xpath", "//div[@class='flex items-center']//input[@type='checkbox']");
+					Common.clickElement("css", "input[class='flex-none disabled:opacity-25']");
 				}
 
 				if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
