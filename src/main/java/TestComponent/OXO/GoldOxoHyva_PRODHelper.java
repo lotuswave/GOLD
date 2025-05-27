@@ -658,8 +658,8 @@ public class GoldOxoHyva_PRODHelper {
 			Thread.sleep(4000);
 			Sync.waitElementPresent("xpath", "//span[@x-text='totalCartAmount']");
 			String minicart = Common.findElement("xpath", "//span[@x-text='totalCartAmount']").getText();
-			Sync.waitElementPresent(30, "xpath", "//a[contains(text(),'Checkout')]");
-			Common.clickElement("xpath", "//a[contains(text(),'Checkout')]");
+			Sync.waitElementPresent(30, "xpath", "//button[contains(@class, 'cart-drawer__totals-content-checkout-button') and contains(text(), 'Checkout')]");
+			Common.clickElement("xpath", "//button[contains(@class, 'cart-drawer__totals-content-checkout-button') and contains(text(), 'Checkout')]");
 			Sync.waitPageLoad();
 			Thread.sleep(6000);
 			Common.assertionCheckwithReport(Common.getCurrentURL().contains("checkout"),
@@ -1007,7 +1007,7 @@ public class GoldOxoHyva_PRODHelper {
 		String product = data.get(Dataset).get("Colorproduct");
 		System.out.println(productcolor1);
 		try {
-			Common.clickElement("xpath", "//a[@title='Edit Nest Booster Seat with Removable Cushion']");      // need to click on the color product
+			Common.clickElement("xpath", "//a[@aria-label='Edit Nest Booster Seat with Removable Cushion'] ");      // need to click on the color product
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Sync.waitElementPresent("xpath", "//input[@aria-label='" + productcolor1 + "']");
@@ -7138,7 +7138,7 @@ public void updatePaymentAndSubmitOrder(String dataSet) throws Exception {
 			Sync.waitPageLoad();
 			Thread.sleep(6000);
 			expectedResult = "It should apply discount on your price.If user enters invalid promocode it should display coupon code is not valid message.";
-			String discountcodemsg = Common.getText("xpath", "//span[@x-html='message.text']");
+			String discountcodemsg = Common.getText("xpath", "//span[contains(text(), 'You used coupon code')]");
 			Common.assertionCheckwithReport(discountcodemsg.contains("You used coupon code"), "verifying pomocode",
 					expectedResult, "promotion code working as expected", "Promation code is not applied");
 		} catch (Exception | Error e) {
