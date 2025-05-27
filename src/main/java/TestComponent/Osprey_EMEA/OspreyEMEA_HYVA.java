@@ -3557,7 +3557,7 @@ public class OspreyEMEA_HYVA {
 			for (i = 0; i < socallinksarry.length; i++) {
 				Common.actionsKeyPress(Keys.END);
 				if (Common.getCurrentURL().contains("preprod")) {
-					Common.clickElement("xpath", "//img[@src,'" + socallinksarry[i] + "')]");
+					Common.clickElement("xpath", "//img[contains(@src,'" + socallinksarry[i] + "')]");
 				} else {
 					Common.clickElement("xpath", "//img[@alt='" + socallinksarrys[i] + "']");
 				}
