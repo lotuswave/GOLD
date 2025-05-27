@@ -14297,8 +14297,8 @@ public class OspreyEMEA_HYVA {
 
 		try {
 			int Products = Common.findElements("xpath", "//a[@class='product-image-link']//img").size();
-			System.out.println(Products);
-			for (int i = 0; i < Products; i++) {
+			System.out.println("Products in PLP: "+Products);
+			for (int i = 0; i < Products-1; i++) {
 				Thread.sleep(4000);
 				int value = i + 1;
 				WebElement ListOfSubproducts = Common.findElement("xpath",
