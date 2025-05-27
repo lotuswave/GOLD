@@ -1007,7 +1007,7 @@ public class GoldOxoHyva_PRODHelper {
 		String product = data.get(Dataset).get("Colorproduct");
 		System.out.println(productcolor1);
 		try {
-			Common.clickElement("xpath", "//a[@aria-label='Edit Nest Booster Seat with Removable Cushion'] ");      // need to click on the color product
+			Common.clickElement("xpath", "//a[@aria-label='Edit Nest Booster Seat with Removable Cushion']");      // need to click on the color product
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Sync.waitElementPresent("xpath", "//input[@aria-label='" + productcolor1 + "']");
