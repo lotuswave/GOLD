@@ -1,4 +1,4 @@
-package TestExecute.Hydroflask.Preprod_Smoke_TestCases;
+package TestExecute.Hydroflask.Smoke_TestCases;
 
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
@@ -9,7 +9,7 @@ import TestComponent.Hydroflask.GoldHydroHyvaHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_HF_ST_040_Register_User_Checkout_Simple_Configurable_Bundle_products_with_Afterpay_Payments {
+public class Test_DGLD_HF_ST_040_Guest_User_Checkout_Simple_Configurable_Bundle_products_with_Afterpay_Payments {
 
 	String datafile = "Hydroflask//GoldHydroTestData.xlsx";
 	GoldHydroHyvaHelper Hydro = new GoldHydroHyvaHelper(datafile, "Bundle");
@@ -47,7 +47,7 @@ public class Test_DGLD_HF_ST_040_Register_User_Checkout_Simple_Configurable_Bund
 
 	@AfterTest
 	public void clearBrowser() {
-		//Common.closeAll();
+		Common.closeAll();
 
 	}
 
