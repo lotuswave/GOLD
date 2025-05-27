@@ -5473,83 +5473,84 @@ public void Remove_GiftCode() {
 
 	public void review(String Dataset) {
 		// TODO Auto-generated method stub
-		String products = data.get(Dataset).get("Products");
-		System.out.println(products);
-		try {
-			Thread.sleep(4000);
-			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
-			Common.clickElement("xpath", "//img[@alt='" + products + "']");
+				String products = data.get(Dataset).get("Products");
+				System.out.println(products);
+				try {
+					Thread.sleep(4000);
+					Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
+					Common.clickElement("xpath", "//img[@alt='" + products + "']");
 
-			Common.scrollIntoView("xpath", "//h2[contains(text(),'Reviews')]");
-			Sync.waitElementPresent("xpath", "//h2[contains(text(),'Reviews')]");
-			Common.clickElement("xpath", "//h2[contains(text(),'Reviews')]");
-			Common.scrollIntoView("xpath", "//button[@id='yotpo-main-widget-btn']");
-			Sync.waitElementPresent("xpath", "//button[@id='yotpo-main-widget-btn']");
-			Common.clickElement("xpath", "//button[@id='yotpo-main-widget-btn']");
-			Thread.sleep(3000);
-			int form = Common.findElements("xpath", "//div[@id='yotpo-modal']").size();
-			System.out.println(form);
-			Common.assertionCheckwithReport(form>0, "verifying the write a review button",
-					"Write a review should be appear in the PDP page",
-					"Sucessfully write a review button has been displayed in PDP page",
-					"Failed to display the write a review button in PDP page");
-			
-
-		} catch (Exception | Error e) {
-			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("verifying the Write a review button", "select the write review option",
-					"User Unable to click write review option  ",
-					Common.getscreenShotPathforReport("User Failed to click write review option "));
-			Assert.fail();
-		}
-		try {
-			String expectedResult = "Sucessfully title input box has been displayed";
-			Common.clickElement("xpath", "//button[@class='yotpo-new-review-submit']");
-			String errormessage = Common.findElement("xpath", "//p[@class='yotpo-star-rating-error']").getText();
-			System.out.println(errormessage);
-			Common.assertionCheckwithReport(errormessage.contains("A star rating is required"),
-					"verifying the error message in invalid fields",
-					"error message should be display in the invalid fields",
-					"Sucessfully Error message has been displayed in invalid fileds ",
-					"Failed to display the error meesage in invalid fields ");
-			score(data.get(Dataset).get("score"));
-			Sync.waitElementPresent("xpath", "//h4[contains(text(),'Write a review')]");
-			int title = Common.findElements("xpath", "//h4[contains(text(),'Write a review')]").size();
-			Common.assertionCheckwithReport(title > 0, "verifying the title page",
-					"title input box should be displayed", expectedResult, "User Unable to display the title box");
-			Common.textBoxInput("xpath", "//textarea[@aria-label='Write a review']", data.get(Dataset).get("title"));
-			Common.textBoxInput("xpath", "//input[@aria-label='Add a headline']", data.get(Dataset).get("Review"));
-			Common.textBoxInput("xpath", "//input[@aria-label='Your name']", data.get(Dataset).get("FirstName"));
-			Common.textBoxInput("xpath", "//input[@aria-label='Your email address']", data.get(Dataset).get("UserName"));
-			Common.clickElement("xpath", "//button[text()='Send']");
-			String emailerror = Common.findElement("xpath", "//p[text()='A valid email address is required']").getText();
-			Common.assertionCheckwithReport(emailerror.contains("A valid email address is required"),
-					"verifying the invaild email for the product review",
-					"error message should be display for invaild email",
-					"Sucessfully error message has been displayed for invalid email",
-					"Failed to display the error message for invaild email");
-			Thread.sleep(4000);
-			Common.textBoxInput("xpath", "//input[@aria-label='Your email address']", data.get(Dataset).get("Email"));
-			Common.clickElement("xpath", "//button[text()='Send']");
-			Thread.sleep(4000);
-			String message = Common.findElement("xpath", "//div[@class='yotpo-headline-complete']").getText();
-			System.out.println(message);
-			Common.assertionCheckwithReport(message.equals("Thanks, testing!"),
+					Common.scrollIntoView("xpath", "//h2[contains(text(),'Reviews')]");
+					Sync.waitElementPresent("xpath", "//h2[contains(text(),'Reviews')]");
+					Common.clickElement("xpath", "//h2[contains(text(),'Reviews')]");
+					Common.scrollIntoView("xpath", "//button[@id='yotpo-main-widget-btn']");
+					Sync.waitElementPresent("xpath", "//button[@id='yotpo-main-widget-btn']");
+					Common.clickElement("xpath", "//button[@id='yotpo-main-widget-btn']");
+					Thread.sleep(3000);
+					int form = Common.findElements("xpath", "//div[@id='yotpo-modal']").size();
+					System.out.println(form);
+					Common.assertionCheckwithReport(form>0, "verifying the write a review button",
+							"Write a review should be appear in the PDP page",
+							"Sucessfully write a review button has been displayed in PDP page",
+							"Failed to display the write a review button in PDP page");
 					
-					"verifying the post for the product review",
-					"product review should be submit after clicking on post",
-					"Sucessfully Thank you message has been displayed ", "Failed to display the Thank you message ");
-//			Common.clickElement("xpath", "//div[@aria-label='Next']");
 
-		} catch (Exception | Error e) {
-			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("verifying the post for the product review",
-					"product review should be submit after clicking on post",
-					"Unable to display the Thank you message after clickng on post ",
-					Common.getscreenShotPathforReport("Failed to display the thank you message"));
-			Assert.fail();
+				} catch (Exception | Error e) {
+					e.printStackTrace();
+					ExtenantReportUtils.addFailedLog("verifying the Write a review button", "select the write review option",
+							"User Unable to click write review option  ",
+							Common.getscreenShotPathforReport("User Failed to click write review option "));
+					Assert.fail();
+				}
+				try {
+					String expectedResult = "Sucessfully title input box has been displayed";
+					Common.clickElement("xpath", "//button[@class='yotpo-new-review-submit']");
+					String errormessage = Common.findElement("xpath", "//p[@class='yotpo-star-rating-error']").getText();
+					System.out.println(errormessage);
+					Common.assertionCheckwithReport(errormessage.contains("A star rating is required"),
+							"verifying the error message in invalid fields",
+							"error message should be display in the invalid fields",
+							"Sucessfully Error message has been displayed in invalid fileds ",
+							"Failed to display the error meesage in invalid fields ");
+					score(data.get(Dataset).get("score"));
+					Sync.waitElementPresent("xpath", "//label[contains(text(),'Write a review')]");
+					int title = Common.findElements("xpath", "//label[contains(text(),'Write a review')]").size();
+					Common.assertionCheckwithReport(title > 0, "verifying the title page",
+							"title input box should be displayed", expectedResult, "User Unable to display the title box");
+					Common.textBoxInput("xpath", "//textarea[@aria-label='Write a review']", data.get(Dataset).get("title"));
+					Common.textBoxInput("xpath", "//input[@aria-label='Add a headline']", data.get(Dataset).get("Review"));
+					Common.textBoxInput("xpath", "//input[@aria-label='Your name']", data.get(Dataset).get("FirstName"));
+					Common.textBoxInput("xpath", "//input[@aria-label='Your email address']", data.get(Dataset).get("UserName"));
+					Common.clickElement("xpath", "//button[text()='Send']");
+					String emailerror = Common.findElement("xpath", "//p[text()='A valid email address is required']").getText();
+					Common.assertionCheckwithReport(emailerror.contains("A valid email address is required"),
+							"verifying the invaild email for the product review",
+							"error message should be display for invaild email",
+							"Sucessfully error message has been displayed for invalid email",
+							"Failed to display the error message for invaild email");
+					Thread.sleep(4000);
+					Common.textBoxInput("xpath", "//input[@aria-label='Your email address']", data.get(Dataset).get("Email"));
+					Common.clickElement("xpath", "//button[text()='Send']");
+					Thread.sleep(4000);
+					String message = Common.findElement("xpath", "//div[@class='yotpo-headline-complete']").getText();
+					System.out.println(message);
+					Common.assertionCheckwithReport(message.equals("Thanks, testing!"),
+							
+							"verifying the post for the product review",
+							"product review should be submit after clicking on post",
+							"Sucessfully Thank you message has been displayed ", "Failed to display the Thank you message ");
+//					Common.clickElement("xpath", "//div[@aria-label='Next']");
 
-		}
+				} catch (Exception | Error e) {
+					e.printStackTrace();
+					ExtenantReportUtils.addFailedLog("verifying the post for the product review",
+							"product review should be submit after clicking on post",
+							"Unable to display the Thank you message after clickng on post ",
+							Common.getscreenShotPathforReport("Failed to display the thank you message"));
+					Assert.fail();
+
+				}
+
 
 	}
 
@@ -8108,54 +8109,56 @@ catch(Exception | Error e)
 
 	public void Click_Instock() {
 		// TODO Auto-generated method stub
-		try {
+				try {
 
-			Sync.waitPageLoad();
-			Common.switchFrames("xpath", "//iframe[@id='lcly-embedded-iframe-inner-0']");
-			Sync.waitElementPresent(40, "xpath", "//a[@id='dealer-navigation-inventory']");
-			// Sync.waitElementPresent(20 "xpath",
-			// "//a[@id='dealer-navigation-inventory']");
-			Common.clickElement("xpath", "//a[@id='dealer-navigation-inventory']");
+					Sync.waitPageLoad();
+					Common.switchFrames("xpath", "//iframe[@id='lcly-embedded-iframe-inner-0']");
+					Sync.waitElementPresent(40, "xpath", "//a[@id='dealer-navigation-inventory']");
+					// Sync.waitElementPresent(20 "xpath",
+					// "//a[@id='dealer-navigation-inventory']");
+					Common.clickElement("xpath", "//a[@id='dealer-navigation-inventory']");
+		Thread.sleep(2000);
+					int stock = Common.findElements("xpath", "(//div[@class='status-message success'])[1]").size();
+					System.out.println(stock);
 
-			int stock = Common.findElements("xpath", "//div[@id='dealer-tab-inventory-grid-container-desktop']").size();
-			System.out.println(stock);
+					Common.assertionCheckwithReport(stock > 0, "validating instock page", "user navigates to instock page",
+							"Sucessfully user navigate to instock page", "faield to navigate to instock page");
+				} catch (Exception e) {
+					e.printStackTrace();
+					ExtenantReportUtils.addFailedLog("validating instock page",
+							"System directs the user back to the instock page", "unale user to go  back to thr instock page",
+							Common.getscreenShotPathforReport("failed to get back to instock page"));
+					Assert.fail();
+				}
 
-			Common.assertionCheckwithReport(stock > 0, "validating instock page", "user navigates to instock page",
-					"Sucessfully user navigate to instock page", "faield to navigate to instock page");
-		} catch (Exception e) {
-			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("validating instock page",
-					"System directs the user back to the instock page", "unale user to go  back to thr instock page",
-					Common.getscreenShotPathforReport("failed to get back to instock page"));
-			Assert.fail();
-		}
 
 	}
 
 	public void selectproduct(String Productname) {
 		// TODO Auto-generated method stub
-		try {
+				try {
 
-			Sync.waitElementPresent(40, "xpath", "//div[text()='" + Productname + "']");
-			Common.scrollIntoView("xpath", "//div[text()='" + Productname + "']");
-			Common.clickElement("xpath", "//div[text()='" + Productname + "']");
-			Sync.waitElementVisible("xpath", "//div[@class='stock-status-banner alert success checkmark']");
-			Common.scrollIntoView("xpath", "(//h4[@class='pdp-information-title'])[1]");
-			int product = Common.findElements("xpath", "//div[@class='pdp-information']/p[2]").size();
-			System.out.println(product);
+					Sync.waitElementPresent(40, "xpath", "//div[text()='" + Productname + "']");
+					Common.scrollIntoView("xpath", "//div[text()='" + Productname + "']");
+					Common.clickElement("xpath", "//div[text()='" + Productname + "']");
+					Sync.waitElementVisible("xpath", "//div[@class='stock-status-banner alert success checkmark']");
+					Common.scrollIntoView("xpath", "(//h4[@class='pdp-information-title'])[1]");
+					int product = Common.findElements("xpath", "//div[@class='pdp-information']/p[2]").size();
+					System.out.println(product);
 
-			Common.assertionCheckwithReport(product > 0, "validating product listing page",
-					"user navigates to product listing page", "Sucessfully user navigate to product listing page",
-					"faield to navigate to product listing page and unable to see error message");
+					Common.assertionCheckwithReport(product > 0, "validating product listing page",
+							"user navigates to product listing page", "Sucessfully user navigate to product listing page",
+							"faield to navigate to product listing page and unable to see error message");
 
-		} catch (Exception | Error e) {
-			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("validating product listing page",
-					"System directs the user back to the product listing page",
-					"unable user back to product listing page",
-					Common.getscreenShotPathforReport("failed to get back product listing page"));
-			Assert.fail();
-		}
+				} catch (Exception | Error e) {
+					e.printStackTrace();
+					ExtenantReportUtils.addFailedLog("validating product listing page",
+							"System directs the user back to the product listing page",
+							"unable user back to product listing page",
+							Common.getscreenShotPathforReport("failed to get back product listing page"));
+					Assert.fail();
+				}
+
 	}
 
 	public void Click_Direction() {
@@ -9398,73 +9401,76 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 
 	public void PDP_video_validation(String Dataset) {
 		// TODO Auto-generated method stub
-		String product = data.get(Dataset).get("Colorproduct");
-		String color = data.get(Dataset).get("Color");
-		try {
-			Sync.waitPageLoad();
-			for (int i = 0; i <= 10; i++) {
-				//Sync.waitElementPresent("xpath", "//li[@class='ais-InfiniteHits-item']//img[1]");
-				Sync.waitElementPresent("xpath", "//a[@class='product-image-link']");
+				String product = data.get(Dataset).get("Colorproduct");
+				String color = data.get(Dataset).get("Color");
+				try {
+					Sync.waitPageLoad();
+					for (int i = 0; i <= 10; i++) {
+						//Sync.waitElementPresent("xpath", "//li[@class='ais-InfiniteHits-item']//img[1]");
+						Sync.waitElementPresent("xpath", "//a[@class='product-image-link']");
 
-				List<WebElement> webelementslist = Common.findElements("xpath","//a[@class='product-image-link']");
-				String s = webelementslist.get(i).getAttribute("href");
-				System.out.println(s);
-				if (s.isEmpty()) {
+						List<WebElement> webelementslist = Common.findElements("xpath","//a[@class='product-image-link']");
+						String s = webelementslist.get(i).getAttribute("href");
+						System.out.println(s);
+						if (s.isEmpty()) {
 
-				} else {
-					break;
+						} else {
+							break;
+						}
+					}
+					
+					Sync.waitElementPresent("xpath", "//img[@alt='" + product + "']");
+					Common.javascriptclickElement("xpath", "//img[@alt='" + product + "']");
+					Sync.waitElementPresent(30, "xpath", "//div[@data-option-label='" + color + "']");
+					Common.clickElement("xpath", "//div[@data-option-label='" + color + "']");
+					Sync.waitPageLoad();
+					Thread.sleep(4000);
+					System.out.println(product);
+					String name = Common.findElement("xpath", "//h1[@itemprop='name']").getText().trim();
+					System.out.println(name);
+					Common.assertionCheckwithReport(name.contains(product),
+							"validating the product should navigate to the PDP page",
+							"When we click on the product is should navigate to the PDP page",
+							"Sucessfully Product navigate to the PDP page", "Failed product to the PDP page");
+					Thread.sleep(3000);
+					Common.scrollIntoView("xpath", "//h1[@itemprop='name']");
+					if(Common.getCurrentURL().contains("mcloud")) {
+						Sync.waitElementClickable("xpath", "(//div[@x-ref='jsThumbSlides']//div)[5]");
+						Common.javascriptclickElement("xpath", "(//div[@x-ref='jsThumbSlides']//div)[5]");
+					}else {
+						Sync.waitElementClickable("xpath", "(//div[@x-ref='jsThumbSlides']//div[5]");
+						Common.clickElement("xpath", "(//div[@x-ref='jsThumbSlides']//div[5]");
+					}
+				Thread.sleep(2000);
+						//Common.switchFrames("xpath", "//iframe[contains(@id,'vimeo')]");
+					//	Sync.waitElementClickable("xpath", "//iframe[contains(@id,'vimeo')]");
+
+					//	Sync.waitElementClickable("xpath", "//img[@alt='video thumbnail'][1]");
+					//Common.switchFrames("xpath", "//div[@class='js_thumbs_slide flex shrink-0 rounded'][1]");
+					Sync.waitElementClickable("xpath", "//div[@class='js_thumbs_slide flex shrink-0 rounded'][1]");
+
+						Sync.waitElementClickable("xpath", "//div[@class='js_thumbs_slide flex shrink-0 rounded'][6]");
+						Common.clickElement("xpath", "//div[@class='js_thumbs_slide flex shrink-0 rounded'][6]");
+						Common.switchFrames("xpath","//iframe[@allow='autoplay']");
+		                Thread.sleep(3000);
+						Common.clickElement("xpath","//span[@id='play-button-tooltip']");
+						   Thread.sleep(3000);
+						int video1 = Common.findElements("xpath","//span[@id='play-button-tooltip']").size();
+						Common.switchToDefault();
+						System.out.println(video1);
+						Common.assertionCheckwithReport(video1>0,"validating the video in PDP page",
+								"video should be play in the PDP page", "Sucessfully the video has been played on the PDP page",
+								"failed to play the video in PDP page");
+
+
+				} catch (Exception | Error e) {
+					e.printStackTrace();
+					ExtenantReportUtils.addFailedLog("validating the video in PDP page", "video should be play in the PDP page",
+							"Unable to play the the video on the PDP page",
+							Common.getscreenShot("failed to play the video in PDP page"));
+					Assert.fail();
 				}
-			}
-			
-			Sync.waitElementPresent("xpath", "//img[@alt='" + product + "']");
-			Common.javascriptclickElement("xpath", "//img[@alt='" + product + "']");
-			Sync.waitElementPresent(30, "xpath", "//div[@data-option-label='" + color + "']");
-			Common.clickElement("xpath", "//div[@data-option-label='" + color + "']");
-			Sync.waitPageLoad();
-			Thread.sleep(4000);
-			System.out.println(product);
-			String name = Common.findElement("xpath", "//h1[@itemprop='name']").getText().trim();
-			System.out.println(name);
-			Common.assertionCheckwithReport(name.contains(product),
-					"validating the product should navigate to the PDP page",
-					"When we click on the product is should navigate to the PDP page",
-					"Sucessfully Product navigate to the PDP page", "Failed product to the PDP page");
-			Thread.sleep(3000);
-			Common.scrollIntoView("xpath", "//h1[@itemprop='name']");
-			if(Common.getCurrentURL().contains("mcloud")) {
-				Sync.waitElementClickable("xpath", "(//div[@x-ref='jsThumbSlides']//div)[5]");
-				Common.javascriptclickElement("xpath", "(//div[@x-ref='jsThumbSlides']//div)[5]");
-			}else {
-				Sync.waitElementClickable("xpath", "(//div[@x-ref='jsThumbSlides']//div[5]");
-				Common.clickElement("xpath", "(//div[@x-ref='jsThumbSlides']//div[5]");
-			}
-		Thread.sleep(2000);
-				//Common.switchFrames("xpath", "//iframe[contains(@id,'vimeo')]");
-			//	Sync.waitElementClickable("xpath", "//iframe[contains(@id,'vimeo')]");
 
-			//	Sync.waitElementClickable("xpath", "//img[@alt='video thumbnail'][1]");
-			Common.switchFrames("xpath", "//img[@alt='video thumbnail'][1]");
-			Sync.waitElementClickable("xpath", "//img[@alt='video thumbnail'][1]");
-
-				Sync.waitElementClickable("xpath", "//button[@aria-labelledby='play-button-tooltip']");
-				Common.clickElement("xpath", "//button[@aria-labelledby='play-button-tooltip']");
-				
-                Thread.sleep(3000);
-				String video1 = Common.findElement("xpath", "//span[@id='play-button-tooltip']").getText();
-				Common.switchToDefault();
-				System.out.println(video1);
-				Common.assertionCheckwithReport(video1.contains("Pause"), "validating the video in PDP page",
-						"video should be play in the PDP page", "Sucessfully the video has been played on the PDP page",
-						"failed to play the video in PDP page");
-
-
-		} catch (Exception | Error e) {
-			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("validating the video in PDP page", "video should be play in the PDP page",
-					"Unable to play the the video on the PDP page",
-					Common.getscreenShot("failed to play the video in PDP page"));
-			Assert.fail();
-		}
 	}
 	public void Prod_PDP_video_validation(String Dataset) {
 		// TODO Auto-generated method stub
@@ -10481,39 +10487,39 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 
 	public void Ask_a_question(String Dataset) {
 		// TODO Auto-generated method stub
-		String Question = data.get(Dataset).get("CommetsHydroflask");
-		String Name = data.get(Dataset).get("FirstName");
-		String Email = data.get(Dataset).get("Email");
-		try {
-			Common.refreshpage();
-			Common.scrollIntoView("xpath", "//h2[contains(text(),'Reviews')]");
-			Sync.waitElementPresent("xpath", "//h2[contains(text(),'Reviews')]");
-			Common.clickElement("xpath", "//h2[contains(text(),'Reviews')]");
-			Common.clickElement("xpath", "//div[@class='ugc-storefront-widgets-tabs-container__tab']");
-			Sync.waitElementPresent("xpath", "//div[@class='ugc-storefront-widgets-tabs-container__tab']");
-			Common.clickElement("xpath", "//div[@class='ugc-storefront-widgets-tabs-container__tab']");
-			Sync.waitElementPresent(30, "xpath", "//span[text()='Ask a question']");
-			Common.clickElement("xpath", "//span[text()='Ask a question']");
-			Common.textBoxInput("xpath", "//textarea[@aria-label='Type your question']", "Ask a question");
-			
+				String Question = data.get(Dataset).get("CommetsHydroflask");
+				String Name = data.get(Dataset).get("FirstName");
+				String Email = data.get(Dataset).get("Email");
+				try {
+					Common.refreshpage();
+					Common.scrollIntoView("xpath", "//h2[contains(text(),'Reviews')]");
+					Sync.waitElementPresent("xpath", "//h2[contains(text(),'Reviews')]");
+					Common.clickElement("xpath", "//h2[contains(text(),'Reviews')]");
+					Common.clickElement("xpath", "//button[@class='ugc-storefront-widgets-tabs-container__tab']");
+					Sync.waitElementPresent("xpath", "//button[@class='ugc-storefront-widgets-tabs-container__tab']");
+					Common.clickElement("xpath", "//button[@class='ugc-storefront-widgets-tabs-container__tab']");
+					Sync.waitElementPresent(30, "xpath", "//span[text()='Ask a question']");
+					Common.clickElement("xpath", "//span[text()='Ask a question']");
+					Common.textBoxInput("xpath", "//textarea[@aria-label='Type your question']", "Ask a question");
+					
 
-			Sync.waitElementPresent(30, "xpath", "//input[@aria-label='Enter your name']");
-			Common.textBoxInput("xpath", "//input[@aria-label='Enter your name']", "Qa");
-			Sync.waitElementPresent(30, "xpath", "//input[@aria-label='Enter your email address']");
-			Common.textBoxInput("xpath", "//input[@aria-label='Enter your email address']", Email);
-			Common.clickElement("xpath", "//button[@class='yotpo-question-submit']");
-			Thread.sleep(4000);
-			String question = Common.findElement("xpath", "//div[@class='yotpo-headline-complete']").getText();
-			System.out.println(question);
-			Common.assertionCheckwithReport(question.contains("Thanks, Qa!"),
-					"validating the question submit form", "Ask a form should be submit",
-					"Sucessfully question post should be submit", "Failed to submit the ask a question post");
-		} catch (Exception | Error e) {
-			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("validating the question submit form", "Ask a form should be submit",
-					"Unable to subit question post", Common.getscreenShot("failed to subit question post"));
-			Assert.fail();
-		}
+					Sync.waitElementPresent(30, "xpath", "//input[@aria-label='Enter your name']");
+					Common.textBoxInput("xpath", "//input[@aria-label='Enter your name']", "Qa");
+					Sync.waitElementPresent(30, "xpath", "//input[@aria-label='Enter your email address']");
+					Common.textBoxInput("xpath", "//input[@aria-label='Enter your email address']", Email);
+					Common.clickElement("xpath", "//button[@class='yotpo-question-submit']");
+					Thread.sleep(4000);
+					String question = Common.findElement("xpath", "//div[@class='yotpo-headline-complete']").getText();
+					System.out.println(question);
+					Common.assertionCheckwithReport(question.contains("Thanks, Qa!"),
+							"validating the question submit form", "Ask a form should be submit",
+							"Sucessfully question post should be submit", "Failed to submit the ask a question post");
+				} catch (Exception | Error e) {
+					e.printStackTrace();
+					ExtenantReportUtils.addFailedLog("validating the question submit form", "Ask a form should be submit",
+							"Unable to subit question post", Common.getscreenShot("failed to subit question post"));
+					Assert.fail();
+				}
 
 	}
 
