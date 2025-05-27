@@ -3708,7 +3708,7 @@ public void Validate_retailerlocations() {
 			Sync.waitElementPresent(40, "xpath", "//a[@id='dealer-navigation-inventory']");
 			Common.clickElement("xpath", "//a[@id='dealer-navigation-inventory']");
 
-			int stock = Common.findElements("xpath", "//div[@id='dealer-tab-inventory-grid-container-desktop']").size();
+			int stock = Common.findElements("xpath", "//div[@id='dealer-tab-inventory-filter-container']").size();
 			System.out.println(stock);
 
 			Common.assertionCheckwithReport(stock > 0, "validating instock page", "user navigates to instock page",
@@ -3727,9 +3727,9 @@ public void Validate_retailerlocations() {
 		// TODO Auto-generated method stub
 		try {
 
-			Sync.waitElementPresent(40, "xpath", "//div[contains(text(),'" + Productname + "')]");
-			Common.scrollIntoView("xpath", "//div[contains(text(),'" + Productname + "')]");
-			Common.javascriptclickElement("xpath", "//div[contains(text(),'" + Productname + "')]");
+			Sync.waitElementPresent(40, "xpath", "//img[contains(@alt,'" + Productname + "')]");
+			Common.scrollIntoView("xpath", "//img[contains(@alt,'" + Productname + "')]");
+			Common.javascriptclickElement("xpath", "//img[contains(@alt,'" + Productname + "')]");
 			
 			Sync.waitElementVisible("xpath", "//div[@class='stock-status-banner alert success checkmark']");
 			Common.scrollIntoView("xpath", "(//h4[@class='pdp-information-title'])[1]");
