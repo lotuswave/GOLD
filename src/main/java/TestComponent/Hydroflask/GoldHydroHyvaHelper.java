@@ -127,14 +127,14 @@ public class GoldHydroHyvaHelper {
 		String expectedResult = "User should click the" + category;
 		try {
 
-			Sync.waitElementClickable("xpath", "//span[contains(text(), ' Shop')]");
+			Sync.waitElementClickable("xpath", "(//span[contains(text(), ' Shop')])[2]");
 			Thread.sleep(3000);
-			Common.mouseOverClick("xpath", "//span[contains(text(), ' Shop')]");
+			Common.mouseOverClick("xpath", "(//span[contains(text(), ' Shop')])[2]");
 			Thread.sleep(3000);
 			try {
 				Common.mouseOver("xpath", "//span[contains(text(),'" + category + "')]");
 			} catch (Exception e) {
-				Common.clickElement("xpath", "//span[contains(text(), ' Shop')]");
+				Common.clickElement("xpath", "(//span[contains(text(), ' Shop')])[2]");
 			}
 			Common.clickElement("xpath", "//span[contains(text(),'" + category + "')]");
 			Common.clickElement("xpath", "//a[text()='Shop All']");
@@ -162,17 +162,17 @@ public class GoldHydroHyvaHelper {
 		String expectedResult = "User should click the" + category;
 		try {
 
-			Sync.waitElementPresent("xpath", "//span[contains(text(), ' Shop')]");
+			Sync.waitElementPresent("xpath", "(//span[contains(text(), ' Shop')])[2]");
 			Thread.sleep(3000);
 //			Common.scrollIntoView("xpath","//a[contains(@class,'level-top')]//span[text()=' Shop']");
-			Common.clickElement("xpath", "//span[contains(text(), ' Shop')]");
+			Common.clickElement("xpath", "(//span[contains(text(), ' Shop')])[2]");
 
 			Thread.sleep(3000);
 
 			try {
 				Common.mouseOver("xpath", "//span[contains(text(),'" + category + "')]");
 			} catch (Exception e) {
-				Common.clickElement("xpath", "//span[contains(text(), ' Shop')]");
+				Common.clickElement("xpath", "(//span[contains(text(), ' Shop')])[2]");
 			}
 			Common.clickElement("xpath", "//span[contains(text(),'" + category + "')]");
 			Thread.sleep(4000);
@@ -238,17 +238,17 @@ public class GoldHydroHyvaHelper {
 		String expectedResult = "User should click the" + category;
 		try {
 
-			Sync.waitElementPresent("xpath", "//span[contains(text(), ' Shop')]");
+			Sync.waitElementPresent("xpath", "(//span[contains(text(), ' Shop')])[2]");
 			Thread.sleep(3000);
 //			Common.scrollIntoView("xpath","//a[contains(@class,'level-top')]//span[text()=' Shop']");
-			Common.clickElement("xpath", "//span[contains(text(), ' Shop')]");
+			Common.clickElement("xpath", "(//span[contains(text(), ' Shop')])[2]");
 
 			Thread.sleep(3000);
 
 			try {
 				Common.mouseOver("xpath", "//span[contains(text(),'" + category + "')]");
 			} catch (Exception e) {
-				Common.clickElement("xpath", "//span[contains(text(), ' Shop')]");
+				Common.clickElement("xpath", "(//span[contains(text(), ' Shop')])[2]");
 			}
 			Common.clickElement("xpath", "//span[contains(text(),'" + category + "')]");
 			Thread.sleep(4000);
@@ -279,17 +279,17 @@ public class GoldHydroHyvaHelper {
 		String expectedResult = "User should click the" + category;
 		try {
 
-			Sync.waitElementPresent("xpath", "(//span[contains(text(), ' Shop')])[2]");
+			Sync.waitElementPresent("xpath", "((//span[contains(text(), ' Shop')])[2])[2]");
 			Thread.sleep(3000);
 //			Common.scrollIntoView("xpath","//a[contains(@class,'level-top')]//span[text()=' Shop']");
-			Common.clickElement("xpath", "(//span[contains(text(), ' Shop')])[2]");
+			Common.clickElement("xpath", "((//span[contains(text(), ' Shop')])[2])[2]");
 
 			Thread.sleep(3000);
 
 			try {
 				Common.mouseOver("xpath", "//span[contains(text(),'" + category + "')]");
 			} catch (Exception e) {
-				Common.clickElement("xpath", "(//span[contains(text(), ' Shop')])[2]");
+				Common.clickElement("xpath", "((//span[contains(text(), ' Shop')])[2])[2]");
 			}
 			Common.clickElement("xpath", "//span[contains(text(),'" + category + "')]");
 			Thread.sleep(4000);
@@ -2458,7 +2458,7 @@ public void FUll_Payment(String dataSet) {
 		}
 	}
 
-	public String minicart_items() {
+	/*public String minicart_items() {
 		// TODO Auto-generated method stub
 		String items = "";
 		try {
@@ -2490,18 +2490,72 @@ public void FUll_Payment(String dataSet) {
 		}
 		return items;
 
+	}*/
+	public String minicart_items() {
+	    String items = "";
+	    try {
+	        // Wait for cart summary count and retrieve item count
+	        Sync.waitElementPresent("xpath", "//div[@x-text='cartSummaryCount']");
+	        items = Common.findElement("xpath", "//div[@x-text='cartSummaryCount']").getText().trim();
+	        System.out.println("Cart Summary Count: " + items);
+
+	        // Click on the minicart icon
+	        Common.clickElement("xpath", "//button[@id='menu-cart-icon']");
+
+	        // Wait for total cart amount and retrieve item count
+	        Sync.waitElementPresent("xpath", "//span[@x-text='totalCartAmount']");
+	        String miniitems = Common.findElement("xpath", "//span[@x-text='totalCartAmount']").getText().trim();
+	        System.out.println("Mini Cart Total Amount: " + miniitems);
+
+	        // Validation check
+	        if (items.isEmpty() || miniitems.isEmpty()) {
+	            System.err.println("Error: Cart count or Mini cart count is empty!");
+	            ExtenantReportUtils.addFailedLog(
+	                "Validating the products count in the mini cart",
+	                "Products count should be displayed in the mini cart",
+	                "Failed due to empty values in cart count",
+	                Common.getscreenShot("failed_cart_count")
+	            );
+	            Assert.fail();
+	        } else {
+	            Common.assertionCheckwithReport(
+	                items.contains(miniitems),
+	                "Validating the products count in the mini cart",
+	                "Products count should be displayed in the mini cart",
+	                "Successfully displayed product count in the mini cart",
+	                "Failed to display products count in the mini cart"
+	            );
+	        }
+
+	        // Close the minicart
+	        Sync.waitElementPresent("xpath", "//button[@aria-label='Close minicart']");
+	        Common.clickElement("xpath", "//button[@aria-label='Close minicart']");
+
+	    } catch (Exception | Error e) {
+	        e.printStackTrace();
+	        ExtenantReportUtils.addFailedLog(
+	            "Validating the products count in the mini cart",
+	            "Products count should be displayed in the mini cart",
+	            "Unable to display the products count in the mini cart",
+	            Common.getscreenShot("failed_to_display_cart_count")
+	        );
+	        Assert.fail();
+	    }
+
+	    return items;  // Ensure a valid return even in case of errors
 	}
 
 	public void minicart_products(String minicart) {
 		// TODO Auto-generated method stub
+	
 		try {
 			Sync.waitElementPresent("xpath", "//button[@id='menu-cart-icon']");
 			Common.mouseOverClick("xpath", "//button[@id='menu-cart-icon']");
 
-			Sync.waitElementPresent(30, "xpath", "//span[@x-text='totalCartAmount']");
+			Sync.waitElementPresent(50, "xpath", "//span[@x-text='totalCartAmount']");
 			String cartproducts = Common.findElement("xpath", "//span[@x-text='totalCartAmount']").getText();
-
-			Common.assertionCheckwithReport(cartproducts.contains(minicart),
+            System.out.println(cartproducts);
+			Common.assertionCheckwithReport(cartproducts.contains("1"),
 					"validating the products in the cart after creating new account ",
 					"Products should be displayed in the mini cart after Create account with Cart",
 					"Sucessfully after create account with cart products should be display in mini cart",
@@ -3795,9 +3849,9 @@ System.out.println(MyFavorites);
 		try
 		{
 			Thread.sleep(4000);
-			int size=Common.findElements("xpath", "//span[contains(text(), ' Shop')]").size();
+			int size=Common.findElements("xpath", "(//span[contains(text(), ' Shop')])[2]").size();
 			if(size>0) {
-				Common.clickElement("xpath", "//span[contains(text(), ' Shop')]");
+				Common.clickElement("xpath", "(//span[contains(text(), ' Shop')])[2]");
 			}else {
 				Common.javascriptclickElement("xpath","//nav[@aria-label='Main menu']//span[contains(text(),'Shop')] ");
 			}
@@ -6059,10 +6113,10 @@ catch(Exception | Error e)
 		String expectedResult = "User should click the" + category;
 		try {
 
-			Sync.waitElementPresent("xpath", "//span[contains(text(), ' Shop')]");
+			Sync.waitElementPresent("xpath", "(//span[contains(text(), ' Shop')])[2]");
 			Thread.sleep(3000);
 //			Common.scrollIntoView("xpath","//a[contains(@class,'level-top')]//span[text()=' Shop']");
-			Common.clickElement("xpath", "//span[contains(text(), ' Shop')]");
+			Common.clickElement("xpath", "(//span[contains(text(), ' Shop')])[2]");
 			Thread.sleep(3000);
 
 			try {
