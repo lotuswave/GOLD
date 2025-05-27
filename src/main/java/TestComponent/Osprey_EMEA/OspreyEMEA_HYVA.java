@@ -8782,6 +8782,7 @@ public class OspreyEMEA_HYVA {
 			Locally_PDP();
 			PDP_Tabs("Tabs");
 			Common.actionsKeyPress(Keys.UP);
+			BNPL();
 
 
 		} catch (Exception | Error e) {
@@ -8792,6 +8793,34 @@ public class OspreyEMEA_HYVA {
 			AssertJUnit.fail();
 		}
 
+	}
+	
+	public void BNPL() {
+		try
+		{
+			String iframename=Common.findElement("xpath", "(//iframe[@role='presentation'])[1]").getAttribute("name");
+			Common.switchFrames("css", "iframe[name='"+ iframename +"']");
+			Sync.waitElementPresent("css", "img[alt='klarna']");
+			Common.clickElement("css", "img[alt='klarna']");
+			Thread.sleep(2000);
+			Common.switchToDefault();
+			Common.switchFrames("xpath", "(//iframe[@role='presentation'])[1]");
+			String text=Common.findElement("css", "div[class='p-ModalHeaderRow '] h1").getText().trim();
+			Common.assertionCheckwithReport(text.contains("Choose how you want to pay"),
+					"validating the  BNPL on the PDP page", "BNPL shoul be appear on the PDP page",
+					"Sucessfully BNPL appeared on the PDP page", "failed to appeared the BNPL on the PDP page");
+			Common.clickElement("css", "button[data-testid='CloseModalButton']");
+			Common.switchToDefault();
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the  BNPL on the PDP page", "BNPL shoul be appear on the PDP page",
+					"Unable to appeared the BNPL on the PDP page",
+					Common.getscreenShot("Failed to appeared the BNPL on the PDP page"));
+			Assert.fail();
+		}
 	}
 
 	public void Locally_PDP() {
@@ -8857,18 +8886,44 @@ public class OspreyEMEA_HYVA {
 			// Common.actionsKeyPress(Keys.UP);
 //			add_simplarproducts("configurable product");
 			PDP_Tabs("Tabs");
+			Common.actionsKeyPress(Keys.UP);
 			PDP_Valdations();
-
-
+			size_and_fit();
+			BNPL( );
+			
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("validating the PDP page", "In PDP fav ugc all should be appear",
 					"Unable to see few things in the PDP",
 					Common.getscreenShot("Failed to see few things in the PDP page"));
-
-			AssertJUnit.fail();
+			Assert.fail();
 		}
 
+	}
+
+	public void size_and_fit() {
+		try {
+			Thread.sleep(3000);
+			Sync.waitElementPresent("css", "div[class='self-center'] span");
+			Common.clickElement("css", "div[class='self-center'] span");
+			Thread.sleep(2000);
+			String size_And_Fit = Common.findElement("xpath", "(//h2[@class='size-overview-block__title'])[1]")
+					.getText().trim();
+			System.out.println(size_And_Fit);
+			Common.assertionCheckwithReport(size_And_Fit.contains("SIZE & FIT"),
+					"validating the  size and fit for the configurable product on the PDP page",
+					"User should able to see the size and fit for the configurable product on the PDP page",
+					"Sucessfully able to see the size and fit for the configurable product on the PDP page ",
+					"failed to see the size and fit for the configurable product on the PDP page");
+			Common.clickElement("css", "div[x-ref='size_and_fit_modal'] button[aria-label='Close']");
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the  size and fit for the configurable product on the PDP page",
+					"User should able to see the size and fit for the configurable product on the PDP page",
+					"Unable to see the size and fit for the configurable product on the PDP page",
+					Common.getscreenShot("failed to see the size and fit for the configurable product on the PDP page"));
+			Assert.fail();
+		}
 	}
 
 	public void add_simplarproducts(String Dataset) {
