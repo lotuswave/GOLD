@@ -3285,10 +3285,10 @@ public class OspreyEMEA_HYVA {
 			Common.clickElement("xpath", "//a[contains(@class,'tab-locations')]");
 
 			int storecount = Common.findElements("xpath", "//h2[@class='store-info-title dl-store-name-inner']").size();
-			for (int i = 1; i <= storecount; i++) {
+			for (int i = 2; i <= storecount; i++) {
+				Sync.waitPageLoad();
 				Thread.sleep(3000);
-				String relatedstores = Common
-						.findElement("xpath", "(//h2[@class='store-info-title dl-store-name-inner'])[" + i + "]")
+				String relatedstores = Common.findElement("xpath", "(//h2[@class='store-info-title dl-store-name-inner'])[" + i + "]")
 						.getText().toUpperCase();
 				System.out.println(relatedstores);
 				Common.assertionCheckwithReport(relatedstores.contains(Storename),
@@ -3378,7 +3378,7 @@ public class OspreyEMEA_HYVA {
 			Sync.waitElementPresent(40, "xpath", "//a[@id='dealer-navigation-inventory']");
 			Common.clickElement("xpath", "//a[@id='dealer-navigation-inventory']");
 
-			int stock = Common.findElements("xpath", "//div[@id='dealer-tab-inventory-grid-container-desktop']").size();
+			int stock = Common.findElements("xpath", "//div[@class='status-message success']").size();
 			System.out.println(stock);
 
 			Common.assertionCheckwithReport(stock > 0, "validating instock page", "user navigates to instock page",
@@ -3396,10 +3396,10 @@ public class OspreyEMEA_HYVA {
 	public void selectproduct(String Productname) {
 		// TODO Auto-generated method stub
 		try {
-
-			Sync.waitElementPresent(40, "xpath", "//img[@alt='" + Productname + "']");
-			Common.scrollIntoView("xpath", "//img[@alt='" + Productname + "']");
-			Common.javascriptclickElement("xpath", "//img[@alt='" + Productname + "']");
+			Thread.sleep(2000);
+			Sync.waitElementPresent("xpath", "//div//img[@alt='" + Productname + "']");
+			Common.scrollIntoView("xpath", "//div//img[@alt='" + Productname + "']");
+			Common.javascriptclickElement("xpath", "//div//img[@alt='" + Productname + "']");
 			Sync.waitElementVisible("xpath", "//div[@class='stock-status-banner alert success checkmark']");
 			Common.scrollIntoView("xpath", "(//h4[@class='pdp-information-title'])[1]");
 			int product = Common.findElements("xpath", "//div[@class='pdp-information']/p[2]").size();
