@@ -22,6 +22,8 @@ public class Test_DGLD_HF_EMEA_RT_059_Guest_User_checkout_with_Express_paypal {
 			Hydro.search_product("Product");      
 			Hydro.addtocart("Product");  
 			Hydro.minicart_Checkout();
+			Hydro.addDeliveryAddress_Guestuser("AccountDetails");
+            Hydro.selectshippingaddress("GroundShipping method");
 			Hydro.Express_Paypal("PaypalDetails");
 			
 		} catch (Exception e) {
@@ -32,7 +34,7 @@ public class Test_DGLD_HF_EMEA_RT_059_Guest_User_checkout_with_Express_paypal {
 
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+//		Common.closeAll();
 
 	}
 
