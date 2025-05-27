@@ -5499,13 +5499,14 @@ public class OspreyEMEA_HYVA {
 	}
 
 	public void newuseraddDeliveryAddress(String dataSet) throws Exception {
-		String email = data.get(dataSet).get("UserName");
+		String email = Common.genrateRandomEmail(data.get(dataSet).get("UserName"));
 		try {
 			Thread.sleep(5000);
 			Sync.waitElementVisible("xpath", "//input[@type='email']");
 			// Common.textBoxInput("xpath",
 			// "//input[@type='email']",data.get(dataSet).get("UserName"));
-			Common.textBoxInput("xpath", "//input[@type='email']", email);
+			Common.findElement("xpath", "//input[@type='email']").sendKeys(email);
+//			Common.textBoxInput("xpath", "//input[@type='email']", email);
 		} catch (NoSuchElementException e) {
 			minicart_Checkout();
 			// Common.textBoxInput("xpath",
@@ -5593,7 +5594,6 @@ public class OspreyEMEA_HYVA {
 			Sync.waitElementPresent(30, "xpath", "(//button[@type='submit'])[2]");
 			Common.clickElement("xpath", "(//button[@type='submit'])[2]");
 			Sync.waitPageLoad();
-			Thread.sleep(4000);
 			Sync.waitElementPresent("xpath", "//span[contains(text(),'Thank you for registering')]");
 			String message = Common.findElement("xpath", "//span[contains(text(),'Thank you for registering')]")
 					.getText();
