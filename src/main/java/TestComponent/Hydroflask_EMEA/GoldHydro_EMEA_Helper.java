@@ -3939,17 +3939,19 @@ System.out.println(MyFavorites);
 		Common.actionsKeyPress(Keys.PAGE_UP);
 		Thread.sleep(3000);
 		int placeordercount = Common.findElements("xpath", "//button[@class='action primary checkout']").size();
-		Thread.sleep(4000);
-		if (Common.findElements("xpath", "//div[@class='flex items-center']//input[@type='checkbox']").size() > 0) {
-			Common.clickElement("xpath", "//div[@class='flex items-center']//input[@type='checkbox']");
-		}
+		Thread.sleep(1000);
+//		if (Common.findElements("xpath", "//div[@class='flex items-center']//input[@type='checkbox']").size() > 0) {
+//			Common.clickElement("xpath", "//div[@class='flex items-center']//input[@type='checkbox']");
+//		}
 		if (Common.getCurrentURL().contains("stage") || Common.getCurrentURL().contains("preprod")) {
 //   Common.refreshpage();
-			Thread.sleep(4000);
+			Thread.sleep(3000);
 			Common.clickElement("xpath", "//input[@id='payment-method-free']");
-			Thread.sleep(4000);
+			Thread.sleep(2000);
 			Common.clickElement("xpath", "(//input[contains(@id,'agreement')])[3]");
-			Common.clickElement("xpath", "(//button[contains(text(),'Place Order')])[2]");
+			Thread.sleep(2000);
+			Sync.waitElementPresent("xpath", "(//button[contains(text(),'Place Order')])[2]");
+			Common.javascriptclickElement("xpath", "(//button[contains(text(),'Place Order')])[2]");
 			// Common.refreshpage();
 			Thread.sleep(3000);
 		} else {

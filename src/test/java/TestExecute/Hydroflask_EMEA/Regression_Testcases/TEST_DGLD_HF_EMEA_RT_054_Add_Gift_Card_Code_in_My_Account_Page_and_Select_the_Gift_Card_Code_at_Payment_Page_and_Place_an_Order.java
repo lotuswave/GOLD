@@ -23,7 +23,7 @@ public class TEST_DGLD_HF_EMEA_RT_054_Add_Gift_Card_Code_in_My_Account_Page_and_
 			Hydro.verifingHomePage();
 			Hydro.click_singinButton();
 			Hydro.login_Hydroflask("AccountDetails");
-			Hydro.Add_GiftCode_Myaccount("Giftcard");
+			Hydro.Add_GiftCode_Myaccount("Full_RedeemGiftcard");
 			Hydro.search_product("Product");       
 			Hydro.addtocart("Product");
 			Hydro.minicart_Checkout();
