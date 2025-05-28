@@ -21,7 +21,8 @@ public class TEST_DGLD_DB_US_ST_123_Track_My_Order_For_Guest_User {
 		
 			Drybar.Verify_Homepage();
 			Drybar.gustuserorderStatus("GuestUserOrderdetails");
-			
+			Drybar.shipment_invoice();
+	
 
 		} catch (Exception e) {
 
@@ -39,7 +40,7 @@ public class TEST_DGLD_DB_US_ST_123_Track_My_Order_For_Guest_User {
 	public void startTest() throws Exception {
 		System.setProperty("configFile", "Drybar_US\\config.properties");
         Login.signIn();
-        Drybar.close_add();
+//        Drybar.close_add();
         
 
 	}
