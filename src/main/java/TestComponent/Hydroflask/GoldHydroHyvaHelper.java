@@ -3270,7 +3270,122 @@ Common.clickElement("xpath", "//span[contains(text(),'Cancel Coupon')]");
 			Assert.fail();
 		}
 	}
+	public void My_Orders(String order) {
+		// TODO Auto-generated method stub
+		try {
+			Common.clickElement("xpath", "//button[@id='customer-menu']");
+			Sync.waitElementPresent(30, "xpath", "//a[@title='My Account']");
+			Common.clickElement("xpath", "//a[@title='My Account']");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			Common.assertionCheckwithReport(Common.getPageTitle().equals("Dashboard"),
+					"validating the Navigation to the My account page",
+					"After Clicking on My account CTA user should be navigate to the my account page",
+					"Sucessfully User Navigates to the My account page after clicking on the my account CTA",
+					"Failed to Navigate to the MY account page after Clicking on my account button");
 
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the Navigation to the My account page",
+					"After Clicking on My account CTA user should be navigate to the my account page",
+					"Unable to Navigates the user to My account page after clicking on the my account CTA",
+					Common.getscreenShot("Failed to Navigate to the MY account page after Clicking on my account CTA"));
+			Assert.fail();
+		}
+		try {
+			Sync.waitPageLoad();
+			Common.clickElement("xpath", "//li//a[@title='My Orders']");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			Common.assertionCheckwithReport(Common.getPageTitle().equals("My Orders"),
+					"validating the Navigation to the My Orders page",
+					"After Clicking on My Orders CTA user should be navigate to the My Orders page",
+					"Sucessfully User Navigates to the My Orders page after clicking on the My Orders CTA",
+					"Failed to Navigate to the My Orders page after Clicking on My Orders CTA");
+			String Ordernumber = Common.findElement("xpath", "(//span[@class='text-right'])[1]")
+					.getText();
+			Sync.waitPageLoad();
+			System.out.println(Ordernumber);
+			
+			
+			Sync.waitElementPresent("xpath", "//a[@aria-label='View order "+order +"']");
+			Common.clickElement("xpath", "//a[@aria-label='View order "+order +"']");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the Order Number in My Myorders page",
+					"Order Number should be display in the MY Order page",
+					"Unable to Display the Order Number in the My orders page",
+					Common.getscreenShot("Failed to Display My order Number in the My orders page"));
+			Assert.fail();
+		}
+	}
+
+	public void Verify_MyOrders_Page() {
+		try {
+			Common.assertionCheckwithReport(Common.getCurrentURL().contains("/sales/order/view/order_id"),
+					"validating the Navigation to the Items ordered page",
+					"After Clicking on the View icon user should be items ordered in My Orders page",
+					"Sucessfully User Navigates to the My Orders page and items ordered displayed  after clicking on the View icon",
+					"Failed to Navigate to the My Orders page and items ordered tab after Clicking on view Icon");
+			System.out.println("Items ordered tab is clicked.....");
+			
+			Common.clickElement("xpath", "//a[contains(text(),'Invoices')]");
+			Sync.waitPageLoad();
+			Common.assertionCheckwithReport(Common.getCurrentURL().contains("sales/order/invoice/order_id/"),
+					"validating the Navigation to the Invoice Tab",
+					"After Clicking on the Invoice user should be able to see Invoice page",
+					"Sucessfully User Navigates to Invoice page  after clicking on the Invoice Tab",
+					"Failed to Navigate to the Invoice after Clicking on Invoice Tab");
+			System.out.println("Invoiced tab is clicked.....");
+			
+			Common.clickElement("xpath", "//a[contains(text(),'Print Invoice')]");
+			Common.switchToSecondTab();
+			Common.assertionCheckwithReport(Common.getCurrentURL().contains("/sales/order/printInvoice/invoice_id"),
+					"validating the Navigation to the Shipment Tab",
+					"After Clicking on the Shipment user should be able to see Shipment page",
+					"Sucessfully User Navigates to Invoice page  after clicking on the Shipment Tab",
+					"Failed to Navigate to the Shipment after Clicking on Shipment Tab");
+			Common.closeCurrentWindow();
+			Common.switchToFirstTab();
+			Common.clickElement("xpath", "//a[contains(text(),'Shipments')]");
+			Sync.waitPageLoad();
+			Common.assertionCheckwithReport(Common.getCurrentURL().contains("sales/order/shipment/order_id"),
+					"validating the Navigation to the Shipment Tab",
+					"After Clicking on the Shipment user should be able to see Shipment page",
+					"Sucessfully User Navigates to Invoice page  after clicking on the Shipment Tab",
+					"Failed to Navigate to the Shipment after Clicking on Shipment Tab");
+			System.out.println("Shipment tab is clicked.....");
+			
+			Common.clickElement("xpath", "//a[contains(text(),'Print Shipment')]");
+			Sync.waitPageLoad();
+			Common.switchToSecondTab();
+			Common.assertionCheckwithReport(Common.getCurrentURL().contains("sales/order/printShipment/shipment_id"),
+					"validating the Navigation to the printShipment Page",
+					"After Clicking on the printShipment user should be able to see printShipment page",
+					"Sucessfully User Navigates to printShipment page  after clicking on the printShipment link",
+					"Failed to Navigate to the printShipment after Clicking on printShipment link");
+			Common.closeCurrentWindow();
+			Common.switchToFirstTab();
+			
+			Common.clickElement("xpath", "//span[contains(text(),'Track Shipment')]");
+			Sync.waitPageLoad();
+			Common.switchToSecondTab();
+			Common.assertionCheckwithReport(Common.getCurrentURL().contains("shipping/tracking"),
+					"validating the Navigation to the Track Shipment Page",
+					"After Clicking on the Track Shipment user should be able to see Shipment page",
+					"Sucessfully User Navigates to Track Shipment page  after clicking on the Track Shipment",
+					"Failed to Navigate to the Track Shipment after Clicking on Track Shipment");
+			
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the Itemordered ,Shipments,invoices in My Myorders page",
+					"Itemordered ,Shipments,invoices should be display in the MY Order page",
+					"Unable to Display the Itemordered ,Shipments,invoices in the My orders page",
+					Common.getscreenShot("Failed to Display Itemordered ,Shipments,invoices in the My orders page"));
+			Assert.fail();
+		}
+	}
 	public void My_Favorites() {
 		// TODO Auto-generated method stub
 		try {
@@ -15263,6 +15378,8 @@ Common.clickElement("xpath", "//span[text()='Edit']");
 		}
 
 	}
+
+	
 }	
 
 
