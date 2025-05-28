@@ -4540,7 +4540,8 @@ catch(Exception | Error e)
 			Common.clickElement("xpath", "//a[@title='Track My Order']");
 			Sync.waitPageLoad();
 			Common.assertionCheckwithReport(
-					Common.getPageTitle().equals("Tracking & Returns") || Common.getPageTitle().equals("My Orders"),
+					Common.getPageTitle().equals("Tracking & Returns") || Common.getPageTitle().equals("My Orders") 
+					|| Common.getCurrentURL().contains("track/order"),
 					"Verifying the track order page navigation ",
 					"after clicking on the track order it should navigate to the orders and return page",
 					"successfully Navigated to the orders and return page",
@@ -14086,7 +14087,51 @@ if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contain
 				"After clicking on Hot/Cold the page should display to select quantity of coffee",
 				"unable to display the page to select quantity of coffee",
 				Common.getscreenShot("Failed to add the product to cart"));
+		Assert.fail();
 	}
+	}
+
+
+
+	public void shipment_invoice() {
+		// TODO Auto-generated method stub
+		try
+		{
+			Sync.waitElementPresent("css", "li[class='nav item'] a[href*='invoice']");
+			String Invoice=Common.findElement("css", "li[class='nav item'] a[href*='invoice']").getAttribute("href");
+			Common.clickElement("css", "li[class='nav item'] a[href*='invoice']");
+			Sync.waitPageLoad();
+			Thread.sleep(2000);
+			String invoice=Common.findElement("css", "div[class='mb-6'] p").getText().trim();
+			Common.assertionCheckwithReport(Common.getCurrentURL().contains(Invoice) && invoice.contains("Invoice"),
+					"validating the navigating to the invoice page from the guest track order",
+					"After clicking it should be navigate to the invoice page",
+					"Sucessfully Navigated to the invoice page after clicking from the guest user track my order",
+					"Failed to Navigate to the inovice page after clicking from the guest user track my order");
+			Sync.waitElementPresent("css", "li[class='nav item'] a[href*='shipment']");
+			String Shipment=Common.findElement("css", "li[class='nav item'] a[href*='shipment']").getAttribute("href");
+			Common.clickElement("css", "li[class='nav item'] a[href*='shipment']");
+			Sync.waitPageLoad();
+			Thread.sleep(2000);
+			String shipment=Common.findElement("css", "div[class='mb-6'] p").getText().trim();
+			Common.assertionCheckwithReport(Common.getCurrentURL().contains(Shipment) && shipment.contains("Shipment"),
+					"validating the navigating to the Shipment page from the guest track order",
+					"After clicking it should be navigate to the Shipment page",
+					"Sucessfully Navigated to the Shipment page after clicking from the guest user track my order",
+					"Failed to Navigate to the Shipment page after clicking from the guest user track my order");
+	
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the navigating to the invoice or Shipment page from the guest track order",
+					"After clicking it should be navigate to the invoice or Shipment page",
+					"Sucessfully Navigated to the invoice or Shipment page after clicking from the guest user track my order",
+					Common.getscreenShot("Failed to Navigate to the Invoice or Shipment page after clicking from the guest user track my order"));
+			Assert.fail();
+		}
+		
 	}
 }
 
