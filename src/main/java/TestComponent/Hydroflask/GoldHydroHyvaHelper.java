@@ -15450,6 +15450,143 @@ Common.clickElement("xpath", "//span[text()='Edit']");
 
 	}
 
+	public void Blog_Page(String Dataset) {
+
+			String names = data.get(Dataset).get("blog");
+			String[] Blog = names.split(",");
+			
+			
+			int i = 0;
+			try {
+				Sync.waitElementPresent("xpath", "(//span[contains(text(),'Explore')])[1]");
+				Common.clickElement("xpath", "(//span[contains(text(),'Explore')])[1]");
+			
+				Common.clickElement("xpath", "(//span[contains(text(),'Blog')])[1]");
+				
+				for (i = 0; i < Blog.length; i++) {
+					
+					Thread.sleep(3000);
+					Sync.waitElementPresent("xpath", "(//a[normalize-space()='"+Blog[i]+"'])[1]");
+					Common.clickElement("xpath", "(//a[normalize-space()='"+Blog[i]+"'])[1]");
+//							Common.clickElement("xpath", "//a[contains(@aria-label,'" +Blog[i]+ "')]");
+					Sync.waitPageLoad();
+					Thread.sleep(2000);
+					String title = Common.findElement("xpath", "//h1[contains(@class,'c')]").getText();
+					Common.assertionCheckwithReport(title.contains(Blog[i]),
+							"verifying the header link " + Blog[i] + "Under Featured",
+							"user should navigate to the " + Blog[i] + " page",
+							"user successfully Navigated to the " + Blog[i], "Failed to navigate to the " + Blog[i]);
+
+				}
+			}
+
+			catch (Exception | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("verifying the header link " + Blog[i] + "Under Featured",
+						"User should navigate to the " + Blog[i] + "pages",
+						" unable to navigate to the " + Blog[i] + "pages",
+						Common.getscreenShot("Failed to navigate to the " + Blog[i] + "pages"));
+				Assert.fail();
+			}
+
+		}
+
+	
+	
+	public void blog_page() {
+
+		try {
+
+			Common.clickElement("xpath", "//a[contains(text(),'Home')]");
+			Sync.waitPageLoad();
+			int blogcategory = Common
+					.findElements("xpath", "(//div[contains(@class,'hf:shadow-blog-hero block')])[1]")
+					.size();
+   System.out.println(blogcategory);
+			Common.assertionCheckwithReport(
+					blogcategory >= 0,
+					"To validate the Blog page", "user should able to see the Blog Article",
+					"Sucessfully Blog Article has been displayed", "Failed to Displayed the Blog Article");
+			
+			Common.scrollIntoView("xpath", "(//span[text()='Read Article'])[1]");
+			Common.clickElement("xpath", "(//span[text()='Read Article'])[1]");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("To validate the Blog page", "user should able to see the Blog Article",
+					"unable to Displayed the Blog Article",
+					Common.getscreenShotPathforReport("Failed to Displayed the Blog Article"));
+			Assert.fail();
+		}
+		blog_article_page();
+		blog_article_comments();
+	}
+
+	public void blog_article_page() {
+
+		try {
+			String blogbreadcrumb = Common.findElement("id", "breadcrumbs").getText();
+			System.out.println(blogbreadcrumb);
+			int blogarticle = Common.findElements("xpath", "//div[contains(@class,'m-blog-post-meta')]").size();
+			Common.assertionCheckwithReport(blogbreadcrumb.contains("Hydro Flask Blog") && blogarticle > 0,
+					"To validate the Blog page", "user should able to see the Blog Article",
+					"Sucessfully Blog Article has been displayed", "Failed to Displayed the Blog Article");
+
+			Common.scrollIntoView("xpath", "//ul[@class='flex items-center']");
+			List<WebElement> blogsocial = Common.findElements("xpath", "//ul[@class='flex items-center']//li//button");
+			for (WebElement blog : blogsocial) {
+
+				System.out.println(blog.getText());
+
+				Common.assertionCheckwithReport(
+						(blog.getText().contains("Pinterest")) || (blog.getText().contains("Facebook"))
+								|| (blog.getText().contains("Twitter")) || (blog.getText().contains("Copy URL")),
+						"To validate the Blog page", "user should able to see the Blog Article",
+						"Sucessfully Blog Article has been displayed", "Failed to Displayed the Blog Article");
+
+			}
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("To validate the Blog page", "user should able to see the Blog Article",
+					"unable to Displayed the Blog Article",
+					Common.getscreenShotPathforReport("Failed to Displayed the Blog Article"));
+			Assert.fail();
+		}
+	}
+
+	public void blog_article_comments() {
+
+		try {
+			
+			Common.scrollIntoView("xpath",  "//iframe[@title='Disqus']");
+			Common.switchFrames("xpath", "//iframe[@title='Disqus']");
+			String comment = Common.findElement("xpath", "//span[@class='comment-count']").getText();
+			System.out.println(comment);
+			Common.clickElement("xpath", "//div[text()='Start the discussion…']");
+			
+			
+			List<WebElement> blogsocial = Common.findElements("xpath", "//ul[@data-role='login-menu']/li/button");  
+
+			List<String> ariaLabels = new ArrayList<>();  
+			for (WebElement element : blogsocial) {  
+			    String ariaLabel = element.getAttribute("aria-label"); 
+			    Thread.sleep(1000);
+			    ariaLabels.add(ariaLabel); 
+			    System.out.println(ariaLabels);
+				Common.assertionCheckwithReport(comment.contains("Comments") && ariaLabels.contains("Login with Disqus")||ariaLabels.contains("Apple")||ariaLabels.contains("Facebook")||ariaLabels.contains("Twitter")||ariaLabels.contains("Google")||ariaLabels.contains("Microsoft"),
+						"To validate the Blog page", "user should able to see the Blog Article",
+						"Sucessfully Blog Article has been displayed", "Failed to Displayed the Blog Article");
+			}  
+			
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("To validate the Blog page", "user should able to see the Blog Article",
+					"unable to Displayed the Blog Article",
+					Common.getscreenShotPathforReport("Failed to Displayed the Blog Article"));
+			Assert.fail();
+		}
+	}
 	
 }	
 
