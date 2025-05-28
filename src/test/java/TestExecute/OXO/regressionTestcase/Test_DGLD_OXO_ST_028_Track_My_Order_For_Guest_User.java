@@ -20,6 +20,7 @@ public class Test_DGLD_OXO_ST_028_Track_My_Order_For_Guest_User {
 			Oxo.verifingHomePage();
 			Oxo.guestuserorderStatus("GuestUserOrderdetails");
 			Oxo.shipment_invoice();
+			Oxo.orders_image_Validation();
 			
 		} catch (Exception e) {
 

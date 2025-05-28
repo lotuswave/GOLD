@@ -16221,9 +16221,20 @@ public class OspreyEMEA_HYVA {
 			}
 			Common.clickElement("xpath",
 					"//span[contains(text(),'" + OrderNumber + "')]//parent::th//parent::tr//a[@title='View Order']");
-
+			Sync.waitPageLoad();
+			Thread.sleep(2000);
+			Common.assertionCheckwithReport(Common.getCurrentURL().contains("/view/order_id"),
+					"validating the order Details on My order page",
+					"After Clicking on view Order it should be navigate to the order details page ",
+					"Sucessfully Navigated to the orders details page from My orders page ",
+					"Failed to Navigate to the Track ordert after Clicking on Back CTA");
+			orders_image_Validation();
 		} catch (Exception | Error e) {
 			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the order Details on My orders page",
+					"After Clicking on view Order it should be navigate to the order details page ",
+					"Unable to Navigate to the orders details page from my order page ",
+					Common.getscreenShot("Failed to Navigate to the orders details page "));
 			Assert.fail();
 		}
 
@@ -16252,6 +16263,47 @@ public class OspreyEMEA_HYVA {
 		}
 
 	}
+	
+	public void orders_image_Validation()
+	{
+		try {
+			List <WebElement> images=Common.findElements("css", "div[class*='parent-item border'] img");
+			  for (WebElement img : images) {
+	                if (img.isDisplayed()) {
+	                    System.out.println("Image is displayed.");
+
+	                    String src = img.getAttribute("src");
+	                    if (validateImageURL(src)) {
+	                        System.out.println("Image URL is valid: " + src);
+	                    } else {
+	                        System.out.println("Broken image URL: " + src);
+	                    }
+
+	                } else {
+	                    System.out.println("Image is NOT displayed.");
+	                }
+	            }
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			Assert.fail();
+		}
+	}
+	
+	 public static boolean validateImageURL(String imageUrl) {
+	        try {
+	            HttpURLConnection connection = (HttpURLConnection) new URL(imageUrl).openConnection();
+	            connection.setRequestMethod("GET");
+	            connection.connect();
+	            int code = connection.getResponseCode();
+	            return (code == 200);
+	        } catch (Exception e) {
+	            return false;
+	        }
+	    }
+
 
 	public void Reg_shipment_invoice() {
 		// TODO Auto-generated method stub

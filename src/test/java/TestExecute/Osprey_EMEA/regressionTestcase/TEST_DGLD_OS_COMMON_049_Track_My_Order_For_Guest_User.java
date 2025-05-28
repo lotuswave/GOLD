@@ -21,8 +21,8 @@ public class TEST_DGLD_OS_COMMON_049_Track_My_Order_For_Guest_User {
         Osprey_ReEu.verifingHomePage();
         Osprey_ReEu.gustuserorderStatus("GustUserOrderdetails");
         Osprey_ReEu.shipment_invoice();
-
-       
+        Osprey_ReEu.orders_image_Validation();
+        
 		} catch (Exception e) {
 
 			Assert.fail(e.getMessage(), e);
