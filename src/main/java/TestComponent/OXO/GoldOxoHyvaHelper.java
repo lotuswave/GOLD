@@ -4651,6 +4651,7 @@ catch(Exception | Error e)
 	}
 	
 	
+	
 	public void changed_password(String Dataset) {
 		// TODO Auto-generated method stub
 
@@ -14165,6 +14166,150 @@ if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contain
 		}
 		
 	}
+
+
+	public void Reg_shipment_invoice() {
+		// TODO Auto-generated method stub
+		try
+		{
+			Sync.waitElementPresent("css", "a[href*='invoice']");
+			String Invoice=Common.findElement("css", "a[href*='invoice']").getAttribute("href");
+			Common.clickElement("css", "a[href*='invoice']");
+			Sync.waitPageLoad();
+			Thread.sleep(2000);
+			String invoice=Common.findElement("css", "div[class='mb-6'] p").getText().trim();
+			Common.assertionCheckwithReport(Common.getCurrentURL().contains(Invoice) && invoice.contains("Invoice"),
+					"validating the navigating to the invoice page from the guest track order",
+					"After clicking it should be navigate to the invoice page",
+					"Sucessfully Navigated to the invoice page after clicking from the guest user track my order",
+					"Failed to Navigate to the inovice page after clicking from the guest user track my order");
+		 Common.clickElement("css", "a[class='link no-underline']");
+			Common.switchToSecondTab();
+			Sync.waitPageLoad();
+			Common.assertionCheckwithReport(Common.getCurrentURL().contains("/printInvoice/invoice_id"),
+					"validating the Navigation to the Invoice Tab",
+					"After Clicking on the print invoice user should be able to see invoice page",
+					"Sucessfully User Navigates to Invoice page  after clicking on the print invoice Tab",
+					"Failed to Navigate to the invoice after Clicking on print invoice Tab");
+			Common.closeCurrentWindow();
+			Common.switchToFirstTab();
+			Sync.waitElementPresent("css", "a[href*='shipment']");
+			String Shipment=Common.findElement("css", "a[href*='shipment']").getAttribute("href");
+			Common.clickElement("css", "a[href*='shipment']");
+			Sync.waitPageLoad();
+			Thread.sleep(2000);
+			String shipment=Common.findElement("css", "div[class='mb-6'] p").getText().trim();
+			Common.assertionCheckwithReport(Common.getCurrentURL().contains(Shipment) && shipment.contains("Shipment"),
+					"validating the navigating to the Shipment page from the guest track order",
+					"After clicking it should be navigate to the Shipment page",
+					"Sucessfully Navigated to the Shipment page after clicking from the guest user track my order",
+					"Failed to Navigate to the Shipment page after clicking from the guest user track my order");
+			Common.clickElement("css", "a[class='link no-underline']");
+			Sync.waitPageLoad();
+			Common.switchToSecondTab();
+			Sync.waitPageLoad();
+			Common.assertionCheckwithReport(Common.getCurrentURL().contains("/printShipment/shipment_id"),
+					"validating the Navigation to the printShipment Page",
+					"After Clicking on the printShipment user should be able to see printShipment page",
+					"Sucessfully User Navigates to printShipment page  after clicking on the printShipment link",
+					"Failed to Navigate to the printShipment after Clicking on printShipment link");
+			Common.closeCurrentWindow();
+			Common.switchToFirstTab();
+			Common.clickElement("css", "a[title='Track Shipment']");
+			Sync.waitPageLoad();
+			Common.switchToSecondTab();
+			Sync.waitPageLoad();
+			Common.assertionCheckwithReport(Common.getCurrentURL().contains("shipping/tracking"),
+					"validating the Navigation to the Track Shipment Page",
+					"After Clicking on the Track Shipment user should be able to see Shipment page",
+					"Sucessfully User Navigates to Track Shipment page  after clicking on the Track Shipment",
+					"Failed to Navigate to the Track Shipment after Clicking on Track Shipment");
+			Common.closeCurrentWindow();
+			Common.switchToFirstTab();
+	
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the navigating to the invoice or Shipment page from the guest track order",
+					"After clicking it should be navigate to the invoice or Shipment page",
+					"Sucessfully Navigated to the invoice or Shipment page after clicking from the guest user track my order",
+					Common.getscreenShot("Failed to Navigate to the Invoice or Shipment page after clicking from the guest user track my order"));
+			Assert.fail();
+		}
+		
+	}
+
+
+	public void back_to_Orders() {
+		// TODO Auto-generated method stub
+		try
+		{
+			Sync.waitElementPresent("css", "a[class='hidden lg:flex btn btn-link']");
+			Common.clickElement("css", "a[class='hidden lg:flex btn btn-link']");
+			Sync.waitPageLoad();
+			Thread.sleep(2000);
+			Common.assertionCheckwithReport(Common.getCurrentURL().contains("/history/"),
+					"validating the Navigation to the Track order Page",
+					"After Clicking on the Back CTA user should be able to see Track order page",
+					"Sucessfully User Navigates to Track order page  after clicking on the Back CTA",
+					"Failed to Navigate to the Track ordert after Clicking on Back CTA");
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the Navigation to the Track order Page",
+					"After Clicking on the Back CTA user should be able to see Track order page",
+					"Unable to Navigate to the Track ordert after Clicking on Back CTA",
+					Common.getscreenShot("Failed to Navigate to the Track ordert after Clicking on Back CTA"));
+			Assert.fail();
+		}
+		
+	}
+
+
+
+	public void search_E2E_Completeorder() {
+		// TODO Auto-generated method stub
+		back_to_Orders();
+		String OrderNumber="7000694873";
+		  boolean found = false;
+		try
+		{
+			while (true)
+			{
+			List<WebElement> elements = Common.findElements("xpath", "//span[contains(text(),'" + OrderNumber + "')]");
+			if (!elements.isEmpty()) {
+                System.out.println("Order found on this page: " + OrderNumber);
+                found = true;
+                break;
+            } 
+			  List<WebElement> nextButtons = Common.findElements("css", "a[aria-label='Next']");
+
+	            if (nextButtons.isEmpty() || !nextButtons.get(0).isDisplayed()) {
+	                System.out.println("Order number not found and no more pages.");
+	                break;
+	            }
+			  nextButtons.get(0).click();
+			  try {
+				  Sync.waitPageLoad();
+	                Thread.sleep(2000);
+	            } catch (InterruptedException e) {
+	                e.printStackTrace();
+	            }
+	        }
+			Common.clickElement("xpath", "//span[contains(text(),'"+ OrderNumber +"')]//parent::th//parent::tr//a[@title='View Order']");
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			Assert.fail();
+		}
+		
+		}
 }
 
 
