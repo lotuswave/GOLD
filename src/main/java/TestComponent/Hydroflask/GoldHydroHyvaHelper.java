@@ -3270,7 +3270,7 @@ Common.clickElement("xpath", "//span[contains(text(),'Cancel Coupon')]");
 			Assert.fail();
 		}
 	}
-	public void My_Orders(String order) {
+	public void My_Orders() {
 		// TODO Auto-generated method stub
 		try {
 			Common.clickElement("xpath", "//button[@id='customer-menu']");
@@ -3302,14 +3302,14 @@ Common.clickElement("xpath", "//span[contains(text(),'Cancel Coupon')]");
 					"After Clicking on My Orders CTA user should be navigate to the My Orders page",
 					"Sucessfully User Navigates to the My Orders page after clicking on the My Orders CTA",
 					"Failed to Navigate to the My Orders page after Clicking on My Orders CTA");
-			String Ordernumber = Common.findElement("xpath", "(//span[@class='text-right'])[1]")
-					.getText();
-			Sync.waitPageLoad();
-			System.out.println(Ordernumber);
-			
-			
-			Sync.waitElementPresent("xpath", "//a[@aria-label='View order "+order +"']");
-			Common.clickElement("xpath", "//a[@aria-label='View order "+order +"']");
+//			String Ordernumber = Common.findElement("xpath", "(//span[@class='text-right'])[1]")
+//					.getText();
+//			Sync.waitPageLoad();
+//			System.out.println(Ordernumber);
+//			
+//			
+//			Sync.waitElementPresent("xpath", "//a[@aria-label='View order "+order +"']");
+//			Common.clickElement("xpath", "//a[@aria-label='View order "+order +"']");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
@@ -3320,7 +3320,71 @@ Common.clickElement("xpath", "//span[contains(text(),'Cancel Coupon')]");
 			Assert.fail();
 		}
 	}
+	public void back_to_Orders() {
+		// TODO Auto-generated method stub
+		try
+		{
+			Sync.waitElementPresent("css", "a[class='hidden lg:flex btn btn-link']");
+			Common.clickElement("css", "a[class='hidden lg:flex btn btn-link']");
+			Sync.waitPageLoad();
+			Thread.sleep(2000);
+			Common.assertionCheckwithReport(Common.getCurrentURL().contains("/history/"),
+					"validating the Navigation to the Track order Page",
+					"After Clicking on the Back CTA user should be able to see Track order page",
+					"Sucessfully User Navigates to Track order page  after clicking on the Back CTA",
+					"Failed to Navigate to the Track ordert after Clicking on Back CTA");
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the Navigation to the Track order Page",
+					"After Clicking on the Back CTA user should be able to see Track order page",
+					"Unable to Navigate to the Track ordert after Clicking on Back CTA",
+					Common.getscreenShot("Failed to Navigate to the Track ordert after Clicking on Back CTA"));
+			Assert.fail();
+		}
+		
+	}
+	public void search_E2E_Completeorder() {
+		// TODO Auto-generated method stub
+//		back_to_Orders();
+		String OrderNumber="4001155229";
+		  boolean found = false;
+		try
+		{
+			while (true)
+			{
+			List<WebElement> elements = Common.findElements("xpath", "//span[contains(text(),'" + OrderNumber + "')]");
+			if (!elements.isEmpty()) {
+                System.out.println("Order found on this page: " + OrderNumber);
+                found = true;
+                break;
+            } 
+			  List<WebElement> nextButtons = Common.findElements("css", "a[aria-label='Next']");
 
+	            if (nextButtons.isEmpty() || !nextButtons.get(0).isDisplayed()) {
+	                System.out.println("Order number not found and no more pages.");
+	                break;
+	            }
+			  nextButtons.get(0).click();
+			  try {
+				  Sync.waitPageLoad();
+	                Thread.sleep(2000);
+	            } catch (InterruptedException e) {
+	                e.printStackTrace();
+	            }
+	        }
+			Common.clickElement("xpath", "//span[contains(text(),'"+ OrderNumber +"')]//parent::th//parent::tr//a[@title='View Order']");
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			Assert.fail();
+		}
+		
+		}
 	public void Verify_MyOrders_Page() {
 		try {
 			Common.assertionCheckwithReport(Common.getCurrentURL().contains("/sales/order/view/order_id"),

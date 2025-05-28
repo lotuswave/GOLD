@@ -21,8 +21,8 @@ public class Test_DGLD_HF_ST_136_Validation_Shipped_Invoiced_In_My_Order_Page {
 			Hydro.verifingHomePage();
 			Hydro.click_singinButton();
 			Hydro.login_Hydroflask("AccountDetails_TC1");
-			String order="4001155229";  // We need to give Shipped and invoiced order
-			Hydro.My_Orders(order);
+			Hydro.My_Orders();
+			Hydro.search_E2E_Completeorder(); // We need to give Shipped and invoiced order in this method
 			Hydro.Verify_MyOrders_Page();
 			
 		} catch (Exception e) {
