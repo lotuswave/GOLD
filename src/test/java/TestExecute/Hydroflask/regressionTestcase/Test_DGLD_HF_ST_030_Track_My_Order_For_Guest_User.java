@@ -20,6 +20,8 @@ public class Test_DGLD_HF_ST_030_Track_My_Order_For_Guest_User {
 		try {
 			Hydro.verifingHomePage();
 			Hydro.gustuserorderStatus("GustUserOrderdetails");
+			Hydro.shipment_invoice();
+			Hydro.orders_image_Validation();
 
 		} catch (Exception e) {
 
