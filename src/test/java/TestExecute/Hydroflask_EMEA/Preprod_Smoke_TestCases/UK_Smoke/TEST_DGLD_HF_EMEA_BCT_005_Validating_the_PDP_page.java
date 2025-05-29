@@ -1,4 +1,4 @@
-package TestExecute.Hydroflask_EMEA.Preprod_Smoke_TestCases;
+package TestExecute.Hydroflask_EMEA.Preprod_Smoke_TestCases.UK_Smoke;
 
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
