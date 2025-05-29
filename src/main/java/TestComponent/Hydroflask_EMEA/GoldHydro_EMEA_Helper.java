@@ -2014,44 +2014,44 @@ public class GoldHydro_EMEA_Helper {
 			String pageTitlename = Common.getText("css", "span[data-ui-id='page-title-wrapper']");
 			System.out.println("Page title name: " + pageTitlename);
 
-//		   if(Common.getCurrentURL().contains("es"))
-//		   {
-//			   LocalizationHelper i18n = new LocalizationHelper("es"); 
-//			   boolean isEmailErrorCorrect = emailErrorMessage.equalsIgnoreCase(i18n.get("Please enter a valid email address."));
-//			   boolean isConfirmPasswordErrorCorrect = confirmPasswordErrorMessage.contains(i18n.get("must be the same as"));
-//			   boolean pagetitlename = pageTitlename.contains(i18n.get("Create an Account"));
-//				Common.assertionCheckwithReport(isEmailErrorCorrect && isConfirmPasswordErrorCorrect && pagetitlename,
-//						"Validating error messages for invalid data in account creation form",
-//						"User should see appropriate error messages for invalid email and mismatched passwords",
-//						"Error messages displayed correctly for invalid data inputs",
-//						"Error messages not displayed as expected for invalid data inputs");
-//		   }
-//		   else  if(Common.getCurrentURL().contains("fr"))
-//		   {
-//			   LocalizationHelper i18n = new LocalizationHelper("fr"); 
-//			   boolean isEmailErrorCorrect = emailErrorMessage.equalsIgnoreCase(i18n.get("Please enter a valid email address."));
-//			   boolean isConfirmPasswordErrorCorrect = confirmPasswordErrorMessage.contains(i18n.get("must be the same as"));
-//			   boolean pagetitlename = pageTitlename.contains(i18n.get("Create an Account"));
-//				Common.assertionCheckwithReport(isEmailErrorCorrect && isConfirmPasswordErrorCorrect && pagetitlename,
-//						"Validating error messages for invalid data in account creation form",
-//						"User should see appropriate error messages for invalid email and mismatched passwords",
-//						"Error messages displayed correctly for invalid data inputs",
-//						"Error messages not displayed as expected for invalid data inputs");
-//		   }
-//		   else  if(Common.getCurrentURL().contains("de/"))
-//		   {
-//			   LocalizationHelper i18n = new LocalizationHelper("de"); 
-//			   boolean isEmailErrorCorrect = emailErrorMessage.equalsIgnoreCase(i18n.get("Please enter a valid email address."));
-//			   boolean isConfirmPasswordErrorCorrect = confirmPasswordErrorMessage.contains(i18n.get("must be the same as"));
-//			   boolean pagetitlename = pageTitlename.contains(i18n.get("Create an Account"));
-//				Common.assertionCheckwithReport(isEmailErrorCorrect && isConfirmPasswordErrorCorrect && pagetitlename,
-//						"Validating error messages for invalid data in account creation form",
-//						"User should see appropriate error messages for invalid email and mismatched passwords",
-//						"Error messages displayed correctly for invalid data inputs",
-//						"Error messages not displayed as expected for invalid data inputs");
-//		   }
-//		   else
-//		   {
+		   if(Common.getCurrentURL().contains("es"))
+		   {
+			   LocalizationHelper i18n = new LocalizationHelper("es"); 
+			   boolean isEmailErrorCorrect = emailErrorMessage.equalsIgnoreCase(i18n.get("Please enter a valid email address."));
+			   boolean isConfirmPasswordErrorCorrect = confirmPasswordErrorMessage.contains(i18n.get("must be the same as"));
+			   boolean pagetitlename = pageTitlename.contains(i18n.get("Create an Account"));
+				Common.assertionCheckwithReport(isEmailErrorCorrect && isConfirmPasswordErrorCorrect && pagetitlename,
+						"Validating error messages for invalid data in account creation form",
+						"User should see appropriate error messages for invalid email and mismatched passwords",
+						"Error messages displayed correctly for invalid data inputs",
+						"Error messages not displayed as expected for invalid data inputs");
+		   }
+		   else  if(Common.getCurrentURL().contains("fr"))
+		   {
+			   LocalizationHelper i18n = new LocalizationHelper("fr"); 
+			   boolean isEmailErrorCorrect = emailErrorMessage.equalsIgnoreCase(i18n.get("Please enter a valid email address."));
+			   boolean isConfirmPasswordErrorCorrect = confirmPasswordErrorMessage.contains(i18n.get("must be the same as"));
+			   boolean pagetitlename = pageTitlename.contains(i18n.get("Create an Account"));
+				Common.assertionCheckwithReport(isEmailErrorCorrect && isConfirmPasswordErrorCorrect && pagetitlename,
+						"Validating error messages for invalid data in account creation form",
+						"User should see appropriate error messages for invalid email and mismatched passwords",
+						"Error messages displayed correctly for invalid data inputs",
+						"Error messages not displayed as expected for invalid data inputs");
+		   }
+		   else  if(Common.getCurrentURL().contains("de/"))
+		   {
+			   LocalizationHelper i18n = new LocalizationHelper("de"); 
+			   boolean isEmailErrorCorrect = emailErrorMessage.equalsIgnoreCase(i18n.get("Please enter a valid email address."));
+			   boolean isConfirmPasswordErrorCorrect = confirmPasswordErrorMessage.contains(i18n.get("must be the same as"));
+			   boolean pagetitlename = pageTitlename.contains(i18n.get("Create an Account"));
+				Common.assertionCheckwithReport(isEmailErrorCorrect && isConfirmPasswordErrorCorrect && pagetitlename,
+						"Validating error messages for invalid data in account creation form",
+						"User should see appropriate error messages for invalid email and mismatched passwords",
+						"Error messages displayed correctly for invalid data inputs",
+						"Error messages not displayed as expected for invalid data inputs");
+		   }
+		   else
+		   {
 			   boolean isEmailErrorCorrect = emailErrorMessage.equalsIgnoreCase("Please enter a valid email address.");
 			   boolean isConfirmPasswordErrorCorrect = confirmPasswordErrorMessage.contains("must be the same as");
 			   boolean pagetitlename = pageTitlename.contains("Create an Account");
@@ -2060,7 +2060,7 @@ public class GoldHydro_EMEA_Helper {
 						"User should see appropriate error messages for invalid email and mismatched passwords",
 						"Error messages displayed correctly for invalid data inputs",
 						"Error messages not displayed as expected for invalid data inputs");
-//		   }
+		   }
 		
 		} catch (Exception | Error e) {
 			e.printStackTrace();
@@ -2272,8 +2272,8 @@ public class GoldHydro_EMEA_Helper {
 		try {
 			Sync.waitElementPresent("css", "button[id='customer-menu']");
 			Common.clickElement("css", "button[id='customer-menu']");
-			Sync.waitElementPresent("css", "a[title='Create an Account']");
-			Common.clickElement("css", "a[title='Create an Account']");
+			Sync.waitElementPresent("css", "a[id='customer.header.register.link']");
+			Common.clickElement("css", "a[id='customer.header.register.link']");
 			Sync.waitPageLoad();
 			Thread.sleep(3000);
 			Common.assertionCheckwithReport(Common.getPageTitle().equals("Create an Account"),
