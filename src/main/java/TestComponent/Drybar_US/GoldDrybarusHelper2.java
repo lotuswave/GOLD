@@ -2992,6 +2992,46 @@ public class GoldDrybarusHelper2 {
 		}
 	}
 
+	public void orders_image_Validation()
+	{
+		try {
+			List <WebElement> images=Common.findElements("css", "div[class*='parent-item border'] img");
+			  for (WebElement img : images) {
+	                if (img.isDisplayed()) {
+	                    System.out.println("Image is displayed.");
+
+	                    String src = img.getAttribute("src");
+	                    if (validateImageURL(src)) {
+	                        System.out.println("Image URL is valid: " + src);
+	                    } else {
+	                        System.out.println("Broken image URL: " + src);
+	                    }
+
+	                } else {
+	                    System.out.println("Image is NOT displayed.");
+	                }
+	            }
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			Assert.fail();
+		}
+	}
+	
+	 public static boolean validateImageURL(String imageUrl) {
+	        try {
+	            HttpURLConnection connection = (HttpURLConnection) new URL(imageUrl).openConnection();
+	            connection.setRequestMethod("GET");
+	            connection.connect();
+	            int code = connection.getResponseCode();
+	            return (code == 200);
+	        } catch (Exception e) {
+	            return false;
+	        }
+	    }
+
 	
 	public void Configurable_addtocart(String Dataset) {{
 		// TODO Auto-generated method stub
@@ -11099,7 +11139,7 @@ public void view_order() {
 		String billingAdd = Common.findElement("xpath", "//p[contains(text(),'Billing Address')]").getText();
 		String shippingmethod = Common.findElement("xpath", "//p[contains(text(),'Shipping Method')]").getText();
 		String ordersummary = Common.findElement("xpath", "//p[contains(text(),'Shipping Method')]").getText();
-		String itemsordered = Common.findElement("xpath", "//span[@class='text-sm']").getText();
+		String itemsordered = Common.findElement("xpath", "//span[@class='content']").getText();
 		System.out.println(itemsordered);
 
 		Common.assertionCheckwithReport(
@@ -11124,7 +11164,7 @@ public void view_order() {
 public void search_E2E_Completeorder() {
 	// TODO Auto-generated method stub
 	back_to_Orders();
-	String OrderNumber="DRYUSPRE97000476881";
+	String OrderNumber="DRYUSPRE97000472312";
 	  boolean found = false;
 	try
 	{
@@ -11171,7 +11211,7 @@ public void Reg_shipment_invoice() {
 		Sync.waitPageLoad();
 		Thread.sleep(2000);
 		String invoice=Common.findElement("css", "div[class='mb-6'] p").getText().trim();
-		Common.assertionCheckwithReport(Common.getCurrentURL().contains(Invoice) && invoice.contains("Invoice"),
+		Common.assertionCheckwithReport(Common.getCurrentURL().contains(Invoice) && invoice.contains("INVOICE"),
 				"validating the navigating to the invoice page from the guest track order",
 				"After clicking it should be navigate to the invoice page",
 				"Sucessfully Navigated to the invoice page after clicking from the guest user track my order",
@@ -11192,7 +11232,7 @@ public void Reg_shipment_invoice() {
 		Sync.waitPageLoad();
 		Thread.sleep(2000);
 		String shipment=Common.findElement("css", "div[class='mb-6'] p").getText().trim();
-		Common.assertionCheckwithReport(Common.getCurrentURL().contains(Shipment) && shipment.contains("Shipment"),
+		Common.assertionCheckwithReport(Common.getCurrentURL().contains(Shipment) && shipment.contains("SHIPMENT"),
 				"validating the navigating to the Shipment page from the guest track order",
 				"After clicking it should be navigate to the Shipment page",
 				"Sucessfully Navigated to the Shipment page after clicking from the guest user track my order",
