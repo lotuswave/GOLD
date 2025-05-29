@@ -131,6 +131,7 @@ public class GoldHydro_EMEA_Helper {
 			Assert.fail("Failed to verify home page.");
 		}
 	}
+	
 	public void Close_Geolocation() {
 		// TODO Auto-generated method stub
 		try {
