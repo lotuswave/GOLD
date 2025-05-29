@@ -1,4 +1,4 @@
-package TestExecute.Hydroflask_EMEA.Preprod_Smoke_TestCases;
+package TestExecute.Hydroflask_EMEA.Preprod_Smoke_TestCases.UK_Smoke;
 
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
@@ -9,7 +9,7 @@ import TestComponent.Hydroflask_EMEA.GoldHydro_EMEA_Helper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class TEST_DGLD_HF_EMEA_BCT_011_Forgot_password_from_SignIn_page {
+public class TEST_DGLD_HF_EMEA_UK_BCT_011_Forgot_password_from_SignIn_page {
 
 	String datafile = "Hydroflask_EMEA//GoldHydroEMEA_TestData.xlsx";
 	GoldHydro_EMEA_Helper Hydro = new GoldHydro_EMEA_Helper(datafile, "DataSet");
