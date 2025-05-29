@@ -36,7 +36,8 @@ public class TEST_DGLD_HF_EMEA_EU_BCT_011_Forgot_password_from_SignIn_page {
 
 	@BeforeTest
 	public void startTest() throws Exception {
-		System.setProperty("configFile", "Hydroflask_EMEA\\config.properties");
+		String url="https://mcloud-na-stage4.hydroflask.com/eu";
+		System.setProperty("url", url);
 		Login.signIn();
 		Hydro.close_add();
 		Hydro.acceptPrivacy();

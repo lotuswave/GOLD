@@ -51,7 +51,8 @@ public class TEST_DGLD_HF_EMEA_EU_RT_009_Register_user_checkout_PP_with_Multiple
 
 	@BeforeTest
 	public void startTest() throws Exception {
-		System.setProperty("configFile", "Hydroflask_EMEA\\config.properties");
+		String url="https://mcloud-na-stage4.hydroflask.com/eu";
+		System.setProperty("url", url);
         Login.signIn();
         Hydro.close_add();
         Hydro.acceptPrivacy();

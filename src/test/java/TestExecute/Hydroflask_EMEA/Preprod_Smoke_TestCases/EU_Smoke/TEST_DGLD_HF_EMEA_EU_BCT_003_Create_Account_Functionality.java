@@ -36,7 +36,8 @@ public class TEST_DGLD_HF_EMEA_EU_BCT_003_Create_Account_Functionality {
 
 	@BeforeTest
 	public void startTest() throws Exception {
-		System.setProperty("configFile", "Hydroflask_EMEA\\config.properties");
+		String url="https://mcloud-na-stage4.hydroflask.com/eu";
+		System.setProperty("url", url);
          Login.signIn();
          Hydro.close_add();
          Hydro.acceptPrivacy();

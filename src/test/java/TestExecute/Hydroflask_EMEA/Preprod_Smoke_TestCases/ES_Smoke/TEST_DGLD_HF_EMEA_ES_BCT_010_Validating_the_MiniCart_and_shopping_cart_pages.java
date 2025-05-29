@@ -49,7 +49,8 @@ public class TEST_DGLD_HF_EMEA_ES_BCT_010_Validating_the_MiniCart_and_shopping_c
 
 	@BeforeTest
 	public void startTest() throws Exception {
-		System.setProperty("configFile", "Hydroflask_EMEA\\config.properties");
+		String url="https://mcloud-na-stage4.hydroflask.com/es";
+		System.setProperty("url", url);
 		Login.signIn();
 		Hydro.close_add();
         Hydro.acceptPrivacy();
