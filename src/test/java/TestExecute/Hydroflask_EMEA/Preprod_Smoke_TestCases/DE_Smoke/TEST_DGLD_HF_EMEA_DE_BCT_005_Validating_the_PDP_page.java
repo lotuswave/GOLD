@@ -20,8 +20,6 @@ public class TEST_DGLD_HF_EMEA_DE_BCT_005_Validating_the_PDP_page {
 			Hydro.verifingHomePage();
 			Hydro.search_product("Product"); 	
 			Hydro.Configurableproduct_addtocart_pdppage("Product");
-			
-
 		
 		}
 		catch (Exception e) {
@@ -30,8 +28,6 @@ public class TEST_DGLD_HF_EMEA_DE_BCT_005_Validating_the_PDP_page {
 		} 
 	}
 	
-	
-	
 	@AfterTest
 	public void clearBrowser()
 	{
@@ -39,18 +35,13 @@ public class TEST_DGLD_HF_EMEA_DE_BCT_005_Validating_the_PDP_page {
 
 	}
 	
-	
 	@BeforeTest
 	public void startTest() throws Exception {
-		System.setProperty("configFile", "Hydroflask_EMEA\\config.properties");
+		String url="https://mcloud-na-stage4.hydroflask.com/de";
+		System.setProperty("url", url);
         Login.signIn();
         Hydro.close_add();
         Hydro.acceptPrivacy();
 
 	}
-
-	
-
-
-
 }

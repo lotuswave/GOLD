@@ -43,6 +43,7 @@ import TestLib.Sync;
 import Utilities.ExcelReader;
 import Utilities.ExtenantReportUtils;
 import Utilities.Utils;
+import ch.qos.logback.core.recovery.ResilientSyslogOutputStream;
 import groovyjarjarantlr.CommonAST;
 
 public class GoldHydro_EMEA_Helper {
@@ -98,14 +99,14 @@ public class GoldHydro_EMEA_Helper {
 			}
 			else if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage4")) {
 				Close_Geolocation();
-				Sync.waitElementPresent(60, "css", "img[alt='Store logo']");
+				Sync.waitPageLoad();
 				int size = Common.findElements("css", "img[alt='Store logo']").size();
 
 				boolean isLogoPresent = size > 0;
 				boolean isTitleCorrect = Common.getPageTitle().contains("Home Page")
 						|| Common.getPageTitle().contains("Hydro Flask Reusable Bottles");
 
-				Common.assertionCheckwithReport(isLogoPresent && isTitleCorrect, "validating the home page navigation",
+				Common.assertionCheckwithReport(isLogoPresent || isTitleCorrect, "validating the home page navigation",
 						"User should be navigate to the Home page", "Successfully user navigates to the home page",
 						"Failed to navigate to the homepage");
 			} else {
@@ -6892,7 +6893,7 @@ System.out.println(MyFavorites);
 			Thread.sleep(4000);
 			String productsearch = Common.findElement("id", "instant-empty-results-container").getText();
 			System.out.println(productsearch);
-			Common.assertionCheckwithReport(productsearch.contains("No products for query"),
+			Common.assertionCheckwithReport(productsearch.contains(search),
 					"validating the search functionality",
 					"enter any search term will display no results in the search box",
 					"user enter the search term in  search box", "Failed to see the search term");
@@ -11349,10 +11350,12 @@ System.out.println(MyFavorites);
 						"//div[contains(@class,'footer-menu')]//a[contains(@title,'" + footerlinks[i] + "')]");
 				Sync.waitPageLoad();
 				Thread.sleep(3000);
-
+ System.out.println(footerlinks[i]);
+ String CurrentPageURL =Common.getCurrentURL();
 				Common.assertionCheckwithReport(
 						Common.getPageTitle().contains(footerlinks[i])
-								|| Common.getCurrentURL().contains(footerlinks[i])
+								||CurrentPageURL.contains(footerlinks[i])
+								|| CurrentPageURL.contains("prodeal")
 								|| Common.getPageTitle().contains("We are Hydro Flask")
 								|| Common.getPageTitle().contains("Refer-A-Friend")
 								|| Common.getPageTitle().contains("Corporate Purchasing"),

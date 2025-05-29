@@ -41,7 +41,8 @@ public class TEST_DGLD_HF_EMEA_DE_BCT_006_Validating_the_Search_Results_Page {
 
 	@BeforeTest
 	public void startTest() throws Exception {
-		System.setProperty("configFile", "Hydroflask_EMEA\\config.properties");
+		String url="https://mcloud-na-stage4.hydroflask.com/de";
+		System.setProperty("url", url);
 		Login.signIn();
 		Hydro.close_add();
         Hydro.acceptPrivacy();
