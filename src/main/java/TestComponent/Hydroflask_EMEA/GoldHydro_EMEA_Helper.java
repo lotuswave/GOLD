@@ -81,7 +81,22 @@ public class GoldHydro_EMEA_Helper {
 	 */
 	public void verifingHomePage() {
 		try {
-			if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage4")) {
+			String url = automation_properties.getInstance().getProperty(automation_properties.BASEURL);
+			System.out.println(url);
+			if (Common.getCurrentURL().contains(url)) {
+				Close_Geolocation();
+				Sync.waitElementPresent(60, "css", "a[class*='c-header__logo inline-flex']");
+				int size = Common.findElements("css", "a[class*='c-header__logo inline-flex']").size();
+
+				boolean isLogoPresent = size > 0;
+				boolean isTitleCorrect = Common.getPageTitle().contains("Home Page")
+						|| Common.getPageTitle().contains("Hydro Flask Reusable Bottles");
+
+				Common.assertionCheckwithReport(isLogoPresent && isTitleCorrect, "validating the home page navigation",
+						"User should be navigate to the Home page", "Successfully user navigates to the home page",
+						"Failed to navigate to the homepage");
+			}
+			else if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage4")) {
 				Close_Geolocation();
 				Sync.waitElementPresent(60, "css", "img[alt='Store logo']");
 				int size = Common.findElements("css", "img[alt='Store logo']").size();
@@ -115,7 +130,6 @@ public class GoldHydro_EMEA_Helper {
 			Assert.fail("Failed to verify home page.");
 		}
 	}
-
 	public void Close_Geolocation() {
 		// TODO Auto-generated method stub
 		try {
@@ -7609,7 +7623,7 @@ System.out.println(MyFavorites);
 					.trim();
 			Common.assertionCheckwithReport(
 					breadcrumbs.contains("Breadcrumb") && title.contains("title-2xl") && filter.contains("Filter by")
-							&& Sort.contains("Sort by"),
+							&& Sort.contains("Sort by") || breadcrumbs.contains("Breadcrumb") && title.contains("title-2xl"),
 					"To validate the Product Listing Page", "User should able to open Product Listing Page",
 					"Sucessfully views the Product Listing Page", "Failed to view Product Listing Page");
 		} catch (Exception | Error e) {
@@ -7621,7 +7635,6 @@ System.out.println(MyFavorites);
 			Assert.fail();
 		}
 	}
-
 	public void filter_By(String category) {
 
 		try {
@@ -9074,8 +9087,14 @@ System.out.println(MyFavorites);
 			Thread.sleep(6000);
 			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
 			Common.mouseOver("xpath", "//img[@alt='" + products + "']");
-			Sync.waitElementPresent("xpath", "//span[text()='Add to Cart']");
-			Common.clickElement("xpath", "//span[text()='Add to Cart']");
+			if(Common.getCurrentURL().contains("/de") || Common.getCurrentURL().contains("/fr") ||
+				Common.getCurrentURL().contains("/es")) {			
+				Sync.waitElementPresent("css","form[class='flex-grow product_addtocart_form'] button");
+				Common.clickElement("css","form[class='flex-grow product_addtocart_form'] button");
+			} else {				
+				Sync.waitElementPresent("xpath", "//span[text()='Add to Cart']");
+				Common.clickElement("xpath", "//span[text()='Add to Cart']");
+			}	
 //			Sync.waitPageLoad();
 			Thread.sleep(2000);
 //			Common.clickElement("xpath", "//button[@aria-label='Close minicart']");
@@ -12173,7 +12192,7 @@ System.out.println(MyFavorites);
 			Common.clickElement("xpath", "//div[@class='ais-Panel-header']//div[text()='Price']");
 			Thread.sleep(3000);
 			String lastvalue = Common.findElement("xpath", "//div[@class='value end active']").getText()
-					.replace("£", "").replace(".00", "");
+					.replace("£", "").replace(".00", "").replace("€","").replace(",00","").replace(" ", "");//eu//de//fr
 			System.out.println(lastvalue);
 			Sync.waitElementPresent("xpath", "//div[@aria-valuemax='" + lastvalue + "' and @data-handle-key='0']");
 			WebElement price = Common.findElement("xpath",
@@ -12235,7 +12254,6 @@ System.out.println(MyFavorites);
 		}
 
 	}
-
 	public void dragprice(WebElement price) {
 		try {
 			String lastvalue = Common.getText("xpath", "//div[@class='value end active']").replace("$", "")
