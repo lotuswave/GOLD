@@ -9018,7 +9018,11 @@ public void header_1_Percent_Planet() {
 	public void minicart_product_close() {
 		// TODO Auto-generated method stub
 		try {
-
+            int popupsize=Common.findElements("css", "button[aria-label='Close dialog']").size();
+            if(popupsize>0)
+            {
+            	Common.clickElement("css", "button[aria-label='Close dialog']");
+            }
 			Common.clickElement("xpath", "//a[contains(@aria-label,'Edit product')]//parent::div//button");
 			Sync.waitElementPresent("xpath", "//a[contains(@aria-label,'Edit product')]//parent::div//button");
 			String minicartpopup = Common.findElement("xpath", "//div[@x-ref='removeItemConfirm']")
