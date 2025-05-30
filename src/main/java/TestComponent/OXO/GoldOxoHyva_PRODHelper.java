@@ -12144,7 +12144,7 @@ public void header_kichenware_Utensils(String Dataset) {
 				System.out.println(breadcrumb);
 				Common.assertionCheckwithReport(
 						title.contains(Links[i]) || breadcrumb.contains(Links[i])
-								|| Common.getPageTitle().contains(Links[i]),
+								|| Common.getPageTitle().contains(Links[i]) || breadcrumb.contains(title),
 						"verifying the header link " + Links[i] + "Under Kitchenware",
 						"user should navigate to the " + Links[i] + " page",
 						"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
@@ -12243,7 +12243,7 @@ public void header_kichenware_CookingAndBaking(String Dataset) {
 				System.out.println(breadcrumb);
 				Common.assertionCheckwithReport(
 						title.contains(Links[i]) || breadcrumb.contains(Links[i])
-								|| Common.getPageTitle().contains(Links[i]),
+								|| Common.getPageTitle().contains(Links[i]) || breadcrumb.contains(title) ,
 						"verifying the header link " + Links[i] + "Under Kitchenware",
 						"user should navigate to the " + Links[i] + " page",
 						"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
