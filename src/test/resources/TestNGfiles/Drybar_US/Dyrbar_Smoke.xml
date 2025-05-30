@@ -17,11 +17,11 @@
     </test>
     
     
-    <test name="TEST_DGLD_DB_US_ST_010_Reset_Password_from_shipping_page" testid="DQA-3659" priority="P1" description="This script will cover resetting the password from the shipping page">
-        <classes>
-            <class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_010_Reset_Password_from_shipping_page"/>
-        </classes>
-    </test>
+   <test name="TEST_DGLD_DB_US_ST_009_Verify_Forgot_Password_page_validation" testid="DQA-3633" priority="P1" description="This Test case is to Validate Forgot Password functionality in Sign in page.">
+<classes>
+<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_009_Verify_Forgot_Password_page_validation"/>
+</classes>
+</test>
     
     <test name="TEST_DGLD_DB_US_ST_012_Header_Validation_for_GuestUser" testid="DQA-3612" priority="P1" description="This script will cover header validation for a guest user">
         <classes>

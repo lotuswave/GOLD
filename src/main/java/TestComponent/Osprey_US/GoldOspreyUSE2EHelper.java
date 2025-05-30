@@ -2980,9 +2980,9 @@ public void header_Shopbycollection(String Dataset) { {
 //			{
 //				Common.clickElement("xpath", "//div[@x-ref='freegift']//button[@aria-label='Close, button.']");
 //			}
-			Sync.waitElementVisible(30, "css", "a[class*='inline-flex btn btn-primary text']");
-			Sync.waitElementPresent(30, "css", "a[class*='inline-flex btn btn-primary text']");
-			Common.clickElement("css", "a[class*='inline-flex btn btn-primary text']");
+			Sync.waitElementVisible(30, "css", "button[class*='inline-flex btn btn-primary text']");
+			Sync.waitElementPresent(30,"css", "button[class*='inline-flex btn btn-primary text']");
+			Common.clickElement("css", "button[class*='inline-flex btn btn-primary text']");
 			Sync.waitPageLoad();
 			Thread.sleep(2000);
 //			Sync.waitElementPresent(30, "xpath", "//strong[@role='heading']");
@@ -3135,7 +3135,7 @@ public void header_Shopbycollection(String Dataset) { {
 //				Common.clickElement("xpath", "//input[@id='shipping-save']");
 
 				Thread.sleep(3000);
-				Common.clickElement("xpath", "//button[@class='btn btn-primary w-full os:uppercase']");
+				Common.clickElement("css", "button[class*='checkout-address-form__buttons-save']");
 
 //				
 //                ExtenantReportUtils.addPassLog("verifying shipping addres filling ",
@@ -17655,7 +17655,7 @@ public String TwentyFive_percent_Reward_Points(String Dataset) {
 //		Common.clickElement("xpath", "//button[contains(text(),'Your Reward Points')]");
 		Thread.sleep(3000);
 		String off=Common.findElement("xpath", "//div[@class='yotpo-remove-tag-container']//div").getText().trim().replace(" Off", "");
-		String discount=Common.findElement("xpath", "//div[@class='item discount']//span[@class='value']").getText().trim().replace("-", "").replace(".00", "");
+		String discount=Common.findElement("xpath", "(//div[@class='item discount']//span[@class='checkout-total-segments__discount-value value'])[1]").getText().trim().replace("-", "").replace(".00", "");
 		System.out.println(off);
 		System.out.println(discount);
 	

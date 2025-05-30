@@ -32,7 +32,7 @@ public class TEST_DGLD_OSP_SP_E2E_010_RegisterUser_with_multipleitems_standard_s
 		     Osprey_ReEu.addtocart_Configurable("SKU-10003319-2QTY");
 		     Osprey_ReEu.minicart_Checkout();
 		     Osprey_ReEu.RegaddDeliveryAddress("sp address");
-		     Osprey_ReEu.selectshippingmethod("Sp Shipping Method");
+		     Osprey_ReEu.selectshippingmethod("reg shipping");
 		     String Used_GiftCode="NULL";
 		     Osprey_ReEu.clickSubmitbutton_Shippingpage();
 		     HashMap<String,String> Details=Osprey_ReEu.ordersummary_Details();

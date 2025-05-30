@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<suite name="Gold-Hydroflask EMEA Regression execution">
+    <listeners>
+        <listener class-name="Utilities.TestListener"/>
+    </listeners>
+
+    <test name="TEST_DGLD_HF_EMEA_RT_001_guestCheckoutwith_invalid_CC_Credentials" testid="DQA-4411" description="This script tests guest user checkout with invalid credit card credentials.">
+    <classes>
+        <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.TEST_DGLD_HF_EMEA_RT_001_guestCheckoutwith_invalid_CC_Credentials"/>
+    </classes>
+</test>
+
+<test name="TEST_DGLD_HF_EMEA_RT_002_RegisteredUserCheckoutwith_invalid_CC_Credentials" testid="DQA-4412" description="This script tests registered user checkout with invalid credit card credentials.">
+    <classes>
+        <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.TEST_DGLD_HF_EMEA_RT_002_RegisteredUserCheckoutwith_invalid_CC_Credentials"/>
+    </classes>
+</test>
+
+<test name="TEST_DGLD_HF_EMEA_RT_005_Checkout_GuestUserCC_configurable_Simple" testid="DQA-4416" description="This script validates guest user checkout with credit card for configurable and simple products.">
+    <classes>
+        <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.TEST_DGLD_HF_EMEA_RT_005_Checkout_GuestUserCC_configurable_Simple"/>
+    </classes>
+</test>
+
+<test name="TEST_DGLD_HF_EMEA_RT_006_Checkout_with_GuestUserCC_Simple_Configurable_and_Bundle_products" testid="DQA-4417" description="This script validates guest user checkout using credit card for simple, configurable, and bundle products.">
+    <classes>
+        <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.TEST_DGLD_HF_EMEA_RT_006_Checkout_with_GuestUserCC_Simple_Configurable_and_Bundle_products"/>
+    </classes>
+</test>
+
+<test name="TEST_DGLD_HF_EMEA_RT_008_Register_user_Checkout_with_Paypal" testid="DQA-4419" description="This script covers registered user checkout using PayPal.">
+    <classes>
+        <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.TEST_DGLD_HF_EMEA_RT_008_Register_user_Checkout_with_Paypal"/>
+    </classes>
+</test>
+
+<test name="TEST_DGLD_HF_EMEA_RT_010_Checkout_with_Register_UserCC_Simple_Configurable_and_Bundle_products" testid="DQA-4425" description="This script validates registered user checkout with credit card for simple, configurable, and bundle products.">
+    <classes>
+        <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.TEST_DGLD_HF_EMEA_RT_010_Checkout_with_Register_UserCC_Simple_Configurable_and_Bundle_products"/>
+    </classes>
+</test>
+
+<test name="TEST_DGLD_HF_EMEA_RT_011_Guest_User_Back_In_stock_Subcription" testid="DQA-4427" description="This script verifies back-in-stock subscription functionality for guest users.">
+    <classes>
+        <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.TEST_DGLD_HF_EMEA_RT_011_Guest_User_Back_In_stock_Subcription"/>
+    </classes>
+</test>
+
+<test name="TEST_DGLD_HF_EMEA_RT_012_Checkout_RegisterUserCC_configurable_Simple" testid="DQA-4429" description="This script verifies checkout for registered users using credit card for simple and configurable products.">
+    <classes>
+        <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.TEST_DGLD_HF_EMEA_RT_012_Checkout_RegisterUserCC_configurable_Simple"/>
+    </classes>
+</test>
+
+<test name="TEST_DGLD_HF_EMEA_RT_013_Register_User_Back_In_stock_Subcription" testid="DQA-4431" description="This script verifies back-in-stock subscription functionality for registered users.">
+    <classes>
+        <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.TEST_DGLD_HF_EMEA_RT_013_Register_User_Back_In_stock_Subcription"/>
+    </classes>
+</test>
+
+<test name="TEST_DGLD_HF_EMEA_RT_014_Change_Password_and_Email_from_AccountInformation_Page" testid="DQA-4432" description="Change Password and Email from Account Information Page">
+    <classes>
+        <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.TEST_DGLD_HF_EMEA_RT_014_Change_Password_and_Email_from_AccountInformation_Page"/>
+    </classes>
+</test>
+
+<test name="TEST_DGLD_HF_EMEA_RT_015_Social_Artical_Links" testid="DQA-4434" description="Social Article Links">
+    <classes>
+        <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.TEST_DGLD_HF_EMEA_RT_015_Social_Artical_Links"/>
+    </classes>
+</test>
+
+<test name="TEST_DGLD_HF_EMEA_RT_016_Track_My_Order_For_Guest_User" testid="DQA-4436" description="Track My Order For Guest User">
+    <classes>
+        <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.TEST_DGLD_HF_EMEA_RT_016_Track_My_Order_For_Guest_User"/>
+    </classes>
+</test>
+
+<test name="TEST_DGLD_HF_EMEA_RT_017_Track_My_Order_for_Register_User" testid="DQA-4441" description="Track My Order for Register User">
+    <classes>
+        <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.TEST_DGLD_HF_EMEA_RT_017_Track_My_Order_for_Register_User"/>
+    </classes>
+</test>
+
+<test name="TEST_DGLD_HF_EMEA_RT_018_Validation_My_Orders_page_For_Register_User" testid="DQA-4442" description="Validation My Orders page For Register User">
+    <classes>
+        <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.TEST_DGLD_HF_EMEA_RT_018_Validation_My_Orders_page_For_Register_User"/>
+    </classes>
+</test>
+
+<test name="TEST_DGLD_HF_EMEA_RT_020_changeAddressIn_AddressBook" testid="DQA-4446" description="Change Address in Address Book">
+    <classes>
+        <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.TEST_DGLD_HF_EMEA_RT_020_changeAddressIn_AddressBook"/>
+    </classes>
+</test>
+
+
+  <test name="TEST_DGLD_HF_EMEA_RT_021_Create_and_Edit_Gift_Registery_For_Register_User" testid="DQA-4447" description="Create and Edit Gift Registry for Registered User">
+    <classes>
+      <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.TEST_DGLD_HF_EMEA_RT_021_Create_and_Edit_Gift_Registery_For_Register_User"/>
+    </classes>
+  </test>
+
+  <test name="TEST_DGLD_HF_EMEA_RT_023_Miscellaneous_Pages" testid="DQA-4449" description="Validate Miscellaneous Pages">
+    <classes>
+      <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.TEST_DGLD_HF_EMEA_RT_023_Miscellaneous_Pages"/>
+    </classes>
+  </test>
+
+  <test name="TEST_DGLD_HF_EMEA_RT_024_WebPageLinkValidation" testid="DQA-4450" description="Web Page Link Validation">
+    <classes>
+      <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.TEST_DGLD_HF_EMEA_RT_024_WebPageLinkValidation"/>
+    </classes>
+  </test>
+
+<test name="TEST_DGLD_HF_EMEA_RT_026_My_Account_Page_Validation" testid="DQA-4384" description="this testcase covers the my account page validation">
+  <classes>
+    <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.TEST_DGLD_HF_EMEA_RT_026_My_Account_Page_Validation"/>
+  </classes>
+</test>
+
+  <test name="TEST_DGLD_HF_EMEA_RT_027_Footer_Newsletter_subcription" testid="DQA-4451" description="Footer Newsletter Subscription">
+    <classes>
+      <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.TEST_DGLD_HF_EMEA_RT_027_Footer_Newsletter_subcription"/>
+    </classes>
+  </test>
+
+  <test name="TEST_DGLD_HF_EMEA_RT_028_Create_share_and_Delete_Gift_Registery_For_Register_User" testid="DQA-4454" description="Create, Share, and Delete Gift Registry for Registered User">
+    <classes>
+      <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.TEST_DGLD_HF_EMEA_RT_028_Create_share_and_Delete_Gift_Registery_For_Register_User"/>
+    </classes>
+  </test>
+
+  <test name="TEST_DGLD_HF_EMEA_RT_029_place_an_order_by_using_reorder" testid="DQA-4455" description="Place an Order Using Reorder Functionality">
+    <classes>
+      <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.Test_DGLD_HF_EMEA_RT_029_place_an_order_by_using_reorder"/>
+    </classes>
+  </test>
+
+  <test name="TEST_DGLD_HF_EMEA_RT_030_URL_verification_of_PDP" testid="DQA-4445" description="URL Verification of Product Detail Page (PDP)">
+    <classes>
+      <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.Test_DGLD_HF_EMEA_RT_030_URL_verification_of_PDP"/>
+    </classes>
+  </test>
+
+  <test name="TEST_DGLD_HF_EMEA_RT_031_Register_user_Checkout_With_Discount_Visa_card" testid="DQA-4443" description="Registered User Checkout with Discount and Visa Card">
+    <classes>
+      <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.Test_DGLD_HF_EMEA_RT_031_Register_user_Checkout_With_Discount_Visa_card"/>
+    </classes>
+  </test>
+
+  <test name="TEST_DGLD_HF_EMEA_RT_032_Validate_StoreLocator" testid="DQA-4440" description="Validate Store Locator Functionality">
+    <classes>
+      <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.Test_DGLD_HF_EMEA_RT_032_Validate_StoreLocator"/>
+    </classes>
+  </test>
+
+  <test name="TEST_DGLD_HF_EMEA_RT_034_Category_Listing_Page" testid="DQA-4438" description="Validate Category Listing Page">
+    <classes>
+      <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.Test_DGLD_HF_EMEA_RT_034_Category_Listing_Page"/>
+    </classes>
+  </test>
+
+  <test name="TEST_DGLD_HF_EMEA_RT_035_Validating_the_product_video_in_PDP_page" testid="DQA-4437" description="Validate Product Video on PDP Page">
+    <classes>
+      <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.Test_DGLD_HF_EMEA_RT_035_Validating_the_product_video_in_PDP_page"/>
+    </classes>
+  </test>
+
+  <test name="TEST_DGLD_HF_EMEA_RT_037_Guest_User_Create_Account_from_OrderConfirmation_Page" testid="DQA-4433" description="Guest User Creates Account from Order Confirmation Page">
+    <classes>
+      <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.Test_DGLD_HF_EMEA_RT_037_Guest_User_Create_Account_from_OrderConfirmation_Page"/>
+    </classes>
+  </test>
+
+  <test name="TEST_DGLD_HF_EMEA_RT_038_Create_An_Account_with_cart" testid="DQA-4430" description="Create an Account with Items in Cart">
+    <classes>
+      <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.Test_DGLD_HF_EMEA_RT_038_Create_An_Account_with_cart"/>
+    </classes>
+  </test>
+
+  <test name="TEST_DGLD_HF_EMEA_RT_039_Add_to_Cart_from_Sticky_Cart_in_PDP_Page" testid="DQA-4428" description="Add to Cart from Sticky Cart in PDP Page">
+    <classes>
+      <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.Test_DGLD_HF_EMEA_RT_039_Add_to_Cart_from_Sticky_Cart_in_PDP_Page"/>
+    </classes>
+  </test>
+
+  <test name="Test_DGLD_HF_EMEA_RT_040_Register_user_Checkout_With_GC_Purchase_and_Bundle_product_and_same_ChildBundle_with_CC" testid="DQA-4426" description="this testcase covers Register user checkout With GC Purchase and Bundle product and same childBundle with CC">
+  <classes>
+    <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.Test_DGLD_HF_EMEA_RT_040_Register_user_Checkout_With_GC_Purchase_and_Bundle_product_and_same_ChildBundle_with_CC"/>
+  </classes>
+ </test>
+
+  <test name="TEST_DGLD_HF_EMEA_RT_041_Register_User_checkout_with_Express_paypal" testid="DQA-4424" description="Registered User Checkout with Express PayPal">
+    <classes>
+      <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.Test_DGLD_HF_EMEA_RT_041_Register_User_checkout_with_Express_paypal"/>
+    </classes>
+  </test>
+
+
+  <test name="TEST_DGLD_HF_EMEA_RT_046_Placeorder_Register_user_multipleproducts_with_giftcardcode_discount_and_3D_Secure_Payment_Method" testid="DQA-4457" description="Registered User Places Order with Multiple Products, Gift Card Code, Discount, and 3D Secure Payment">
+    <classes>
+      <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.TEST_DGLD_HF_EMEA_RT_046_Placeorder_Register_user_multipleproducts_with_giftcardcode_discount_and_3D_Secure_Payment_Method"/>
+    </classes>
+  </test>
+
+  <test name="TEST_DGLD_HF_EMEA_RT_047_Placeorder_Guest_user_Checkout_with_multiple_products_as_full_Redemption_using_gift_card_code" testid="DQA-4468" description="Guest User Checkout with Multiple Products Fully Redeemed Using Gift Card Code">
+    <classes>
+      <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.TEST_DGLD_HF_EMEA_RT_047_Placeorder_Guest_user_Checkout_with_multiple_products_as_full_Redemption_using_gift_card_code"/>
+    </classes>
+  </test>
+
+<test name="TEST_DGLD_HF_EMEA_RT_050_Register_User_Checkout_Gift_Card_Partial_Payment" testid="DQA-4465" description="this testcase covers registeruser checkout with giftcard partial payment">
+  <classes>
+    <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.TEST_DGLD_HF_EMEA_RT_050_Register_User_Checkout_Gift_Card_Partial_Payment"/>
+  </classes>
+</test>
+
+  <test name="TEST_DGLD_HF_EMEA_RT_051_RegisterUser_Checkout_using_GiftCard_and_Payment_with_3D_Payment" testid="DQA-4464" description="Registered User Checkout Using Gift Card and 3D Secure Payment">
+    <classes>
+      <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.TEST_DGLD_HF_EMEA_RT_051_RegisterUser_Checkout_using_GiftCard_and_Payment_with_3D_Payment"/>
+    </classes>
+  </test>
+
+  <test name="TEST_DGLD_HF_EMEA_RT_053_Placeorder_Register_user_mutipleproducts_with_giftcardcode_discount_and_CC" testid="DQA-4461" description="Registered User Places Order with Multiple Products, Gift Card Code, Discount, and Credit Card">
+    <classes>
+      <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.TEST_DGLD_HF_EMEA_RT_053_Placeorder_Register_user_mutipleproducts_with_giftcardcode_discount_and_CC"/>
+    </classes>
+  </test>
+
+  <test name="TEST_DGLD_HF_EMEA_RT_054_Add_Gift_Card_Code_in_My_Account_Page_and_Select_the_Gift_Card_Code_at_Payment_Page_and_Place_an_Order" testid="DQA-4460" description="Add Gift Card Code in My Account and Use at Payment Page to Place Order">
+    <classes>
+      <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.TEST_DGLD_HF_EMEA_RT_054_Add_Gift_Card_Code_in_My_Account_Page_and_Select_the_Gift_Card_Code_at_Payment_Page_and_Place_an_Order"/>
+    </classes>
+  </test>
+
+  <test name="TEST_DGLD_HF_EMEA_RT_055_Gift_card_and_Configurable_Product_Checkout_with_Promo_code_Applied" testid="DQA-4459" description="Checkout with Gift Card and Configurable Product with Promo Code Applied">
+    <classes>
+      <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.TEST_DGLD_HF_EMEA_RT_055_Gift_card_and_Configurable_Product_Checkout_with_Promo_code_Applied"/>
+    </classes>
+  </test>
+
+  
+ <test name="TEST_DGLD_HF_EMEA_RT_056_Guest_User_Checkout_with_Gift_Card_Code" testid="DQA-4458" description="Guest User Checkout with Gift Card Code">
+  <classes>
+    <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.TEST_DGLD_HF_EMEA_RT_056__Guest_User_Checkout_with_Gift_Card_Code"/>
+  </classes>
+</test>
+
+<test name="TEST_DGLD_HF_EMEA_RT_057_Decline_All_Create_Account_Login_and_checkout_as_Register_User" testid="DQA-4488" description="Decline All Create Account, Login and Checkout as Registered User">
+  <classes>
+    <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.TEST_DGLD_HF_EMEA_RT_057_Decline_All_Create_Account_Login_and_checkout_as_Register_User"/>
+  </classes>
+</test>
+
+<test name="TEST_DGLD_HF_EMEA_RT_058_Stored_Payment_For_Register_User" testid="DQA-4491" description="Stored Payment for Registered User">
+  <classes>
+    <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.TEST_DGLD_HF_EMEA_RT_058_Stored_Payment_For_Register_User"/>
+  </classes>
+</test>
+
+<test name="TEST_DGLD_HF_EMEA_RT_059_Guest_User_checkout_with_Express_paypal" testid="DQA-4378" description="Guest User Checkout with Express PayPal">
+  <classes>
+    <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.Test_DGLD_HF_EMEA_RT_059_Guest_User_checkout_with_Express_paypal"/>
+  </classes>
+</test>
+
+<test name="TEST_DGLD_HF_EMEA_RT_060_Placeorder_Guest_user_multipleproducts_with_giftcardcode_discount_and_3D_Secure_Payment_Method" testid="DQA-4489" description="Guest Order: Multiple Products, Gift Card Discount and 3D Secure Payment">
+  <classes>
+    <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.TEST_DGLD_HF_EMEA_RT_060_Placeorder_Guest_user_multipleproducts_with_giftcardcode_discount_and_3D_Secure_Payment_Method"/>
+  </classes>
+</test>
+
+<test name="TEST_DGLD_HF_EMEA_RT_065_PlaceOrder_Validate_ShippingMethods_for_NonPro_Employee_subtotal_amount_Lessthan_OR_Equal_30Pound_StandardShipping_5Pound" testid="DQA-4502" description="Validate Shipping Methods for Non-Pro Employee subtotal ≤ £30 (Standard Shipping £5)">
+  <classes>
+    <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.Test_DGLD_HF_EMEA_RT_065_PlaceOrder_Validate_ShippingMethods_for_NonPro_Employee_subtotal_amount_Lessthan_OR_Equal_30Pound_StandardShipping_5Pound"/>
+  </classes>
+</test>
+
+<test name="TEST_DGLD_HF_EMEA_RT_066_RegisterUser_Add_Other_Amount_To_GiftCard_In_PDP_And_Checkout" testid="DQA-4512" description="Register User Adds Other Amount to Gift Card in PDP and Checkout">
+  <classes>
+    <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.TEST_DGLD_HF_EMEA_RT_066_RegisterUser_Add_Other_Amount_To_GiftCard_In_PDP_And_Checkout"/>
+  </classes>
+</test>
+
+<test name="TEST_DGLD_HF_EMEA_RT_067_Guest_User_Checkout_with_Multiple_Gift_Card_Codes" testid="DQA-4511" description="Guest User Checkout with Multiple Gift Card Codes">
+  <classes>
+    <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.TEST_DGLD_HF_EMEA_RT_067_Guest_User_Checkout_with_Multiple_Gift_Card_Codes"/>
+  </classes>
+</test>
+
+<test name="TEST_DGLD_HF_EMEA_RT_068_Placeorder_GuestUser_checkout_with_Multiple_giftCard_Products" testid="DQA-4513" description="Guest User Checkout with Multiple Gift Card Products">
+  <classes>
+    <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.Test_DGLD_HF_EMEA_RT_068_Placeorder_GuestUser_checkout_with_Multiple_giftCard_Products"/>
+  </classes>
+</test>
+
+<test name="Test_DGLD_HF_EMEA_RT_069_Place_Order_Validate_ShippingMethods_for_Non_Pro_or_Employee_subtotal_amount_lessthan_or_equal_to_35_Euros_Standard_Shipping_5" testid="DQA-4559" description="This testcase is to verify that the Shipping methods for a customer are Non-Pro or Employee, and the sub-total amount is less than or equal to 35 Euros">
+  <classes>
+    <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.Test_DGLD_HF_EMEA_RT_069_Place_Order_Validate_ShippingMethods_for_Non_Pro_or_Employee_subtotal_amount_lessthan_or_equal_to_35_Euros_Standard_Shipping_5"/>
+  </classes>
+</test>
+</suite>
+

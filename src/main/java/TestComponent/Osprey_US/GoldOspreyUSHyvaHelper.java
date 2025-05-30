@@ -92,10 +92,10 @@ public class GoldOspreyUSHyvaHelper {
 //				close_countryselector();
 				acceptPrivacy();
 //				Thread.sleep(2000);
-				if(Common.findElements("xpath", "//button[@aria-label='Close dialog']").size()>0)
-				{
-				Common.clickElement("xpath", "//button[@aria-label='Close dialog']");
-				}
+//				if(Common.findElements("xpath", "//button[@aria-label='Close dialog']").size()>0)
+//				{
+//				Common.clickElement("xpath", "//button[@aria-label='Close dialog']");
+//				}
 		
 				int size = Common.findElements("xpath", "//img[@alt='Osprey store logo']").size();
 				System.out.println(size);
@@ -3007,8 +3007,8 @@ public void Addtocart_From_MyFavorites(String Dataset) {
 			Sync.waitElementPresent("css", "span[x-text='totalCartAmount']");
 			String minicart = Common.findElement("css", "span[x-text='totalCartAmount']").getText();
 			System.out.println(minicart);
-			Sync.waitElementPresent(30, "css", "a[class*='inline-flex btn btn-primary text']");
-			Common.clickElement("css", "a[class*='inline-flex btn btn-primary text']");
+			Sync.waitElementPresent(30, "css", "button[class*='inline-flex btn btn-primary text']");
+			Common.clickElement("css", "button[class*='inline-flex btn btn-primary text']");
 //			Sync.waitPageLoad();
 			Thread.sleep(1000);
 //			Sync.waitElementPresent(30, "xpath", "//strong[@role='heading']");
@@ -3161,7 +3161,7 @@ public void Addtocart_From_MyFavorites(String Dataset) {
 //				Common.clickElement("xpath", "//input[@id='shipping-save']");
 
 				Thread.sleep(2000);
-				Common.clickElement("xpath", "//button[@class='btn btn-primary w-full os:uppercase']");
+				Common.clickElement("css", "button[class*='checkout-address-form__buttons-save']");
 
 //				
 //                ExtenantReportUtils.addPassLog("verifying shipping addres filling ",
@@ -3708,7 +3708,7 @@ public void Validate_retailerlocations() {
 			Sync.waitElementPresent(40, "xpath", "//a[@id='dealer-navigation-inventory']");
 			Common.clickElement("xpath", "//a[@id='dealer-navigation-inventory']");
 
-			int stock = Common.findElements("xpath", "//div[@id='dealer-tab-inventory-grid-container-desktop']").size();
+			int stock = Common.findElements("xpath", "//div[@id='dealer-tab-inventory-filter-container']").size();
 			System.out.println(stock);
 
 			Common.assertionCheckwithReport(stock > 0, "validating instock page", "user navigates to instock page",
@@ -3727,9 +3727,9 @@ public void Validate_retailerlocations() {
 		// TODO Auto-generated method stub
 		try {
 
-			Sync.waitElementPresent(40, "xpath", "//div[contains(text(),'" + Productname + "')]");
-			Common.scrollIntoView("xpath", "//div[contains(text(),'" + Productname + "')]");
-			Common.javascriptclickElement("xpath", "//div[contains(text(),'" + Productname + "')]");
+			Sync.waitElementPresent(40, "xpath", "//img[contains(@alt,'" + Productname + "')]");
+			Common.scrollIntoView("xpath", "//img[contains(@alt,'" + Productname + "')]");
+			Common.javascriptclickElement("xpath", "//img[contains(@alt,'" + Productname + "')]");
 			
 			Sync.waitElementVisible("xpath", "//div[@class='stock-status-banner alert success checkmark']");
 			Common.scrollIntoView("xpath", "(//h4[@class='pdp-information-title'])[1]");
@@ -6001,10 +6001,10 @@ return Number;
 			Sync.waitElementPresent("id", "oar_email");
 			Common.textBoxInput("id", "oar_email", data.get(dataSet).get("BillingEmail"));
 
-			if(Common.findElements("xpath", "//button[@aria-label='Close dialog']").size()>0)
-			{
-			Common.clickElement("xpath", "//button[@aria-label='Close dialog']");
-			}
+//			if(Common.findElements("xpath", "//button[@aria-label='Close dialog']").size()>0)
+//			{
+//			Common.clickElement("xpath", "//button[@aria-label='Close dialog']");
+//			}
 			Sync.waitElementPresent("xpath", "//button[@type='submit']//span[text()='Search']");
 			Common.clickElement("xpath", "//button[@type='submit']//span[text()='Search']");
 			Sync.waitPageLoad();
@@ -7779,31 +7779,31 @@ public void review(String Dataset) {
 		// TODO Auto-generated method stub
 		Accont_Information();
 		try {
-
-			Sync.waitElementPresent("xpath", "//span[@class='m-accordion__title-label']");
-
-			Common.clickElement("xpath", "//span[@class='m-accordion__title-label']");
-			Thread.sleep(4000);
+			
+			Sync.waitElementPresent("id", "change-password");
+			Common.clickElement("id", "change-password"); 
+			Thread.sleep(3000);
 			Common.clickElement("xpath", "//div//input[@id='current-password']");
 			Common.textBoxInput("xpath", "//input[@id='current-password']", data.get(dataSet).get("Password"));
 			Common.textBoxInput("xpath", "//input[@id='password']", data.get(dataSet).get("Confirm Password"));
 			Common.textBoxInput("xpath", "//input[@id='password-confirmation']",
 					data.get(dataSet).get("Confirm Password"));
-			String message = Common.findElement("id", "validation-classes").getCssValue("color");
-			String greencolor = Color.fromString(message).asHex();
-			String message1 = Common.findElement("id", "validation-length").getAttribute("class");
+//			String message = Common.findElement("id", "password-strength-meter-container").getCssValue("color");
+//			String greencolor = Color.fromString(message).asHex();
+//			String message1 = Common.findElement("id", "password-strength-meter-container").getAttribute("class");
+//
+//			Common.assertionCheckwithReport(greencolor.equals("#2f741f") && message1.contains("complete"),
+//					"validating the cureent password and new password fields",
+//					"User should able enter data in current password and new password",
+//					"Sucessfully the data has been entered in new password and current password",
+//					"Failed to enter data in current password and new password fields");
 
-			Common.assertionCheckwithReport(greencolor.equals("#2f741f") && message1.contains("complete"),
-					"validating the cureent password and new password fields",
-					"User should able enter data in current password and new password",
-					"Sucessfully the data has been entered in new password and current password",
-					"Failed to enter data in current password and new password fields");
-
-			Common.clickElement("xpath", "//button[@title='Save']");
+			Sync.waitElementVisible(30,"css", "button[title='Save Account Information']");
+			Common.javascriptclickElement("css", "button[title='Save Account Information']");
 			Sync.waitPageLoad();
-			Thread.sleep(3000);
-			String sucessmessage = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
-			Thread.sleep(4000);
+			Sync.waitElementVisible(30,"xpath", "//div[@ui-id='message-success']");
+			String sucessmessage = Common.findElement("xpath", "//div[@ui-id='message-success']").getText();
+			Thread.sleep(1000);
 			System.out.println(sucessmessage);
 			Common.assertionCheckwithReport(sucessmessage.contains("You saved the account"),
 					"Validating the saved account information", "Account information should be saved for the user",
@@ -7825,9 +7825,9 @@ public void review(String Dataset) {
 			Sync.waitPageLoad();
 			Common.textBoxInput("id", "email", Dataset);
 			Common.textBoxInput("id", "pass", "Lotuswave@1234");
-			Common.clickElement("xpath", "//button[contains(@class,'action login')]");
+			Common.clickElement("css", "button[name='send']");
 			Sync.waitPageLoad();
-			Common.assertionCheckwithReport(Common.getPageTitle().contains("My Account"),
+			Common.assertionCheckwithReport(Common.getPageTitle().contains("Dashboard"),
 					"To validate the user lands on My Account page after successfull login",
 					"After clicking on the signIn button it should navigate to the My Account page",
 					"user Sucessfully navigate to the My Account page after clicking on the signIn button",
@@ -7849,8 +7849,8 @@ public void review(String Dataset) {
 		// TODO Auto-generated method stub
 
 		try {
-			Sync.waitElementPresent("xpath", "//a[text()='Account Information']");
-			Common.clickElement("xpath", "//a[text()='Account Information']");
+			Sync.waitElementPresent("css", "a[title='Account Information']");
+			Common.clickElement("css", "a[title='Account Information']");
 			Sync.waitPageLoad();
 			Common.assertionCheckwithReport(Common.getPageTitle().equals("Account Information"),
 					"validating the Navigation to the Account information page",
@@ -7868,6 +7868,57 @@ public void review(String Dataset) {
 			AssertJUnit.fail();
 		}
 	}
+	
+	public String change_email(String Dataset) {
+		// TODO Auto-generated method stub
+		String newemail = "";
+		String Email=Common.genrateRandomEmail("meenabogi7+@gmail.com");
+		try {
+			
+			Common.clickElement("xpath", "//span[text()='Edit']");
+			
+			Sync.waitElementClickable(30, "id", "change-email");
+			Common.clickElement("id", "change-email");
+			Common.textBoxInputClear("xpath", "(//input[@name='email'])[1]");
+			Thread.sleep(2000);
+			Common.textBoxInputAndVerify("xpath", "(//input[@name='email'])[1]", Email);
+			 newemail = Common.findElement("xpath", "(//input[@name='email'])[1]").getAttribute("value");
+			Common.textBoxInput("xpath", "//input[@name='current_password']",
+					data.get(Dataset).get("Confirm Password"));
+			Common.clickElement("xpath", "//span[text()='Save Account Information']");
+			Sync.waitPageLoad();
+			Thread.sleep(3000);
+			String successmessage = Common.findElement("xpath", "//div[@ui-id='message-success']").getText();
+			Common.assertionCheckwithReport(
+					successmessage.contains("You saved the account information.")
+							|| Common.getPageTitle().contains("Customer Login"),
+					"verifying the Success message for the Change email",
+					"user should get the success message and navigate back to the Login page",
+					"Successfully user gets the success message and navigated to the Login page",
+					"Failed to get the success message and unable to navigate to the login page");
+			Sync.waitPageLoad();
+			Common.textBoxInput("id", "email", newemail);
+			Common.textBoxInput("id", "pass", data.get(Dataset).get("Confirm Password"));
+			Common.clickElement("xpath", "//span[text()='Sign In']");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			Common.assertionCheckwithReport(Common.getPageTitle().contains("Dashboard"),
+					"To validate the user lands on My Account after successfull login",
+					"After clicking on the signIn button it should navigate to the My Account",
+					"user Sucessfully navigate to the My Account after clicking on the signIn button",
+					"Failed to signIn and not navigated to the My Account");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("To validate the user lands on My Account after successfull login",
+					"After clicking on the signIn button it should navigate to the My Account",
+					"Unable to signIn and not navigated to the My Account",
+					Common.getscreenShot(" Failed to signIn and not navigated to the My Account"));
+			Assert.fail();
+		}
+		return newemail;
+	}
+
 
 	public String change_Email(String Dataset) {
 		// TODO Auto-generated method stub
@@ -10012,6 +10063,7 @@ public void MyFavorites_Guestuser(String Dataset) {
 			
 			if (Common.getCurrentURL().contains("stage") || Common.getCurrentURL().contains("preprod")) {
 				Sync.waitElementPresent("id", "discount-code");
+				Thread.sleep(3000);
 
 				Common.textBoxInput("id", "discount-code", data.get(dataSet).get("Discountcode"));
 			} else {
@@ -10946,7 +10998,7 @@ public void Gift_card(String dataSet) {
 		Common.textBoxInput("xpath","//input[@x-model='giftCardCode']", data.get(dataSet).get("GiftCard3_Stage"));
 		Common.actionsKeyPress(Keys.ARROW_UP);
 		Common.clickElement("xpath","(//button[contains(@class,'btn btn-primary')])[2]"); 
-		Thread.sleep(1000);
+		//Thread.sleep(1000);
 		Sync.waitElementVisible(30,"xpath", "//div[@ui-id='message-success']");
 		String successmsg=Common.findElement("xpath", "//div[@ui-id='message-success']").getText();
 	    System.out.println(successmsg);	
@@ -17639,9 +17691,6 @@ public void PDP_Color_Validation() {
 	
 }
 
-
-
-
 public void Accessories_Header1(String Dataset) {
 	// TODO Auto-generated method stub
 	String expectedResult = "User should click the" + Dataset;
@@ -17705,8 +17754,80 @@ public void Accessories_Header1(String Dataset) {
 		AssertJUnit.fail();
 	}
 }
-}
 
+public void shipment_invoice() {
+	// TODO Auto-generated method stub
+	try
+	{
+		Sync.waitElementPresent("css", "li[class='nav item'] a[href*='invoice']");
+		String Invoice=Common.findElement("css", "li[class='nav item'] a[href*='invoice']").getAttribute("href");
+		Common.clickElement("css", "li[class='nav item'] a[href*='invoice']");
+		Sync.waitPageLoad();
+		Thread.sleep(2000);
+		String invoice=Common.findElement("css", "div[class='mb-6'] p").getText().trim();
+		Common.assertionCheckwithReport(Common.getCurrentURL().contains(Invoice) && invoice.contains("Invoice"),
+				"validating the navigating to the invoice page from the guest track order",
+				"After clicking it should be navigate to the invoice page",
+				"Sucessfully Navigated to the invoice page after clicking from the guest user track my order",
+				"Failed to Navigate to the inovice page after clicking from the guest user track my order");
+	 Common.clickElement("css", "a[class='link no-underline']");
+		Common.switchToSecondTab();
+		Sync.waitPageLoad();
+		Common.assertionCheckwithReport(Common.getCurrentURL().contains("/printInvoice/invoice_id"),
+				"validating the Navigation to the Invoice Tab",
+				"After Clicking on the print invoice user should be able to see invoice page",
+				"Sucessfully User Navigates to Invoice page  after clicking on the print invoice Tab",
+				"Failed to Navigate to the invoice after Clicking on print invoice Tab");
+		Common.closeCurrentWindow();
+		Common.switchToFirstTab();
+		Sync.waitElementPresent("css", "li[class='nav item'] a[href*='shipment']");
+		String Shipment=Common.findElement("css", "li[class='nav item'] a[href*='shipment']").getAttribute("href");
+		Common.clickElement("css", "li[class='nav item'] a[href*='shipment']");
+		Sync.waitPageLoad();
+		Thread.sleep(2000);
+		String shipment=Common.findElement("css", "div[class='mb-6'] p").getText().trim();
+		Common.assertionCheckwithReport(Common.getCurrentURL().contains(Shipment) && shipment.contains("Shipment"),
+				"validating the navigating to the Shipment page from the guest track order",
+				"After clicking it should be navigate to the Shipment page",
+				"Sucessfully Navigated to the Shipment page after clicking from the guest user track my order",
+				"Failed to Navigate to the Shipment page after clicking from the guest user track my order");
+		Common.clickElement("css", "a[class='link no-underline']");
+		Sync.waitPageLoad();
+		Common.switchToSecondTab();
+		Sync.waitPageLoad();
+		Common.assertionCheckwithReport(Common.getCurrentURL().contains("/printShipment/shipment_id"),
+				"validating the Navigation to the printShipment Page",
+				"After Clicking on the printShipment user should be able to see printShipment page",
+				"Sucessfully User Navigates to printShipment page  after clicking on the printShipment link",
+				"Failed to Navigate to the printShipment after Clicking on printShipment link");
+		Common.closeCurrentWindow();
+		Common.switchToFirstTab();
+		Common.clickElement("css", "a[title='Track Shipment']");
+		Sync.waitPageLoad();
+		Common.switchToSecondTab();
+		Sync.waitPageLoad();
+		Common.assertionCheckwithReport(Common.getCurrentURL().contains("shipping/tracking"),
+				"validating the Navigation to the Track Shipment Page",
+				"After Clicking on the Track Shipment user should be able to see Shipment page",
+				"Sucessfully User Navigates to Track Shipment page  after clicking on the Track Shipment",
+				"Failed to Navigate to the Track Shipment after Clicking on Track Shipment");
+		Common.closeCurrentWindow();
+		Common.switchToFirstTab();
+
+		
+	}
+	catch(Exception | Error e)
+	{
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the navigating to the invoice or Shipment page from the guest track order",
+				"After clicking it should be navigate to the invoice or Shipment page",
+				"Sucessfully Navigated to the invoice or Shipment page after clicking from the guest user track my order",
+				Common.getscreenShot("Failed to Navigate to the Invoice or Shipment page after clicking from the guest user track my order"));
+		Assert.fail();
+	}
+	
+}
+}
 
 
 

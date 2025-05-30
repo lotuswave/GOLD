@@ -19,7 +19,8 @@ public class TEST_DGLD_OS_US_049_Track_My_Order_For_Guest_User {
 
 		try {
         Osprey_ReEu.verifingHomePage();
-        Osprey_ReEu.gustuserorderStatus("GustUserOrderdetails");
+        Osprey_ReEu.gustuserorderStatus("GustUserOrderdetails");              
+        Osprey_ReEu.shipment_invoice();
 
        
 		} catch (Exception e) {
@@ -31,7 +32,7 @@ public class TEST_DGLD_OS_US_049_Track_My_Order_For_Guest_User {
 
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+		 Common.closeAll();
 
 	}
 

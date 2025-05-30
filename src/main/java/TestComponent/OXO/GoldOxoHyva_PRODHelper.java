@@ -83,7 +83,7 @@ public class GoldOxoHyva_PRODHelper {
 			Sync.waitPageLoad();
 			Thread.sleep(5000);
 
-			int size = Common.findElements("xpath", "//img[@alt='OXO logo. Takes to OXO homepage']").size();
+			int size = Common.findElements("xpath", "//img[@alt='Oxo store logo']").size();
 			System.out.println(size);
 
 			Common.assertionCheckwithReport(
@@ -627,8 +627,8 @@ public class GoldOxoHyva_PRODHelper {
 	public void minicart_viewcart() {
 		// TODO Auto-generated method stub
 		try {
-			Sync.waitElementPresent("xpath", "//div[@id='cart-drawer-title']/span/span");
-			String minicart = Common.findElement("xpath", "//div[@id='cart-drawer-title']/span/span").getText();
+			Sync.waitElementPresent("xpath", "//span[@x-text='totalCartAmount']");
+			String minicart = Common.findElement("xpath", "//span[@x-text='totalCartAmount']").getText();
 			Sync.waitElementPresent("xpath", "//a[@title='View Cart']");
 			Common.clickElement("xpath", "//a[@title='View Cart']");
 			String viewcart = Common.findElement("xpath", "//span[contains(@class,'ml-7 title-xs hf:title')]").getText();
@@ -658,8 +658,8 @@ public class GoldOxoHyva_PRODHelper {
 			Thread.sleep(4000);
 			Sync.waitElementPresent("xpath", "//span[@x-text='totalCartAmount']");
 			String minicart = Common.findElement("xpath", "//span[@x-text='totalCartAmount']").getText();
-			Sync.waitElementPresent(30, "xpath", "//a[contains(text(),'Checkout')]");
-			Common.clickElement("xpath", "//a[contains(text(),'Checkout')]");
+			Sync.waitElementPresent(30, "xpath", "//button[contains(@class, 'cart-drawer__totals-content-checkout-button') and contains(text(), 'Checkout')]");
+			Common.clickElement("xpath", "//button[contains(@class, 'cart-drawer__totals-content-checkout-button') and contains(text(), 'Checkout')]");
 			Sync.waitPageLoad();
 			Thread.sleep(6000);
 			Common.assertionCheckwithReport(Common.getCurrentURL().contains("checkout"),
@@ -1003,11 +1003,11 @@ public class GoldOxoHyva_PRODHelper {
 	
 	public void updateproductcolor_shoppingcart(String Dataset) {
 		// TODO Auto-generated method stub
-		String productcolor1 = "Blossom";
+		String productcolor1 = "Taupe";
 		String product = data.get(Dataset).get("Colorproduct");
 		System.out.println(productcolor1);
 		try {
-			Common.clickElement("xpath", "//a[@title='Edit Stick & Stay Suction Divided Plate']");      // need to click on the color product
+			Common.clickElement("xpath", "//a[@aria-label='Edit Nest Booster Seat with Removable Cushion']");      // need to click on the color product
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Sync.waitElementPresent("xpath", "//input[@aria-label='" + productcolor1 + "']");
@@ -4043,8 +4043,8 @@ public void payPal_Payment(String dataSet) throws Exception {
             
 			
 			Common.switchFrames("xpath", "//iframe[contains(@class,'component-frame visible')]");
-			Sync.waitElementPresent("xpath", "(//div[contains(@class,'paypal-button paypal-button')])[1]");
-			Common.clickElement("xpath", "(//div[contains(@class,'paypal-button paypal-button')])[1]");
+			Sync.waitElementPresent("xpath", "//div[@id='buttons-container']//div[@aria-label='PayPal']");
+			Common.clickElement("xpath", "//div[@id='buttons-container']//div[@aria-label='PayPal']");
 			Thread.sleep(8000);
 			Common.switchToDefault();
 			Thread.sleep(5000);
@@ -6421,7 +6421,7 @@ public void updatePaymentAndSubmitOrder(String dataSet) throws Exception {
 			String breadcrumbs = Common.findElement("xpath", "//nav[@aria-label='Breadcrumb']")
 					.getAttribute("aria-label");
 			Thread.sleep(2000);
-			String filter = Common.findElement("xpath", "//span[normalize-space()='Filter by:']").getText().trim();
+			String filter = Common.findElement("xpath", "//h3[normalize-space()='Filter by:']").getText().trim();
 			String Sort = Common
 					.findElement("xpath",
 							"//div[@class='flex items-center']")
@@ -7138,7 +7138,7 @@ public void updatePaymentAndSubmitOrder(String dataSet) throws Exception {
 			Sync.waitPageLoad();
 			Thread.sleep(6000);
 			expectedResult = "It should apply discount on your price.If user enters invalid promocode it should display coupon code is not valid message.";
-			String discountcodemsg = Common.getText("xpath", "//span[@x-html='message.text']");
+			String discountcodemsg = Common.getText("xpath", "//span[contains(text(), 'You used coupon code')]");
 			Common.assertionCheckwithReport(discountcodemsg.contains("You used coupon code"), "verifying pomocode",
 					expectedResult, "promotion code working as expected", "Promation code is not applied");
 		} catch (Exception | Error e) {
@@ -11847,8 +11847,8 @@ public void outofstock_subcription(String Dataset) {
 
 	public void signout() {
 		try {
-			Sync.waitElementPresent("xpath", "//img[@alt='Store logo']");
-			Common.clickElement("xpath", "//img[@alt='Store logo']");
+			Sync.waitElementPresent("xpath", "//img[@alt='Oxo store logo']");
+			Common.clickElement("xpath", "//img[@alt='Oxo store logo']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Sync.waitElementPresent("xpath", "//button[@id='customer-menu']");
@@ -12144,7 +12144,7 @@ public void header_kichenware_Utensils(String Dataset) {
 				System.out.println(breadcrumb);
 				Common.assertionCheckwithReport(
 						title.contains(Links[i]) || breadcrumb.contains(Links[i])
-								|| Common.getPageTitle().contains(Links[i]),
+								|| Common.getPageTitle().contains(Links[i]) || breadcrumb.contains(title),
 						"verifying the header link " + Links[i] + "Under Kitchenware",
 						"user should navigate to the " + Links[i] + " page",
 						"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
@@ -12243,7 +12243,7 @@ public void header_kichenware_CookingAndBaking(String Dataset) {
 				System.out.println(breadcrumb);
 				Common.assertionCheckwithReport(
 						title.contains(Links[i]) || breadcrumb.contains(Links[i])
-								|| Common.getPageTitle().contains(Links[i]),
+								|| Common.getPageTitle().contains(Links[i]) || breadcrumb.contains(title) ,
 						"verifying the header link " + Links[i] + "Under Kitchenware",
 						"user should navigate to the " + Links[i] + " page",
 						"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);

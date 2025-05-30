@@ -2614,8 +2614,8 @@ public class OspreyEMEA_PRODHYVA {
 			String minicart = Common.findElement("xpath", "//span[@x-text='totalCartAmount']").getText();
 			System.out.println(minicart);
 			Thread.sleep(3000);
-			Sync.waitElementPresent(30, "xpath", "//a[contains(@class,'inline-flex btn btn-primary text')]");
-			Common.clickElement("xpath", "//a[contains(@class,'inline-flex btn btn-primary text')]");
+			Sync.waitElementPresent(30, "css", "button[class*='inline-flex btn btn-primary text']");
+			Common.clickElement("css", "button[class*='inline-flex btn btn-primary text']");
 			Sync.waitPageLoad();
 			Thread.sleep(7000);
 //			Sync.waitElementPresent(30, "xpath", "//strong[@role='heading']");
@@ -5480,7 +5480,7 @@ return Number;
 					.replace(symbol, "");
 			Float subtotalvalue = Float.parseFloat(subtotal);
 			String productname = Common
-					.findElement("xpath", "(//p[@class='text-md font-bold dr:title-sm']//a)[1]")
+					.findElement("xpath", "(//p[contains(@class,'text-md font-bold dr:title-sm')]//a)[1]")
 					.getText();
 			String productamount1 = Common.getText("xpath", "(//span[@x-html='item.product_price']//span[@class='price'])[1]").replace(symbol,
 					"");
@@ -6559,6 +6559,10 @@ return Number;
 				Common.scrollIntoView("xpath", "//input[@id='payment-method-paypal_express']");
 				Common.clickElement("xpath", "//input[@id='payment-method-paypal_express']");
 				Common.clickElement("xpath", "//div[@id='paypal-button-paypal_express']");
+				Common.switchFrames("xpath", "//iframe[contains(@class,'component-frame visible')]");
+				Sync.waitElementPresent("css", "div[class='paypal-button-label-container']");
+				Common.clickElement("css", "div[class='paypal-button-label-container']");
+				Common.switchToDefault();
 			}
             
 			

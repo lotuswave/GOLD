@@ -29,7 +29,7 @@ public class Test_DGLD_OS_US_ST_010_Find_a_Dealer {
 		        Osprey_ReEu.Validate_AvailableRetailers();
 		        Osprey_ReEu.Validate_retailerlocations();  //need to add locations
 		        Osprey_ReEu.Click_Instock();
-		        Osprey_ReEu.selectproduct("Daylite Plus");
+		        Osprey_ReEu.selectproduct("Farpoint 40");
 		        
       
 		} catch (Exception e) {

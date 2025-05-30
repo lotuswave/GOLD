@@ -32,7 +32,7 @@ public class TEST_DGLD_OSP_E2E_007_RegisterUser_checkout_Multiple_Items_GiftCode
 		     Osprey_ReEu.addtocart("SKU-10005235 -3QTY");
 		     Osprey_ReEu.minicart_Checkout();
 		     Osprey_ReEu.RegaddDeliveryAddress("Account");
-		     Osprey_ReEu.selectshippingmethod("GroundShipping method");
+		     Osprey_ReEu.selectshippingmethod("reg shipping");
 		     String Used_GiftCode=Osprey_ReEu.Gift_card("Full_RedeemGiftcard");
 		     HashMap<String,String> Details=Osprey_ReEu.ordersummary_Details();
 		     String OrderNumber= Osprey_ReEu.giftCardSubmitOrder();
@@ -51,7 +51,7 @@ public class TEST_DGLD_OSP_E2E_007_RegisterUser_checkout_Multiple_Items_GiftCode
 
 	@AfterTest
 	public void clearBrowser() {
-	//	Common.closeAll();
+	Common.closeAll();
 
 	}
 

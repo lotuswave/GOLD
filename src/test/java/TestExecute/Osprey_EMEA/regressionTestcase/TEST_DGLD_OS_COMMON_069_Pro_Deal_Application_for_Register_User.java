@@ -20,6 +20,7 @@ public class TEST_DGLD_OS_COMMON_069_Pro_Deal_Application_for_Register_User {
 		try {
         Osprey_ReEu.verifingHomePage();
         Osprey_ReEu.Prodeler_Application_Page("Prodeler Details");
+        Osprey_ReEu.Prodeal_form_verification();
    
         
         } 

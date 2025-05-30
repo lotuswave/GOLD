@@ -2868,7 +2868,7 @@ System.out.println(MyFavorites);
 //				Common.clickElement("xpath", "//input[@id='shipping-save']");
 
 				Thread.sleep(4000);
-				Common.clickElement("xpath", "//button[@class='btn btn-primary w-full os:uppercase']");
+				Common.clickElement("xpath", "//button[contains(@class, 'checkout-address-form__buttons-save')]");
 
 //				
 //                ExtenantReportUtils.addPassLog("verifying shipping addres filling ",
@@ -14507,10 +14507,10 @@ public void Explore_Validation(String Dataset) {
 			Sync.waitElementPresent("xpath", "//button[contains(text(),'Your Reward Points')]");
 			Common.clickElement("xpath", "//button[contains(text(),'Your Reward Points')]");
 			Thread.sleep(5000);
-			String off = Common.findElement("xpath", "//div[@class='yotpo-remove-tag-container']//div").getText().trim()
+			String off = Common.findElement("xpath", "(//span[contains(@class, 'checkout-total-segments__discount-label')])[1]").getText().trim()
 					.replace(" OFF", "");
 			Thread.sleep(3000);
-			String discount = Common.findElement("xpath", "//div[@class='item discount']//span[@class='value']").getText()
+			String discount = Common.findElement("xpath", "(//span[contains(@class, 'discount-value')])[1]").getText()
 					.trim().replace("-", "").replace(".00", "");
 			Thread.sleep(3000);
 			System.out.println(off);

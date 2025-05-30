@@ -21,6 +21,9 @@ public class Test_DGLD_OS_COMMON_035_Track_My_Order_For_Register_User {
         Osprey_ReEu.verifingHomePage();
         Osprey_ReEu.Register_userorder_status();
         Osprey_ReEu.view_order();
+        Osprey_ReEu.search_E2E_Completeorder();
+        Osprey_ReEu.Reg_shipment_invoice();
+        
        
 		} catch (Exception e) {
 

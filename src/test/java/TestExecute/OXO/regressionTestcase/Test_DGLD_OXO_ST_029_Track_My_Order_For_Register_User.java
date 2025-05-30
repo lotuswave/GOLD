@@ -20,10 +20,9 @@ public class Test_DGLD_OXO_ST_029_Track_My_Order_For_Register_User {
 			Oxo.verifingHomePage();
 			Oxo.register_userorder_status();
 			Oxo.view_order();
-			
-			
-			
-
+			Oxo.search_E2E_Completeorder();
+			Oxo.Reg_shipment_invoice();
+		
 		} catch (Exception e) {
 
 			Assert.fail(e.getMessage(), e);

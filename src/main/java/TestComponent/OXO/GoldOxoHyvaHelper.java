@@ -116,7 +116,7 @@ public class GoldOxoHyvaHelper
 			try {
 				Common.mouseOver("xpath", "//span[contains(text(),'" + category + "')]");
 			} catch (Exception e) {
-				Common.clickElement("xpath", "//a[contains(@class,'level-0-link')]//span[contains(text(),' Shop')]");
+				Common.clickElement("xpath", "//button[@type='button']//span[contains(text(),' Shop')]");
 			}
 			Common.clickElement("xpath", "//span[contains(text(),'" + category + "')]");
 			// Common.clickElement("xpath", "//span[text()='Shop All']");
@@ -682,8 +682,8 @@ public class GoldOxoHyvaHelper
 	        String minicart = Common.findElement("xpath", "//span[@x-text='totalCartAmount']").getText();
 	        System.out.println("Minicart total: " + minicart);
             Thread.sleep(4000);
-            Sync.waitElementPresent(30, "xpath", "//a[contains(text(),'Checkout')]");
-	        Common.clickElement("xpath", "//a[contains(text(),'Checkout')]");
+            Sync.waitElementPresent(30, "xpath", "//button[contains(@class, 'cart-drawer__totals-content-checkout-button') and contains(text(), 'Checkout')]");
+	        Common.clickElement("xpath", "//button[contains(@class, 'cart-drawer__totals-content-checkout-button') and contains(text(), 'Checkout')]");
 	       Thread.sleep(5000);
 	        
 	        String currentURL = Common.getCurrentURL();
@@ -1079,7 +1079,7 @@ public class GoldOxoHyvaHelper
 
 			{
 
-			Common.clickElement("xpath", "//div[@class='flex justify-end']//a[@title='Edit Perch Booster Seat With Straps']");      // need to click on the color product
+			Common.clickElement("xpath", "//a[@aria-label='Edit Nest Booster Seat with Removable Cushion']");      // need to click on the color product
 
 			Sync.waitPageLoad();
 
@@ -1121,7 +1121,7 @@ public class GoldOxoHyvaHelper
 
 			Thread.sleep(4000);
 
-			String getProductColor =Common.findElement("xpath","(//div[@class='mt-2 title-xs hf:title-2xs os:text-sm']//span)[2]").getText().trim();
+			String getProductColor =Common.findElement("xpath","//span[@class='checkout-cart-item-info-table__cell-content-title-options-option-value os:font-normal']").getText().trim();
 
 			System.out.println(getProductColor);
 
@@ -2011,7 +2011,7 @@ public String create_account(String Dataset) {
 			Sync.waitElementClickable("xpath", "//button[@title='Sign Up']");
 			Common.clickElement("xpath", "//button[@title='Sign Up']");
 			Sync.waitImplicit(5);
-			String message = Common.findElement("xpath", "//span[@x-html='message.text']").getText();
+			String message = Common.findElement("xpath", "//span[text()='Thank you for registering with OXO Store.']").getText();
 			System.out.println(message);
 			Common.assertionCheckwithReport(
 					message.contains("Thank you for registering") || Common.getPageTitle().contains("Wish List Sharing") && message.contains(Product + " has been added to your Favorites. Click here to view your Favorites"),
@@ -4540,7 +4540,8 @@ catch(Exception | Error e)
 			Common.clickElement("xpath", "//a[@title='Track My Order']");
 			Sync.waitPageLoad();
 			Common.assertionCheckwithReport(
-					Common.getPageTitle().equals("Tracking & Returns") || Common.getPageTitle().equals("My Orders"),
+					Common.getPageTitle().equals("Tracking & Returns") || Common.getPageTitle().equals("My Orders") 
+					|| Common.getCurrentURL().contains("track/order"),
 					"Verifying the track order page navigation ",
 					"after clicking on the track order it should navigate to the orders and return page",
 					"successfully Navigated to the orders and return page",
@@ -4648,6 +4649,7 @@ catch(Exception | Error e)
 		}
 
 	}
+	
 	
 	
 	public void changed_password(String Dataset) {
@@ -7316,8 +7318,8 @@ catch(Exception | Error e)
 				Common.scrollIntoView("xpath", "//button[contains(@class, 'group/wishlist')]");
 				Common.clickElement("xpath", "//button[contains(@class, 'group/wishlist')]");
 				
-				Sync.waitElementPresent(30, "xpath", "//span[@x-html='message.text']");
-				String message = Common.findElement("xpath", "//span[@x-html='message.text']").getText();
+				Sync.waitElementPresent(30, "xpath", "//div[@class='message mb-0 os:py-4 success bg-success']");
+				String message = Common.findElement("xpath", "//div[@class='message mb-0 os:py-4 success bg-success']").getText();
 				System.out.println(message);
 				Common.assertionCheckwithReport(message.contains("Click here to view your Favorites."),
 						"validating the  product add to the Whishlist", "Product should be add to whishlist",
@@ -7499,7 +7501,7 @@ catch(Exception | Error e)
 			Sync.waitPageLoad();
 			Thread.sleep(6000);
 			expectedResult = "It should apply discount on your price.If user enters invalid promocode it should display coupon code is not valid message.";
-			String discountcodemsg = Common.getText("xpath", "//span[@x-html='message.text']");
+			String discountcodemsg = Common.getText("xpath", "//span[contains(text(), 'You used coupon code')]");
 			Common.assertionCheckwithReport(discountcodemsg.contains("You used coupon code"), "verifying pomocode",
 					expectedResult, "promotion code working as expected", "Promation code is not applied");
 		} catch (Exception | Error e) {
@@ -8887,8 +8889,8 @@ public void header_1_Percent_Planet() {
 		String products = data.get(Dataset).get("Products");
 		try {
 			String minicartproduct = Common
-					.findElement("xpath", "//a[@class='product-item-link hover:underline inline-block' and text()='"+ products +"']").getText();
-			Common.clickElement("xpath", "//a[@class='product-item-link hover:underline inline-block' and text()='"+ products +"']");
+					.findElement("xpath", "//a[@class='cart-drawer__item-content-description-header-link product-item-link hover:underline inline-block' and text()='"+ products +"']").getText();
+			Common.clickElement("xpath", "//a[@class='cart-drawer__item-content-description-header-link product-item-link hover:underline inline-block' and text()='" + products +"']");
 			Sync.waitPageLoad();
 			Thread.sleep(3000);
 			Common.assertionCheckwithReport(Common.getPageTitle().contains(minicartproduct),
@@ -8969,17 +8971,17 @@ public void header_1_Percent_Planet() {
 					.replace(symbol, "");
 			Float subtotalvalue = Float.parseFloat(subtotal);
 			String productname = Common
-					.findElement("xpath", "(//p[@class='text-md font-bold dr:title-sm']//a)[1]")
+					.findElement("xpath", "(//p[@class='cart-drawer__item-content-description-header-text text-md font-bold dr:title-sm lg:flex-shrink-1'])[1]")
 					.getText();
-			String productamount1 = Common.getText("xpath", "(//span[@x-html='item.product_price']//span[@class='price'])[1]").replace(symbol,
+			String productamount1 = Common.getText("xpath", "(//span[@x-html='item.product_price'])[1]").replace(symbol,
 					"");
 			Float productamount1value = Float.parseFloat(productamount1);
 			Thread.sleep(4000);
 			if (productname.equals(deleteproduct)) {
 				Sync.waitElementPresent(30, "xpath",
-						"(//a[contains(@aria-label,'Edit product')]//parent::div//button)[1]");
+						"(//button[@type='button' and contains(@class, 'cart-drawer__item-content-description-actions-edit-button')])[1]");
 				Common.clickElement("xpath",
-						"(//a[contains(@aria-label,'Edit product')]//parent::div//button)[1]");
+						"(//button[@type='button' and contains(@class, 'cart-drawer__item-content-description-actions-edit-button')])[1]");
 				Sync.waitElementPresent("xpath", "//button[contains(text(),'OK')]");
 				Common.clickElement("xpath", "//button[contains(text(),'OK')]");
 			} else {
@@ -9016,7 +9018,11 @@ public void header_1_Percent_Planet() {
 	public void minicart_product_close() {
 		// TODO Auto-generated method stub
 		try {
-
+            int popupsize=Common.findElements("css", "button[aria-label='Close dialog']").size();
+            if(popupsize>0)
+            {
+            	Common.clickElement("css", "button[aria-label='Close dialog']");
+            }
 			Common.clickElement("xpath", "//a[contains(@aria-label,'Edit product')]//parent::div//button");
 			Sync.waitElementPresent("xpath", "//a[contains(@aria-label,'Edit product')]//parent::div//button");
 			String minicartpopup = Common.findElement("xpath", "//div[@x-ref='removeItemConfirm']")
@@ -14086,8 +14092,278 @@ if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contain
 				"After clicking on Hot/Cold the page should display to select quantity of coffee",
 				"unable to display the page to select quantity of coffee",
 				Common.getscreenShot("Failed to add the product to cart"));
+		Assert.fail();
 	}
 	}
+
+
+
+	public void shipment_invoice() {
+		// TODO Auto-generated method stub
+		try
+		{
+			Sync.waitElementPresent("css", "li[class='nav item'] a[href*='invoice']");
+			String Invoice=Common.findElement("css", "li[class='nav item'] a[href*='invoice']").getAttribute("href");
+			Common.clickElement("css", "li[class='nav item'] a[href*='invoice']");
+			Sync.waitPageLoad();
+			Thread.sleep(2000);
+			String invoice=Common.findElement("css", "div[class='mb-6'] p").getText().trim();
+			Common.assertionCheckwithReport(Common.getCurrentURL().contains(Invoice) && invoice.contains("Invoice"),
+					"validating the navigating to the invoice page from the guest track order",
+					"After clicking it should be navigate to the invoice page",
+					"Sucessfully Navigated to the invoice page after clicking from the guest user track my order",
+					"Failed to Navigate to the inovice page after clicking from the guest user track my order");
+		 Common.clickElement("css", "a[class='link no-underline']");
+			Common.switchToSecondTab();
+			Sync.waitPageLoad();
+			Common.assertionCheckwithReport(Common.getCurrentURL().contains("/printInvoice/invoice_id"),
+					"validating the Navigation to the Invoice Tab",
+					"After Clicking on the print invoice user should be able to see invoice page",
+					"Sucessfully User Navigates to Invoice page  after clicking on the print invoice Tab",
+					"Failed to Navigate to the invoice after Clicking on print invoice Tab");
+			Common.closeCurrentWindow();
+			Common.switchToFirstTab();
+			Sync.waitElementPresent("css", "li[class='nav item'] a[href*='shipment']");
+			String Shipment=Common.findElement("css", "li[class='nav item'] a[href*='shipment']").getAttribute("href");
+			Common.clickElement("css", "li[class='nav item'] a[href*='shipment']");
+			Sync.waitPageLoad();
+			Thread.sleep(2000);
+			String shipment=Common.findElement("css", "div[class='mb-6'] p").getText().trim();
+			Common.assertionCheckwithReport(Common.getCurrentURL().contains(Shipment) && shipment.contains("Shipment"),
+					"validating the navigating to the Shipment page from the guest track order",
+					"After clicking it should be navigate to the Shipment page",
+					"Sucessfully Navigated to the Shipment page after clicking from the guest user track my order",
+					"Failed to Navigate to the Shipment page after clicking from the guest user track my order");
+			Common.clickElement("css", "a[class='link no-underline']");
+			Sync.waitPageLoad();
+			Common.switchToSecondTab();
+			Sync.waitPageLoad();
+			Common.assertionCheckwithReport(Common.getCurrentURL().contains("/printShipment/shipment_id"),
+					"validating the Navigation to the printShipment Page",
+					"After Clicking on the printShipment user should be able to see printShipment page",
+					"Sucessfully User Navigates to printShipment page  after clicking on the printShipment link",
+					"Failed to Navigate to the printShipment after Clicking on printShipment link");
+			Common.closeCurrentWindow();
+			Common.switchToFirstTab();
+			Common.clickElement("css", "a[title='Track Shipment']");
+			Sync.waitPageLoad();
+			Common.switchToSecondTab();
+			Sync.waitPageLoad();
+			Common.assertionCheckwithReport(Common.getCurrentURL().contains("shipping/tracking"),
+					"validating the Navigation to the Track Shipment Page",
+					"After Clicking on the Track Shipment user should be able to see Shipment page",
+					"Sucessfully User Navigates to Track Shipment page  after clicking on the Track Shipment",
+					"Failed to Navigate to the Track Shipment after Clicking on Track Shipment");
+			Common.closeCurrentWindow();
+			Common.switchToFirstTab();
+	
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the navigating to the invoice or Shipment page from the guest track order",
+					"After clicking it should be navigate to the invoice or Shipment page",
+					"Sucessfully Navigated to the invoice or Shipment page after clicking from the guest user track my order",
+					Common.getscreenShot("Failed to Navigate to the Invoice or Shipment page after clicking from the guest user track my order"));
+			Assert.fail();
+		}
+		
+	}
+
+
+	public void Reg_shipment_invoice() {
+		// TODO Auto-generated method stub
+		try
+		{
+			Sync.waitElementPresent("css", "a[href*='invoice']");
+			String Invoice=Common.findElement("css", "a[href*='invoice']").getAttribute("href");
+			Common.clickElement("css", "a[href*='invoice']");
+			Sync.waitPageLoad();
+			Thread.sleep(2000);
+			String invoice=Common.findElement("css", "div[class='mb-6'] p").getText().trim();
+			Common.assertionCheckwithReport(Common.getCurrentURL().contains(Invoice) && invoice.contains("Invoice"),
+					"validating the navigating to the invoice page from the guest track order",
+					"After clicking it should be navigate to the invoice page",
+					"Sucessfully Navigated to the invoice page after clicking from the guest user track my order",
+					"Failed to Navigate to the inovice page after clicking from the guest user track my order");
+		 Common.clickElement("css", "a[class='link no-underline']");
+			Common.switchToSecondTab();
+			Sync.waitPageLoad();
+			Common.assertionCheckwithReport(Common.getCurrentURL().contains("/printInvoice/invoice_id"),
+					"validating the Navigation to the Invoice Tab",
+					"After Clicking on the print invoice user should be able to see invoice page",
+					"Sucessfully User Navigates to Invoice page  after clicking on the print invoice Tab",
+					"Failed to Navigate to the invoice after Clicking on print invoice Tab");
+			Common.closeCurrentWindow();
+			Common.switchToFirstTab();
+			Sync.waitElementPresent("css", "a[href*='shipment']");
+			String Shipment=Common.findElement("css", "a[href*='shipment']").getAttribute("href");
+			Common.clickElement("css", "a[href*='shipment']");
+			Sync.waitPageLoad();
+			Thread.sleep(2000);
+			String shipment=Common.findElement("css", "div[class='mb-6'] p").getText().trim();
+			Common.assertionCheckwithReport(Common.getCurrentURL().contains(Shipment) && shipment.contains("Shipment"),
+					"validating the navigating to the Shipment page from the guest track order",
+					"After clicking it should be navigate to the Shipment page",
+					"Sucessfully Navigated to the Shipment page after clicking from the guest user track my order",
+					"Failed to Navigate to the Shipment page after clicking from the guest user track my order");
+			Common.clickElement("css", "a[class='link no-underline']");
+			Sync.waitPageLoad();
+			Common.switchToSecondTab();
+			Sync.waitPageLoad();
+			Common.assertionCheckwithReport(Common.getCurrentURL().contains("/printShipment/shipment_id"),
+					"validating the Navigation to the printShipment Page",
+					"After Clicking on the printShipment user should be able to see printShipment page",
+					"Sucessfully User Navigates to printShipment page  after clicking on the printShipment link",
+					"Failed to Navigate to the printShipment after Clicking on printShipment link");
+			Common.closeCurrentWindow();
+			Common.switchToFirstTab();
+			Common.clickElement("css", "a[title='Track Shipment']");
+			Sync.waitPageLoad();
+			Common.switchToSecondTab();
+			Sync.waitPageLoad();
+			Common.assertionCheckwithReport(Common.getCurrentURL().contains("shipping/tracking"),
+					"validating the Navigation to the Track Shipment Page",
+					"After Clicking on the Track Shipment user should be able to see Shipment page",
+					"Sucessfully User Navigates to Track Shipment page  after clicking on the Track Shipment",
+					"Failed to Navigate to the Track Shipment after Clicking on Track Shipment");
+			Common.closeCurrentWindow();
+			Common.switchToFirstTab();
+	
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the navigating to the invoice or Shipment page from the guest track order",
+					"After clicking it should be navigate to the invoice or Shipment page",
+					"Sucessfully Navigated to the invoice or Shipment page after clicking from the guest user track my order",
+					Common.getscreenShot("Failed to Navigate to the Invoice or Shipment page after clicking from the guest user track my order"));
+			Assert.fail();
+		}
+		
+	}
+
+
+	public void back_to_Orders() {
+		// TODO Auto-generated method stub
+		try
+		{
+			Sync.waitElementPresent("css", "a[class='hidden lg:flex btn btn-link']");
+			Common.clickElement("css", "a[class='hidden lg:flex btn btn-link']");
+			Sync.waitPageLoad();
+			Thread.sleep(2000);
+			Common.assertionCheckwithReport(Common.getCurrentURL().contains("/history/"),
+					"validating the Navigation to the Track order Page",
+					"After Clicking on the Back CTA user should be able to see Track order page",
+					"Sucessfully User Navigates to Track order page  after clicking on the Back CTA",
+					"Failed to Navigate to the Track ordert after Clicking on Back CTA");
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the Navigation to the Track order Page",
+					"After Clicking on the Back CTA user should be able to see Track order page",
+					"Unable to Navigate to the Track ordert after Clicking on Back CTA",
+					Common.getscreenShot("Failed to Navigate to the Track ordert after Clicking on Back CTA"));
+			Assert.fail();
+		}
+		
+	}
+
+
+
+	public void search_E2E_Completeorder() {
+		// TODO Auto-generated method stub
+		back_to_Orders();
+		String OrderNumber="7000694873";
+		  boolean found = false;
+		try
+		{
+			while (true)
+			{
+			List<WebElement> elements = Common.findElements("xpath", "//span[contains(text(),'" + OrderNumber + "')]");
+			if (!elements.isEmpty()) {
+                System.out.println("Order found on this page: " + OrderNumber);
+                found = true;
+                break;
+            } 
+			  List<WebElement> nextButtons = Common.findElements("css", "a[aria-label='Next']");
+
+	            if (nextButtons.isEmpty() || !nextButtons.get(0).isDisplayed()) {
+	                System.out.println("Order number not found and no more pages.");
+	                break;
+	            }
+			  nextButtons.get(0).click();
+			  try {
+				  Sync.waitPageLoad();
+	                Thread.sleep(2000);
+	            } catch (InterruptedException e) {
+	                e.printStackTrace();
+	            }
+	        }
+			Common.clickElement("xpath", "//span[contains(text(),'"+ OrderNumber +"')]//parent::th//parent::tr//a[@title='View Order']");
+			Sync.waitPageLoad();
+			Thread.sleep(2000);
+			Common.assertionCheckwithReport(Common.getCurrentURL().contains("/view/order_id"),
+					"validating the order Details on My order page",
+					"After Clicking on view Order it should be navigate to the order details page ",
+					"Sucessfully Navigated to the orders details page from My orders page ",
+					"Failed to Navigate to the Track ordert after Clicking on Back CTA");
+			orders_image_Validation();
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the order Details on My orders page",
+					"After Clicking on view Order it should be navigate to the order details page ",
+					"Unable to Navigate to the orders details page from my order page ",
+					Common.getscreenShot("Failed to Navigate to the orders details page "));
+			Assert.fail();
+		}
+	}
+	
+	public void orders_image_Validation()
+	{
+		try {
+			List <WebElement> images=Common.findElements("css", "div[class*='parent-item border'] img");
+			  for (WebElement img : images) {
+	                if (img.isDisplayed()) {
+	                    System.out.println("Image is displayed.");
+
+	                    String src = img.getAttribute("src");
+	                    if (validateImageURL(src)) {
+	                        System.out.println("Image URL is valid: " + src);
+	                    } else {
+	                        System.out.println("Broken image URL: " + src);
+	                    }
+
+	                } else {
+	                    System.out.println("Image is NOT displayed.");
+	                }
+	            }
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			Assert.fail();
+		}
+	}
+	
+	 public static boolean validateImageURL(String imageUrl) {
+	        try {
+	            HttpURLConnection connection = (HttpURLConnection) new URL(imageUrl).openConnection();
+	            connection.setRequestMethod("GET");
+	            connection.connect();
+	            int code = connection.getResponseCode();
+	            return (code == 200);
+	        } catch (Exception e) {
+	            return false;
+	        }
+	    }
+
+
 }
 
 

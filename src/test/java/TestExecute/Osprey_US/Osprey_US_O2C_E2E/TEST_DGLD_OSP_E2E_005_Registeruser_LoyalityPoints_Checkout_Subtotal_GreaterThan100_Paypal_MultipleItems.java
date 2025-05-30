@@ -33,7 +33,7 @@ public class TEST_DGLD_OSP_E2E_005_Registeruser_LoyalityPoints_Checkout_Subtotal
 //		     Osprey_ReEu.addtocart("SKU-10005151 -2QTY");
 		     Osprey_ReEu.minicart_Checkout();
 		     Osprey_ReEu.RegaddDeliveryAddress("Account");
-		     Osprey_ReEu.selectshippingmethod("GroundShipping method");
+		     Osprey_ReEu.selectshippingmethod("reg shipping");
 		     String Used_GiftCode="NULL";
 		     Osprey_ReEu.TwentyFive_percent_Reward_Points("$25 Off (500 Points)");
 		     Osprey_ReEu.clickSubmitbutton_Shippingpage();
