@@ -3730,8 +3730,8 @@ public class OspreyEMEA_HYVA {
 //				Common.textBoxInput("xpath", "//input[@placeholder='Enter e-mail address']", data.get(dataSet).get("Email"));
 			} else {
 				Sync.waitElementVisible("xpath", "//input[@placeholder='Enter e-mail address']");
-				Common.textBoxInput("xpath", "//input[@placeholder='Enter e-mail address']",
-						data.get(dataSet).get("Prod Email"));
+				Common.findElement("css", "input[placeholder='Enter e-mail address']")
+				.sendKeys(data.get(dataSet).get("Prod Email"));
 			}
 
 		} catch (NoSuchElementException e) {
