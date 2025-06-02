@@ -20,7 +20,7 @@ public class TEST_DGLD_HF_EMEA_ES_BCT_012_Checkout_with_RegisterUserCC_Simple_Co
 		try {
 			Hydro.verifingHomePage();
 			Hydro.click_singinButton();
-			Hydro.login_Hydroflask("AccountDetails");
+			Hydro.login_Hydroflask("es_Address");
 			Hydro.search_product("Product");       
 			Hydro.addtocart("Product");
 			Hydro.bottles_headerlinks("Bottles & Drinkware"); 
@@ -28,7 +28,7 @@ public class TEST_DGLD_HF_EMEA_ES_BCT_012_Checkout_with_RegisterUserCC_Simple_Co
 //			Hydro.search_product("Bundle product"); 
 //			Hydro.Addtocart_Bundle("Bundle product");
 			Hydro.minicart_Checkout();
-			Hydro.RegaddDeliveryAddress("AccountDetails");
+			Hydro.RegaddDeliveryAddress("es_Address");
             Hydro.selectshippingaddress("GroundShipping method");
             Hydro.clickSubmitbutton_Shippingpage();
 			Hydro.updatePaymentAndSubmitOrder("PaymentDetails");
