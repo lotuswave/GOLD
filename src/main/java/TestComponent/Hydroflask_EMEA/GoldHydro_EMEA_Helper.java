@@ -12311,7 +12311,7 @@ System.out.println(MyFavorites);
 				Thread.sleep(4000);
 				if (Size == 1) {
 					String name1 = Common.findElement("xpath", "//span[@class='price-wrapper']//span[@class='price']")
-							.getText().replace("$", "");
+							.getText().replace("£", "").replace("€","");
 					System.out.println(name1);
 					Float namevalue1 = Float.parseFloat(name1);
 					System.out.println(namevalue1);
@@ -12331,13 +12331,13 @@ System.out.println(MyFavorites);
 					List<WebElement> productprice = Common.findElements("xpath",
 							"//span[@class='price-wrapper']//span[@class='price']");
 					Thread.sleep(6000);
-					name = productprice.get(i).getText().replace("$", "");
+					name = productprice.get(i).getText().replace("£", "");
 					Float namevlaue = Float.parseFloat(name);
 					if (namevlaue >= 5) {
 						Thread.sleep(3000);
 						String value = Common
 								.findElement("xpath", "//span[@class='price-wrapper']//span[@class='price']").getText()
-								.replace("$", "");
+								.replace("£", "");
 						Common.assertionCheckwithReport(value.equals(name), "verifying the price filters in PLP page",
 								"When we select the range of price filters between the range only products should display",
 								"Successfully are displayed in the pricing range",
@@ -12360,7 +12360,7 @@ System.out.println(MyFavorites);
 	}
 	public void dragprice(WebElement price) {
 		try {
-			String lastvalue = Common.getText("xpath", "//div[@class='value end active']").replace("$", "")
+			String lastvalue = Common.getText("xpath", "//div[@class='value end active']").replace("£", "").replace("€","")
 					.replace(".00", "");
 			System.out.println(lastvalue);
 			Thread.sleep(3000);
