@@ -3613,8 +3613,17 @@ System.out.println(MyFavorites);
 		Common.textBoxInput("id", "shipping-city", data.get(dataSet).get("City"));
 
 		try {
-			Sync.waitElementPresent(30, "css", "input[id='shipping-region']");
-			Common.textBoxInput("css", "input[id='shipping-region']", data.get(dataSet).get("Region"));
+			if(Common.getCurrentURL().contains("/eu") || Common.getCurrentURL().contains("/es/") 
+					|| Common.getCurrentURL().contains("/de/") || Common.getCurrentURL().contains("/fr")) {
+				Sync.waitElementVisible("id", "shipping-region");
+				Common.clickElement("id","shipping-region");
+				Common.dropdown("id", "shipping-region", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+				Common.actionsKeyPress(Keys.SPACE);
+			} else {
+				Sync.waitElementVisible("id", "shipping-region");
+//	            Common.dropdown("id", "shipping-region", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+				Common.textBoxInput("id", "shipping-region", data.get(dataSet).get("Region"));
+			}
 		} catch (ElementClickInterceptedException e) {
 			if (isPopupFlow) {
 				Common.dropdown("id", "shipping-region", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
@@ -3635,7 +3644,7 @@ System.out.println(MyFavorites);
 		Common.textBoxInput("xpath", "//form[@id='shipping']//input[@name='telephone']",
 				data.get(dataSet).get("phone"));
 	}
-
+	
 	public void Accont_Information() {
 		// TODO Auto-generated method stub
 
