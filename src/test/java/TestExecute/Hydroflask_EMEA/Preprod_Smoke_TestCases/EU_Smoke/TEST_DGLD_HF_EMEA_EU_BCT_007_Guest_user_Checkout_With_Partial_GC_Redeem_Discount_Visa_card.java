@@ -22,7 +22,7 @@ public class TEST_DGLD_HF_EMEA_EU_BCT_007_Guest_user_Checkout_With_Partial_GC_Re
 			Hydro.search_product("Product");      
 			Hydro.addtocart("Product");                    
 			Hydro.minicart_Checkout();
-            Hydro.addDeliveryAddress_Guestuser("AccountDetails");
+            Hydro.addDeliveryAddress_Guestuser("eu_Address");
             Hydro.selectshippingaddress("GroundShipping method");
             Hydro.discountCode("Discount");
             Hydro.clickSubmitbutton_Shippingpage();

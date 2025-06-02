@@ -713,6 +713,7 @@ public class GoldHydro_EMEA_Helper {
 		try {
 			Thread.sleep(4000);
 			Sync.waitElementVisible("css", "input[type='email']");
+			Thread.sleep(2000);
 			Common.textBoxInput("css", "input[type='email']", email);
 
 		} catch (NoSuchElementException e) {
@@ -750,10 +751,18 @@ public class GoldHydro_EMEA_Helper {
 			Common.actionsKeyPress(Keys.PAGE_DOWN);
 
 			try {
-				Sync.waitElementVisible("id", "shipping-region");
-//	            Common.dropdown("id", "shipping-region", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
-				Common.textBoxInput("id", "shipping-region", userData.get("Region"));
-
+				if(Common.getCurrentURL().contains("/eu") || Common.getCurrentURL().contains("/es/") 
+						|| Common.getCurrentURL().contains("/de/") || Common.getCurrentURL().contains("/fr")) {
+					Sync.waitElementVisible("id", "shipping-region");
+					Common.clickElement("id","shipping-region");
+					Common.dropdown("id", "shipping-region", Common.SelectBy.TEXT, userData.get("Region"));
+					Common.actionsKeyPress(Keys.SPACE);
+				} else {
+					Sync.waitElementVisible("id", "shipping-region");
+//		            Common.dropdown("id", "shipping-region", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+					Common.textBoxInput("id", "shipping-region", userData.get("Region"));
+				}
+				
 			} catch (ElementClickInterceptedException e) {
 				Sync.waitElementVisible("id", "shipping-region");
 //	            Common.dropdown("id", "shipping-region", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
@@ -1652,11 +1661,15 @@ public class GoldHydro_EMEA_Helper {
 					Sync.waitElementPresent("xpath", "(//input[@class='checkbox mr-4'])[2]");
 					Common.clickElement("xpath", "(//input[@class='checkbox mr-4'])[2]");
 				}
+				if(Common.findElements("css","iframe[title='Secure payment input frame']").size()>0) {
+					Sync.waitElementPresent("css", "iframe[title='Secure payment input frame']");
+					Common.switchFrames("css", "iframe[title='Secure payment input frame']");
+				}else {
+					Sync.waitElementPresent("css", "div[id='payment-method-view-stripe_payments']");
+					Common.switchFrames("css", "iframe[name*='__privateStripeFrame']");
 
-				Sync.waitElementPresent("css", "iframe[title='Secure payment input frame']");
-				Common.switchFrames("css", "iframe[title='Secure payment input frame']");
-
-				Sync.waitElementClickable("css", "label[for='Field-numberInput']");
+				}		
+//				Sync.waitElementClickable("css", "label[for='Field-numberInput']");
 				Common.scrollIntoView("css", "label[for='Field-numberInput']");
 				Common.clickElement("css", "label[for='Field-numberInput']");
 				Common.findElement("id", "Field-numberInput").sendKeys(cardnumber);
@@ -1671,10 +1684,6 @@ public class GoldHydro_EMEA_Helper {
 
 				Common.actionsKeyPress(Keys.ARROW_DOWN);
 				Common.switchToDefault();
-				if (Common.findElements("xpath", "//div[@class='flex items-center']//input[@type='checkbox']")
-						.size() > 0) {
-					Common.clickElement("xpath", "//div[@class='flex items-center']//input[@type='checkbox']");
-				}
 
 				if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
 					Sync.waitElementPresent("css", "input[class='flex-none disabled:opacity-25']");
@@ -1682,12 +1691,12 @@ public class GoldHydro_EMEA_Helper {
 					Sync.waitPageLoad();
 					Thread.sleep(4000);
 					Sync.waitElementPresent(30, "xpath",
-							"(//button[contains(@class, 'btn-place-order') and contains(text(), 'Place Order')])[2]");
+							"(//button[contains(@class, 'btn-place-order') or contains(text(), 'Place Order')])[2]");
 					Common.scrollIntoView("xpath",
-							"(//button[contains(@class, 'btn-place-order') and contains(text(), 'Place Order')])[2]");
+							"(//button[contains(@class, 'btn-place-order') or contains(text(), 'Place Order')])[2]");
 					Thread.sleep(2000);
 					Common.clickElement("xpath",
-							"(//button[contains(@class, 'btn-place-order') and contains(text(), 'Place Order')])[2]");
+							"(//button[contains(@class, 'btn-place-order') or contains(text(), 'Place Order')])[2]");
 					Sync.waitPageLoad();
 					// Common.switchFrames("css", "iframe[title='Secure payment input frame']");
 					int error = Common.findElements("xpath", "//p[text()='Please provide a mobile phone number.']")
@@ -2623,8 +2632,8 @@ public class GoldHydro_EMEA_Helper {
 
 			} else {
 				Thread.sleep(4000);
-				Sync.waitElementPresent("xpath", "//h3[contains(text(),'Add Discount Code')]");
-				Common.clickElement("xpath", "//h3[contains(text(),'Add Discount Code')]");
+				Sync.waitElementPresent("css", "h3[class*='flex items-center justify-between']");
+				Common.clickElement("css", "h3[class*='flex items-center justify-between']");
 			}
 			if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
 				Sync.waitElementPresent("id", "discount-code");
@@ -2640,8 +2649,8 @@ public class GoldHydro_EMEA_Helper {
 			Common.assertionCheckwithReport(size > 0, "verifying the Discount Code label", expectedResult,
 					"Successfully open the discount input box", "User unable enter Discount Code");
 			Thread.sleep(4000);
-			Sync.waitElementClickable("xpath", "//span[contains(text(),'Apply Code')]");
-			Common.clickElement("xpath", "//span[contains(text(),'Apply Code')]");
+			Sync.waitElementClickable("css", "button[class*='btn btn-primary justify-center']");
+			Common.clickElement("css", "button[class*='btn btn-primary justify-center']");
 			Sync.waitPageLoad();
 			Thread.sleep(8000);
 			/*
@@ -2696,6 +2705,7 @@ public class GoldHydro_EMEA_Helper {
 
 		}
 	}
+
 
 	/**
 	 * Searches for a product using data from a specified dataset.
