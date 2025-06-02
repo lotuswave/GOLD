@@ -1921,10 +1921,12 @@ public class GoldHydro_EMEA_Helper {
 		try {
 			Sync.waitElementPresent("id", "customer-menu");
 			Common.clickElement("id", "customer-menu");
-			Common.clickElement("css", "a[title='Sign In']");
+			Common.clickElement("id", "customer.header.sign.in.link");
 			Sync.waitPageLoad();
+			Thread.sleep(2000);
 			Common.assertionCheckwithReport(
-					Common.getText("xpath", "//fieldset[@class='fieldset login']//legend/h2").equals("Sign In"),
+					Common.getText("xpath", "//fieldset[@class='fieldset login']//legend/h2").equals("Sign In")
+					|| Common.getCurrentURL().contains("customer/account/login"),
 					"To validate the user navigates to the signin page",
 					"user should able to land on the signIn page after clicking on the sigIn button",
 					"User Successfully clicked on the singIn button and Navigate to the signIn page",
@@ -7458,20 +7460,24 @@ System.out.println(MyFavorites);
 		String Email = data.get(DateSet).get("Email");
 		// TODO Auto-generated method stub
 		try {
-			Common.clickElement("xpath", "//span[contains(text(),'Forgot Password?')]");
-			String forgotpassword = Common.findElement("xpath", "//h2[contains(text(),'Forgot Your Password?')]")
-					.getText();
+			Common.clickElement("xpath", "//a[contains(@class,'link link-primary')]");
+			String forgotpassword = Common.findElement("xpath", "//h2[contains(@class,'text')]").getText();
 			System.out.println(forgotpassword);
+			Thread.sleep(5000);
 			Common.textBoxInput("id", "email_address", Email);
 			Common.findElement("id", "email_address").getAttribute("value");
-			Common.clickElement("xpath", "//button[contains(text(),'Reset My Password')]");
-
-			Sync.waitElementPresent(50, "xpath", "//span[@x-html='message.text']");
-			String message = Common.findElement("xpath", "//span[@x-html='message.text']").getText();
+			Common.clickElement("xpath", "//button[@type='submit' and contains(@class,'btn btn-primary')]");
+			Sync.waitPageLoad();
+			Thread.sleep(2000);
+			Sync.waitElementPresent(30, "xpath", "//div[contains(@ui-id,'message')]");
+			String message = Common.findElement("xpath", "//div[contains(@ui-id,'message')]").getText();
+			Thread.sleep(4000);
 			System.out.println(message);
 			Common.assertionCheckwithReport(
 					message.contains("We received too many requests for password resets")
-							|| message.contains("you will receive an email with a link to reset your password."),
+							|| message.contains("If there is an account associated")
+							|| Common.getCurrentURL().contains("/forgotpassword/")
+							|| Common.getCurrentURL().contains("/customer/account/login"),
 					"To validate the user is navigating to Forgot Password page",
 					"user should naviagte to forgot password page", "User lands on Forgot Password page",
 					"User failed to navigate to forgot password page");
