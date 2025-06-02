@@ -1666,12 +1666,12 @@ public class GoldHydro_EMEA_Helper {
 					Common.switchFrames("css", "iframe[title='Secure payment input frame']");
 				}else {
 					Sync.waitElementPresent("css", "div[id='payment-method-view-stripe_payments']");
-					Common.switchFrames("css", "iframe[name*='__privateStripeFrame']");
+					Common.switchFrames("xpath", "(//iframe[@role='presentation' and contains(@allow,'payment *; publickey-credentials')])[1]");
 
 				}		
 //				Sync.waitElementClickable("css", "label[for='Field-numberInput']");
-				Common.scrollIntoView("css", "label[for='Field-numberInput']");
-				Common.clickElement("css", "label[for='Field-numberInput']");
+				Common.scrollIntoView("css", "input[id='Field-numberInput']");
+				Common.clickElement("id", "Field-numberInput");
 				Common.findElement("id", "Field-numberInput").sendKeys(cardnumber);
 
 				Number = Common.findElement("id", "Field-numberInput").getAttribute("value").replace(" ", "");
