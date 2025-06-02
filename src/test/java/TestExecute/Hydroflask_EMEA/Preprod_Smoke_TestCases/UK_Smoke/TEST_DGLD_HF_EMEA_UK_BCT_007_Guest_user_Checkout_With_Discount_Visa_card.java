@@ -9,7 +9,7 @@ import TestComponent.Hydroflask_EMEA.GoldHydro_EMEA_Helper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class TEST_DGLD_HF_EMEA_UK_BCT_007_Guest_user_Checkout_With_Partial_GC_Redeem_Discount_Visa_card {
+public class TEST_DGLD_HF_EMEA_UK_BCT_007_Guest_user_Checkout_With_Discount_Visa_card {
 
 	String datafile = "Hydroflask_EMEA//GoldHydroEMEA_TestData.xlsx";
 	GoldHydro_EMEA_Helper Hydro = new GoldHydro_EMEA_Helper(datafile,"DataSet");

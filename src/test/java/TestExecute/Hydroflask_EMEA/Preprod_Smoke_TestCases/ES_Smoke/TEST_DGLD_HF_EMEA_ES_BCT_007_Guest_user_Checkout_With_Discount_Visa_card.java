@@ -1,4 +1,4 @@
-package TestExecute.Hydroflask_EMEA.Preprod_Smoke_TestCases.FR_Smoke;
+package TestExecute.Hydroflask_EMEA.Preprod_Smoke_TestCases.ES_Smoke;
 
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
@@ -9,7 +9,7 @@ import TestComponent.Hydroflask_EMEA.GoldHydro_EMEA_Helper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class TEST_DGLD_HF_EMEA_FR_BCT_007_Guest_user_Checkout_With_Partial_GC_Redeem_Discount_Visa_card {
+public class TEST_DGLD_HF_EMEA_ES_BCT_007_Guest_user_Checkout_With_Discount_Visa_card {
 
 	String datafile = "Hydroflask_EMEA//GoldHydroEMEA_TestData.xlsx";
 	GoldHydro_EMEA_Helper Hydro = new GoldHydro_EMEA_Helper(datafile,"DataSet");
@@ -22,7 +22,7 @@ public class TEST_DGLD_HF_EMEA_FR_BCT_007_Guest_user_Checkout_With_Partial_GC_Re
 			Hydro.search_product("Product");      
 			Hydro.addtocart("Product");                    
 			Hydro.minicart_Checkout();
-            Hydro.addDeliveryAddress_Guestuser("fr_Address");
+            Hydro.addDeliveryAddress_Guestuser("es_Address");
             Hydro.selectshippingaddress("GroundShipping method");
             Hydro.discountCode("Discount");
             Hydro.clickSubmitbutton_Shippingpage();
@@ -38,7 +38,7 @@ public class TEST_DGLD_HF_EMEA_FR_BCT_007_Guest_user_Checkout_With_Partial_GC_Re
 	}
 	@BeforeTest
 	public void startTest() throws Exception {
-		String url="https://mcloud-na-stage4.hydroflask.com/fr";
+		String url="https://mcloud-na-stage4.hydroflask.com/es";
 		System.setProperty("url", url);
 		Login.signIn();
 		Hydro.close_add();
