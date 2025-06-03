@@ -10940,7 +10940,7 @@ System.out.println(MyFavorites);
 				Sync.waitElementPresent(50, "xpath", "(//span[normalize-space()='Shop'])[1]");
 				Common.javascriptclickElement("xpath", "(//span[normalize-space()='Shop'])[1]");
 
-				Common.clickElement("xpath", "//a[contains(@title,'Food & Coolers​')]");
+				Common.clickElement("css", "a[title*='Coolers & Kitchenware']");
 				Thread.sleep(3000);
 				Sync.waitElementPresent(30, "xpath",
 						"//a[contains(@href,'cooler')]/span[contains(text(),'" + Links[i] + "')]");
@@ -10985,6 +10985,7 @@ System.out.println(MyFavorites);
 		}
 
 	}
+
 
 	public void kitchenware_validation(String Dataset) {
 		// TODO Auto-generated method stub
@@ -11110,7 +11111,7 @@ System.out.println(MyFavorites);
 						"(//a[contains(@title,'" + Links[i] + "')]//span[contains(text(),'" + Links[i] + "')])[1]");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
-				String title = Common.findElement("xpath", "//h1//span").getText();
+				String title = Common.findElement("xpath", "//h1").getText();
 				String breadcrumbs = Common.findElement("xpath", "//nav[contains(@class,'breadcrumb')]").getText();
 				System.out.println(title);
 				System.out.println(Links[i]);
@@ -11199,7 +11200,6 @@ System.out.println(MyFavorites);
 		}
 
 	}
-
 	public void shopall(String Dataset) {
 		// TODO Auto-generated method stub
 		String names = data.get(Dataset).get("shopall links");
@@ -12483,9 +12483,9 @@ System.out.println(MyFavorites);
 				Common.clickElement("xpath", "//span[contains(text(),'New Colours')]");
 				Thread.sleep(3000);
 				Sync.waitElementPresent("xpath",
-						"//div[contains(@class,'segmented-categories')]//span[contains(text(),'" + Links[i] + "')]");
+						"//div[contains(@class,'main-nav__submenu-')]//span[contains(text(),'" + Links[i] + "')]");
 				Common.clickElement("xpath",
-						"//div[contains(@class,'segmented-categories')]//span[contains(text(),'" + Links[i] + "')]");
+						"//div[contains(@class,'main-nav__submenu-')]//span[contains(text(),'" + Links[i] + "')]");
 				Sync.waitPageLoad();
 				Thread.sleep(3000);
 
