@@ -386,8 +386,9 @@ public class GoldHydro_EMEA_Helper {
 			Thread.sleep(3000);
 
 			Common.clickElement("css", "img[alt='" + products + "']");
-			Sync.waitElementPresent("css", "button[title='Add to Cart']");
-			Common.javascriptclickElement("css", "button[title='Add to Cart']");
+			Sync.waitElementPresent("css", "button[form='product_addtocart_form']");
+			Thread.sleep(2000);
+			Common.javascriptclickElement("css", "button[form='product_addtocart_form']");
 			Thread.sleep(3000);
 
 			String openminicart = Common.findElement("css", "div[class*='fixed inset-y-0']").getAttribute("aria-modal");
@@ -499,8 +500,9 @@ public class GoldHydro_EMEA_Helper {
 			Sync.waitElementPresent(30, "css", "span[x-text='totalCartAmount']");
 			String minicart = Common.findElement("css", "span[x-text='totalCartAmount']").getText();
 
-			Sync.waitElementPresent(30, "css", "a[class*='inline-flex btn btn-primary']");
-			Common.clickElement("css", "a[class*='inline-flex btn btn-primary']");
+			Sync.waitElementPresent(30, "css", "button[class*='inline-flex btn btn-primary']");
+			Common.clickElement("css", "button[class*='inline-flex btn btn-primary']");
+
 			Sync.waitPageLoad();
 			Thread.sleep(2000);
 			try {
@@ -2623,18 +2625,20 @@ public class GoldHydro_EMEA_Helper {
 
 		try {
 			int discountsize = Common
-					.findElements("xpath", "(//span[contains(text(),'Discount (10% off test coupon)')])[1]").size();
+					.findElements("xpath", "(//span[contains(text(),'functionality on HYF EMEA')])[1]").size();
 			if (discountsize > 0) {
 				Thread.sleep(3000);
 
-				Common.findElement("xpath", "//span[contains(text(),'Cancel Coupon')]");
-				Common.clickElement("xpath", "//span[contains(text(),'Cancel Coupon')]");
+				Common.findElement("xpath", "button[class*='btn btn-primary justify-center']");
+				Common.clickElement("xpath", "button[class*='btn btn-primary justify-center']");
+				Common.clickElement("css", "h3[class*='flex items-center justify-between']");
 
 			} else {
 				Thread.sleep(4000);
 				Sync.waitElementPresent("css", "h3[class*='flex items-center justify-between']");
 				Common.clickElement("css", "h3[class*='flex items-center justify-between']");
 			}
+
 			if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
 				Sync.waitElementPresent("id", "discount-code");
 
@@ -3617,6 +3621,7 @@ System.out.println(MyFavorites);
 					|| Common.getCurrentURL().contains("/de/") || Common.getCurrentURL().contains("/fr")) {
 				Sync.waitElementVisible("id", "shipping-region");
 				Common.clickElement("id","shipping-region");
+				Thread.sleep(2000);
 				Common.dropdown("id", "shipping-region", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
 				Common.actionsKeyPress(Keys.SPACE);
 			} else {
@@ -4236,8 +4241,8 @@ System.out.println(MyFavorites);
 				Thread.sleep(5000);
 				Common.actionsKeyPress(Keys.END);
 				Thread.sleep(5000);
-				Sync.waitElementClickable("id", "payment-submit-btn");
-				Common.clickElement("id", "payment-submit-btn");
+				Sync.waitElementClickable("css", "button[data-id='payment-submit-btn']");
+				Common.clickElement("css", "button[data-id='payment-submit-btn']");
 				Thread.sleep(8000);
 				Common.switchToFirstTab();
 			} catch (Exception | Error e) {
@@ -8323,7 +8328,7 @@ System.out.println(MyFavorites);
 		// TODO Auto-generated method stub
 		try {
 			Sync.waitPageLoad();
-			Common.clickElement("xpath", "//input[@id='billing-as-shipping']");
+			Common.javascriptclickElement("xpath", "//input[@id='billing-as-shipping']");
 			Thread.sleep(4000);
 			Sync.waitElementPresent(30, "xpath", "(//button[normalize-space()='New Address'])[2]");
 			Common.clickElement("xpath", "(//button[normalize-space()='New Address'])[2]");
@@ -8345,9 +8350,18 @@ System.out.println(MyFavorites);
 //			Common.actionsKeyPress(Keys.PAGE_DOWN);
 			Thread.sleep(4000);
 			try {
-//				Common.dropdown("xpath", "//form[@id='billing']//select[@name='region']", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
-				Common.textBoxInput("xpath", "//form[@id='billing']//input[@name='region']",
-						data.get(dataSet).get("Region"));
+				if(Common.getCurrentURL().contains("/eu") || Common.getCurrentURL().contains("/es/") 
+						|| Common.getCurrentURL().contains("/de/") || Common.getCurrentURL().contains("/fr")) {
+					Sync.waitElementVisible("id", "billing-region");
+					Common.clickElement("id","billing-region");
+					Thread.sleep(2000);
+					Common.dropdown("id", "billing-region", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+					Common.actionsKeyPress(Keys.SPACE);
+				} else {
+					Sync.waitElementVisible("id", "billing-region");
+//		            Common.dropdown("id", "shipping-region", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+					Common.textBoxInput("id", "billing-region", data.get(dataSet).get("Region"));
+				}
 			} catch (ElementClickInterceptedException e) {
 				Thread.sleep(3000);
 				Common.dropdown("name", "region_id", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
@@ -8366,7 +8380,8 @@ System.out.println(MyFavorites);
 					"//select[@id='address-list']//option[@value='4335046'] | //select[@id='address-list']//option[@value='0']")
 					.getText().trim();
 			System.out.println(update);
-			Common.assertionCheckwithReport(update.contains("71 Worthy Street"),
+			Common.assertionCheckwithReport(update.contains("71 Worthy Street") || update.contains("2 Rue De La Zinsel") ||
+					update.contains("Rauhankatu 55"),
 					"verifying the Billing address form in payment page",
 					"Billing address should be saved in the payment page",
 					"Sucessfully Billing address form should be Display ",
@@ -8382,7 +8397,6 @@ System.out.println(MyFavorites);
 		}
 
 	}
-
 	public void outofstock_subcription(String Dataset) {
 		// TODO Auto-generated method stub
 		String products = data.get(Dataset).get("Products");

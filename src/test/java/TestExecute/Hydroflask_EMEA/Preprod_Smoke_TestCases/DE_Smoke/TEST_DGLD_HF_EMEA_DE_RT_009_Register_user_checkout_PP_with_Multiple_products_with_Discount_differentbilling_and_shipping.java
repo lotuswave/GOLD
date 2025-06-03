@@ -26,14 +26,14 @@ public class TEST_DGLD_HF_EMEA_DE_RT_009_Register_user_checkout_PP_with_Multiple
 //			Hydro.Addtocart_Bundle("Bundle product");
 			Hydro.search_product("Product");     
 			Hydro.addtocart("Product");
-//			Hydro.bottles_headerlinks("Bottles & Drinkware");
-//			Hydro.Configurable_addtocart_pdp("Product");
+			Hydro.bottles_headerlinks("Bottles & Drinkware");
+			Hydro.Configurable_addtocart_pdp("Product");
 			Hydro.minicart_Checkout();
-			Hydro.RegaddDeliveryAddress("AccountDetails");
+			Hydro.RegaddDeliveryAddress("de_Address");
 			Hydro.discountCode("Discount");
             Hydro.selectshippingaddress("GroundShipping method");
             Hydro.clickSubmitbutton_Shippingpage();
-            Hydro.register_billingAddress("BillingDetails");
+            Hydro.register_billingAddress("de_BillingDetails");
             Hydro.payPal_Payment("PaypalDetails");
 
 		} catch (Exception e) {
