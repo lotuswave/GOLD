@@ -2624,17 +2624,19 @@ public class GoldHydro_EMEA_Helper {
 		String expectedResult = "It should opens textbox input to enter discount.";
 
 		try {
+			Thread.sleep(3000);
 			int discountsize = Common
 					.findElements("xpath", "(//span[contains(text(),'functionality on HYF EMEA')])[1]").size();
 			if (discountsize > 0) {
+				Sync.waitElementPresent("css","h3[class*='flex items-center justify-between']");
+				Common.clickElement("css", "h3[class*='flex items-center justify-between']");
+				Sync.waitElementPresent(30,"css","button[class*='btn btn-primary justify-center']");
+				Common.clickElement("css","button[class*='btn btn-primary justify-center']");
 				Thread.sleep(3000);
 
-				Common.findElement("xpath", "button[class*='btn btn-primary justify-center']");
-				Common.clickElement("xpath", "button[class*='btn btn-primary justify-center']");
-				Common.clickElement("css", "h3[class*='flex items-center justify-between']");
 
 			} else {
-				Thread.sleep(4000);
+				Thread.sleep(3000);
 				Sync.waitElementPresent("css", "h3[class*='flex items-center justify-between']");
 				Common.clickElement("css", "h3[class*='flex items-center justify-between']");
 			}
@@ -3571,7 +3573,7 @@ System.out.println(MyFavorites);
 				fillShippingForm(dataSet, true);
 //				  Common.clickElement("xpath", "//input[@id='shipping-save']");
 				Thread.sleep(2000);
-				Common.clickElement("css", "button[class='btn btn-primary w-full os:uppercase']");
+				Common.clickElement("css", "button[class*='btn btn-primary w-full os:uppercase']");
 			} else {
 				fillShippingForm(dataSet, false);
 //		            Common.clickElement("id", "shipping-save");
@@ -4258,11 +4260,6 @@ System.out.println(MyFavorites);
 
 			else {
 				try {
-					Thread.sleep(2000);
-					if (Common.findElements("xpath", "//div[@class='flex items-center']//input[@type='checkbox']")
-							.size() > 0) {
-						Common.clickElement("xpath", "//div[@class='flex items-center']//input[@type='checkbox']");
-					}
 					Thread.sleep(6000);
 					Sync.waitElementPresent("css", "input[class='flex-none disabled:opacity-25']");
 					Common.clickElement("css", "input[class='flex-none disabled:opacity-25']");
@@ -4271,13 +4268,18 @@ System.out.println(MyFavorites);
 					Common.scrollIntoView("xpath", "(//button[contains(@class,'btn btn-primary place-order')])[2]");
 					Common.clickElement("xpath", "(//button[contains(@class,'btn btn-primary place-order')])[2]");
 					Thread.sleep(8000);
-					Sync.waitElementPresent(30, "xpath", "//h1[normalize-space()='Thank you for your purchase!']");
-					String sucessMessage = Common.getText("xpath",
-							" //h1[normalize-space()='Thank you for your purchase!']");
-					System.out.println(sucessMessage);
-					int sizes = Common.findElements("xpath", " //h1[normalize-space()='Thank you for your purchase!']")
+					String sucessMessage = "";
+					if(Common.findElements("xpath","//h1[normalize-space()='Thank you for your purchase!']").size()>0) {
+						Sync.waitElementPresent(30, "xpath", "//h1[normalize-space()='Thank you for your purchase!']");
+						sucessMessage = Common.getText("xpath",
+								"//h1[normalize-space()='Thank you for your purchase!']");
+						System.out.println(sucessMessage);
+					}else {
+						System.out.println(Common.getCurrentURL());
+					}					
+					int sizes = Common.findElements("xpath", "//h1[normalize-space()='Thank you for your purchase!']")
 							.size();
-					Common.assertionCheckwithReport(sucessMessage.contains("Thank you for your purchase!"),
+					Common.assertionCheckwithReport(sucessMessage.contains("Thank you for your purchase!") || Common.getCurrentURL().contains("success"),
 							"verifying the product confirmation", expectedResult,
 							"Successfully It redirects to order confirmation page Order Placed",
 							"User unabel to go orderconformation page");
@@ -8330,9 +8332,14 @@ System.out.println(MyFavorites);
 			Sync.waitPageLoad();
 			Common.javascriptclickElement("xpath", "//input[@id='billing-as-shipping']");
 			Thread.sleep(4000);
-			Sync.waitElementPresent(30, "xpath", "(//button[normalize-space()='New Address'])[2]");
-			Common.clickElement("xpath", "(//button[normalize-space()='New Address'])[2]");
-
+			if (Common.findElements("xpath","(//button[normalize-space()='New Address'])[2]").size()>0) {
+				Sync.waitElementPresent(30, "xpath", "(//button[normalize-space()='New Address'])[2]");
+				Common.clickElement("xpath", "(//button[normalize-space()='New Address'])[2]");
+			} else {
+				Sync.waitElementPresent(30, "xpath", "(//button[contains(@class,'checkout-address-list__button')])[2]");
+				Common.clickElement("xpath", "(//button[contains(@class,'checkout-address-list__button')])[2]");
+			}
+		
 			Common.textBoxInput("xpath", "//form[@id='billing']//input[@id='billing-firstname']",
 					data.get(dataSet).get("FirstName"));
 			Common.textBoxInput("xpath", "//form[@id='billing']//input[@name='lastname']",
@@ -8373,7 +8380,7 @@ System.out.println(MyFavorites);
 			Common.textBoxInput("xpath", "//form[@id='billing']//input[@name='telephone']",
 					data.get(dataSet).get("phone"));
 			Thread.sleep(3000);
-			Common.clickElement("xpath", "//button[normalize-space()='Save']");
+			Common.clickElement("xpath", "(//button[contains(@class,'checkout-address-form__buttons-save')])[2]");
 			Sync.waitPageLoad();
 			Thread.sleep(5000);
 			String update = Common.findElement("xpath",
@@ -8381,7 +8388,7 @@ System.out.println(MyFavorites);
 					.getText().trim();
 			System.out.println(update);
 			Common.assertionCheckwithReport(update.contains("71 Worthy Street") || update.contains("2 Rue De La Zinsel") ||
-					update.contains("Rauhankatu 55"),
+					update.contains("Rauhankatu 55") || update.contains("CR-5212") || update.contains("12 Rue De La Hulotais"),
 					"verifying the Billing address form in payment page",
 					"Billing address should be saved in the payment page",
 					"Sucessfully Billing address form should be Display ",
