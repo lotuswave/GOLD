@@ -8382,7 +8382,7 @@ System.out.println(MyFavorites);
 			Thread.sleep(3000);
 			Common.clickElement("xpath", "(//button[contains(@class,'checkout-address-form__buttons-save')])[2]");
 			Sync.waitPageLoad();
-			Thread.sleep(5000);
+			Thread.sleep(10000);
 			String update = Common.findElement("xpath",
 					"//select[@id='address-list']//option[@value='4335046'] | //select[@id='address-list']//option[@value='0']")
 					.getText().trim();
