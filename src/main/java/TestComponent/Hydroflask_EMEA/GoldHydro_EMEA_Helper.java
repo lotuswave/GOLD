@@ -8337,6 +8337,8 @@ System.out.println(MyFavorites);
 
 	public void register_billingAddress(String dataSet) {
 		// TODO Auto-generated method stub
+		String Address = data.get(dataSet).get("Street");
+		System.out.println(Address);
 		try {
 			Sync.waitPageLoad();
 			Common.javascriptclickElement("xpath", "//input[@id='billing-as-shipping']");
@@ -8396,8 +8398,7 @@ System.out.println(MyFavorites);
 					"//select[@id='address-list']//option[@value='4335046'] | //select[@id='address-list']//option[@value='0']")
 					.getText().trim();
 			System.out.println(update);
-			Common.assertionCheckwithReport(update.contains("71 Worthy Street") || update.contains("2 Rue De La Zinsel") ||
-					update.contains("Rauhankatu 55") || update.contains("CR-5212") || update.contains("12 Rue De La Hulotais"),
+			Common.assertionCheckwithReport(update.contains(Address),
 					"verifying the Billing address form in payment page",
 					"Billing address should be saved in the payment page",
 					"Sucessfully Billing address form should be Display ",
@@ -8468,6 +8469,121 @@ System.out.println(MyFavorites);
 		}
 
 	}
+	
+	
+	public void country_selctor(String Dataset) {
+		// TODO Auto-generated method stub
+		String Country;
+		try {
+			Common.actionsKeyPress(Keys.END);
+ 
+			Sync.waitElementPresent(50, "xpath", "(//span[@class='country-selector-title'])[2]");
+			Common.clickElement("xpath", "(//span[@class='country-selector-title'])[2]");
+			if (Common.findElements("xpath", "//button[@aria-label='Close dialog']").size() > 0) {
+				Common.clickElement("xpath", "//button[@aria-label='Close dialog']");
+			}
+			Thread.sleep(4000);
+			List<WebElement> country = Common.findElements("xpath",
+					"(//legend[text()='Europe']//parent::fieldset)[2]//div[@class='country-item flex gap-3']//p");
+			List<WebElement> Countryselector = Common.findElements("xpath",
+					"(//legend[text()='Europe']//parent::fieldset)[2]//div[@class='country-item flex gap-3']//p");
+			ArrayList<String> CountryNames = new ArrayList<String>();
+			Thread.sleep(2000);
+			for (WebElement Countryselections : Countryselector) {
+				CountryNames.add(Countryselections.getText());
+				System.out.println(CountryNames);
+			}
+			String[] items = data.get(Dataset).get("Countrynames").split(",");
+			System.out.println(Arrays.toString(items));
+			Common.clickElement("css", "button[aria-label='Close']");
+			for (int j = 0; j < items.length; j++) {
+				if (CountryNames.contains(items[j])) {
+ 
+					System.out.println(country.size());
+ 
+					for (int i = 0; i < country.size(); i++) {
+ 
+						Sync.waitPageLoad();
+ 
+						Sync.waitElementPresent(50, "xpath", "(//span[@class='country-selector-title'])[2]");
+						Common.clickElement("xpath", "(//span[@class='country-selector-title'])[2]");
+						Thread.sleep(2000);
+ 
+						Common.refreshpage();
+						Sync.waitElementPresent(50, "xpath", "(//span[@class='country-selector-title'])[2]");
+						Common.clickElement("xpath", "(//span[@class='country-selector-title'])[2]");
+						List<WebElement> select = Common.findElements("xpath",
+								"(//legend[text()='Europe']//parent::fieldset)[2]//div[@class='country-item flex gap-3']//p");
+						String countryname = Common.findElement("xpath",
+								"(//legend[text()='Europe']//parent::fieldset)[2]//div[@class='country-item flex gap-3']//span[@class='country-item__country-label title-xs font-bold']")
+								.getText();
+						System.out.println("countryname:" + countryname);
+						int size = Common.findElements("css", "button[aria-label='Close dialog']").size();
+						if (size > 0) {
+							Common.clickElement("css", "button[aria-label='Close dialog']");
+						}
+						Thread.sleep(4000);
+						Country = select.get(i).getText();
+						System.out.println(Country);
+						select.get(i).click();
+						Thread.sleep(5000);
+						if (Country.contains("English (£)") && countryname.contains("UK")
+								|| Country.contains("English (£)") && countryname.contains("United Kingdom")) {
+							ExtenantReportUtils.addPassLog("Validating" + Country + "Page  ",
+									"click on the country should navigate to the  " + Country + "Page",
+									"successfully page navigating to " + Country + "PAGE",
+									Common.getscreenShotPathforReport(Country));
+						}
+ 
+						else if (Country.contains("English (€)") || Country.contains("Français (€)")
+								|| Country.contains("Deutsch (€)") || Country.contains("Italiano (€)")
+								|| Country.contains("Español (€)")) {
+ 
+							Sync.waitElementPresent("xpath", "(//legend[@class='title-sm font-bold h5 mb-2.5'])[1]");
+							Common.getText("xpath", "(//legend[@class='title-sm font-bold h5 mb-2.5'])[1]");
+							Sync.waitPageLoad();
+							Thread.sleep(4000);
+							Common.navigateBack();
+							Common.clickElement("xpath",
+									"(//button[contains(@class,'btn btn-primary os:btn-secondary')])[1]");
+ 
+							ExtenantReportUtils.addPassLog("Validating" + Country + "Page  ",
+									"click on the country should navigate to the  " + Country + "Page",
+									"successfully page navigating to " + Country + "PAGE",
+									Common.getscreenShotPathforReport(Country));
+							Thread.sleep(5000);
+							int size1 = Common.findElements("xpath",
+									"//button[contains(@class,'needsclick klaviyo-close-form kl-private-reset-css-Xuajs1')]")
+									.size();
+							if (size1 > 0) {
+								close_add();
+							}
+						} else {
+							Sync.waitPageLoad();
+							Thread.sleep(4000);
+							Common.navigateBack();
+							ExtenantReportUtils.addPassLog("Validating" + Country + "Page  ",
+									"click on the country should navigate to the  " + Country + "Page",
+									"successfully page navigating to " + Country + "PAGE",
+									Common.getscreenShotPathforReport(Country));
+ 
+						}
+					}
+				}
+			}
+		}
+ 
+		catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the country selection page navigation",
+					"After Clicking on the selected country it should navigate to the respective country page",
+					"Unable to navigate to the respective country page after clicking on the selected country",
+					Common.getscreenShot(
+							"Failed to navigate to the respective country page after clicking on the selected country"));
+			Assert.fail();
+		}
+	}
+ 
 
 	private void subscribeToAlert(String email) throws Exception {
 		Common.clickElement("css", "button[title='Notify Me When Available']");
