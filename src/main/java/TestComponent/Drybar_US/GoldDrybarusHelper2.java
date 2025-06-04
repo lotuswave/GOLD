@@ -545,9 +545,9 @@ public class GoldDrybarusHelper2 {
         }
         else {
 
-            Common.switchFrames("xpath", "//div[@class='preloaded_lightbox']/iframe");
-            Sync.waitElementPresent("id", "ltkpopup-close-button");
-            Common.clickElement("id", "ltkpopup-close-button");
+  //          Common.switchFrames("xpath", "//div[@id='ltkpopup-formcontent']");
+            Sync.waitElementPresent("css", "div[aria-label='Close dialog']");
+            Common.clickElement("css", "div[aria-label='Close dialog']");
             Common.switchToDefault();
             }
 
@@ -1862,7 +1862,7 @@ public class GoldDrybarusHelper2 {
 			String shipping = Common.getText("xpath", "(//div[contains(@class,'item shipping')]//span[contains(@class, 'shipping-value')])[1]")
 					.replace("$", "");
 			Float shippingvalue = Float.parseFloat(shipping);
-			String ordertotal = Common.getText("xpath", "(//div[@class='item grand_total']//span[contains(@class, 'checkout-total')])[1]")
+			String ordertotal = Common.getText("css", "div[class*='item grand_total'] span[class*='grand-total-value']")
 					.replace("$", "");
 			Float ordertotalvalue = Float.parseFloat(ordertotal);
 			Thread.sleep(4000);
