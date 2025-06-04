@@ -1780,17 +1780,17 @@ public class GoldDrybarusHelper2 {
 			
 			if(Common.getCurrentURL().contains("/gb"))
 			{
-				String Subtotal = Common.getText("xpath", "//tr[@class='totals sub']//span[@class='price']").replace(Symbol,
+				String Subtotal = Common.getText("xpath", "(//div[@class='item subtotal']//span[@class='value'])[1]").replace(Symbol,
 						"");
 				Float subtotalvalue = Float.parseFloat(Subtotal);
-				String shipping = Common.getText("xpath", "//tr[contains(@class,'totals shipping')]//span[@class='price']")
+				String shipping = Common.getText("xpath", "(//div[contains(@class,'item shipping')]//span[contains(@class, 'shipping-value')])[1]")
 						.replace(Symbol, "");
 				Float shippingvalue = Float.parseFloat(shipping);
-				String Tax = Common.getText("xpath", "//tr[@class='totals-tax']//span[@class='price']").replace(Symbol, "");
+				String Tax = Common.getText("xpath", "(//div[@class='item tax']//span[@class='value'])[1]").replace(Symbol, "");
 				Float Taxvalue = Float.parseFloat(Tax);
 				Thread.sleep(4000);
 
-				String ordertotal = Common.getText("xpath", "//tr[@class='grand totals']//span[@class='price']")
+				String ordertotal = Common.getText("xpath", "(//div[@class='item grand_total']//span[contains(@class, 'checkout-total')])[1]")
 						.replace(Symbol, "");
 				Float ordertotalvalue = Float.parseFloat(ordertotal);
 				Thread.sleep(4000);
