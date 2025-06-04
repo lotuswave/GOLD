@@ -1780,21 +1780,21 @@ public class GoldDrybarusHelper2 {
 			
 			if(Common.getCurrentURL().contains("/gb"))
 			{
-				String Subtotal = Common.getText("xpath", "(//div[@class='item subtotal']//span[@class='value'])[1]").replace(Symbol,
+				String Subtotal = Common.getText("xpath", "//div[@class='item subtotal']//span[contains(@class, 'value')]").replace(Symbol,
 						"");
 				Float subtotalvalue = Float.parseFloat(Subtotal);
-				String shipping = Common.getText("xpath", "(//div[contains(@class,'item shipping')]//span[contains(@class, 'shipping-value')])[1]")
+				String shipping = Common.getText("xpath", "//span[contains(@class, 'shipping-value')]")
 						.replace(Symbol, "");
 				Float shippingvalue = Float.parseFloat(shipping);
-				String Tax = Common.getText("xpath", "(//div[@class='item tax']//span[@class='value'])[1]").replace(Symbol, "");
+				String Tax = Common.getText("xpath", "//div[@class='item tax']//span[@class='value']").replace(Symbol, "");
 				Float Taxvalue = Float.parseFloat(Tax);
 				Thread.sleep(4000);
 
-				String ordertotal = Common.getText("xpath", "(//div[@class='item grand_total']//span[contains(@class, 'checkout-total')])[1]")
+				String ordertotal = Common.getText("xpath", "//div[@class='item grand_total']//span[contains(@class, 'checkout-total')]")
 						.replace(Symbol, "");
 				Float ordertotalvalue = Float.parseFloat(ordertotal);
 				Thread.sleep(4000);
-				Float Total = (subtotalvalue + shippingvalue);
+				Float Total = (subtotalvalue + shippingvalue + Taxvalue );
 				String ExpectedTotalAmmount2 = new BigDecimal(Total).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
 				Thread.sleep(4000);
 				System.out.println(ExpectedTotalAmmount2);
@@ -1807,30 +1807,25 @@ public class GoldDrybarusHelper2 {
 			}
 			else
 			{
-			Thread.sleep(4000);
-			String Subtotal = Common.getText("xpath", "(//div[@class='item subtotal']//span[@class='value'])[1]").replace("$",
-					"");
-			System.out.println(Subtotal);
-			Float subtotalvalue = Float.parseFloat(Subtotal);
-			String shipping = Common.getText("xpath", "(//div[@class='item shipping']//span[@class='checkout-total-segments__shipping-value value'])[1]")
-					.replace(Symbol, "");
-			Float shippingvalue = Float.parseFloat(shipping);
-			
-			
-			String Tax = Common.getText("xpath", "(//div[@class='item tax']//span[@class='value'])[1]").replace(Symbol, "");
-			
-			Float Taxvalue = Float.parseFloat(Tax);
-			Thread.sleep(4000);
+				String Subtotal = Common.getText("xpath", "//div[@class='item subtotal']//span[contains(@class, 'value')]").replace(Symbol,
+						"");
+				Float subtotalvalue = Float.parseFloat(Subtotal);
+				String shipping = Common.getText("xpath", "//span[contains(@class, 'shipping-value')]")
+						.replace(Symbol, "");
+				Float shippingvalue = Float.parseFloat(shipping);
+				String Tax = Common.getText("xpath", "//div[@class='item tax']//span[@class='value']").replace(Symbol, "");
+				Float Taxvalue = Float.parseFloat(Tax);
+				Thread.sleep(4000);
 
-			String ordertotal = Common.getText("xpath", "(//div[@class='item grand_total']//span[contains(@class,'value')])[1]")
-					.replace(Symbol, "");
-			Float ordertotalvalue = Float.parseFloat(ordertotal);
-			Thread.sleep(4000);
-			Float Total = (subtotalvalue + shippingvalue + Taxvalue);
-			String ExpectedTotalAmmount2 = new BigDecimal(Total).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
-			Thread.sleep(4000);
-			System.out.println(ExpectedTotalAmmount2);
-			System.out.println(ordertotal);
+				String ordertotal = Common.getText("xpath", "//span[contains(@class, 'grand-total-value')]")
+						.replace(Symbol, "");
+				
+				Thread.sleep(4000);
+				Float Total = (subtotalvalue + shippingvalue + Taxvalue);
+				String ExpectedTotalAmmount2 = new BigDecimal(Total).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
+				Thread.sleep(4000);
+				System.out.println(ExpectedTotalAmmount2);
+				System.out.println(ordertotal);
 			Common.assertionCheckwithReport(ExpectedTotalAmmount2.equals(ordertotal),
 					"validating the Tax on the payment page",
 					"On the order summary tax should be display on the payment page",
@@ -1856,13 +1851,13 @@ public class GoldDrybarusHelper2 {
 		// TODO Auto-generated method stub
 		try
 		{
-			String Subtotal = Common.getText("xpath", "(//div[@class='item subtotal']//span[@class='value'])[1]").replace("$",
+			String Subtotal = Common.getText("xpath", "//div[@class='item subtotal']//span[contains(@class, 'value')]").replace("$",
 					"");
 			Float subtotalvalue = Float.parseFloat(Subtotal);
-			String shipping = Common.getText("xpath", "(//div[contains(@class,'item shipping')]//span[contains(@class, 'shipping-value')])[1]")
+			String shipping = Common.getText("xpath", "//span[contains(@class, 'shipping-value')]")
 					.replace("$", "");
 			Float shippingvalue = Float.parseFloat(shipping);
-			String ordertotal = Common.getText("css", "div[class*='item grand_total'] span[class*='grand-total-value']")
+			String ordertotal = Common.getText("xpath", "//span[contains(@class, 'grand-total-value')]")
 					.replace("$", "");
 			Float ordertotalvalue = Float.parseFloat(ordertotal);
 			Thread.sleep(4000);
@@ -9144,16 +9139,16 @@ public void Tax_validation_Paymentpage() {
 	  
 	try
 	{
-		String Subtotal = Common.getText("xpath", "(//div[@class='item subtotal']//span[@class='value'])[1]").replace("£","");
+		String Subtotal = Common.getText("xpath", "//div[@class='item subtotal']//span[contains(@class, 'value')]").replace("£","");
 		Float subtotalvalue = Float.parseFloat(Subtotal);
 		System.out.println("subtotalvalue");
-		String shipping = Common.getText("xpath", "(//div[contains(@class,'item shipping')]//span[contains(@class, 'shipping-value')])[1]").replace("£", "");
+		String shipping = Common.getText("xpath", "//span[contains(@class, 'shipping-value')]").replace("£", "");
 		Float shippingvalue = Float.parseFloat(shipping);
-		String Tax = Common.getText("xpath", "(//div[@class='item tax']//span[@class='value'])[1]").replace("£", "");
+		String Tax = Common.getText("xpath", "//div[@class='item tax']//span[@class='value']").replace("£", "");
 		Float Taxvalue = Float.parseFloat(Tax);
 		Thread.sleep(4000);
 
-		String ordertotal = Common.getText("xpath", "(//div[@class='item grand_total']//span[contains(@class, 'checkout-total')])[1]")
+		String ordertotal = Common.getText("xpath", "//span[contains(@class, 'grand-total-value')]")
 				.replace("£", "");
 		Float ordertotalvalue = Float.parseFloat(ordertotal);
 		Thread.sleep(4000);
