@@ -6104,14 +6104,14 @@ public void FUll_Payment(String dataSet) {
 				Sync.waitPageLoad();
 				Common.switchWindows();
 				//Common.switchFrames("xpath", "//iframe[@id='klarna-apf-iframe']");
-				Sync.waitElementPresent("xpath", "//input[@name='phonePasskey']");
+				Sync.waitElementPresent("xpath", "//input[@name='phonePasskey'] | //input[@name='phone']");
 			/*	Common.clickElement("xpath", "//input[@name='phone']");
 				
 				int number=Common.genrateRandomNumber();
 				System.out.println(number);
 				String mobile=Integer.toString(number);
 				String phone="+91"+"95862"+mobile;*/
-				WebElement clear=Common.findElement("xpath", "//input[@name='phonePasskey']");
+				WebElement clear=Common.findElement("xpath", "//input[@name='phonePasskey'] | //input[@name='phone']");
 			    clear.sendKeys(Keys.CONTROL+"a");
 			    clear.sendKeys(Keys.DELETE);
 				System.out.println(phone);
