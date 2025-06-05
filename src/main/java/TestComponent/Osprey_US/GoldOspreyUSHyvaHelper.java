@@ -7453,12 +7453,12 @@ public void review(String Dataset) {
 					"open paypal site window", "faild to open paypal account");
 		} else {
 
-			Common.clickElement("id", "login_emaildiv");
-			Common.textBoxInput("id", "email", data.get(dataSet).get("Email"));
-			Common.clickElement("id", "btnNext");
-			int size = Common.findElements("xpath", "//a[text()='Log in with a password instead']").size();
+			Common.clickElement("id", "login_email");
+			Common.textBoxInput("id", "login_email", data.get(dataSet).get("Email"));
+			Common.clickElement("xpath", "//button[text()='Next']");
+			int size = Common.findElements("xpath", "//button[text()='Use Password Instead']").size();
 			if(size>0) {
-				Common.clickElement("xpath", "//a[text()='Log in with a password instead']");
+				Common.clickElement("xpath", "//button[text()='Use Password Instead']");
 				Common.textBoxInput("id", "password", data.get(dataSet).get("Password"));
 			}
 			else {
@@ -7471,10 +7471,10 @@ public void review(String Dataset) {
 					"open paypal site window", "faild to open paypal account");
 			}
 			try {
-				Common.clickElement("id", "btnLogin");
+				Common.clickElement("xpath", "//button[text()='Log In']");
 				Sync.waitPageLoad();
 				Common.actionsKeyPress(Keys.END);
-				Common.clickElement("id", "payment-submit-btn");
+				Common.clickElement("css", "#one-time-cta");
 				Thread.sleep(3000);
 				Common.switchToFirstTab();
 			} catch (Exception | Error e) {
@@ -10050,10 +10050,10 @@ public void MyFavorites_Guestuser(String Dataset) {
 		try {
 			Sync.waitPageLoad();
 			Thread.sleep(2000);
-			int size1= Common.findElements("xpath", "//button[contains(text(), 'Agregar código de descuento')]").size();
+			int size1= Common.findElements("xpath", "//h3[contains(text(), 'Agregar código de descuento')]").size();
 		       if (size1>0) {
-		    	   Sync.waitElementClickable("xpath", "//button[contains(text(), 'Agregar código de descuento')]");
-		    	   Common.clickElement("xpath", "//button[contains(text(), 'Agregar código de descuento')]");
+		    	   Sync.waitElementClickable("xpath", "//h3[contains(text(), 'Agregar código de descuento')]");
+		    	   Common.clickElement("xpath", "//h3[contains(text(), 'Agregar código de descuento')]");
 		    	   
 		       } 
 		       else {
@@ -10062,14 +10062,14 @@ public void MyFavorites_Guestuser(String Dataset) {
 		       }
 			
 			if (Common.getCurrentURL().contains("stage") || Common.getCurrentURL().contains("preprod")) {
-				Sync.waitElementPresent("id", "discount-code");
+				Sync.waitElementPresent("css", "input[placeholder='Enter discount code']");
 				Thread.sleep(3000);
 
-				Common.textBoxInput("id", "discount-code", data.get(dataSet).get("Discountcode"));
+				Common.textBoxInput("css", "input[placeholder='Enter discount code']", data.get(dataSet).get("Discountcode"));
 			} else {
-				Sync.waitElementPresent("id", "discount-code");
+				Sync.waitElementPresent("css", "input[placeholder='Enter discount code']");
 
-				Common.textBoxInput("id", "discount-code", data.get(dataSet).get("ProdDiscountcode"));
+				Common.textBoxInput("css", "input[placeholder='Enter discount code']", data.get(dataSet).get("ProdDiscountcode"));
 			}
 
 			int size = Common.findElements("id", "discount-code").size();
@@ -10084,7 +10084,7 @@ public void MyFavorites_Guestuser(String Dataset) {
 			expectedResult = "It should apply discount on your price.If user enters invalid promocode it should display coupon code is not valid message.";
 			String discountcodemsg = Common.getText("xpath", "//div[@ui-id='message-success']");
 			System.out.println(discountcodemsg);
-			Common.assertionCheckwithReport(discountcodemsg.contains("Your coupon was successfully")||discountcodemsg.contains("Su cupón fue aplicado con éxito."),
+			Common.assertionCheckwithReport(discountcodemsg.contains("Your discount code was successfully applied")||discountcodemsg.contains("Su cupón fue aplicado con éxito."),
 					"verifying pomocode", expectedResult, "promotion code working as expected",                   
 					"Promation code is not applied");
 
@@ -10321,7 +10321,7 @@ try {
 			Common.scrollIntoView("xpath", "//span[@x-html='message.text']");
 			expectedResult = "It should apply discount on your price.If user enters invalid promocode it should display coupon code is not valid message.";
 			String discountcodemsg = Common.getText("xpath", "//span[@x-html='message.text']");
-			Common.assertionCheckwithReport(discountcodemsg.contains("You used coupon code"), "verifying pomocode",
+			Common.assertionCheckwithReport(discountcodemsg.contains("You used discount code"), "verifying pomocode",
 					expectedResult, "promotion code working as expected", "Promation code is not applied");
 		} catch (Exception | Error e) {
 			e.printStackTrace();
@@ -10345,7 +10345,7 @@ try {
 	        
 	        String ordertotal = Common.getText("xpath", "//span[@x-text='hyva.formatPrice(segment.value)']").replace("$", ""); 
 	        BigDecimal orderTotalValue = new BigDecimal(ordertotal).setScale(2, BigDecimal.ROUND_HALF_UP);
-	        
+	        Thread.sleep(10000);
 	        String Shipping = Common.getText("xpath", "(//div[@x-text='hyva.formatPrice(segment.value)'])[2]").replace("$", "");  
 	        BigDecimal ShippingValue = new BigDecimal(Shipping).setScale(2, BigDecimal.ROUND_HALF_UP);
 	        String Taxvalue = Common.getText("xpath", "(//div[contains(@x-text,'hyva.formatPrice(segment.value)')])[3]").replace("$", "");
@@ -10747,8 +10747,8 @@ public void Gift_cards(String Dataset) {
 //		Sync.waitPageLoad(30);
 		Thread.sleep(1000);
 		if (Common.getCurrentURL().contains("preprod")) {
-			Sync.waitElementPresent(30, "xpath", "//img[contains(@alt,'" + GiftCard + "')]");
-			Common.clickElement("xpath", "//img[contains(@alt,'" + GiftCard + "')]");
+			Sync.waitElementPresent(30, "css", "a>img[alt='" + GiftCard + "']");
+			Common.clickElement("css", "a>img[alt='" + GiftCard + "']");
 			Sync.waitPageLoad();
 		} else {
 			Sync.waitElementPresent(30, "xpath", "(//img[contains(@alt,'" + prodgiftcard + "')])[3]");
@@ -10991,10 +10991,12 @@ public void Gift_card(String dataSet) {
 			String URL = Common.getCurrentURL();
 			System.out.println(URL);
 			if(URL.contains("stage")|| URL.contains("preprod")) {
-			Thread.sleep(1000);
-			
-		Sync.waitElementPresent("xpath", "//div[contains(@class,'amcard-field')]");	
-		Common.clickElement("xpath", "//div[contains(@class,'amcard-field')]");
+			Thread.sleep(5000);
+		Sync.waitElementPresent("xpath", "//div[@class='border-b pb-4 amcard-field-container -code']");	
+		Common.clickElement("xpath","//div[@class='border-b pb-4 amcard-field-container -code']");
+		Common.clickElement("xpath","//div[@class='border-b pb-4 amcard-field-container -code']");
+
+		Thread.sleep(5000);
 		Common.textBoxInput("xpath","//input[@x-model='giftCardCode']", data.get(dataSet).get("GiftCard3_Stage"));
 		Common.actionsKeyPress(Keys.ARROW_UP);
 		Common.clickElement("xpath","(//button[contains(@class,'btn btn-primary')])[2]"); 
@@ -11900,18 +11902,18 @@ public void After_Pay_payment(String dataSet) throws Exception {
 			Sync.waitPageLoad();
 			Common.switchWindows();
 			//Common.switchFrames("xpath", "//iframe[@id='klarna-apf-iframe']");
-			Sync.waitElementPresent("xpath", "//input[@name='phonePasskey']");
+			Sync.waitElementPresent("css", "#phone");
 		/*	Common.clickElement("xpath", "//input[@name='phone']");
 			
 			int number=Common.genrateRandomNumber();
 			System.out.println(number);
 			String mobile=Integer.toString(number);
 			String phone="+91"+"95862"+mobile;*/
-			WebElement clear=Common.findElement("xpath", "//input[@name='phonePasskey']");
+			WebElement clear=Common.findElement("css", "#phone");
 		    clear.sendKeys(Keys.CONTROL+"a");
 		    clear.sendKeys(Keys.DELETE);
 			System.out.println(phone);
-			Common.textBoxInput("xpath", "//input[@name='phonePasskey']", phone);
+			Common.textBoxInput("css", "#phone", phone);
 			Common.clickElement("xpath", "//button[@id='onContinue']");
 			Sync.waitPageLoad();
 			Sync.waitElementPresent(30, "xpath", "//input[@id='otp_field']");
