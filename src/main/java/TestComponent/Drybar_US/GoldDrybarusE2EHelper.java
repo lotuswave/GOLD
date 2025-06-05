@@ -6204,18 +6204,18 @@ public void FUll_Payment(String dataSet) {
 				Sync.waitPageLoad();
 				Common.switchWindows();
 				//Common.switchFrames("xpath", "//iframe[@id='klarna-apf-iframe']");
-				Sync.waitElementPresent("xpath", "//input[@name='phonePasskey']");
+				Sync.waitElementPresent("xpath", "//input[@name='phonePasskey'] | //input[@name='phone']");
 			/*	Common.clickElement("xpath", "//input[@name='phone']");
 				
 				int number=Common.genrateRandomNumber();
 				System.out.println(number);
 				String mobile=Integer.toString(number);
 				String phone="+91"+"95862"+mobile;*/
-				WebElement clear=Common.findElement("xpath", "//input[@name='phonePasskey']");
+				WebElement clear=Common.findElement("xpath", "//input[@name='phonePasskey'] | //input[@name='phone']");
 			    clear.sendKeys(Keys.CONTROL+"a");
 			    clear.sendKeys(Keys.DELETE);
 				System.out.println(phone);
-				Common.textBoxInput("xpath", "//input[@name='phonePasskey']", phone);
+				Common.textBoxInput("xpath", "//input[@name='phonePasskey'] | //input[@name='phone']", phone);
 				Common.clickElement("xpath", "//button[@id='onContinue']");
 				Sync.waitPageLoad();
 				Sync.waitElementPresent(30, "xpath", "//input[@id='otp_field']");

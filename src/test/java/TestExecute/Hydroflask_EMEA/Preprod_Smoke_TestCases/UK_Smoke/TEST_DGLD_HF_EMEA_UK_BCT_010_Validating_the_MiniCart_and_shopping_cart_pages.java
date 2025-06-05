@@ -15,14 +15,23 @@ public class TEST_DGLD_HF_EMEA_UK_BCT_010_Validating_the_MiniCart_and_shopping_c
 	GoldHydro_EMEA_Helper Hydro = new GoldHydro_EMEA_Helper(datafile,"DataSet");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Validating_the_shopping_cart_page() throws Exception {
+	public void Validating_the_MiniCart_and_shopping_cart_page() throws Exception {
 
 		try {
+			/*	Minicart Validation:	*/
 			Hydro.verifingHomePage();    
 			Hydro.bottles_headerlinks("Bottles & Drinkware"); 
 			Hydro.Configurable_addtocart_pdp("Product");
 			Hydro.search_product("Product");      
 			Hydro.addtocart("Product"); 
+			//Hydro.clickontheproduct_and_image("Product");
+			Hydro.minicart_freeshipping();
+			Hydro.minicart_delete("Product");
+			Hydro.minicart_validation("Product Qunatity");
+			
+	    /*  Shoppingcart Validation:  */
+			Hydro.bottles_headerlinks("Bottles & Drinkware"); 
+			Hydro.Configurable_addtocart_pdp("Product");
 			Hydro.click_minicart();
 			Hydro.minicart_viewcart();
 			Hydro.Remove_Product("Product");
@@ -32,6 +41,7 @@ public class TEST_DGLD_HF_EMEA_UK_BCT_010_Validating_the_MiniCart_and_shopping_c
             Hydro.selectshippingaddress("GroundShipping method");
             Hydro.Shoppingcart_page();
 			Hydro.minicart_ordersummary_discount("Discount");
+		    
 		    
 		    
 			

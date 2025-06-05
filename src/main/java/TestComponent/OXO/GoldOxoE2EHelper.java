@@ -182,10 +182,10 @@ public class GoldOxoE2EHelper {
 			Sync.waitPageLoad();
 			for (int i = 0; i <= 10; i++) {
 				Thread.sleep(3000);
-				Sync.waitElementPresent("css", "img[itemprop='image']");
+				Sync.waitElementPresent("css", "a[class*=roduct-image-link]>img");
 //				Sync.waitElementPresent("xpath", "(//img[contains(@class,'m-product-card__image')])[2]");
 				List<WebElement> webelementslist = Common.findElements("css",
-						"img[itemprop='image']");
+						"a[class*=roduct-image-link]>img");
 				String s = webelementslist.get(i).getAttribute("src");
 				System.out.println(s);
 				if (s.isEmpty()) {
