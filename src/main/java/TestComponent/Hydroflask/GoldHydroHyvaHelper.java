@@ -2967,8 +2967,18 @@ Common.clickElement("xpath", "//span[contains(text(),'Cancel Coupon')]");
         if (sizesframe > 0) {
             Common.actionsKeyPress(Keys.PAGE_UP);
             Thread.sleep(2000);
-            Sync.waitElementPresent("name", "email");
-           Common.textBoxInput("name", "email", email);
+            Sync.waitElementPresent("xpath", "//div[@data-testid='form-component']//input[@name='email']");
+           Common.textBoxInput("xpath", "//div[@data-testid='form-component']//input[@name='email']", email);
+           Common.clickElement("xpath", "//button[text()='Continue']");
+           Thread.sleep(2000);
+           String  text = Common.findElement("xpath", "(//div[@data-testid='form-component']//button)[5]").getText();
+           Common.assertionCheckwithReport(text.contains("No, I Don't Want Texts"),
+					"verifying the Newsletter subscription from Popup", "It should enter the mail id in Newsletter Popup",
+					"Successfully It entered mail id in Newsletter Popup",
+					"User unable to Enter the mail id in Newsletter Popup");
+         
+           Common.clickElement("xpath", "(//div[@data-testid='form-component'])[11]");
+           
         }   
         else {
 
@@ -2976,9 +2986,14 @@ Common.clickElement("xpath", "//span[contains(text(),'Cancel Coupon')]");
             }
         }
         catch(Exception|Error e) {
-        	
+        	e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("verifying the Newsletter subscription from Popup",
+					"It should enter the mail id in Newsletter Popup",
+					"User unable to Enter the mail id in Newsletter Popup",
+					Common.getscreenShotPathforReport("failed to ENter the mail id in Newsletter Popup"));
+
+			Assert.fail();
         }
- 
 
     }
 	
