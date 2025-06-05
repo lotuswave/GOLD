@@ -6101,7 +6101,7 @@ public void Remove_GiftCode() {
 			Thread.sleep(8000);
 //			Common.switchWindows();
 			//Common.switchFrames("xpath", "//iframe[@id='klarna-apf-iframe']");
-			Sync.waitElementPresent(50,"xpath", "//input[@id='phonePasskey']");
+			Sync.waitElementPresent(50,"xpath", "//input[@id='phone']");
 		/*	Common.clickElement("xpath", "//input[@name='phone']");
 			
 			int number=Common.genrateRandomNumber();
@@ -6109,11 +6109,11 @@ public void Remove_GiftCode() {
 			String mobile=Integer.toString(number);
 			String phone="+91"+"95862"+mobile;*/
 			Thread.sleep(6000);
-			WebElement clear=Common.findElement("xpath", "//input[@id='phonePasskey']");
+			WebElement clear=Common.findElement("xpath", "//input[@id='phone']");
 		    clear.sendKeys(Keys.CONTROL+"a");
 		    clear.sendKeys(Keys.DELETE);
 			System.out.println(phone);
-			Common.textBoxInput("xpath", "//input[@id='phonePasskey']", phone);
+			Common.textBoxInput("xpath", "//input[@id='phone']", phone);
 			Common.clickElement("xpath", "//button[@id='onContinue']");
 			Sync.waitPageLoad();
 			Sync.waitElementPresent(30, "xpath", "//input[@id='otp_field']");
