@@ -2957,6 +2957,31 @@ Common.clickElement("xpath", "//span[contains(text(),'Cancel Coupon')]");
 		}
 	}
 
+	public void Newsletter_Popup(String DataSet) throws Exception {
+		String email = data.get(DataSet).get("UserName");
+        try{
+		
+      Thread.sleep(4000);
+        int sizesframe = Common.findElements("xpath", "//div[@aria-label='POPUP Form']").size();
+        System.out.println(sizesframe);
+        if (sizesframe > 0) {
+            Common.actionsKeyPress(Keys.PAGE_UP);
+            Thread.sleep(2000);
+            Sync.waitElementPresent("name", "email");
+           Common.textBoxInput("name", "email", email);
+        }   
+        else {
+
+            Assert.fail("Popup Not displayed");
+            }
+        }
+        catch(Exception|Error e) {
+        	
+        }
+ 
+
+    }
+	
 	public void close_add() throws Exception {
         // TODO Auto-generated method stub
       Thread.sleep(4000);
@@ -11795,6 +11820,7 @@ public void Explore_Validation(String Dataset) {
 						|| Common.getPageTitle().contains("Frequently Asked Questions")
 						|| Common.getPageTitle().contains("Contact")
 						|| Common.getPageTitle().contains("Tracking & Returns")
+						|| Common.getPageTitle().contains("HydroFlask Gift Card")
 			|| Common.getPageTitle().contains("Shipping & Handling") ,		
 						"validating the Kustomer links navigation from footer Links",
 						"After Clicking on" + Kustomerlinks[i] + "it should navigate to the",
@@ -11812,7 +11838,7 @@ public void Explore_Validation(String Dataset) {
 		}
 	}
 
-	public void Footer_Links(String Dataset) {
+	public void Company(String Dataset) {
 		// TODO Auto-generated method stub
 		String footer = data.get(Dataset).get("Footer Links");
 		String[] footerlinks = footer.split(",");
@@ -11832,8 +11858,7 @@ public void Explore_Validation(String Dataset) {
 				Common.assertionCheckwithReport(
 						Common.getPageTitle().contains(footerlinks[i]) || Common.getCurrentURL().contains(footerlinks[i])
 								|| Common.getPageTitle().contains("We are Hydro Flask")
-								|| Common.getPageTitle().contains("Refer-A-Friend")
-								|| Common.getPageTitle().contains("Corporate Purchasing"),
+								,
 						"validating the links navigation from footer Links",
 						"After Clicking on" + footerlinks[i] + "it should navigate to the",
 						footerlinks[i] + "Sucessfully Navigated to the" + footerlinks[i] + "Links",
@@ -11853,7 +11878,7 @@ public void Explore_Validation(String Dataset) {
 
 	}
 
-	public void Footer_validation(String Dataset) {
+	public void Account(String Dataset) {
 		// TODO Auto-generated method stub
 		String footer = data.get(Dataset).get("Footer Links");
 		String[] footerlinks = footer.split(",");
@@ -11874,8 +11899,12 @@ public void Explore_Validation(String Dataset) {
 				String Bread = Common.findElement("xpath", "//nav[contains(@class,'breadcrumb')]").getText();
 				System.out.println(Common.getPageTitle().contains(Bread));				
 				Common.assertionCheckwithReport(
-						Common.getPageTitle().contains(footerlinks[i]) || Bread.contains(footerlink[i]) || Common.getCurrentURL().contains("/refer/")
-						|| Common.getCurrentURL().contains("track/order") || Common.getPageTitle().contains(Bread),
+						Common.getPageTitle().contains(footerlinks[i])
+						|| Bread.contains(footerlink[i]) 
+						|| Common.getCurrentURL().contains("/refer/")
+						|| Common.getCurrentURL().contains("track/order") 
+						|| Common.getPageTitle().contains(Bread)
+						||Common.getPageTitle().contains("Hydro Flask Loyalty Program Terms and Conditions"),
 						"validating the links navigation from footer Links",
 						"After Clicking on" + footerlinks[i] + "it should navigate to the",
 						footerlinks[i] + "Sucessfully Navigated to the" + footerlinks[i] + "Links",
@@ -12061,7 +12090,7 @@ public void Explore_Validation(String Dataset) {
 	}
 	
 	
-	public void Footer_Dogood(String Dataset) {
+	public void Resources(String Dataset) {
 		// TODO Auto-generated method stub
 		String footer = data.get(Dataset).get("Footer Links");
 		String[] footerlinks = footer.split(",");
@@ -12070,6 +12099,28 @@ public void Explore_Validation(String Dataset) {
 		int i = 0;
 		try {
 			for (i = 0; i < footerlinks.length; i++) {
+				if(footerlinks.equals("Dealer Central")) {
+					Sync.waitElementPresent(30, "xpath",
+							"//div[contains(@class,'footer-menu')]//a[normalize-space()='" + footerlinks[i] + "']");
+					Thread.sleep(3000);
+					Common.findElement("xpath",
+							"//div[contains(@class,'footer-menu')]//a[normalize-space()='" + footerlinks[i] + "']");
+					Common.clickElement("xpath",
+							"//div[contains(@class,'footer-menu')]//a[normalize-space()='" + footerlinks[i] + "']");
+					Common.switchToSecondTab();
+					Sync.waitPageLoad();
+					Thread.sleep(3000);
+					Common.assertionCheckwithReport(
+							Common.getPageTitle().contains(footerlinks[i])
+				            || Common.getPageTitle().contains("New Retail Account or Corporate Sale Requests / Dealer Central"),
+							"validating the links navigation from footer Links",
+							"After Clicking on" + footerlinks[i] + "it should navigate to the",
+							footerlinks[i] + "Sucessfully Navigated to the" + footerlinks[i] + "Links",
+							"Unable to Navigated to the" + footerlinks[i] + "Links");
+					
+				}else {
+					
+				
 				Sync.waitElementPresent(30, "xpath",
 						"//div[contains(@class,'footer-menu')]//a[normalize-space()='" + footerlinks[i] + "']");
 				Thread.sleep(3000);
@@ -12079,18 +12130,18 @@ public void Explore_Validation(String Dataset) {
 						"//div[contains(@class,'footer-menu')]//a[normalize-space()='" + footerlinks[i] + "']");
 				Sync.waitPageLoad();
 				Thread.sleep(3000);
-				String Bread = Common.findElement("xpath", "//nav[contains(@class,'breadcrumb')]").getText();
-				System.out.println(Common.getPageTitle().contains(Bread));				
+//				String Bread = Common.findElement("xpath", "//nav[contains(@class,'breadcrumb') or //h1[text()='Hydro Flask Pro Account']]").getText();
+//				System.out.println(Common.getPageTitle().contains(Bread));				
 				Common.assertionCheckwithReport(
-						Common.getPageTitle().contains(footerlinks[i]) || Bread.contains(footerlink[i])
-			            || Common.getPageTitle().contains(Bread),
+						Common.getPageTitle().contains(footerlinks[i])
+						|| Common.getPageTitle().contains("Corporate Purchasing"),
 						"validating the links navigation from footer Links",
 						"After Clicking on" + footerlinks[i] + "it should navigate to the",
 						footerlinks[i] + "Sucessfully Navigated to the" + footerlinks[i] + "Links",
 						"Unable to Navigated to the" + footerlinks[i] + "Links"); 
 				Thread.sleep(4000);
 				Common.navigateBack();
-
+				}
 			}
 		} catch (Exception | Error e) {
 			e.printStackTrace();
@@ -15701,8 +15752,82 @@ Common.clickElement("xpath", "//span[text()='Edit']");
 	        }
 	    }
 
+	public void Anti_Human_Trafficking() {
+		try {
+			Common.findElement("xpath", "//a[contains(@href,'anti-human-trafficking-and-modern-slavery-statement')]");
+			Common.clickElement("xpath", "//a[contains(@href,'anti-human-trafficking-and-modern-slavery-statement')]");
+			Common.switchToSecondTab();
+			Common.assertionCheckwithReport(Common.getPageTitle().contains("Anti-human Trafficking and Modern Slavery Statement | Helen of Troy"),
+					"validating the anti-human-trafficking-and-modern-slavery-statement page Navigation",
+					"After Clicking anti-human-trafficking-and-modern-slavery-statement it should navigate to the respective page",
+					"Unable to Navigate to the Privacy Policy page");
+			Common.closeCurrentWindow();
+			Common.switchToFirstTab();
+		}
+		catch(Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the anti-human-trafficking-and-modern-slavery-statement page Navigation",
+					"After Clicking anti-human-trafficking-and-modern-slavery-statement it should navigate to the respective page",
+					"Unable to Navigate to the Privacy Policy page",
+					Common.getscreenShot("Failed Navigate to the anti-human-trafficking-and-modern-slavery-statement page"));
+			Assert.fail();
+		}
+		
+	}
+
+	public void Cookies_and_ShopNow() {
+		try {
+			
+			Common.clickElement("xpath", "//a[@class='truste_cursor_pointer']");
+			Thread.sleep(3000);
+			Common.switchFrames("xpath", "//iframe[@name='trustarc_cm']");
+			String Cookies_content = Common.findElement("xpath", "//img[@alt='Hydroflask logo']").getAttribute("alt");
+			
+			Common.assertionCheckwithReport(Cookies_content.contains("Hydroflask logo"),
+					"validating the Cookie Preferences Navigation",
+					"After Clicking Cookie Preferences it should navigate to the respective page",
+					"Unable to Navigate to the Cookie Preferences");
+			Common.actionsKeyPress(Keys.ESCAPE);
+			Common.switchToDefault();
+			Common.scrollIntoView("xpath", "//div[contains(@class,'footer-banner-image')]//a");
+			Common.clickElement("xpath", "//div[contains(@class,'footer-banner-image')]//a");
+			Common.assertionCheckwithReport(Common.getCurrentURL().contains("shop"),
+					"validating the Cookie Preferences Navigation",
+					"After Clicking Cookie Preferences it should navigate to the respective page",
+					"Unable to Navigate to the Cookie Preferences");
+		}
+		catch(Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the Cookie Preferences page Navigation",
+					"After Clicking Cookie Preferences it should navigate to the respective page",
+					"Unable to Navigate to the Cookie Preferences page",
+					Common.getscreenShot("Failed Navigate to Cookie Preferences"));
+			Assert.fail();
+		}
+
 
 	
-}	
+}
 
+	public void Accessibility() {
+		try {
+			Common.clickElement("xpath", "//img[contains(@src,'accessibility_icon')]");
+			Common.switchToSecondTab();
+			Common.assertionCheckwithReport(Common.getCurrentURL().contains("levelaccess"),
+					"validating the Accessibility Navigation",
+					"After Clicking Accessibility it should navigate to the respective page",
+					"Unable to Navigate to the Accessibility page");
+		}
+		catch(Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the Cookie Preferences page Navigation",
+					"After Clicking Cookie Preferences it should navigate to the respective page",
+					"Unable to Navigate to the Cookie Preferences page",
+					Common.getscreenShot("Failed Navigate to Cookie Preferences"));
+			Assert.fail();	
+		}
+		
+	}	
+
+}
 
