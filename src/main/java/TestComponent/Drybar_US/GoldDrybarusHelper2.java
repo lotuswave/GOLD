@@ -12144,6 +12144,61 @@ public String fivepercent_Reward_Points(String Dataset) {
 	return rewardpointsused;
 }
 
+public void My_Returns_page_Validation() throws Exception {
+	// TODO Auto-generated method stub
+			
+			try
+			{	
+				Sync.waitElementPresent("css", "button[id='customer-menu']");
+				Common.clickElement("css", "button[id='customer-menu']");
+				Sync.waitElementPresent("id", "customer.header.dashboard.link");
+				Common.clickElement("id", "customer.header.dashboard.link");			
+				Sync.waitElementPresent("id", "account-returns-link");
+				Common.clickElement("id","account-returns-link");
+				String returns=Common.findElement("id", "my-orders-title").getText();
+				Sync.waitPageLoad();
+				Thread.sleep(2000);
+				Common.assertionCheckwithReport(Common.getPageTitle().contains("My Returns") && returns.contains("MY RETURNS"),
+						"validating the navigating to the returns page from the register user",
+						"After clicking it should be navigate to the returns page",
+						"Sucessfully Navigated to the returns page after clicking from the My returns my order",
+						"Failed to Navigate to the returns page after clicking from the My returns my order");
+			    Common.clickElement("css", "a[title='View Return']");
+				Sync.waitPageLoad();
+				Common.assertionCheckwithReport(Common.getCurrentURL().contains("/rma/returns/view/entity_id/"),
+						"validating the Navigation to the return order page",
+						"After Clicking on the print invoice user should be able to see return orders page",
+						"Sucessfully User Navigates to returns page  after clicking on the view returns",
+						"Failed to Navigate to the to returns page  after clicking on the view returns");
+				String returnid=Common.findElement("id","my-orders-title").getText().toLowerCase().replace("return #","").trim();
+				System.out.println(returnid);
+				String returnDetails = Common.findElement("xpath","//div[@class='pt-3 box-content']").getText();
+				System.out.println(returnDetails);
+				String ID = Common.findElement("xpath","//div[contains(text(),'ID:')]").getText().split("ID: ")[1].split(" \\|")[0].replace("Order","").trim();
+				System.out.println(ID);
+				String Status = Common.findElement("css","div[class*='flex justify-between lg:block text-right'] span").getText();
+				System.out.println(Status);
+				System.out.println(returnid.equals(ID));
+				Sync.waitPageLoad();
+				Thread.sleep(2000);
+				Common.assertionCheckwithReport(returnid.equals(ID) && Status.contains("Return Received"),
+						"validating the navigating to the return received page",
+						"After clicking it should be navigate to the recevied status",
+						"Sucessfully Navigated to the to the return received page",
+						"Failed to Navigate to the to the return received page");		
+			}
+			catch(Exception | Error e)
+			{
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("validating the navigating to the invoice or Shipment page from the guest track order",
+						"After clicking it should be navigate to the invoice or Shipment page",
+						"Sucessfully Navigated to the invoice or Shipment page after clicking from the guest user track my order",
+						Common.getscreenShot("Failed to Navigate to the Invoice or Shipment page after clicking from the guest user track my order"));
+				Assert.fail();
+			}
+			
+		}
+
 public void verify_RewardPoints(String rewardpoints) {
 	// TODO Auto-generated method stub
 	
