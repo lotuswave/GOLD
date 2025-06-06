@@ -754,6 +754,7 @@ public class OspreyEMEA_HYVA {
 							"user successfully Navigated to the " + name1, "Failed to navigate to the " + name1);
 
 				}
+				Common.clickElement("css", "img[alt='Osprey store logo']");
 			}
 
 			catch (Exception | Error e) {
