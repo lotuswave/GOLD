@@ -19,11 +19,12 @@ public class Test_DGLD_HF_ST_057_Category_Listing_Page {
 
 		try {
 			Hydro.verifingHomePage();
+			Hydro.click_BottlesDrinkware_ShopAll();
 			Hydro.CLP_Page("Bottles & Drinkware");
 			Hydro.CLP_Page("Coolers & Lunch Boxes");
 			Hydro.CLP_Page("Kitchenware");
 			Hydro.CLP_Page("Accessories");
-//			Hydro.CLP_Page("Water Bottle Gifts");
+		
 	
 		} catch (Exception e) {
 

@@ -15,13 +15,13 @@ public class Test_DGLD_HF_ST_012_Newsletter_subcription_from_myaccount_page {
 	GoldHydroHyvaHelper Hydro = new GoldHydroHyvaHelper(datafile,"DataSet");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Validating_changeAddressIn_AddressBook () throws Exception {
+	public void Newsletter_subcription_from_myaccount_page () throws Exception {
 
 		try {
 			Hydro.verifingHomePage();
 			Hydro.click_singinButton();
 			Hydro.login_Hydroflask("AccountDetails");
-			Hydro.Newsletter();
+			Hydro.Newsletter_SUbscription_MyAccout();
 		} catch (Exception e) {
 
 			Assert.fail(e.getMessage(), e);
@@ -30,7 +30,7 @@ public class Test_DGLD_HF_ST_012_Newsletter_subcription_from_myaccount_page {
 
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 
