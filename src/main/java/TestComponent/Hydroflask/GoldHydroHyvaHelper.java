@@ -6429,7 +6429,7 @@ catch(Exception | Error e)
 			try {
 				Common.mouseOver("xpath", "//span[contains(text(),'" + category + "')]");
 			} catch (Exception e) {
-				Common.clickElement("xpath", "//a[@class='level-top ui-corner-all']//span[text()=' Shop']");
+				Common.mouseOver("xpath", "//span[contains(text(),'" + category + "')]");
 			}
 			Common.clickElement("xpath", "//span[contains(text(),'" + category + "')]");
 			Common.clickElement("xpath", "//span[text()='Shop All']");
@@ -7538,7 +7538,43 @@ catch(Exception | Error e)
 		}
 
 	}
+	public void click_BottlesDrinkware_ShopAll() {
 
+		try {
+			Common.clickElement("xpath", "(//span[contains(text(), ' Shop')])[2]");
+			Sync.waitElementPresent("xpath",
+					"(//span[contains(text(),'Bottles & Drinkware')])[1]");
+
+			Common.javascriptclickElement("xpath",
+					"(//span[contains(text(),'Bottles & Drinkware')])[1]");
+			Thread.sleep(2000);
+			Common.clickElement("xpath",
+					"//ul[@id='category-node-241']//span[text()='Shop All']");
+			String category = Common.getText("xpath", "//h3[text()='Bottles & Drinkware']");
+			System.out.println(category);
+
+			Common.assertionCheckwithReport(category.contains("Bottles"),
+					"To Validate the subcatogories are displayed",
+					"should display the subcatogories after clicking on the shop",
+					"update subcatogories are displayed after a click on the shop",
+					"Failed to display the subcatogories");
+			
+			Common.findElementBy("css",
+					"div[id='algolia-load-more'] button");
+			
+			Common.clickElement("css",
+					"div[id='algolia-load-more'] button");
+			
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("To Validate the catogories are displayed",
+					"should display the catogories after clicking on the shop",
+					"unable to display catogories after a click on the shop", "Failed to display subcatogories");
+			Assert.fail();
+		}
+
+	}
+	
 	public void click_Bottles() {
 
 		try {
@@ -12727,6 +12763,35 @@ public void Explore_Validation(String Dataset) {
 
 	}
 
+	public void reviews_colorcount_banner_Ribbon_ColorSwatch() {
+		// TODO Auto-generated method stub
+		try {
+			Common.actionsKeyPress(Keys.ARROW_DOWN);
+			int Reviews = Common.findElements("css", "div[class*='yotpo-reviews-star-ratings']").size();
+			int colorcount = Common.findElements("css", "div[class*='flex-shrink']").size();
+			int ribbon = Common.findElements("css", "span[class*='ribbon-bg']").size();
+			int promobanner = Common.findElements("css", "div[class='hero-container']").size();
+			int Color_Swatch = Common.findElements("css", "div[class*='mr-0']").size();
+			int NewColor = Common.findElements("xpath", "//span[text()='New Color']").size();
+			
+			Common.assertionCheckwithReport(NewColor>0 && Color_Swatch>0 && Reviews > 0 && colorcount > 0 && ribbon > 0 && promobanner > 0,
+					"verifying the products reviews color count ribbon and promo banner on the PLP page  ",
+					"user should able to see the products reviews color count ribbon and promo banner on the PLP page",
+					"user successfully see the products reviews color count ribbon and promo banner on the PLP page",
+					"Failed to see the products reviews color count ribbon and promo banner on the PLP page");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog(
+					"verifying the products reviews color count ribbon and promo banner on the PLP page  ",
+					"user should able to see the products reviews color count ribbon and promo banner on the PLP page",
+					"user unable to see the products reviews color count ribbon and promo banner on the PLP page",
+					Common.getscreenShot(
+							"Failed to see the products reviews color count ribbon and promo banner on the PLP page"));
+			Assert.fail();
+		}
+
+	}
 
 	public void price_filter_validation() {
 		// TODO Auto-generated method stub
@@ -15842,6 +15907,34 @@ Common.clickElement("xpath", "//span[text()='Edit']");
 			Assert.fail();	
 		}
 		
+	}
+
+	public void Newsletter() {
+		try {
+			Common.clickElement("css", "button[id='customer-menu']");
+			Common.clickElement("css","a[id='customer.header.dashboard.link']");
+			Common.clickElement("xpath", "//span[text()='My Newsletter Subscriptions']");
+			String Frame = Common.findElement("xpath", "//iframe[contains(@id,'klaviyo_subscribe_page')]").getAttribute("id");
+			if(Frame.contains("page_1"))
+					{
+				Common.switchFrames("xpath", "//iframe[contains(@id,'klaviyo_subscribe_page')]");
+				Common.textBoxInput("xpath", "(//input[contains(@id,'kl-consent-page')])[1]", "Spanem@helenoftroy.com");
+				Common.textBoxInput("xpath", "(//input[contains(@id,'kl-consent-page')])[2]", "S");
+				Common.textBoxInput("xpath", "(//input[contains(@id,'kl-consent-page')])[3]", "panem");
+Common.clickElement("xpath", "//button[text()='Subscribe']");
+String text = 	Common.getText("xpath", "//span[text()='Thanks for confirming your email address.']");
+
+					}else {
+				
+			}
+			Common.switchFrames("xpath", "//iframe[contains(@id,'klaviyo_subscribe_page')]");
+		String text = 	Common.getText("xpath", "//span[text()='Thanks for confirming your email address.']");
+			
+			System.out.println(text);
+		}
+		catch(Exception | Error e) {
+			
+		}
 	}	
 
 }
