@@ -5779,7 +5779,9 @@ public void Remove_GiftCode() {
 					Thread.sleep(4000);
 					Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
 					Common.clickElement("xpath", "//img[@alt='" + products + "']");
-
+					Sync.waitElementPresent("css", "div[class='yotpo-widget-instance'] [id='yotpo-reviews-star-ratings-widget']");
+					int Star_rating = Common.findElements("css", "div[class='yotpo-widget-instance'] [id='yotpo-reviews-star-ratings-widget']").size();
+					
 					Common.scrollIntoView("xpath", "//h2[contains(text(),'Reviews')]");
 					Sync.waitElementPresent("xpath", "//h2[contains(text(),'Reviews')]");
 					Common.clickElement("xpath", "//h2[contains(text(),'Reviews')]");
@@ -5789,7 +5791,7 @@ public void Remove_GiftCode() {
 					Thread.sleep(3000);
 					int form = Common.findElements("xpath", "//div[@id='yotpo-modal']").size();
 					System.out.println(form);
-					Common.assertionCheckwithReport(form>0, "verifying the write a review button",
+					Common.assertionCheckwithReport(form>0 && Star_rating>0, "verifying the write a review button",
 							"Write a review should be appear in the PDP page",
 							"Sucessfully write a review button has been displayed in PDP page",
 							"Failed to display the write a review button in PDP page");
@@ -5858,25 +5860,25 @@ public void Remove_GiftCode() {
 		Thread.sleep(4000);
 		switch (score) {
 		case "1":
-			Sync.waitElementPresent("xpath", "//span[@aria-label='score 1']");
-			Common.clickElement("xpath", "//span[@aria-label='score 1']");
+			Sync.waitElementPresent("css", "label[aria-label='Score 1 Very poor']");
+			Common.clickElement("css", "label[aria-label='Score 1 Very poor']");
 			break;
 		case "2":
-			Sync.waitElementPresent("xpath", "//span[@aria-label='score 2']");
-			Common.clickElement("xpath", "//span[@aria-label='score 2']");
+			Sync.waitElementPresent("css", "label[aria-label='Score 2 Poor']");
+			Common.clickElement("css", "label[aria-label='Score 2 Poor']");
 			break;
 		case "3":
-			Sync.waitElementPresent("xpath", "//span[@aria-label='score 3']");
-			Common.clickElement("xpath", "//span[@aria-label='score 3']");
+			Sync.waitElementPresent("css", "label[aria-label='Score 3 Average']");
+			Common.clickElement("css", "label[aria-label='Score 3 Average']");
 			;
 			break;
 		case "4":
-			Sync.waitElementPresent("css", "svg[aria-label='Score 4']");
-			Common.clickElement("css", "svg[aria-label='Score 4']");
+			Sync.waitElementPresent("css", "label[aria-label='Score 4 Good']");
+			Common.clickElement("css", "label[aria-label='Score 4 Good']");
 			break;
 		case "5":
-			Sync.waitElementPresent("xpath", "//span[@aria-label='score 5']");
-			Common.clickElement("xpath", "//span[@aria-label='score 5']");
+			Sync.waitElementPresent("css", "label[aria-label='Score 5 Great!']");
+			Common.clickElement("css", "label[aria-label='Score 5 Great!']");
 			break;
 		}
 	}
