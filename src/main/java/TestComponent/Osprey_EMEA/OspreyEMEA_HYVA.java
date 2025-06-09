@@ -16450,5 +16450,43 @@ public class OspreyEMEA_HYVA {
 		
 	}
 
+	public void Activity_and_color_label() {
+		// TODO Auto-generated method stub
+		try {
+			Sync.waitElementPresent("css", "button[class*='ais-ClearRefinements']");
+			Common.clickElement("css", "button[class*='ais-ClearRefinements']");
+			Thread.sleep(6000);
+			int Activitylabel = Common.findElements("css", "div[class*='text-xs font-bold']").size();
+			List<WebElement> colorSwatches = Common.findElements("css", "div[aria-label='Colour'] div[x-id]");
+				 for (WebElement color : colorSwatches) {
+						String colorname= color.getAttribute("class");
+				color.click();
+				Thread.sleep(2000);
+				boolean selectedcolor=color.isSelected();
+
+			}
+			Common.clickElement("css", "div[id='algolia-load-more'] button");
+			Sync.waitPageLoad();
+			Thread.sleep(2000);
+			Common.assertionCheckwithReport(Common.getCurrentURL().contains("page=2") && Activitylabel>0 ,
+					"Validating the Load More CTA on the PLP page",
+					"After clicking on the Load more CTA products should be display",
+					"Succesfully products has been displayed after Clicking on the Load More CTA",
+					"Failed to dipslay the products after clicking on the Load More CTA");
+
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("Validating the Load More CTA on the PLP page",
+					"After clicking on the Load more CTA products should be display",
+					"Unable to dipslay the products after clicking on the Load More CTA",
+					Common.getscreenShot("Failed to dipslay the products after clicking on the Load More CTA"));
+			
+			Assert.fail();
+		}
+		
+	}
+
 
 }
