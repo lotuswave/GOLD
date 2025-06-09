@@ -3187,6 +3187,12 @@ public class GoldDrybarusHelper2 {
 					Common.closeCurrentWindow();
 					Common.switchToFirstTab();
 				}
+				else if (socallinksarry[i].contains("levelaccess")) {
+					Common.assertionCheckwithReport(Common.getCurrentURL().contains("levelaccess"),
+							"Verifying Social link  " + socallinksarry[i], "User click the social " + socallinksarry[i],
+							"successfully navigating to social link  " + socallinksarry[i],
+							"Failed to navigate to social link " + socallinksarry[i]);
+				}
 
 			}
 		} catch (Exception | Error e) {
@@ -5468,6 +5474,7 @@ public void FUll_Payment(String dataSet) {
 			Common.clickElement("xpath", "//input[@name='password_confirmation']");
 			Common.textBoxInput("xpath", "//input[@name='password_confirmation']",
 					data.get(Dataset).get("Confirm Password"));
+			Common.clickElement("id","is_subscribed");
 			Common.clickElement("xpath", "//button[@title='Sign Up']");
 			Thread.sleep(4000);
 //			String message = Common.findElement("id", "validation-classes").getCssValue("color");
@@ -5540,7 +5547,9 @@ public void FUll_Payment(String dataSet) {
     			Common.textBoxInput("xpath", "//input[@name='password_confirmation']",
     					data.get(Dataset).get("Confirm Password"));
     			System.out.println(data.get(Dataset).get("Confirm Password"));
-    			Thread.sleep(4000);
+    			Thread.sleep(3000);
+    			Common.clickElement("id","is_subscribed");
+    			Thread.sleep(2000);
     			Common.clickElement("xpath", "//button[@title='Sign Up']");
     			Sync.waitElementVisible(30, "xpath", "//span[@x-html='message.text']");
     			String message = Common.findElement("xpath", "//span[@x-html='message.text']").getText();
@@ -7714,6 +7723,7 @@ public void FUll_Payment(String dataSet) {
 								&& filter.contains("Filter by") || filter.contains("Filtrado por") || filter.contains("Filtres") && Sort.contains("Sort by") || Sort.contains("Ordenar por") || Sort.contains("Trier par"),
 						"To validate the Product Listing Page", "User should able to open Product Listing Page",
 						"Sucessfully views the Product Listing Page", "Failed to view Product Listing Page");
+				Common.clickElement("xpath","//button[contains(@class,'border border-secondary btn-secondary')]");//
 			} catch (Exception | Error e) {
 				e.printStackTrace();
 				ExtenantReportUtils.addFailedLog("To validate the Product Listing Page",
@@ -11697,6 +11707,8 @@ public void Company(String Dataset) {
 	String[] footerlinks = footer.split(",");
 	int i = 0;
 	try {
+		Common.scrollIntoView("xpath","//img[@alt='Logo']");
+		Common.clickElement("xpath","//img[@alt='Logo']");
 		for (i = 0; i < footerlinks.length; i++) {
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
