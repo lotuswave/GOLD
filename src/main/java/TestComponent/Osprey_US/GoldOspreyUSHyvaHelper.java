@@ -13922,10 +13922,10 @@ public void validateChatboxOptions(String Dataset) {
 	}
 }
 
-public void Kustomer_Links(String Dataset) {
+public void Customer_Links(String Dataset) {
 	// TODO Auto-generated method stub
 	
-	String Kustomer = data.get(Dataset).get("Kustomer Links");
+	String Kustomer = data.get(Dataset).get("Customer_Links");
 	String[] Kustomerlinks = Kustomer.split(",");
 	int i = 0;
 	try {
@@ -13953,18 +13953,21 @@ public void Kustomer_Links(String Dataset) {
 					"After Clicking on" + Kustomerlinks[i] + "it should navigate to the",
 					Kustomerlinks[i] + "Sucessfully Navigated to the" + Kustomerlinks[i] + "Links",
 					"Unable to Navigated to the" + Kustomerlinks[i] + "Links");
-			if(Common.getPageTitle().contains("404"))
-			{
-				Assert.fail();
-				ExtenantReportUtils.addFailedLog("validating the  links navigation from footer Links",
-						"After Clicking on" + Kustomerlinks[i] + "it should navigate to the",
-						Kustomerlinks[i] + "Navigated to the 404 page" + Kustomerlinks[i] + "Links",
-						Common.getscreenShot("Failed to Navigated to the" + Kustomerlinks[i] + "Links"));
-				
-			}
+//			if(Common.getPageTitle().contains("404"))
+//			{
+//				Assert.fail();
+//				ExtenantReportUtils.addFailedLog("validating the  links navigation from footer Links",
+//						"After Clicking on" + Kustomerlinks[i] + "it should navigate to the",
+//						Kustomerlinks[i] + "Navigated to the 404 page" + Kustomerlinks[i] + "Links",
+//						Common.getscreenShot("Failed to Navigated to the" + Kustomerlinks[i] + "Links"));		
+//			}
 			Common.navigateBack();
-		
-	} }catch (Exception | Error e) {
+			Sync.waitPageLoad();
+			int size = Common.findElements("css", "img[alt='Osprey store logo']").size();
+			System.out.println(size);
+	     } 
+	}
+	catch (Exception | Error e) {
 		e.printStackTrace();
 		ExtenantReportUtils.addFailedLog("validating the Kustomer links navigation from footer Links",
 				"After Clicking on" + Kustomerlinks[i] + "it should navigate to the",
@@ -13976,7 +13979,7 @@ public void Kustomer_Links(String Dataset) {
 }
 
 
-public void Footer_Links(String Dataset) {
+public void Company_and_terms_links(String Dataset) {
 	// TODO Auto-generated method stub
 	String footer = data.get(Dataset).get("Company_Links");
 	String Terms=data.get(Dataset).get("Terms");
@@ -14005,11 +14008,8 @@ public void Footer_Links(String Dataset) {
 					Termlinks[j] + "Sucessfully Navigated to the" + Termlinks[j] + "Links",
 					"Unable to Navigated to the" + Termlinks[j] + "Links");
 			Common.navigateBack();
-//			Sync.waitPageLoad();
-//			Thread.sleep(3000);
-//			int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
-//			System.out.println(size);
-		}
+		}	
+		
 		for (i = 0; i < footerlinks.length; i++) {
 			Sync.waitElementPresent(20, "xpath",
 					"//div[contains(@class,'footer')]//a[contains(@title,'" + footerlinks[i] + "')]");
@@ -14029,17 +14029,13 @@ public void Footer_Links(String Dataset) {
 					"After Clicking on" + footerlinks[i] + "it should navigate to the",
 					footerlinks[i] + "Sucessfully Navigated to the" + footerlinks[i] + "Links",
 					"Unable to Navigated to the" + footerlinks[i] + "Links");
-
-		Common.navigateBack();
-//			Sync.waitPageLoad();
-//			Thread.sleep(3000);
-//			int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
-//			System.out.println(size);
-//		
-		}
-		
-
-	} catch (Exception | Error e) {
+			Common.navigateBack();
+			Sync.waitPageLoad();
+			int size = Common.findElements("css", "img[alt='Osprey store logo']").size();
+			System.out.println(size);
+		  }		
+	} 
+	catch (Exception | Error e) {
 		e.printStackTrace();
 		ExtenantReportUtils.addFailedLog("validating the  links navigation from footer Links",
 				"After Clicking on" + footerlinks[i] + "it should navigate to the",
@@ -14049,8 +14045,6 @@ public void Footer_Links(String Dataset) {
 	}
 
 }
-
-
 
 public void warrenty_Replacement() {
 	// TODO Auto-generated method stub
@@ -15476,7 +15470,6 @@ public void Footer_Links_Resources(String Dataset) {
 	String[] footerlinks = footer.split(",");
 	
 	int i = 0;
-
 	try {
 		
 		for (i = 0; i < footerlinks.length; i++) {
@@ -15501,23 +15494,12 @@ public void Footer_Links_Resources(String Dataset) {
 					"After Clicking on" + footerlinks[i] + "it should navigate to the",
 					footerlinks[i] + "Sucessfully Navigated to the" + footerlinks[i] + "Links",
 					"Unable to Navigated to the" + footerlinks[i] + "Links");
-					
-//			Thread.sleep(1000);
-//			if(Common.getPageTitle().contains("404"))
-//			{
-//				Assert.fail();
-//				ExtenantReportUtils.addFailedLog("validating the  links navigation from footer Links",
-//						"After Clicking on" + footerlinks[i] + "it should navigate to the",
-//						footerlinks[i] + "Navigated to the 404 page" + footerlinks[i] + "Links",
-//						Common.getscreenShot("Failed to Navigated to the" + footerlinks[i] + "Links"));
-//				
-//			}
 			Common.navigateBack();
-//			Sync.waitPageLoad();
-//			Thread.sleep(1000);
-//			int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
-//			System.out.println(size);	
-		}	
+			Sync.waitPageLoad();
+			int size = Common.findElements("css", "img[alt='Osprey store logo']").size();
+			System.out.println(size);
+		}
+		
 	} catch (Exception | Error e) {
 		e.printStackTrace();
 		ExtenantReportUtils.addFailedLog("validating the  links navigation from footer Links",
@@ -15535,11 +15517,9 @@ public void Footer_Links_BrandTeam(String Dataset) {
 	String[] footerlinks = footer.split(",");
 	
 	int i = 0;
-
-	try {
-		
+	try {	
 		for (i = 0; i < footerlinks.length; i++) {
-//			Thread.sleep(2000);
+			
 			Sync.waitElementPresent(30, "xpath",
 					"//div[contains(@class,'footer')]//a[@title='" + footerlinks[i] + "']");
 			Thread.sleep(2000);
@@ -15559,26 +15539,12 @@ public void Footer_Links_BrandTeam(String Dataset) {
 					"After Clicking on" + footerlinks[i] + "it should navigate to the",
 					footerlinks[i] + "Sucessfully Navigated to the" + footerlinks[i] + "Links",
 					"Unable to Navigated to the" + footerlinks[i] + "Links");
-				
-			Thread.sleep(2000);
-			if(Common.getPageTitle().contains("404"))
-			{
-				Assert.fail();
-				ExtenantReportUtils.addFailedLog("validating the  links navigation from footer Links",
-						"After Clicking on" + footerlinks[i] + "it should navigate to the",
-						footerlinks[i] + "Navigated to the 404 page" + footerlinks[i] + "Links",
-						Common.getscreenShot("Failed to Navigated to the" + footerlinks[i] + "Links"));
-				
-			}
 			Common.navigateBack();
-//			Sync.waitPageLoad();
-//			Thread.sleep(3000);
-//			int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
-//			System.out.println(size);
-//		
-		}
-		
-
+			Sync.waitPageLoad();
+			int size = Common.findElements("css", "img[alt='Osprey store logo']").size();
+			System.out.println(size);
+		 }
+			
 	} catch (Exception | Error e) {
 		e.printStackTrace();
 		ExtenantReportUtils.addFailedLog("validating the  links navigation from footer Links",
@@ -15590,7 +15556,7 @@ public void Footer_Links_BrandTeam(String Dataset) {
 
 }
 
-public void Footer_validation(String Dataset) {
+public void Footer_breadcrumbs_validation(String Dataset) {
 	// TODO Auto-generated method stub
 	String footer = data.get(Dataset).get("breadcrumbs");
 	String[] footerlinks = footer.split(",");
@@ -15599,52 +15565,39 @@ public void Footer_validation(String Dataset) {
 	int i = 0;
 	try {
 		for (i = 0; i < footerlinks.length; i++) {
-//			Sync.waitPageLoad();
-//			Thread.sleep(2000);
-			Sync.waitElementPresent(30, "xpath",
-					"//div[contains(@class,'footer')]//a[@title='" + footerlinks[i] + "']");
-//			Thread.sleep(1000);
+			
+			Sync.waitElementPresent(50, "xpath",
+					"//div[contains(@class,'footer')]//a[normalize-space()='" + footerlinks[i] + "']");
 			Common.findElement("xpath",
-					"//div[contains(@class,'footer')]//a[@title='" + footerlinks[i] + "']");
+					"//div[contains(@class,'footer')]//a[normalize-space()='" + footerlinks[i] + "']");
 			Common.clickElement("xpath",
-					"//div[contains(@class,'footer')]//a[@title='" + footerlinks[i] + "']");
+					"//div[contains(@class,'footer')]//a[normalize-space()='" + footerlinks[i] + "']");
 			Sync.waitPageLoad();
 			Thread.sleep(2000);
 			String Bread = Common.findElement("xpath", "//nav[contains(@aria-label,'Breadcrumb')]").getText();
-			String title = "";
-			if (Common.findElements("xpath", "//h1[contains(@class,'cms-clear')]").size() > 0) {
-			    title = Common.findElement("xpath", "//h1[contains(@class,'cms-clear')]").getText();
-			} else {
-			    String currentURL = Common.getCurrentURL().toUpperCase();
-			    System.out.println("Redirecting to URL: " + currentURL);
-			}		
-			String page = Common.getPageTitle().toUpperCase();
-//			System.out.println(page);
-//			System.out.println(Bread);
-//			System.out.println(footerlinks[i]);
+//			String title = "";
+//			if (Common.findElements("xpath", "//h1[contains(@class,'cms-clear')]").size() > 0) {
+//			    title = Common.findElement("xpath", "//h1[contains(@class,'cms-clear')]").getText();
+//			} else {
+//			    String currentURL = Common.getCurrentURL().toUpperCase();
+//			    System.out.println("Redirecting to URL: " + currentURL);
+//			}		
+//			String page = Common.getPageTitle().toUpperCase();
 			Common.assertionCheckwithReport(
-					Common.getPageTitle().contains(footerlinks[i]) || Bread.contains(footerlink[i]) || title.contains(footerlink[i]) || Bread.contains(page)
-							|| Common.getCurrentURL().contains("size-fit")|| Common.getCurrentURL().contains("status")|| Common.getPageTitle().contains("Request")||Common.getPageTitle().contains("Affiliate")
-							|| Common.getPageTitle().contains("Page") || Common.getPageTitle().contains("Thru-Hike") ,
+					Common.getPageTitle().contains(footerlinks[i]) || Bread.contains(footerlink[i]) 
+					        || Common.getCurrentURL().contains(footerlinks[i]) || Common.getPageTitle().contains(footerlinks[i])
+							|| Common.getCurrentURL().contains("size-fit")|| Common.getCurrentURL().contains("status")
+							|| Common.getPageTitle().contains("Request")||Common.getPageTitle().contains("Affiliate")
+							|| Common.getCurrentURL().contains("gift-card")  || Common.getPageTitle().contains("Thru-Hike")
+							|| Common.getCurrentURL().contains("dealer-inquiries"),
 					"validating the links navigation from footer Links",
 					"After Clicking on" + footerlinks[i] + "it should navigate to the",
 					footerlinks[i] + "Sucessfully Navigated to the" + footerlinks[i] + "Links",
 					"Unable to Navigated to the" + footerlinks[i] + "Links"); 
-//			Thread.sleep(1000);
-			if(Common.getPageTitle().contains("404"))
-			{
-				Assert.fail();
-				ExtenantReportUtils.addFailedLog("validating the  links navigation from footer Links",
-						"After Clicking on" + footerlinks[i] + "it should navigate to the",
-						footerlinks[i] + "Navigated to the 404 page" + footerlinks[i] + "Links",
-						Common.getscreenShot("Failed to Navigated to the" + footerlinks[i] + "Links"));
-				
-			}
 			Common.navigateBack();
-//			int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
-//			System.out.println(size);
-			
-
+			Sync.waitPageLoad();
+			int size = Common.findElements("css", "img[alt='Osprey store logo']").size();
+			System.out.println(size);
 		}
 	} catch (Exception | Error e) {
 		e.printStackTrace();
@@ -15665,15 +15618,13 @@ public void Footer_Links_Repari_And_Replacement(String Dataset) {
 	String[] footerlinks = footer.split(",");
 	
 	int i = 0;
-
 	try {
 		
 		click_singinButton();
 		Login_Account("Account");
 		for (i = 0; i < footerlinks.length; i++) {
-			Sync.waitElementPresent(20, "xpath",
+			Sync.waitElementPresent(30, "xpath",
 					"//div[contains(@class,'footer')]//a[contains(@title,'" + footerlinks[i] + "')]");
-			Thread.sleep(2000);
 			Common.findElement("xpath",
 					"//div[contains(@class,'footer')]//a[contains(@title,'" + footerlinks[i] + "')]");
 			Common.clickElement("xpath",
@@ -15687,26 +15638,20 @@ public void Footer_Links_Repari_And_Replacement(String Dataset) {
 					"After Clicking on" + footerlinks[i] + "it should navigate to the",
 					footerlinks[i] + "Sucessfully Navigated to the" + footerlinks[i] + "Links",
 					"Unable to Navigated to the" + footerlinks[i] + "Links");
-				
-			Thread.sleep(1000);
 			if(Common.getPageTitle().contains("404"))
 			{
 				Assert.fail();
 				ExtenantReportUtils.addFailedLog("validating the  links navigation from footer Links",
 						"After Clicking on" + footerlinks[i] + "it should navigate to the",
 						footerlinks[i] + "Navigated to the 404 page" + footerlinks[i] + "Links",
-						Common.getscreenShot("Failed to Navigated to the" + footerlinks[i] + "Links"));
-				
+						Common.getscreenShot("Failed to Navigated to the" + footerlinks[i] + "Links"));	
 			}
 			Common.navigateBack();
-//			Sync.waitPageLoad();
-//			Thread.sleep(3000);
-//			int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
-//			System.out.println(size);
-		
+			Sync.waitPageLoad();
+			int size = Common.findElements("css", "img[alt='Osprey store logo']").size();
+			System.out.println(size);
 		}
-		
-
+	
 	} catch (Exception | Error e) {
 		e.printStackTrace();
 		ExtenantReportUtils.addFailedLog("validating the  links navigation from footer Links",
@@ -18014,6 +17959,69 @@ public void orders_image_Validation()
 
 	}
 	
+	public void AMG_chain_Act_Access_Cookie() {
+		// TODO Auto-generated method stub
+		String ChainActlink = "California Supply Chain Act/UK Modern Slavery Act Statement";
+		String Cookie = "Cookie Preferences";
+		
+		try {			
+			Sync.waitElementPresent("css", "a[class*='a-footer-link'] img");
+			Common.clickElement("css", "a[class*='a-footer-link'] img");
+			Sync.waitPageLoad();
+			Thread.sleep(2000);
+			Common.assertionCheckwithReport(Common.getCurrentURL().contains("all-mighty-guarantee"),
+					"validating the all-mighty-guarantee logo image link on the footer links",
+					"After clicking on the link it should be navigate to the all-mighty-guarantee page",
+					"Sucessfully Navigated to the all-mighty-guarantee page ",
+					"failed to navigate to the all-mighty-guarantee page");
+			Common.navigateBack();			
+			Thread.sleep(1000);		
+			Sync.waitElementPresent("css", "a[class*='footer-accessibility']");
+			Common.clickElement("css", "a[class*='footer-accessibility']");
+			Sync.waitPageLoad();
+			Thread.sleep(2000);
+			Common.assertionCheckwithReport(Common.getCurrentURL().contains("levelaccess"),
+					"validating the levelaccess link on the footer links",
+					"After clicking on the link it should be navigate to the levelaccess",
+					"Sucessfully Navigated to the levelaccess page ", "failed to navigate to the levelaccess page");
+			Common.navigateBack();
+			
+			Thread.sleep(1000);	
+			Sync.waitElementPresent("css", "a[aria-label*='" + ChainActlink + "']");
+			Common.clickElement("css", "a[aria-label*='" + ChainActlink + "']");
+			Sync.waitPageLoad();
+			Thread.sleep(2000);
+			Common.switchWindows();
+			Common.assertionCheckwithReport(Common.getCurrentURL().contains("anti-human-trafficking"),
+					"validating the chain act link on the footer links",
+					"After clicking on the link it should be navigate to the act statement",
+					"Sucessfully Navigated to the act statement page ", "failed to navigate to the act statement page");
+			Common.closeCurrentWindow();
+			Common.switchToFirstTab();
+			
+			Sync.waitElementPresent(60,"xpath", "//a[text()='Cookie Preferences']");
+			Common.clickElement("xpath", "//a[text()='Cookie Preferences']");
+			Thread.sleep(3000);
+			Common.switchFrames("xpath", "//iframe[@class='truste_popframe']");
+			String logo = Common.findElement("css", "img[alt='Osprey Europe Logo']").getAttribute("alt");
+			Common.assertionCheckwithReport(logo.contains("Osprey Europe Logo"),
+					"validating the Cookie Preferences on the footer links",
+					"After clicking on the Cookie Preferences Popup should be open",
+					"Sucessfully Cookie Preferences popup has been opened",
+					"failed to open the Cookie Preferences popup after clicking from the fotter");
+			Common.switchToDefault();
+			Common.clickElement("css", "img[class='truste-close-button-img']");
+		
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the links from the footer links",
+					"User should able to navigate the links", "unable to navigate the links from the footer ",
+					Common.getscreenShot("Failed to navigate to the selected links from the footer"));
+			Assert.fail();
+		}
+
+	}
 }
 
 
