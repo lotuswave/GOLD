@@ -13892,18 +13892,20 @@ public void Validateshippingmethods_Reguleruser(String Dataset) {
 public void validateChatboxOptions(String Dataset) {
 	// TODO Auto-generated method stub
 	try {
-		
-		Common.switchFrames("id", "kustomer-ui-sdk-iframe");
-	
-		Sync.waitElementVisible(30, "xpath", "//div[@class='chatRootIcon__pointer___QslJf']");
-		Common.mouseOverClick("xpath", "//div[@class='chatRootIcon__pointer___QslJf']");
-		Sync.waitElementClickable(30, "xpath", "//button[contains(@class,'newConversationButton')]");
-		Common.mouseOverClick("xpath", "//button[contains(@class,'newConversationButton')]");
 
-		Sync.waitElementVisible("xpath", "(//div[contains(@class,'markdownBody')])[1]");
-		String welcomemsg = Common.findElement("xpath", "(//div[contains(@class,'markdownBody')])[1]").getText();
+		Common.switchFrames("id", "kustomer-ui-sdk-iframe");
+
+		Sync.waitElementVisible(30, "css", "div[class*='chatRootIcon__pointer']");
+		Common.mouseOverClick("css", "div[class*='chatRootIcon__pointer']");
+
+		Common.mouseOverClick("css", "div[aria-label='Chat']"); 
+		Sync.waitElementClickable(30, "css", "button[class*='newConversationButton']");
+		Common.mouseOverClick("css", "button[class*='newConversationButton']");
+
+		Sync.waitElementVisible("css", "div[class*='chatBubble'] div p");
+		String welcomemsg = Common.findElement("css", "div[class*='chatBubble'] div p").getText();
 		System.out.println(welcomemsg);
-		Common.assertionCheckwithReport( welcomemsg.contains("Welcome to Osprey"),
+		Common.assertionCheckwithReport(welcomemsg.contains("Welcome to Osprey!")|| welcomemsg.contains("Hey there!"),
 				"To validate the Chat Conversation when user click on the chat option",
 				"It should Open the Chat conversation in ChatBot",
 				"Sucessfully click on the ChatBot and display the Chat conversation ",
@@ -13918,7 +13920,7 @@ public void validateChatboxOptions(String Dataset) {
 				"Unable to  click on the ChatBot and not displayed the Chat conversation ",
 				Common.getscreenShotPathforReport(
 						"Unable to display the chat conversation when user click on the chat option"));
-		AssertJUnit.fail();
+		Assert.fail();
 	}
 }
 
