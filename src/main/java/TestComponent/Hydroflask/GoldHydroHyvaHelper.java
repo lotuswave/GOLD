@@ -10139,6 +10139,47 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 
 	}
 
+	public void Account_Page_Rewards() {
+	    try {
+	        String Tier_Status = Common.getText("xpath", "//div[contains(text(),'Tier status')]");
+	        int Rewards = Common.findElements("css", "div.yotpo-progress-bar-container").size();
+	        int House_Of_HF = Common.findElements("css", "p.hoh-paragraph").size();
+	        int Spent = Common.findElements("css", "div.yotpo-progress-bar-bottom").size();
+
+	        Common.assertionCheckwithReport(
+	            Tier_Status.contains("Tier status") && Rewards > 0 && House_Of_HF > 0 && Spent > 0,
+	            "Verifying Rewards Point section",
+	            "User should be able to see the Rewards Point section",
+	            "User successfully navigated to the Rewards Point section",
+	            "User failed to navigate to Rewards Point section"
+	        );
+
+	        Common.clickElement("xpath", "//a[text()='Redeem Points']");
+
+	        boolean URL = Common.getCurrentURL().contains("https://mcloud-na-preprod.hydroflask.com/house-of-hydro-rewards");
+	        if (!URL) {
+	            ExtenantReportUtils.addFailedLog(
+	                "Navigation validation failed",
+	                "User should land on the House of Hydroflask rewards page",
+	                "Incorrect URL detected: " + Common.getCurrentURL(),
+	                Common.getscreenShotPathforReport("Navigation failure")
+	            );
+	        }
+	        else {
+	        	Common.navigateBack();
+	        }
+
+	    } catch (Exception | Error e) {
+	        e.printStackTrace();
+	        ExtenantReportUtils.addFailedLog(
+	            "Validating the Rewards Point section",
+	            "User should be able to see the Rewards Point section",
+	            "User unable to navigate to the Rewards Point section",
+	            Common.getscreenShotPathforReport("User failed to navigate to the Rewards Point section")
+	        );
+	    }
+	}
+	
 	public void Account_page_Validation(String Dataset) throws Exception {
 		// TODO Auto-generated method stub
 		Sync.waitElementPresent("xpath", "//button[@id='customer-menu']");
@@ -10146,6 +10187,38 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 		Sync.waitElementPresent("xpath", "//a[@title='My Account']");
 		Common.clickElement("xpath", "//a[@title='My Account']");
 		Sync.waitPageLoad();
+		Account_Page_Rewards();
+		
+		int size1 = Common.findElements("xpath", "//h2[contains(text(),'Shop By Category')]").size();
+		boolean ShopbByCategory = size1>0;
+		if(ShopbByCategory) {
+			Common.scrollIntoView("xpath", "//h2[contains(text(),'Shop By Category')]");
+			List<WebElement> category= Common.findElements("xpath", "//span[contains(text(),'Shop Now')]//parent::div");
+ 			for (int i = 0; i < category.size(); i++) {
+			    WebElement element = category.get(i);
+			    String text =Common.getText("xpath", "(//span[contains(text(),'Shop Now')]//parent::div)[" +( i+1) + "]").toLowerCase();
+                 System.out.println("Shopy by Category: "+text);
+                 Thread.sleep(2000);
+			    Common.mouseOverClick("xpath", "(//span[contains(text(),'Shop Now')]//parent::div)[" +( i+1) + "]");
+			     String    Breadcrumb = Common.getText("css", "nav[id='breadcrumbs']").toLowerCase();
+			     System.out.println("Category Bredcrumb: "+text);
+			   Common.assertionCheckwithReport(Breadcrumb.contains(text), 
+					   "Verifyinh Shop By Categories ",
+					   "user should navigate to the Selected category"+text, 
+					   "User Successfully navigate to the selected category "+text, "User Failed to navigate to selected category"+text);
+			   Common.navigateBack();
+			
+			}
+			
+		}
+		else {
+			Assert.fail("Shop By category is not Displayed in My account Page");
+			ExtenantReportUtils.addFailedLog("validating the Shop By category",
+					"user should Navigate to the Shop By category section",
+					"User unable to navigate to the Shop By category section ",
+					Common.getscreenShotPathforReport("user Failed to Navigate to the Shop By category section"));
+		}
+		
 		if (Common.getCurrentURL().contains("preprod")) {
 			String Accountlinks = data.get(Dataset).get("Account Links");
 			String[] Account = Accountlinks.split(",");
@@ -10163,11 +10236,19 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 					{
 					String title = Common.findElement("xpath", "//h1[@class='title-2xl']//span").getText();
 					System.out.println(title);
+				
+					
 					Common.assertionCheckwithReport(title.contains(Account[i]) || title.contains("My Out Of Stock Subscriptions") || title.contains("My Payment Methods") 
 							|| title.contains("Newsletter Subscription"),
 							"verifying Account page links " + Account[i],
 							"user should navigate to the " + Account[i] + " page",
 							"user successfully Navigated to the " + Account[i], "Failed click on the " + Account[i]);
+					Common.scrollIntoView("xpath", "(//div[@id='we-are-here-for-you-default'])[1]");
+					int CMS_Block = Common.findElements("xpath", "(//div[@id='we-are-here-for-you-default'])[1]").size();
+					Common.assertionCheckwithReport(CMS_Block>0,
+							"verifying CMS Block in " + Account[i],
+							"user should navigate to the CMS Block in  " + Account[i] + " page",
+							"user successfully Navigated to the CMS Block in " + Account[i], "Failed Navigate to CMS Block in  " + Account[i]);
 					}
 					else
 					{
@@ -10213,6 +10294,12 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 							"verifying Account page links " + Account[i],
 							"user should navigate to the " + Account[i] + " page",
 							"user successfully Navigated to the " + Account[i], "Failed click on the " + Account[i]);
+					Common.scrollIntoView("xpath", "(//div[@id='we-are-here-for-you-default'])[1]");
+					int CMS_Block = Common.findElements("xpath", "(//div[@id='we-are-here-for-you-default'])[1]").size();
+					Common.assertionCheckwithReport(CMS_Block>0,
+							"verifying CMS Block in " + Account[i],
+							"user should navigate to the CMS Block in  " + Account[i] + " page",
+							"user successfully Navigated to the CMS Block in " + Account[i], "Failed Navigate to CMS Block in  " + Account[i]);
 
 				} else
 					{
