@@ -9600,7 +9600,7 @@ public class OspreyEMEA_HYVA {
 			expectedResult = "It should apply discount on your price.If user enters invalid promocode it should display coupon code is not valid message.";
 			if (Common.getCurrentURL().contains("Stage") || Common.getCurrentURL().contains("preprod")) {
 				String discountcodemsg = Common.getText("css", "span[x-html='message.text']");
-				Common.assertionCheckwithReport(discountcodemsg.contains("You used coupon code"), "verifying pomocode",
+				Common.assertionCheckwithReport(discountcodemsg.contains("You used discount code"), "verifying pomocode",
 						expectedResult, "promotion code working as expected", "Promation code is not applied");
 			} else {
 				String discountcodemsg = Common.getText("css", "span[x-html='message.text']");
@@ -15703,7 +15703,7 @@ public class OspreyEMEA_HYVA {
 	public void deleteProduct_shoppingcart() {
 		// TODO Auto-generated method stub
 		try {
-
+			verify_paywithlink();
 			int size = Common.findElements("xpath", "//tr[contains(@class,'item-info align')]").size();
 			System.out.println(size);
 			for (int i = 0; i < size; i++) {
@@ -15728,6 +15728,32 @@ public class OspreyEMEA_HYVA {
 					"color should be delete in the shopping cart page",
 					"Unable to delete the product  in the shopping cart page",
 					Common.getscreenShot("Failed to delete the product  in the shopping cart page"));
+			Assert.fail();
+		}
+	}
+	public void verify_paywithlink() {
+		try
+		{
+			String paywithlink=Common.findElement("xpath", "(//iframe[@role='presentation'])[2]").getAttribute("name");
+			System.out.println(paywithlink);
+			Common.switchFrames("css", "iframe[name='"+ paywithlink +"']");
+			int link=Common.findElements("css", "button[aria-label='Pay with Link']").size();
+			Common.assertionCheckwithReport(link>0,
+					"validating the paywithlink on the shopping cart page",
+					"paywithlink should be appear on the shopping cart page under the checkout button",
+					"Sucessfully paywithlink is appeared on the shopping cart page below the checkout Button CTA",
+					"Failed to appear the paywithlink on the shopping cart page under the checkout button CTA");
+			Common.switchToDefault();
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the paywithlink on the shopping cart page",
+					"paywithlink should be appear on the shopping cart page under the checkout button",
+					"unable to appear the paywithlink on the shopping cart page under the checkout button CTA",
+					Common.getscreenShot("Failed to appear the paywithlink on the shopping cart page under the checkout button CTA"));
+			
 			Assert.fail();
 		}
 	}

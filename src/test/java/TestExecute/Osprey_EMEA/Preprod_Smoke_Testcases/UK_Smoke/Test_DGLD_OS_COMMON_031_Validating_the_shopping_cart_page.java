@@ -15,7 +15,7 @@ public class Test_DGLD_OS_COMMON_031_Validating_the_shopping_cart_page {
 	OspreyEMEA_HYVA Osprey_ReEu = new OspreyEMEA_HYVA(datafile,"Checkout payments");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Verifying_Checkout_RegisterUserCC_configurable_Simple () throws Exception {
+	public void Verifying_Validating_the_shopping_cart_page () throws Exception {
 
 		try {
         Osprey_ReEu.verifingHomePage();
