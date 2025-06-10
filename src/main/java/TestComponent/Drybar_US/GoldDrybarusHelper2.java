@@ -1620,27 +1620,20 @@ public class GoldDrybarusHelper2 {
 		String Brushes = data.get(Dataset).get("Brushes");
 		String Detangling = data.get(Dataset).get("Detangling Brushes");
 		String header=data.get(Dataset).get("headers");
-		try {
-
-		  
+		try {		  
 //			Sync.waitElementPresent("xpath",
-//					"//a[@title='"+ header +"']//span[contains(text(),'"+ header +"')]");
-//			
-//			Common.clickElement("xpath", "//a[@title='"+ header +"']//span[contains(text(),'"+ header +"')]");
-			
-			Sync.waitElementPresent("xpath","//button//span[contains(text(),'"+ header +"')]");
-			
+//					"//a[@title='"+ header +"']//span[contains(text(),'"+ header +"')]");			
+//			Common.clickElement("xpath", "//a[@title='"+ header +"']//span[contains(text(),'"+ header +"')]");			
+			Sync.waitElementPresent("xpath","//button//span[contains(text(),'"+ header +"')]");			
 			Common.clickElement("xpath", "//button//span[contains(text(),'"+ header +"')]");
-
 			Thread.sleep(3000);
-
 			try {
 				Common.mouseOver("xpath", "//span[contains(text(),'"+ header +"')]");
 			} catch (Exception e) {
 				Common.clickElement("xpath", "//a[@class='level-top ui-corner-all']//span[text()='"+ header +"']");
 			}
 //			Common.clickElement("xpath", "//span[contains(text(),'" + Brushes + "')]");
-			Common.clickElement("xpath", "//span[contains(text(),'All Hair Tools')]");
+			Common.clickElement("xpath", "//span[contains(text(),'" + Brushes + "')]");
 			Thread.sleep(3000);
 			Sync.waitPageLoad();
 //			Common.clickElement("xpath", "//span[contains(text(),'" + Detangling + "')]");
