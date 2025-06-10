@@ -2328,30 +2328,33 @@ public void FUll_Payment(String dataSet) {
 		String UpdataedQuntityinminicart = data.get(Dataset).get("Quantity");
 		try {
 
-			String Subtotal = Common.getText("xpath", "//span[@class='c-mini-cart__subtotal-amount']//span")
+			String Subtotal = Common.getText("xpath", "//span[contains(@class, 'subtotal-value')]//span")
 					.replace("$", "");
 			Float subtotalvalue = Float.parseFloat(Subtotal);
-			Sync.waitElementPresent("xpath", "//select[@class='a-select-menu cart-item-qty']");
-			Common.clickElement("xpath", "//select[@class='a-select-menu cart-item-qty']");
-			Common.dropdown("xpath", "//select[@class='a-select-menu cart-item-qty']", Common.SelectBy.VALUE,
+			System.out.println("Subtotal  :"+subtotalvalue);
+			Sync.waitElementPresent("xpath", "(//select[@name='qty'])[2]");
+			Common.clickElement("xpath", "(//select[@name='qty'])[2]");
+			Common.dropdown("xpath", "(//select[@name='qty'])[2]", Common.SelectBy.VALUE,
 					UpdataedQuntityinminicart);
-			Common.clickElement("xpath", "//span[text()='Update']");
-			Thread.sleep(4000);
-			Sync.waitElementPresent("xpath", "//p[@class='c-mini-cart__total-counter']//strong");
-			String cart = Common.findElement("xpath", "//p[@class='c-mini-cart__total-counter']//strong").getText();
-			System.out.println(cart);
-			String Subtotal2 = Common.getText("xpath", "//span[@class='c-mini-cart__subtotal-amount']//span")
+			Thread.sleep(5000);
+			Sync.waitElementPresent("xpath", "//span[@x-text='totalCartAmount']");
+			String cart = Common.findElement("xpath", "//span[@x-text='totalCartAmount']").getText();
+			System.out.println("cart"+ cart);
+			String Subtotal2 = Common.getText("xpath", "//span[contains(@class, 'subtotal-value')]//span")
 					.replace("$", "");
 			Float subtotalvalue2 = Float.parseFloat(Subtotal2);
+			System.out.println("Subtotal2  :"+Subtotal2);
 			Float Total = subtotalvalue * 3;
+			System.out.println("Total  :"+Total);
 			String ExpectedTotalAmmount2 = new BigDecimal(Total).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
+			System.out.println("ExpectedTotalAmmount  :"+ ExpectedTotalAmmount2);
 			Common.assertionCheckwithReport(
 					UpdataedQuntityinminicart.equals(cart) && ExpectedTotalAmmount2.equals(Subtotal2),
 					"validating the product update quantity and subtotal",
 					"The product Quantity should be update in mini cart and subtotal should change",
 					"Successfully product quantity updated and subtotal has been changed",
 					"Failed to update the product quantity from cart and subtotal not changed");
-
+			
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("validating the product update quantity and subtotal",
@@ -2362,7 +2365,33 @@ public void FUll_Payment(String dataSet) {
 		}
 
 	}
-
+	public void verify_paywithlink() {
+		try
+		{
+			String paywithlink=Common.findElement("xpath", "(//iframe[@role='presentation'])[2]").getAttribute("name");
+			System.out.println(paywithlink);
+			Common.switchFrames("css", "iframe[name='"+ paywithlink +"']");
+			Common.scrollIntoView("css", "button[aria-label='Pay with Link']");
+			int link=Common.findElements("css", "button[aria-label='Pay with Link']").size();
+			Common.assertionCheckwithReport(link>0,
+					"validating the paywithlink on the shopping cart page",
+					"paywithlink should be appear on the shopping cart page under the checkout button",
+					"Sucessfully paywithlink is appeared on the shopping cart page below the checkout Button CTA",
+					"Failed to appear the paywithlink on the shopping cart page under the checkout button CTA");
+			Common.switchToDefault();
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the paywithlink on the shopping cart page",
+					"paywithlink should be appear on the shopping cart page under the checkout button",
+					"unable to appear the paywithlink on the shopping cart page under the checkout button CTA",
+					Common.getscreenShot("Failed to appear the paywithlink on the shopping cart page under the checkout button CTA"));
+			
+			Assert.fail();
+		}
+	}
 	public void minicart_delete(String Dataset) {
 		// TODO Auto-generated method stub
 		String deleteproduct = data.get(Dataset).get("Colorproduct");
@@ -2372,27 +2401,27 @@ public void FUll_Payment(String dataSet) {
 					.replace("$", "");
 			Float subtotalvalue = Float.parseFloat(subtotal);
 			String productname = Common
-					.findElement("xpath", "(//div[@class='m-mini-product-card__info']//a[@class='a-product-name'])[1]")
+					.findElement("xpath", "(//div[contains(@class,'cart-drawer__item-content')]//a[contains(@class,'cart-drawer__item')])[2]")
 					.getText();
-			String productamount1 = Common.getText("xpath", "(//span[@class='minicart-price']//span)[1]").replace("$",
+			String productamount1 = Common.getText("xpath", "(//span[@x-html='item.product_price']//span)[1]").replace("$",
 					"");
 			Float productamount1value = Float.parseFloat(productamount1);
 			if (productname.equals(deleteproduct)) {
 				Sync.waitElementPresent(30, "xpath",
-						"(//div[@class='m-mini-product-card__info']//span[contains(@class,'icon-cart__remove')])[1]");
+						"(//div[contains(@class,'cart-drawer__item-content')]//button[contains(@aria-label,'Remove product')])[1]");
 				Common.clickElement("xpath",
-						"(//div[@class='m-mini-product-card__info']//span[contains(@class,'icon-cart__remove')])[1]");
-				Sync.waitElementPresent("xpath", "//button[contains(@class,'a-btn a-btn--primary action-p')]//span");
-				Common.clickElement("xpath", "//button[contains(@class,'a-btn a-btn--primary action-p')]//span");
+						"(//div[contains(@class,'cart-drawer__item-content')]//button[contains(@aria-label,'Remove product')])[1]");
+				Sync.waitElementPresent("xpath", "//button[contains(text(),'OK')]");
+				Common.javascriptclickElement("xpath", "//button[contains(text(),'OK')]");
 			} else {
 				Assert.fail();
 			}
 			Thread.sleep(6000);
-			String subtotal1 = Common.getText("xpath", "//span[@class='c-mini-cart__subtotal-amount']//span")
+			String subtotal1 = Common.getText("xpath", "//span[@x-html='cart.subtotal']//span")
 					.replace("$", "");
 			Float subtotal1value = Float.parseFloat(subtotal1);
 			Thread.sleep(8000);
-			String productamount = Common.getText("xpath", "//span[@class='minicart-price']//span").replace("$", "");
+			String productamount = Common.getText("xpath", "//span[@x-html='item.product_price']").replace("$", "");
 			Float productamountvalue = Float.parseFloat(productamount);
 			Float Total = subtotalvalue - productamount1value;
 			String ExpectedTotalAmmount2 = new BigDecimal(Total).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
@@ -9902,32 +9931,32 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 		String Symbol="$";
 		String expectedResult = "It should opens textbox input to enter discount.";
 		try {
-			Sync.waitElementPresent("xpath", "//h3[contains(text(),'Add Discount Code')]");
-			Common.clickElement("xpath", "//h3[contains(text(),'Add Discount Code')]");
+			Sync.waitElementPresent("xpath", "//button[contains(text(),'Add Discount Code')]");
+			Common.clickElement("xpath", "//button[contains(text(),'Add Discount Code')]");
 
-			Sync.waitElementPresent("xpath", "//input[@id='discount-code']");
+			Sync.waitElementPresent("css", "input[id='coupon_code']");
 			if (Common.getCurrentURL().contains("preprod")) {
-				Common.textBoxInput("xpath", "//input[@id='discount-code']", data.get(Dataset).get("Discountcode"));
+				Common.textBoxInput("css", "input[id='coupon_code']", data.get(Dataset).get("Discountcode"));
 			} else {
-				Common.textBoxInput("xpath", "//input[@id='discount-code']", data.get(Dataset).get("prodDiscountcode"));
+				Common.textBoxInput("css", "input[id='coupon_code']", data.get(Dataset).get("prodDiscountcode"));
 			}
-			int size = Common.findElements("xpath", "//input[@id='discount-code']").size();
+			int size = Common.findElements("css", "input[id='coupon_code']").size();
 			Common.assertionCheckwithReport(size > 0, "verifying the Discount Code label", expectedResult,
 					"Successfully open the discount input box", "User unable enter Discount Code");
-			Sync.waitElementClickable("xpath", "(//button[contains(@class, 'btn btn-primary')])[1]");
-			Common.clickElement("xpath", "(//button[contains(@class, 'btn btn-primary')])[1]");
+			Sync.waitElementClickable("xpath", "//span[text()='Apply Discount']");
+			Common.clickElement("xpath", "//span[text()='Apply Discount']");
 			Sync.waitPageLoad();
 			expectedResult = "It should apply discount on your price.If user enters invalid promocode it should display coupon code is not valid message.";
 			if (Common.getCurrentURL().contains("preprod")) {
 				
 				String discountcodemsg = Common.getText("xpath", "//div[@class='container']//div[@class='relative flex w-full']/span");
 				System.out.println(discountcodemsg);
-				Common.assertionCheckwithReport(discountcodemsg.contains("Your coupon was successfully applied."), "verifying pomocode",
+				Common.assertionCheckwithReport(discountcodemsg.contains("You used discount code"), "verifying pomocode",
 						expectedResult, "promotion code working as expected", "Promation code is not applied");
 			} else {
 				String discountcodemsg = Common.getText("xpath", "//div[@class='container']//div[@class='relative flex w-full']/span");
 				System.out.println(discountcodemsg);
-				Common.assertionCheckwithReport(discountcodemsg.contains("Your coupon was successfully applied."), "verifying pomocode",
+				Common.assertionCheckwithReport(discountcodemsg.contains("You used discount code"), "verifying pomocode",
 						expectedResult, "promotion code working as expected", "Promation code is not applied");
 			}
 		} catch (Exception | Error e) {
@@ -9945,43 +9974,13 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 			String Subtotal = Common.getText("xpath", "//div[@x-text='hyva.formatPrice(totalsData.subtotal)']").replace(Symbol,
 					"");
 			Float subtotalvalue = Float.parseFloat(Subtotal);
-			if(Common.getCurrentURL().contains("/gb")|| Common.getCurrentURL().contains("/eu"))  {
+	
 				
-				String shipping = Common.getText("xpath", "//tr[@class='totals shipping incl']//span[@class='price']")
-						.replace(Symbol, "");
-				Float shippingvalue = Float.parseFloat(shipping);
-				
-				System.out.println("Shipping:"+  shippingvalue);
-				String Discount = Common.getText("xpath", "//tr[@class='totals discount']//span[@class='price']")
-						.replace(Symbol, "");
-				Float Discountvalue = Float.parseFloat(Discount);
-				System.out.println("Discount:"+ Discountvalue);
-				Common.clickElement("xpath", "//span[@class='block transform']");
-				String Tax = Common.getText("xpath", "//div[@x-text='hyva.formatPrice(taxItem.amount)']").replace(Symbol, "");
-				Float Taxvalue = Float.parseFloat(Tax);
-				System.out.println("Tax:"+  Taxvalue);
-				String ordertotal = Common.getText("xpath", "//span[@x-text='hyva.formatPrice(segment.value)']")
-						.replace(Symbol, "");
-				Float ordertotalvalue = Float.parseFloat(ordertotal);
-				System.out.println("Order Total"+   ordertotalvalue);
-				Float Total = (subtotalvalue + shippingvalue) + Discountvalue;
-				
-				String ExpectedTotalAmmount2 = new BigDecimal(Total).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
-				System.out.println(ExpectedTotalAmmount2);
-				System.out.println(ordertotal);
-				Common.assertionCheckwithReport(ExpectedTotalAmmount2.equals(ordertotal),
-						"validating the order summary in the payment page",
-						"Order summary should be display in the payment page and all fields should display",
-						"Successfully Order summary is displayed in the payment page and fields are displayed",
-						"Failed to display the order summary and fileds under order summary");
-			}
-			else {
-				
-				String shipping = Common.getText("xpath", "(//div[@x-text='hyva.formatPrice(segment.value)'])[2]")
+				String shipping = Common.getText("xpath", "(//div[contains(@x-text,'segment')])[2]")
 						.replace(Symbol, "");
 				Float shippingvalue = Float.parseFloat(shipping);
 				System.out.println("Shipping:"+  shippingvalue);
-				String Discount = Common.getText("xpath", "(//div[@x-text='hyva.formatPrice(segment.value)'])[1]")
+				String Discount = Common.getText("xpath", "//div[@x-text='hyva.formatPrice(segment.value)']")
 						.replace(Symbol, "").replace("-", "");
 				
 				Float Discountvalue = Float.parseFloat(Discount);
@@ -10006,7 +10005,7 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 			}
 			
 			
-			}
+			
 			else
 			{
 				String Subtotal = Common.getText("xpath", "//div[@x-text='hyva.formatPrice(totalsData.subtotal)']").replace(Symbol,
@@ -10039,7 +10038,7 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 						"Successfully Order summary is displayed in the payment page and fields are displayed",
 						"Failed to display the order summary and fileds under order summary");
 			}
-
+			verify_paywithlink();
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("validating the order summary in the payment page",
@@ -12385,7 +12384,11 @@ public void Explore_Validation(String Dataset) {
 			Common.clickElement("xpath", "//a[contains(@class, 'product-item-link') and text()='" + product + "']");
 			Sync.waitPageLoad();
 			Thread.sleep(3000);
-			Common.assertionCheckwithReport(Common.getPageTitle().contains(minicartproduct),
+			String currentURL = Common.getCurrentURL();
+
+			String productName = currentURL.substring(currentURL.lastIndexOf("/") + 1).split("\\?")[0];
+			productName = productName.replace("-", " ");
+			Common.assertionCheckwithReport(productName.contains(minicartproduct.toLowerCase()),
 					"validating the product navigating to the PDP page",
 					"The product Should be navigates to the PDP page", "Successfully product navigates to the PDP page",
 					"Failed to Navigates Product to the PDP page");
@@ -12395,7 +12398,12 @@ public void Explore_Validation(String Dataset) {
 			Common.clickElement("xpath", "//img[contains(@alt,'" + color + "')]");
 			Sync.waitPageLoad();
 			Thread.sleep(3000);
-			Common.assertionCheckwithReport(Common.getPageTitle().contains(color),
+			String currentURL1 = Common.getCurrentURL();
+
+			String productName1 = currentURL1.substring(currentURL1.lastIndexOf("/") + 1).split("\\?")[0];
+			productName1 = productName1.replace("-", " ");
+String PDP_PrdtName = color.toLowerCase();
+			Common.assertionCheckwithReport(productName1.contains(PDP_PrdtName),
 					"validating the product navigating to the PDP page",
 					"The product Should be navigates to the PDP page", "Successfully product navigates to the PDP page",
 					"Failed to Navigates Product to the PDP page");
@@ -12489,31 +12497,33 @@ public void Explore_Validation(String Dataset) {
 		// TODO Auto-generated method stub
 		try {
 
-			Common.clickElement("xpath", "//span[contains(@class,'icon-cart__r')]");
-			Sync.waitElementPresent("xpath", "//div[@class='modal-popup confirm _show']");
-			String minicartpopup = Common.findElement("xpath", "//div[@class='modal-popup confirm _show']")
-					.getAttribute("class");
+			Common.clickElement("xpath", "//a[contains(@aria-label,'Edit product')]//parent::div//button");
+			Sync.waitElementPresent("xpath", "//a[contains(@aria-label,'Edit product')]//parent::div//button");
+			String minicartpopup = Common.findElement("xpath", "//div[@x-ref='removeItemConfirm']")
+					.getAttribute("aria-modal");
 			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
-			Common.assertionCheckwithReport(minicartpopup.contains("_show"),
+			Common.assertionCheckwithReport(minicartpopup.contains("true"),
 					"validating the popup when you click on delete", "The Popup should be displayed",
 					"Successfully popup is displayed when we click on the delete button",
 					"Failed to Display the popup");
-			String popup = Common.findElement("xpath", "//h2[contains(text(),'Remove')]").getText();
+			String popup = Common.findElement("xpath", "//h2[@x-ref='modalHeader' and contains(text(),'Remove Item')]")
+					.getText().trim();
 			if (popup.equals("Remove Item")) {
-				Common.clickElement("xpath", "//button[contains(@class,'a-btn a-btn--secondary acti')]");
+				Common.clickElement("xpath", "//button[@aria-label='Close']");
 			} else {
 				Assert.fail();
 			}
-			Common.clickElement("xpath", "//span[contains(@class,'icon-cart__r')]");
-			Sync.waitElementPresent("xpath", "//div[@class='modal-popup confirm _show']");
+			Common.clickElement("xpath", "//a[contains(@aria-label,'Edit product')]//parent::div//button");
+			Sync.waitElementPresent("xpath", "//a[contains(@aria-label,'Edit product')]//parent::div//button");
 			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
-			Common.assertionCheckwithReport(minicartpopup.contains("_show"),
+			Common.assertionCheckwithReport(minicartpopup.contains("true"),
 					"validating the popup when you click on delete", "The Popup should be displayed",
 					"Successfully popup is displayed when we click on the delete button",
 					"Failed to Display the popup");
+
 			if (popup.equals("Remove Item")) {
 
-				Common.clickElement("xpath", "//button[@data-role='closeBtn' and @aria-label='Close']");
+				Common.clickElement("xpath", "//button[contains(text(),'Cancel')]");
 			} else {
 				Assert.fail();
 			}

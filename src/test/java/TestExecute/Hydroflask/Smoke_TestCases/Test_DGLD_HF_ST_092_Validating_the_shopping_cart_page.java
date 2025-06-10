@@ -31,10 +31,11 @@ public class Test_DGLD_HF_ST_092_Validating_the_shopping_cart_page {
 						Hydro.minicart_freeshipping();
 						Hydro.minicart_delete("Product");
 						Hydro.minicart_product_close();
+						Hydro.minicart_validation("Product Qunatity");
 			/*
 			 * Shopping cart validation			
 			 */
-						Hydro.minicart_validation("Product Qunatity");
+						
 						Hydro.bottles_headerlinks("Bottles & Drinkware"); 
 						Hydro.Configurable_addtocart_pdp("Product");
 						Hydro.click_minicart();
