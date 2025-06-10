@@ -1639,11 +1639,12 @@ public class GoldDrybarusHelper2 {
 			} catch (Exception e) {
 				Common.clickElement("xpath", "//a[@class='level-top ui-corner-all']//span[text()='"+ header +"']");
 			}
-			Common.clickElement("xpath", "//span[contains(text(),'" + Brushes + "')]");
+//			Common.clickElement("xpath", "//span[contains(text(),'" + Brushes + "')]");
+			Common.clickElement("xpath", "//span[contains(text(),'All Hair Tools')]");
 			Thread.sleep(3000);
-			Common.clickElement("xpath", "//span[contains(text(),'" + Detangling + "')]");
 			Sync.waitPageLoad();
-			Thread.sleep(4000);
+//			Common.clickElement("xpath", "//span[contains(text(),'" + Detangling + "')]");
+//			Thread.sleep(4000);
 			expectedResult = "User should select the " + Dataset + "category";
 			//int sizebotteles = Common.findElements("xpath", "//a[@title='"+ header +"']//span[contains(text(),'"+ header +"')]").size();
 			int sizebotteles = Common.findElements("xpath", "//button//span[contains(text(),'"+ header +"')]").size();
@@ -7212,6 +7213,9 @@ public void FUll_Payment(String dataSet) {
 			
 			int i = 0;
 			try {
+				Common.findElement("xpath","(//div[@class='row-full-width-inner']//p)[4]");
+				Common.clickElement("xpath","//img[contains(@class,'header__logo-image')]");
+				Sync.waitPageLoad();
 				for (i = 0; i < Links.length; i++) {
 					Sync.waitElementPresent("xpath", "(//span[contains(text(),'"+ hair +"')])[1]");
 					Common.clickElement("xpath", "(//span[contains(text(),'"+ hair +"')])[1]");
@@ -7704,8 +7708,8 @@ public void FUll_Payment(String dataSet) {
 		public void view_PLP_page() {
 			try {
 				Thread.sleep(4000);
-//				String title = Common.findElement("xpath","//div[contains(@class,'c-clp-hero')]").getAttribute("Class");
-//				System.out.println(title);
+				String title = Common.findElement("xpath","//h1[contains(@class,'title-2xl')]").getAttribute("class");
+				System.out.println(title);
 				Common.scrollIntoView("xpath", "//nav[@id='breadcrumbs']");
 				String breadcrumbs = Common.findElement("xpath", "//nav[@id='breadcrumbs']")
 						.getAttribute("aria-label");
@@ -7717,12 +7721,21 @@ public void FUll_Payment(String dataSet) {
 								"//div[@id='algolia_instant_sorter']//span")
 						.getText();
 				System.out.println(Sort);
+				int Reviews = Common.findElements("xpath","//span[@class='yotpo-sr-bottom-line-right-panel']").size();
+				int Ribbons = Common.findElements("xpath","//span[contains(@class,'ribbon-bg new flex justify-center')]").size();
 				Thread.sleep(4000);
-				Common.assertionCheckwithReport(
-						breadcrumbs.contains("Breadcrumb") || breadcrumbs.contains("Migaja de pan") || breadcrumbs.contains("Fil d'Ariane")
-								&& filter.contains("Filter by") || filter.contains("Filtrado por") || filter.contains("Filtres") && Sort.contains("Sort by") || Sort.contains("Ordenar por") || Sort.contains("Trier par"),
+				Common.assertionCheckwithReport(Reviews > 0 && breadcrumbs.contains("Breadcrumb") && filter.contains("Filter by") && Sort.contains("Sort by") 
+						&& title.contains("title") && Ribbons > 0,
 						"To validate the Product Listing Page", "User should able to open Product Listing Page",
 						"Sucessfully views the Product Listing Page", "Failed to view Product Listing Page");
+				Thread.sleep(4000);
+				if(Common.findElements("xpath","//picture[contains(@class,'cmsb4384-absolute cmsb4384-w-full')]").size()>0) {
+					Thread.sleep(4000);
+					Common.clickElement("xpath","//a[contains(@aria-label,'Shop now')]");
+					Thread.sleep(4000);
+					Common.navigateBack();
+					}
+				Common.actionsKeyPress(Keys.PAGE_DOWN);
 				Common.clickElement("xpath","//button[contains(@class,'border border-secondary btn-secondary')]");//
 			} catch (Exception | Error e) {
 				e.printStackTrace();
@@ -7738,7 +7751,7 @@ public void FUll_Payment(String dataSet) {
 			System.out.println(category);
 	try {
 				
-		Thread.sleep(6000);
+				Thread.sleep(6000);
 				String text = Common.findElement("xpath", "//span[text()='"+category+"']//parent::a//span[2]").getText();
 				System.out.println(text);
 				 
@@ -7746,7 +7759,7 @@ public void FUll_Payment(String dataSet) {
 				int textValue = Integer.parseInt(text); // Now parse the cleaned string  
 				System.out.println(textValue); // This will print: 14
 				
-				Common.clickElement("xpath", "//a[text()='"+category+"']");
+				Common.clickElement("xpath", "//span[text()='"+category+"']");
 				Thread.sleep(4000);
 //				int textValue = Integer.parseInt(text);
 				String categoryvalue=Integer.toString(textValue);
