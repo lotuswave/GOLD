@@ -16054,7 +16054,163 @@ Common.clickElement("xpath", "//span[text()='Edit']");
 					Common.getscreenShot("Failed to subscribe Newsletter subscription in My Account Page"));
 			Assert.fail();	
 		}
-	}	
+	}
 
+	public void ribbon() {
+		try {
+			Common.refreshpage();
+			Sync.waitPageLoad();
+			int ribbon = Common.findElements("xpath", "//div[contains(@class,'ribbons grid gap')]").size();
+			Common.assertionCheckwithReport(ribbon>0,
+					"Verfying the PDP ribbon when navigated to the PDP page ",
+					"User should able to see ribbon when navigated on the PDP Page",
+					"Successfully able to see the ribbon on the PDP page",
+					"Failed to display the ribbon icons on the PDP page");
+		}
+	 catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog(
+				"verifying the products ribbon  on the PDP page  ",
+				"user should able to see the products ribbon on the PDP page",
+				"user unable to see the products  ribbon on the PDP page",
+				Common.getscreenShot(
+						"Failed to see the products ribbon r on the PDP page"));
+		Assert.fail();
+	}
+	
+}	
+
+	public void Locally_PDP() {
+		// TODO Auto-generated method stub
+		try {
+//			Common.clickElement("css", "span[class='a-btn-tertiary__label']");
+//			Sync.waitPageLoad();
+//			Thread.sleep(2000);
+//			Common.clickElement("xpath", "//button[@aria-label='close']");
+			String locally = Common.findElement("css", "span[class='a-btn-tertiary__label']").getText().trim();
+			int ribbon = Common.findElements("css", "span[class*='ribbon-bg']").size();
+			Common.assertionCheckwithReport(locally.contains("Find this locally"),
+					"Verfying the PDP Locally when navigated to the PDP page ",
+					"User should able to see Locally when navigated on the PDP Page",
+					"Successfully able to see the locally on the PDP page",
+					"Failed to display the locally icons on the PDP page");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("Verfying the PDP Locally when navigated to the PDP page ",
+					"User should able to see Locally when navigated on the PDP Page",
+					"Unable to display the locally icons on the PDP page",
+					Common.getscreenShot("Failed to display the locally icons on the PDP page"));
+			Assert.fail();
+		}
+
+	}
+	
+	public void PDP_Tabs(String Dataset) throws Exception {
+		List<WebElement> size = Common.findElements("css",
+				"div[x-ref='productTabsComponent'] div h2[aria-live='polite']");
+		Common.actionsKeyPress(Keys.ARROW_DOWN);
+		try {
+			for (int i = 0; i < size.size(); i++) {
+				Common.actionsKeyPress(Keys.ARROW_DOWN);
+				 WebElement tab = size.get(i);
+			        tab.click();
+			        String Text= tab.getText().trim();
+			        System.out.println(Text);
+			        
+				Common.assertionCheckwithReport(Text.contains("tab active"), "verifying the tabs in PDP ",
+						"After clicking on the " + Text + "It should display the related content",
+						"sucessfully after clicking on the " + Text + "it has been displayed related content",
+						"Failed to display related content" + Text);
+			}
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("verifying the tabs in PDP ",
+					"After clicking on the PDP tab " + "It should display the related content",
+					"Unable to display the content in  the PDP Tab",
+					Common.getscreenShot("Failed to display related content"));
+
+			Assert.fail();
+		}
+
+	}
+
+	public void Related_Products() {
+	    boolean hasLeftArrow = false;
+	    boolean hasRightArrow = false;
+
+	    try {
+	    	Common.actionsKeyPress(Keys.PAGE_DOWN);
+	        int RelatedPrd = Common.findElements("xpath", "//h2[contains(text(),'Related products')]").size();
+	        if (RelatedPrd > 0) {
+	            List<WebElement> size = Common.findElements("xpath", "//button[contains(@class,'recommended-arrow')]");
+
+	            for (WebElement element : size) {
+	                String arrowType = element.getAttribute("aria-label");
+	                if (arrowType != null) {
+	                    hasLeftArrow |= arrowType.contains("Scroll left");
+	                    hasRightArrow |= arrowType.contains("Scroll right");
+	                }
+	            }
+
+	            Common.assertionCheckwithReport(hasLeftArrow && hasRightArrow, 
+	                "Validating Left & Right Arrows",
+	                "Both Left and Right arrows should be present.",
+	                "Successfully verified both arrows are present.",
+	                "Missing arrows in Related Products section.");
+
+	            int Products = Common.findElements("xpath", "//div[contains(@class,'algolia-slider-items widget-product-carousel')]").size();
+	            Common.assertionCheckwithReport(Products > 0, "Verifying the Related Product section",
+	                "It should display the Related Product section",
+	                "Successfully displayed Related Product section",
+	                "Failed to display Related Product section");
+	        } else {
+	            Assert.fail("No related Product section available");
+	        }
+
+	    } catch (Exception | Error e) {
+	        e.printStackTrace();
+	        ExtenantReportUtils.addFailedLog("Verifying the Related Product section",
+	            "It should display the Related Product section",
+	            "Unable to display the Related Product section",
+	            Common.getscreenShot("Failed to display Related Product section"));
+	        Assert.fail();
+	    }
+	}
+
+	public void User_GenerTed_Content() {
+		// TODO Auto-generated method stub
+		try {
+			Common.actionsKeyPress(Keys.ARROW_DOWN);
+			int size =Common.findElements("css", "div[class='yotpo-display-wrapper yotpo-slider']").size();
+			Common.assertionCheckwithReport(size > 0, "Verifying the User_Generted_Content section",
+	                "It should display the Related Product section",
+	                "Successfully displayed User_Generted_Content section",
+	                "Failed to display User_Generted_Content section");
+		}
+		catch(Exception | Error e) {
+			
+		}
+	}
+
+	public void BNPL() {
+		try {
+			Common.switchFrames("xpath", "(//iframe[@role='presentation'])[1]");
+			int BNPL = Common.findElements("css", "div[class='p-CondensedMultiPromotionView']").size();
+			Common.assertionCheckwithReport(BNPL>0,
+					"validating the  BNPL on the PDP page", "BNPL shoul be appear on the PDP page",
+					"Sucessfully BNPL appeared on the PDP page", "failed to appeared the BNPL on the PDP page");
+			Common.switchToDefault();
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the  BNPL on the PDP page",
+					"BNPL shoul be appear on the PDP page", "Unable to appeared the BNPL on the PDP page",
+					Common.getscreenShot("Failed to appeared the BNPL on the PDP page"));
+			Assert.fail();
+		}
+	}
+
+	
 }
 
