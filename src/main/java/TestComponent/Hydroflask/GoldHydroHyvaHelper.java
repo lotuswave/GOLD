@@ -5893,6 +5893,7 @@ public void Remove_GiftCode() {
 			Common.clickElement("css", "label[aria-label='Score 1 Very poor']");
 			break;
 		case "2":
+			
 			Sync.waitElementPresent("css", "label[aria-label='Score 2 Poor']");
 			Common.clickElement("css", "label[aria-label='Score 2 Poor']");
 			break;
