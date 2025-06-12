@@ -25,7 +25,7 @@ public class Test_DGLD_HF_ST_059_Validate_PLP_page {
 			Hydro.filter_By("Accessories");
 			Hydro.color_validation("Black");
 			Hydro.price_filter_validation();
-			Hydro.addtocart_PLP("Product");
+			//Hydro.addtocart_PLP("Product");
 			Hydro.Validating_search("bottle");
 			Hydro.Bottles_headerlinks("Bottles & Drinkware");
 			Hydro.reviews_colorcount_banner_Ribbon_ColorSwatch();

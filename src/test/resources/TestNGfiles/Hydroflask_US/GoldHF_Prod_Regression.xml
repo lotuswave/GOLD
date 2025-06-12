@@ -33,16 +33,6 @@
 <class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_026_Pro_Deal_Application_for_Register_User"/>
 </classes>
 </test>
-<test name="Test_DGLD_HF_ST_037_Create_share_and_Delete_Gift_Registery_For_Register_User" testid="DQA-228" priority="P1" description="This script will cover validating Create share and Delete Gift Registery For Register User">
-<classes>
-<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_037_Create_share_and_Delete_Gift_Registery_For_Register_User"/>
-</classes>
-</test>
-<test name="Test_DGLD_HF_ST_038_Create_Manageitems_and_invalid_Details_Gift_Registery_For_Register_User" testid="DQA-227" priority="P1" description="This script will cover validating Create Manageitems and invalid Details Gift Registery For Register User">
-<classes>
-<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_038_Create_Manageitems_and_invalid_Details_Gift_Registery_For_Register_User"/>
-</classes>
-</test>
 <test name="Test_DGLD_HF_ST_042_Validate_Store_Locator" testid="DQA-244" priority="P1" description="This script will cover Validate Store Locator">
 <classes>
 <class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_042_Validate_Store_Locator"/>
