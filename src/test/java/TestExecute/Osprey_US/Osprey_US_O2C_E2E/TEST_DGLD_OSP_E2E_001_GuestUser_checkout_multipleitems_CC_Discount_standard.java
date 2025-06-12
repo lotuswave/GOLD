@@ -52,7 +52,7 @@ public class TEST_DGLD_OSP_E2E_001_GuestUser_checkout_multipleitems_CC_Discount_
 
 	@AfterTest
 	public void clearBrowser() {
-		//Common.closeAll();
+		Common.closeAll();
 
 	}
 

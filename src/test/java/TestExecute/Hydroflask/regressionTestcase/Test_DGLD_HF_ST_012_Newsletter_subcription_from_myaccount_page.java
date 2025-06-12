@@ -1,4 +1,4 @@
-package TestExecute.Hydroflask.Smoke_TestCases;
+package TestExecute.Hydroflask.regressionTestcase;
 
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
@@ -9,27 +9,19 @@ import TestComponent.Hydroflask.GoldHydroHyvaHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_HF_ST_059_Validate_PLP_page {
+public class Test_DGLD_HF_ST_012_Newsletter_subcription_from_myaccount_page {
 
 	String datafile = "Hydroflask//GoldHydroTestData.xlsx";
 	GoldHydroHyvaHelper Hydro = new GoldHydroHyvaHelper(datafile,"DataSet");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Validate_PLP () throws Exception {
+	public void Newsletter_subcription_from_myaccount_page () throws Exception {
 
 		try {
 			Hydro.verifingHomePage();
-			Hydro.bottle_Accessories_headerlinks("Accessories");
-			Hydro.view_PLP_page();
-			Hydro.sort_By("SortBy");
-			Hydro.filter_By("Accessories");
-			Hydro.color_validation("Black");
-			Hydro.price_filter_validation();
-			Hydro.addtocart_PLP("Product");
-			Hydro.Validating_search("bottle");
-			Hydro.Bottles_headerlinks("Bottles & Drinkware");
-			Hydro.reviews_colorcount_banner_Ribbon_ColorSwatch();
-			
+			Hydro.click_singinButton();
+			Hydro.login_Hydroflask("AccountDetails");
+			Hydro.Newsletter_SUbscription_MyAccout();
 		} catch (Exception e) {
 
 			Assert.fail(e.getMessage(), e);
@@ -45,8 +37,8 @@ public class Test_DGLD_HF_ST_059_Validate_PLP_page {
 	@BeforeTest
 	public void startTest() throws Exception {
 		System.setProperty("configFile", "Hydroflask\\config.properties");
-        Login.signIn();
-        Hydro.close_add();
+		Login.signIn();
+		Hydro.close_add();
         Hydro.acceptPrivacy();
 
 	}

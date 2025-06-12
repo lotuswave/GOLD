@@ -25,7 +25,7 @@ public class TEST_DGLD_OS_COMMON_053_Validate_PLP_page {
         Osprey_ReEu.color_validation("PLP Color");
         Osprey_ReEu.reviews_colorcount_banner_Ribbon(); 
         Osprey_ReEu.price_filter_validation("PLP Color");
-
+        Osprey_ReEu.Activity_and_color_label();
  
 		} catch (Exception e) {
 

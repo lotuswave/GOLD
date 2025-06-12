@@ -20,10 +20,13 @@ public class Test_DGLD_HF_ST_033_Footer_Links_Validation {
 		try {
 			Hydro.verifingHomePage();
 			Hydro.Kustomer_Links("Kustomer");
-			Hydro.Footer_Links("Footer");
-			Hydro.Footer_validation("Breadcrumbs");
-			Hydro.Footer_Dogood("Do Good");
+			Hydro.Company("Company");
+			Hydro.Account("Account");
+			Hydro.Resources("Resources");
 			Hydro.Terms_and_privacy();
+			Hydro.Cookies_and_ShopNow();
+			Hydro.Anti_Human_Trafficking();
+			Hydro.Accessibility();
 			
 			} catch (Exception e) {
 

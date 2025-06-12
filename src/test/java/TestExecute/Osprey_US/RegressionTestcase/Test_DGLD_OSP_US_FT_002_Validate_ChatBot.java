@@ -9,22 +9,18 @@ import TestComponent.Osprey_US.GoldOspreyUSHyvaHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class TEST_DGLD_OS_US_099_Validate_Footer_links {
-
+public class Test_DGLD_OSP_US_FT_002_Validate_ChatBot {
+	
 	String datafile = "Osprey_US//GoldOspreyus.xlsx";
-	GoldOspreyUSHyvaHelper Osprey_ReEu = new GoldOspreyUSHyvaHelper(datafile,"Footer Links");
+	GoldOspreyUSHyvaHelper Osprey_ReEu = new GoldOspreyUSHyvaHelper(datafile,"Checkout payments");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Verifying_the_Footer_Links_Funtionality () throws Exception {
+	public void Validating_ChatBot_functionality () throws Exception {
 
 		try {
-			    Osprey_ReEu.verifingHomePage();
-		        Osprey_ReEu.Kustomer_Links("Kustomer");
-		        Osprey_ReEu.Footer_validation("Breadcrumbs");
-		        Osprey_ReEu.Footer_Links("Footer");
-		        Osprey_ReEu.Footer_Links_Resources("Footer");
-		        Osprey_ReEu.Footer_Links_BrandTeam("Footer");
-		        Osprey_ReEu.Footer_Links_Repari_And_Replacement("Footer");
+			Osprey_ReEu.verifingHomePage();
+	        Osprey_ReEu.validateChatboxOptions("Chatoptions");
+        
         
 		} catch (Exception e) {
 
@@ -43,7 +39,9 @@ public class TEST_DGLD_OS_US_099_Validate_Footer_links {
 	public void startTest() throws Exception {
 		System.setProperty("configFile", "Osprey_US\\config.properties");
         Login.signIn();
+        
 
 	}
-
+	
+	
 }

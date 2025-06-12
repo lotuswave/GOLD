@@ -754,6 +754,7 @@ public class OspreyEMEA_HYVA {
 							"user successfully Navigated to the " + name1, "Failed to navigate to the " + name1);
 
 				}
+				Common.clickElement("css", "img[alt='Osprey store logo']");
 			}
 
 			catch (Exception | Error e) {
@@ -9599,7 +9600,7 @@ public class OspreyEMEA_HYVA {
 			expectedResult = "It should apply discount on your price.If user enters invalid promocode it should display coupon code is not valid message.";
 			if (Common.getCurrentURL().contains("Stage") || Common.getCurrentURL().contains("preprod")) {
 				String discountcodemsg = Common.getText("css", "span[x-html='message.text']");
-				Common.assertionCheckwithReport(discountcodemsg.contains("You used coupon code"), "verifying pomocode",
+				Common.assertionCheckwithReport(discountcodemsg.contains("You used discount code"), "verifying pomocode",
 						expectedResult, "promotion code working as expected", "Promation code is not applied");
 			} else {
 				String discountcodemsg = Common.getText("css", "span[x-html='message.text']");
@@ -15702,7 +15703,7 @@ public class OspreyEMEA_HYVA {
 	public void deleteProduct_shoppingcart() {
 		// TODO Auto-generated method stub
 		try {
-
+			verify_paywithlink();
 			int size = Common.findElements("xpath", "//tr[contains(@class,'item-info align')]").size();
 			System.out.println(size);
 			for (int i = 0; i < size; i++) {
@@ -15727,6 +15728,32 @@ public class OspreyEMEA_HYVA {
 					"color should be delete in the shopping cart page",
 					"Unable to delete the product  in the shopping cart page",
 					Common.getscreenShot("Failed to delete the product  in the shopping cart page"));
+			Assert.fail();
+		}
+	}
+	public void verify_paywithlink() {
+		try
+		{
+			String paywithlink=Common.findElement("xpath", "(//iframe[@role='presentation'])[2]").getAttribute("name");
+			System.out.println(paywithlink);
+			Common.switchFrames("css", "iframe[name='"+ paywithlink +"']");
+			int link=Common.findElements("css", "button[aria-label='Pay with Link']").size();
+			Common.assertionCheckwithReport(link>0,
+					"validating the paywithlink on the shopping cart page",
+					"paywithlink should be appear on the shopping cart page under the checkout button",
+					"Sucessfully paywithlink is appeared on the shopping cart page below the checkout Button CTA",
+					"Failed to appear the paywithlink on the shopping cart page under the checkout button CTA");
+			Common.switchToDefault();
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the paywithlink on the shopping cart page",
+					"paywithlink should be appear on the shopping cart page under the checkout button",
+					"unable to appear the paywithlink on the shopping cart page under the checkout button CTA",
+					Common.getscreenShot("Failed to appear the paywithlink on the shopping cart page under the checkout button CTA"));
+			
 			Assert.fail();
 		}
 	}
@@ -16444,6 +16471,44 @@ public class OspreyEMEA_HYVA {
 					"After clicking it should be navigate to the invoice or Shipment page",
 					"Sucessfully Navigated to the invoice or Shipment page after clicking from the guest user track my order",
 					Common.getscreenShot("Failed to Navigate to the Invoice or Shipment page after clicking from the guest user track my order"));
+			Assert.fail();
+		}
+		
+	}
+
+	public void Activity_and_color_label() {
+		// TODO Auto-generated method stub
+		try {
+			Sync.waitElementPresent("css", "button[class*='ais-ClearRefinements']");
+			Common.clickElement("css", "button[class*='ais-ClearRefinements']");
+			Thread.sleep(6000);
+			int Activitylabel = Common.findElements("css", "div[class*='text-xs font-bold']").size();
+			List<WebElement> colorSwatches = Common.findElements("css", "div[aria-label='Colour'] div[x-id]");
+				 for (WebElement color : colorSwatches) {
+						String colorname= color.getAttribute("class");
+				color.click();
+				Thread.sleep(2000);
+				boolean selectedcolor=color.isSelected();
+
+			}
+			Common.clickElement("css", "div[id='algolia-load-more'] button");
+			Sync.waitPageLoad();
+			Thread.sleep(2000);
+			Common.assertionCheckwithReport(Common.getCurrentURL().contains("page=2") && Activitylabel>0 ,
+					"Validating the Load More CTA on the PLP page",
+					"After clicking on the Load more CTA products should be display",
+					"Succesfully products has been displayed after Clicking on the Load More CTA",
+					"Failed to dipslay the products after clicking on the Load More CTA");
+
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("Validating the Load More CTA on the PLP page",
+					"After clicking on the Load more CTA products should be display",
+					"Unable to dipslay the products after clicking on the Load More CTA",
+					Common.getscreenShot("Failed to dipslay the products after clicking on the Load More CTA"));
+			
 			Assert.fail();
 		}
 		

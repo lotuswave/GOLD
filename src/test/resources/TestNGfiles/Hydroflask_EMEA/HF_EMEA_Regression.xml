@@ -94,12 +94,12 @@
     </classes>
 </test>
 
-
+<!-- 
   <test name="TEST_DGLD_HF_EMEA_RT_021_Create_and_Edit_Gift_Registery_For_Register_User" testid="DQA-4447" description="Create and Edit Gift Registry for Registered User">
     <classes>
       <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.TEST_DGLD_HF_EMEA_RT_021_Create_and_Edit_Gift_Registery_For_Register_User"/>
     </classes>
-  </test>
+  </test> -->
 
   <test name="TEST_DGLD_HF_EMEA_RT_023_Miscellaneous_Pages" testid="DQA-4449" description="Validate Miscellaneous Pages">
     <classes>

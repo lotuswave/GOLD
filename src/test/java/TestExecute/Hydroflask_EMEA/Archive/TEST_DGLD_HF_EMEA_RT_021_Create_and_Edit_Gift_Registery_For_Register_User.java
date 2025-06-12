@@ -1,4 +1,4 @@
-package TestExecute.Hydroflask_EMEA.Regression_Testcases;
+package TestExecute.Hydroflask_EMEA.Archive;
 
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;

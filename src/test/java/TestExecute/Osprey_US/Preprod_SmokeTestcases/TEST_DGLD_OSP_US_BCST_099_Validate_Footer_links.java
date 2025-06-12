@@ -19,12 +19,13 @@ public class TEST_DGLD_OSP_US_BCST_099_Validate_Footer_links {
 
 		try {
 			    Osprey_ReEu.verifingHomePage();
-		        Osprey_ReEu.Kustomer_Links("Kustomer");
-		        Osprey_ReEu.Footer_validation("Breadcrumbs");
-		        Osprey_ReEu.Footer_Links("Footer");
+		        Osprey_ReEu.Customer_Links("Customer");
+		        Osprey_ReEu.Footer_breadcrumbs_validation("Breadcrumbs");
+		        Osprey_ReEu.Company_and_terms_links("Footer");
 		        Osprey_ReEu.Footer_Links_Resources("Footer");
-		//        Osprey_ReEu.Footer_Links_BrandTeam("Footer");           //covered in breadcrumbs validation
+		        Osprey_ReEu.Footer_Links_BrandTeam("Footer");           
 		        Osprey_ReEu.Footer_Links_Repari_And_Replacement("Footer");
+		        Osprey_ReEu.AMG_chain_Act_Access_Cookie(); 
         
 		} catch (Exception e) {
 

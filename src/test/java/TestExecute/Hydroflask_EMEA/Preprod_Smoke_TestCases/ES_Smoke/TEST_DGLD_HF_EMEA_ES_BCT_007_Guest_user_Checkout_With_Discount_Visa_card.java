@@ -9,7 +9,7 @@ import TestComponent.Hydroflask_EMEA.GoldHydro_EMEA_Helper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class TEST_DGLD_HF_EMEA_ES_BCT_007_Guest_user_Checkout_With_Partial_GC_Redeem_Discount_Visa_card {
+public class TEST_DGLD_HF_EMEA_ES_BCT_007_Guest_user_Checkout_With_Discount_Visa_card {
 
 	String datafile = "Hydroflask_EMEA//GoldHydroEMEA_TestData.xlsx";
 	GoldHydro_EMEA_Helper Hydro = new GoldHydro_EMEA_Helper(datafile,"DataSet");
@@ -22,7 +22,7 @@ public class TEST_DGLD_HF_EMEA_ES_BCT_007_Guest_user_Checkout_With_Partial_GC_Re
 			Hydro.search_product("Product");      
 			Hydro.addtocart("Product");                    
 			Hydro.minicart_Checkout();
-            Hydro.addDeliveryAddress_Guestuser("AccountDetails");
+            Hydro.addDeliveryAddress_Guestuser("es_Address");
             Hydro.selectshippingaddress("GroundShipping method");
             Hydro.discountCode("Discount");
             Hydro.clickSubmitbutton_Shippingpage();

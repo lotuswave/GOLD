@@ -2284,8 +2284,8 @@ public void header_Shopbycollection(String Dataset) { {
 				}
 			}	
 			    Thread.sleep(1000);		
-				Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
-				Common.clickElement("xpath", "//img[@alt='" + products + "']");
+				Sync.waitElementPresent(30, "css", "a[class='product-image-link'] img");
+				Common.clickElement("css", "a[class='product-image-link'] img");
 //				Thread.sleep(3000);
 //				Sync.waitElementPresent("xpath", "//div[@data-option-label='" + prodcolor + "']");
 //				Common.clickElement("xpath", "//div[@data-option-label='" + prodcolor + "']");
@@ -7305,36 +7305,40 @@ public void minicart_validation(String Dataset) {
 					"open paypal site window", "faild to open paypal account");
 		} else {
 
-			Common.clickElement("id", "login_emaildiv");
-			Common.textBoxInput("id", "email", data.get(dataSet).get("Email"));
-			Common.clickElement("id", "btnNext");
-			int size = Common.findElements("xpath", "//a[text()='Log in with a password instead']").size();
-			int size1 = Common.findElements("xpath", "//a[text()='Iniciar sesión con una contraseña']").size();
+			Common.clickElement("id", "login_email");
+			Common.textBoxInput("id", "login_email", data.get(dataSet).get("Email"));
+			Common.clickElement("css", "button[data-atomic-wait-task='login_enter_email']");
+			int size = Common.findElements("xpath", "//button[text()='Use Password Instead']").size();
+			int size1 = Common.findElements("xpath", "//button[text()='Utilizar contraseña']").size();
 			if(size>0) {
-				Common.clickElement("xpath", "//a[text()='Log in with a password instead']");
+				Common.clickElement("xpath", "//button[text()='Use Password Instead']");
 				Common.textBoxInput("id", "password", data.get(dataSet).get("Password"));
 			}
 			else if(size1>0){
 				
-				Common.clickElement("xpath", "//a[text()='Iniciar sesión con una contraseña']");
+				Common.clickElement("xpath", "//button[text()='Utilizar contraseña']");
 				Common.textBoxInput("id", "password", data.get(dataSet).get("Password"));
 			}
 			else {
 				
 			
 			Common.textBoxInput("id", "password", data.get(dataSet).get("Password"));
-			int sizeemail = Common.findElements("id", "email").size();
+			int sizeemail = Common.findElements("id", "login_email").size();
 			
 			Common.assertionCheckwithReport(sizeemail > 0, "verifying the paypal payment ", expectedResult,
 					"open paypal site window", "faild to open paypal account");
 			}
 			try {
-				Common.clickElement("id", "btnLogin");
+				Common.clickElement("css", "button[data-atomic-wait-intent='Submit_Password']");
 				Thread.sleep(5000);
 				Common.actionsKeyPress(Keys.END);
 				Thread.sleep(5000);
-				Common.clickElement("id", "payment-submit-btn");
+				Common.clickElement("css", "#one-time-cta");
 				Thread.sleep(8000);
+
+
+
+
 				Common.switchToFirstTab();
 			} catch (Exception | Error e) {
 				e.printStackTrace();
@@ -8082,7 +8086,7 @@ public void Continue_Shopping() {
 			Sync.waitPageLoad();
 			Sync.waitElementPresent(30, "css", "label[for='billing-as-shipping']");
 			Common.clickElement("css", "label[for='billing-as-shipping']");
-			
+			Thread.sleep(2000);
 			if(Common.findElements("xpath", "//label[@for='guest_details-email_address']").size()>0)
 			{
 				Common.findElement("xpath", "//label[@for='guest_details-email_address']").getText();
@@ -8100,15 +8104,15 @@ public void Continue_Shopping() {
 			
 			Common.textBoxInput("xpath", "//form[@id='billing']//input[@name='street[0]']", data.get(dataSet).get("Street"));
 			String Text = Common.getText("xpath", "//form[@id='billing']//input[@name='street[0]']");
-//			Sync.waitPageLoad();
-			Thread.sleep(5000);
+			Sync.waitPageLoad();
+			Thread.sleep(8000);
 			
 			
 			Common.textBoxInput("xpath", "//form[@id='billing']//input[@name='city']", data.get(dataSet).get("City"));
 			System.out.println(data.get(dataSet).get("City"));
 
 //			Common.actionsKeyPress(Keys.PAGE_DOWN);
-			Thread.sleep(3000);
+			Thread.sleep(8000);
 			try {
 				Common.dropdown("xpath", "//form[@id='billing']//select[@name='region']", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
 			} catch (ElementClickInterceptedException e) {
@@ -8160,6 +8164,7 @@ public void Continue_Shopping() {
 			Assert.fail();
 		}
 		return update;
+	
 	}
 
 	public void verify_BillingAddress(String Dataset) {
@@ -10281,8 +10286,8 @@ public void Continue_Shopping() {
 				}
 				else
 				{
-					Sync.waitElementPresent("xpath", "//span[text()='Gift Cards']");
-					Common.clickElement("xpath", "//span[text()='Gift Cards']");
+					Sync.waitElementPresent("xpath", "//img[contains(@alt,'\" + GiftCard + \"')]");
+					Common.clickElement("xpath", "//img[contains(@alt,'\" + GiftCard + \"')]");
 				}
 				
 				Sync.waitElementPresent("xpath", "//img[@loading='eager']");

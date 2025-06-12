@@ -545,9 +545,9 @@ public class GoldDrybarusHelper2 {
         }
         else {
 
-            Common.switchFrames("xpath", "//div[@class='preloaded_lightbox']/iframe");
-            Sync.waitElementPresent("id", "ltkpopup-close-button");
-            Common.clickElement("id", "ltkpopup-close-button");
+  //          Common.switchFrames("xpath", "//div[@id='ltkpopup-formcontent']");
+            Sync.waitElementPresent("css", "div[aria-label='Close dialog']");
+            Common.clickElement("css", "div[aria-label='Close dialog']");
             Common.switchToDefault();
             }
 
@@ -1620,30 +1620,24 @@ public class GoldDrybarusHelper2 {
 		String Brushes = data.get(Dataset).get("Brushes");
 		String Detangling = data.get(Dataset).get("Detangling Brushes");
 		String header=data.get(Dataset).get("headers");
-		try {
-
-		  
+		try {		  
 //			Sync.waitElementPresent("xpath",
-//					"//a[@title='"+ header +"']//span[contains(text(),'"+ header +"')]");
-//			
-//			Common.clickElement("xpath", "//a[@title='"+ header +"']//span[contains(text(),'"+ header +"')]");
-			
-			Sync.waitElementPresent("xpath","//button//span[contains(text(),'"+ header +"')]");
-			
+//					"//a[@title='"+ header +"']//span[contains(text(),'"+ header +"')]");			
+//			Common.clickElement("xpath", "//a[@title='"+ header +"']//span[contains(text(),'"+ header +"')]");			
+			Sync.waitElementPresent("xpath","//button//span[contains(text(),'"+ header +"')]");			
 			Common.clickElement("xpath", "//button//span[contains(text(),'"+ header +"')]");
-
 			Thread.sleep(3000);
-
 			try {
 				Common.mouseOver("xpath", "//span[contains(text(),'"+ header +"')]");
 			} catch (Exception e) {
 				Common.clickElement("xpath", "//a[@class='level-top ui-corner-all']//span[text()='"+ header +"']");
 			}
+//			Common.clickElement("xpath", "//span[contains(text(),'" + Brushes + "')]");
 			Common.clickElement("xpath", "//span[contains(text(),'" + Brushes + "')]");
 			Thread.sleep(3000);
-			Common.clickElement("xpath", "//span[contains(text(),'" + Detangling + "')]");
 			Sync.waitPageLoad();
-			Thread.sleep(4000);
+//			Common.clickElement("xpath", "//span[contains(text(),'" + Detangling + "')]");
+//			Thread.sleep(4000);
 			expectedResult = "User should select the " + Dataset + "category";
 			//int sizebotteles = Common.findElements("xpath", "//a[@title='"+ header +"']//span[contains(text(),'"+ header +"')]").size();
 			int sizebotteles = Common.findElements("xpath", "//button//span[contains(text(),'"+ header +"')]").size();
@@ -1780,21 +1774,21 @@ public class GoldDrybarusHelper2 {
 			
 			if(Common.getCurrentURL().contains("/gb"))
 			{
-				String Subtotal = Common.getText("xpath", "//tr[@class='totals sub']//span[@class='price']").replace(Symbol,
+				String Subtotal = Common.getText("xpath", "//div[@class='item subtotal']//span[contains(@class, 'value')]").replace(Symbol,
 						"");
 				Float subtotalvalue = Float.parseFloat(Subtotal);
-				String shipping = Common.getText("xpath", "//tr[contains(@class,'totals shipping')]//span[@class='price']")
+				String shipping = Common.getText("xpath", "//span[contains(@class, 'shipping-value')]")
 						.replace(Symbol, "");
 				Float shippingvalue = Float.parseFloat(shipping);
-				String Tax = Common.getText("xpath", "//tr[@class='totals-tax']//span[@class='price']").replace(Symbol, "");
+				String Tax = Common.getText("xpath", "//div[@class='item tax']//span[@class='value']").replace(Symbol, "");
 				Float Taxvalue = Float.parseFloat(Tax);
 				Thread.sleep(4000);
 
-				String ordertotal = Common.getText("xpath", "//tr[@class='grand totals']//span[@class='price']")
+				String ordertotal = Common.getText("xpath", "//div[@class='item grand_total']//span[contains(@class, 'checkout-total')]")
 						.replace(Symbol, "");
 				Float ordertotalvalue = Float.parseFloat(ordertotal);
 				Thread.sleep(4000);
-				Float Total = (subtotalvalue + shippingvalue);
+				Float Total = (subtotalvalue + shippingvalue + Taxvalue );
 				String ExpectedTotalAmmount2 = new BigDecimal(Total).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
 				Thread.sleep(4000);
 				System.out.println(ExpectedTotalAmmount2);
@@ -1807,30 +1801,25 @@ public class GoldDrybarusHelper2 {
 			}
 			else
 			{
-			Thread.sleep(4000);
-			String Subtotal = Common.getText("xpath", "(//div[@class='item subtotal']//span[@class='value'])[1]").replace("$",
-					"");
-			System.out.println(Subtotal);
-			Float subtotalvalue = Float.parseFloat(Subtotal);
-			String shipping = Common.getText("xpath", "(//div[@class='item shipping']//span[@class='checkout-total-segments__shipping-value value'])[1]")
-					.replace(Symbol, "");
-			Float shippingvalue = Float.parseFloat(shipping);
-			
-			
-			String Tax = Common.getText("xpath", "(//div[@class='item tax']//span[@class='value'])[1]").replace(Symbol, "");
-			
-			Float Taxvalue = Float.parseFloat(Tax);
-			Thread.sleep(4000);
+				String Subtotal = Common.getText("xpath", "//div[@class='item subtotal']//span[contains(@class, 'value')]").replace(Symbol,
+						"");
+				Float subtotalvalue = Float.parseFloat(Subtotal);
+				String shipping = Common.getText("xpath", "//span[contains(@class, 'shipping-value')]")
+						.replace(Symbol, "");
+				Float shippingvalue = Float.parseFloat(shipping);
+				String Tax = Common.getText("xpath", "//div[@class='item tax']//span[@class='value']").replace(Symbol, "");
+				Float Taxvalue = Float.parseFloat(Tax);
+				Thread.sleep(4000);
 
-			String ordertotal = Common.getText("xpath", "(//div[@class='item grand_total']//span[contains(@class,'value')])[1]")
-					.replace(Symbol, "");
-			Float ordertotalvalue = Float.parseFloat(ordertotal);
-			Thread.sleep(4000);
-			Float Total = (subtotalvalue + shippingvalue + Taxvalue);
-			String ExpectedTotalAmmount2 = new BigDecimal(Total).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
-			Thread.sleep(4000);
-			System.out.println(ExpectedTotalAmmount2);
-			System.out.println(ordertotal);
+				String ordertotal = Common.getText("xpath", "//span[contains(@class, 'grand-total-value')]")
+						.replace(Symbol, "");
+				
+				Thread.sleep(4000);
+				Float Total = (subtotalvalue + shippingvalue + Taxvalue);
+				String ExpectedTotalAmmount2 = new BigDecimal(Total).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
+				Thread.sleep(4000);
+				System.out.println(ExpectedTotalAmmount2);
+				System.out.println(ordertotal);
 			Common.assertionCheckwithReport(ExpectedTotalAmmount2.equals(ordertotal),
 					"validating the Tax on the payment page",
 					"On the order summary tax should be display on the payment page",
@@ -1856,13 +1845,13 @@ public class GoldDrybarusHelper2 {
 		// TODO Auto-generated method stub
 		try
 		{
-			String Subtotal = Common.getText("xpath", "(//div[@class='item subtotal']//span[@class='value'])[1]").replace("$",
+			String Subtotal = Common.getText("xpath", "//div[@class='item subtotal']//span[contains(@class, 'value')]").replace("$",
 					"");
 			Float subtotalvalue = Float.parseFloat(Subtotal);
-			String shipping = Common.getText("xpath", "//div[@class='item shipping']//span[@class='value']")
+			String shipping = Common.getText("xpath", "//span[contains(@class, 'shipping-value')]")
 					.replace("$", "");
 			Float shippingvalue = Float.parseFloat(shipping);
-			String ordertotal = Common.getText("xpath", "(//div[@class='item grand_total']//span[contains(@class,'value text-right')])[1]")
+			String ordertotal = Common.getText("xpath", "//span[contains(@class, 'grand-total-value')]")
 					.replace("$", "");
 			Float ordertotalvalue = Float.parseFloat(ordertotal);
 			Thread.sleep(4000);
@@ -3191,6 +3180,12 @@ public class GoldDrybarusHelper2 {
 							"Failed to navigate to social link " + socallinksarry[i]);
 					Common.closeCurrentWindow();
 					Common.switchToFirstTab();
+				}
+				else if (socallinksarry[i].contains("levelaccess")) {
+					Common.assertionCheckwithReport(Common.getCurrentURL().contains("levelaccess"),
+							"Verifying Social link  " + socallinksarry[i], "User click the social " + socallinksarry[i],
+							"successfully navigating to social link  " + socallinksarry[i],
+							"Failed to navigate to social link " + socallinksarry[i]);
 				}
 
 			}
@@ -5473,6 +5468,7 @@ public void FUll_Payment(String dataSet) {
 			Common.clickElement("xpath", "//input[@name='password_confirmation']");
 			Common.textBoxInput("xpath", "//input[@name='password_confirmation']",
 					data.get(Dataset).get("Confirm Password"));
+			Common.clickElement("id","is_subscribed");
 			Common.clickElement("xpath", "//button[@title='Sign Up']");
 			Thread.sleep(4000);
 //			String message = Common.findElement("id", "validation-classes").getCssValue("color");
@@ -5545,7 +5541,9 @@ public void FUll_Payment(String dataSet) {
     			Common.textBoxInput("xpath", "//input[@name='password_confirmation']",
     					data.get(Dataset).get("Confirm Password"));
     			System.out.println(data.get(Dataset).get("Confirm Password"));
-    			Thread.sleep(4000);
+    			Thread.sleep(3000);
+    			Common.clickElement("id","is_subscribed");
+    			Thread.sleep(2000);
     			Common.clickElement("xpath", "//button[@title='Sign Up']");
     			Sync.waitElementVisible(30, "xpath", "//span[@x-html='message.text']");
     			String message = Common.findElement("xpath", "//span[@x-html='message.text']").getText();
@@ -6104,14 +6102,14 @@ public void FUll_Payment(String dataSet) {
 				Sync.waitPageLoad();
 				Common.switchWindows();
 				//Common.switchFrames("xpath", "//iframe[@id='klarna-apf-iframe']");
-				Sync.waitElementPresent("xpath", "//input[@name='phonePasskey']");
+				Sync.waitElementPresent("xpath", "//input[@name='phonePasskey'] | //input[@name='phone']");
 			/*	Common.clickElement("xpath", "//input[@name='phone']");
 				
 				int number=Common.genrateRandomNumber();
 				System.out.println(number);
 				String mobile=Integer.toString(number);
 				String phone="+91"+"95862"+mobile;*/
-				WebElement clear=Common.findElement("xpath", "//input[@name='phonePasskey']");
+				WebElement clear=Common.findElement("xpath", "//input[@name='phonePasskey'] | //input[@name='phone']");
 			    clear.sendKeys(Keys.CONTROL+"a");
 			    clear.sendKeys(Keys.DELETE);
 				System.out.println(phone);
@@ -7208,6 +7206,9 @@ public void FUll_Payment(String dataSet) {
 			
 			int i = 0;
 			try {
+				Common.findElement("xpath","(//div[@class='row-full-width-inner']//p)[4]");
+				Common.clickElement("xpath","//img[contains(@class,'header__logo-image')]");
+				Sync.waitPageLoad();
 				for (i = 0; i < Links.length; i++) {
 					Sync.waitElementPresent("xpath", "(//span[contains(text(),'"+ hair +"')])[1]");
 					Common.clickElement("xpath", "(//span[contains(text(),'"+ hair +"')])[1]");
@@ -7700,8 +7701,8 @@ public void FUll_Payment(String dataSet) {
 		public void view_PLP_page() {
 			try {
 				Thread.sleep(4000);
-//				String title = Common.findElement("xpath","//div[contains(@class,'c-clp-hero')]").getAttribute("Class");
-//				System.out.println(title);
+				String title = Common.findElement("xpath","//h1[contains(@class,'title-2xl')]").getAttribute("class");
+				System.out.println(title);
 				Common.scrollIntoView("xpath", "//nav[@id='breadcrumbs']");
 				String breadcrumbs = Common.findElement("xpath", "//nav[@id='breadcrumbs']")
 						.getAttribute("aria-label");
@@ -7713,12 +7714,22 @@ public void FUll_Payment(String dataSet) {
 								"//div[@id='algolia_instant_sorter']//span")
 						.getText();
 				System.out.println(Sort);
+				int Reviews = Common.findElements("xpath","//span[@class='yotpo-sr-bottom-line-right-panel']").size();
+				int Ribbons = Common.findElements("xpath","//span[contains(@class,'ribbon-bg new flex justify-center')]").size();
 				Thread.sleep(4000);
-				Common.assertionCheckwithReport(
-						breadcrumbs.contains("Breadcrumb") || breadcrumbs.contains("Migaja de pan") || breadcrumbs.contains("Fil d'Ariane")
-								&& filter.contains("Filter by") || filter.contains("Filtrado por") || filter.contains("Filtres") && Sort.contains("Sort by") || Sort.contains("Ordenar por") || Sort.contains("Trier par"),
+				Common.assertionCheckwithReport(Reviews > 0 && breadcrumbs.contains("Breadcrumb") && filter.contains("Filter by") && Sort.contains("Sort by") 
+						&& title.contains("title") && Ribbons > 0,
 						"To validate the Product Listing Page", "User should able to open Product Listing Page",
 						"Sucessfully views the Product Listing Page", "Failed to view Product Listing Page");
+				Thread.sleep(4000);
+				if(Common.findElements("xpath","//picture[contains(@class,'cmsb4384-absolute cmsb4384-w-full')]").size()>0) {
+					Thread.sleep(4000);
+					Common.clickElement("xpath","//a[contains(@aria-label,'Shop now')]");
+					Thread.sleep(4000);
+					Common.navigateBack();
+					}
+				Common.actionsKeyPress(Keys.PAGE_DOWN);
+				Common.clickElement("xpath","//button[contains(@class,'border border-secondary btn-secondary')]");//
 			} catch (Exception | Error e) {
 				e.printStackTrace();
 				ExtenantReportUtils.addFailedLog("To validate the Product Listing Page",
@@ -7733,7 +7744,7 @@ public void FUll_Payment(String dataSet) {
 			System.out.println(category);
 	try {
 				
-		Thread.sleep(6000);
+				Thread.sleep(6000);
 				String text = Common.findElement("xpath", "//span[text()='"+category+"']//parent::a//span[2]").getText();
 				System.out.println(text);
 				 
@@ -7741,7 +7752,7 @@ public void FUll_Payment(String dataSet) {
 				int textValue = Integer.parseInt(text); // Now parse the cleaned string  
 				System.out.println(textValue); // This will print: 14
 				
-				Common.clickElement("xpath", "//a[text()='"+category+"']");
+				Common.clickElement("xpath", "//span[text()='"+category+"']");
 				Thread.sleep(4000);
 //				int textValue = Integer.parseInt(text);
 				String categoryvalue=Integer.toString(textValue);
@@ -9144,16 +9155,16 @@ public void Tax_validation_Paymentpage() {
 	  
 	try
 	{
-		String Subtotal = Common.getText("xpath", "//tr[@class='totals sub']//span[@class='price']").replace("£","");
+		String Subtotal = Common.getText("xpath", "//div[@class='item subtotal']//span[contains(@class, 'value')]").replace("£","");
 		Float subtotalvalue = Float.parseFloat(Subtotal);
 		System.out.println("subtotalvalue");
-		String shipping = Common.getText("xpath", "//tr[@class='totals shipping incl']//span[@class='price']").replace("£", "");
+		String shipping = Common.getText("xpath", "//span[contains(@class, 'shipping-value')]").replace("£", "");
 		Float shippingvalue = Float.parseFloat(shipping);
-		String Tax = Common.getText("xpath", "//tr[@class='totals-tax']//span[@class='price']").replace("£", "");
+		String Tax = Common.getText("xpath", "//div[@class='item tax']//span[@class='value']").replace("£", "");
 		Float Taxvalue = Float.parseFloat(Tax);
 		Thread.sleep(4000);
 
-		String ordertotal = Common.getText("xpath", "//tr[@class='grand totals']//span[@class='price']")
+		String ordertotal = Common.getText("xpath", "//span[contains(@class, 'grand-total-value')]")
 				.replace("£", "");
 		Float ordertotalvalue = Float.parseFloat(ordertotal);
 		Thread.sleep(4000);
@@ -11702,6 +11713,8 @@ public void Company(String Dataset) {
 	String[] footerlinks = footer.split(",");
 	int i = 0;
 	try {
+		Common.scrollIntoView("xpath","//img[@alt='Logo']");
+		Common.clickElement("xpath","//img[@alt='Logo']");
 		for (i = 0; i < footerlinks.length; i++) {
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
@@ -12148,6 +12161,61 @@ public String fivepercent_Reward_Points(String Dataset) {
 	}
 	return rewardpointsused;
 }
+
+public void My_Returns_page_Validation() throws Exception {
+	// TODO Auto-generated method stub
+			
+			try
+			{	
+				Sync.waitElementPresent("css", "button[id='customer-menu']");
+				Common.clickElement("css", "button[id='customer-menu']");
+				Sync.waitElementPresent("id", "customer.header.dashboard.link");
+				Common.clickElement("id", "customer.header.dashboard.link");			
+				Sync.waitElementPresent("id", "account-returns-link");
+				Common.clickElement("id","account-returns-link");
+				String returns=Common.findElement("id", "my-orders-title").getText();
+				Sync.waitPageLoad();
+				Thread.sleep(2000);
+				Common.assertionCheckwithReport(Common.getPageTitle().contains("My Returns") && returns.contains("MY RETURNS"),
+						"validating the navigating to the returns page from the register user",
+						"After clicking it should be navigate to the returns page",
+						"Sucessfully Navigated to the returns page after clicking from the My returns my order",
+						"Failed to Navigate to the returns page after clicking from the My returns my order");
+			    Common.clickElement("css", "a[title='View Return']");
+				Sync.waitPageLoad();
+				Common.assertionCheckwithReport(Common.getCurrentURL().contains("/rma/returns/view/entity_id/"),
+						"validating the Navigation to the return order page",
+						"After Clicking on the print invoice user should be able to see return orders page",
+						"Sucessfully User Navigates to returns page  after clicking on the view returns",
+						"Failed to Navigate to the to returns page  after clicking on the view returns");
+				String returnid=Common.findElement("id","my-orders-title").getText().toLowerCase().replace("return #","").trim();
+				System.out.println(returnid);
+				String returnDetails = Common.findElement("xpath","//div[@class='pt-3 box-content']").getText();
+				System.out.println(returnDetails);
+				String ID = Common.findElement("xpath","//div[contains(text(),'ID:')]").getText().split("ID: ")[1].split(" \\|")[0].replace("Order","").trim();
+				System.out.println(ID);
+				String Status = Common.findElement("css","div[class*='flex justify-between lg:block text-right'] span").getText();
+				System.out.println(Status);
+				System.out.println(returnid.equals(ID));
+				Sync.waitPageLoad();
+				Thread.sleep(2000);
+				Common.assertionCheckwithReport(returnid.equals(ID) && Status.contains("Return Received"),
+						"validating the navigating to the return received page",
+						"After clicking it should be navigate to the recevied status",
+						"Sucessfully Navigated to the to the return received page",
+						"Failed to Navigate to the to the return received page");		
+			}
+			catch(Exception | Error e)
+			{
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("validating the navigating to the invoice or Shipment page from the guest track order",
+						"After clicking it should be navigate to the invoice or Shipment page",
+						"Sucessfully Navigated to the invoice or Shipment page after clicking from the guest user track my order",
+						Common.getscreenShot("Failed to Navigate to the Invoice or Shipment page after clicking from the guest user track my order"));
+				Assert.fail();
+			}
+			
+		}
 
 public void verify_RewardPoints(String rewardpoints) {
 	// TODO Auto-generated method stub
