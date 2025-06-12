@@ -120,9 +120,9 @@
 <class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_105_Checkout_with_AMEX_as_Guestuser_with_PO_Box_2DAY"/>
 </classes>
 </test>
-<test name="Test_DGLD_HF_ST_107_Prod_My_Account_Page_Validation" testid="DQA-220" priority="P1" description="This script will cover validating of the my account page ">
+<test name="Test_DGLD_HF_ST_107_My_Account_Page_Validation" testid="DQA-220" priority="P1" description="This script will cover validating of the my account page ">
 <classes>
-<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_107_Prod_My_Account_Page_Validation"/>
+<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_107_My_Account_Page_Validation"/>
 </classes>
 </test>
 <test name="Test_DGLD_HF_ST_083_Register_User_Back_In_stock_Subcription" testid="DQA-182" priority="P1" description="This script will cover validating the Register User Back In stock Subcription ">
