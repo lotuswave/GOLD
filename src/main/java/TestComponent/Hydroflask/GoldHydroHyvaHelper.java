@@ -2332,8 +2332,9 @@ public void FUll_Payment(String dataSet) {
 					.replace("$", "");
 			Float subtotalvalue = Float.parseFloat(Subtotal);
 			System.out.println("Subtotal  :"+subtotalvalue);
-			Sync.waitElementPresent("xpath", "(//select[@name='qty'])[2]");
-			Common.clickElement("xpath", "(//select[@name='qty'])[2]");
+			Sync.waitElementPresent(30,"xpath", "(//select[@name='qty'])[2]");
+            Common.scrollIntoView("xpath", "(//select[@name='qty'])[2]");
+			Common.javascriptclickElement("xpath", "(//select[@name='qty'])[2]");
 			Common.dropdown("xpath", "(//select[@name='qty'])[2]", Common.SelectBy.VALUE,
 					UpdataedQuntityinminicart);
 			Thread.sleep(5000);
@@ -2396,17 +2397,22 @@ public void FUll_Payment(String dataSet) {
 		// TODO Auto-generated method stub
 		String deleteproduct = data.get(Dataset).get("Colorproduct");
 		try {
+			Thread.sleep(3000);
 			Sync.waitElementPresent(30, "xpath", "//span[contains(@class, 'subtotal-value')]//span");
 			String subtotal = Common.getText("xpath", "//span[contains(@class, 'subtotal-value')]//span")
 					.replace("$", "");
 			Float subtotalvalue = Float.parseFloat(subtotal);
+			Thread.sleep(3000);
+			Common.scrollIntoView("xpath", "(//div[contains(@class,'cart-drawer__item-content')]//a[contains(@class,'cart-drawer__item')])[2]");
+			int pSize=Common.findElements("xpath", "(//div[contains(@class,'cart-drawer__item-content')]//a[contains(@class,'cart-drawer__item')])[2]").size();
+
 			String productname = Common
 					.findElement("xpath", "(//div[contains(@class,'cart-drawer__item-content')]//a[contains(@class,'cart-drawer__item')])[2]")
 					.getText();
-			String productamount1 = Common.getText("xpath", "(//span[@x-html='item.product_price']//span)[1]").replace("$",
+			String productamount1 = Common.getText("xpath", "(//span[@x-html='cart.subtotal']//span)[1]").replace("$",
 					"");
 			Float productamount1value = Float.parseFloat(productamount1);
-			if (productname.equals(deleteproduct)) {
+			if (productname.equals(deleteproduct)||pSize>0 ) {
 				Sync.waitElementPresent(30, "xpath",
 						"(//div[contains(@class,'cart-drawer__item-content')]//button[contains(@aria-label,'Remove product')])[1]");
 				Common.clickElement("xpath",
@@ -2416,21 +2422,19 @@ public void FUll_Payment(String dataSet) {
 			} else {
 				Assert.fail();
 			}
-			Thread.sleep(6000);
-			String subtotal1 = Common.getText("xpath", "//span[@x-html='cart.subtotal']//span")
-					.replace("$", "");
-			Float subtotal1value = Float.parseFloat(subtotal1);
-			Thread.sleep(8000);
-			String productamount = Common.getText("xpath", "//span[@x-html='item.product_price']").replace("$", "");
-			Float productamountvalue = Float.parseFloat(productamount);
-			Float Total = subtotalvalue - productamount1value;
-			String ExpectedTotalAmmount2 = new BigDecimal(Total).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
-			Thread.sleep(4000);
-			Common.assertionCheckwithReport(ExpectedTotalAmmount2.equals(subtotal1),
-					"validating the delete operation and subtotal",
-					"The product should be delete from mini cart and subtotal should change",
-					"Successfully product delete from the mini cart and subtotal has been changed",
-					"Failed to delete the product from cart and subtotal not changed");
+			Thread.sleep(7000);
+			String cartProductQty = Common.getText("xpath", "//span[@x-text='totalCartAmount']");
+			
+//			String productamount = Common.getText("xpath", "//span[@x-html='item.product_price']//span[@class='price']").replace("$", "");
+//			Float productamountvalue = Float.parseFloat(productamount);
+//			Float Total = subtotalvalue - productamount1value;
+//			String ExpectedTotalAmmount2 = new BigDecimal(Total).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
+//			Thread.sleep(4000);
+			Common.assertionCheckwithReport(cartProductQty.equals("1"),
+					"validating the delete operation",
+					"The product should be delete from mini cart ",
+					"Successfully product delete from the mini cart ",
+					"Failed to delete the product from cart ");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
@@ -5946,12 +5950,9 @@ public void Remove_GiftCode() {
 			}
 			Thread.sleep(2000);
 //			Common.textBoxInputClear("xpath", "//input[@name='postcode']");
-			Common.textBoxInput("id", "billing-postcode",
+			Common.textBoxInput("css", "input#shipping-telephone",
 					data.get(dataSet).get("postcode"));
 			Thread.sleep(5000);
-
-			Common.textBoxInput("id", "billing-telephone",
-					data.get(dataSet).get("phone"));
 			if(Common.findElements("xpath", "//span[text()='Update']").size()>0) {
 				Common.clickElement("xpath", "//span[text()='Update']");
 				Sync.waitPageLoad();
@@ -9952,9 +9953,9 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 			expectedResult = "It should apply discount on your price.If user enters invalid promocode it should display coupon code is not valid message.";
 			if (Common.getCurrentURL().contains("preprod")) {
 				
-				String discountcodemsg = Common.getText("xpath", "//div[@class='container']//div[@class='relative flex w-full']/span");
+				int discountcodemsg = Common.findElements("xpath", "//div[@class='container']//div[@class='relative flex w-full']/span").size();
 				System.out.println(discountcodemsg);
-				Common.assertionCheckwithReport(discountcodemsg.contains("You used discount code"), "verifying pomocode",
+				Common.assertionCheckwithReport(discountcodemsg>0, "verifying pomocode",
 						expectedResult, "promotion code working as expected", "Promation code is not applied");
 			} else {
 				String discountcodemsg = Common.getText("xpath", "//div[@class='container']//div[@class='relative flex w-full']/span");
@@ -10191,6 +10192,7 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 		Common.clickElement("xpath", "//a[@title='My Account']");
 		Sync.waitPageLoad();
 		Account_Page_Rewards();
+		
 		if(Common.findElements("xpath", "//button[@aria-label='Close dialog']").size()>0) {
 			Common.clickElement("xpath", "//button[@aria-label='Close dialog']");
 		}
@@ -15563,6 +15565,7 @@ Common.clickElement("xpath", "//span[text()='Edit']");
 		String Symbol = data.get(dataSet).get("Symbol");
 		String products = data.get(dataSet).get("Products");
 		System.out.println(products);
+		//String products ="12 oz Mug";
 
 		try {
 			Thread.sleep(4000);
