@@ -25,7 +25,7 @@ public class TEST_DGLD_OS_US_ST_109_RegisterUser_checkout_Klarna_SavedPayment_St
         Osprey_ReEu.Verify_Price("Product<50");  
         Osprey_ReEu.minicart_Checkout();
         Osprey_ReEu.RegaddDeliveryAddress("Account");
-        Osprey_ReEu.selectshippingmethod("GroundShipping method");
+        Osprey_ReEu.selectshippingmethod("RegisterShippingMethod");
         Osprey_ReEu.Verify_OrderTotal();
         Osprey_ReEu.clickSubmitbutton_Shippingpage();
         Osprey_ReEu.Kalrna_Payment("Klarna Visa Payment");

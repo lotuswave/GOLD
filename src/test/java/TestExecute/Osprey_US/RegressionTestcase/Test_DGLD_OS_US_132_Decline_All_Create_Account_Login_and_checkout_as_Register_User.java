@@ -25,7 +25,7 @@ public class Test_DGLD_OS_US_132_Decline_All_Create_Account_Login_and_checkout_a
         Osprey_ReEu.addtocart("Product");
         Osprey_ReEu.minicart_Checkout();
         Osprey_ReEu.RegaddDeliveryAddress("Account");
-        Osprey_ReEu.selectshippingmethod("GroundShipping method");
+        Osprey_ReEu.selectshippingmethod("RegisterShippingMethod");
         Osprey_ReEu.clickSubmitbutton_Shippingpage();      
         Osprey_ReEu.updatePaymentAndSubmitOrder("CCAmexcard");
         if(Common.getCurrentURL().contains("https://mcloud-na-preprod.osprey.com/")) {

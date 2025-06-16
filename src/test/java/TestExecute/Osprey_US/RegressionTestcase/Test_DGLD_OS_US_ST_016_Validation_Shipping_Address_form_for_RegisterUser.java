@@ -25,7 +25,7 @@ public class Test_DGLD_OS_US_ST_016_Validation_Shipping_Address_form_for_Registe
         Osprey_ReEu.addtocart("Product");
         Osprey_ReEu.minicart_Checkout();
         Osprey_ReEu.addDeliveryAddress_RegUser("Invalid Address");
-        Osprey_ReEu.selectshippingmethod("GroundShipping method");
+        Osprey_ReEu.selectshippingmethod("RegisterShippingMethod");
         Osprey_ReEu.validatingErrormessageShippingpage_negative();
         
 		} catch (Exception e) {

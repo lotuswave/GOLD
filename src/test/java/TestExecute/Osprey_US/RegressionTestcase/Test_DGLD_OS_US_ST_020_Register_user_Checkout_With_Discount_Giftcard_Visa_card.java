@@ -24,7 +24,7 @@ public class Test_DGLD_OS_US_ST_020_Register_user_Checkout_With_Discount_Giftcar
         Osprey_ReEu.addtocart("Product");
         Osprey_ReEu.minicart_Checkout();
         Osprey_ReEu.RegaddDeliveryAddress("Account");
-        Osprey_ReEu.selectshippingmethod("GroundShipping method");
+        Osprey_ReEu.selectshippingmethod("RegisterShippingMethod");
         Osprey_ReEu.discountCode("Discount");
         Osprey_ReEu.Gift_card("Partial Giftcard");
         Osprey_ReEu.updatePaymentAndSubmitOrder("CCVisacard");

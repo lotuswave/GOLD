@@ -25,7 +25,7 @@ public class Test_DGLD_OS_US_ST_024_Add_to_Cart_from_Sticky_Cart_in_PDP_Page {
         Osprey_ReEu.Sticky_Add_to_Cart("Simple product");        
         Osprey_ReEu.minicart_Checkout();
         Osprey_ReEu.addDeliveryAddress_Guestuser("Account");
-        Osprey_ReEu.selectshippingmethod("GroundShipping method");
+        Osprey_ReEu.selectshippingmethod("RegisterShippingMethod");
         Osprey_ReEu.clickSubmitbutton_Shippingpage();
         Osprey_ReEu.updatePaymentAndSubmitOrder("CCVisacard");
         
