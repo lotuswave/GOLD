@@ -535,7 +535,7 @@ public class GoldDrybarusHelper2 {
 	public void close_add() throws Exception {
         // TODO Auto-generated method stub
         Thread.sleep(5000);
-        int sizesframe = Common.findElements("xpath", "//div[@id='ltkpopup-content']").size();
+      /*  int sizesframe = Common.findElements("xpath", "//div[@id='ltkpopup-content']").size();
         System.out.println(sizesframe);
         if (sizesframe > 0) {
             Common.actionsKeyPress(Keys.PAGE_UP);
@@ -549,7 +549,7 @@ public class GoldDrybarusHelper2 {
             Sync.waitElementPresent("css", "div[aria-label='Close dialog']");
             Common.clickElement("css", "div[aria-label='Close dialog']");
             Common.switchToDefault();
-            }
+            }*/
 
 	}
 
