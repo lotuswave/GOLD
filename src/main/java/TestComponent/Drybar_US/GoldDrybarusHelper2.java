@@ -7475,8 +7475,16 @@ public void FUll_Payment(String dataSet) {
 						System.out.println(breadcrumbs);
 						System.out.println(Links[i]);
 						Thread.sleep(4000);
-						String products=Common.getText("xpath", "//div[contains(@class,'flex w-full')]//span");
+						//String products=Common.getText("xpath", "//div[contains(@class,'flex w-full')]//span");
+						String products = "";
+						if (Common.findElements("xpath", "//span[@id='algolia-tab-products-counter']").size() > 0) {
+						    products = Common.findElement("xpath", "//span[@id='algolia-tab-products-counter']").getText();
+						} else if(Common.findElements("xpath", "//div[contains(@class,'flex w-full')]//span").size() > 0) {
+							products = Common.findElement("xpath", "(//div[contains(@class,'flex w-full')]//span)[1]").getText();
+						}
+						
 						System.out.println(products);
+						
 						int Number = Integer.parseInt(products);
 						int j=0;
 						if(Number>j)
