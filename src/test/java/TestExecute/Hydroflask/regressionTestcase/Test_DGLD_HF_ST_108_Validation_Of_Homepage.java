@@ -9,7 +9,7 @@ import TestComponent.Hydroflask.GoldHydroHyvaHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_HY_ST_108_Validation_Of_Homepage {
+public class Test_DGLD_HF_ST_108_Validation_Of_Homepage {
 
 	String datafile = "Hydroflask//GoldHydroTestData.xlsx";
 	GoldHydroHyvaHelper Hydro = new GoldHydroHyvaHelper(datafile,"Dataset");
