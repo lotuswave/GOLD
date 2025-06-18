@@ -13331,7 +13331,11 @@ String PDP_PrdtName = color.toLowerCase();
 	public String change_Email(String Dataset) {
 		// TODO Auto-generated method stub
 		String newemail = "";
-		String Email=Common.genrateRandomEmail("hydroflaskqa@gmail.com");
+//		String Email=Common.genrateRandomEmail("hydroflaskqa@gmail.com");
+		Random random = new Random();
+		int min = 1000, max =1300;
+        int i = random.nextInt(max - min + 1) + min; 
+		String Email ="hydroflaskqa+Automation"+i+"@gmail.com";
 
 		try {
 			
@@ -16231,6 +16235,183 @@ Common.clickElement("xpath", "//span[text()='Edit']");
 		}
 	}
 
+	public void Store_Logo_Validation() {
+		
+		try {
+			
+			Common.clickElement("css", "img[alt='Hydroflask store logo']");	
+			String expectedHomePageURL = automation_properties.getInstance().getProperty(automation_properties.BASEURL);
+	System.out.println(expectedHomePageURL);
+	Common.assertionCheckwithReport(
+		    Common.getCurrentURL().equals(expectedHomePageURL),
+		    "Validating store logo click redirects to homepage",
+		    "Store logo should redirect to the homepage",
+		    "Successfully redirected to homepage after clicking the store logo",
+		    "Failed to redirect to homepage after clicking the store logo"
+		);
+
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog(
+				    "Validating store logo click redirects to homepage",
+				    "Store logo should redirect to the homepage",
+				    "Unable to redirect to the homepage after clicking the store logo",
+				    Common.getscreenShot("Failed to redirect to homepage after clicking the store logo")
+				);
+
+			Assert.fail();
+		}
+	}
+	
+	
+	
+	public void Hero_Banner_Validation() {
+		try {
+			int hero_banner = Common.findElements("xpath", "//section[contains(@aria-label,'Hero')]").size();
+
+			Common.assertionCheckwithReport(hero_banner > 0, "Validating presence of hero banner on the homepage",
+					"Hero banner should be displayed on the homepage",
+					"Successfully displayed the hero banner on the homepage",
+					"Failed to display the hero banner on the homepage");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("Validating presence of hero banner on the homepage",
+					"Hero banner should be displayed on the homepage", "Hero banner is not displayed on the homepage",
+					Common.getscreenShot("Hero_Banner_Not_Displayed"));
+			Assert.fail();
+		}
+	}
+	
+	public void CatogeryORproduct_Tile_Validation() {
+		try {
+			Common.scrollIntoView("css", "div[class='html-category-tiles'],[class='ussa-pmcs']");
+			int CatogeryORproduct_Tile = Common.findElements("css", "div[class='html-category-tiles'],[class='ussa-pmcs']").size();
+
+						Common.assertionCheckwithReport(
+								CatogeryORproduct_Tile > 0,
+			    "Validating presence of category or product tile on the homepage",
+			    "Category or product tile should be displayed on the homepage",
+			    "Successfully displayed the category or product tile on the homepage",
+			    "Failed to display the category or product tile on the homepage"
+			);
+
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog(
+				    "Validating presence of category or product tile on the homepage",
+				    "Category or product tile should be displayed on the homepage",
+				    "Category or product tile is not displayed on the homepage",
+				    Common.getscreenShot("CategoryOrProductTile_Not_Displayed")
+				);
+
+			Assert.fail();
+		}
+	}
+	public void CatogeryORproduct_Slider_Validation() {
+		try {
+			Common.scrollIntoView("css", "div[class='hf__category-product__slider']");
+			int CatogeryORproduct_Slider = Common.findElements("css", "div[class='hf__category-product__slider']").size();
+
+			Common.assertionCheckwithReport(
+				    CatogeryORproduct_Slider > 0,
+				    "Validating presence of category or product slider on the homepage",
+				    "Category or product slider should be displayed on the homepage",
+				    "Successfully displayed the category or product slider on the homepage",
+				    "Failed to display the category or product slider on the homepage"
+				);
+
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog(
+				    "Validating presence of category or product slider on the homepage",
+				    "Category or product slider should be displayed on the homepage",
+				    "Category or product slider is not displayed on the homepage",
+				    Common.getscreenShot("CategoryOrProductSlider_Not_Displayed")
+				);
+
+			Assert.fail();
+		}
+	}
+	
+	public void Promo_Block_Validation() {
+		try {
+			Common.scrollIntoView("css", "section[aria-label='Recycle Values Section']");
+			int promoBlock = Common.findElements("css", "section[aria-label='Recycle Values Section']").size();
+
+			Common.assertionCheckwithReport(
+				    promoBlock > 0,
+				    "Validating presence of promo block on the homepage",
+				    "Promo block should be displayed on the homepage",
+				    "Successfully displayed the promo block on the homepage",
+				    "Failed to display the promo block on the homepage"
+				);
+
+
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog(
+				    "Validating presence of promo block on the homepage",
+				    "Promo block should be displayed on the homepage",
+				    "Promo block is not displayed on the homepage",
+				    Common.getscreenShot("PromoBlock_Not_Displayed")
+				);
+
+
+			Assert.fail();
+		}
+	}
+	
+	public void Marketing_Flyout_Validation() {
+		try {
+			
+			List<WebElement> animatedTeasers = Common.findElements("css", "div[data-testid='animated-teaser']");
+			for (int i = 0; i < animatedTeasers.size(); i++)
+			{
+				animatedTeasers = Common.findElements("css", "div[data-testid='animated-teaser']");
+	            WebElement teaser = animatedTeasers.get(i);
+	            teaser.click();
+	            if( i == 1) {
+	            	int marketingFlyout =Common.findElements("xpath", "(//div[@data-testid='POPUP'])[2]").size();
+	            	Common.assertionCheckwithReport(
+		            		marketingFlyout>0,
+		            	    "Validating marketing flyout opens after clicking animated teaser",
+		            	    "Marketing flyout should appear after clicking teaser element",
+		            	    "Marketing flyout appeared successfully after clicking teaser element",
+		            	    "Marketing flyout did not appear after clicking teaser element"
+		            	);
+	            }else {
+	            	int marketingFlyout =Common.findElements("xpath", "(//div[@data-testid='POPUP'])[1]").size();
+	            	Common.assertionCheckwithReport(
+		            		marketingFlyout>0,
+		            	    "Validating marketing flyout opens after clicking animated teaser",
+		            	    "Marketing flyout should appear after clicking teaser element",
+		            	    "Marketing flyout appeared successfully after clicking teaser element",
+		            	    "Marketing flyout did not appear after clicking teaser element"
+		            	);
+	            }
+	            	 close_add();        
+	            
+
+	            
+			}	
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog(
+				    "Validating marketing flyout opens after clicking animated teaser",
+				    "Marketing flyout should appear after clicking teaser element",
+				    "Marketing flyout did not appear after clicking teaser element",
+				    Common.getscreenShot("MarketingFlyout_Not_Appeared")
+				);
+
+
+			Assert.fail();
+		}
+	}
+
 	
 }
-
