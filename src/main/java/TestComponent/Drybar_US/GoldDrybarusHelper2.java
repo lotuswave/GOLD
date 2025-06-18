@@ -5614,7 +5614,7 @@ public void FUll_Payment(String dataSet) {
         			expectedResult = "It should apply discount on your price.If user enters invalid promocode it should display coupon code is not valid message.";
         			String discountcodemsg = Common.getText("xpath", "//div[@ui-id='message-success']//span");
         			System.out.println(discountcodemsg);
-        			Common.assertionCheckwithReport(discountcodemsg.contains("Your coupon was successfully"),
+        			Common.assertionCheckwithReport(discountcodemsg.contains("Your discount code was successfully"),
         					"verifying pomocode", expectedResult, "promotion code working as expected",
         					"Promation code is not applied");
     			} else {
