@@ -16579,6 +16579,31 @@ public class OspreyEMEA_HYVA {
 		
 	}
 
+	public void Back_to_Top_widget() {
+		// TODO Auto-generated method stub
+		try {
+			Common.clickElement("css", "a[title='Guarantee FAQs']");
+			Sync.waitPageLoad();
+			Thread.sleep(2000);
+			Common.actionsKeyPress(Keys.END);
+			Common.clickElement("css", "div[class='footer-back-top-container'] span");
+			Common.assertionCheckwithReport(Common.getCurrentURL().contains("#top"),
+					"Validating the back to top widget on the gurantee faq page",
+					"After clicking on the back to top it is navigate to the top page",
+					"Succesfully able to navigate to the top page after clicking on the back to top",
+					"Failed to navigate to the top page after clicking on the back to top widget");
+		}
+		catch(Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("Validating the back to top widget on the gurantee faq page",
+					"After clicking on the back to top it is navigate to the top page",
+					"Unable to navigate to the top page after clicking on the back to top widget",
+					Common.getscreenShot("Failed to navigate to the top page after clicking on the back to top widget"));
+			Assert.fail();
+		}
+		
+	}
+
 
 
 }
