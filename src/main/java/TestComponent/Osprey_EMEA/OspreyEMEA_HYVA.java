@@ -16514,5 +16514,30 @@ public class OspreyEMEA_HYVA {
 		
 	}
 
+	public void Subscribe_and_SMS() {
+		// TODO Auto-generated method stub
+		try
+		{
+			int emailupdates=Common.findElements("css", "label[for='email-newsletter-subscribe']").size();
+			int sms=Common.findElements("css","label[for='newsletter-subscribe']").size();
+			Common.assertionCheckwithReport(sms>0 && emailupdates>0 ,
+					"Validating the email updates and sms checkboxs and matter on the shipping address page",
+					"After Navigating to the shipping address page emails & sms checkboxs and matter",
+					"Succesfully able to see the sms and email updates on the shipping address page for the Guest user",
+					"Failed to dipslay the sms and email updates on the shipping address page for the guest user");
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("Validating the email updates and sms checkboxs and matter on the shipping address page",
+					"After Navigating to the shipping address page emails & sms checkboxs and matter",
+					"Unable to dipslay the SMS and email updates on the shipping address page for the guest user",
+					Common.getscreenShot("Failed to dipslay the sms and email updates on the shipping address page for the guest user"));
+			Assert.fail();
+		}
+		
+	}
+
 
 }
