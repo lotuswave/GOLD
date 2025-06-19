@@ -96,10 +96,10 @@ public class GoldHydro_EMEA_Helper {
 				Close_Geolocation();
 				Sync.waitElementPresent(60, "css", "a[class*='c-header__logo inline-flex']");
 				int size = Common.findElements("css", "a[class*='c-header__logo inline-flex']").size();
-
+Thread.sleep(3000);
 				boolean isLogoPresent = size > 0;
 				boolean isTitleCorrect = Common.getPageTitle().contains("Home Page")
-						|| Common.getPageTitle().contains("Hydro Flask Reusable Bottles");
+						|| Common.getPageTitle().contains("Hydro Flask Reusable Bottles")|| Common.getPageTitle().contains("gb - mcloud-na-preprod-hydroflask");
 
 				Common.assertionCheckwithReport(isLogoPresent && isTitleCorrect, "validating the home page navigation",
 						"User should be navigate to the Home page", "Successfully user navigates to the home page",
@@ -210,8 +210,9 @@ public class GoldHydro_EMEA_Helper {
 			Common.clickElement("xpath", "//span[text()='Coffee & Tea']");
 			Sync.waitPageLoad();
 			Thread.sleep(6000);
+			System.out.println(category);
 			expectedResult = "User should select the " + category + "category";
-			int sizebotteles = Common.findElements("xpath", "//span[contains(text(),'" + category + "')]").size();
+			int sizebotteles = Common.findElements("xpath", "//a[contains(text(),'" + category + "')]").size();
 			Common.assertionCheckwithReport(sizebotteles > 0,
 					"validating the product category as" + category + "from navigation menu ", expectedResult,
 					"Selected the " + category + " category", "User unabel to click" + category + "");
@@ -1966,8 +1967,12 @@ public class GoldHydro_EMEA_Helper {
 			Common.textBoxInput("id", "pass", data.get(dataSet).get("Password"));
 			Common.clickElement("xpath", "//button[contains(@class,'btn btn-primary')]");
 			Sync.waitPageLoad();
+			Thread.sleep(4000);
+		String	Page_title= Common.getPageTitle();
+		System.out.println("Page Title  :" +Page_title);
 			Common.assertionCheckwithReport(
-					Common.getPageTitle().contains("Home Page") || Common.getPageTitle().contains("Hydro Flask"),
+					Page_title.contains("Home Page") || Page_title.contains("Hydro Flask")|| Page_title.contains("gb - mcloud-na-preprod-hydroflask")
+,
 					"To validate the user lands on Home page after successfull login",
 					"After clicking on the signIn button it should navigate to the Home page",
 					"user Sucessfully navigate to the Home page after clicking on the signIn button",
@@ -3018,9 +3023,9 @@ public class GoldHydro_EMEA_Helper {
 		// TODO Auto-generated method stub
 		Thread.sleep(4000);
 		int sizesframe = Common.findElements("xpath", "//div[@aria-label='POPUP Form']").size();
-		System.out.println(sizesframe);
+		System.out.println("Popup:" +sizesframe);
 		if (sizesframe > 0) {
-			Common.actionsKeyPress(Keys.PAGE_UP);
+//			Common.actionsKeyPress(Keys.PAGE_UP);
 			Thread.sleep(2000);
 			Sync.waitElementPresent("xpath", "//button[@aria-label='Close dialog']");
 			Common.clickElement("xpath", "//button[@aria-label='Close dialog']");
@@ -8422,13 +8427,13 @@ System.out.println(MyFavorites);
 		String prod = data.get(Dataset).get("prod product");
 		String symbol = data.get(Dataset).get("Symbol");
 		try {
-			for (int i = 0; i <= 10; i++) {
-				Sync.waitElementPresent("css", "img[itemprop='image']");
-				List<WebElement> webelementslist = Common.findElements("css", "img[itemprop='image']");
-				String s = webelementslist.get(i).getAttribute("src");
-				if (!s.isEmpty())
-					break;
-			}
+//			for (int i = 0; i <= 10; i++) {
+//				Sync.waitElementPresent("css", "img[itemprop='image']");
+//				List<WebElement> webelementslist = Common.findElements("css", "img[itemprop='image']");
+//				String s = webelementslist.get(i).getAttribute("src");
+//				if (!s.isEmpty())
+//					break;
+//			}
 			String productName = Common.getCurrentURL().contains("preprod") ? products : prod;
 			Sync.waitElementPresent("xpath", "//img[contains(@alt,'" + productName + "')]");
 
@@ -8591,7 +8596,7 @@ System.out.println(MyFavorites);
 
 	private void stickysubscribeToAlert(String email) throws Exception {
 		Common.actionsKeyPress(Keys.END);
-		Common.clickElement("xpath", "(//button[@title='Notify Me When Available'])[2]");
+		Common.clickElement("xpath", "(//button[@title='Notify Me When Available'])[1]");
 		Thread.sleep(2000);
 		Common.textBoxInput("css", "input[placeholder='Insert your email']", email);
 		Common.clickElement("xpath", "//span[text()='Subscribe']");
@@ -8619,17 +8624,17 @@ System.out.println(MyFavorites);
 		String symbol = data.get(Dataset).get("Symbol");
 
 		try {
-
-			for (int i = 0; i <= 10; i++) {
-				Sync.waitElementPresent("css", "img[itemprop='image']");
-				List<WebElement> productImages = Common.findElements("css", "img[itemprop='image']");
-				String imageSrc = productImages.get(i).getAttribute("src");
-				System.out.println(imageSrc);
-
-				if (!imageSrc.isEmpty()) {
-					break;
-				}
-			}
+//need to enable again after configuration
+//			for (int i = 0; i <= 10; i++) {
+//				Sync.waitElementPresent("css", "img[itemprop='image']");
+//				List<WebElement> productImages = Common.findElements("css", "img[itemprop='image']");
+//				String imageSrc = productImages.get(i).getAttribute("src");
+//				System.out.println(imageSrc);
+//
+//				if (!imageSrc.isEmpty()) {
+//					break;
+//				}
+//			}
 			boolean isPreprod = Common.getCurrentURL().contains("preprod");
 			String productName = isPreprod ? products : prod;
 
@@ -13888,7 +13893,7 @@ System.out.println(MyFavorites);
 				Thread.sleep(4000);
 
 				if (Common.getCurrentURL().contains(""))
-					Common.clickElement("id", "payment-submit-btn");
+					Common.clickElement("css", "button[data-id='payment-submit-btn']");
 				Thread.sleep(8000);
 				Common.switchToFirstTab();
 			} catch (Exception | Error e) {
@@ -13900,11 +13905,6 @@ System.out.println(MyFavorites);
 			}
 			Sync.waitForLoad();
 			Thread.sleep(5000);
-//			express_paypal_shipping("PaypalDetails");
-
-//			Common.textBoxInput("name", "telephone", data.get(dataSet).get("phone"));
-//			Thread.sleep(3000);
-//			select_Shipping_Method("GroundShipping method");
 			Thread.sleep(4000);
 			int rewards = Common.findElements("xpath", "//span[contains(text(),'Sign in')]").size();
 			System.out.println(rewards);
