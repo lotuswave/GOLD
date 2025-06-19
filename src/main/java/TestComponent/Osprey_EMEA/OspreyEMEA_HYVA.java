@@ -8411,9 +8411,9 @@ public class OspreyEMEA_HYVA {
 			}
 			Thread.sleep(4000);
 			List<WebElement> country = Common.findElements("xpath",
-					"(//legend[text()='Europe']//parent::fieldset)[3]//div[@class='country-item flex gap-3']//p");
+					"(//legend[text()='Europe']//parent::fieldset)[1]//div[@class='country-item flex gap-3']//p");
 			List<WebElement> Countryselector = Common.findElements("xpath",
-					"(//legend[text()='Europe']//parent::fieldset)[3]//div[@class='country-item flex gap-3']//p");
+					"(//legend[text()='Europe']//parent::fieldset)[1]//div[@class='country-item flex gap-3']//p");
 			ArrayList<String> CountryNames = new ArrayList<String>();
 			Thread.sleep(4000);
 			for (WebElement Countryselections : Countryselector) {
@@ -8431,13 +8431,13 @@ public class OspreyEMEA_HYVA {
 					for (int i = 0; i < country.size(); i++) {
 
 						List<WebElement> select = Common.findElements("xpath",
-								"(//legend[text()='Europe']//parent::fieldset)[3]//div[@class='country-item flex gap-3']//p");
+								"(//legend[text()='Europe']//parent::fieldset)[1]//div[@class='country-item flex gap-3']//p");
 						Sync.waitPageLoad();
-						Sync.waitElementPresent(50, "xpath", "(//span[@class='country-selector-title'])[3]");
-						Common.clickElement("xpath", "(//span[@class='country-selector-title'])[3]");
+						Sync.waitElementPresent(50, "xpath", "(//span[@class='country-selector-title'])[1]");
+						Common.clickElement("xpath", "(//span[@class='country-selector-title'])[1]");
 						Thread.sleep(4000);
 						String countryname = Common.findElement("xpath",
-								"(//legend[text()='Europe']//parent::fieldset)[3]//div[@class='country-item flex gap-3']//span[@class='country-item__country-label title-xs font-bold']")
+								"(//legend[text()='Europe']//parent::fieldset)[1]//div[@class='country-item flex gap-3']//span[@class='country-item__country-label title-xs font-bold']")
 								.getText();
 						System.out.println(countryname);
 						int size = Common.findElements("xpath", "//button[@aria-label='Close dialog']").size();
@@ -8509,6 +8509,46 @@ public class OspreyEMEA_HYVA {
 			Assert.fail();
 		}
 	}
+	
+	public void Geolocation_Popup() {
+		// TODO Auto-generated method stub
+		try {
+			Common.clickElement("css", "span[class='country-selector-title']");
+			Sync.waitElementPresent("xpath",
+								"(//legend[text()='North America']//parent::fieldset)[1]//div[@class='country-item flex gap-3']//p");
+			Common.clickElement("xpath",
+								"(//legend[text()='North America']//parent::fieldset)[1]//div[@class='country-item flex gap-3']//p");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			Common.assertionCheckwithReport(
+					Common.getCurrentURL().equals("https://mcloud-na-preprod.osprey.com/") || Common.getCurrentURL().equals("https://www.osprey.com"),
+					"Validating the navigation to US website through country selector", "user should able to navigate to us websites from the Uk country selector",
+					"Sucessfully Navigated to the us website from the country selector", "Failed to navigate to us website from the country selector");
+			Common.clickElement("css", "div[x-ref='ip-detection-modal'] button[aria-label='Close, button.']");
+			Common.clickElement("css", "span[class='country-selector-title']");
+			Common.clickElement("xpath", "(//legend[text()='Europe']//parent::fieldset)[1]//div[@class='country-item flex gap-3']//p");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			System.out.println(Common.getCurrentURL());
+			Common.assertionCheckwithReport(
+					Common.getCurrentURL().equals("https://mcloud-na-preprod.osprey.com/gb/") || Common.getCurrentURL().equals("https://www.osprey.com/gb"),
+					"Validating the navigation to Uk website through country selector", "user should able to navigate to uK websites from the Us country selector",
+					"Sucessfully Navigated to the uK website from the country selector", "Failed to navigate to Uk website from the country selector");
+			
+		
+		}
+		catch(Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the country selection page navigation",
+					"After Clicking on the selected country it should navigate to the respective country page",
+					"Unable to navigate to the respective country page after clicking on the selected country",
+					Common.getscreenShot(
+							"Failed to navigate to the respective country page after clicking on the selected country"));
+			Assert.fail();
+			}
+		
+	}
+
 
 	public void Change_Shippingmethods(String Dataset) {
 		// TODO Auto-generated method stub
@@ -16538,6 +16578,7 @@ public class OspreyEMEA_HYVA {
 		}
 		
 	}
+
 
 
 }
