@@ -82,7 +82,7 @@ public class GoldOspreyUSE2EHelper {
 				Close_Geolocation();
 				Thread.sleep(4000);
 			     acceptPrivacy();
-				int size = Common.findElements("css", "img[alt='Store logo']").size();
+				int size = Common.findElements("css", "img[alt='Osprey store logo']").size();
 				System.out.println(size);
 				System.out.println(Common.getPageTitle());
 				Common.assertionCheckwithReport(size > 0 && Common.getPageTitle().contains("Osprey")|| size > 0 && Common.getPageTitle().contains("Backpacks"),
@@ -2267,13 +2267,13 @@ public void header_Shopbycollection(String Dataset) { {
 		String Productsize = data.get(Dataset).get("Size");
 		String symbol=data.get(Dataset).get("Symbol");
 //		System.out.println(symbol);
-//		System.out.println(products);
+		System.out.println(products);
 //		System.out.println(productcolor);
 		try {
 			Sync.waitPageLoad();
 			for (int i = 0; i <= 10; i++) {
-				Sync.waitElementPresent("css", "a[class='product-image-link'] img");
-				List<WebElement> webelementslist = Common.findElements("css","a[class='product-image-link'] img");
+				Sync.waitElementPresent("css", "img[alt='" + products + "']");
+				List<WebElement> webelementslist = Common.findElements("css","img[alt='" + products + "']");
 
 				String s = webelementslist.get(i).getAttribute("src");
 				System.out.println(s);
@@ -2284,8 +2284,8 @@ public void header_Shopbycollection(String Dataset) { {
 				}
 			}	
 			    Thread.sleep(1000);		
-				Sync.waitElementPresent(30, "css", "a[class='product-image-link'] img");
-				Common.clickElement("css", "a[class='product-image-link'] img");
+			    Sync.waitElementPresent("css", "img[alt='" + products + "']");
+			    Common.clickElement("css","img[alt='" + products + "']");
 //				Thread.sleep(3000);
 //				Sync.waitElementPresent("xpath", "//div[@data-option-label='" + prodcolor + "']");
 //				Common.clickElement("xpath", "//div[@data-option-label='" + prodcolor + "']");
@@ -7300,7 +7300,7 @@ public void minicart_validation(String Dataset) {
 
 		if (!url.contains("stage") & !url.contains("preprod")) {
 
-			int sizeofelement = Common.findElements("id", "email").size();
+			int sizeofelement = Common.findElements("id", "login_email").size();
 			Common.assertionCheckwithReport(sizeofelement > 0, "verifying the paypal payment ", expectedResult,
 					"open paypal site window", "faild to open paypal account");
 		} else {
@@ -10267,32 +10267,27 @@ public void Continue_Shopping() {
 	public void Gift_cards(String Dataset) {
 		// TODO Auto-generated method stub
 		String GiftCard = data.get(Dataset).get("Osprey");
-		String prodgiftcard=data.get(Dataset).get("Prod Product");
-		try
-		{
+		String prodgiftcard = data.get(Dataset).get("Prod Product");
+		try {
 			for (int i = 0; i <= 10; i++) {
-				if(Common.getCurrentURL().contains("/us/es/"))
-				{
-					Common.clickElement("xpath", "//span[contains(@class, 'flex')and contains(text(), 'Destacados')]");
+				Common.clickElement("xpath", "(//span[contains(@class,'flex h-full')])[4]");
+				if (Common.getCurrentURL().contains("preprod")) {
+					Sync.waitElementPresent("xpath", "//a[contains(@href,'featured/gift-cards')]");
+					//a[contains(@href,'featured/gift-cards')]
+					Common.clickElement("xpath", "//a[contains(@href,'featured/gift-cards')]");
+				} 
+				else if (Common.getCurrentURL().contains("osprey.com/us/es/")) {
+					
+					Sync.waitElementPresent("xpath", "//a[contains(@href,'featured/gift-cards')]");
+					Common.clickElement("xpath", "//a[contains(@href,'featured/gift-cards')]");
+				} 
+				else {
+					Sync.waitElementPresent("xpath", "//span[text()='E Gift Cards']");
+					Common.clickElement("xpath", "//span[text()='E Gift Cards']");
 				}
-				else
-				{
-				Common.clickElement("xpath", "//span[contains(@class, 'flex')and contains(text(), 'Featured')]");
-				}
-				if(Common.getCurrentURL().contains("preprod") && Common.getCurrentURL().contains("/us/es/") )
-				{
-				Sync.waitElementPresent("xpath", "//span[text()='Tarjetas de regalo']");
-				Common.clickElement("xpath", "//span[text()='Tarjetas de regalo']");
-				}
-				else
-				{
-					Sync.waitElementPresent("xpath", "//img[contains(@alt,'\" + GiftCard + \"')]");
-					Common.clickElement("xpath", "//img[contains(@alt,'\" + GiftCard + \"')]");
-				}
-				
-				Sync.waitElementPresent("xpath", "//img[@loading='eager']");
-				List<WebElement> webelementslist = Common.findElements("xpath",
-						"//img[@loading='eager']");
+
+				Sync.waitElementPresent("css", "a[class='product-image-link'] img");
+				List<WebElement> webelementslist = Common.findElements("css", "a[class='product-image-link'] img");
 
 				String s = webelementslist.get(i).getAttribute("src");
 				System.out.println(s);
@@ -10302,36 +10297,28 @@ public void Continue_Shopping() {
 					break;
 				}
 			}
-			Sync.waitPageLoad(30);
-			Thread.sleep(4000);
-			if(Common.getCurrentURL().contains("preprod"))
-			{
-			Sync.waitElementPresent(30, "xpath", "//img[contains(@alt,'" + GiftCard + "')]");
-			Common.clickElement("xpath", "//img[contains(@alt,'" + GiftCard + "')]");
-			Sync.waitPageLoad();
-			}
-			else
-			{
+//			Sync.waitPageLoad(30);
+			Thread.sleep(1000);
+			if (Common.getCurrentURL().contains("preprod")) {
+				Sync.waitElementPresent(30, "css", "a>img[alt='" + GiftCard + "']");
+				Common.clickElement("css", "a>img[alt='" + GiftCard + "']");
+				Sync.waitPageLoad();
+			} else {
 				Sync.waitElementPresent(30, "xpath", "(//img[contains(@alt,'" + prodgiftcard + "')])[3]");
 				Common.clickElement("xpath", "(//img[contains(@alt,'" + prodgiftcard + "')])[3]");
 				Sync.waitPageLoad();
 			}
-			Thread.sleep(4000);
-		}
-		catch(Exception | Error e)
-		{
+//			Thread.sleep(4000);
+		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("validating the Gift card Navigation to the PDP page",
 					"After clicking on the gift card it should navigate to the PDP",
 					"Unable to Navigate the Gift card to the PDP page",
 					Common.getscreenShot("Failed to Navigate the Gift card to the PDP page"));
 			AssertJUnit.fail();
-			
-		
 		}
 	}
-	
-	
+		
 	
 	public void SendLater_Card_Value(String Dataset) {
 		// TODO Auto-generated method stub
