@@ -3516,12 +3516,12 @@ public void Remove_GiftCode() {
 					"open paypal site window", "faild to open paypal account");
 		} else {
 
-			Common.clickElement("id", "login_emaildiv");
-			Common.textBoxInput("id", "email", data.get(dataSet).get("Email"));
-			Common.clickElement("id", "btnNext");
-			int size = Common.findElements("xpath", "//a[text()='Log in with a password instead']").size();
+			Common.clickElement("css", "input[id='login_email']");
+			Common.textBoxInput("css", "input[id='login_email']", data.get(dataSet).get("Email"));
+			Common.clickElement("xpath", "//button[text()='Next']");
+			int size = Common.findElements("xpath", "//button[text()='Use Password Instead']").size();
 			if(size>0) {
-				Common.clickElement("xpath", "//a[text()='Log in with a password instead']");
+				Common.clickElement("xpath", "//button[text()='Use Password Instead']");
 				Common.textBoxInput("id", "password", data.get(dataSet).get("Password"));
 			}
 			else {
@@ -3534,12 +3534,12 @@ public void Remove_GiftCode() {
 					"open paypal site window", "faild to open paypal account");
 			}
 			try {
-				Common.clickElement("id", "btnLogin");
+				Common.clickElement("xpath", "//button[text()='Log In']");
 				Thread.sleep(5000);
 				Common.actionsKeyPress(Keys.END);
 				Thread.sleep(5000);
-				Common.clickElement("id", "payment-submit-btn");
-				Thread.sleep(8000);
+				Common.clickElement("xpath", "//div[text()='Pay']");
+				Thread.sleep(9000);
 				Common.switchToFirstTab();
 			} catch (Exception | Error e) {
 				e.printStackTrace();

@@ -180,7 +180,7 @@ public class GoldHydroHyvaHelper {
 			Sync.waitPageLoad();
 			Thread.sleep(6000);
 			expectedResult = "User should select the " + category + "category";
-			int sizebotteles = Common.findElements("xpath", "//span[contains(text(),'" + category + "')]").size();
+			int sizebotteles = Common.findElements("xpath", "//h1//span[contains(text(),'Coffee & Tea')]").size();
 			Common.assertionCheckwithReport(sizebotteles > 0,
 					"validating the product category as" + category + "from navigation menu ", expectedResult,
 					"Selected the " + category + " category", "User unabel to click" + category + "");
@@ -15615,53 +15615,53 @@ Common.clickElement("xpath", "//span[text()='Edit']");
 		            Thread.sleep(8000);
 		        }
 		        Common.clickElement("css", "button[class*='btn dr:btn-secondary-checkout hf:btn-primary']");
-		        Common.textBoxInput("xpath", "//input[@id='billing-firstname']", 
+		        Common.textBoxInput("xpath", "//input[@id='shipping-firstname']", 
 		                data.get(dataSet).get("FirstName"));
-		        Common.textBoxInput("xpath", "//input[@id='billing-lastname']",
+		        Common.textBoxInput("xpath", "//input[@id='shipping-lastname']",
 		                data.get(dataSet).get("LastName"));
-		        Common.textBoxInput("xpath", "//input[@id='billing-street-0']", data.get(dataSet).get("Street"));
+		        Common.textBoxInput("xpath", "//input[@id='shipping-street-0']", data.get(dataSet).get("Street"));
 		        Common.actionsKeyPress(Keys.SPACE);
 		        try {
-		            Common.clickElement("xpath", "//input[@id='billing-street-0']");
+		            Common.clickElement("xpath", "//input[@id='shipping-street-0']");
 		        } catch (Exception e) {
 		            Common.actionsKeyPress(Keys.BACK_SPACE);
 		            Thread.sleep(1000);
 		            Common.actionsKeyPress(Keys.SPACE);
-		            Common.clickElement("xpath", "//input[@id='billing-street-0']");
+		            Common.clickElement("xpath", "//input[@id='shipping-street-0']");
 		        }
 		        if (data.get(dataSet).get("StreetLine2") != null) {
-		            Common.textBoxInput("xpath", "//input[@id='billing-street-1']", data.get(dataSet).get("Street"));
+		            Common.textBoxInput("xpath", "//input[@id='shipping-street-1']", data.get(dataSet).get("Street"));
 		        }
 		        //removed street[2] since the provided xpaths only include street 0 and 1
 
-		        Common.scrollIntoView("id", "billing-region");
-		        Common.dropdown("id", "billing-region", Common.SelectBy.TEXT,
+		        Common.scrollIntoView("id", "shipping-region");
+		        Common.dropdown("id", "shipping-region", Common.SelectBy.TEXT,
 		                data.get(dataSet).get("Region"));
 
 		        Common.actionsKeyPress(Keys.PAGE_DOWN);
-		        Common.textBoxInput("id", "billing-city", data.get(dataSet).get("City"));
+		        Common.textBoxInput("id", "shipping-city", data.get(dataSet).get("City"));
 
 		        try {
-		            Common.dropdown("id", "billing-region", Common.SelectBy.TEXT,
+		            Common.dropdown("id", "shipping-region", Common.SelectBy.TEXT,
 		                    data.get(dataSet).get("Region"));
 		        } catch (ElementClickInterceptedException e) {
-		            Common.dropdown("id", "billing-region", Common.SelectBy.TEXT,
+		            Common.dropdown("id", "shipping-region", Common.SelectBy.TEXT,
 		                    data.get(dataSet).get("Region"));
 		        }
 
-		        Common.textBoxInputClear("xpath", "//input[@id='billing-postcode']");
-		        Common.textBoxInput("xpath", "//input[@id='billing-postcode']",
+		        Common.textBoxInputClear("xpath", "//input[@id='shipping-postcode']");
+		        Common.textBoxInput("xpath", "//input[@id='shipping-postcode']",
 		                data.get(dataSet).get("postcode"));
-		        String ShippingZip = Common.findElement("id", "billing-postcode").getAttribute("value");
+		        String ShippingZip = Common.findElement("id", "shipping-postcode").getAttribute("value");
 		        System.out.println("*****" + ShippingZip + "*******");
 
-		        Sync.waitElementPresent("xpath", "//input[@id='billing-telephone']");
-		        Common.textBoxInput("xpath", "//input[@id='billing-telephone']",
+		        Sync.waitElementPresent("xpath", "//input[@id='shipping-telephone']");
+		        Common.textBoxInput("xpath", "//input[@id='shipping-telephone']",
 		                data.get(dataSet).get("phone"));
 
 		        Thread.sleep(2000);
-		        Common.clickElement("css", "button[class='btn btn-primary w-full os:uppercase']");
-
+		       // Common.clickElement("css", "button[class='btn btn-primary w-full os:uppercase']");
+		        Common.clickElement("xpath", "//button[@class='checkout-address-form__buttons-save btn btn-primary w-full os:uppercase']");
 		    } catch (Exception | Error e) {
 		        e.printStackTrace();
 
