@@ -5625,8 +5625,8 @@ return Number;
 		String Prod=data.get(Dataset).get("Prod Product");
 		try {
 			
-			String minicartproduct = Common.findElement("xpath", "//img[@alt='" + product + "']").getText();
-			Common.clickElement("xpath", "//img[@alt='" + product + "']");
+			String minicartproduct = Common.findElement("xpath", "//img[@alt='" + Prod + "']").getText();
+			Common.clickElement("xpath", "//img[@alt='" + Prod + "']");
 			Sync.waitPageLoad();
 			Thread.sleep(3000);
 			System.out.println(minicartproduct);
@@ -5706,7 +5706,7 @@ return Number;
 					.replace(symbol, "");
 			Float subtotalvalue = Float.parseFloat(subtotal);
 			String productname = Common
-					.findElement("xpath", "(//p[@class='text-md font-bold dr:title-sm']//a)[2]")
+					.findElement("xpath", "(//p[contains(@class, 'cart-drawer__item-content-description-header-text')])[2]")
 					.getText();
 			String productamount1 = Common.getText("xpath", "(//span[@x-html='item.product_price']//span[@class='price'])[1]").replace(symbol,
 					"");
