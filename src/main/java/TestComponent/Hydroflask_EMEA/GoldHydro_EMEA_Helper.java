@@ -3971,7 +3971,7 @@ public class GoldHydro_EMEA_Helper {
 				Sync.waitElementPresent("css", "button[aria-label='Add Code']");
 				Thread.sleep(2000);
 				Common.clickElement("css", "button[aria-label='Add Code']");
-				Sync.waitElementPresent(30, "xpath", "//div[@ui-id='message-success']");
+//				Sync.waitElementVisible(30, "xpath", "//div[@ui-id='message-success']");
 				String successmsg = Common.findElement("xpath", "//div[@ui-id='message-success']").getText();
 				System.out.println(successmsg);
 				Common.assertionCheckwithReport(successmsg.contains("added") | successmsg.contains("applied"),
@@ -8284,11 +8284,11 @@ public class GoldHydro_EMEA_Helper {
 		System.out.println(Address);
 		try {
 			Sync.waitPageLoad();
-			Common.javascriptclickElement("xpath", "//input[@id='billing-as-shipping']");
+//			Common.javascriptclickElement("xpath", "//input[@id='billing-as-shipping']");
 			Thread.sleep(4000);
-			if (Common.findElements("xpath", "(//button[normalize-space()='New Address'])[2]").size() > 0) {
-				Sync.waitElementPresent(30, "xpath", "(//button[normalize-space()='New Address'])[2]");
-				Common.clickElement("xpath", "(//button[normalize-space()='New Address'])[2]");
+			if (Common.findElements("xpath", "//button[normalize-space()='New Address']").size() > 0) {
+				Sync.waitElementPresent(30, "xpath", "//button[normalize-space()='New Address']");
+				Common.clickElement("xpath", "//button[normalize-space()='New Address']");
 			} else {
 				Sync.waitElementPresent(30, "xpath", "(//button[contains(@class,'checkout-address-list__button')])[2]");
 				Common.clickElement("xpath", "(//button[contains(@class,'checkout-address-list__button')])[2]");
@@ -8334,7 +8334,7 @@ public class GoldHydro_EMEA_Helper {
 			Common.textBoxInput("xpath", "//form[@id='billing']//input[@name='telephone']",
 					data.get(dataSet).get("phone"));
 			Thread.sleep(3000);
-			Common.clickElement("xpath", "(//button[contains(@class,'checkout-address-form__buttons-save')])[2]");
+			Common.clickElement("xpath", "//button[contains(@class,'checkout-address-form__buttons-save')]");
 			Sync.waitPageLoad();
 			Thread.sleep(10000);
 			String update = Common.findElement("xpath",
@@ -14040,11 +14040,9 @@ public class GoldHydro_EMEA_Helper {
 
 				if (Common.findElements("xpath", "//div[contains(@class,'checkout-success container')]//p//span")
 						.size() > 0) {
-					Thread.sleep(4000);
 					order = Common.getText("xpath", "//div[contains(@class,'checkout-success container')]//p//span");
 					System.out.println(order);
 				} else {
-					Thread.sleep(4000);
 					order = Common.getText("xpath", "//div[contains(@class,'checkout-success')]//p//a");
 					System.out.println(order);
 				}
