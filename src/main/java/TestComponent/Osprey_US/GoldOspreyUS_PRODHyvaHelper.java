@@ -2167,11 +2167,18 @@ public void Featured_ShopAll(String Dataset) {{
 	public void minicart_viewcart() {
 		// TODO Auto-generated method stub
 		try {
-			Sync.waitElementPresent("xpath", "//div[@id='cart-drawer-title']/span/span");
-			String minicart = Common.findElement("xpath", "//div[@id='cart-drawer-title']/span/span").getText();
+			Sync.waitElementPresent("xpath", "//span [@x-text='totalCartAmount']");
+			String minicart = Common.findElement("xpath", "//span [@x-text='totalCartAmount']").getText();
 			Sync.waitElementPresent("xpath", "//a[@title='View Cart']");
 			Common.clickElement("xpath", "//a[@title='View Cart']");
 			String viewcart = Common.findElement("xpath", "//span[contains(@class,'ml-7 title-xs hf:title')]").getText();
+			String viewcartText = Common.findElement("xpath", "//span[contains(@class,'ml-7 title-xs hf:title')]").getText();
+			 
+			// Extract only the digits (number of items) using regex
+			String itemCount = viewcartText.replaceAll("\\D+", ""); // Removes all non-digit characters
+			 
+			// Print just the number
+			System.out.println(itemCount);
 			Common.assertionCheckwithReport(
 					viewcart.contains(minicart) && Common.getCurrentURL().contains("/checkout/cart/"),
 					"validating the navigation to the view cart", "User should able to navigate to the view cart page",
@@ -9471,7 +9478,7 @@ public void Continue_Shopping() {
 			Common.scrollIntoView("xpath", "//span[@x-html='message.text']");
 			expectedResult = "It should apply discount on your price.If user enters invalid promocode it should display coupon code is not valid message.";
 			String discountcodemsg = Common.getText("xpath", "//span[@x-html='message.text']");
-			Common.assertionCheckwithReport(discountcodemsg.contains("You used coupon code"), "verifying pomocode",
+			Common.assertionCheckwithReport(discountcodemsg.contains("You used discount code"), "verifying pomocode",
 					expectedResult, "promotion code working as expected", "Promation code is not applied");
 		} catch (Exception | Error e) {
 			e.printStackTrace();
@@ -9495,7 +9502,7 @@ public void Continue_Shopping() {
 		        String Shipping = Common.getText("xpath", "(//div[@x-text='hyva.formatPrice(segment.value)'])[2]").replace("$", "");  
 		        BigDecimal ShippingValue = new BigDecimal(Shipping).setScale(2, BigDecimal.ROUND_HALF_UP);
 		        
-		        String Tax = Common.getText("xpath", "//div[@class='w-5/12 text-right md:w-auto' and @x-text=\"segment.value == 0 ? '-' : hyva.formatPrice(segment.value)\"]").replace("$", "");  
+		        String Tax = Common.getText("xpath", "//div[@class='flex px-4 py-3.5 dr:py-1 justify-between']//div[@class='w-5/12 text-right md:w-auto']").replace("$", "");  
 		        BigDecimal TaxValue = new BigDecimal(Tax).setScale(2, BigDecimal.ROUND_HALF_UP);
 		        Thread.sleep(3000);
 		        

@@ -39,6 +39,7 @@ public class Test_DGLD_OSP_US_ST_040_Create_Account_Validation_Checkout_Simple_C
 		    Osprey_ReEu.After_Pay_payment("Afterpay");
 		    Osprey_ReEu.Shoppingcart_page();
 		    Osprey_ReEu.deleteProduct_shoppingcart();
+		   
 	        
 
 		} catch (Exception e) {
