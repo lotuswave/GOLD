@@ -5145,6 +5145,7 @@ public class OspreyEMEA_HYVA {
 				Common.dragdrop(price, "xpath", "//div[@aria-valuemax='" + lastvalue + "' and @data-handle-key='0']");
 			} else if (Common.getCurrentURL().contains("es/") || Common.getCurrentURL().contains("fr/")) {
 				Thread.sleep(5000);
+				
 				Sync.waitElementPresent(40, "xpath", "//div[@class='value end active']");
 				String lastvalue = Common.getText("xpath", "//div[@class='value end active']").replace(symbol, "")
 						.replace(",00", "").trim();
@@ -16604,6 +16605,113 @@ public class OspreyEMEA_HYVA {
 		
 	}
 
+	public void PDP_Validation(String Dataset) {
+		// TODO Auto-generated method stub
+		String Product=data.get(Dataset).get("Products");
+		try
+		{
+			Common.clickElement("css", "img[alt='" + Product +"']");
+			Threed_Viewers_and_attachemnets();
+			producttype_Product_Recommendations();
+			Buy_the_complete_system();
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("To validate the minicart popup", "Should display the mini cart",
+					"unable to  display the mini cart", Common.getscreenShot("Failed to display the mini cart"));
+			Assert.fail();
+		}
+		
+	}
+
+	public void Buy_the_complete_system() {
+		try {
+			Sync.waitElementPresent("css", "div[class='w-full relative'] a[class*='btn bg-white text-xs']");
+			Common.mouseOverClick("css", "div[class='w-full relative'] a[class*='btn bg-white text-xs']");
+			Thread.sleep(4000);
+			String completesystem=Common.findElement("css", "h2[class='title-xl md:text-4xl']").getText().trim();
+			Common.assertionCheckwithReport(completesystem.contains("Buy The Complete System"),
+					"Validating the popup when we click on the complete system",
+					"After clicking on the complete system popup should be open",
+					"Succesfully popup has been opened after clicking on the complete system",
+					"Failed to open the popup after clicking on the complete system");
+			Sync.waitElementPresent("css", "div[class='w-full relative'] button[type='submit']");
+			Thread.sleep(3000);
+			Common.mouseOverClick("css", "div[class='w-full relative'] button[type='submit']");
+			Thread.sleep(4000);
+			String openminicart = Common.findElement("id", "menu-cart-icon").getAttribute("aria-expanded");
+			System.out.println(openminicart);
+			Common.assertionCheckwithReport(openminicart.contains("true"), "To validate the minicart popup",
+					"Should display the mini cart", "Mini cart is displayed", "mini cart is not displayed");
+	
+		}
+		catch(Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("To validate the minicart popup", "Should display the mini cart",
+					"unable to  display the mini cart", Common.getscreenShot("Failed to display the mini cart"));
+			Assert.fail();
+		}
+	}
+	public void producttype_Product_Recommendations() {
+		try {
+			Common.actionsKeyPress(Keys.HOME);
+			int ProductType=Common.findElements("css", "div[class*='product-type']").size();
+			Common.scrollIntoView("css", "section[aria-label='Compare Similar Products']");
+			Common.mouseOverClick("css", "section[aria-label='Compare Similar Products'] button[type='submit']");
+			Thread.sleep(4000);
+			Common.clickElement("css", "button[aria-label='Close minicart']");
+			Common.assertionCheckwithReport(ProductType>0,
+					"Validating the producttype and product recomendations on the PDP page",
+					"productype and product recomendations should be on the PDP page",
+					"Succesfully producttype and product recomendations on the PDP page",
+					"Failed to display the product type and product recomendations on the PDP page");
+			
+		}
+		catch(Exception |Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("Validating the producttype and product recomendations on the PDP page",
+					"productype and product recomendations should be on the PDP page",
+					"Unable to display the product type and product recomendations on the PDP page",
+					Common.getscreenShot("Failed to display the product type and product recomendations on the PDP page"));
+			Assert.fail();
+		}
+	}
+public void Threed_Viewers_and_attachemnets()
+{
+	try {
+		Common.actionsKeyPress(Keys.PAGE_DOWN);
+		Common.scrollIntoView("css", "h2[class='text-3xl font-semibold uppercase mb-4']");	
+		Thread.sleep(5000);
+		WebElement image=Common.findElement("id", "wr360image_wr360PlayerId");
+		WebElement rotate=Common.findElement("id", "wr360image_wr360PlayerId");
+		Common.clickAndHold(rotate);
+		String Raincover=Common.findElement("css", "h4[x-text='hotspot.title']").getText();
+		Common.assertionCheckwithReport(Raincover.contains("RAINCOVER"),
+				"Validating the drag to rotate the 3d image on the PDP page",
+				"After clicikng on the image is should be roate on the PDP page",
+				"Succesfully image is performed the rotate operation after clicking on the drag to rotate ",
+				"Failed to performe the rotate operation after clicking on the drag to rotate");
+		Common.actionsKeyPress(Keys.PAGE_UP);
+		Common.clickElement("css", "span[class='icon-pdp__download']");
+		Common.switchWindows();
+		Common.assertionCheckwithReport(Common.getCurrentURL().contains("download"),
+				"Validating the attachment on the PDP page",
+				"After clicikng the attatment user manual should be open in the different window",
+				"Succesfully iuser manual opened in the different window",
+				"Failed to open the users manual in the different window");
+		Common.closeCurrentWindow();
+		Common.switchToFirstTab();
+	}
+	catch(Exception |Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("Validating the drag to rotate the 3d image on the PDP page",
+				"After clicikng on the image is should be roate on the PDP page",
+				"Unable to performe the rotate operation after clicking on the drag to rotate",
+				Common.getscreenShot("Failed to performe the rotate operation after clicking on the drag to rotate"));
+		Assert.fail();
+	}
+}
 
 
 }

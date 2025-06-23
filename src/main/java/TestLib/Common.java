@@ -654,6 +654,11 @@ public class Common {
 		ac.moveToElement(findElement(elemfindBY,elemfindText));
 		ac.perform();
 	}
+	
+	public static void clickAndHold(WebElement element) {
+		Actions action=new Actions(getDriver());
+		action.clickAndHold(element).moveByOffset(50, 0).moveByOffset(0, 50).moveByOffset(-50, 0).moveByOffset(0, -50).release().perform();
+	}
 
 	/**
 	 * mouseOverClick: will get the mouse over action on a element and click on
@@ -1036,7 +1041,8 @@ public class Common {
 			executeJS("arguments[0].click();", element);
 		}
 	}
-
+	
+	
 	public static void scrollToElementAndUnCheck(String elemfindBY, String elemfindText)  {
 		scrollToElementAndUnCheck(returnByLocator(elemfindBY, elemfindText));
 	}
