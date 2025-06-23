@@ -3732,7 +3732,7 @@ public class OspreyEMEA_HYVA {
 			} else {
 				Sync.waitElementVisible("xpath", "//input[@placeholder='Enter e-mail address']");
 				Common.findElement("css", "input[placeholder='Enter e-mail address']")
-				.sendKeys(data.get(dataSet).get("Prod Email"));
+						.sendKeys(data.get(dataSet).get("Prod Email"));
 			}
 
 		} catch (NoSuchElementException e) {
@@ -5145,7 +5145,7 @@ public class OspreyEMEA_HYVA {
 				Common.dragdrop(price, "xpath", "//div[@aria-valuemax='" + lastvalue + "' and @data-handle-key='0']");
 			} else if (Common.getCurrentURL().contains("es/") || Common.getCurrentURL().contains("fr/")) {
 				Thread.sleep(5000);
-				
+
 				Sync.waitElementPresent(40, "xpath", "//div[@class='value end active']");
 				String lastvalue = Common.getText("xpath", "//div[@class='value end active']").replace(symbol, "")
 						.replace(",00", "").trim();
@@ -8510,35 +8510,40 @@ public class OspreyEMEA_HYVA {
 			Assert.fail();
 		}
 	}
-	
+
 	public void Geolocation_Popup() {
 		// TODO Auto-generated method stub
 		try {
 			Common.clickElement("css", "span[class='country-selector-title']");
 			Sync.waitElementPresent("xpath",
-								"(//legend[text()='North America']//parent::fieldset)[1]//div[@class='country-item flex gap-3']//p");
+					"(//legend[text()='North America']//parent::fieldset)[1]//div[@class='country-item flex gap-3']//p");
 			Common.clickElement("xpath",
-								"(//legend[text()='North America']//parent::fieldset)[1]//div[@class='country-item flex gap-3']//p");
+					"(//legend[text()='North America']//parent::fieldset)[1]//div[@class='country-item flex gap-3']//p");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Common.assertionCheckwithReport(
-					Common.getCurrentURL().equals("https://mcloud-na-preprod.osprey.com/") || Common.getCurrentURL().equals("https://www.osprey.com"),
-					"Validating the navigation to US website through country selector", "user should able to navigate to us websites from the Uk country selector",
-					"Sucessfully Navigated to the us website from the country selector", "Failed to navigate to us website from the country selector");
+					Common.getCurrentURL().equals("https://mcloud-na-preprod.osprey.com/")
+							|| Common.getCurrentURL().equals("https://www.osprey.com"),
+					"Validating the navigation to US website through country selector",
+					"user should able to navigate to us websites from the Uk country selector",
+					"Sucessfully Navigated to the us website from the country selector",
+					"Failed to navigate to us website from the country selector");
 			Common.clickElement("css", "div[x-ref='ip-detection-modal'] button[aria-label='Close, button.']");
 			Common.clickElement("css", "span[class='country-selector-title']");
-			Common.clickElement("xpath", "(//legend[text()='Europe']//parent::fieldset)[1]//div[@class='country-item flex gap-3']//p");
+			Common.clickElement("xpath",
+					"(//legend[text()='Europe']//parent::fieldset)[1]//div[@class='country-item flex gap-3']//p");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			System.out.println(Common.getCurrentURL());
 			Common.assertionCheckwithReport(
-					Common.getCurrentURL().equals("https://mcloud-na-preprod.osprey.com/gb/") || Common.getCurrentURL().equals("https://www.osprey.com/gb"),
-					"Validating the navigation to Uk website through country selector", "user should able to navigate to uK websites from the Us country selector",
-					"Sucessfully Navigated to the uK website from the country selector", "Failed to navigate to Uk website from the country selector");
-			
-		
-		}
-		catch(Exception | Error e) {
+					Common.getCurrentURL().equals("https://mcloud-na-preprod.osprey.com/gb/")
+							|| Common.getCurrentURL().equals("https://www.osprey.com/gb"),
+					"Validating the navigation to Uk website through country selector",
+					"user should able to navigate to uK websites from the Us country selector",
+					"Sucessfully Navigated to the uK website from the country selector",
+					"Failed to navigate to Uk website from the country selector");
+
+		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("validating the country selection page navigation",
 					"After Clicking on the selected country it should navigate to the respective country page",
@@ -8546,10 +8551,9 @@ public class OspreyEMEA_HYVA {
 					Common.getscreenShot(
 							"Failed to navigate to the respective country page after clicking on the selected country"));
 			Assert.fail();
-			}
-		
-	}
+		}
 
+	}
 
 	public void Change_Shippingmethods(String Dataset) {
 		// TODO Auto-generated method stub
@@ -9641,8 +9645,9 @@ public class OspreyEMEA_HYVA {
 			expectedResult = "It should apply discount on your price.If user enters invalid promocode it should display coupon code is not valid message.";
 			if (Common.getCurrentURL().contains("Stage") || Common.getCurrentURL().contains("preprod")) {
 				String discountcodemsg = Common.getText("css", "span[x-html='message.text']");
-				Common.assertionCheckwithReport(discountcodemsg.contains("You used discount code"), "verifying pomocode",
-						expectedResult, "promotion code working as expected", "Promation code is not applied");
+				Common.assertionCheckwithReport(discountcodemsg.contains("You used discount code"),
+						"verifying pomocode", expectedResult, "promotion code working as expected",
+						"Promation code is not applied");
 			} else {
 				String discountcodemsg = Common.getText("css", "span[x-html='message.text']");
 				Common.assertionCheckwithReport(discountcodemsg.contains("You used coupon code"), "verifying pomocode",
@@ -15772,29 +15777,28 @@ public class OspreyEMEA_HYVA {
 			Assert.fail();
 		}
 	}
+
 	public void verify_paywithlink() {
-		try
-		{
-			String paywithlink=Common.findElement("xpath", "(//iframe[@role='presentation'])[2]").getAttribute("name");
+		try {
+			String paywithlink = Common.findElement("xpath", "(//iframe[@role='presentation'])[2]")
+					.getAttribute("name");
 			System.out.println(paywithlink);
-			Common.switchFrames("css", "iframe[name='"+ paywithlink +"']");
-			int link=Common.findElements("css", "button[aria-label='Pay with Link']").size();
-			Common.assertionCheckwithReport(link>0,
-					"validating the paywithlink on the shopping cart page",
+			Common.switchFrames("css", "iframe[name='" + paywithlink + "']");
+			int link = Common.findElements("css", "button[aria-label='Pay with Link']").size();
+			Common.assertionCheckwithReport(link > 0, "validating the paywithlink on the shopping cart page",
 					"paywithlink should be appear on the shopping cart page under the checkout button",
 					"Sucessfully paywithlink is appeared on the shopping cart page below the checkout Button CTA",
 					"Failed to appear the paywithlink on the shopping cart page under the checkout button CTA");
 			Common.switchToDefault();
-			
-		}
-		catch(Exception | Error e)
-		{
+
+		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("validating the paywithlink on the shopping cart page",
 					"paywithlink should be appear on the shopping cart page under the checkout button",
 					"unable to appear the paywithlink on the shopping cart page under the checkout button CTA",
-					Common.getscreenShot("Failed to appear the paywithlink on the shopping cart page under the checkout button CTA"));
-			
+					Common.getscreenShot(
+							"Failed to appear the paywithlink on the shopping cart page under the checkout button CTA"));
+
 			Assert.fail();
 		}
 	}
@@ -16331,47 +16335,43 @@ public class OspreyEMEA_HYVA {
 		}
 
 	}
-	
-	public void orders_image_Validation()
-	{
+
+	public void orders_image_Validation() {
 		try {
-			List <WebElement> images=Common.findElements("css", "div[class*='parent-item border'] img");
-			  for (WebElement img : images) {
-	                if (img.isDisplayed()) {
-	                    System.out.println("Image is displayed.");
+			List<WebElement> images = Common.findElements("css", "div[class*='parent-item border'] img");
+			for (WebElement img : images) {
+				if (img.isDisplayed()) {
+					System.out.println("Image is displayed.");
 
-	                    String src = img.getAttribute("src");
-	                    if (validateImageURL(src)) {
-	                        System.out.println("Image URL is valid: " + src);
-	                    } else {
-	                        System.out.println("Broken image URL: " + src);
-	                    }
+					String src = img.getAttribute("src");
+					if (validateImageURL(src)) {
+						System.out.println("Image URL is valid: " + src);
+					} else {
+						System.out.println("Broken image URL: " + src);
+					}
 
-	                } else {
-	                    System.out.println("Image is NOT displayed.");
-	                }
-	            }
-			
-		}
-		catch(Exception | Error e)
-		{
+				} else {
+					System.out.println("Image is NOT displayed.");
+				}
+			}
+
+		} catch (Exception | Error e) {
 			e.printStackTrace();
 			Assert.fail();
 		}
 	}
-	
-	 public static boolean validateImageURL(String imageUrl) {
-	        try {
-	            HttpURLConnection connection = (HttpURLConnection) new URL(imageUrl).openConnection();
-	            connection.setRequestMethod("GET");
-	            connection.connect();
-	            int code = connection.getResponseCode();
-	            return (code == 200);
-	        } catch (Exception e) {
-	            return false;
-	        }
-	    }
 
+	public static boolean validateImageURL(String imageUrl) {
+		try {
+			HttpURLConnection connection = (HttpURLConnection) new URL(imageUrl).openConnection();
+			connection.setRequestMethod("GET");
+			connection.connect();
+			int code = connection.getResponseCode();
+			return (code == 200);
+		} catch (Exception e) {
+			return false;
+		}
+	}
 
 	public void Reg_shipment_invoice() {
 		// TODO Auto-generated method stub
@@ -16443,23 +16443,22 @@ public class OspreyEMEA_HYVA {
 		}
 
 	}
-	
+
 	public void shipment_invoice() {
 		// TODO Auto-generated method stub
-		try
-		{
+		try {
 			Sync.waitElementPresent("css", "li[class='nav item'] a[href*='invoice']");
-			String Invoice=Common.findElement("css", "li[class='nav item'] a[href*='invoice']").getAttribute("href");
+			String Invoice = Common.findElement("css", "li[class='nav item'] a[href*='invoice']").getAttribute("href");
 			Common.clickElement("css", "li[class='nav item'] a[href*='invoice']");
 			Sync.waitPageLoad();
 			Thread.sleep(2000);
-			String invoice=Common.findElement("css", "div[class='mb-6'] p").getText().trim();
+			String invoice = Common.findElement("css", "div[class='mb-6'] p").getText().trim();
 			Common.assertionCheckwithReport(Common.getCurrentURL().contains(Invoice) && invoice.contains("Invoice"),
 					"validating the navigating to the invoice page from the guest track order",
 					"After clicking it should be navigate to the invoice page",
 					"Sucessfully Navigated to the invoice page after clicking from the guest user track my order",
 					"Failed to Navigate to the inovice page after clicking from the guest user track my order");
-		 Common.clickElement("css", "a[class='link no-underline']");
+			Common.clickElement("css", "a[class='link no-underline']");
 			Common.switchToSecondTab();
 			Sync.waitPageLoad();
 			Common.assertionCheckwithReport(Common.getCurrentURL().contains("/printInvoice/invoice_id"),
@@ -16470,11 +16469,12 @@ public class OspreyEMEA_HYVA {
 			Common.closeCurrentWindow();
 			Common.switchToFirstTab();
 			Sync.waitElementPresent("css", "li[class='nav item'] a[href*='shipment']");
-			String Shipment=Common.findElement("css", "li[class='nav item'] a[href*='shipment']").getAttribute("href");
+			String Shipment = Common.findElement("css", "li[class='nav item'] a[href*='shipment']")
+					.getAttribute("href");
 			Common.clickElement("css", "li[class='nav item'] a[href*='shipment']");
 			Sync.waitPageLoad();
 			Thread.sleep(2000);
-			String shipment=Common.findElement("css", "div[class='mb-6'] p").getText().trim();
+			String shipment = Common.findElement("css", "div[class='mb-6'] p").getText().trim();
 			Common.assertionCheckwithReport(Common.getCurrentURL().contains(Shipment) && shipment.contains("Shipment"),
 					"validating the navigating to the Shipment page from the guest track order",
 					"After clicking it should be navigate to the Shipment page",
@@ -16502,19 +16502,18 @@ public class OspreyEMEA_HYVA {
 					"Failed to Navigate to the Track Shipment after Clicking on Track Shipment");
 			Common.closeCurrentWindow();
 			Common.switchToFirstTab();
-	
-			
-		}
-		catch(Exception | Error e)
-		{
+
+		} catch (Exception | Error e) {
 			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("validating the navigating to the invoice or Shipment page from the guest track order",
+			ExtenantReportUtils.addFailedLog(
+					"validating the navigating to the invoice or Shipment page from the guest track order",
 					"After clicking it should be navigate to the invoice or Shipment page",
 					"Sucessfully Navigated to the invoice or Shipment page after clicking from the guest user track my order",
-					Common.getscreenShot("Failed to Navigate to the Invoice or Shipment page after clicking from the guest user track my order"));
+					Common.getscreenShot(
+							"Failed to Navigate to the Invoice or Shipment page after clicking from the guest user track my order"));
 			Assert.fail();
 		}
-		
+
 	}
 
 	public void Activity_and_color_label() {
@@ -16525,59 +16524,56 @@ public class OspreyEMEA_HYVA {
 			Thread.sleep(6000);
 			int Activitylabel = Common.findElements("css", "div[class*='text-xs font-bold']").size();
 			List<WebElement> colorSwatches = Common.findElements("css", "div[aria-label='Colour'] div[x-id]");
-				 for (WebElement color : colorSwatches) {
-						String colorname= color.getAttribute("class");
+			for (WebElement color : colorSwatches) {
+				String colorname = color.getAttribute("class");
 				color.click();
 				Thread.sleep(2000);
-				boolean selectedcolor=color.isSelected();
+				boolean selectedcolor = color.isSelected();
 
 			}
 			Common.clickElement("css", "div[id='algolia-load-more'] button");
 			Sync.waitPageLoad();
 			Thread.sleep(2000);
-			Common.assertionCheckwithReport(Common.getCurrentURL().contains("page=2") && Activitylabel>0 ,
+			Common.assertionCheckwithReport(Common.getCurrentURL().contains("page=2") && Activitylabel > 0,
 					"Validating the Load More CTA on the PLP page",
 					"After clicking on the Load more CTA products should be display",
 					"Succesfully products has been displayed after Clicking on the Load More CTA",
 					"Failed to dipslay the products after clicking on the Load More CTA");
 
-		}
-		catch(Exception | Error e)
-		{
+		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("Validating the Load More CTA on the PLP page",
 					"After clicking on the Load more CTA products should be display",
 					"Unable to dipslay the products after clicking on the Load More CTA",
 					Common.getscreenShot("Failed to dipslay the products after clicking on the Load More CTA"));
-			
+
 			Assert.fail();
 		}
-		
+
 	}
 
 	public void Subscribe_and_SMS() {
 		// TODO Auto-generated method stub
-		try
-		{
-			int emailupdates=Common.findElements("css", "label[for='email-newsletter-subscribe']").size();
-			int sms=Common.findElements("css","label[for='newsletter-subscribe']").size();
-			Common.assertionCheckwithReport(sms>0 && emailupdates>0 ,
+		try {
+			int emailupdates = Common.findElements("css", "label[for='email-newsletter-subscribe']").size();
+			int sms = Common.findElements("css", "label[for='newsletter-subscribe']").size();
+			Common.assertionCheckwithReport(sms > 0 && emailupdates > 0,
 					"Validating the email updates and sms checkboxs and matter on the shipping address page",
 					"After Navigating to the shipping address page emails & sms checkboxs and matter",
 					"Succesfully able to see the sms and email updates on the shipping address page for the Guest user",
 					"Failed to dipslay the sms and email updates on the shipping address page for the guest user");
-			
-		}
-		catch(Exception | Error e)
-		{
+
+		} catch (Exception | Error e) {
 			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("Validating the email updates and sms checkboxs and matter on the shipping address page",
+			ExtenantReportUtils.addFailedLog(
+					"Validating the email updates and sms checkboxs and matter on the shipping address page",
 					"After Navigating to the shipping address page emails & sms checkboxs and matter",
 					"Unable to dipslay the SMS and email updates on the shipping address page for the guest user",
-					Common.getscreenShot("Failed to dipslay the sms and email updates on the shipping address page for the guest user"));
+					Common.getscreenShot(
+							"Failed to dipslay the sms and email updates on the shipping address page for the guest user"));
 			Assert.fail();
 		}
-		
+
 	}
 
 	public void Back_to_Top_widget() {
@@ -16593,36 +16589,32 @@ public class OspreyEMEA_HYVA {
 					"After clicking on the back to top it is navigate to the top page",
 					"Succesfully able to navigate to the top page after clicking on the back to top",
 					"Failed to navigate to the top page after clicking on the back to top widget");
-		}
-		catch(Exception | Error e) {
+		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("Validating the back to top widget on the gurantee faq page",
 					"After clicking on the back to top it is navigate to the top page",
-					"Unable to navigate to the top page after clicking on the back to top widget",
-					Common.getscreenShot("Failed to navigate to the top page after clicking on the back to top widget"));
+					"Unable to navigate to the top page after clicking on the back to top widget", Common.getscreenShot(
+							"Failed to navigate to the top page after clicking on the back to top widget"));
 			Assert.fail();
 		}
-		
+
 	}
 
 	public void PDP_Validation(String Dataset) {
 		// TODO Auto-generated method stub
-		String Product=data.get(Dataset).get("Products");
-		try
-		{
-			Common.clickElement("css", "img[alt='" + Product +"']");
+		String Product = data.get(Dataset).get("Products");
+		try {
+			Common.clickElement("css", "img[alt='" + Product + "']");
 			Threed_Viewers_and_attachemnets();
 			producttype_Product_Recommendations();
 			Buy_the_complete_system();
-		}
-		catch(Exception | Error e)
-		{
+		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("To validate the minicart popup", "Should display the mini cart",
 					"unable to  display the mini cart", Common.getscreenShot("Failed to display the mini cart"));
 			Assert.fail();
 		}
-		
+
 	}
 
 	public void Buy_the_complete_system() {
@@ -16630,7 +16622,7 @@ public class OspreyEMEA_HYVA {
 			Sync.waitElementPresent("css", "div[class='w-full relative'] a[class*='btn bg-white text-xs']");
 			Common.mouseOverClick("css", "div[class='w-full relative'] a[class*='btn bg-white text-xs']");
 			Thread.sleep(4000);
-			String completesystem=Common.findElement("css", "h2[class='title-xl md:text-4xl']").getText().trim();
+			String completesystem = Common.findElement("css", "h2[class='title-xl md:text-4xl']").getText().trim();
 			Common.assertionCheckwithReport(completesystem.contains("Buy The Complete System"),
 					"Validating the popup when we click on the complete system",
 					"After clicking on the complete system popup should be open",
@@ -16644,74 +16636,189 @@ public class OspreyEMEA_HYVA {
 			System.out.println(openminicart);
 			Common.assertionCheckwithReport(openminicart.contains("true"), "To validate the minicart popup",
 					"Should display the mini cart", "Mini cart is displayed", "mini cart is not displayed");
-	
-		}
-		catch(Exception | Error e) {
+
+		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("To validate the minicart popup", "Should display the mini cart",
 					"unable to  display the mini cart", Common.getscreenShot("Failed to display the mini cart"));
 			Assert.fail();
 		}
 	}
+
 	public void producttype_Product_Recommendations() {
 		try {
 			Common.actionsKeyPress(Keys.HOME);
-			int ProductType=Common.findElements("css", "div[class*='product-type']").size();
+			int ProductType = Common.findElements("css", "div[class*='product-type']").size();
 			Common.scrollIntoView("css", "section[aria-label='Compare Similar Products']");
 			Common.mouseOverClick("css", "section[aria-label='Compare Similar Products'] button[type='submit']");
 			Thread.sleep(4000);
 			Common.clickElement("css", "button[aria-label='Close minicart']");
-			Common.assertionCheckwithReport(ProductType>0,
+			Common.assertionCheckwithReport(ProductType > 0,
 					"Validating the producttype and product recomendations on the PDP page",
 					"productype and product recomendations should be on the PDP page",
 					"Succesfully producttype and product recomendations on the PDP page",
 					"Failed to display the product type and product recomendations on the PDP page");
-			
-		}
-		catch(Exception |Error e) {
+
+		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("Validating the producttype and product recomendations on the PDP page",
 					"productype and product recomendations should be on the PDP page",
 					"Unable to display the product type and product recomendations on the PDP page",
-					Common.getscreenShot("Failed to display the product type and product recomendations on the PDP page"));
+					Common.getscreenShot(
+							"Failed to display the product type and product recomendations on the PDP page"));
 			Assert.fail();
 		}
 	}
-public void Threed_Viewers_and_attachemnets()
-{
-	try {
-		Common.actionsKeyPress(Keys.PAGE_DOWN);
-		Common.scrollIntoView("css", "h2[class='text-3xl font-semibold uppercase mb-4']");	
-		Thread.sleep(5000);
-		WebElement image=Common.findElement("id", "wr360image_wr360PlayerId");
-		WebElement rotate=Common.findElement("id", "wr360image_wr360PlayerId");
-		Common.clickAndHold(rotate);
-		String Raincover=Common.findElement("css", "h4[x-text='hotspot.title']").getText();
-		Common.assertionCheckwithReport(Raincover.contains("RAINCOVER"),
-				"Validating the drag to rotate the 3d image on the PDP page",
-				"After clicikng on the image is should be roate on the PDP page",
-				"Succesfully image is performed the rotate operation after clicking on the drag to rotate ",
-				"Failed to performe the rotate operation after clicking on the drag to rotate");
-		Common.actionsKeyPress(Keys.PAGE_UP);
-		Common.clickElement("css", "span[class='icon-pdp__download']");
-		Common.switchWindows();
-		Common.assertionCheckwithReport(Common.getCurrentURL().contains("download"),
-				"Validating the attachment on the PDP page",
-				"After clicikng the attatment user manual should be open in the different window",
-				"Succesfully iuser manual opened in the different window",
-				"Failed to open the users manual in the different window");
-		Common.closeCurrentWindow();
-		Common.switchToFirstTab();
-	}
-	catch(Exception |Error e) {
-		e.printStackTrace();
-		ExtenantReportUtils.addFailedLog("Validating the drag to rotate the 3d image on the PDP page",
-				"After clicikng on the image is should be roate on the PDP page",
-				"Unable to performe the rotate operation after clicking on the drag to rotate",
-				Common.getscreenShot("Failed to performe the rotate operation after clicking on the drag to rotate"));
-		Assert.fail();
-	}
-}
 
+	public void Threed_Viewers_and_attachemnets() {
+		try {
+			Common.actionsKeyPress(Keys.PAGE_DOWN);
+			Common.scrollIntoView("css", "h2[class='text-3xl font-semibold uppercase mb-4']");
+			Thread.sleep(5000);
+			WebElement image = Common.findElement("id", "wr360image_wr360PlayerId");
+			WebElement rotate = Common.findElement("id", "wr360image_wr360PlayerId");
+			Common.clickAndHold(rotate);
+			String Raincover = Common.findElement("css", "h4[x-text='hotspot.title']").getText();
+			Common.assertionCheckwithReport(Raincover.contains("RAINCOVER"),
+					"Validating the drag to rotate the 3d image on the PDP page",
+					"After clicikng on the image is should be roate on the PDP page",
+					"Succesfully image is performed the rotate operation after clicking on the drag to rotate ",
+					"Failed to performe the rotate operation after clicking on the drag to rotate");
+			Common.actionsKeyPress(Keys.PAGE_UP);
+			Common.clickElement("css", "span[class='icon-pdp__download']");
+			Common.switchWindows();
+			Common.assertionCheckwithReport(Common.getCurrentURL().contains("download"),
+					"Validating the attachment on the PDP page",
+					"After clicikng the attatment user manual should be open in the different window",
+					"Succesfully iuser manual opened in the different window",
+					"Failed to open the users manual in the different window");
+			Common.closeCurrentWindow();
+			Common.switchToFirstTab();
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("Validating the drag to rotate the 3d image on the PDP page",
+					"After clicikng on the image is should be roate on the PDP page",
+					"Unable to performe the rotate operation after clicking on the drag to rotate",
+					Common.getscreenShot(
+							"Failed to performe the rotate operation after clicking on the drag to rotate"));
+			Assert.fail();
+		}
+	}
+
+	public void Store_Logo_Validation() {
+		// TODO Auto-generated method stub
+
+		try {
+			Common.clickElement("css", "img[alt='Osprey store logo']");
+			Sync.waitPageLoad();
+			Thread.sleep(2000);
+			String expectedHomePageURL = automation_properties.getInstance().getProperty(automation_properties.BASEURL);
+			System.out.println(expectedHomePageURL);
+			Common.assertionCheckwithReport(Common.getCurrentURL().contains(expectedHomePageURL),
+					"Validating store logo click redirects to homepage", "Store logo should redirect to the homepage",
+					"Successfully redirected to homepage after clicking the store logo",
+					"Failed to redirect to homepage after clicking the store logo");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("Validating store logo click redirects to homepage",
+					"Store logo should redirect to the homepage",
+					"Unable to redirect to the homepage after clicking the store logo",
+					Common.getscreenShot("Failed to redirect to homepage after clicking the store logo"));
+
+			Assert.fail();
+		}
+
+	}
+
+	public void Hero_Banner_Validation() {
+		// TODO Auto-generated method stub
+		try {
+			int hero_banner = Common.findElements("css", "section[aria-label*='Hiker wearing a red']").size();
+			Common.assertionCheckwithReport(hero_banner > 0, "Validating presence of hero banner on the homepage",
+					"Hero banner should be displayed on the homepage",
+					"Successfully displayed the hero banner on the homepage",
+					"Failed to display the hero banner on the homepage");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("Validating presence of hero banner on the homepage",
+					"Hero banner should be displayed on the homepage", "Hero banner is not displayed on the homepage",
+					Common.getscreenShot("Hero_Banner_Not_Displayed"));
+			Assert.fail();
+		}
+		
+	}
+	public void CatogeryORproduct_Tile_Validation() {
+		try {
+			Common.scrollIntoView("css", "div[data-content-type='hot_card_tiles']");
+			int CatogeryORproduct_Tile = Common.findElements("css", "div[data-content-type='hot_card_tiles']").size();
+
+						Common.assertionCheckwithReport(
+								CatogeryORproduct_Tile > 0,
+			    "Validating presence of category or product tile on the homepage",
+			    "Category or product tile should be displayed on the homepage",
+			    "Successfully displayed the category or product tile on the homepage",
+			    "Failed to display the category or product tile on the homepage"
+			);
+
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog(
+				    "Validating presence of category or product tile on the homepage",
+				    "Category or product tile should be displayed on the homepage",
+				    "Category or product tile is not displayed on the homepage",
+				    Common.getscreenShot("CategoryOrProductTile_Not_Displayed")
+				);
+
+			Assert.fail();
+		}
+	}
+
+	public void Marketing_Flyout_Validation() {
+		// TODO Auto-generated method stub
+		try {
+			Sync.waitElementPresent("css", "div[aria-label='PACKFINDER℠']");
+			Common.clickElement("css", "div[aria-label='PACKFINDER℠']");
+			Thread.sleep(3000);
+			Common.switchFrames("css", "iframe[title='Product Finder']");
+			Common.clickElement("css", "button[data-testid='get-started-button']");
+			Sync.waitElementPresent("css", "label[data-answer='backpacking']");
+			Common.clickElement("css", "label[data-answer='backpacking']");
+			Sync.waitElementPresent("css", "label[data-answer='man']");
+			Common.clickElement("css", "label[data-answer='man']");
+			Sync.waitElementPresent("css", "label[data-answer='40-59']");
+			Common.clickElement("css", "label[data-answer='40-59']");
+			Sync.waitElementPresent("css", "label[data-answer='light']");
+			Common.clickElement("css", "label[data-answer='light']");
+			Sync.waitElementPresent("css", "button[data-testid='skip-button']");
+			Common.clickElement("css", "button[data-testid='skip-button']");
+			Sync.waitElementPresent("css", "label[data-answer='top-access']");
+			Common.clickElement("css", "label[data-answer='top-access']");
+			Sync.waitElementPresent("css", "button[data-testid='continue-button']");
+			Common.clickElement("css", "button[data-testid='continue-button']");
+			Thread.sleep(6000);
+			int size=Common.findElements("css", "section[data-testid='answers-section']").size();
+			System.out.println(size);
+			Common.assertionCheckwithReport(size > 0,
+					"Validating the packfinder journey on the home page",
+					"packfinder journey should be there in the Home page",
+					"Successfully packfinder journey should be in the Home page",
+					"Failed to display the packfinder journey should be in the home page");
+			Common.clickElement("css", "button[class='topbar-button topbar-close']");
+			Common.switchToDefault();
+			
+		}
+		catch(Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("Validating the packfinder journey on the home page",
+					"packfinder journey should be there in the Home page",
+					"Unable to display the packfinder journey should be in the home page",
+					Common.getscreenShot("Failed to display the packfinder journey should be in the home page"));
+			Assert.fail();
+		}
+		
+	}
 
 }
