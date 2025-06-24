@@ -15,7 +15,7 @@ public class Test_DGLD_HF_ST_073_Social_Article_Links {
 	GoldHydroHyvaHelper Hydro = new GoldHydroHyvaHelper(datafile,"DataSet");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Validate_Add_to_Cart_from_Sticky_Cart () throws Exception {
+	public void Validate_Social_Article_Links () throws Exception {
 
 		try {
 			Hydro.verifingHomePage();
