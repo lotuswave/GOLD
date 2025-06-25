@@ -36,7 +36,7 @@ public class TEST_DGLD_HF_EMEA_EU_BCT_003_Create_Account_Functionality {
 
 	@BeforeTest
 	public void startTest() throws Exception {
-		String url="https://mcloud-na-stage4.hydroflask.com/eu";
+		String url="https://mcloud-na-preprod.hydroflask.com/eu";
 		System.setProperty("url", url);
          Login.signIn();
          Hydro.close_add();
