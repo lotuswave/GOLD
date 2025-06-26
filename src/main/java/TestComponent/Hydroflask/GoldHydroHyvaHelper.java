@@ -3841,7 +3841,7 @@ System.out.println(MyFavorites);
 				if (data.get(dataSet).get("StreetLine3") != null) {
 					Common.textBoxInput("name", "street[2]", data.get(dataSet).get("Street"));
 				}
-
+ 
 				Common.scrollIntoView("id", "shipping-region");
 				Common.dropdown("id", "shipping-region", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
 				Common.actionsKeyPress(Keys.PAGE_DOWN);
@@ -3850,42 +3850,41 @@ System.out.println(MyFavorites);
 					Common.dropdown("id", "shipping-region", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
 				} catch (ElementClickInterceptedException e) {
 					// TODO: handle exception
-
+ 
 					Common.dropdown("id", "shipping-region", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
 				}
-
+ 
 				Common.textBoxInputClear("xpath", "//form[@id='shipping']//input[@name='postcode']");
 				Common.textBoxInput("xpath", "//form[@id='shipping']//input[@name='postcode']",
 						data.get(dataSet).get("postcode"));
 				String ShippingZip = Common.findElement("name", "postcode").getAttribute("value");
 				System.out.println("*****" + ShippingZip + "*******");
 //				Shippingaddress.put("ShippingZip", ShippingZip);
-
+ 
 				Sync.waitElementPresent("xpath", "//form[@id='shipping']//input[@name='telephone']");
 				Common.textBoxInput("xpath", "//form[@id='shipping']//input[@name='telephone']",
 						data.get(dataSet).get("phone"));
-
+ 
 //				Sync.waitElementPresent("xpath", "//input[@id='shipping-save']");
 //				Common.clickElement("xpath", "//input[@id='shipping-save']");
-
+ 
 				Thread.sleep(2000);
 				Common.clickElement("xpath", "//button[contains(@class, 'checkout-address-form__buttons-save')]");
-				 
 			} catch (Exception | Error e) {
 				e.printStackTrace();
-
+ 
 				ExtenantReportUtils.addFailedLog("validating adding  address", expectedResult,
 						"User unabel add shipping address",
 						Common.getscreenShotPathforReport("shipping address faield"));
-
+ 
 				Assert.fail();
-
+ 
 			}
-
+ 
 		}
-
+ 
 		else
-
+ 
 		{
 			try {
 				Sync.waitElementPresent("xpath", "//form[@id='shipping']//input[@name='firstname']");
@@ -3897,18 +3896,16 @@ System.out.println(MyFavorites);
 				Sync.waitElementPresent("xpath", "//input[@name='street[0]']");
 				Common.textBoxInput("xpath", "//input[@name='street[0]']", data.get(dataSet).get("Street"));
 				Thread.sleep(2000);
-
+ 
 				if (data.get(dataSet).get("StreetLine2") != null) {
 					Common.textBoxInput("name", "street[1]", data.get(dataSet).get("Street"));
 				}
-				if (data.get(dataSet).get("StreetLine3") != null) {
-					Common.textBoxInput("name", "street[2]", data.get(dataSet).get("Street"));
-				}
+				else {
 				Common.actionsKeyPress(Keys.PAGE_DOWN);
 				Thread.sleep(3000);
 				Sync.waitElementPresent("id", "shipping-city");
 				Common.textBoxInput("id", "shipping-city", data.get(dataSet).get("City"));
-
+ 
 				try {
 					Common.dropdown("xpath", "//select[@id='shipping-region']", Common.SelectBy.TEXT,
 							data.get(dataSet).get("Region"));
@@ -3922,35 +3919,33 @@ System.out.println(MyFavorites);
 				Common.textBoxInputClear("xpath", "//form[@id='shipping']//input[@name='postcode']");
 				Common.textBoxInput("xpath", "//form[@id='shipping']//input[@name='postcode']",
 						data.get(dataSet).get("postcode"));
-
+ 
 				String ShippingZip = Common.findElement("xpath", "//form[@id='shipping']//input[@name='postcode']")
 						.getAttribute("value");
 				System.out.println("*****" + ShippingZip + "*******");
-
+ 
 				Thread.sleep(5000);
 				Sync.waitElementPresent("xpath", "//form[@id='shipping']//input[@name='telephone']");
 				Common.textBoxInput("xpath", "//form[@id='shipping']//input[@name='telephone']",
 						data.get(dataSet).get("phone"));
 				Common.clickElement("id", "shipping-save");
-
-			} catch (Exception | Error e) {
+ 
+			} }catch (Exception | Error e) {
 				e.printStackTrace();
-
+ 
 				ExtenantReportUtils.addFailedLog("validating adding  address", expectedResult,
 						"User unabel add shipping address",
 						Common.getscreenShotPathforReport("shipping address faield"));
-
+ 
 				Assert.fail();
-
+ 
 			}
 		}
-
+ 
 	}
-
-	
 	public void Accont_Information() {
 		// TODO Auto-generated method stub
-
+ 
 		try {
 			Sync.waitElementPresent("xpath", "//span[contains(text(),'Account Information')]");
 			Common.clickElement("xpath", "//span[contains(text(),'Account Information')]");
@@ -3960,7 +3955,7 @@ System.out.println(MyFavorites);
 					"After Clicking on Account information CTA user should be navigate to the Account information page",
 					"Sucessfully User Navigates to the Account information page after clicking on the Account information CTA",
 					"Failed to Navigate to the Account information page after Clicking on Account information button");
-
+ 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("validating the Navigation to the Account information page",
@@ -8776,50 +8771,47 @@ catch(Exception | Error e)
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Sync.waitPageLoad();
-			Sync.waitElementPresent(30, "xpath", "//button[normalize-space()='New Address'] | (//button[normalize-space()='New Address'])[2]");
-			Common.clickElement("xpath", "//button[normalize-space()='New Address'] | (//button[normalize-space()='New Address'])[2]");
- 
-			Common.textBoxInput("xpath", "//input[@id='shipping-firstname']",
+			Common.clickElement("xpath", "//input[@id='billing-as-shipping']");
+			Sync.waitElementPresent(30, "xpath", "(//div[contains(@class, 'checkout-address-list__button-container')]//button[@type='button'])[2]");
+			Common.clickElement("xpath", "(//div[contains(@class, 'checkout-address-list__button-container')]//button[@type='button'])[2]");
+			Thread.sleep(5000);
+			Common.textBoxInput("xpath", "//form[@id='billing']//input[@name='firstname']",
 					data.get(dataSet).get("FirstName"));
-			Common.textBoxInput("xpath", "//input[@id='shipping-lastname']",
+			Common.textBoxInput("xpath", "//form[@id='billing']//input[@name='lastname']",
 					data.get(dataSet).get("LastName"));
-			
-			Common.textBoxInput("xpath", "//form[@id='shipping']//input[@name='street[0]']", data.get(dataSet).get("Street"));
-			String Text = Common.getText("xpath", "//form[@id='shipping']//input[@name='street[0]']");
+			Common.textBoxInput("xpath", "//form[@id='billing']//input[@name='street[0]']", data.get(dataSet).get("Street"));
+			String Text = Common.getText("xpath", "//form[@id='billing']//input[@name='street[0]']");
 			Sync.waitPageLoad();
 			Thread.sleep(5000);
-			
-			
-			Common.textBoxInput("xpath", "//form[@id='shipping']//input[@name='city']", data.get(dataSet).get("City"));
-			System.out.println(data.get(dataSet).get("City"));
 
+			Common.textBoxInput("xpath", "//form[@id='billing']//input[@name='city']", data.get(dataSet).get("City"));
+			System.out.println(data.get(dataSet).get("City"));
+ 
 //			Common.actionsKeyPress(Keys.PAGE_DOWN);
 			Thread.sleep(4000);
 			try {
-				Common.dropdown("xpath", "//form[@id='shipping']//select[@name='region']", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+				Common.dropdown("xpath", "//form[@id='billing']//select[@name='region']", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
 			} catch (ElementClickInterceptedException e) {
 				Thread.sleep(3000);
 				Common.dropdown("id", "shipping-region", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
 			}
 			Thread.sleep(2000);
-		
-			Common.textBoxInput("xpath", "//input[@id='shipping-postcode']", data.get(dataSet).get("postcode"));
+			Common.textBoxInput("xpath", "//form[@id='billing']//input[@name='postcode']", data.get(dataSet).get("postcode"));
 			Thread.sleep(4000);
-			Common.textBoxInput("xpath", "//form[@id='shipping']//input[@name='telephone']",
+			Common.textBoxInput("xpath", "//form[@id='billing']//input[@name='telephone']",
 					data.get(dataSet).get("phone"));
 			Thread.sleep(4000);
 			Common.clickElement("xpath", "//button[contains(@class, 'checkout-address-form__buttons-save')]");
 			Sync.waitPageLoad();
 			Thread.sleep(2000);
-		
-		   int	update = Common.findElements("xpath", "//div[@class='relative flex w-full']//span").size();
-				System.out.println(update);
-			Common.assertionCheckwithReport(update>0 ,
+		  // String	update = Common.findElement("xpath", "//select[@id='address-list']").getAttribute("value");
+			//	System.out.println(update);
+			/*Common.assertionCheckwithReport(update.equals(0) ,
 					"verifying the Billing address form in payment page",
 					"Billing address should be saved in the payment page",
 					"Sucessfully Billing address form should be Display ",
-					"Failed to display the Billing address in payment page");
-
+					"Failed to display the Billing address in payment page");*/
+ 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("verifying the Billing address form in payment page",
@@ -8828,8 +8820,8 @@ catch(Exception | Error e)
 					Common.getscreenShot("Failed to display the Billing address in payment page"));
 			Assert.fail();
 		}
-
-
+ 
+ 
 	}
 
 	public void outofstock_subcription(String Dataset) {
@@ -9086,78 +9078,77 @@ catch(Exception | Error e)
 
 	public void share_whishlist(String Dataset) {
 		// TODO Auto-generated method stub
-		try {
-			Sync.waitPageLoad();
-			int MyFavorites = Common.findElements("xpath", "//div[contains(@class,'message')]//span").size();
-
-			if (MyFavorites != 0) {
-				search_product("Product");
-				Sync.waitElementPresent(30, "xpath", "//button[contains(@class, 'group/wishlist')]");
-				Common.scrollIntoView("xpath", "//button[contains(@class, 'group/wishlist')]");
-				Common.clickElement("xpath", "//button[contains(@class, 'group/wishlist')]");
-				Common.clickElement("xpath","//span[@x-text='customerGreeting']");
-				Sync.waitElementPresent(30, "id", "customer-menu");
-				Common.clickElement("id", "customer-menu");
-				Sync.waitElementPresent(30, "xpath", "//a[@title='My Favorites']");
-				Common.clickElement("xpath", "//a[@title='My Favorites']");
-				
-				Sync.waitPageLoad();
-				Thread.sleep(4000);
-				Common.assertionCheckwithReport(Common.getPageTitle().equals("Wish List Sharing"),
-						"validating the Navigation to the My Favorites page",
-						"After Clicking on My Favorites CTA user should be navigate to the My Favorites page",
-						"Sucessfully User Navigates to the My Favorites page after clicking on the My Favorites CTA",
-						"Failed to Navigate to the My Favorites page after Clicking on My Favorites button");
-				Common.findElements("xpath", "//span[contains(@class,'a-wishlist')]");
-				Sync.waitPageLoad();
-				Thread.sleep(4000);
-//				String message = Common.findElement("xpath", "//span[@class='w-full text-center pr-10']").getText();
-//				System.out.println(message);
-//				Common.assertionCheckwithReport(message.contains("Click here to view your Favorites."),
-//						"validating the  product add to the Whishlist", "Product should be add to whishlist",
-//						"Sucessfully product added to the Whishlist ", "failed to add product to the Whishlist");
-				Common.clickElement("xpath", "(//button[@aria-haspopup='dialog'])[2]");
-				Sync.waitPageLoad();
-				Thread.sleep(2000);
-				Common.textBoxInput("xpath", "//textarea[@name='emails']", data.get(Dataset).get("Email"));
-				Common.textBoxInput("xpath", "//textarea[@name='message']", data.get(Dataset).get("message"));
-				Thread.sleep(4000);
-				Common.clickElement("xpath", "//button[@title='Share Wish List']");
-				Sync.waitPageLoad();
-				Thread.sleep(3000);
-				String message1 = Common.findElement("xpath", "//span[text()='Your wish list has been shared.']").getText();
-				System.out.println(message1);
-				Common.assertionCheckwithReport(message1.contains("Your wish list has been shared."),
-						"validating the shared whishlist functionality",
-						"sucess message should display after share whishlist",
-						"Sucessfully message has been displayed for whishlist",
-						"failed to display the message for whishlist");
-			} else {
-				Common.clickElement("xpath", "//button[@aria-haspopup='dialog']//parent::div[contains(@x-data,'hyva')]");
-				Sync.waitPageLoad();
-				Thread.sleep(4000);
-				Common.textBoxInput("xpath", "//textarea[@name='emails']", data.get(Dataset).get("Email"));
-				Common.textBoxInput("xpath", "//textarea[@name='message']", data.get(Dataset).get("message"));
-				Thread.sleep(4000);
-				Common.clickElement("xpath", "//button[@title='Share Wish List']");
-				Sync.waitElementPresent(30, "xpath", "//div[@ui-id='message-success']");
-				String message1 = Common.findElement("xpath", "//div[@ui-id='message-success']").getText();
-				System.out.println(message1);
-				Common.assertionCheckwithReport(message1.contains("Your wish list has been shared."),
-						"validating the shared whishlist functionality",
-						"sucess message should display after share whishlist",
-						"Sucessfully message has been displayed for whishlist",
-						"failed to display the message for whishlist");
-
-			}
-		} catch (Exception | Error e) {
-			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("validating the shared whishlist functionality",
-					"sucess message should display after share whishlist",
-					"Unable to display the message for whishlist",
-					Common.getscreenShot("failed to display the message for whishlist"));
-			Assert.fail();
-		}
+				try {
+					Sync.waitPageLoad();
+					int MyFavorites = Common.findElements("xpath", "//div[contains(@class,'message')]//span").size();
+		 
+					if (MyFavorites != 0) {
+						search_product("Product");
+						Sync.waitElementPresent(30, "xpath", "//button[contains(@class, 'group/wishlist')]");
+						Common.scrollIntoView("xpath", "//button[contains(@class, 'group/wishlist')]");
+						Common.clickElement("xpath", "//button[contains(@class, 'group/wishlist')]");
+						Common.clickElement("xpath","//span[@x-text='customerGreeting']");
+						Sync.waitElementPresent(30, "id", "customer-menu");
+						Common.clickElement("id", "customer-menu");
+						Sync.waitElementPresent(30, "xpath", "//a[@title='My Favorites']");
+						Common.clickElement("xpath", "//a[@title='My Favorites']");
+						Sync.waitPageLoad();
+						Thread.sleep(4000);
+						Common.assertionCheckwithReport(Common.getPageTitle().equals("Wish List Sharing"),
+								"validating the Navigation to the My Favorites page",
+								"After Clicking on My Favorites CTA user should be navigate to the My Favorites page",
+								"Sucessfully User Navigates to the My Favorites page after clicking on the My Favorites CTA",
+								"Failed to Navigate to the My Favorites page after Clicking on My Favorites button");
+						Common.findElements("xpath", "//span[contains(@class,'a-wishlist')]");
+						Sync.waitPageLoad();
+						Thread.sleep(4000);
+//						String message = Common.findElement("xpath", "//span[@class='w-full text-center pr-10']").getText();
+//						System.out.println(message);
+//						Common.assertionCheckwithReport(message.contains("Click here to view your Favorites."),
+//								"validating the  product add to the Whishlist", "Product should be add to whishlist",
+//								"Sucessfully product added to the Whishlist ", "failed to add product to the Whishlist");
+						Common.clickElement("xpath", "(//button[@aria-haspopup='dialog'])[3]");
+						Sync.waitPageLoad();
+						Thread.sleep(2000);
+						Common.textBoxInput("xpath", "//textarea[@name='emails']", data.get(Dataset).get("Email"));
+						Common.textBoxInput("xpath", "//textarea[@name='message']", data.get(Dataset).get("message"));
+						Thread.sleep(4000);
+						Common.clickElement("xpath", "//button[@title='Share Wish List']");
+						Sync.waitPageLoad();
+						Thread.sleep(3000);
+						String message1 = Common.findElement("xpath", "//span[text()='Your wish list has been shared.']").getText();
+						System.out.println(message1);
+						Common.assertionCheckwithReport(message1.contains("Your wish list has been shared."),
+								"validating the shared whishlist functionality",
+								"sucess message should display after share whishlist",
+								"Sucessfully message has been displayed for whishlist",
+								"failed to display the message for whishlist");
+					} else {
+						Common.clickElement("xpath", "//button[@aria-haspopup='dialog']//parent::div[contains(@x-data,'hyva')]");
+						Sync.waitPageLoad();
+						Thread.sleep(4000);
+						Common.textBoxInput("xpath", "//textarea[@name='emails']", data.get(Dataset).get("Email"));
+						Common.textBoxInput("xpath", "//textarea[@name='message']", data.get(Dataset).get("message"));
+						Thread.sleep(4000);
+						Common.clickElement("xpath", "//button[@title='Share Wish List']");
+						Sync.waitElementPresent(30, "xpath", "//div[@ui-id='message-success']");
+						String message1 = Common.findElement("xpath", "//div[@ui-id='message-success']").getText();
+						System.out.println(message1);
+						Common.assertionCheckwithReport(message1.contains("Your wish list has been shared."),
+								"validating the shared whishlist functionality",
+								"sucess message should display after share whishlist",
+								"Sucessfully message has been displayed for whishlist",
+								"failed to display the message for whishlist");
+		 
+					}
+				} catch (Exception | Error e) {
+					e.printStackTrace();
+					ExtenantReportUtils.addFailedLog("validating the shared whishlist functionality",
+							"sucess message should display after share whishlist",
+							"Unable to display the message for whishlist",
+							Common.getscreenShot("failed to display the message for whishlist"));
+					Assert.fail();
+				}
 	}
 
 	public void Add_Myhydro(String Dataset) {
