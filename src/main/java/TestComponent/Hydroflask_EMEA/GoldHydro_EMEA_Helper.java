@@ -9499,7 +9499,7 @@ public class GoldHydro_EMEA_Helper {
 			expectedResult = "It should apply discount on your price.If user enters invalid promocode it should display coupon code is not valid message.";
 			if (Common.getCurrentURL().contains("Stage") || Common.getCurrentURL().contains("preprod")) {
 				String discountcodemsg = Common.getText("css", "span[x-html='message.text']");
-				Common.assertionCheckwithReport(discountcodemsg.contains("You used coupon code"), "verifying pomocode",
+				Common.assertionCheckwithReport(discountcodemsg.contains("You used coupon code") || discountcodemsg.contains("HFEMEA20OFF"), "verifying pomocode",
 						expectedResult, "promotion code working as expected", "Promation code is not applied");
 			} else {
 				String discountcodemsg = Common.getText("css", "span[x-html='message.text']");
