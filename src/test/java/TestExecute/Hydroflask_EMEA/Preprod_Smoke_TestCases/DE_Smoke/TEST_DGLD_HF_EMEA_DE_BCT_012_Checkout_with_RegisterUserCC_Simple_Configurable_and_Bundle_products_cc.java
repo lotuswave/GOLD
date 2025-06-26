@@ -41,13 +41,13 @@ public class TEST_DGLD_HF_EMEA_DE_BCT_012_Checkout_with_RegisterUserCC_Simple_Co
 
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+//		Common.closeAll();
 
 	}
 
 	@BeforeTest
 	public void startTest() throws Exception {
-		String url="https://mcloud-na-stage4.hydroflask.com/de";
+		String url="https://mcloud-na-preprod.hydroflask.com/de";
 		System.setProperty("url", url);
 		Login.signIn();
 		Hydro.close_add();
