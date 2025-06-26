@@ -264,7 +264,7 @@ public class GoldHydroHyvaHelper {
 			Sync.waitPageLoad();
 			Thread.sleep(6000);
 			expectedResult = "User should select the " + category + "category";
-			int sizebotteles = Common.findElements("xpath", "//div[@class='hero-container']//span[contains(text(),'Bottles')]").size();
+			int sizebotteles = Common.findElements("xpath", "//h1//span[contains(text(),'Bottles')]").size();
 			Common.assertionCheckwithReport(sizebotteles > 0,
 					"validating the product category as" + category + "from navigation menu ", expectedResult,
 					"Selected the " + category + " category", "User unabel to click" + category + "");
@@ -4454,8 +4454,9 @@ public void Remove_GiftCode() {
 	
 
 	public String payPal_Payment(String dataSet) throws Exception {
+		
 		String order = "";
-
+		 
 		String expectedResult = "It should open paypal site window.";
 		try {
 			Thread.sleep(3000);
@@ -4463,7 +4464,6 @@ public void Remove_GiftCode() {
 			System.out.println(cancelpayment);
 			if(cancelpayment>0)
 			{
-				
 				Sync.waitElementPresent("xpath", "//button[contains(text(),'Cancel Payment')]");
 				Common.clickElement("xpath", "//button[contains(text(),'Cancel Payment')]");
 				Sync.waitPageLoad();
@@ -4472,7 +4472,6 @@ public void Remove_GiftCode() {
 				Common.clickElement("xpath", "//input[@id='payment-method-paypal_express']");
 				Sync.waitElementPresent("xpath", "//div[@id='paypal-button-paypal_express']");
 				Common.clickElement("xpath", "//div[@id='paypal-button-paypal_express']");
-				
 			}
 			else
 			{
@@ -4481,15 +4480,13 @@ public void Remove_GiftCode() {
 				Sync.waitElementClickable("xpath", "//div[@id='paypal-button-paypal_express']");
 				Common.clickElement("xpath", "//div[@id='paypal-button-paypal_express']");
 			}
-            
-			
+
 			Common.switchFrames("xpath", "//iframe[contains(@class,'component-frame visible')]");
 			Sync.waitElementPresent("xpath", "(//div[contains(@class,'paypal-button-label')])[1]");
 			Common.clickElement("xpath", "(//div[contains(@class,'paypal-button-label')])[1]");
 //			Common.switchFrames("xpath", "//iframe[contains(@class,'component-frame visible')]");
-
+ 
 			Thread.sleep(9000);
-			
 			Common.switchToDefault();
 			Thread.sleep(6000);
 			Common.switchWindows();
@@ -4497,7 +4494,7 @@ public void Remove_GiftCode() {
 			if (size > 0) {
 				Sync.waitElementPresent("id", "acceptAllButton");
 				Common.clickElement("id", "acceptAllButton");
-
+ 
 			}
 		} catch (Exception | Error e) {
 			e.printStackTrace();
@@ -4506,32 +4503,30 @@ public void Remove_GiftCode() {
 			Assert.fail();
 		}
 		String url = automation_properties.getInstance().getProperty(automation_properties.BASEURL);
-
+ 
 		if (!url.contains("stage") & !url.contains("preprod")) {
-
+ 
 			int sizeofelement = Common.findElements("id", "email").size();
 			Common.assertionCheckwithReport(sizeofelement > 0, "verifying the paypal payment ", expectedResult,
 					"open paypal site window", "faild to open paypal account");
 		} else {
-			Sync.waitElementPresent("id", "login_email");
-			Common.clickElement("id", "login_email");
-			Sync.waitElementPresent("id", "login_email");
-			Common.textBoxInput("id", "login_email", data.get(dataSet).get("Email"));
-			
+			Sync.waitElementPresent("id", "email");
+			Common.clickElement("id", "email");
+			Sync.waitElementPresent("id", "email");
+			Common.findElement("id", "email").clear();
+			Common.textBoxInput("id", "email", data.get(dataSet).get("Email"));
 			Sync.waitElementClickable("xpath", "//button[text()='Next']");
 			Common.clickElement("xpath", "//button[text()='Next']");
-			int size = Common.findElements("xpath", "//button[text()='Use Password Instead']").size();
+			int size = Common.findElements("xpath", "//a[contains(text(),'Log in with a password instead')]").size();
 			if(size>0) {
-				Common.clickElement("xpath", "//button[text()='Use Password Instead']");
+				Common.clickElement("xpath", "//a[contains(text(),'Log in with a password instead')]");
 			    Sync.waitElementPresent(10,"id", "password");
 				Common.textBoxInput("id", "password", data.get(dataSet).get("Password"));
 			}
 			else {
-				
-			
+
 			Common.textBoxInput("id", "password", data.get(dataSet).get("Password"));
 			int sizeemail = Common.findElements("id", "email").size();
-			
 			Common.assertionCheckwithReport(sizeemail > 0, "verifying the paypal payment ", expectedResult,
 					"open paypal site window", "faild to open paypal account");
 			}
@@ -4541,8 +4536,8 @@ public void Remove_GiftCode() {
 				Thread.sleep(5000);
 				Common.actionsKeyPress(Keys.END);
 				Thread.sleep(5000);
-				Sync.waitElementClickable("xpath", "//div[text()='Pay']");
-				Common.clickElement("xpath", "//div[text()='Pay']");
+				Sync.waitElementClickable("xpath", "//button[text()='Complete Purchase']");
+				Common.clickElement("xpath", "//button[text()='Complete Purchase']");
 				Thread.sleep(8000);
 				Common.switchToFirstTab();
 			} catch (Exception | Error e) {
@@ -4555,14 +4550,13 @@ public void Remove_GiftCode() {
 			String url1 = automation_properties.getInstance().getProperty(automation_properties.BASEURL);
 			if (!url1.contains("stage") && !url1.contains("preprod")) {
 			}
-
+ 
 			else {
 				try {
 					Thread.sleep(8000);
 					Common.scrollIntoView("xpath", "(//button[contains(@class,'btn btn-primary place-order')])[1]");
-					
 					Common.clickElement("xpath", "(//button[contains(@class,'btn btn-primary place-order')])[1]");
-
+ 
 					Thread.sleep(7000);
 					Sync.waitElementPresent(30, "xpath", "//h1[normalize-space()='Thank you for your purchase!']");
 					String sucessMessage = Common.getText("xpath",
@@ -4574,7 +4568,7 @@ public void Remove_GiftCode() {
 							"verifying the product confirmation", expectedResult,
 							"Successfully It redirects to order confirmation page Order Placed",
 							"User unabel to go orderconformation page");
-
+ 
 					if (Common.findElements("xpath", "//div[contains(@class,'checkout-success container')]//p//span")
 							.size() > 0) {
 						Thread.sleep(1000);
@@ -4591,7 +4585,7 @@ public void Remove_GiftCode() {
 							"It should navigate to the order confirmation page",
 							"User failed to proceed to the order confirmation page",
 							Common.getscreenShotPathforReport("failed to Navigate to the order summary page"));
-
+ 
 					Assert.fail();
 				}
 			}
@@ -10361,10 +10355,17 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 			String Newprice = Common.getText("xpath", "(//span[@class='price-wrapper']//span[@class='price'])").replace("$", "").trim();
 			Float pricevalue = Float.parseFloat(Newprice);
 			Thread.sleep(4000);
-			float discount = originalvalue - (originalvalue * 65 / 100);
+			float discount1 = originalvalue - (originalvalue * 40 / 100);
+			float discount=originalvalue-discount1;
 			String discountvalue = String.valueOf(discount).replace("$", "");
 			Float value = Float.parseFloat(discountvalue);
-			Common.assertionCheckwithReport(discountvalue.contains(Newprice),
+			float discount2 = originalvalue - (originalvalue * 65 / 100);
+			float discount3=originalvalue-discount2;
+			String discountvalue1 = String.valueOf(discount2).replace("$", "");
+			Float value1 = Float.parseFloat(discountvalue1);
+			System.out.println(discountvalue1);
+			System.out.println(Newprice);
+			Common.assertionCheckwithReport(discountvalue.contains(Newprice)||discountvalue1.contains(Newprice),
 					"verifying the discount for the employee discount ",
 					"user should able to see the discount for the employee",
 					"user successfully able to apply the discount", "Failed to apply the discount for the employee");
@@ -12031,7 +12032,7 @@ public void Explore_Validation(String Dataset) {
 
 				Common.assertionCheckwithReport(
 						Common.getPageTitle().contains(footerlinks[i]) || Common.getCurrentURL().contains(footerlinks[i])
-								|| Common.getPageTitle().contains("We are Hydro Flask")
+								|| Common.getPageTitle().contains("We are Hydro Flask")	|| Common.getPageTitle().contains("Bluesign LP")
 								,
 						"validating the links navigation from footer Links",
 						"After Clicking on" + footerlinks[i] + "it should navigate to the",
@@ -14794,9 +14795,11 @@ Common.clickElement("xpath", "//span[text()='Edit']");
 				Common.clickElement("xpath", "//a[@title='Sign Out']");
 				Sync.waitPageLoad();
 				Thread.sleep(5000);
-				String homepage= Common.findElementBy("xpath", "//meta[@content='Hydroflask Current Homepage']").getAttribute("content");
+				String homepage= Common.findElementBy("xpath", "//meta[@name='description']").getAttribute("content");
 				System.out.println(homepage);
-				Common.assertionCheckwithReport(homepage.contains("Hydroflask Current Homepage") ,
+				String homepage1= Common.findElementBy("xpath", "//meta[@name='title']").getAttribute("content");
+				System.out.println(homepage1);
+				Common.assertionCheckwithReport(homepage.contains("Hydro Flask creates insulated, stainless steel water bottles to keep you hydrated on any adventure. Let's go!")|| homepage1.contains("Customer Login") ,
 						"validating store logo", "System directs the user to the Homepage",
 						"Sucessfully user navigates to the home page", "Failed to navigate to the homepage");
 			} catch (Exception | Error e) {

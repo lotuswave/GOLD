@@ -3,6 +3,11 @@
     <listeners>
         <listener class-name="Utilities.TestListener"/>
     </listeners>
+    <test name="Test_DGLD_HF_ST_137_Validation_Of_Homepage" testid="DQA-3840" priority="P1" description="This script will cover validating the home page">
+<classes>
+<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_137_Validation_Of_Homepage"/>
+</classes>
+</test>
    <test name="Test_DGLD_HF_ST_016_guestCheckoutwith_invalid_CC_Credentials" testid="DQA-161" priority="P1" description="This script will cover guest Checkout with invalid CC Credentials">
 <classes>
 <class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_016_guestCheckoutwith_invalid_CC_Credentials"/>
