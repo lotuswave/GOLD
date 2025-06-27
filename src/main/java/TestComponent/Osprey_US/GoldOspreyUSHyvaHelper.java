@@ -109,7 +109,7 @@ public class GoldOspreyUSHyvaHelper {
 			else
 			{
 //			Close_Geolocation();
-//			close_add();
+			close_add();
 				close_countryselector();
 				acceptPrivacy();
 				int size = Common.findElements("css", "img[alt='Osprey store logo']").size();
