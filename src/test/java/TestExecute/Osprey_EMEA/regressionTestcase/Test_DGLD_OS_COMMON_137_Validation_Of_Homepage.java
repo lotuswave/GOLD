@@ -9,19 +9,21 @@ import TestComponent.Osprey_EMEA.OspreyEMEA_HYVA;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_OS_COMMON_014_Validate_Country_Selector {
+public class Test_DGLD_OS_COMMON_137_Validation_Of_Homepage {
 
 	String datafile = "Osprey_EMEA//GoldOspreyemea.xlsx";
-	OspreyEMEA_HYVA Osprey_ReEu = new OspreyEMEA_HYVA(datafile,"Country");
+	OspreyEMEA_HYVA Osprey_ReEu = new OspreyEMEA_HYVA(datafile,"Checkout payments");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Verifying_Validate_Country_Selector () throws Exception {
+	public void Verifying_the_Homepage_Functionality () throws Exception {
 
 		try {
-        Osprey_ReEu.verifingHomePage();
-        Osprey_ReEu.country_selctor("Countryselector");  //need to add validation from excel and webelements and assertions
-        Osprey_ReEu.Geolocation_Popup();
-        
+			Osprey_ReEu.Verify_Homepage();
+			Osprey_ReEu.Store_Logo_Validation();
+			Osprey_ReEu.Hero_Banner_Validation();
+			Osprey_ReEu.CatogeryORproduct_Tile_Validation();
+			Osprey_ReEu.Marketing_Flyout_Validation();
+       
 		} catch (Exception e) {
 
 			Assert.fail(e.getMessage(), e);
@@ -39,7 +41,6 @@ public class Test_DGLD_OS_COMMON_014_Validate_Country_Selector {
 	public void startTest() throws Exception {
 		System.setProperty("configFile", "Osprey_EMEA\\config.properties");
         Login.signIn();
-        
 
 	}
 

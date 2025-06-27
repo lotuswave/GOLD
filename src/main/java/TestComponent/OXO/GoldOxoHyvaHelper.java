@@ -2011,7 +2011,7 @@ public String create_account(String Dataset) {
 			Sync.waitElementClickable("xpath", "//button[@title='Sign Up']");
 			Common.clickElement("xpath", "//button[@title='Sign Up']");
 			Sync.waitImplicit(5);
-			String message = Common.findElement("xpath", "//span[text()='Thank you for registering with OXO Store.']").getText();
+			String message = Common.findElement("xpath", "//span[text()='Thank you for registering with OXO.']").getText();
 			System.out.println(message);
 			Common.assertionCheckwithReport(
 					message.contains("Thank you for registering") || Common.getPageTitle().contains("Wish List Sharing") && message.contains(Product + " has been added to your Favorites. Click here to view your Favorites"),

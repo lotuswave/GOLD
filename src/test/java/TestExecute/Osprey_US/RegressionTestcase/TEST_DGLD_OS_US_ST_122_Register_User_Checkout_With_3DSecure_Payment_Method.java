@@ -25,7 +25,7 @@ public class TEST_DGLD_OS_US_ST_122_Register_User_Checkout_With_3DSecure_Payment
         Osprey_ReEu.addtocart("Product");
         Osprey_ReEu.minicart_Checkout();
         Osprey_ReEu.RegaddDeliveryAddress("Account");
-        Osprey_ReEu.selectshippingmethod("GroundShipping method");
+        Osprey_ReEu.selectshippingmethod("RegisterShippingMethod");
         Osprey_ReEu.clickSubmitbutton_Shippingpage();
         Osprey_ReEu.Secure_Payment_details("3d_Secure");
         

@@ -3,6 +3,16 @@
 <listeners>
 <listener class-name="Utilities.TestListener"/>
 </listeners>
+<test name="Test_DGLD_HF_ST_137_Validation_Of_Homepage" testid="DQA-3840" priority="P1" description="This script will cover validating the home page">
+<classes>
+<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_137_Validation_Of_Homepage"/>
+</classes>
+</test>
+<test name="Test_DGLD_HF_ST_136_Validation_Shipped_Invoiced_In_My_Order_Page" testid="DQA-4339" priority="P1" description="This script will cover validating the Shipped Invoiced In My Order Page">
+<classes>
+<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_136_Validation_Shipped_Invoiced_In_My_Order_Page"/>
+</classes>
+</test>
 <test name="Test_DGLD_HF_ST_107_My_Account_Page_Validation" testid="DQA-220" priority="P1" description="This script will cover validating the My Account page">
 <classes>
 <class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_107_My_Account_Page_Validation"/>

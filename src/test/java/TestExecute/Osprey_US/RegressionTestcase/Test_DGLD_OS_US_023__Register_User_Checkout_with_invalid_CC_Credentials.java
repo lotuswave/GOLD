@@ -25,7 +25,7 @@ public class Test_DGLD_OS_US_023__Register_User_Checkout_with_invalid_CC_Credent
         Osprey_ReEu.addtocart("Product");
         Osprey_ReEu.minicart_Checkout();
         Osprey_ReEu.RegaddDeliveryAddress("Account");
-        Osprey_ReEu.selectshippingmethod("GroundShipping method");
+        Osprey_ReEu.selectshippingmethod("RegisterShippingMethod");
         Osprey_ReEu.clickSubmitbutton_Shippingpage();
         Osprey_ReEu.Paymentcreditcard_WithInvalidData("Invalid Card Details");
         

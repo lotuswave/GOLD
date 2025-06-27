@@ -1949,7 +1949,7 @@ public void Featured_ShopAll(String Dataset) {{
 				String productsearch = Common.findElement("id", "algolia-srp-title").getText();
 				System.out.println(productsearch);
 				Common.assertionCheckwithReport(productsearch.contains(Prod) || Common.getPageTitle().contains("Hydration Packs | Osprey")||
-						Common.getPageTitle().contains("Atmos Aura AG backpacks"), "validating the search functionality",
+						Common.getPageTitle().contains("Shop Extended Fit"), "validating the search functionality",
 						"enter product name will display in the search box", "user enter the product name in  search box",
 						"Failed to see the product name");
 				Thread.sleep(8000);
@@ -1973,7 +1973,7 @@ public void Featured_ShopAll(String Dataset) {{
 		String prodproduct = data.get(Dataset).get("Prod Product");
 		String productcolor = data.get(Dataset).get("Color");
 		String prodcolor = data.get(Dataset).get("Prodcolor");
-		String Productsize = data.get(Dataset).get("Size");
+		String Productsize = data.get(Dataset).get("Prod Size");
 		String symbol=data.get(Dataset).get("Symbol");
 //		System.out.println(symbol);
 //		System.out.println(products);
@@ -2167,11 +2167,18 @@ public void Featured_ShopAll(String Dataset) {{
 	public void minicart_viewcart() {
 		// TODO Auto-generated method stub
 		try {
-			Sync.waitElementPresent("xpath", "//div[@id='cart-drawer-title']/span/span");
-			String minicart = Common.findElement("xpath", "//div[@id='cart-drawer-title']/span/span").getText();
+			Sync.waitElementPresent("xpath", "//span [@x-text='totalCartAmount']");
+			String minicart = Common.findElement("xpath", "//span [@x-text='totalCartAmount']").getText();
 			Sync.waitElementPresent("xpath", "//a[@title='View Cart']");
 			Common.clickElement("xpath", "//a[@title='View Cart']");
 			String viewcart = Common.findElement("xpath", "//span[contains(@class,'ml-7 title-xs hf:title')]").getText();
+			String viewcartText = Common.findElement("xpath", "//span[contains(@class,'ml-7 title-xs hf:title')]").getText();
+			 
+			// Extract only the digits (number of items) using regex
+			String itemCount = viewcartText.replaceAll("\\D+", ""); // Removes all non-digit characters
+			 
+			// Print just the number
+			System.out.println(itemCount);
 			Common.assertionCheckwithReport(
 					viewcart.contains(minicart) && Common.getCurrentURL().contains("/checkout/cart/"),
 					"validating the navigation to the view cart", "User should able to navigate to the view cart page",
@@ -2597,8 +2604,8 @@ public void Featured_ShopAll(String Dataset) {{
 			String minicart = Common.findElement("xpath", "//span[@x-text='totalCartAmount']").getText();
 			System.out.println(minicart);
 			Thread.sleep(3000);
-			Sync.waitElementPresent(30, "xpath", "//a[contains(@class,'inline-flex btn btn-primary text')]");
-			Common.clickElement("xpath", "//a[contains(@class,'inline-flex btn btn-primary text')]");
+			Sync.waitElementPresent(30, "xpath", "//button[contains(text(),'Checkout')]");
+			Common.clickElement("xpath", "//button[contains(text(),'Checkout')]");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 //			Sync.waitElementPresent(30, "xpath", "//strong[@role='heading']");
@@ -5618,8 +5625,8 @@ return Number;
 		String Prod=data.get(Dataset).get("Prod Product");
 		try {
 			
-			String minicartproduct = Common.findElement("xpath", "//img[@alt='" + product + "']").getText();
-			Common.clickElement("xpath", "//img[@alt='" + product + "']");
+			String minicartproduct = Common.findElement("xpath", "//img[@alt='" + Prod + "']").getText();
+			Common.clickElement("xpath", "//img[@alt='" + Prod + "']");
 			Sync.waitPageLoad();
 			Thread.sleep(3000);
 			System.out.println(minicartproduct);
@@ -5699,7 +5706,7 @@ return Number;
 					.replace(symbol, "");
 			Float subtotalvalue = Float.parseFloat(subtotal);
 			String productname = Common
-					.findElement("xpath", "(//p[@class='text-md font-bold dr:title-sm']//a)[2]")
+					.findElement("xpath", "(//p[contains(@class, 'cart-drawer__item-content-description-header-text')])[2]")
 					.getText();
 			String productamount1 = Common.getText("xpath", "(//span[@x-html='item.product_price']//span[@class='price'])[1]").replace(symbol,
 					"");
@@ -6792,8 +6799,8 @@ public void minicart_validation(String Dataset) {
             
 			
 			Common.switchFrames("xpath", "//iframe[contains(@class,'component-frame visible')]");
-			Sync.waitElementPresent("xpath", "(//div[contains(@class,'paypal-button paypal-button')])[1]");
-			Common.clickElement("xpath", "(//div[contains(@class,'paypal-button paypal-button')])[1]");
+			Sync.waitElementPresent("xpath", "//img[contains(@class,'paypal-logo-color-blue')]");
+			Common.clickElement("xpath", "//img[contains(@class,'paypal-logo-color-blue')]");
 			Thread.sleep(8000);
 			Common.switchToDefault();
 			Thread.sleep(5000);
@@ -9471,7 +9478,7 @@ public void Continue_Shopping() {
 			Common.scrollIntoView("xpath", "//span[@x-html='message.text']");
 			expectedResult = "It should apply discount on your price.If user enters invalid promocode it should display coupon code is not valid message.";
 			String discountcodemsg = Common.getText("xpath", "//span[@x-html='message.text']");
-			Common.assertionCheckwithReport(discountcodemsg.contains("You used coupon code"), "verifying pomocode",
+			Common.assertionCheckwithReport(discountcodemsg.contains("You used discount code"), "verifying pomocode",
 					expectedResult, "promotion code working as expected", "Promation code is not applied");
 		} catch (Exception | Error e) {
 			e.printStackTrace();
@@ -9495,7 +9502,7 @@ public void Continue_Shopping() {
 		        String Shipping = Common.getText("xpath", "(//div[@x-text='hyva.formatPrice(segment.value)'])[2]").replace("$", "");  
 		        BigDecimal ShippingValue = new BigDecimal(Shipping).setScale(2, BigDecimal.ROUND_HALF_UP);
 		        
-		        String Tax = Common.getText("xpath", "//div[@class='w-5/12 text-right md:w-auto' and @x-text=\"segment.value == 0 ? '-' : hyva.formatPrice(segment.value)\"]").replace("$", "");  
+		        String Tax = Common.getText("xpath", "//div[@class='flex px-4 py-3.5 dr:py-1 justify-between']//div[@class='w-5/12 text-right md:w-auto']").replace("$", "");  
 		        BigDecimal TaxValue = new BigDecimal(Tax).setScale(2, BigDecimal.ROUND_HALF_UP);
 		        Thread.sleep(3000);
 		        
@@ -10053,19 +10060,19 @@ public void Gift_card(String dataSet) {
 		{
 			
 		Thread.sleep(2000);
-		Sync.waitElementPresent("xpath", "//button[contains(text(),'Add Gift Card')]");	
-		Common.clickElement("xpath", "//button[contains(text(),'Add Gift Card')]");
+		Sync.waitElementPresent("xpath", "//h3[contains(text(),'Add Gift Card')]");	
+		Common.clickElement("xpath", "//h3[contains(text(),'Add Gift Card')]");
 		Common.textBoxInput("xpath","//input[@x-model='giftCardCode']", data.get(dataSet).get("GiftCard3_Stage"));
 		Common.actionsKeyPress(Keys.ARROW_UP);
 		Common.javascriptclickElement("xpath","//button[@aria-label='Add Code']");
-		//Thread.sleep(2000);
-//		Sync.waitElementVisible(30,"xpath", "//div[@ui-id='message-success']");
-//		String successmsg=Common.findElement("xpath", "//div[@ui-id='message-success']").getText();
-//	    System.out.println(successmsg);	
-//		Common.assertionCheckwithReport(successmsg.contains("added."),
-//				"validating the success message after applying gift card",
-//				"Success message should be displayed after the applying of gift card",
-//				"Sucessfully gift card has been applyed","Failed to apply the gift card");
+		Thread.sleep(2000);
+		Sync.waitElementVisible(30,"xpath", "//div[@ui-id='message-success']");
+		String successmsg=Common.findElement("xpath", "//div[@ui-id='message-success']").getText();
+	    System.out.println(successmsg);	
+		Common.assertionCheckwithReport(successmsg.contains("added."),
+				"validating the success message after applying gift card",
+				"Success message should be displayed after the applying of gift card",
+				"Sucessfully gift card has been applyed","Failed to apply the gift card");
 			}
 		catch(Exception | Error e)
 		{

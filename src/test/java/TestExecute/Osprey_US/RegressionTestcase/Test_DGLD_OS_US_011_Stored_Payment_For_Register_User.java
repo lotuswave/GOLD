@@ -25,7 +25,7 @@ public class Test_DGLD_OS_US_011_Stored_Payment_For_Register_User {
         Osprey_ReEu.addtocart("Product");
         Osprey_ReEu.minicart_Checkout();
         Osprey_ReEu.RegaddDeliveryAddress("Account");
-        Osprey_ReEu.selectshippingmethod("GroundShipping method");
+        Osprey_ReEu.selectshippingmethod("RegisterShippingMethod");
 //      Osprey_ReEu.clickSubmitbutton_Shippingpage();
         String Number= Osprey_ReEu.addPaymentDetails("CCVisacard");
         Osprey_ReEu.Store_payment_placeOrder("CCVisacard");

@@ -31,7 +31,7 @@ public class Test_DGLD_DB_E2E_006_Guestuser_checkout_3items_Expeditedshipping_Gi
 	        Drybar.addtocart("900-0700-4 Product");
 	        Drybar.minicart_Checkout();
 	        Drybar.addDeliveryAddress_Guestuser("Address");
-	        String Used_GiftCode= Drybar.gitCard("DRY-PRPD-TEST-QA");
+	        String Used_GiftCode= Drybar.gitCard("DRYGLD-QA-TEST-E2E-04");
 	        Drybar.selectshippingmethod("ExpeditedShipping method");
 	    	HashMap<String,String> Details=Drybar.ordersummary_Details();
 	        String OrderNumber=Drybar.payPal_Payment("PaypalDetails");

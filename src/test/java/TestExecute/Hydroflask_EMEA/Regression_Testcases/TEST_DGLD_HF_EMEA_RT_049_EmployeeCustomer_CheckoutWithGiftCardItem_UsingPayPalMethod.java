@@ -1,4 +1,4 @@
-package TestExecute.Hydroflask_EMEA.Preprod_Smoke_TestCases.EU_Smoke;
+package TestExecute.Hydroflask_EMEA.Regression_Testcases;
 
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
@@ -9,29 +9,30 @@ import TestComponent.Hydroflask_EMEA.GoldHydro_EMEA_Helper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class TEST_DGLD_HF_EMEA_EU_BCT_006_Validating_the_Search_Results_Page {
+public class TEST_DGLD_HF_EMEA_RT_049_EmployeeCustomer_CheckoutWithGiftCardItem_UsingPayPalMethod {
 
 	String datafile = "Hydroflask_EMEA//GoldHydroEMEA_TestData.xlsx";
 	GoldHydro_EMEA_Helper Hydro = new GoldHydro_EMEA_Helper(datafile,"DataSet");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Validate_Search_Results_Page () throws Exception {
-
+	public void Validating_EmployeeCustomer_Checkout_with_Gift_cardItem_Using_PaypalPayment () throws Exception {
+		
 		try {
 			Hydro.verifingHomePage();
-			Hydro.Validating_search("aaabbcc");
-			Hydro.search_results("aaabbcc");
-			Hydro.popular_searches();
-			//Hydro.carousel();
-			Hydro.search_product("Product");
-			
-			
+			Hydro.click_singinButton();
+			Hydro.login_Hydroflask("Employee_id");
+			Hydro.Gift_cards("Hydro Gift Card");
+			Hydro.Card_Value("price");
+			Hydro.minicart_Checkout();
+			Hydro.register_billingAddress("Employee_id");
+           Hydro.payPal_Payment("PaypalDetails");
 
 		} catch (Exception e) {
 
 			Assert.fail(e.getMessage(), e);
 		}
 	}
+
 
 	@AfterTest
 	public void clearBrowser() {
@@ -41,8 +42,7 @@ public class TEST_DGLD_HF_EMEA_EU_BCT_006_Validating_the_Search_Results_Page {
 
 	@BeforeTest
 	public void startTest() throws Exception {
-		String url="https://mcloud-na-preprod.hydroflask.com/eu";
-		System.setProperty("url", url);
+		System.setProperty("configFile", "Hydroflask_EMEA\\config.properties");
 		Login.signIn();
 		Hydro.close_add();
         Hydro.acceptPrivacy();

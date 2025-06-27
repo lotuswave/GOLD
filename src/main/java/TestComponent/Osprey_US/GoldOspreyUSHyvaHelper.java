@@ -6871,7 +6871,7 @@ public void review(String Dataset) {
 				Thread.sleep(2000);
 				Common.clickElement("xpath", "//input[@name='postcode']");
 				Common.textBoxInput("xpath", "//input[@name='postcode']", zipcode);
-				Common.clickElement("xpath", "//label[@for='primary_shipping']");
+				Common.clickElement("xpath", "//input[@id='customer-address-edit-primary-billing']");
 				Common.clickElement("xpath", "//button[@title='Save Address']");
 				String message = Common.findElement("xpath", "//div[@class='relative flex w-full']//span").getText();
 				Common.assertionCheckwithReport(message.contains("You saved the address."),

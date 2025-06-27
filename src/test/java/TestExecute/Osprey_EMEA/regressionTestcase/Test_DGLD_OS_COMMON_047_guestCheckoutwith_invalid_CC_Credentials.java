@@ -25,6 +25,7 @@ public class Test_DGLD_OS_COMMON_047_guestCheckoutwith_invalid_CC_Credentials {
         Osprey_ReEu.addDeliveryAddress_Guestuser("Account");
         Osprey_ReEu.selectshippingmethod("GroundShipping method");
         Osprey_ReEu.clickSubmitbutton_Shippingpage();
+        Osprey_ReEu.Subscribe_and_SMS();
         Osprey_ReEu.Paymentcreditcard_WithInvalidData("Invalid Card Details");
         
 		} catch (Exception e) {

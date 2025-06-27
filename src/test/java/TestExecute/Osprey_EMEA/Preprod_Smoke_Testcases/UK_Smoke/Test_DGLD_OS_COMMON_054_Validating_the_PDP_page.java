@@ -26,6 +26,9 @@ public class Test_DGLD_OS_COMMON_054_Validating_the_PDP_page {
         Osprey_ReEu.search_product("Product");  
         Osprey_ReEu.Configurable_PDP("Product");
         Osprey_ReEu.PDP_Color_Validation();
+        Osprey_ReEu.search_product("Aether product");
+        Osprey_ReEu.PDP_Validation("Aether product");
+        
 
 		} catch (Exception e) {
 

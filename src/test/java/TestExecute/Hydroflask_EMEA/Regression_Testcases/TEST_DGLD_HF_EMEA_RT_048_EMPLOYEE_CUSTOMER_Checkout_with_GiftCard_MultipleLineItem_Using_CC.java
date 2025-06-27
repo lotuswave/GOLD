@@ -1,43 +1,46 @@
-package TestExecute.Hydroflask_EMEA.Preprod_Smoke_TestCases.FR_Smoke;
+package TestExecute.Hydroflask_EMEA.Regression_Testcases;
 
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import TestComponent.Hydroflask.GoldHydroHyvaHelper;
 import TestComponent.Hydroflask_EMEA.GoldHydro_EMEA_Helper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class TEST_DGLD_HF_EMEA_FR_BCT_012_Checkout_with_RegisterUserCC_Simple_Configurable_and_Bundle_products_cc {
+public class TEST_DGLD_HF_EMEA_RT_048_EMPLOYEE_CUSTOMER_Checkout_with_GiftCard_MultipleLineItem_Using_CC {
 
 	String datafile = "Hydroflask_EMEA//GoldHydroEMEA_TestData.xlsx";
-	GoldHydro_EMEA_Helper Hydro = new GoldHydro_EMEA_Helper(datafile,"Bundle");
+	GoldHydro_EMEA_Helper Hydro = new GoldHydro_EMEA_Helper(datafile,"DataSet");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Validating_Checkout_with_Register_UserCC_Simple_Configurable_and_Bundle_products () throws Exception {
-
+	public void Validating_EmployeeCustomer_Checkout_with_Gift_card_MultipleLineItem_Using_CC () throws Exception {
+		
 		try {
 			Hydro.verifingHomePage();
 			Hydro.click_singinButton();
-			Hydro.login_Hydroflask("fr_Address");
-			Hydro.search_product("Product");       
-			Hydro.addtocart("Product");
+			Hydro.login_Hydroflask("Employee_id");
+			Hydro.search_product("Product");      
+			Hydro.addtocart("Product"); 
+			Hydro.employee_discount();
 			Hydro.bottles_headerlinks("Bottles & Drinkware"); 
 			Hydro.Configurable_addtocart_pdp("Product");
-//			Hydro.search_product("Bundle product"); 
-//			Hydro.Addtocart_Bundle("Bundle product");
+			Hydro.employee_discount();
+			Hydro.Gift_cards("Hydro Gift Card");
+			Hydro.Card_Value("price");
 			Hydro.minicart_Checkout();
-			Hydro.RegaddDeliveryAddress("fr_Address");
+			Hydro.RegaddDeliveryAddress("Employee_id");
             Hydro.selectshippingaddress("GroundShipping method");
-            Hydro.clickSubmitbutton_Shippingpage();
-			Hydro.updatePaymentAndSubmitOrder("PaymentDetails");
-			
+            Hydro.updatePaymentAndSubmitOrder("PaymentDetails");
+
 		} catch (Exception e) {
 
 			Assert.fail(e.getMessage(), e);
 		}
 	}
+
 
 	@AfterTest
 	public void clearBrowser() {
@@ -47,8 +50,7 @@ public class TEST_DGLD_HF_EMEA_FR_BCT_012_Checkout_with_RegisterUserCC_Simple_Co
 
 	@BeforeTest
 	public void startTest() throws Exception {
-		String url="https://mcloud-na-preprod.hydroflask.com/fr";
-		System.setProperty("url", url);
+		System.setProperty("configFile", "Hydroflask_EMEA\\config.properties");
 		Login.signIn();
 		Hydro.close_add();
         Hydro.acceptPrivacy();

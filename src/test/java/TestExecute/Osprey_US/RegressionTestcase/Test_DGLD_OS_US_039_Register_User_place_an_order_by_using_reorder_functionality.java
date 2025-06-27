@@ -23,7 +23,7 @@ public class Test_DGLD_OS_US_039_Register_User_place_an_order_by_using_reorder_f
         Osprey_ReEu.Login_Account("Account");
         Osprey_ReEu.reorder();    
         Osprey_ReEu.minicart_Checkout();
-        Osprey_ReEu.selectshippingmethod("GroundShipping method");
+        Osprey_ReEu.selectshippingmethod("RegisterShippingMethod");
         Osprey_ReEu.clickSubmitbutton_Shippingpage();
         Osprey_ReEu.Navigate_back_to_Shoppingcart_page("GroundShipping method");
         Osprey_ReEu.updatePaymentAndSubmitOrder("CCDiscovercard");

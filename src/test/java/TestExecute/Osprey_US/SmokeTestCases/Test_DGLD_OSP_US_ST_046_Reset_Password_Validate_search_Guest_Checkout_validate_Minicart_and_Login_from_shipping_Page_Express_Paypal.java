@@ -51,7 +51,7 @@ public class Test_DGLD_OSP_US_ST_046_Reset_Password_Validate_search_Guest_Checko
 
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+//		Common.closeAll();
 
 	}
 
