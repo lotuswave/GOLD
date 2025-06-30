@@ -42,7 +42,7 @@ public class TEST_DGLD_HF_EMEA_UK_BCT_013_Guest_user_Checkout_Klarna_Payment {
 
 	@BeforeTest
 	public void startTest() throws Exception {
-		String url="https://mcloud-na-stage4.hydroflask.com/gb";
+		String url="https://mcloud-na-preprod.hydroflask.com/gb";
 		System.setProperty("url", url);
        Login.signIn();
        Hydro.close_add();

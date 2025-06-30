@@ -29,6 +29,7 @@ public class TEST_DGLD_HF_EMEA_UK_BCT_007_Guest_user_Checkout_With_Discount_Visa
 			Hydro.updatePaymentAndSubmitOrder("PaymentDetails");
 		} catch (Exception e) {
 
+			
 			Assert.fail(e.getMessage(), e);
 		}
 	}
@@ -38,7 +39,7 @@ public class TEST_DGLD_HF_EMEA_UK_BCT_007_Guest_user_Checkout_With_Discount_Visa
 	}
 	@BeforeTest
 	public void startTest() throws Exception {
-		String url="https://mcloud-na-stage4.hydroflask.com/gb";
+		String url="https://mcloud-na-preprod.hydroflask.com/gb";
 		System.setProperty("url", url);
 		Login.signIn();
 		Hydro.close_add();
