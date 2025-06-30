@@ -37,7 +37,7 @@ public class Test_DGLD_OSP_US_BCST_045_Minicart_Validation {
 
 		@AfterTest
 		public void clearBrowser() {
-			Common.closeAll();
+//			Common.closeAll();
 
 		}
 

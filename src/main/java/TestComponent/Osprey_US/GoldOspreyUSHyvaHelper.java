@@ -6229,8 +6229,8 @@ return Number;
 		String Prod=data.get(Dataset).get("Prod Product");
 		try {
 			
-			String minicartproduct = Common.findElement("xpath", "//img[@alt='" + product + "']").getText();
-			Common.clickElement("xpath", "//img[@alt='" + product + "']");
+			String minicartproduct = Common.findElement("xpath", "//img[normalize-space(@alt)='" + product + "']").getText();
+			Common.clickElement("xpath", "//img[normalize-space(@alt)='" + product + "']");
 			Sync.waitPageLoad();
 			Thread.sleep(3000);
 			System.out.println(minicartproduct);
@@ -6241,9 +6241,13 @@ return Number;
 			click_minicart();
 			if(Common.getCurrentURL().contains("preprod"))
 			{
-			String minicartimage = Common.findElement("xpath", "//img[contains(@alt,'" + color + "')]")
+				String productName = Common.findElement("xpath", "//img[@alt='" + color + "']").getText();
+				productName = productName.trim().replaceAll("\\s+", " ");
+				System.out.println(productName);
+			String minicartimage = Common.findElement("xpath", "//img[@alt='" + color + "']")
 					.getAttribute("alt");
-			Common.clickElement("xpath", "//img[contains(@alt,'" + color + "')]");
+			System.out.println(minicartimage);
+			Common.clickElement("xpath", "//img[@alt='" + color + "']");
 			Sync.waitPageLoad();
 			Thread.sleep(3000);
 			Common.assertionCheckwithReport(minicartimage.contains(color),
@@ -6308,12 +6312,18 @@ return Number;
 			Sync.waitElementPresent(30, "xpath", "//span[contains(@class, 'flex text-lg')]//span[@class='price']");
 			String subtotal = Common.getText("xpath", "//span[contains(@class, 'flex text-lg')]//span[@class='price']")
 					.replace(symbol, "");
+			System.out.println(subtotal);
 			Float subtotalvalue = Float.parseFloat(subtotal);
-			String productname = Common
-					.findElement("xpath", "(//div[contains(@class,'ustify-betwee')]/p/a)[2]")
-					.getText();
+			String productname = Common.findElement("xpath", "(//div[contains(@class,'ustify-betwee')]/p/a)[2]").getText();
+			productname = productname.trim().replaceAll("\\s+", " ");
+//			String productname = Common
+//					.findElement("xpath", "(//div[contains(@class,'ustify-betwee')]/p/a)[2]")
+//					.getText();
+			System.out.println(productname);
 			String productamount1 = Common.getText("xpath", "(//p//span[@class='price'])[2]").replace(symbol,
 					"");
+			System.out.println(productamount1);
+
 			Float productamount1value = Float.parseFloat(productamount1);
 			if(Common.getCurrentURL().contains("preprod"))
 			{
@@ -6324,10 +6334,12 @@ return Number;
 						"(//button[contains(@title,'Remove product')])[2]");
 				Sync.waitElementPresent("xpath", "//button[contains(@class,'btn btn-primary') and contains(text(),'OK')]");
 				Common.clickElement("xpath", "//button[contains(@class,'btn btn-primary') and contains(text(),'OK')]");
+				
 			} else {
 				AssertJUnit.fail();
 			}
 			}
+			
 			else
 			{
 				if (Proddelete.equals(productname)) {
@@ -9601,8 +9613,8 @@ public void MyFavorites_Guestuser(String Dataset) {
 			Float Total = subtotalvalue - pricevalue;
 			String ExpectedTotalAmmount2 = new BigDecimal(Total).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
 			System.out.println(ExpectedTotalAmmount2);
-			Sync.waitElementPresent("xpath", "//button[@aria-label='Remove " + products + "']");
-			Common.clickElement("xpath", "//button[@aria-label='Remove " + products + "']");
+			Sync.waitElementPresent("xpath", "//button[normalize-space(@aria-label)='Remove " + products + "']");
+			Common.clickElement("xpath", "//button[normalize-space(@aria-label)='Remove " + products + "']");
 			Common.clickElement("xpath", "//button[contains(text(),'OK')]");
 			Sync.waitPageLoad(30);
 			Thread.sleep(10000);
@@ -10298,14 +10310,14 @@ try {
 	public void minicart_ordersummary_discount(String Dataset) {
 		// TODO Auto-generated method stub.
 		String expectedResult = "It should opens textbox input to enter discount.";
-		String Discountcode = "testcoupon";
+//		String Discountcode = "testcoupon";
 		try {
 			Sync.waitElementPresent("css", "button[id='discount-form-toggle']");
 			Common.clickElement("css", "button[id='discount-form-toggle']");
 
 			Sync.waitElementPresent("css", "input[name='coupon_code']");
 			if(Common.getCurrentURL().contains("preprod")) {
-				Common.textBoxInput("css", "input[name='coupon_code']", Discountcode);
+				Common.textBoxInput("css", "input[name='coupon_code']", data.get(Dataset).get("Discountcode"));
 			}else {
 				Common.textBoxInput("css", "input[name='coupon_code']", data.get(Dataset).get("ProdDiscountcode"));
 			}
