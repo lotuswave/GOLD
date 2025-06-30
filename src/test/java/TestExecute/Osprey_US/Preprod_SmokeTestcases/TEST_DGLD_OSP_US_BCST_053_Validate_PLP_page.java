@@ -36,7 +36,7 @@ public class TEST_DGLD_OSP_US_BCST_053_Validate_PLP_page {
 
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+//		Common.closeAll();
 
 	}
 

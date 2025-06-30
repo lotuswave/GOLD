@@ -5292,6 +5292,9 @@ return Number;
 					int textValue = Integer.parseInt(text);
 					String categoryvalue = Integer.toString(textValue);
 					Thread.sleep(6000);
+					Common.findElement("xpath", "//button[text()='Load More']");
+			        Common.clickElement("xpath", "//button[text()='Load More']");
+
 					String textValueAfterFilter = Common.findElement("xpath", "(//div[@class='text-sm']//span)[1]")
 							.getText().trim();
 					Thread.sleep(4000);
