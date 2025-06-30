@@ -2,12 +2,20 @@ package TestComponent.Hydroflask_EMEA;
 
 import static org.testng.Assert.fail;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementClickInterceptedException;
@@ -18,8 +26,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.Color;
 import org.testng.Assert;
 import org.testng.AssertJUnit;
-
-import com.google.api.client.util.Key;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
@@ -39,7 +45,6 @@ import TestLib.Sync;
 import Utilities.ExcelReader;
 import Utilities.ExtenantReportUtils;
 import Utilities.Utils;
-import ch.qos.logback.core.recovery.ResilientSyslogOutputStream;
 import groovyjarjarantlr.CommonAST;
 
 public class GoldHydro_EMEA_Helper {
@@ -64,18 +69,8 @@ public class GoldHydro_EMEA_Helper {
 
 	}
 
-	public class LocalizationHelper {
-		private ResourceBundle bundle;
+	
 
-		public LocalizationHelper(String languageCode) {
-			Locale locale = new Locale(languageCode);
-			bundle = ResourceBundle.getBundle("Messages", locale);
-		}
-
-		public String get(String key) {
-			return bundle.getString(key);
-		}
-	}
 
 	public int getpageresponce(String url) throws MalformedURLException, IOException {
 		HttpURLConnection c = (HttpURLConnection) new URL(url).openConnection();
@@ -675,7 +670,7 @@ public class GoldHydro_EMEA_Helper {
 			Common.actionsKeyPress(Keys.PAGE_DOWN);
 			Thread.sleep(3000);
 			try {
-				Common.dropdown("id", "shipping-region", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+				Common.textBoxInput("id", "shipping-region",data.get(dataSet).get("Region"));
 			} catch (ElementClickInterceptedException e) {
 				Thread.sleep(3000);
 				Common.dropdown("id", "shipping-region", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
@@ -684,12 +679,12 @@ public class GoldHydro_EMEA_Helper {
 //			Common.textBoxInputClear("name", "postcode");
 //			Common.textBoxInput("name", "postcode", data.get(dataSet).get("postcode"));
 
-			Common.textBoxInputClear("xpath", "//input[@name='postcode']");
-			Common.textBoxInput("xpath", "//input[@name='postcode']", data.get(dataSet).get("postcode"));
+			Common.textBoxInputClear("css", "input[name='postcode']");
+			Common.textBoxInput("css", "input[name='postcode']", data.get(dataSet).get("postcode"));
 
 			Thread.sleep(5000);
 
-			Common.textBoxInput("xpath", "//input[@name='telephone']", data.get(dataSet).get("phone"));
+			Common.textBoxInput("css", "input[name='telephone']", data.get(dataSet).get("phone"));
 			Sync.waitPageLoad();
 			ExtenantReportUtils.addPassLog("validating shipping address filling Fileds",
 					"shipping address is filled in to the fields", "user should able to fill the shipping address ",
@@ -3012,7 +3007,9 @@ public class GoldHydro_EMEA_Helper {
 	}
 
 	public void close_add() throws Exception {
-		// TODO Auto-generated method stub
+		try {
+			
+		
 		Thread.sleep(4000);
 		int sizesframe = Common.findElements("xpath", "//div[@aria-label='POPUP Form']").size();
 		System.out.println("Popup:" + sizesframe);
@@ -3024,20 +3021,25 @@ public class GoldHydro_EMEA_Helper {
 			Sync.waitElementPresent("xpath", "//button[@aria-label='Close dialog']");
 			Common.clickElement("xpath", "//button[@aria-label='Close dialog']");
 		} else {
-
-//			Common.switchFrames("xpath", "//div[@class='preloaded_lightbox']/iframe");
-//			acceptPrivacy();
-			Sync.waitElementPresent("xpath", "//button[@aria-label='Close dialog']");
-			Common.clickElement("xpath", "//button[@aria-label='Close dialog']");
-//			Common.switchToDefault();
+			System.out.println("Popup not displayed");
 		}
-
+		}
+		catch(Exception | Error e) {
+			e.printStackTrace();
+			Assert.fail("Popup handling failed");
+		}
 	}
 
 	public void acceptPrivacy() {
-
-		Sync.waitElementClickable("id", "truste-consent-button");
-		Common.clickElement("id", "truste-consent-button");
+try {
+	Sync.waitElementClickable("id", "truste-consent-button");
+	Common.clickElement("id", "truste-consent-button");
+}
+catch(Exception | Error e){
+	Sync.waitElementClickable("id", "truste-consent-button");
+	Common.clickElement("id", "truste-consent-button");
+}
+		
 	}
 
 	public void decline_All() {
@@ -3531,7 +3533,8 @@ public class GoldHydro_EMEA_Helper {
 						data.get(dataSet).get("City"));
 
 				try {
-					Common.dropdown("name", "region", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+					Common.textBoxInput("name", "region", data.get(dataSet).get("Region"));
+					
 				} catch (ElementClickInterceptedException e) {
 					// TODO: handle exception
 					Thread.sleep(3000);
@@ -3545,7 +3548,7 @@ public class GoldHydro_EMEA_Helper {
 				System.out.println("*****" + ShippingZip + "*******");
 
 				Common.textBoxInput("name", "telephone", data.get(dataSet).get("phone"));
-				Common.clickElement("xpath", "//button[@class='btn btn-primary w-full os:uppercase']");
+				Common.clickElement("xpath", "//button[contains(@class,'checkout-address-form__buttons-save')]");
 
 			} catch (Exception | Error e) {
 				e.printStackTrace();
@@ -5638,6 +5641,7 @@ public class GoldHydro_EMEA_Helper {
 
 	public void valid_email_newsletter(String Dataset) {
 		String Email = Common.genrateRandomEmail(data.get(Dataset).get("Email"));
+		System.out.println("Email :"+ Email);
 		try {
 			Thread.sleep(5000);
 			Common.actionsKeyPress(Keys.END);
