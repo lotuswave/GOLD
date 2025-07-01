@@ -30,7 +30,7 @@ public class TEST_DGLD_HF_EMEA_FR_BCT_003_Create_Account_Functionality {
 
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 

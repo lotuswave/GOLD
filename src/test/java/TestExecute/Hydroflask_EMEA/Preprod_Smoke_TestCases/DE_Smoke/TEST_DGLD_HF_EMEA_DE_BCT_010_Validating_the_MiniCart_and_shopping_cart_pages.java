@@ -53,7 +53,7 @@ public class TEST_DGLD_HF_EMEA_DE_BCT_010_Validating_the_MiniCart_and_shopping_c
 
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 
