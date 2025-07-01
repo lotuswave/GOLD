@@ -7719,7 +7719,8 @@ catch(Exception | Error e){
 			Common.clickElement("xpath", "//select[@class='ais-SortBy-select']");
 //			Common.dropdown("xpath", "//option[@class='ais-SortBy-option']", Common.SelectBy.TEXT, sort);
 			if (Common.getCurrentURL().contains("preprod")) {
-				if(Common.getCurrentURL().contains("de"))
+				String URL=Common.getCurrentURL();
+				if(URL.contains("de") || URL.contains("es") )
 				{
 				Common.clickElement("xpath", "//div[@id='algolia-sorts']//option[contains(text(),'" + desort + "')]");
 
