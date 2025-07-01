@@ -15,14 +15,14 @@ public class TEST_DGLD_HF_EMEA_UK_BCT_004_Validating_the_PLP_page {
 	GoldHydro_EMEA_Helper Hydro = new GoldHydro_EMEA_Helper(datafile,"DataSet");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Validate_Product_Listing_Page () throws Exception {
+	public void Validate_PLP () throws Exception {
 
 		try {
 			Hydro.verifingHomePage();
 			Hydro.bottle_Accessories_headerlinks("Accessories");
 			Hydro.view_PLP_page();
 			Hydro.sort_By("SortBy");
-//			Hydro.filter_By("Accessories"); category filter by not available on EMEA 
+			Hydro.filter_By("Accessories");
 			Hydro.color_validation("Black");
 			Hydro.price_filter_validation();
 			Hydro.addtocart_PLP("PLP Product");

@@ -22,7 +22,7 @@ public class TEST_DGLD_HF_EMEA_DE_BCT_004_Validating_the_PLP_page {
 			Hydro.bottle_Accessories_headerlinks("Accessories");
 			Hydro.view_PLP_page();
 			Hydro.sort_By("SortBy");
-//			Hydro.filter_By("Accessories"); category filter by not available on EMEA 
+			Hydro.filter_By("Accessories");
 			Hydro.color_validation("Black");
 			Hydro.price_filter_validation();
 			Hydro.addtocart_PLP("PLP Product");
