@@ -8308,11 +8308,11 @@ catch(Exception | Error e){
 		System.out.println(Address);
 		try {
 			Sync.waitPageLoad();
-//			Common.javascriptclickElement("xpath", "//input[@id='billing-as-shipping']");
+			Common.clickElement("xpath", "//input[@id='billing-as-shipping']");
 			Thread.sleep(4000);
-			if (Common.findElements("xpath", "//button[normalize-space()='New Address']").size() > 0) {
-				Sync.waitElementPresent(30, "xpath", "//button[normalize-space()='New Address']");
-				Common.clickElement("xpath", "//button[normalize-space()='New Address']");
+			if (Common.findElements("xpath", "//section[@id='billing-details']//button[normalize-space()='New Address']").size() > 0) {
+				Sync.waitElementPresent(30, "xpath", "//section[@id='billing-details']//button[normalize-space()='New Address']");
+				Common.clickElement("xpath", "//section[@id='billing-details']//button[normalize-space()='New Address']");
 			} else {
 				Sync.waitElementPresent(30, "xpath", "(//button[contains(@class,'checkout-address-list__button')])[2]");
 				Common.clickElement("xpath", "(//button[contains(@class,'checkout-address-list__button')])[2]");
