@@ -12558,7 +12558,7 @@ catch(Exception | Error e){
 			System.out.println(lastvalue);
 			Sync.waitElementPresent("xpath", "//div[@aria-valuemax='" + lastvalue + "' and @data-handle-key='0']");
 			WebElement price = Common.findElement("xpath",
-					"//div[@aria-valuemax='" + lastvalue + "' and @data-handle-key='0']");
+					"//div[@aria-valuemax='" + lastvalue + "' and @data-handle-key='1']");
 			dragprice(price);
 			Thread.sleep(6000);
 			List<WebElement> products = Common.findElements("xpath",
@@ -12605,6 +12605,7 @@ catch(Exception | Error e){
 					}
 				}
 			}
+			Common.clickElement("id", "clear-refinements");
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("verifying the price filters in PLP page",
@@ -12619,8 +12620,7 @@ catch(Exception | Error e){
 
 	public void dragprice(WebElement price) {
 		try {
-			String lastvalue = Common.getText("xpath", "//div[@class='value end active']").replace("£", "")
-					.replace("€", "").replace(".00", "");
+			String lastvalue = Common.getText("xpath", "//div[@class='value end active']").replace("£", "").replace(".00", "").replace("€", "").replace(",00", "").replace(" ", "");
 			System.out.println(lastvalue);
 			Thread.sleep(3000);
 			Common.dragdrop(price, "xpath", "//div[@aria-valuemax='" + lastvalue + "' and @data-handle-key='0']");
