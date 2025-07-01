@@ -91,7 +91,7 @@ public class GoldOspreyUSHyvaHelper {
 //				close_add();
 //				close_countryselector();
 				acceptPrivacy();
-//				Thread.sleep(2000);
+				Thread.sleep(2000);
 //				if(Common.findElements("xpath", "//button[@aria-label='Close dialog']").size()>0)
 //				{
 //				Common.clickElement("xpath", "//button[@aria-label='Close dialog']");
