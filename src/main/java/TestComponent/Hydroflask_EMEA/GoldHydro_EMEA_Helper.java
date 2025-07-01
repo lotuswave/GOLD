@@ -7713,20 +7713,36 @@ catch(Exception | Error e){
 	public void sort_By(String dataSet) {
 		String sort = data.get(dataSet).get("Sort");
 		String Prodsort = data.get(dataSet).get("ProdSort");
+		String desort=data.get(dataSet).get("DESort");
 		try {
 
 			Common.clickElement("xpath", "//select[@class='ais-SortBy-select']");
 //			Common.dropdown("xpath", "//option[@class='ais-SortBy-option']", Common.SelectBy.TEXT, sort);
 			if (Common.getCurrentURL().contains("preprod")) {
-				Common.clickElement("xpath", "//div[@id='algolia-sorts']//option[contains(text(),'" + sort + "')]");
+				if(Common.getCurrentURL().contains("de"))
+				{
+				Common.clickElement("xpath", "//div[@id='algolia-sorts']//option[contains(text(),'" + desort + "')]");
 
 				String low = Common
-						.findElement("xpath", "//div[@id='algolia-sorts']//option[contains(text(),'" + sort + "')]")
+						.findElement("xpath", "//div[@id='algolia-sorts']//option[contains(text(),'" + desort + "')]")
 						.getText();
 
-				Common.assertionCheckwithReport(low.contains(sort), "To validate the Sort in Product Listing Page",
+				Common.assertionCheckwithReport(low.contains(desort), "To validate the Sort in Product Listing Page",
 						"User should able to Sort in Product Listing Page",
 						"Sucessfully Sorts in the Product Listing Page", "Failed to Sort  in Product Listing Page");
+				}
+				else
+				{
+					Common.clickElement("xpath", "//div[@id='algolia-sorts']//option[contains(text(),'" + sort + "')]");
+
+					String low = Common
+							.findElement("xpath", "//div[@id='algolia-sorts']//option[contains(text(),'" + sort + "')]")
+							.getText();
+
+					Common.assertionCheckwithReport(low.contains(sort), "To validate the Sort in Product Listing Page",
+							"User should able to Sort in Product Listing Page",
+							"Sucessfully Sorts in the Product Listing Page", "Failed to Sort  in Product Listing Page");
+				}
 			} else {
 				Common.clickElement("xpath", "//div[@id='algolia-sorts']//option[contains(text(),'" + Prodsort + "')]");
 
