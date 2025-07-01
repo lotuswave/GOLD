@@ -9339,72 +9339,65 @@ catch(Exception | Error e){
 	}
 
 	public void PDP_video_validation(String Dataset) {
-		// TODO Auto-generated method stub
-		String product = data.get(Dataset).get("Products");
-		String color = data.get(Dataset).get("Color");
-		try {
-			Sync.waitPageLoad();
-//			for (int i = 0; i <= 10; i++) {
-//				//Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
-//				Sync.waitElementPresent("xpath", "//a[@class='product-image-link']");
-//
-//				List<WebElement> webelementslist = Common.findElements("xpath",
-//						"//a[@class='product-image-link']");
-//				String s = webelementslist.get(i).getAttribute("href");
-//				System.out.println(s);
-//				if (s.isEmpty()) {
-//
-//				} else {
-//					break;
-//				}
-//			}
-//			
-//			Sync.waitElementPresent("xpath", "//img[@alt='" + product + "']");
-//			Common.javascriptclickElement("xpath", "//img[@alt='" + product + "']");
-//			Sync.waitElementPresent(30, "xpath", "//div[@data-option-label='" + color + "']");
-//			Common.clickElement("xpath", "//div[@data-option-label='" + color + "']");
-			Sync.waitPageLoad();
-			Thread.sleep(4000);
-			System.out.println(product);
-			String name = Common.findElement("xpath", "//h1[@itemprop='name']").getText().trim();
-			System.out.println(name);
-			Common.assertionCheckwithReport(name.contains(product),
-					"validating the product should navigate to the PDP page",
-					"When we click on the product is should navigate to the PDP page",
-					"Sucessfully Product navigate to the PDP page", "Failed product to the PDP page");
-			Thread.sleep(3000);
-			Common.scrollIntoView("xpath", "//h1[@itemprop='name']");
-			if (Common.getCurrentURL().contains("stage")) {
-				Sync.waitElementClickable("xpath",
-						"(//button[contains(@class,'relative block after') and @type='button'])[2]");
-				Common.clickElement("xpath",
-						"(//button[contains(@class,'relative block after') and @type='button'])[2]");
-			} else {
-				Sync.waitElementClickable("xpath", "(//div[@x-ref='jsThumbSlides']//div)[5]");
-				Common.clickElement("xpath", "(//div[@x-ref='jsThumbSlides']//div)[5]");
-			}
+	    String product = data.get(Dataset).get("Products");
+	    String currentUrl = Common.getCurrentURL();
 
-			Common.switchFrames("xpath", "//iframe[contains(@id,'vimeo')]");
-			Sync.waitElementClickable("xpath", "//button[@aria-labelledby='play-button-tooltip']");
-			Common.clickElement("xpath", "//button[@aria-labelledby='play-button-tooltip']");
+	    try {
+	        Sync.waitPageLoad();
 
-			Thread.sleep(3000);
-			String video1 = Common.findElement("xpath", "//span[@id='play-button-tooltip']").getText();
-			Common.switchToDefault();
-			System.out.println(video1);
-			Common.assertionCheckwithReport(video1.contains("Pause"), "validating the video in PDP page",
-					"video should be play in the PDP page", "Sucessfully the video has been played on the PDP page",
-					"failed to play the video in PDP page");
+	        String actualProductName = Common.findElement("xpath", "//h1[@itemprop='name']").getText().trim();
+	        System.out.println("Expected Product: " + product);
+	        System.out.println("Actual PDP Product Name: " + actualProductName);
 
-		} catch (Exception | Error e) {
-			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("validating the video in PDP page", "video should be play in the PDP page",
-					"Unable to play the the video on the PDP page",
-					Common.getscreenShot("failed to play the video in PDP page"));
-			Assert.fail();
-		}
+	        Common.assertionCheckwithReport(
+	            actualProductName.contains(product),
+	            "Validating navigation to PDP page",
+	            "Clicking product should navigate to PDP page",
+	            "Successfully navigated to PDP page",
+	            "Failed to navigate to PDP page"
+	        );
+
+	        Common.scrollIntoView("xpath", "//h1[@itemprop='name']");
+
+	        if (currentUrl.contains("stage") || currentUrl.contains("preprod")) {
+	            Sync.waitElementClickable("xpath", "(//button[contains(@class,'relative block after') and @type='button'])[2]");
+	            Common.clickElement("xpath", "(//button[contains(@class,'relative block after') and @type='button'])[2]");
+	        } else {
+	            Sync.waitElementClickable("xpath", "(//div[@x-ref='jsThumbSlides']//div)[5]");
+	            Common.clickElement("xpath", "(//div[@x-ref='jsThumbSlides']//div)[5]");
+	        }
+
+	        Sync.waitElementVisible("xpath", "//iframe[contains(@id,'vimeo')]");
+	        Common.switchFrames("xpath", "//iframe[contains(@id,'vimeo')]");
+	        Sync.waitElementClickable("xpath", "//button[@aria-labelledby='play-button-tooltip']");
+	        Common.clickElement("xpath", "//button[@aria-labelledby='play-button-tooltip']");
+
+	        Sync.waitElementVisible("xpath", "//span[@id='play-button-tooltip']");
+	        String tooltipText = Common.findElement("xpath", "//span[@id='play-button-tooltip']").getText();
+
+	        Common.switchToDefault();
+
+	        Common.assertionCheckwithReport(
+	            tooltipText.contains("Pause"),
+	            "Validating video playback on PDP",
+	            "Video should start playing on PDP",
+	            "Successfully played video on PDP",
+	            "Failed to play video on PDP"
+	        );
+
+	    } catch (Exception | Error e) {
+	        e.printStackTrace();
+	        ExtenantReportUtils.addFailedLog(
+	            "Validating video playback on PDP",
+	            "Video should start playing on PDP",
+	            "Unable to play the video on PDP",
+	            Common.getscreenShot("Video_Playback_Failure_" + product)
+	        );
+	        Assert.fail("Video playback test failed due to: " + e.getMessage());
+	    }
 	}
 
+	
 	public void Prod_PDP_video_validation(String Dataset) {
 		// TODO Auto-generated method stub
 		String product = data.get(Dataset).get("Colorproduct");
