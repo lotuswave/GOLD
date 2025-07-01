@@ -1550,25 +1550,32 @@ public void header_Shopbycollection(String Dataset) { {
 					}
 		
 					Thread.sleep(2000);
-					 String title = "";
-			            if (Common.findElements("xpath", "//div[contains(@class,'c-clp-hero')]//h1").size() > 0) {
-			                title = Common.findElement("xpath", "//div[contains(@class,'c-clp-hero')]//h1").getText();
-			            } 
-			            else if (Common.findElements("xpath", "//div[contains(@class,'category-view')]/h1").size() > 0) {
-			                title = Common.findElement("xpath", "//div[contains(@class,'category-view')]/h1").getText();
-			            }
+					String title = "";
+		            if (Common.findElements("xpath", "//div[contains(@class,'c-clp-hero')]//h1").size() > 0) {
+		                title = Common.findElement("xpath", "//div[contains(@class,'c-clp-hero')]//h1").getText();
+		            } 
+		            else if (Common.findElements("xpath", "//div[contains(@class,'category-view')]/h1").size() > 0) {
+		                title = Common.findElement("xpath", "//div[contains(@class,'category-view')]/h1").getText();
+		            }
+			
+			else if (Common.findElements("xpath", "//div//nav[contains(@class,'breadcrumbs')]").size() > 0) {
+			    title = Common.findElement("xpath", "//div//nav[contains(@class,'breadcrumbs')]").getText(); 
+			}
 					
-//					String breadcrumbs = Common.findElement("xpath", "//div//nav[contains(@class,'breadcrumbs')]").getText();
+					String breadcrumbs = Common.findElement("xpath", "//div//nav[contains(@class,'breadcrumbs')]").getText();
 					String products=Common.getText("xpath", "(//div[contains(@class,'flex w-full')]//span)[1]");
-//					System.out.println(products);
-//					System.out.println(title);
-//					System.out.println(breadcrumbs);
+					System.out.println(products);
+					System.out.println(title);
+					System.out.println(breadcrumbs);
 					int Number = Integer.parseInt(products);
 					int j=0;
 					if(Number>j)
 					{
-					Common.assertionCheckwithReport(title.contains(Links[i]) || Common.getCurrentURL().contains(title),
-							"verifying the header link " + Links[i] + "Under Travel",
+						Common.assertionCheckwithReport(
+						        title.contains(Links[i]) ||
+						        breadcrumbs.contains(Links[i]) ||
+						        Common.getPageTitle().contains(Links[i]),
+						        "verifying the header link " + Links[i] + "Under Travel",
 							"user should navigate to the " + Links[i] + " page",
 							"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
 					}
@@ -5169,7 +5176,7 @@ return Number;
 	public void Shippingform_Guestuser(String dataSet) throws Exception {
 
 		try {
-//			Thread.sleep(5000);
+			Thread.sleep(1000);
 			Sync.waitElementVisible("css", "input[type='email']");
 			Thread.sleep(2000);
 			if(Common.findElements("xpath", "//div[@x-ref='freegift']//button[@aria-label='Close, button.']").size()>0)
@@ -16100,7 +16107,7 @@ public void header_Explore_2(String Dataset) {{
 			Sync.waitElementPresent("xpath", "//span[contains(text(),'"+ Explore +"')]");
 			Common.clickElement("xpath", "//span[contains(text(),'"+ Explore +"')]");
 			Common.clickElement("xpath", "//a//span[contains(text(),'" + Expert + "')]");
-			Thread.sleep(2000);
+			Thread.sleep(3000);
 			Sync.waitElementPresent("xpath",
 					"//a//span[contains(text(),'" + Links[i] + "')]");
 			Common.clickElement("xpath",
@@ -18004,8 +18011,8 @@ public void orders_image_Validation()
 			Common.navigateBack();
 			
 			Thread.sleep(1000);	
-			Sync.waitElementPresent("css", "a[aria-label*='" + ChainActlink + "']");
-			Common.clickElement("css", "a[aria-label*='" + ChainActlink + "']");
+			Sync.waitElementPresent("xpath", " //a[text()='" + ChainActlink + "']");
+			Common.clickElement("xpath", " //a[text()='" + ChainActlink + "']");
 			Sync.waitPageLoad();
 			Thread.sleep(2000);
 			Common.switchWindows();
