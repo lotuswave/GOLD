@@ -27,7 +27,7 @@ public class TEST_DGLD_HF_EMEA_RT_047_Placeorder_Guest_user_Checkout_with_multip
 			Hydro.addDeliveryAddress_Guestuser("AccountDetails_2");
             Hydro.selectshippingaddress("GroundShipping method");
             Hydro.clickSubmitbutton_Shippingpage();
-            Hydro.Gift_card("Full_RedeemGiftcard");
+            Hydro.Gift_card("Full_RedeemGiftcard_2");
             Hydro.giftCardSubmitOrder();
 
 		} catch (Exception e) {
