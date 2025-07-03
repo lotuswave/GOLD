@@ -34,6 +34,8 @@ public class TEST_DGLD_HF_EMEA_UK_BCT_001_Header_Links_Validation {
 //			Hydro.New_Color_Destination("Colors");
 			Hydro.featured_Shopby_Collections("Shopby Collections");
 			Hydro.featured_Shopby_Activity("Shopby Activity");
+			Hydro.Shop_Shopall("Shop All");
+			Hydro.Featured_ShopAll("Featured shopall");
 //			Hydro.Customize_validation("Customize");			
 //			Hydro.Holiday_shop_validation("Holiday Sale"); 
 			
