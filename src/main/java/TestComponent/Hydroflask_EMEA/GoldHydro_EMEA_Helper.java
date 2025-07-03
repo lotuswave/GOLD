@@ -114,6 +114,7 @@ public class GoldHydro_EMEA_Helper {
 						"User should be navigate to the Home page", "Successfully user navigates to the home page",
 						"Failed to navigate to the homepage");
 			} else {
+				Close_Geolocation();
 				Sync.waitElementPresent(60, "xpath", "//img[@alt='Store logo' or @alt='Hydroflask store logo']");
 				int size = Common.findElements("xpath", "//img[@alt='Store logo' or @alt='Hydroflask store logo']")
 						.size();
@@ -3036,8 +3037,7 @@ try {
 	Common.clickElement("id", "truste-consent-button");
 }
 catch(Exception | Error e){
-	Sync.waitElementClickable("id", "truste-consent-button");
-	Common.clickElement("id", "truste-consent-button");
+
 }
 		
 	}
