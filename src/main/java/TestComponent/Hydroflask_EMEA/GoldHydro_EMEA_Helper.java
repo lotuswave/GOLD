@@ -11717,7 +11717,7 @@ catch(Exception | Error e){
 						Common.getPageTitle().contains(Kustomerlinks[i])
 								|| Common.getCurrentURL().contains(Kustomerlinks[i])
 								|| Common.getPageTitle().contains("Store Locator")
-								|| Common.getPageTitle().contains("Frequently Asked Questions")
+								|| Common.getPageTitle().contains("Knowledge Base")
 								|| Common.getPageTitle().contains("Contact")
 								|| Common.getPageTitle().contains("Tracking and Returns")
 								|| Common.getPageTitle().contains("Shipping & Handling"),
@@ -11741,6 +11741,8 @@ catch(Exception | Error e){
 		// TODO Auto-generated method stub
 		String footer = data.get(Dataset).get("Footer Links");
 		String[] footerlinks = footer.split(",");
+		String Company=data.get(Dataset).get("Comapany links");
+		String [] CompanyLinks=Company.split(",");
 		int i = 0;
 		try {
 			for (i = 0; i < footerlinks.length; i++) {
@@ -11767,6 +11769,31 @@ catch(Exception | Error e){
 						"Unable to Navigated to the" + footerlinks[i] + "Links");
 				Common.navigateBack();
 
+			}
+			
+			for(i=0; i< CompanyLinks.length; i++) {
+				Sync.waitElementPresent(30, "xpath",
+						"//div[contains(@class,'footer-menu')]//a[contains(text(),'" + CompanyLinks[i] + "')]");
+				Thread.sleep(3000);
+				Common.findElement("xpath",
+						"//div[contains(@class,'footer-menu')]//a[contains(text(),'" + CompanyLinks[i] + "')]");
+				Common.clickElement("xpath",
+						"//div[contains(@class,'footer-menu')]//a[contains(text(),'" + CompanyLinks[i] + "')]");
+				Sync.waitPageLoad();
+				Thread.sleep(3000);
+				System.out.println(CompanyLinks[i]);
+				String CurrentPageURL = Common.getCurrentURL();
+				Common.assertionCheckwithReport(
+						Common.getPageTitle().contains(CompanyLinks[i]) || CurrentPageURL.contains(CompanyLinks[i])
+								|| CurrentPageURL.contains("prodeal")
+								|| Common.getPageTitle().contains("Our Story")
+								|| Common.getPageTitle().contains("Privacy Policy")
+								|| Common.getPageTitle().contains("Cookie Policy"),
+						"validating the links navigation from footer Links",
+						"After Clicking on" + CompanyLinks[i] + "it should navigate to the",
+						CompanyLinks[i] + "Sucessfully Navigated to the" + CompanyLinks[i] + "Links",
+						"Unable to Navigated to the" + CompanyLinks[i] + "Links");
+				Common.navigateBack();
 			}
 
 		} catch (Exception | Error e) {
@@ -11967,14 +11994,22 @@ catch(Exception | Error e){
 	public void Terms_and_privacy() {
 		// TODO Auto-generated method stub
 		try {
-			Sync.waitElementPresent("xpath", "//a[contains(text(),'Privacy Policy')]");
-			Common.clickElement("xpath", "//a[contains(text(),'Privacy Policy')]");
+			Sync.waitElementPresent("xpath", "//a[contains(@href,'Privacy')]");
+			Common.clickElement("xpath", "//a[contains(@href,'Privacy')]");
 			Sync.waitPageLoad();
 			Thread.sleep(3000);
 			Common.assertionCheckwithReport(Common.getPageTitle().contains("Privacy Policy"),
-					"validating the Terms and privacy page Navigation",
-					"After Clicking Terms and privacy it should navigate to the respective page",
+					"validating the privacy page Navigation",
+					"After Clicking  privacy it should navigate to the respective page",
 					"Sucessfully Navigated to the Privacy Policy page", "Failed Navigate to the Privacy Policy page");
+			Sync.waitElementPresent("xpath", "//a[contains(@href,'terms')]");
+			Common.clickElement("xpath", "//a[contains(@href,'terms')]");
+			Sync.waitPageLoad();
+			Thread.sleep(3000);
+			Common.assertionCheckwithReport(Common.getPageTitle().contains("Terms & Conditions"),
+					"validating the Terms and condition page Navigation",
+					"After Clicking Terms and condition it should navigate to the respective page",
+					"Sucessfully Navigated to the Terms and condition page", "Failed Navigate to the Terms and condition page");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
@@ -11983,6 +12018,7 @@ catch(Exception | Error e){
 					"Unable to Navigate to the Privacy Policy page",
 					Common.getscreenShot("Failed Navigate to the Privacy Policy page"));
 			Assert.fail();
+		
 		}
 
 	}
