@@ -3253,7 +3253,8 @@ Common.clickElement("xpath", "//span[contains(text(),'Cancel Coupon')]");
 		}
 
 		else {
-			Common.clickElement("xpath", "//span[contains(text(),'Change Billing Address')]");
+			//Common.clickElement("xpath", "//span[contains(text(),'Change Billing Address')]");
+			Common.clickElement("xpath", "//a[@title='Edit']");
 
 			try {
 				Common.textBoxInput("xpath", "//input[@name='firstname']", data.get(dataSet).get("FirstName"));
@@ -3329,7 +3330,7 @@ Common.clickElement("xpath", "//span[contains(text(),'Cancel Coupon')]");
 					"After Clicking on My Orders CTA user should be navigate to the My Orders page",
 					"Sucessfully User Navigates to the My Orders page after clicking on the My Orders CTA",
 					"Failed to Navigate to the My Orders page after Clicking on My Orders CTA");
-			String Ordernumber = Common.findElement("xpath", "(//span[@class='text-right'])[1]")
+			String Ordernumber = Common.findElement("xpath", "(//span[@class='block lg:inline text-right break-words'])[1]")
 					.getText();
 			Sync.waitPageLoad();
 			System.out.println(Ordernumber);
@@ -4505,16 +4506,16 @@ public void Remove_GiftCode() {
 			Common.assertionCheckwithReport(sizeofelement > 0, "verifying the paypal payment ", expectedResult,
 					"open paypal site window", "faild to open paypal account");
 		} else {
-			Sync.waitElementPresent("id", "email");
-			Common.clickElement("id", "email");
-			Sync.waitElementPresent("id", "email");
-			Common.findElement("id", "email").clear();
-			Common.textBoxInput("id", "email", data.get(dataSet).get("Email"));
+			Sync.waitElementPresent("id", "login_email");
+			Common.clickElement("id", "login_email");
+			Sync.waitElementPresent("id", "login_email");
+			Common.findElement("id", "login_email").clear();
+			Common.textBoxInput("id", "login_email", data.get(dataSet).get("Email"));
 			Sync.waitElementClickable("xpath", "//button[text()='Next']");
 			Common.clickElement("xpath", "//button[text()='Next']");
-			int size = Common.findElements("xpath", "//a[contains(text(),'Log in with a password instead')]").size();
+			int size = Common.findElements("xpath", "//button[text()='Use Password Instead']").size();
 			if(size>0) {
-				Common.clickElement("xpath", "//a[contains(text(),'Log in with a password instead')]");
+				Common.clickElement("xpath", "//button[text()='Use Password Instead']");
 			    Sync.waitElementPresent(10,"id", "password");
 				Common.textBoxInput("id", "password", data.get(dataSet).get("Password"));
 			}
@@ -4531,8 +4532,8 @@ public void Remove_GiftCode() {
 				Thread.sleep(5000);
 				Common.actionsKeyPress(Keys.END);
 				Thread.sleep(5000);
-				Sync.waitElementClickable("xpath", "//button[text()='Complete Purchase']");
-				Common.clickElement("xpath", "//button[text()='Complete Purchase']");
+				Sync.waitElementClickable("xpath", "//div[text()='Pay']");
+				Common.clickElement("xpath", "//div[text()='Pay']");
 				Thread.sleep(8000);
 				Common.switchToFirstTab();
 			} catch (Exception | Error e) {
@@ -9107,13 +9108,15 @@ catch(Exception | Error e)
 //						Common.assertionCheckwithReport(message.contains("Click here to view your Favorites."),
 //								"validating the  product add to the Whishlist", "Product should be add to whishlist",
 //								"Sucessfully product added to the Whishlist ", "failed to add product to the Whishlist");
-						Common.clickElement("xpath", "(//button[@aria-haspopup='dialog'])[3]");
+						//Common.clickElement("xpath", "(//button[@aria-haspopup='dialog'])[3]");
+						Common.clickElement("xpath", "//button[contains(@class,'customer-wishlist-title-container-share-button')]");
+
 						Sync.waitPageLoad();
 						Thread.sleep(2000);
 						Common.textBoxInput("xpath", "//textarea[@name='emails']", data.get(Dataset).get("Email"));
 						Common.textBoxInput("xpath", "//textarea[@name='message']", data.get(Dataset).get("message"));
 						Thread.sleep(4000);
-						Common.clickElement("xpath", "//button[@title='Share Wish List']");
+						Common.clickElement("xpath", "//button[contains(@class,'customer-wishlist-title-container-share-button')]");
 						Sync.waitPageLoad();
 						Thread.sleep(3000);
 						String message1 = Common.findElement("xpath", "//span[text()='Your wish list has been shared.']").getText();
@@ -16391,7 +16394,7 @@ Common.clickElement("xpath", "//span[text()='Edit']");
 			List<WebElement> animatedTeasers = Common.findElements("css", "div[data-testid='animated-teaser']");
 			for (int i = 0; i < animatedTeasers.size(); i++)
 			{
-				animatedTeasers = Common.findElements("css", "div[data-testid='animated-teaser']");
+				animatedTeasers = Common.findElements("css", "div[class='needsclick kl-teaser-QYRkJ7 undefined kl-private-reset-css-Xuajs1']");
 	            WebElement teaser = animatedTeasers.get(i);
 	            teaser.click();
 	            if( i == 1) {
