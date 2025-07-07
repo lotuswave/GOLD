@@ -12685,8 +12685,8 @@ public void Guest_Sub_minicart_Checkout() {
 		Sync.waitElementPresent("xpath", "//span[@x-text='totalCartAmount']");
 		String minicart = Common.findElement("xpath", "//span[@x-text='totalCartAmount']").getText();
 		System.out.println(minicart);
-		Sync.waitElementPresent(30, "xpath", "//a[contains(text(),'Checkout')]");
-		Common.clickElement("xpath", "//a[contains(text(),'Checkout')]");
+		Sync.waitElementPresent(30, "xpath", "//button[contains(text(),'Checkout')]");
+		Common.clickElement("xpath", "//button[contains(text(),'Checkout')]");
 		Sync.waitPageLoad();
 		Thread.sleep(7000);
 		Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
