@@ -6113,7 +6113,8 @@ public void FUll_Payment(String dataSet) {
 			    clear.sendKeys(Keys.CONTROL+"a");
 			    clear.sendKeys(Keys.DELETE);
 				System.out.println(phone);
-				Common.textBoxInput("xpath", "//input[@name='phonePasskey']", phone);
+				//Common.textBoxInput("xpath", "//input[@name='phonePasskey']", phone);
+				Common.textBoxInput("xpath", "//input[@aria-label='Phone number']", phone);
 				Common.clickElement("xpath", "//button[@id='onContinue']");
 				Sync.waitPageLoad();
 				Sync.waitElementPresent(30, "xpath", "//input[@id='otp_field']");
@@ -6348,8 +6349,8 @@ public void FUll_Payment(String dataSet) {
 				Common.textBoxInput("xpath", "//input[@name='postcode' and @data-form='billing']",
 						data.get(dataSet).get("postcode"));
 				Thread.sleep(6000);
-				Common.textBoxInput("xpath", "//input[@name='telephone' and @data-form='billing']",
-						data.get(dataSet).get("phone"));
+//				Common.textBoxInput("xpath", "//input[@name='telephone' and @data-form='billing']",
+//						data.get(dataSet).get("phone"));
 				Thread.sleep(2000);
 //				Common.clickElement("xpath", "//button[contains(text(),' Save ')]");
 //				Sync.waitPageLoad();
@@ -7722,7 +7723,7 @@ public void FUll_Payment(String dataSet) {
 								"//div[@id='algolia_instant_sorter']//span")
 						.getText();
 				System.out.println(Sort);
-				int Reviews = Common.findElements("xpath","//span[@class='yotpo-sr-bottom-line-right-panel']").size();
+				int Reviews = Common.findElements("xpath","//span[@class='yotpo-sr-bottom-line-right-panel']//span").size();
 				int Ribbons = Common.findElements("xpath","//span[contains(@class,'ribbon-bg new flex justify-center')]").size();
 				Thread.sleep(4000);
 				Common.assertionCheckwithReport(Reviews > 0 && breadcrumbs.contains("Breadcrumb") && filter.contains("Filter by") && Sort.contains("Sort by") 
