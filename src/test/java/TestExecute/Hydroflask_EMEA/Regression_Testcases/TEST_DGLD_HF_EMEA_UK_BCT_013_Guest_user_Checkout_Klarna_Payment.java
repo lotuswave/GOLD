@@ -1,4 +1,4 @@
-package TestExecute.Hydroflask_EMEA.Preprod_Smoke_TestCases.DE_Smoke;
+package TestExecute.Hydroflask_EMEA.Regression_Testcases;
 
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
@@ -9,7 +9,7 @@ import TestComponent.Hydroflask_EMEA.GoldHydro_EMEA_Helper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class TEST_DGLD_HF_EMEA_DE_BCT_013_Guest_user_Checkout_Klarna_Payment {
+public class TEST_DGLD_HF_EMEA_UK_BCT_013_Guest_user_Checkout_Klarna_Payment {
 
 	String datafile = "Hydroflask_EMEA//GoldHydroEMEA_TestData.xlsx";
 	GoldHydro_EMEA_Helper Hydro = new GoldHydro_EMEA_Helper(datafile,"DataSet");
@@ -42,7 +42,7 @@ public class TEST_DGLD_HF_EMEA_DE_BCT_013_Guest_user_Checkout_Klarna_Payment {
 
 	@BeforeTest
 	public void startTest() throws Exception {
-		String url="https://mcloud-na-stage4.hydroflask.com/de";
+		String url="https://mcloud-na-preprod.hydroflask.com/gb";
 		System.setProperty("url", url);
        Login.signIn();
        Hydro.close_add();
