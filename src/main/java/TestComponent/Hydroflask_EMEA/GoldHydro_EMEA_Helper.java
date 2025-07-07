@@ -783,7 +783,7 @@ public class GoldHydro_EMEA_Helper {
 					"Shipping address should be filled correctly",
 					"User successfully filled all required shipping fields",
 					Common.getscreenShotPathforReport("ShippingAddressFilled"));
-
+Common.implicitWait();
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("Validating shipping address",
@@ -1686,7 +1686,7 @@ public class GoldHydro_EMEA_Helper {
 				Common.actionsKeyPress(Keys.ARROW_DOWN);
 				Common.switchToDefault();
 
-				if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
+				if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("emea")) {
 					Sync.waitElementPresent("css", "input[class='flex-none disabled:opacity-25']");
 					Common.clickElement("css", "input[class='flex-none disabled:opacity-25']");
 					Sync.waitPageLoad();
