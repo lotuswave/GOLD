@@ -6109,7 +6109,7 @@ public void FUll_Payment(String dataSet) {
 				System.out.println(number);
 				String mobile=Integer.toString(number);
 				String phone="+91"+"95862"+mobile;*/
-				WebElement clear=Common.findElement("xpath", "//input[@name='phonePasskey'] | //input[@name='phone']");
+				WebElement clear=Common.findElement("xpath", "//input[@aria-label='Phone number']");
 			    clear.sendKeys(Keys.CONTROL+"a");
 			    clear.sendKeys(Keys.DELETE);
 				System.out.println(phone);

@@ -23,10 +23,10 @@ public class Test_DGLD_DB_E2E_003_Guestuser_checkout_with_simple_Configurable_Al
 			Drybar.prepareOrdersData("Drybar_E2E_orderDetails.xlsx");
 			String Description="Guest user checkout with simple + Configurable + Alaska Address +Different Billing and Shipping Address+ Express Shipping + Discount + CC";
 			Drybar.Verify_Homepage();
-			Drybar.search_product("900-0700-4 Product");
-		    Drybar.addtocart("900-0700-4 Product");
-	        Drybar.search_product("Cure Liqueur Strengthening Shampoo Product");
-	        Drybar.Configurable_addtocart("Cure Liqueur Strengthening Shampoo Product");
+			Drybar.search_product("900-2230-1 Product");
+		    Drybar.addtocart("900-2230-1 Product");
+	        Drybar.search_product("Tress Press Product");
+	        Drybar.Configurable_addtocart("Tress Press Product");
 	        Drybar.minicart_Checkout();
 	        String Used_GiftCode= "Null"; //No giftcide used
 	        Drybar.addDeliveryAddress_Guestuser("Alaska Address");

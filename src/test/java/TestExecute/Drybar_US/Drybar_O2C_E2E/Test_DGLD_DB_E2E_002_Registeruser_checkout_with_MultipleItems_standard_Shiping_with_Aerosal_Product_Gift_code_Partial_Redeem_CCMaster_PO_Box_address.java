@@ -25,8 +25,8 @@ public class Test_DGLD_DB_E2E_002_Registeruser_checkout_with_MultipleItems_stand
 		Drybar.Verify_Homepage();
         Drybar.click_singinButton();
         Drybar.login_Drybar("AccountDetails");
-        Drybar.search_product("900-2935-1 Product");
-        Drybar.addtocart("900-2935-1 Product");
+        Drybar.search_product("900-1285-1 Product");
+        Drybar.addtocart("900-1285-1 Product");
         Drybar.search_product("900-0700-4 Product");
         Drybar.addtocart("900-0700-4 Product");
         Drybar.search_product("900-2230-1 Product");
