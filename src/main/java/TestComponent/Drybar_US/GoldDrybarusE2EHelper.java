@@ -492,7 +492,7 @@ public class GoldDrybarusE2EHelper {
 	public void close_add() throws Exception {
         // TODO Auto-generated method stub
         Thread.sleep(3000);
-        int sizesframe = Common.findElements("xpath", "//div[@id='ltkpopup-content']").size();
+     /*   int sizesframe = Common.findElements("xpath", "//div[@id='ltkpopup-content']").size();
         System.out.println(sizesframe);
         if (sizesframe > 0) {
             Common.actionsKeyPress(Keys.PAGE_UP);
@@ -506,7 +506,7 @@ public class GoldDrybarusE2EHelper {
             Sync.waitElementPresent("id", "ltkpopup-close-button");
             Common.clickElement("id", "ltkpopup-close-button");
 //            Common.switchToDefault();
-            }
+            }*/
 
 	}
 
@@ -3359,7 +3359,8 @@ public class GoldDrybarusE2EHelper {
 			Sync.waitElementPresent("xpath", "//span[contains(text(),'" + Productsize + "')]");
 			Common.clickElement("xpath", "//span[contains(text(),'" + Productsize + "')]");
 			Thread.sleep(8000);
-			String size=Common.findElement("xpath", "//*[contains(@id,'attribute-label-71902-1346')]/span[2]").getText().toUpperCase();
+			//String size=Common.findElement("xpath", "//*[contains(@id,'attribute-label-71902-1346')]/span[2]").getText().toUpperCase();
+			String size=Common.findElement("xpath", "//span[contains(@class,' m-swatch-group__header')]").getText().toUpperCase();
 			System.out.println(size);
 			String size1= data.get(Dataset).get("size").toUpperCase();
 			System.out.println(size1);
@@ -6211,11 +6212,11 @@ public void FUll_Payment(String dataSet) {
 				System.out.println(number);
 				String mobile=Integer.toString(number);
 				String phone="+91"+"95862"+mobile;*/
-				WebElement clear=Common.findElement("xpath", "//input[@name='phonePasskey'] | //input[@name='phone']");
+				WebElement clear=Common.findElement("xpath", "//input[@aria-label='Phone number']");
 			    clear.sendKeys(Keys.CONTROL+"a");
 			    clear.sendKeys(Keys.DELETE);
 				System.out.println(phone);
-				Common.textBoxInput("xpath", "//input[@name='phonePasskey'] | //input[@name='phone']", phone);
+				Common.textBoxInput("xpath", "//input[@aria-label='Phone number']", phone);
 				Common.clickElement("xpath", "//button[@id='onContinue']");
 				Sync.waitPageLoad();
 				Sync.waitElementPresent(30, "xpath", "//input[@id='otp_field']");
@@ -6458,8 +6459,8 @@ public void FUll_Payment(String dataSet) {
 				Common.textBoxInput("xpath", "//input[@name='postcode' and @data-form='billing']",
 						data.get(dataSet).get("postcode"));
 				Thread.sleep(5000);
-				Common.textBoxInput("xpath", "//input[@name='telephone' and @data-form='billing']",
-						data.get(dataSet).get("phone"));
+//				Common.textBoxInput("xpath", "//input[@name='telephone' and @data-form='billing']",
+//						data.get(dataSet).get("phone"));
 //				Common.clickElement("xpath", "//button[contains(text(),' Save ')]");
 //				Sync.waitPageLoad();
 //				Thread.sleep(5000);

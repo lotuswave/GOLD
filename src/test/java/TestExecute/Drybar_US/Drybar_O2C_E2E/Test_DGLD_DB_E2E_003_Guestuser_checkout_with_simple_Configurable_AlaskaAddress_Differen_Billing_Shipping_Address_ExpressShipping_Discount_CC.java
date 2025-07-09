@@ -30,7 +30,8 @@ public class Test_DGLD_DB_E2E_003_Guestuser_checkout_with_simple_Configurable_Al
 	        Drybar.minicart_Checkout();
 	        String Used_GiftCode= "Null"; //No giftcide used
 	        Drybar.addDeliveryAddress_Guestuser("Alaska Address");
-	        Drybar.BillingAddress("AccountDetails");
+//	        Drybar.BillingAddress("AccountDetails");
+	        Drybar.guest_BillingAddress("BillingDetails");
 	        Drybar.selectshippingmethod("ExpressShipping method");
 	        Drybar.discountCode("Discount");
 	        Drybar.clickSubmitbutton_Shippingpage(); 

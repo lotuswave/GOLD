@@ -27,14 +27,15 @@ public class Test_DGLD_DB_E2E_004_Registeruser_checkout_with_Non_aerosal_bundleI
         Drybar.login_Drybar("AccountDetails");
         Drybar.search_product("Perfect blow Bundle E2E");
         Drybar.addtocart("Perfect blow Bundle E2E"); 
-        Drybar.search_product("900-1515-1-N2");
-        Drybar.addtocart("900-1515-1-N2");
+        Drybar.search_product("900-1285-1 Product");
+        Drybar.addtocart("900-1285-1 Product");
         Drybar.search_product("CURE-LIQUEUR- product");
         Drybar.addtocart("CURE-LIQUEUR- product");
         Drybar.minicart_Checkout();
         Drybar.RegaddDeliveryAddress("AccountDetails");
         Drybar.discountCode("Discount");
-        Drybar.BillingAddress("6 walnut address");
+       // Drybar.BillingAddress("6 walnut address");
+        Drybar.guest_BillingAddress("BillingDetails");
         Drybar.selectshippingmethod("StandardShipping method");
         String Used_GiftCode = Drybar.gitCard("GiftCode"); 
     	HashMap<String,String> Details=Drybar.ordersummary_Details();
