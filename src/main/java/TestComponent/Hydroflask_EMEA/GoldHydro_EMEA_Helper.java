@@ -9722,9 +9722,9 @@ catch(Exception | Error e){
 			Sync.waitPageLoad();
 			Common.scrollIntoView("css", "span[x-html='message.text']");
 			expectedResult = "It should apply discount on your price.If user enters invalid promocode it should display coupon code is not valid message.";
-			if (Common.getCurrentURL().contains("Stage") || Common.getCurrentURL().contains("preprod")) {
+			if (Common.getCurrentURL().contains("emea") || Common.getCurrentURL().contains("preprod")) {
 				String discountcodemsg = Common.getText("css", "span[x-html='message.text']");
-				Common.assertionCheckwithReport(discountcodemsg.contains("You used coupon code") || discountcodemsg.contains("HFEMEA20OFF"), "verifying pomocode",
+				Common.assertionCheckwithReport(discountcodemsg.contains("You used coupon code") || discountcodemsg.contains("HFEMEA20OFF") || discountcodemsg.contains("HFEMEATEST5"), "verifying pomocode",
 						expectedResult, "promotion code working as expected", "Promation code is not applied");
 			} else {
 				String discountcodemsg = Common.getText("css", "span[x-html='message.text']");
@@ -9745,7 +9745,7 @@ catch(Exception | Error e){
 			Assert.fail();
 		}
 		try {
-			if (Common.getCurrentURL().contains("stage") || Common.getCurrentURL().contains("preprod")) {
+			if (Common.getCurrentURL().contains("emea") || Common.getCurrentURL().contains("preprod")) {
 				Thread.sleep(6000);
 				String Subtotal = Common.getText("xpath", "//div[contains(@class,'text-right md:w-auto text-sm')]")
 						.replace(Symbol, "").replace(Symbol_1, "").replace(",", ".");
@@ -9771,8 +9771,8 @@ catch(Exception | Error e){
 //				Float subvalue = subtotalvalue + shippingvalue;
 //				Float Total = subvalue - subvalue * 20 / 100;
 
-				Float subvalue = subtotalvalue - subtotalvalue * 20 / 100;
-				Float Total = subvalue + shippingvalue;
+				Float subvalue = subtotalvalue + shippingvalue;
+				Float Total = subvalue - Discountvalue;
 				String ExpectedTotalAmmount2 = new BigDecimal(Total).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
 				System.out.println(ExpectedTotalAmmount2);
 				System.out.println(ordertotal);
