@@ -16,19 +16,16 @@ public class TEST_DGLD_HF_EMEA_RT_004_Validation_ShippingAddress_form_for_Regist
 	GoldHydro_EMEA_Helper Hydro = new GoldHydro_EMEA_Helper(datafile,"DataSet");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Validate_registeredUserCheckoutwith_invalid_CC_Credentials () throws Exception {
-
-		try {
-			Hydro.verifingHomePage();
-			Hydro.click_singinButton();
+	 public void Validation_ShippingAddress_form_for_RegisterUesr() throws Exception {
+        try {
+            Hydro.verifingHomePage();
+            Hydro.click_singinButton();
 			Hydro.login_Hydroflask("AccountDetails");
-			Hydro.search_product("Product");      
-			Hydro.addtocart("Product");                    
-			Hydro.minicart_Checkout();
-			Hydro.RegaddDeliveryAddress("AccountDetails");
-            Hydro.selectshippingaddress("GroundShipping method");
-            Hydro.clickSubmitbutton_Shippingpage();
-			Hydro.updtePayementcrditcard_WithInvalidData("invlidPaymentDetails");
+            Hydro.search_product("Product");      
+            Hydro.addtocart("Product");                    
+            Hydro.minicart_Checkout();
+            Hydro.addDeliveryAddress_RegUser("InvalidAddress");
+            Hydro.validatingErrormessageShippingpage_negative();
 
 		} catch (Exception e) {
 
