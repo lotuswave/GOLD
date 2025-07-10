@@ -643,8 +643,8 @@ public class GoldHydro_EMEA_Helper {
 
 		try {
 			Thread.sleep(5000);
-			Sync.waitElementVisible("xpath", "//input[@type='email']");
-			Common.textBoxInput("xpath", "//input[@type='email']", data.get(dataSet).get("Email"));
+			Sync.waitElementVisible("css", "input[placeholder='Enter e-mail address']");
+			Common.textBoxInput("css", "input[placeholder='Enter e-mail address']", data.get(dataSet).get("Email"));
 
 		} catch (NoSuchElementException e) {
 			minicart_Checkout();
@@ -983,15 +983,16 @@ Common.implicitWait();
 
 	public void validatingErrormessageShippingpage_negative() throws InterruptedException {
 		Thread.sleep(2000);
-		int Firstname_Error = Common.findElements("xpath", "//li[@data-msg-field='firstname']").size();
-		int Lastname_Error = Common.findElements("xpath", "//li[@data-msg-field='lastname']").size();
+//		int Firstname_Error = Common.findElements("xpath", "//li[@data-msg-field='firstname']").size();
+//		int Lastname_Error = Common.findElements("xpath", "//li[@data-msg-field='lastname']").size();
 //		int Address_Error =Common.findElements("xpath", "//li[@data-msg-field='street[0]']").size();
 		int Phn_Error = Common.findElements("xpath", "//li[@data-msg-field='telephone']").size();
 		String expectedResult = "Error message will dispaly when we miss the data in fields ";
-		System.out.println(Firstname_Error);
-		System.out.println(Lastname_Error);
+//		System.out.println(Firstname_Error);
+//		System.out.println(Lastname_Error);
 		System.out.println(Phn_Error);
-		if (Firstname_Error > 0 && Lastname_Error > 0 && Phn_Error > 0) {
+		int Zipcode_Error = Common.findElements("xpath", "//li[@data-msg-field='postcode']").size();
+		if (Zipcode_Error > 0 && Phn_Error > 0) {
 			System.out.println("Error Message displayed");
 			ExtenantReportUtils.addPassLog("validating the shippingPage error message", expectedResult,
 					"sucessfully  dispaly error message", Common.getscreenShotPathforReport("errormessagenegative"));
