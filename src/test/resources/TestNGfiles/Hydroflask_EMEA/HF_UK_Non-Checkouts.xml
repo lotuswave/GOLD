@@ -15,6 +15,17 @@
         <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.TEST_DGLD_HF_EMEA_RT_002_RegisteredUserCheckoutwith_invalid_CC_Credentials"/>
     </classes>
 </test>
+<test name="TEST_DGLD_HF_EMEA_RT_003_Validation_ShippingAddress_form_for_GuestUser" testid="DQA-4413" description="This script validates the shipping address form for a guest user.">
+    <classes>
+        <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.TEST_DGLD_HF_EMEA_RT_003_Validation_ShippingAddress_form_for_GuestUser"/>
+    </classes>
+</test>
+
+<test name="TEST_DGLD_HF_EMEA_RT_004_Validation_ShippingAddress_form_for_RegisterUesr" testid="DQA-4414" description="This script validates the shipping address form for a registered user.">
+    <classes>
+        <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.TEST_DGLD_HF_EMEA_RT_004_Validation_ShippingAddress_form_for_RegisterUesr"/>
+    </classes>
+</test>
 
 <test name="TEST_DGLD_HF_EMEA_RT_005_Checkout_GuestUserCC_configurable_Simple" testid="DQA-4416" description="This script validates guest user checkout with credit card for configurable and simple products.">
     <classes>
