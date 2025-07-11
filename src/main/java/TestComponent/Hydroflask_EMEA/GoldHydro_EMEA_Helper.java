@@ -10126,7 +10126,7 @@ catch(Exception | Error e){
 						String title = Common.findElement("xpath", "//h1[@class='title-2xl']//span").getText();
 						System.out.println(title);
 						Common.assertionCheckwithReport(
-								title.contains(Account[i]) || title.contains("My Out Of Stock Subscriptions")
+								title.contains(Account[i]) || title.contains("My Back in Stock Subscriptions")
 										|| title.contains("My Payment Methods")
 										|| title.contains("Newsletter Subscription"),
 								"verifying Account page links " + Account[i],
@@ -10146,6 +10146,7 @@ catch(Exception | Error e){
 				}
 				Sync.waitElementPresent("xpath", "//a[@title='Sign Out']");
 				Common.clickElement("xpath", "//a[@title='Sign Out']");
+				Thread.sleep(4000);
 				verifingHomePage();
 			} catch (Exception | Error e) {
 				e.printStackTrace();
