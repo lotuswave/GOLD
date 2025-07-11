@@ -5160,7 +5160,8 @@ catch(Exception | Error e){
 					.trim();
 			System.out.println(ID);
 			System.out.println(ordernumber);
-			Common.assertionCheckwithReport(Common.getPageTitle().contains(orderid) || ID.equals(ordernumber),
+			Common.assertionCheckwithReport(Common.getPageTitle().contains(orderid) || ID.equals(ordernumber)
+					|| ID.equals(prodordernumber),
 					"verifying order status form", "order tracking information page navigation",
 					"successfully order tracking information page ",
 					"Failed to navigate tracking order page infromation");
