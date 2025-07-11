@@ -85,57 +85,74 @@ public class GoldHydro_EMEA_Helper {
 	 * Verifies the Home Page logo and title based on the environment.
 	 */
 	public void verifingHomePage() {
-		try {
-			String url = automation_properties.getInstance().getProperty(automation_properties.BASEURL);
-			System.out.println(url);
-			if (Common.getCurrentURL().contains(url)) {
-				Close_Geolocation();
-				Sync.waitElementPresent(60, "css", "a[class*='c-header__logo inline-flex']");
-				int size = Common.findElements("css", "a[class*='c-header__logo inline-flex']").size();
-				Thread.sleep(3000);
-				boolean isLogoPresent = size > 0;
-				boolean isTitleCorrect = Common.getPageTitle().contains("Home Page")
-						|| Common.getPageTitle().contains("Hydro Flask Reusable Bottles")
-						|| Common.getPageTitle().contains("gb - mcloud-na-preprod-hydroflask");
+	    try {
+	        String currentUrl = Common.getCurrentURL();
+	        String baseUrl = automation_properties.getInstance().getProperty(automation_properties.BASEURL);
+	        System.out.println("Expected Base URL: " + baseUrl);
+	        System.out.println("Current URL: " + currentUrl);
 
-				Common.assertionCheckwithReport(isLogoPresent && isTitleCorrect, "validating the home page navigation",
-						"User should be navigate to the Home page", "Successfully user navigates to the home page",
-						"Failed to navigate to the homepage");
-			} else if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage4")) {
-				Close_Geolocation();
-				Sync.waitPageLoad();
-				int size = Common.findElements("css", "img[alt='Store logo']").size();
+	        Close_Geolocation();
 
-				boolean isLogoPresent = size > 0;
-				boolean isTitleCorrect = Common.getPageTitle().contains("Home Page")
-						|| Common.getPageTitle().contains("Hydro Flask Reusable Bottles");
+	        boolean isLogoPresent = false;
+	        boolean isTitleCorrect = false;
 
-				Common.assertionCheckwithReport(isLogoPresent || isTitleCorrect, "validating the home page navigation",
-						"User should be navigate to the Home page", "Successfully user navigates to the home page",
-						"Failed to navigate to the homepage");
-			} else {
-				Close_Geolocation();
-				Sync.waitElementPresent(60, "xpath", "//img[@alt='Store logo' or @alt='Hydroflask store logo']");
-				int size = Common.findElements("xpath", "//img[@alt='Store logo' or @alt='Hydroflask store logo']")
-						.size();
+	        if (currentUrl.contains(baseUrl)) {
+	            Sync.waitElementPresent(60, "css", "a[class*='c-header__logo inline-flex']");
+	            isLogoPresent = Common.findElements("css", "a[class*='c-header__logo inline-flex']").size() > 0;
+	            isTitleCorrect = validateTitle(
+	                "Home Page",
+	                "Hydro Flask Reusable Bottles",
+	                "gb - mcloud-na-preprod-hydroflask"
+	            );
+	        } else if (currentUrl.contains("preprod") || currentUrl.contains("stage4")) {
+	            Sync.waitPageLoad();
+	            isLogoPresent = Common.findElements("css", "img[alt='Store logo']").size() > 0;
+	            isTitleCorrect = validateTitle(
+	                "Home Page",
+	                "Hydro Flask Reusable Bottles"
+	            );
+	        } else {
+	            Sync.waitElementPresent(60, "xpath", "//img[@alt='Store logo' or @alt='Hydroflask store logo']");
+	            isLogoPresent = Common.findElements("xpath", "//img[@alt='Store logo' or @alt='Hydroflask store logo']").size() > 0;
+	            isTitleCorrect = validateTitle(
+	                "Home Page",
+	                "Hydro Flask",
+	                "Hydro Flask: Sustainable & Refillable Water Bottles | Hydro Flask"
+	            );
+	        }
+	        System.out.println("Logo Present: " + isLogoPresent);
+	        System.out.println("Title Correct: " + isTitleCorrect);
+	        System.out.println("Page Title: " + Common.getPageTitle());
+	        Common.assertionCheckwithReport(
+	            isLogoPresent && isTitleCorrect,
+	            "Validating the home page navigation",
+	            "User should be navigated to the Home page",
+	            "Successfully navigated to the home page",
+	            "Failed to navigate to the homepage"
+	        );
 
-				boolean isLogoPresent = size > 0;
-				boolean isTitleCorrect = Common.getPageTitle().contains("Home Page")
-						|| Common.getPageTitle().contains("Hydro Flask") || Common.getPageTitle()
-								.contains("Hydro Flask: Sustainable & Refillable Water Bottles | Hydro Flask");
-
-				Common.assertionCheckwithReport(isLogoPresent && isTitleCorrect, "validating the home page navigation",
-						"User should be navigate to the Home page", "Successfully user navigates to the home page",
-						"Failed to navigate to the homepage");
-			}
-		} catch (Exception | Error e) {
-			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("validating the home page navigation",
-					"User should be navigate to the Home page", "user unable navigates to the home page",
-					Common.getscreenShotPathforReport("homepage_verification_failed"));
-			Assert.fail("Failed to verify home page.");
-		}
+	    } catch (Exception | Error e) {
+	        e.printStackTrace();
+	        ExtenantReportUtils.addFailedLog(
+	            "Validating the home page navigation",
+	            "User should be navigated to the Home page",
+	            "User failed to navigate to the home page",
+	            Common.getscreenShotPathforReport("homepage_verification_failed")
+	        );
+	        Assert.fail("Failed to verify home page.");
+	    }
 	}
+
+	private boolean validateTitle(String... expectedTitles) {
+	    String pageTitle = Common.getPageTitle();
+	    for (String expected : expectedTitles) {
+	        if (pageTitle.contains(expected)) {
+	            return true;
+	        }
+	    }
+	    return false;
+	}
+
 
 	public void Close_Geolocation() {
 		// TODO Auto-generated method stub
@@ -15570,7 +15587,7 @@ catch(Exception | Error e){
 			Common.actionsKeyPress(Keys.ARROW_DOWN);
 			Common.switchToDefault();
 
-			if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
+			if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("emea")) {
 				Thread.sleep(1000);
 				Sync.waitElementPresent("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
 				Common.clickElement("xpath", "(//button[contains(@class,'btn-place-order')])[1]");

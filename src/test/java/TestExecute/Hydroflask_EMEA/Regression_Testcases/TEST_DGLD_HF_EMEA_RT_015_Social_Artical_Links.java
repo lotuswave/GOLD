@@ -16,7 +16,7 @@ public class TEST_DGLD_HF_EMEA_RT_015_Social_Artical_Links {
 	GoldHydro_EMEA_Helper Hydro = new GoldHydro_EMEA_Helper(datafile,"DataSet");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Validate_Add_to_Cart_from_Sticky_Cart () throws Exception {
+	public void Validate_Social_Media_Links_presentIn_Website () throws Exception {
 
 		try {
 			Hydro.verifingHomePage();
