@@ -7748,7 +7748,7 @@ catch(Exception | Error e){
 
 			} else if (Common.getCurrentURL().contains("https://mcloud-na-preprod.hydroflask.com/")) {
 
-				Common.oppenURL(strArray[i].replace("mcloud-na-stage", "www"));
+				Common.oppenURL(strArray[i].replace("mcloud-na-stage", "https://mcloud-"));
 				Thread.sleep(2000);
 				int responcecode = getpageresponce(Common.getCurrentURL());
 				System.out.println(responcecode);
