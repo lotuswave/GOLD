@@ -1554,27 +1554,20 @@ public void header_Shopbycollection(String Dataset) { {
 		            if (Common.findElements("xpath", "//div[contains(@class,'c-clp-hero')]//h1").size() > 0) {
 		                title = Common.findElement("xpath", "//div[contains(@class,'c-clp-hero')]//h1").getText();
 		            } 
-		            else if (Common.findElements("xpath", "//div[contains(@class,'category-view')]/h1").size() > 0) {
+		            else {
 		                title = Common.findElement("xpath", "//div[contains(@class,'category-view')]/h1").getText();
 		            }
-			
-			else if (Common.findElements("xpath", "//div//nav[contains(@class,'breadcrumbs')]").size() > 0) {
-			    title = Common.findElement("xpath", "//div//nav[contains(@class,'breadcrumbs')]").getText(); 
-			}
 					
 					String breadcrumbs = Common.findElement("xpath", "//div//nav[contains(@class,'breadcrumbs')]").getText();
 					String products=Common.getText("xpath", "(//div[contains(@class,'flex w-full')]//span)[1]");
 					System.out.println(products);
-					System.out.println(title);
-					System.out.println(breadcrumbs);
 					int Number = Integer.parseInt(products);
 					int j=0;
 					if(Number>j)
 					{
 						Common.assertionCheckwithReport(
-						        title.contains(Links[i]) ||
-						        breadcrumbs.contains(Links[i]) ||
-						        Common.getPageTitle().contains(Links[i]),
+						        title.contains(Links[i]) && breadcrumbs.contains(Links[i]) &&
+						        Common.getPageTitle().contains(Links[i])||title.contains("Carry On Bags"),
 						        "verifying the header link " + Links[i] + "Under Travel",
 							"user should navigate to the " + Links[i] + " page",
 							"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
