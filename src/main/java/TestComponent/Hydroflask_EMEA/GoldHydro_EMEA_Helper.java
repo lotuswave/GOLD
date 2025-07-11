@@ -3387,119 +3387,100 @@ catch(Exception | Error e){
 	}
 
 	public void ChangeAddress_AddressBook(String dataSet) {
-		// TODO Auto-generated method stub
 		try {
 			Sync.waitElementClickable("id", "customer-menu");
 			Common.clickElement("id", "customer-menu");
 			Sync.waitElementPresent(30, "xpath", "//a[contains(text(),'My Account')]");
 			Common.clickElement("xpath", "//a[contains(text(),'My Account')]");
-			Common.assertionCheckwithReport(
-					Common.getPageTitle().equals("My Account") || Common.getPageTitle().equals("Dashboard"),
-					"validating the Navigation to the My account page",
-					"After Clicking on My account CTA user should be navigate to the my account page",
-					"Sucessfully User Navigates to the My account page after clicking on the my account CTA",
-					"Failed to Navigate to the MY account page after Clicking on my account button");
+
+			boolean isMyAccountPage = Common.getPageTitle().equals("My Account") || Common.getPageTitle().equals("Dashboard");
+			Common.assertionCheckwithReport(isMyAccountPage,
+					"Validating navigation to the My Account page",
+					"User should navigate to the My Account page",
+					"User successfully navigated to the My Account page",
+					"Failed to navigate to the My Account page");
+			if (!isMyAccountPage) Assert.fail("My Account page title is incorrect");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("validating the Navigation to the My account page",
-					"After Clicking on My account CTA user should be navigate to the my account page",
-					"Unable to Navigates the user to My account page after clicking on the my account CTA",
-					Common.getscreenShot("Failed to Navigate to the MY account page after Clicking on my account CTA"));
-			Assert.fail();
+			ExtenantReportUtils.addFailedLog("Validating navigation to My Account page",
+					"User should navigate to My Account page",
+					"Navigation to My Account page failed",
+					Common.getscreenShot("My_Account_Page_Navigation_Failed"));
+			Assert.fail("Exception during My Account navigation");
 		}
-		Sync.waitPageLoad();
-		Common.clickElement("xpath", "(//span[text()='Address Book'])[1]");
-		Sync.waitPageLoad();
-		Common.assertionCheckwithReport(Common.getPageTitle().equals("Address Book"),
-				"validating the Navigation to the Address Book page",
-				"After Clicking on Address Book CTA user should be navigate to the Address Book page",
-				"Sucessfully User Navigates to the Address Book page after clicking on the Address Book CTA",
-				"Failed to Navigate to the Address Book page after Clicking on Address Book CTA");
 
-		int PageTitle = Common.findElements("xpath", "//h1[@class='page-title-wrapper h2']").size();
-		if (PageTitle > 0) {
-			try {
-				Common.textBoxInput("xpath", "//input[@name='firstname']", data.get(dataSet).get("FirstName"));
-				Common.textBoxInput("xpath", "//input[@name='lastname']", data.get(dataSet).get("LastName"));
-				Common.textBoxInput("xpath", "//input[@title='Phone Number']", data.get(dataSet).get("phone"));
-				Common.textBoxInput("xpath", "//input[@title='Address Line 1']", data.get(dataSet).get("Street"));
-				Common.textBoxInput("xpath", "//input[@title='City']", data.get(dataSet).get("City"));
-				try {
-					Common.dropdown("xpath", "//select[@name='region_id']", Common.SelectBy.TEXT,
-							data.get(dataSet).get("Region"));
-				} catch (ElementClickInterceptedException e) {
-					Thread.sleep(3000);
-					Common.dropdown("id", "region_id", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
-				}
+		try {
+			Sync.waitPageLoad();
+			Common.clickElement("xpath", "(//span[text()='Address Book'])[1]");
+			Sync.waitPageLoad();
 
-				Common.textBoxInput("xpath", "//input[@name='postcode']", data.get(dataSet).get("postcode"));
+			boolean isAddressBookPage = Common.getPageTitle().equals("Address Book");
+			Common.assertionCheckwithReport(isAddressBookPage,
+					"Validating navigation to the Address Book page",
+					"User should navigate to Address Book page",
+					"Successfully navigated to Address Book page",
+					"Failed to navigate to Address Book page");
+			if (!isAddressBookPage) Assert.fail("Address Book page title is incorrect");
 
-				Common.clickElement("xpath", "//button[@title='Save Address']");
-				Thread.sleep(3000);
-				String message = Common.findElement("xpath", "//div[@ui-id='message-success']").getText();
-
-				Common.assertionCheckwithReport(message.equals("You saved the address."),
-						"validating the saved message after saving address in address book",
-						"Save address message should be displayed after the address saved in address book",
-						"Sucessfully address has been saved in the address book",
-						"Failed to save the address in the address book");
-
-			} catch (Exception | Error e) {
-				e.printStackTrace();
-				ExtenantReportUtils.addFailedLog("validating the saved message after saving address in address book",
-						"Save address message should be displayed after the address saved in address book",
-						"unable to save the adreess in the address book",
-						Common.getscreenShotPathforReport("Failed to save the address in the address book"));
-
-				Assert.fail();
-
+			int pageTitle = Common.findElements("xpath", "//h1[@class='page-title-wrapper h2']").size();
+			if (pageTitle > 0) {
+				// Fill and save the address
+				fillAddressForm(dataSet, false);
+			} else {
+				// Fallback: Click change billing address and fill
+				Common.clickElement("xpath", "//span[contains(text(),'Change Billing Address')]");
+				fillAddressForm(dataSet, true);
 			}
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("Validating Address Book",
+					"User should successfully update the address",
+					"User failed to update address",
+					Common.getscreenShotPathforReport("AddressBook_Failure"));
+			Assert.fail("Exception during address update");
 		}
+	}
+	public void fillAddressForm(String dataSet, boolean isBilling) {
+		try {
+			Common.textBoxInput("xpath", "//input[@name='firstname']", data.get(dataSet).get("FirstName"));
+			Common.textBoxInput("xpath", "//input[@name='lastname']", data.get(dataSet).get("LastName"));
+			Common.textBoxInput("xpath", "//input[@title='Phone Number']", data.get(dataSet).get("phone"));
 
-		else {
-			Common.clickElement("xpath", "//span[contains(text(),'Change Billing Address')]");
-
-			try {
-				Common.textBoxInput("xpath", "//input[@name='firstname']", data.get(dataSet).get("FirstName"));
-				Common.textBoxInput("xpath", "//input[@name='lastname']", data.get(dataSet).get("LastName"));
-				Common.textBoxInput("xpath", "//input[@title='Phone Number']", data.get(dataSet).get("phone"));
+			if (isBilling) {
 				Common.textBoxInput("xpath", "//input[@name='street[0]']", data.get(dataSet).get("Street"));
-
+				Common.textBoxInput("xpath", "//input[@name='region']", data.get(dataSet).get("Region"));
+			} else {
+				Common.textBoxInput("xpath", "//input[@title='Address Line 1']", data.get(dataSet).get("Street"));
 				try {
-//					Common.dropdown("xpath", "//select[@name='region_id']", Common.SelectBy.TEXT,data.get(dataSet).get("Region"));					
-					Common.textBoxInput("xpath", "//input[@name='region']", data.get(dataSet).get("Region"));
-
+					Common.dropdown("xpath", "//select[@name='region_id']", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
 				} catch (ElementClickInterceptedException e) {
-
 					Thread.sleep(3000);
 					Common.dropdown("id", "region_id", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
 				}
-				Thread.sleep(2000);
-
-				Common.textBoxInput("xpath", "//input[@name='postcode']", data.get(dataSet).get("postcode"));
-
-				Common.clickElement("xpath", "//button[@title='Save Address']");
-				Thread.sleep(1000);
-				Sync.waitElementPresent(30, "xpath", "//div[@ui-id='message-success']");
-				String message = Common.findElement("xpath", "//div[@ui-id='message-success']").getText();
-
-				Common.assertionCheckwithReport(message.equals("You saved the address."),
-						"validating the saved message after saving address in address book",
-						"Save address message should be displayed after the address saved in address book",
-						"Sucessfully address has been saved in the address book",
-						"Failed to save the address in the address book");
 			}
 
-			catch (Exception | Error e) {
-				e.printStackTrace();
-				ExtenantReportUtils.addFailedLog("validating my address book with data",
-						"enter the valid address without any validation",
-						"User failed to enter data in my address book",
-						Common.getscreenShotPathforReport("faield to save the address in addressbook"));
-				Assert.fail();
+			Common.textBoxInput("xpath", "//input[@title='City']", data.get(dataSet).get("City"));
+			Common.textBoxInput("xpath", "//input[@name='postcode']", data.get(dataSet).get("postcode"));
 
-			}
+			Common.clickElement("xpath", "//button[@title='Save Address']");
+			Sync.waitElementPresent(30, "xpath", "//div[@ui-id='message-success']");
+			String message = Common.findElement("xpath", "//div[@ui-id='message-success']").getText();
+
+			boolean isAddressSaved = message.equals("You saved the address.");
+			Common.assertionCheckwithReport(isAddressSaved,
+					"Validating address save confirmation",
+					"'You saved the address.' message should be shown",
+					"Address successfully saved",
+					"Address not saved");
+			if (!isAddressSaved) Assert.fail("Expected success message not displayed after saving address");
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("Saving Address",
+					"User should successfully fill and save address",
+					"Failed to fill/save address",
+					Common.getscreenShotPathforReport("Address_Save_Failed"));
+			Assert.fail("Exception while filling or saving address");
 		}
 	}
 
