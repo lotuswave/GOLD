@@ -26,6 +26,11 @@
         <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.TEST_DGLD_HF_EMEA_RT_004_Validation_ShippingAddress_form_for_RegisterUesr"/>
     </classes>
 </test>
+<test name="TEST_DGLD_HF_EMEA_RT_009_Add_To_Cart_and_Checkout_from_My_Favorites" testid="DQA-4419" description="This script tests adding items to cart and checking out from My Favorites.">
+    <classes>
+        <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.TEST_DGLD_HF_EMEA_RT_009_Add_To_Cart_and_Checkout_from_My_Favorites"/>
+    </classes>
+</test>
 
 
 <test name="TEST_DGLD_HF_EMEA_RT_011_Guest_User_Back_In_stock_Subcription" testid="DQA-4427" description="This script verifies back-in-stock subscription functionality for guest users.">
@@ -63,10 +68,9 @@
         <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.TEST_DGLD_HF_EMEA_RT_017_Track_My_Order_for_Register_User"/>
     </classes>
 </test>
-
-<test name="TEST_DGLD_HF_EMEA_RT_018_Validation_My_Orders_page_For_Register_User" testid="DQA-4442" description="Validation My Orders page For Register User">
+<test name="TEST_DGLD_HF_EMEA_RT_019_share_Whishlist_Funtionality" testid="DQA-4429" description="This script tests the share functionality from wishlist.">
     <classes>
-        <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.TEST_DGLD_HF_EMEA_RT_018_Validation_My_Orders_page_For_Register_User"/>
+        <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.TEST_DGLD_HF_EMEA_RT_019_share_Whishlist_Funtionality"/>
     </classes>
 </test>
 
