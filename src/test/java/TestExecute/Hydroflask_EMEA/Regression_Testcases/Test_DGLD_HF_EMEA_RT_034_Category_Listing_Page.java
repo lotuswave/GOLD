@@ -21,7 +21,8 @@ public class Test_DGLD_HF_EMEA_RT_034_Category_Listing_Page {
 		try {
 			Hydro.verifingHomePage();
 			Hydro.CLP_Page("Bottles & Drinkware");
-			Hydro.CLP_Page("Food & Coolers​");
+			Hydro.CLP_Page("Coolers & Kitchenware");
+			Hydro.CLP_Page("New Colours");
 //			Hydro.CLP_Page("Accessories");     //CLP page is not there for this category 
 		
 		} catch (Exception e) {
