@@ -2105,7 +2105,7 @@ Common.implicitWait();
 			Common.actionsKeyPress(Keys.ARROW_DOWN);
 			Common.switchToDefault();
 
-			if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
+			if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")||Common.getCurrentURL().contains("emea")) {
 				Sync.waitElementPresent("css", "input[class='flex-none disabled:opacity-25']");
 				Common.clickElement("css", "input[class='flex-none disabled:opacity-25']");
 				Sync.waitPageLoad();
@@ -3276,13 +3276,13 @@ catch(Exception | Error e){
 			Sync.waitElementPresent("css", "button[class='truste-button truste-manage-btn']");
 			Common.clickElement("css", "button[class='truste-button truste-manage-btn']");
 			Thread.sleep(4000);
-			Common.switchFrames("css", "iframe[title='TrustArc Cookie Consent Manager']");
-			Common.clickElement("css", "span[aria-label='Refuse all Functional Cookies']");
-			Common.clickElement("css", "span[aria-label='Refuse all Advertising Cookies']");
-			Sync.waitElementPresent("css", "button[class='declineAllButtonLower']");
-			Common.clickElement("css", "button[class='declineAllButtonLower']");
+			Common.switchFrames("css", "iframe[title*='TrustArc Cookie'], iframe[title*='consent-pref-trustarc']");
+			Common.clickElement("css", "span[aria-label='Yes Functional Cookies']");
+			Common.clickElement("css", "span[aria-label='Yes Advertising Cookies']");
+			Sync.waitElementPresent("css", "a[class='declineAllButtonLower']");
+			Common.clickElement("css", "a[class='declineAllButtonLower']");
 			Thread.sleep(2000);
-			Common.clickElement("css", "button[id='gwt-debug-close_id']");
+			Common.clickElement("css", "a[id='gwt-debug-close_id']");
 			Common.switchToDefault();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -11892,7 +11892,7 @@ catch(Exception | Error e){
 					"After Clicking on stored methods CTA user should be navigate to the My Payment Methods page",
 					"Sucessfully User Navigates to the My Payment Methods page after clicking on the stored methods  CTA",
 					"Failed to Navigate to the My Payment Methods page after Clicking on my stored methods  CTA");
-			String card = Common.findElement("css", "div[class='w-full'] p").getText().trim();
+			String card = Common.findElement("css", "div[class*='customer-payment-methods'] p").getText().trim();
 			Common.assertionCheckwithReport(card.contains("You do not have any saved payment methods."),
 					"validating the no saved payments in stored credit card",
 					"After Clicking on stored methods CTA stored credit cart should be empty",
@@ -11908,6 +11908,7 @@ catch(Exception | Error e){
 			Assert.fail();
 		}
 	}
+
 
 	public void Kustomer_Links(String Dataset) {
 		// TODO Auto-generated method stub
