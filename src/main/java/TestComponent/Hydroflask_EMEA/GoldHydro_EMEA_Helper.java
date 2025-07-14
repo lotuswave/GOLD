@@ -2828,11 +2828,12 @@ Common.implicitWait();
 		// TODO Auto-generated method stub
 		try {
 			Sync.waitElementPresent("xpath", "//button[@id='menu-cart-icon']");
-			Common.mouseOverClick("xpath", "//button[@id='menu-cart-icon']");
+			Common.javascriptclickElement("xpath", "//button[@id='menu-cart-icon']");
 
 			Sync.waitElementPresent(30, "xpath", "//span[@x-text='totalCartAmount']");
+			Thread.sleep(2000);
 			String cartproducts = Common.findElement("xpath", "//span[@x-text='totalCartAmount']").getText();
-
+System.out.println("cartproducts  :"+cartproducts);
 			Common.assertionCheckwithReport(cartproducts.equals(minicart),
 					"validating the products in the cart after creating new account ",
 					"Products should be displayed in the mini cart after Create account with Cart",
