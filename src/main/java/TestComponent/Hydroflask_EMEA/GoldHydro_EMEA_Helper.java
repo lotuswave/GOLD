@@ -509,66 +509,67 @@ public class GoldHydro_EMEA_Helper {
 	}
 
 	public String minicart_Checkout() {
-		String Checkoutprice = "";
-		try {
-			Thread.sleep(3000);
-			Sync.waitElementPresent(30, "css", "span[x-text='totalCartAmount']");
-			String minicart = Common.findElement("css", "span[x-text='totalCartAmount']").getText();
+	    String checkoutPrice = "";
 
-			Sync.waitElementPresent(30, "css", "button[class*='inline-flex btn btn-primary']");
-			Common.clickElement("css", "button[class*='inline-flex btn btn-primary']");
+	    try {
+	        // Wait for minicart total to appear
+	        Sync.waitElementVisible("css", "span[x-text='totalCartAmount']");
+	        WebElement cartTotal = Common.findElement("css", "span[x-text='totalCartAmount']");
+	        checkoutPrice = cartTotal.getText();
 
-			Sync.waitPageLoad();
-			Thread.sleep(2000);
-			try {
-				Common.assertionCheckwithReport(Common.getCurrentURL().contains("checkout"),
-						"validating the navigation to the shipping page when we click on the checkout",
-						"User should able to navigate to the shipping  page after clicking on the checkout page",
-						"Successfully navigate to the shipping page after clicking on the checkout page",
-						"Failed to navigate to the shipping page after clicking on the checkout button");
-			} catch (Exception | Error e) {
-				Thread.sleep(5000);
-				int Checkout_button = Common.findElements("xpath", "//a[contains(text(),'Checkout')]").size();
-				if (Checkout_button > 0) {
+	        // Click on Checkout button (primary)
+	        try {
+	            Sync.waitElementClickable("css", "button[class*='inline-flex btn btn-primary']");
+	            Common.clickElement("css", "button[class*='inline-flex btn btn-primary']");
+	        } catch (Exception primaryFail) {
+	            // Try fallback Checkout button
+	            int fallbackCount = Common.findElements("xpath", "//a[contains(text(),'Checkout')]").size();
+	            if (fallbackCount > 0) {
+	                Common.javascriptclickElement("xpath", "//a[contains(text(),'Checkout')]");
+	            } else {
+	                throw new Exception("No checkout button found.");
+	            }
+	        }
 
-					Common.javascriptclickElement("xpath", "//a[contains(text(),'Checkout')]");
-					Thread.sleep(5000);
-					Common.assertionCheckwithReport(Common.getCurrentURL().contains("checkout"),
-							"validating the navigation to the shipping page when we click on the checkout",
-							"User should able to navigate to the shipping  page after clicking on the checkout page",
-							"Successfully navigate to the shipping page after clicking on the checkout page",
-							"Failed to navigate to the shipping page after clicking on the checkout button");
-				}
-			}
-			/**
-			 * Free gift popup handling
-			 */
-			Thread.sleep(5000);
-			int hiddenPopupElements = Common.findElements("xpath",
-					"//div[@class='modal-overlay fixed inset-0 bg-popup-overlay z-modal' and contains(@x-bind,'freegift')and @style='display: none;']")
-					.size();
-			if (hiddenPopupElements > 0) {
-				System.out.println("Free gift popup is not currently displayed.");
-			} else {
+	         	        Sync.waitPageLoad();
+	         	       Sync.waitURLContains("checkout");
 
-				System.out.println("Free gift popup is likely displayed. Attempting to close...");
-				Sync.waitElementVisible("xpath",
-						"//div[@x-ref='freegift']//button[@aria-label='Close, button.'] | //div[@x-ref='freegift']//button[@aria-label='Close']");
-				Common.clickElement("xpath",
-						"//div[@x-ref='freegift']//button[@aria-label='Close, button.'] | //div[@x-ref='freegift']//button[@aria-label='Close']");
-			}
-		} catch (Exception | Error e) {
-			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog(
-					"validating the navigation to the shipping page when we click on the checkout ",
-					"User should able to navigate to the shipping  page", "unable to navigate to the shipping page",
-					Common.getscreenShot("Failed to navigate to the shipping page"));
+	             Common.assertionCheckwithReport(
+	            Common.getCurrentURL().contains("checkout"),
+	            "Validating navigation to the shipping page from minicart checkout",
+	            "User should be navigated to the shipping page",
+	            "Successfully navigated to the shipping page",
+	            "Failed to navigate to the shipping page"
+	        );
 
-			Assert.fail();
-		}
-		return Checkoutprice;
+	        // Check for Free Gift popup
+	        List<WebElement> hiddenPopup = Common.findElements("xpath",
+	            "//div[contains(@class,'modal-overlay') and contains(@x-bind,'freegift') and contains(@style,'display: none')]");
 
+	        if (hiddenPopup.isEmpty()) {
+	            // If popup is visible, close it
+	            System.out.println("Free gift popup is likely displayed. Attempting to close...");
+	            Sync.waitElementVisible("xpath",
+	                "//div[@x-ref='freegift']//button[@aria-label='Close, button.'] | //div[@x-ref='freegift']//button[@aria-label='Close']");
+	            Common.clickElement("xpath",
+	                "//div[@x-ref='freegift']//button[@aria-label='Close, button.'] | //div[@x-ref='freegift']//button[@aria-label='Close']");
+	        } else {
+	            System.out.println("Free gift popup is not currently displayed.");
+	        }
+
+	    } catch (Exception | Error e) {
+	        e.printStackTrace();
+	        ExtenantReportUtils.addFailedLog(
+	            "Validating the navigation to the shipping page from minicart",
+	            "User should be able to navigate to the shipping page",
+	            "Unable to navigate to the shipping page",
+	            Common.getscreenShot("Failed_to_navigate_shipping_page"));
+	        Assert.fail("Minicart checkout failed due to sync or navigation issue.");
+	    }
+
+	    return checkoutPrice;
 	}
+
 
 	public String Minicart_Checkout() {
 		String Checkoutprice = "";
@@ -1566,7 +1567,7 @@ Common.implicitWait();
 
 		String url = automation_properties.getInstance().getProperty(automation_properties.BASEURL);
 
-		if (url.contains("stage") || url.contains("preprod")) { // Check for stage/preprod explicitly
+		if (url.contains("emea") || url.contains("preprod")) { // Check for stage/preprod explicitly
 			try {
 
 				String Current_URL = Common.getCurrentURL();

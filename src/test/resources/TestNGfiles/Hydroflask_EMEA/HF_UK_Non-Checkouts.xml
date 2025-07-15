@@ -152,6 +152,11 @@
   </test>
 
 
+ <test name="TEST_DGLD_HF_EMEA_UK_RT_070_Validation_Of_Homepage" testid="DQA-4070" description="This script validates the content and elements on the EMEA UK Home Page.">
+    <classes>
+        <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.TEST_DGLD_HF_EMEA_UK_RT_070_Validation_Of_Homepage"/>
+    </classes>
+</test>
  
 
 </suite>

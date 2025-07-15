@@ -26,8 +26,8 @@ public class Test_DGLD_HF_EMEA_RT_040_Register_user_Checkout_With_GC_Purchase_an
 			Hydro.Card_Value("price");
 //			Hydro.search_product("Bundle product");
 //			Hydro.Addtocart_Bundle("Bundle product");
-//			Hydro.search_product("Product");                                    //needs to add buddle child product
-//			Hydro.addtocart("Product");
+			Hydro.search_product("Product");                                    //needs to add buddle child product
+			Hydro.addtocart("Product");
 			Hydro.minicart_Checkout();
 			Hydro.RegaddDeliveryAddress("AccountDetails");
 			Hydro.selectshippingaddress("GroundShipping method");
