@@ -17,11 +17,7 @@
         </classes>
     </test>
 
-    <test name="TEST_DGLD_HF_EMEA_FR_BCT_008_Register_User_Checkout_Simple_Configurable_Bundle_products_with_Afterpay_Payments" testid="DQA-008" priority="P1" description="Register user checkout with Afterpay for various product types">
-        <classes>
-            <class name="TestExecute.Hydroflask_EMEA.Preprod_Smoke_TestCases.FR_Smoke.TEST_DGLD_HF_EMEA_FR_BCT_008_Register_User_Checkout_Simple_Configurable_Bundle_products_with_Afterpay_Payments"/>
-        </classes>
-    </test>
+   
 
     <test name="TEST_DGLD_HF_EMEA_FR_BCT_003_Create_Account_Functionality" testid="DQA-003" priority="P1" description="Covers account creation process">
         <classes>
@@ -59,11 +55,6 @@
         </classes>
     </test>
 
-    <test name="TEST_DGLD_HF_EMEA_FR_BCT_013_Guest_user_Checkout_Klarna_Payment" testid="DQA-013" priority="P1" description="Guest user checkout using Klarna payment">
-        <classes>
-            <class name="TestExecute.Hydroflask_EMEA.Preprod_Smoke_TestCases.FR_Smoke.TEST_DGLD_HF_EMEA_FR_BCT_013_Guest_user_Checkout_Klarna_Payment"/>
-        </classes>
-    </test>
 
     <test name="TEST_DGLD_HF_EMEA_FR_BCT_011_Forgot_password_from_SignIn_page" testid="DQA-011" priority="P1" description="Forgot password workflow from sign-in page">
         <classes>

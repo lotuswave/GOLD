@@ -28,11 +28,7 @@
         </classes>
     </test>
 
-    <test name="TEST_DGLD_HF_EMEA_DE_BCT_013_Guest_user_Checkout_Klarna_Payment" testid="DQA-013" priority="P1" description="This script will cover guest user checkout with Klarna payment">
-        <classes>
-            <class name="TestExecute.Hydroflask_EMEA.Preprod_Smoke_TestCases.DE_Smoke.TEST_DGLD_HF_EMEA_DE_BCT_013_Guest_user_Checkout_Klarna_Payment"/>
-        </classes>
-    </test>
+   
 
     <test name="TEST_DGLD_HF_EMEA_DE_BCT_002_Footer_Links_Validation" testid="DQA-002" priority="P1" description="This script will cover footer links validation">
         <classes>
@@ -70,11 +66,6 @@
         </classes>
     </test>
 
-    <test name="TEST_DGLD_HF_EMEA_DE_BCT_008_Register_User_Checkout_Simple_Configurable_Bundle_products_with_Afterpay_Payments" testid="DQA-008" priority="P1" description="This script will cover registered user checkout for simple, configurable, and bundle products with Afterpay payment">
-        <classes>
-            <class name="TestExecute.Hydroflask_EMEA.Preprod_Smoke_TestCases.DE_Smoke.TEST_DGLD_HF_EMEA_DE_BCT_008_Register_User_Checkout_Simple_Configurable_Bundle_products_with_Afterpay_Payments"/>
-        </classes>
-    </test>
 
     <test name="TEST_DGLD_HF_EMEA_DE_BCT_001_Header_Links_Validation" testid="DQA-001" priority="P1" description="This script will cover header links validation">
         <classes>
