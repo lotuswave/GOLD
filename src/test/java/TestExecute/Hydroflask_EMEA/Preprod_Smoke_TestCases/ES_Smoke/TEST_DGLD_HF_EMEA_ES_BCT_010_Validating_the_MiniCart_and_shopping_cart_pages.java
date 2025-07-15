@@ -21,12 +21,12 @@ public class TEST_DGLD_HF_EMEA_ES_BCT_010_Validating_the_MiniCart_and_shopping_c
 	  /*	Minicart Validation:	*/
 			Hydro.verifingHomePage();    
 			Hydro.bottles_headerlinks("Bottles & Drinkware"); 
-			Hydro.Configurable_addtocart_pdp("Product");
+			Hydro.Configurable_addtocart_pdp("Price Product");
 			Hydro.search_product("Product");      
 			Hydro.addtocart("Product"); 
 			//Hydro.clickontheproduct_and_image("Product");
 			Hydro.minicart_freeshipping();
-			Hydro.minicart_delete("Product");
+			Hydro.minicart_delete("Price Product");
 			Hydro.minicart_validation("Product Qunatity");
 			
 	  /*    Shoppingcart Validation:    */
