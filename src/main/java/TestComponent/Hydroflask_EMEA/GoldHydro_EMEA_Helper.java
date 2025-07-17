@@ -7865,14 +7865,21 @@ catch(Exception | Error e){
 	}
 
 	public void view_PLP_page() {
+		String title="";
 		try {
-			String title = Common.findElement("xpath", "//h1[@class='title-2xl min-w-56']").getAttribute("Class");
+			if(Common.getCurrentURL().contains("preprod"))
+			{
+			 title = Common.findElement("xpath", "//h1[@class='title-2xl min-w-56']").getAttribute("class");
+			}
+			else {
+				 title = Common.findElement("xpath", "//h1//parent::div").getAttribute("data-element");
+			}
 			String breadcrumbs = Common.findElement("xpath", "//nav[@id='breadcrumbs']").getAttribute("aria-label");
 			String filter = Common.findElement("xpath", "//h3[contains(@class,'flex-grow title')]").getText();
 			String Sort = Common.findElement("xpath", "//span[contains(@class,'pr-2.5 title-panel-sm')]").getText()
 					.trim();
 			Common.assertionCheckwithReport(
-					breadcrumbs.contains("Breadcrumb") && title.contains("title-2xl") && filter.contains("Filter by")
+					breadcrumbs.contains("Breadcrumb") && title.contains("main")|| title.contains("title-2xl") && filter.contains("Filter by")
 							&& Sort.contains("Sort by")
 							|| breadcrumbs.contains("Breadcrumb") && title.contains("title-2xl"),
 					"To validate the Product Listing Page", "User should able to open Product Listing Page",
