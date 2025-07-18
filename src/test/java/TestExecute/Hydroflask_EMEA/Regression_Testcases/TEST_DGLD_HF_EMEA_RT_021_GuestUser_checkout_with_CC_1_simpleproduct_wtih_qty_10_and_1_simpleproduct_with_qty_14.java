@@ -25,6 +25,7 @@ public class TEST_DGLD_HF_EMEA_RT_021_GuestUser_checkout_with_CC_1_simpleproduct
 			Hydro.minicart_Checkout();
 			Hydro.addDeliveryAddress_Guestuser("AccountDetails");
 			Hydro.updatePaymentAndSubmitOrder("PaymentDetails");
+			
 		} catch (Exception e) {
  
 			Assert.fail(e.getMessage(), e);
