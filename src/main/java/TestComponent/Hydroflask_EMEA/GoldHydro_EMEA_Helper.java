@@ -3094,6 +3094,7 @@ System.out.println("cartproducts  :"+cartproducts);
 				Sync.waitElementPresent(30, "xpath", "//select[@name='qty']");
 				Common.dropdown("xpath", "//select[@name='qty']", Common.SelectBy.VALUE, above10);
 				Thread.sleep(4000);
+				Common.clickElement("css", "input[name='qty']");
 				Common.textBoxInput("css", "input[name='qty']", Quantity);
 				Thread.sleep(3000);
 			} catch (Exception | Error e) {
