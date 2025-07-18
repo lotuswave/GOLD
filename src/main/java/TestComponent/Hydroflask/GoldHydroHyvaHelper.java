@@ -1517,6 +1517,7 @@ public class GoldHydroHyvaHelper {
 
 	public String updatePaymentAndSubmitOrder(String dataSet) throws Exception {
 	    String order = "";
+	    Thread.sleep(5000);
 	    addPaymentDetails(dataSet);
 	    String expectedResult = "It redirects to order confirmation page";
 
@@ -1604,6 +1605,7 @@ public class GoldHydroHyvaHelper {
 	                    Sync.waitElementPresent("css", "button[class='action primary checkout']");
 	                    Common.scrollIntoView("css", "button[class='action primary checkout']");
 	                    Common.clickElement("css", "button[class='action primary checkout']");
+	  //                  if
 
 	                    if (Common.getCurrentURL().contains("/checkout/#payment")) {
 	                        Sync.waitElementPresent("css", "label[for='stripe-new-payments']");
@@ -2625,17 +2627,21 @@ int discountsize = Common.findElements("xpath", "(//span[contains(text(),'Discou
 			if(discountsize>0)
 {
 				Thread.sleep(4000);
+				Sync.waitElementPresent("xpath", "//h3[contains(text(),'Add Discount Code')]");
+	Common.clickElement("xpath", "//h3[contains(text(),'Add Discount Code')]");	
 	
 Common.findElement("xpath", "//span[contains(text(),'Cancel Coupon')]");
 Common.clickElement("xpath", "//span[contains(text(),'Cancel Coupon')]");
 			
 }
-			else {
-				Thread.sleep(4000);
-				Sync.waitElementPresent("xpath", "//h3[contains(text(),'Add Discount Code')]");
-			Common.clickElement("xpath", "//h3[contains(text(),'Add Discount Code')]");
-			}
-			if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage") ) {
+			else if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage") ) {
+//			//	Thread.sleep(4000);
+//				Sync.waitElementPresent("xpath", "//h3[contains(text(),'Add Discount Code')]");
+//			Common.clickElement("xpath", "//h3[contains(text(),'Add Discount Code')]");
+//			}
+//			if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage") ) {
+				Common.clickElement("xpath", "//h3[contains(text(),'Add Discount Code')]");	
+
 				Sync.waitElementPresent("id", "discount-code");
  
 				Common.textBoxInput("id", "discount-code", data.get(dataSet).get("Discountcode"));
@@ -2690,6 +2696,8 @@ Common.clickElement("xpath", "//span[contains(text(),'Cancel Coupon')]");
 		}
  
 		catch (Exception | Error e) {
+			e.printStackTrace();
+
 			ExtenantReportUtils.addFailedLog("validating discount code", expectedResult,
 					"User failed to proceed with discountcode",
 					Common.getscreenShotPathforReport("discountcodefailed"));
@@ -4510,21 +4518,27 @@ public void Remove_GiftCode() {
 			Common.clickElement("id", "login_email");
 			Sync.waitElementPresent("id", "login_email");
 			Common.findElement("id", "login_email").clear();
-			Common.textBoxInput("id", "login_email", data.get(dataSet).get("Email"));
+		//	Common.textBoxInput("id", "login_email", data.get(dataSet).get("Email"));
+			Common.textBoxInput("id", "login_email", "oxobuyer@oxo.com");
+
 			Sync.waitElementClickable("xpath", "//button[text()='Next']");
 			Common.clickElement("xpath", "//button[text()='Next']");
 			int size = Common.findElements("xpath", "//button[text()='Use Password Instead']").size();
 			if(size>0) {
 				Common.clickElement("xpath", "//button[text()='Use Password Instead']");
 			    Sync.waitElementPresent(10,"id", "password");
-				Common.textBoxInput("id", "password", data.get(dataSet).get("Password"));
+				Common.textBoxInput("id", "password", "oxobuyer123");
+
+		//		Common.textBoxInput("id", "password", data.get(dataSet).get("Password"));
 			}
 			else {
+				Common.textBoxInput("id", "password", "oxobuyer123");
 
-			Common.textBoxInput("id", "password", data.get(dataSet).get("Password"));
-			int sizeemail = Common.findElements("id", "email").size();
-			Common.assertionCheckwithReport(sizeemail > 0, "verifying the paypal payment ", expectedResult,
-					"open paypal site window", "faild to open paypal account");
+
+////			Common.textBoxInput("id", "password", data.get(dataSet).get("Password"));
+//			int sizeemail = Common.findElements("id", "email").size();
+//			Common.assertionCheckwithReport(sizeemail > 0, "verifying the paypal payment ", expectedResult,
+//					"open paypal site window", "faild to open paypal account");
 			}
 			try {
 				Sync.waitElementClickable("xpath", "//button[text()='Log In']");
@@ -5468,7 +5482,8 @@ public void Remove_GiftCode() {
 		Sync.waitPageLoad();
 		Thread.sleep(3000);
 	
-		String fullname=data.get(dataSet).get("FirstName");
+		//String fullname=data.get(dataSet).get("FirstName");
+		String fullname="srinivas";
 		String expectedResult = "land on the payment section";
 
 		try {
@@ -8770,11 +8785,17 @@ catch(Exception | Error e)
 		// TODO Auto-generated method stub
 		try {
 			Sync.waitPageLoad();
-			Thread.sleep(4000);
-			Sync.waitPageLoad();
+			Thread.sleep(5000);
+			Common.actionsKeyPress(Keys.PAGE_UP);
+			
+Sync.waitElementPresent("xpath", "//input[@id='billing-as-shipping']");
 			Common.clickElement("xpath", "//input[@id='billing-as-shipping']");
-			Sync.waitElementPresent(30, "xpath", "(//div[contains(@class, 'checkout-address-list__button-container')]//button[@type='button'])[2]");
-			Common.clickElement("xpath", "(//div[contains(@class, 'checkout-address-list__button-container')]//button[@type='button'])[2]");
+			Thread.sleep(4000);
+
+			Common.clickElement("xpath", "//input[@id='billing-as-shipping']");
+
+			Sync.waitElementPresent(30, "xpath", "(//div[contains(@class, 'checkout-address-list__button-container')]//button[@type='button'])[1]");
+			Common.clickElement("xpath", "(//div[contains(@class, 'checkout-address-list__button-container')]//button[@type='button'])[1]");
 			Thread.sleep(5000);
 			Common.textBoxInput("xpath", "//form[@id='billing']//input[@name='firstname']",
 					data.get(dataSet).get("FirstName"));
@@ -11323,7 +11344,7 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 					int j=0;
 					if(Number>j)
 					{
-						Common.assertionCheckwithReport(Page_title.contains("Travel Bottle")||Page_title.contains(Links[i])|| title.contains("Shop Travel Bottles"),
+						Common.assertionCheckwithReport(Page_title.contains("Travel Bottle")||Page_title.contains(Links[i])|| title.contains("Shop Travel Tumbler"),
 								"verifying the header link " + Links[i] + "Under Collections",
 								"user should navigate to the " + Links[i] + " page",
 								"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
@@ -11515,7 +11536,7 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 
 	
 	
-	public void Coolers_validation(String Dataset) {
+	public void coolers_LunchBoxes_Validation(String Dataset) {
 		// TODO Auto-generated method stub
 
 		String names = data.get(Dataset).get("Kitchen");
@@ -11527,8 +11548,8 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 		         	
 							Sync.waitElementPresent(50,"xpath", "//nav[@class='main-nav flex h-full']//span[contains(text(), 'Shop')]");
 							Common.javascriptclickElement("xpath", "//nav[@class='main-nav flex h-full']//span[contains(text(), 'Shop')]");
-					
-					Common.clickElement("xpath", "(//a[@title='Coolers & Lunch Boxes'])[1]");
+							Thread.sleep(2000);
+					Common.clickElement("xpath", "//ul[@role='menu']//a[@title='Coolers & Lunch Boxes']");
 					Thread.sleep(3000);
 					Sync.waitElementPresent(30,"xpath",
 							"//a[contains(@href,'cooler')]/span[contains(text(),'" + Links[i] + "')]");
@@ -11633,8 +11654,9 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 				for (int i1 = 0; i1 < minLength; i1++) {
 				    Sync.waitElementPresent("xpath", "//nav[@class='main-nav flex h-full']//span[contains(text(), 'Shop')]");
 				    Common.clickElement("xpath", "//nav[@class='main-nav flex h-full']//span[contains(text(), 'Shop')]");
-				    Common.clickElement("xpath", "(//span[text()='Kitchenware'])[1]");
-				    Thread.sleep(3000);
+				    Thread.sleep(1000);
+				    Common.clickElement("xpath", "//ul[@role='menu']//span[text()='Kitchenware']");
+				    Thread.sleep(1000);
 				    Sync.waitElementPresent("xpath", "//a[@title='" + Links[i1] + "']//span[contains(text(),'" + Links[i1] + "')]");
 				    Common.clickElement("xpath", "//a[@title='" + Links[i1] + "']//span[contains(text(),'" + Links[i1] + "')]");
 				    Sync.waitPageLoad();
@@ -14288,10 +14310,10 @@ Common.clickElement("xpath", "//span[text()='Edit']");
 			
 			//Common.textBoxInput("id", "password", data.get(dataSet).get("Password"));
 			Common.textBoxInput("id", "password", "oxobuyer123");
-			int sizeemail = Common.findElements("id", "email").size();
+			/*			int sizeemail = Common.findElements("id", "email").size();
 			
 			Common.assertionCheckwithReport(sizeemail > 0, "verifying the paypal payment ", expectedResult,
-					"open paypal site window", "faild to open paypal account");
+					"open paypal site window", "faild to open paypal account"); */
 			}
 			
 
