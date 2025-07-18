@@ -23,7 +23,7 @@ public void Validating_RegisterUser_Add_Other_Amount_To_GiftCard_In_PDP_And_Chec
 //		Hydro.Gift_cards("Hydro Gift Card");
 		Hydro.Other_Amount("price");
 	    Hydro.minicart_Checkout();
-		Hydro.DeliveryAddress_Guestuser_Gift("Gift_CardAccountDetails");
+		Hydro.DeliveryAddress_Guestuser_Gift("AccountDetails");
 		Hydro.updatePaymentAndSubmitOrder("PaymentDetails");
 
 	} catch (Exception e) {

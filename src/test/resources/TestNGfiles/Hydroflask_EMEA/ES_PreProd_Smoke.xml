@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<suite name="Gold-Hydroflask EMEA ES Smoke Execution">
+    <listeners>
+        <listener class-name="Utilities.TestListener"/>
+    </listeners>
+    
+
+    <test name="TEST_DGLD_HF_EMEA_ES_BCT_005_Validating_the_PDP_page" testid="DQA-005" priority="P1" description="Validates the Product Detail Page (PDP)">
+        <classes>
+            <class name="TestExecute.Hydroflask_EMEA.Preprod_Smoke_TestCases.ES_Smoke.TEST_DGLD_HF_EMEA_ES_BCT_005_Validating_the_PDP_page"/>
+        </classes>
+    </test>
+
+    <test name="TEST_DGLD_HF_EMEA_ES_BCT_001_Header_Links_Validation" testid="DQA-001" priority="P1" description="Validates all header links">
+        <classes>
+            <class name="TestExecute.Hydroflask_EMEA.Preprod_Smoke_TestCases.ES_Smoke.TEST_DGLD_HF_EMEA_ES_BCT_001_Header_Links_Validation"/>
+        </classes>
+    </test>
+
+   
+
+    <test name="TEST_DGLD_HF_EMEA_ES_BCT_003_Create_Account_Functionality" testid="DQA-003" priority="P1" description="Covers account creation process">
+        <classes>
+            <class name="TestExecute.Hydroflask_EMEA.Preprod_Smoke_TestCases.ES_Smoke.TEST_DGLD_HF_EMEA_ES_BCT_003_Create_Account_Functionality"/>
+        </classes>
+    </test>
+
+    <test name="TEST_DGLD_HF_EMEA_ES_BCT_007_Guest_user_Checkout_With_Discount_Visa_card" testid="DQA-007" priority="P1" description="Guest user checkout with Visa and discount applied">
+        <classes>
+            <class name="TestExecute.Hydroflask_EMEA.Preprod_Smoke_TestCases.ES_Smoke.TEST_DGLD_HF_EMEA_ES_BCT_007_Guest_user_Checkout_With_Discount_Visa_card"/>
+        </classes>
+    </test>
+
+    <test name="TEST_DGLD_HF_EMEA_ES_BCT_002_Footer_Links_Validation" testid="DQA-002" priority="P1" description="Validates all footer links">
+        <classes>
+            <class name="TestExecute.Hydroflask_EMEA.Preprod_Smoke_TestCases.ES_Smoke.TEST_DGLD_HF_EMEA_ES_BCT_002_Footer_Links_Validation"/>
+        </classes>
+    </test>
+
+    <test name="TEST_DGLD_HF_EMEA_ES_BCT_006_Validating_the_Search_Results_Page" testid="DQA-006" priority="P1" description="Validates search results functionality">
+        <classes>
+            <class name="TestExecute.Hydroflask_EMEA.Preprod_Smoke_TestCases.ES_Smoke.TEST_DGLD_HF_EMEA_ES_BCT_006_Validating_the_Search_Results_Page"/>
+        </classes>
+    </test>
+
+    <test name="TEST_DGLD_HF_EMEA_ES_BCT_012_Checkout_with_RegisterUserCC_Simple_Configurable_and_Bundle_products_cc" testid="DQA-012" priority="P1" description="Checkout for registered user with credit card and multiple product types">
+        <classes>
+            <class name="TestExecute.Hydroflask_EMEA.Preprod_Smoke_TestCases.ES_Smoke.TEST_DGLD_HF_EMEA_ES_BCT_012_Checkout_with_RegisterUserCC_Simple_Configurable_and_Bundle_products_cc"/>
+        </classes>
+    </test>
+
+    <test name="TEST_DGLD_HF_EMEA_ES_BCT_010_Validating_the_MiniCart_and_shopping_cart_pages" testid="DQA-010" priority="P1" description="Validates MiniCart and Shopping Cart pages">
+        <classes>
+            <class name="TestExecute.Hydroflask_EMEA.Preprod_Smoke_TestCases.ES_Smoke.TEST_DGLD_HF_EMEA_ES_BCT_010_Validating_the_MiniCart_and_shopping_cart_pages"/>
+        </classes>
+    </test>
+
+   
+
+    <test name="TEST_DGLD_HF_EMEA_ES_BCT_011_Forgot_password_from_SignIn_page" testid="DQA-011" priority="P1" description="Forgot password workflow from sign-in page">
+        <classes>
+            <class name="TestExecute.Hydroflask_EMEA.Preprod_Smoke_TestCases.ES_Smoke.TEST_DGLD_HF_EMEA_ES_BCT_011_Forgot_password_from_SignIn_page"/>
+        </classes>
+    </test>
+
+    <test name="TEST_DGLD_HF_EMEA_ES_RT_009_Register_user_checkout_PP_with_Multiple_products_with_Discount_differentbilling_and_shipping" testid="DQA-009" priority="P1" description="Register user checkout with PayPal using discounts and different billing/shipping">
+        <classes>
+            <class name="TestExecute.Hydroflask_EMEA.Preprod_Smoke_TestCases.ES_Smoke.TEST_DGLD_HF_EMEA_ES_RT_009_Register_user_checkout_PP_with_Multiple_products_with_Discount_differentbilling_and_shipping"/>
+        </classes>
+    </test>
+
+    <test name="TEST_DGLD_HF_EMEA_ES_BCT_004_Validating_the_PLP_page" testid="DQA-004" priority="P1" description="Validates Product Listing Page (PLP)">
+        <classes>
+            <class name="TestExecute.Hydroflask_EMEA.Preprod_Smoke_TestCases.ES_Smoke.TEST_DGLD_HF_EMEA_ES_BCT_004_Validating_the_PLP_page"/>
+        </classes>
+    </test>
+
+</suite>

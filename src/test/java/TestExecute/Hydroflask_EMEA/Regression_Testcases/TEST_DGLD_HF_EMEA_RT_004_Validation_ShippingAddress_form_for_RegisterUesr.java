@@ -5,24 +5,27 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import TestComponent.Hydroflask.GoldHydroHyvaHelper;
 import TestComponent.Hydroflask_EMEA.GoldHydro_EMEA_Helper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class TEST_DGLD_HF_EMEA_RT_026_My_Account_Page_Validation {
+public class TEST_DGLD_HF_EMEA_RT_004_Validation_ShippingAddress_form_for_RegisterUesr {
 
 	String datafile = "Hydroflask_EMEA//GoldHydroEMEA_TestData.xlsx";
-	GoldHydro_EMEA_Helper Hydro = new GoldHydro_EMEA_Helper(datafile,"Account page");
-
+	GoldHydro_EMEA_Helper Hydro = new GoldHydro_EMEA_Helper(datafile,"DataSet");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Validating_My_Account_Page () throws Exception {
-
-		try {
-			Hydro.verifingHomePage();
-			Hydro.click_singinButton();
+	 public void Validation_ShippingAddress_form_for_RegisterUesr() throws Exception {
+        try {
+            Hydro.verifingHomePage();
+            Hydro.click_singinButton();
 			Hydro.login_Hydroflask("AccountDetails");
-			Hydro.Account_page_Validation("Account");
+            Hydro.search_product("Product");      
+            Hydro.addtocart("Product");                    
+            Hydro.minicart_Checkout();
+            Hydro.addDeliveryAddress_RegUser("InvalidAddress");
+            Hydro.validatingErrormessageShippingpage_negative();
 
 		} catch (Exception e) {
 
@@ -33,6 +36,7 @@ public class TEST_DGLD_HF_EMEA_RT_026_My_Account_Page_Validation {
 	@AfterTest
 	public void clearBrowser() {
 		Common.closeAll();
+
 	}
 
 	@BeforeTest
@@ -44,4 +48,3 @@ public class TEST_DGLD_HF_EMEA_RT_026_My_Account_Page_Validation {
 	}
 
 }
-

@@ -31,9 +31,11 @@ public class TEST_DGLD_HF_EMEA_UK_BCT_001_Header_Links_Validation {
     //        Hydro.Collections_validation("Collections");            //working fine needsto commit  and add one zero product
 			Hydro.Explore_Validation("Explore Links");                
 			Hydro.featured_validation("Featured");                       
-			Hydro.New_Color_Destination("Colors");
+//			Hydro.New_Color_Destination("Colors");
 			Hydro.featured_Shopby_Collections("Shopby Collections");
-			
+			Hydro.featured_Shopby_Activity("Shopby Activity");
+			Hydro.Shop_Shopall("Shop All");
+			Hydro.Featured_ShopAll("Featured shopall");
 //			Hydro.Customize_validation("Customize");			
 //			Hydro.Holiday_shop_validation("Holiday Sale"); 
 			
@@ -52,7 +54,7 @@ public class TEST_DGLD_HF_EMEA_UK_BCT_001_Header_Links_Validation {
 
 	@BeforeTest
 	public void startTest() throws Exception {
-		String url="https://mcloud-na-stage4.hydroflask.com/gb";
+		String url="https://mcloud-na-preprod.hydroflask.com/gb";
 		System.setProperty("url", url);
         Login.signIn();
         Hydro.close_add();

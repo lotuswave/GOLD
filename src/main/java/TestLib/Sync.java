@@ -57,8 +57,15 @@ public class Sync  {
 		logger.info("Sync waitPageLoad Completed successfully");
 	}
 	
-	
-
+	/**
+     * Waits until the current URL contains the given keyword (e.g., "checkout", "shipping").
+     *
+     * @param keyword - part of URL expected to appear
+     */
+    public static void waitURLContains(String keyword) {
+    	WebDriverWait wait = new WebDriverWait(Common.getDriver(), 20);
+        wait.until(ExpectedConditions.urlContains(keyword));
+    }
 	/**
 	 * set ImplicitWait time.
 	 * 

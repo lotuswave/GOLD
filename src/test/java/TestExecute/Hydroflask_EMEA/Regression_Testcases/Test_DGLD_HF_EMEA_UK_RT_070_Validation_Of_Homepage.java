@@ -1,26 +1,32 @@
-package TestExecute.Hydroflask_EMEA.Preprod_Smoke_TestCases.UK_Smoke;
+package TestExecute.Hydroflask_EMEA.Regression_Testcases;
 
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import TestComponent.Hydroflask.GoldHydroHyvaHelper;
 import TestComponent.Hydroflask_EMEA.GoldHydro_EMEA_Helper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class TEST_DGLD_HF_EMEA_UK_BCT_011_Forgot_password_from_SignIn_page {
+public class Test_DGLD_HF_EMEA_UK_RT_070_Validation_Of_Homepage {
 
 	String datafile = "Hydroflask_EMEA//GoldHydroEMEA_TestData.xlsx";
-	GoldHydro_EMEA_Helper Hydro = new GoldHydro_EMEA_Helper(datafile, "DataSet");
+	GoldHydro_EMEA_Helper Hydro = new GoldHydro_EMEA_Helper(datafile,"DataSet");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Validate_Forgot_password_from_SignIn_page() throws Exception {
+	public void Validate_Homepage_Elements_Displayed  () throws Exception {
 
 		try {
 			Hydro.verifingHomePage();
-			Hydro.click_singinButton();
-			Hydro.Forgot_password("AccountDetails");
+			Hydro.Store_Logo_Validation();
+			Hydro.Hero_Banner_Validation();
+			Hydro.CatogeryORproduct_Tile_Validation();
+			Hydro.CatogeryORproduct_Slider_Validation();
+			Hydro.Promo_Block_Validation();
+			Hydro.Marketing_Flyout_Validation();
+			
 
 		} catch (Exception e) {
 
@@ -36,12 +42,10 @@ public class TEST_DGLD_HF_EMEA_UK_BCT_011_Forgot_password_from_SignIn_page {
 
 	@BeforeTest
 	public void startTest() throws Exception {
-		String url="https://mcloud-na-preprod.hydroflask.com/gb";
-		System.setProperty("url", url);
+		System.setProperty("configFile", "Hydroflask_EMEA\\config.properties");
 		Login.signIn();
 		Hydro.close_add();
-		Hydro.acceptPrivacy();
-
+        Hydro.acceptPrivacy();
 	}
 
 }

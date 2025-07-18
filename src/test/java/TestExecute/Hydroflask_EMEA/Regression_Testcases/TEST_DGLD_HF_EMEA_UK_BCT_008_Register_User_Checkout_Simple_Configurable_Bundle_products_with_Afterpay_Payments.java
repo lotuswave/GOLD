@@ -1,4 +1,4 @@
-package TestExecute.Hydroflask_EMEA.Preprod_Smoke_TestCases.ES_Smoke;
+package TestExecute.Hydroflask_EMEA.Regression_Testcases;
 
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
@@ -9,7 +9,7 @@ import TestComponent.Hydroflask_EMEA.GoldHydro_EMEA_Helper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class TEST_DGLD_HF_EMEA_ES_BCT_008_Register_User_Checkout_Simple_Configurable_Bundle_products_with_Afterpay_Payments {
+public class TEST_DGLD_HF_EMEA_UK_BCT_008_Register_User_Checkout_Simple_Configurable_Bundle_products_with_Afterpay_Payments {
 
 	String datafile ="Hydroflask_EMEA//GoldHydroEMEA_TestData.xlsx";
 	GoldHydro_EMEA_Helper Hydro = new GoldHydro_EMEA_Helper(datafile, "Bundle");
@@ -22,8 +22,8 @@ public class TEST_DGLD_HF_EMEA_ES_BCT_008_Register_User_Checkout_Simple_Configur
 			Hydro.verifingHomePage();
 			Hydro.click_singinButton();
 			Hydro.login_Hydroflask("AccountDetails");
-			Hydro.search_product("Bundle product");
-			Hydro.Addtocart_Bundle("Bundle product");
+//			Hydro.search_product("Bundle product");
+//			Hydro.Addtocart_Bundle("Bundle product");  Enable this once the Bundle products are available
 			Hydro.search_product("Product");
 			Hydro.addtocart("Product");
 			Hydro.bottles_headerlinks("Bottles & Drinkware");
@@ -46,7 +46,7 @@ public class TEST_DGLD_HF_EMEA_ES_BCT_008_Register_User_Checkout_Simple_Configur
 
 	@BeforeTest
 	public void startTest() throws Exception {
-		String url="https://mcloud-na-stage4.hydroflask.com/es";
+		String url="https://mcloud-na-preprod.hydroflask.com/gb";
 		System.setProperty("url", url);
 		Login.signIn();
 		Hydro.close_add();

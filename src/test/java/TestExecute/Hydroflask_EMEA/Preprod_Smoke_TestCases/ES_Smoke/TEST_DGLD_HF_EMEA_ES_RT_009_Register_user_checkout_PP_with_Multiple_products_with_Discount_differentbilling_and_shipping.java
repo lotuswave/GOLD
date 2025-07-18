@@ -5,7 +5,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import TestComponent.Hydroflask.GoldHydroHelper;
+
 import TestComponent.Hydroflask_EMEA.GoldHydro_EMEA_Helper;
 import TestLib.Common;
 import TestLib.Login;
@@ -51,7 +51,7 @@ public class TEST_DGLD_HF_EMEA_ES_RT_009_Register_user_checkout_PP_with_Multiple
 
 	@BeforeTest
 	public void startTest() throws Exception {
-		String url="https://mcloud-na-stage4.hydroflask.com/es";
+		String url="https://mcloud-na-preprod.hydroflask.com/es";
 		System.setProperty("url", url);
         Login.signIn();
         Hydro.close_add();
