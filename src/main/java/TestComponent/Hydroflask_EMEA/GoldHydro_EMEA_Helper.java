@@ -2974,6 +2974,140 @@ System.out.println("cartproducts  :"+cartproducts);
 			Assert.fail();
 		}
 	}
+	
+	public void Tenqtyaddtocart(String Dataset) {
+		String products = data.get(Dataset).get("Products");
+		System.out.println(products);
+
+		try {
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			boolean imageLoaded = false;
+			for (int attempt = 0; attempt < 10; attempt++) {
+				Sync.waitElementPresent("css", "a[class*=roduct-image-link]>img");
+				List<WebElement> imageelemnets = Common.findElements("css", "a[class*=roduct-image-link]>img");
+
+				if (!imageelemnets.isEmpty()) {
+					String imageUrl = imageelemnets.get(0).getAttribute("src");
+					System.out.println("Image URL: " + imageUrl);
+
+					if (imageUrl != null && imageUrl.trim().isEmpty()) {
+						imageLoaded = true;
+						break;
+					}
+				}
+			}
+//	    	if(!imageLoaded) {
+//	    		throw new Exception("Products images didn't load within the expected time.");
+//	    	}
+
+			Common.scrollIntoView("css", "img[alt='" + products + "']");
+			Sync.waitElementPresent(30, "css", "img[alt='" + products + "']");
+			Thread.sleep(3000);
+
+			Common.clickElement("css", "img[alt='" + products + "']");
+			Sync.waitElementPresent("css", "button[form='product_addtocart_form']");
+			Thread.sleep(2000);
+			product_quantity("10 Quantity");
+			Common.javascriptclickElement("css", "button[form='product_addtocart_form']");
+			Thread.sleep(3000);
+
+			String openminicart = Common.findElement("css", "div[class*='fixed inset-y-0']").getAttribute("aria-modal");
+			System.out.println("Minicart Open:" + openminicart);
+			Common.assertionCheckwithReport(openminicart != null && openminicart.contains("true"),
+					"Add to Cart Validation",
+					"The product should be successfully added to the cart and the mini cart should appear.",
+					"Product was successfully added and mini cart opened.",
+					"Product was not added to the cart or mini cart did not open.");
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("Add to Cart Validation",
+					"Product should be successfully added to the cart.",
+					"An error occurred while attempting to add the product to the cart.",
+					Common.getscreenShot("failed_to_add_to_cart"));
+			Assert.fail();
+		}
+	}
+	
+	public void AboveTenqtyaddtocart(String Dataset) {
+		String products = data.get(Dataset).get("Products");
+		System.out.println(products);
+
+		try {
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			boolean imageLoaded = false;
+			for (int attempt = 0; attempt < 10; attempt++) {
+				Sync.waitElementPresent("css", "a[class*=roduct-image-link]>img");
+				List<WebElement> imageelemnets = Common.findElements("css", "a[class*=roduct-image-link]>img");
+
+				if (!imageelemnets.isEmpty()) {
+					String imageUrl = imageelemnets.get(0).getAttribute("src");
+					System.out.println("Image URL: " + imageUrl);
+
+					if (imageUrl != null && imageUrl.trim().isEmpty()) {
+						imageLoaded = true;
+						break;
+					}
+				}
+			}
+//	    	if(!imageLoaded) {
+//	    		throw new Exception("Products images didn't load within the expected time.");
+//	    	}
+
+			Common.scrollIntoView("css", "img[alt='" + products + "']");
+			Sync.waitElementPresent(30, "css", "img[alt='" + products + "']");
+			Thread.sleep(3000);
+
+			Common.clickElement("css", "img[alt='" + products + "']");
+			Sync.waitElementPresent("css", "button[form='product_addtocart_form']");
+			Thread.sleep(2000);
+			Product_Qty_Above10("14 Quantity");
+			Common.javascriptclickElement("css", "button[form='product_addtocart_form']");
+			Thread.sleep(3000);
+
+			String openminicart = Common.findElement("css", "div[class*='fixed inset-y-0']").getAttribute("aria-modal");
+			System.out.println("Minicart Open:" + openminicart);
+			Common.assertionCheckwithReport(openminicart != null && openminicart.contains("true"),
+					"Add to Cart Validation",
+					"The product should be successfully added to the cart and the mini cart should appear.",
+					"Product was successfully added and mini cart opened.",
+					"Product was not added to the cart or mini cart did not open.");
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("Add to Cart Validation",
+					"Product should be successfully added to the cart.",
+					"An error occurred while attempting to add the product to the cart.",
+					Common.getscreenShot("failed_to_add_to_cart"));
+			Assert.fail();
+		}
+	}
+	
+	
+	public void Product_Qty_Above10(String DataSet) {
+		// TODO Auto-generated method stub
+		String Quantity = data.get(DataSet).get("Quantity");
+		String above10="10";
+		try {
+			Thread.sleep(2000);
+			try {
+				Sync.waitElementPresent(30, "xpath", "//select[@name='qty']");
+				Common.dropdown("xpath", "//select[@name='qty']", Common.SelectBy.VALUE, above10);
+				Thread.sleep(4000);
+				Common.textBoxInput("css", "input[name='qty']", Quantity);
+				Thread.sleep(3000);
+			} catch (Exception | Error e) {
+				Common.dropdown("xpath", "//select[@name='qty']", Common.SelectBy.VALUE, "1");
+			}
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the  product the product quantity in PDP page",
+					"Product quantity should be update in the PDP page", "unable to change the  product Qunatity",
+					Common.getscreenShot("failed to update the product quantity"));
+			Assert.fail();
+		}
+		
+	}
 
 	public void newuseraddDeliveryAddress(String dataSet) throws Exception {
 		// TODO Auto-generated method stub
