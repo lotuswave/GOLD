@@ -152,9 +152,9 @@
   </test>
 
 
- <test name="TEST_DGLD_HF_EMEA_UK_RT_070_Validation_Of_Homepage" testid="DQA-4070" description="This script validates the content and elements on the EMEA UK Home Page.">
+ <test name="Test_DGLD_HF_EMEA_UK_RT_070_Validation_Of_Homepage" testid="DQA-4070" description="This script validates the content and elements on the EMEA UK Home Page.">
     <classes>
-        <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.TEST_DGLD_HF_EMEA_UK_RT_070_Validation_Of_Homepage"/>
+        <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.Test_DGLD_HF_EMEA_UK_RT_070_Validation_Of_Homepage"/>
     </classes>
 </test>
  
@@ -167,6 +167,12 @@
 <test name="Test_DGLD_HF_EMEA_RT_045_Newsletter_subcribtion_and_Unsubscription_from_MyAccount_Page" testid="DQA-45" description="These testcase is to verify Newsletter subscription and un subscribe from the My account page">
     <classes>
         <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.Test_DGLD_HF_EMEA_RT_045_Newsletter_subcribtion_and_Unsubscription_from_MyAccount_Page"/>
+    </classes>
+</test>
+
+<test name="Test_DGLD_HF_EMEA_RT_044_Validate_Blog_page" testid="DQA-44" description="This test case is to verify the all Blog categories pages for the HYF UK website.">
+    <classes>
+        <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.Test_DGLD_HF_EMEA_RT_044_Validate_Blog_page"/>
     </classes>
 </test>
 </suite>

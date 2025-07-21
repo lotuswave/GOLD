@@ -143,6 +143,19 @@
     <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.Test_DGLD_HF_EMEA_RT_064_Register_User_Checkout_With_GiftCard_Sendlater"/>
   </classes>
 </test>
+
+<test name="TEST_DGLD_HF_EMEA_RT_022_registerUserCheckout_below30_simpleItem_paypal_discount_shippingAmount" testid="DQA-22" description="The Testcase is to verify place an order with below 30 and discount with paypal payment">
+  <classes>
+    <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.TEST_DGLD_HF_EMEA_RT_022_registerUserCheckout_below30_simpleItem_paypal_discount_shippingAmount"/>
+  </classes>
+</test>
+
+<test name="TEST_DGLD_HF_EMEA_RT_028_EmployeeUser_1Simple_1Configurable_5QtyEach_PartialGift_Discount_Paypal" testid="DQA-28" description="The Testcase is to verify place an order with employee user simple and configurable product partial redeem and discount with Paypal">
+  <classes>
+    <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.TEST_DGLD_HF_EMEA_RT_028_EmployeeUser_1Simple_1Configurable_5QtyEach_PartialGift_Discount_Paypal"/>
+  </classes>
+</test>
+
   
 </suite>
 
