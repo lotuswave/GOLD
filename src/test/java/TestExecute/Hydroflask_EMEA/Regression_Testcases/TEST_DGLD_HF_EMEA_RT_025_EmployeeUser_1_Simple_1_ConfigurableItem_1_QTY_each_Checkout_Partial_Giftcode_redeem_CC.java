@@ -24,7 +24,7 @@ public class TEST_DGLD_HF_EMEA_RT_025_EmployeeUser_1_Simple_1_ConfigurableItem_1
 			Hydro.search_product("Product");      
 			Hydro.addtocart("Product"); 
 			Hydro.employee_discount();
-			Hydro.bottles_headerlinks("Bottles & Drinkware"); 
+			Hydro.bottles_headerlinks("bottles-drinkware"); 
 			Hydro.Configurable_addtocart_pdp("Product");
 			Hydro.employee_discount();
 			Hydro.RegaddDeliveryAddress("Employee_id");

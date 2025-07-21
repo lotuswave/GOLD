@@ -26,7 +26,7 @@ public class TEST_DGLD_HF_EMEA_RT_071_RegisterUser_Add_GiftCard_MyAccountCheckou
 			Hydro.applyGiftCardFromMyAccount("GiftCard_MyAccount");
 			Hydro.search_product("Product");      
 			Hydro.addtocart("Product");  
-			Hydro.bottles_headerlinks("Bottles & Drinkware"); 
+			Hydro.bottles_headerlinks("bottles-drinkware"); 
 			Hydro.Configurable_addtocart_pdp("Product");
 			Hydro.minicart_Checkout();
 			Hydro.RegaddDeliveryAddress("AccountDetails");
@@ -43,7 +43,7 @@ public class TEST_DGLD_HF_EMEA_RT_071_RegisterUser_Add_GiftCard_MyAccountCheckou
 
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 

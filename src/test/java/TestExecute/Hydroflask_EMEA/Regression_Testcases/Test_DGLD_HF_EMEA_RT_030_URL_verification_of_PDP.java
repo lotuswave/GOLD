@@ -19,7 +19,7 @@ public class Test_DGLD_HF_EMEA_RT_030_URL_verification_of_PDP {
 
 		try {
 			Hydro.verifingHomePage();
-			Hydro.bottles_headerlinks("Bottles & Drinkware"); 
+			Hydro.bottles_headerlinks("bottles-drinkware"); 
 			Hydro.url_color_validation("Product");
 			
 			

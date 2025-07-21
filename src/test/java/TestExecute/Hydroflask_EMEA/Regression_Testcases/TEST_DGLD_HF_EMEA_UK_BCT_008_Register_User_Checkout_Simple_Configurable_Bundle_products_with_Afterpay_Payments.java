@@ -26,7 +26,7 @@ public class TEST_DGLD_HF_EMEA_UK_BCT_008_Register_User_Checkout_Simple_Configur
 //			Hydro.Addtocart_Bundle("Bundle product");  Enable this once the Bundle products are available
 			Hydro.search_product("Product");
 			Hydro.addtocart("Product");
-			Hydro.bottles_headerlinks("Bottles & Drinkware");
+			Hydro.bottles_headerlinks("bottles-drinkware");
 			Hydro.Configurable_addtocart_pdp("Product");
 			Hydro.minicart_Checkout();
 			Hydro.RegaddDeliveryAddress("AccountDetails");

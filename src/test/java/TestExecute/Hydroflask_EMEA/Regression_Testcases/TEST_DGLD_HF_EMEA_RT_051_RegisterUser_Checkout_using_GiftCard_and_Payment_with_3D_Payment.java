@@ -20,7 +20,7 @@ public class TEST_DGLD_HF_EMEA_RT_051_RegisterUser_Checkout_using_GiftCard_and_P
 			Hydro.verifingHomePage();
 			Hydro.click_singinButton();
 			Hydro.login_Hydroflask("AccountDetails_2");
-			Hydro.bottles_headerlinks("Bottles & Drinkware"); 
+			Hydro.bottles_headerlinks("bottles-drinkware"); 
 			Hydro.Configurable_addtocart_pdp("Product");
 			Hydro.minicart_Checkout();
 			Hydro.RegaddDeliveryAddress("AccountDetails");

@@ -22,7 +22,7 @@ public class TEST_DGLD_HF_EMEA_RT_028_EmployeeUser_1Simple_1Configurable_5QtyEac
 			Hydro.login_Hydroflask("Employee_id");
 			Hydro.search_product("Product_5QTY");      
 			Hydro.addtocart("Product_5QTY"); 
-			Hydro.bottles_headerlinks("Bottles & Drinkware"); 
+			Hydro.bottles_headerlinks("bottles-drinkware"); 
 			Hydro.Configurable_addtocart_pdp("Product_5QTY");
 			Hydro.RegaddDeliveryAddress("Employee_id");
             Hydro.selectshippingaddress("GroundShipping method");
