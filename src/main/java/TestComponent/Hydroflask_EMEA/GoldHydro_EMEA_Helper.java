@@ -217,13 +217,13 @@ public class GoldHydro_EMEA_Helper {
 			Thread.sleep(3000);
 
 			try {
-				Common.mouseOver("css", "a[href*='" + category + "']");
+				Common.mouseOver("xpath", "(//a[@title='" + category + "'])[1]");
 			} catch (Exception e) {
 				Common.clickElement("xpath", "//button[contains(@class,'level-0-link')]");
 			}
-			Common.clickElement("css", "a[href*='" + category + "']");
+			Common.clickElement("xpath", "(//a[@title='" + category + "'])[1]");
 			Thread.sleep(2000);
-			Common.clickElement("css", "a[href*='coffee-tea']");
+			Common.clickElement("xpath", "//span[text()='Coffee & Tea']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			System.out.println(category);
@@ -403,6 +403,7 @@ public class GoldHydro_EMEA_Helper {
 			Thread.sleep(3000);
 
 			Common.clickElement("css", "img[alt='" + products + "']");
+			product_quantity(Dataset);
 			Sync.waitElementPresent("css", "button[form='product_addtocart_form']");
 			Thread.sleep(2000);
 			Common.javascriptclickElement("css", "button[form='product_addtocart_form']");
