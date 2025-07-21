@@ -5914,14 +5914,14 @@ catch(Exception | Error e){
 			Sync.waitElementPresent("xpath", "//h2[contains(text(),'Reviews')]");
 			Common.clickElement("xpath", "//h2[contains(text(),'Reviews')]");
 			Thread.sleep(3000);
-			int form = Common.findElements("xpath", "//div[@id='write-review-tabpanel-main-widget']").size();
+			int form = Common.findElements("xpath", "//button[text()='Be the first to write a review!']").size();
 			System.out.println(form);
 			Common.assertionCheckwithReport(form > 0, "verifying the write a review button",
 					"Write a review should be appear in the PDP page",
 					"Sucessfully write a review button has been displayed in PDP page",
 					"Failed to display the write a review button in PDP page");
-			Sync.waitElementPresent("xpath", "//span[text()='Write A Review']");
-			Common.clickElement("xpath", "//span[text()='Write A Review']");
+			Sync.waitElementPresent("xpath", "//button[text()='Be the first to write a review!']");
+			Common.clickElement("xpath", "//button[text()='Be the first to write a review!']");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
@@ -5932,10 +5932,21 @@ catch(Exception | Error e){
 		}
 		try {
 			String expectedResult = "Sucessfully title input box has been displayed";
-			Common.clickElement("xpath", "//input[@value='Post']");
-			String errormessage = Common.findElement("xpath", "//span[@class='form-input-error']").getText();
-			System.out.println(errormessage);
-			Common.assertionCheckwithReport(errormessage.contains("Please enter a star rating for this review"),
+			Common.clickElement("xpath", "//button[text()='Send']");
+			int starRatingError = Common.findElements("css", "p[class='yotpo-star-rating-error']").size();
+			System.out.println("star-rating-error "+starRatingError);
+			int HeadlineError = Common.findElements("id", "headline-validation").size();
+			System.out.println("HeadlineError  :"+HeadlineError);
+			int contentError = Common.findElements("id", "content-validation").size();
+			System.out.println("contentError  :"+contentError);
+			int EmailError = Common.findElements("id", "email-validation").size();
+			System.out.println("EmailError   :"+EmailError);
+			int NameError = Common.findElements("id", "name-validation").size();
+			System.out.println("NameError   :"+NameError);
+			
+			int Requirefield = Common.findElements("xpath", "//p[text()='* required fields']").size();
+			System.out.println("Requirefield   :"+Requirefield);
+			Common.assertionCheckwithReport(starRatingError>0 && HeadlineError>0 && contentError>0 && EmailError>0&& Requirefield>0,
 					"verifying the error message in invalid fields",
 					"error message should be display in the invalid fields",
 					"Sucessfully Error message has been displayed in invalid fileds ",
