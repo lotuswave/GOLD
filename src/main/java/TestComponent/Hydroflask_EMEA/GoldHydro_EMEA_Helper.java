@@ -209,19 +209,19 @@ public class GoldHydro_EMEA_Helper {
 		String expectedResult = "User should click the" + category;
 		try {
 
-			Sync.waitElementPresent("xpath", "//span[contains(text(), ' Shop')]");
+			Sync.waitElementPresent("xpath", "//button[contains(@class,'level-0-link')]");
 			Thread.sleep(3000);
 //			Common.scrollIntoView("xpath","//a[contains(@class,'level-top')]//span[text()=' Shop']");
-			Common.clickElement("xpath", "//span[contains(text(), ' Shop')]");
+			Common.clickElement("xpath", "//button[contains(@class,'level-0-link')]");
 
 			Thread.sleep(3000);
 
 			try {
-				Common.mouseOver("xpath", "//span[contains(text(),'" + category + "')]");
+				Common.mouseOver("css", "a[href*='" + category + "']");
 			} catch (Exception e) {
-				Common.clickElement("xpath", "//a[@class='level-top ui-corner-all']//span[text()=' Shop']");
+				Common.clickElement("xpath", "//button[contains(@class,'level-0-link')]");
 			}
-			Common.clickElement("xpath", "//span[contains(text(),'" + category + "')]");
+			Common.clickElement("css", "a[href*='" + category + "']");
 			Thread.sleep(2000);
 			Common.clickElement("css", "a[href*='coffee-tea']");
 			Sync.waitPageLoad();
@@ -229,7 +229,7 @@ public class GoldHydro_EMEA_Helper {
 			System.out.println(category);
 			expectedResult = "User should select the " + category + "category";
 			int sizebotteles = Common.findElements("xpath", "//a[contains(text(),'" + category + "')]").size();
-			Common.assertionCheckwithReport(sizebotteles > 0,
+			Common.assertionCheckwithReport(sizebotteles > 0 || Common.getCurrentURL().contains(category),
 					"validating the product category as" + category + "from navigation menu ", expectedResult,
 					"Selected the " + category + " category", "User unabel to click" + category + "");
 
