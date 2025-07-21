@@ -16388,4 +16388,49 @@ catch(Exception | Error e){
 		}
 	}
 
+
+	public void Newsletter_Subscription_MyAccout() {
+		try {
+			Common.clickElement("css", "button[id='customer-menu']");
+			Common.clickElement("css","a[id='customer.header.dashboard.link']");
+			Common.clickElement("xpath", "//span[text()='My Newsletter Subscriptions']");
+			int Frame = Common.findElements("xpath", "//iframe[contains(@id,'klaviyo_subscribe_page_1')]").size();
+			if(Frame==1)
+					{
+				Common.switchFrames("xpath", "//iframe[contains(@id,'klaviyo_subscribe_page_1')]");
+				Thread.sleep(4000);
+				Common.textBoxInput("xpath", "(//input[contains(@id,'kl-consent-page')])[1]", "vnarra@helenoftroy.com");
+				Common.textBoxInput("xpath", "(//input[contains(@id,'kl-consent-page')])[2]", "v");
+				Common.textBoxInput("xpath", "(//input[contains(@id,'kl-consent-page')])[3]", "narra");
+                  Common.clickElement("xpath", "//button[text()='Subscribe']");
+              String text = Common.getText("xpath", "//span[text()='Thanks for confirming your email address.']");
+              Common.assertionCheckwithReport(text.contains("Thanks for confirming your email"),
+  					"validating Newsletter Subscription Message",
+  					"After Clicking subscribe button it should display the you've subscribed",
+  					"Unable to subscribed the Newsletter in My Account");
+					}else {
+				
+			
+			 Common.switchFrames("xpath", "//iframe[contains(@id,'klaviyo_subscribe_page_2')]");
+			 Thread.sleep(3000);
+			 Common.textBoxInput("xpath", "(//input[contains(@id,'kl-consent-page')])[1]", "vnarra@helenoftroy.com");
+			 Common.clickElement("xpath", "//button[text()='UNSUBSCRIBE']");
+			 Thread.sleep(2000);
+		    String text = 	Common.getText("xpath", "(//h1//span[contains(text(),'been unsubscribed')])[1]");
+			System.out.println(text); Common.assertionCheckwithReport(text.contains("unsubscribed"),
+	  					"validating Newsletter Unsubscription Message",
+	  					"After Clicking Unsubscribe button it should display the you've Unsubscribed",
+	  					"Unable to UnSubscribed the Newsletter in My Account");
+					}
+		}
+		catch(Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the Newsletter subscription in My Account Page",
+					"After Entering all details ine newsletter form and submitting it should successfully subscribe ",
+					"Unable to subscribe Newsletter subscription in My Account Page ",
+					Common.getscreenShot("Failed to subscribe Newsletter subscription in My Account Page"));
+			Assert.fail();	
+		}
+	}
+
 }
