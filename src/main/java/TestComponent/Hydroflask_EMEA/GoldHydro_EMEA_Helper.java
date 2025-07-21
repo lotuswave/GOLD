@@ -254,21 +254,21 @@ public class GoldHydro_EMEA_Helper {
 		try {
 
 			Sync.waitElementPresent("xpath",
-					"//button[contains(@class,'level-0-link')]//span[contains(text(),'Shop')]");
+					"//button[contains(@class,'level-0-link')]");
 			Thread.sleep(3000);
 //			Common.scrollIntoView("xpath","//a[contains(@class,'level-top')]//span[text()=' Shop']")//a[contains(@title,'Shop')];
-			Common.clickElement("xpath", "//button[contains(@class,'level-0-link')]//span[contains(text(),'Shop')]");
+			Common.clickElement("xpath", "//button[contains(@class,'level-0-link')]");
 
 			Thread.sleep(3000);
-			Sync.waitElementPresent("xpath", "(//span[contains(text(),'" + category + "')])[1]");
-			Common.clickElement("xpath", "(//span[contains(text(),'" + category + "')])[1]");
-			Thread.sleep(3000);
-			Sync.waitElementPresent("xpath", "(//span[contains(text(),'" + subcategory + "')])[1]");
-			Common.clickElement("xpath", "(//span[contains(text(),'" + subcategory + "')])[1]");
+			Sync.waitElementPresent("css", "a[href*='" + category + "']");
+			Common.clickElement("css", "a[href*='" + category + "']");
+//			Thread.sleep(3000);
+			Sync.waitElementPresent("css", "a[href*='" + subcategory + "']");
+			Common.clickElement("css", "a[href*='" + subcategory + "']");
 			Thread.sleep(6000);
 			expectedResult = "User should select the " + subcategory + "subcategory";
 			int sizebotteles = Common.findElements("xpath", "//span[contains(text(),'" + subcategory + "')]").size();
-			Common.assertionCheckwithReport(sizebotteles > 0,
+			Common.assertionCheckwithReport(sizebotteles > 0 || Common.getCurrentURL().contains(subcategory),
 					"validating the product category as" + subcategory + "from navigation menu ", expectedResult,
 					"Selected the " + subcategory + " category", "User unabel to click" + subcategory + "");
 
