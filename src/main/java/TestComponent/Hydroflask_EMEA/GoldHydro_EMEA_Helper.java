@@ -465,6 +465,49 @@ public class GoldHydro_EMEA_Helper {
 
 		}
 	}
+	public void applyGiftCardFromMyAccount(String DataSet) {
+		String giftCode =data.get(DataSet).get("GiftCard_Preprod");
+	    try {
+	        Sync.waitElementPresent("css", "button[id='customer-menu']");
+	        Common.clickElement("css", "button[id='customer-menu']");
+
+	        Sync.waitElementPresent("css", "a[id='customer.header.dashboard.link']");
+	        Common.clickElement("css", "a[id='customer.header.dashboard.link']");
+
+	        Sync.waitElementPresent("xpath", "//a[@title='Gift Cards']");
+	        Common.clickElement("xpath", "//a[@title='Gift Cards']");
+
+	        Sync.waitElementPresent("css", "input[placeholder='Enter your Code']");
+	        Common.textBoxInput("css", "input[placeholder='Enter your Code']", giftCode);
+
+	        Sync.waitElementPresent("xpath", "//span[text()='Add']");
+	        Common.clickElement("xpath", "//span[text()='Add']");
+
+	        int codeAlreadyApplied = Common.findElements("xpath", "//span[text()='This Gift Code already exists.']").size();
+	        if (codeAlreadyApplied > 0) {
+	            System.out.println("Code Already applied");
+	            return;
+	        } else {
+	            Sync.waitElementVisible("xpath", "//span[text()='Gift Code added.']");
+	            String actualMessage = Common.getText("xpath", "//span[text()='Gift Code added.']");
+	            String expectedMessage = "Gift Code added.";
+
+	            Assert.assertEquals(actualMessage.trim(), expectedMessage, "Gift code success message mismatch");
+
+	            ExtenantReportUtils.addPassLog("Gift Code Message Validation",
+	                    "Expected message: " + expectedMessage,
+	                    "Actual message displayed: " + actualMessage,
+	                    Common.getscreenShotPathforReport("GiftCodeSuccess"));
+	        }
+	    } catch (Exception | AssertionError e) {
+	        e.printStackTrace();
+	        ExtenantReportUtils.addFailedLog("Apply Gift Card",
+	                "Gift card should be applied successfully",
+	                "Failed to apply gift card: " + e.getMessage(),
+	                Common.getscreenShot("GiftCardApplyFail"));
+	        Assert.fail("Gift card application failed: " + e.getMessage());
+	    }
+	}
 
 	public void Other_Amount(String Dataset) {
 		// TODO Auto-generated method stub
@@ -2895,46 +2938,7 @@ System.out.println("cartproducts  :"+cartproducts);
 			Common.clickElement("css", "button[class*='btn btn-primary justify-center']");
 			Sync.waitPageLoad();
 			Thread.sleep(8000);
-			/*
-			 * Common.scrollIntoView("xpath", "//div[@ui-id='message-success']//span");
-			 * expectedResult =
-			 * "It should apply discount on your price.If user enters invalid promocode it should display coupon code is not valid message."
-			 * ; String discountcodemsg = Common.getText("xpath",
-			 * "//div[@ui-id='message-success']//span");
-			 * System.out.println(discountcodemsg);
-			 * Common.assertionCheckwithReport(discountcodemsg.
-			 * contains("Your coupon was successfully applied."), "verifying pomocode",
-			 * expectedResult, "promotion code working as expected",
-			 * "Promation code is not applied"); Common.scrollIntoView("xpath",
-			 * "//div[@class='item subtotal']//span[contains(@class,'value')]"); String
-			 * Subtotal = Common.getText("xpath",
-			 * "//div[@class='item subtotal']//span[contains(@class,'value')]").replace("$",
-			 * "").trim(); Float subtotalvalue = Float.parseFloat(Subtotal); String shipping
-			 * = Common.getText("xpath",
-			 * "//div[@class='item shipping']//span[contains(@class,'value')]")
-			 * .replace("$", "").trim(); Float shippingvalue = Float.parseFloat(shipping);
-			 * String Tax = Common.getText("xpath",
-			 * "//div[@class='item tax']//span[contains(@class,'value')]").replace("$",
-			 * "").trim(); Float Taxvalue = Float.parseFloat(Tax); String Discount =
-			 * Common.getText("xpath",
-			 * "//div[@class='item discount']//span[contains(@class,'value')]")
-			 * .replace("$", "").trim(); Float Discountvalue = Float.parseFloat(Discount);
-			 * System.out.println(Discountvalue);
-			 * 
-			 * String ordertotal = Common.getText("xpath",
-			 * "//div[@class='item grand_total']//span[contains(@class,'value text')]")
-			 * .replace("$", "").trim(); Float ordertotalvalue =
-			 * Float.parseFloat(ordertotal); Float Total = (subtotalvalue + shippingvalue +
-			 * Taxvalue) + Discountvalue; String ExpectedTotalAmmount2 = new
-			 * BigDecimal(Total).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
-			 * System.out.println(ExpectedTotalAmmount2); System.out.println(ordertotal);
-			 * Common.assertionCheckwithReport(ExpectedTotalAmmount2.equals(ordertotal),
-			 * "validating the order summary in the payment page",
-			 * "Order summary should be display in the payment page and all fields should display"
-			 * ,
-			 * "Successfully Order summary is displayed in the payment page and fields are displayed"
-			 * , "Failed to display the order summary and fileds under order summary");
-			 */
+			
 
 		}
 
@@ -2976,7 +2980,27 @@ System.out.println("cartproducts  :"+cartproducts);
 			Assert.fail();
 		}
 	}
-	
+	public void validateGrandTotalBelow30() {
+	    try {
+	        String orderTotalText = Common.getText("xpath", "(//span[contains(@class,'checkout-total-segments__grand-total-value') and contains(@class,'value')])[1]");
+	        orderTotalText = orderTotalText.replaceAll("[^\\d.]", "").trim();
+	        double orderTotal = Double.parseDouble(orderTotalText);
+
+	        Assert.assertTrue(orderTotal < 30.0, "Grand total is not below 30. Found: " + orderTotal);
+
+	        ExtenantReportUtils.addPassLog("Validate Grand Total < 30",
+	                "Grand total should be below 30",
+	                "Grand total validated: " + orderTotal,
+	                Common.getscreenShotPathforReport("GrandTotalBelow30"));
+
+	    } catch (Exception | AssertionError e) {
+	        ExtenantReportUtils.addFailedLog("Validate Grand Total < 30",
+	                "Grand total should be below 30",
+	                "Validation failed: " + e.getMessage(),
+	                Common.getscreenShot("GrandTotalValidationFail"));
+	        Assert.fail("Grand total validation failed: " + e.getMessage());
+	    }
+	}
 	public void Tenqtyaddtocart(String Dataset) {
 		String products = data.get(Dataset).get("Products");
 		System.out.println(products);
