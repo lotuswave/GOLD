@@ -158,6 +158,16 @@
     </classes>
 </test>
  
+ <test name="Test_DGLD_HF_EMEA_RT_043_Pro_Deal_Application_for_Register_User" testid="DQA-43" description="Validating the pro deal application for the Register user">
+    <classes>
+        <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.Test_DGLD_HF_EMEA_RT_043_Pro_Deal_Application_for_Register_User"/>
+    </classes>
+</test>
 
+<test name="Test_DGLD_HF_EMEA_RT_045_Newsletter_subcribtion_and_Unsubscription_from_MyAccount_Page" testid="DQA-45" description="These testcase is to verify Newsletter subscription and un subscribe from the My account page">
+    <classes>
+        <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.Test_DGLD_HF_EMEA_RT_045_Newsletter_subcribtion_and_Unsubscription_from_MyAccount_Page"/>
+    </classes>
+</test>
 </suite>
 

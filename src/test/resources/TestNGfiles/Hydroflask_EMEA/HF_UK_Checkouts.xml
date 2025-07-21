@@ -126,7 +126,23 @@
   </classes>
 </test>
 
+<test name="TEST_DGLD_HF_EMEA_RT_021_GuestUser_checkout_with_CC_1_simpleproduct_wtih_qty_10_and_1_simpleproduct_with_qty_14" testid="DQA-21" description="The testcase is to verify place an order with 2 simple items with different qunatity with CC">
+  <classes>
+    <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.TEST_DGLD_HF_EMEA_RT_021_GuestUser_checkout_with_CC_1_simpleproduct_wtih_qty_10_and_1_simpleproduct_with_qty_14"/>
+  </classes>
+</test>
 
+<test name="TEST_DGLD_HF_EMEA_RT_025_EmployeeUser_1_Simple_1_ConfigurableItem_1_QTY_each_Checkout_Partial_Giftcode_redeem_CC" testid="DQA-25" description="The Testcase is to verify place an order with employee user simple and configurable product partial redeem with CC ">
+  <classes>
+    <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.TEST_DGLD_HF_EMEA_RT_025_EmployeeUser_1_Simple_1_ConfigurableItem_1_QTY_each_Checkout_Partial_Giftcode_redeem_CC"/>
+  </classes>
+</test>
+
+<test name="Test_DGLD_HF_EMEA_RT_064_Register_User_Checkout_With_GiftCard_Sendlater" testid="DQA-71" description="This testcase is to validate the register user gift card send later functionality using CC ">
+  <classes>
+    <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.Test_DGLD_HF_EMEA_RT_064_Register_User_Checkout_With_GiftCard_Sendlater"/>
+  </classes>
+</test>
   
 </suite>
 
