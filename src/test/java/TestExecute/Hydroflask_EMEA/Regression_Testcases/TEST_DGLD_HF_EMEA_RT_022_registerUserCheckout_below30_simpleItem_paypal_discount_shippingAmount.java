@@ -40,7 +40,7 @@ public class TEST_DGLD_HF_EMEA_RT_022_registerUserCheckout_below30_simpleItem_pa
 
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 

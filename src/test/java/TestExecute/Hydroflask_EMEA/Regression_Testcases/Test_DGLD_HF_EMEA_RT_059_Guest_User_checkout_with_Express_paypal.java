@@ -34,7 +34,7 @@ public class Test_DGLD_HF_EMEA_RT_059_Guest_User_checkout_with_Express_paypal {
 
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 
