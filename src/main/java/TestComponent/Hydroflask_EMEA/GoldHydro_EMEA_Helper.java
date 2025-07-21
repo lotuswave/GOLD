@@ -220,10 +220,10 @@ public class GoldHydro_EMEA_Helper {
 				Common.clickElement("xpath", "//a[@class='level-top ui-corner-all']//span[text()=' Shop']");
 			}
 			Common.clickElement("xpath", "//span[contains(text(),'" + category + "')]");
-			Thread.sleep(4000);
-			Common.clickElement("xpath", "//span[text()='Coffee & Tea']");
+			Thread.sleep(2000);
+			Common.clickElement("css", "a[href*='coffee-tea']");
 			Sync.waitPageLoad();
-			Thread.sleep(6000);
+			Thread.sleep(4000);
 			System.out.println(category);
 			expectedResult = "User should select the " + category + "category";
 			int sizebotteles = Common.findElements("xpath", "//a[contains(text(),'" + category + "')]").size();
