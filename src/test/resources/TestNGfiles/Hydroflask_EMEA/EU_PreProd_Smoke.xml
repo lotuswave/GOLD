@@ -26,7 +26,7 @@
 
     <test name="TEST_DGLD_HF_EMEA_EU_BCT_007_Guest_user_Checkout_With_Discount_Visa_card" testid="DQA-007" priority="P1" description="Guest user checkout with Visa and discount applied">
         <classes>
-            <class name="TestExecute.Hydroflask_EMEA.Preprod_Smoke_TestCases.EU_Smoke.TEST_DGLD_HF_EMEA_EU_BCT_007_Guest_user_Checkout_With_Discount_Visa_card"/>
+            <class name="TestExecute.Hydroflask_EMEA.Preprod_Smoke_TestCases.EU_Smoke.TEST_DGLD_HF_EMEA_EU_BCT_007_Guest_user_Checkout_Discount_Visa_card"/>
         </classes>
     </test>
 
