@@ -11,6 +11,8 @@ import java.math.BigDecimal;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -4217,6 +4219,100 @@ catch(Exception | Error e){
 
 		}
 
+	}
+	
+	public void SendLater_Card_Value(String Dataset) {
+		// TODO Auto-generated method stub
+		String amount=data.get(Dataset).get("Card Amount");
+		try
+		{
+			Sync.waitPageLoad();
+			Sync.waitElementPresent("xpath", "//span[text()='"+ amount +"']");
+			Common.clickElement("xpath", "//span[text()='"+ amount +"']");
+			String Price=Common.findElement("xpath", "(//span[@class='price'])[1]").getText();
+			Common.assertionCheckwithReport(Price.contains(amount),
+					"validating gift card amount value in PDP",
+					"After clicking on the value amount should be appear in PDP",
+					"Successfully selected amount is matched for the gift card",
+					"Failed to appear amount for the gift card");
+			Common.clickElement("xpath", "(//img[contains(@class,'amcard-image')])[2]");
+//			String SmallCard=Common.findElement("xpath", "//img[@class='amcard-image -active']").getAttribute("src");
+//			String MainCard=Common.findElement("xpath", "//img[@class='fotorama__img']").getAttribute("src");
+//			Common.assertionCheckwithReport(SmallCard.equals(MainCard),
+//					"validating the selected gift card",
+//					"After clicking on the card design gift card should be match",
+//					"Successfully Gift card design has been matched",
+//					"Failed to match the Gift card design");
+			SendLater_Giftcard_details("Gift Details");
+			product_quantity("Product Qunatity");
+			Thread.sleep(4000);
+			Sync.waitElementPresent("xpath", "//button[@id='product-addtocart-button']");
+			Common.clickElement("xpath", "//button[@id='product-addtocart-button']");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			String openminicart = Common.findElement("css", "div[class*='fixed inset-y-0']").getAttribute("aria-modal");
+			System.out.println("Minicart Open:" + openminicart);
+			Common.assertionCheckwithReport(openminicart != null && openminicart.contains("true"),
+					"Add to Cart Validation",
+					"The product should be successfully added to the cart and the mini cart should appear.",
+					"Product was successfully added and mini cart opened.",
+					"Product was not added to the cart or mini cart did not open.");
+
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the  product add to the cart", "Product should be add to cart",
+					"Unable to add the product to the cart", Common.getscreenShot("Failed the product Add to cart from the PDP"));
+			Assert.fail();
+		}
+
+	}
+	
+	public void SendLater_Giftcard_details(String Dataset) {
+		// TODO Auto-generated method stub
+		String Giftmessage=data.get(Dataset).get("message");
+		try
+		{
+			Common.textBoxInput("xpath", "//input[@name='am_giftcard_sender_name']", data.get(Dataset).get("FirstName"));
+			Common.textBoxInput("xpath", "//input[@name='am_giftcard_recipient_name']", data.get(Dataset).get("LastName"));
+			Common.textBoxInput("xpath", "//input[@name='am_giftcard_recipient_email']", data.get(Dataset).get("Email"));
+			Common.textBoxInput("xpath", "//textarea[@name='am_giftcard_message']", Giftmessage);
+			Thread.sleep(3000);
+			String Message=Common.findElement("xpath", "//textarea[@name='am_giftcard_message']").getAttribute("value");
+			System.out.println(Message);
+			Common.assertionCheckwithReport(Message.equals(Giftmessage),
+					"validating the message for the Gift card",
+					"Message should be dispaly for the Gift card",
+					"Successfully message has been dispalyed for the Gift card",
+					"Failed to display the gift message for the Gift Card");
+			Common.clickElement("xpath", "//input[@id='is_date_delivery' and @value='1']");
+
+			DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+			LocalDate currentDate = LocalDate.now();
+			String formattedDate = currentDate.format(dateFormatter);
+
+
+			LocalDate nextDay = currentDate.plusDays(1);
+			String formattednextDay = nextDay.format(dateFormatter);
+
+			System.out.println("Current Date: " + formattedDate);
+			System.out.println("NextDay Date: "+ formattednextDay);
+
+
+			Common.textBoxInput("xpath", "//input[@id='am_giftcard_date_delivery']", formattednextDay);
+			Common.dropdown("id", "am_giftcard_date_delivery_timezone", Common.SelectBy.INDEX, "1");
+
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the message for the Gift card",
+					"Message should be dispaly for the Gift card",
+					"Unable to display the gift message for the Gift Card",
+					Common.getscreenShot("Failed to display the gift message for the Gift Card"));
+			Assert.fail();
+		}
 	}
 
 	public void Card_Value(String Dataset) {
