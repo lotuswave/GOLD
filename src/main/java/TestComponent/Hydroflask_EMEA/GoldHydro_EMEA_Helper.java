@@ -215,15 +215,15 @@ public class GoldHydro_EMEA_Helper {
 			Common.clickElement("xpath", "//button[contains(@class,'level-0-link')]");
 
 			Thread.sleep(3000);
-
+			
 			try {
-				Common.mouseOver("xpath", "(//a[@title='" + category + "'])[1]");
+				Common.mouseOver("xpath", "(//a[contains(@href,'" + category + "')])[2]");
 			} catch (Exception e) {
 				Common.clickElement("xpath", "//button[contains(@class,'level-0-link')]");
 			}
-			Common.clickElement("xpath", "(//a[@title='" + category + "'])[1]");
+			Common.clickElement("xpath", "(//a[contains(@href,'" + category + "')])[2]");
 			Thread.sleep(2000);
-			Common.clickElement("xpath", "//span[text()='Coffee & Tea']");
+			Common.clickElement("css","a[href*='coffee-tea']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			System.out.println(category);
