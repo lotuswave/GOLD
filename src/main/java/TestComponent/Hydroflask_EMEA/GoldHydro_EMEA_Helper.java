@@ -89,30 +89,22 @@ public class GoldHydro_EMEA_Helper {
 	public void verifingHomePage() {
 	    try {
 	        String currentUrl = Common.getCurrentURL();
-	        String baseUrl = automation_properties.getInstance().getProperty(automation_properties.BASEURL);
-	        System.out.println("Expected Base URL: " + baseUrl);
-	        System.out.println("Current URL: " + currentUrl);
+	       	        System.out.println("Current URL: " + currentUrl);
 
 	        Close_Geolocation();
 
 	        boolean isLogoPresent = false;
 	        boolean isTitleCorrect = false;
 
-	        if (currentUrl.contains(baseUrl)) {
-	            Sync.waitElementPresent(60, "css", "a[class*='c-header__logo inline-flex']");
-	            isLogoPresent = Common.findElements("css", "a[class*='c-header__logo inline-flex']").size() > 0;
-	            isTitleCorrect = validateTitle(
-	                "Home Page",
-	                "Hydro Flask Reusable Bottles",
-	                "gb - mcloud-na-preprod-hydroflask"
-	            );
-	        } else if (currentUrl.contains("preprod") || currentUrl.contains("stage4")|| currentUrl.contains("emea")) {
+	       
+	      if (currentUrl.contains("preprod") || currentUrl.contains("stage4")|| currentUrl.contains("emea")) {
 	            Sync.waitPageLoad();
-	            isLogoPresent = Common.findElements("css", "img[alt='Store logo']").size() > 0;
+	            isLogoPresent = Common.findElements("css", "a[class*='c-header__logo inline-flex'], img[alt='Store logo']").size() > 0;
 	            isTitleCorrect = validateTitle(
-	                "Home Page",
-	                "Hydro Flask Reusable Bottles"
-	            );
+		                "Home Page",
+		                "Hydro Flask Reusable Bottles",
+		                "gb - mcloud-na-preprod-hydroflask"
+		            );
 	        } else {
 	            Sync.waitElementPresent(60, "xpath", "//img[@alt='Store logo' or @alt='Hydroflask store logo']");
 	            isLogoPresent = Common.findElements("xpath", "//img[@alt='Store logo' or @alt='Hydroflask store logo']").size() > 0;
