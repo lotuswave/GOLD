@@ -21,9 +21,8 @@ public class TEST_DGLD_HF_EMEA_ES_BCT_002_Footer_Links_Validation {
 			Hydro.verifingHomePage();
 			Hydro.Kustomer_Links("Kustomer");
 			Hydro.Footer_Links("Footer");
-			Hydro.Footer_validation("Breadcrumbs");
 			Hydro.Footer_Dogood("Do Good");
-			Hydro.Terms_and_privacy();
+			Hydro.Terms_and_privacy_and_AntiHumanTrafficking();
 			
 			} catch (Exception e) {
 

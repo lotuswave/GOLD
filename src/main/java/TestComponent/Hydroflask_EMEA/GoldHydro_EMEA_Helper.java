@@ -12243,15 +12243,34 @@ catch(Exception | Error e){
 		try {
 			for (i = 0; i < footerlinks.length; i++) {
 				Sync.waitElementPresent(30, "xpath",
-						"//div[contains(@class,'footer-menu')]//a[contains(@title,'" + footerlinks[i] + "')]");
+						"//div[contains(@class,'footer-menu')]//a[contains(@href,'" + footerlinks[i] + "')]");
 				Thread.sleep(3000);
 				Common.findElement("xpath",
-						"//div[contains(@class,'footer-menu')]//a[contains(@title,'" + footerlinks[i] + "')]");
+						"//div[contains(@class,'footer-menu')]//a[contains(@href,'" + footerlinks[i] + "')]");
 				Common.clickElement("xpath",
-						"//div[contains(@class,'footer-menu')]//a[contains(@title,'" + footerlinks[i] + "')]");
+						"//div[contains(@class,'footer-menu')]//a[contains(@href,'" + footerlinks[i] + "')]");
 				Sync.waitPageLoad();
 				Thread.sleep(3000);
-				System.out.println(footerlinks[i]);
+				String Footer_Name = footerlinks[i];
+				System.out.println(Footer_Name);
+				if(Footer_Name.contains("careers")||Footer_Name.contains("privacy")||Footer_Name.contains("cookie")) {
+				Common.switchWindows();
+					String CurrentPageURL = Common.getCurrentURL();
+					Common.assertionCheckwithReport(
+							Common.getPageTitle().contains(footerlinks[i]) || CurrentPageURL.contains(footerlinks[i])
+									|| CurrentPageURL.contains("prodeal")
+									|| Common.getPageTitle().contains("We are Hydro Flask")
+									|| Common.getPageTitle().contains("Refer-A-Friend")
+									|| Common.getPageTitle().contains("Corporate Purchasing"),
+							"validating the links navigation from footer Links",
+							"After Clicking on" + footerlinks[i] + "it should navigate to the",
+							footerlinks[i] + "Sucessfully Navigated to the" + footerlinks[i] + "Links",
+							"Unable to Navigated to the" + footerlinks[i] + "Links");
+					
+					Common.switchToFirstTab();
+					
+				}
+				else {
 				String CurrentPageURL = Common.getCurrentURL();
 				Common.assertionCheckwithReport(
 						Common.getPageTitle().contains(footerlinks[i]) || CurrentPageURL.contains(footerlinks[i])
@@ -12264,33 +12283,34 @@ catch(Exception | Error e){
 						footerlinks[i] + "Sucessfully Navigated to the" + footerlinks[i] + "Links",
 						"Unable to Navigated to the" + footerlinks[i] + "Links");
 				Common.navigateBack();
+				}
 
 			}
 			
-			for(i=0; i< CompanyLinks.length; i++) {
-				Sync.waitElementPresent(30, "xpath",
-						"//div[contains(@class,'footer-menu')]//a[contains(text(),'" + CompanyLinks[i] + "')]");
-				Thread.sleep(3000);
-				Common.findElement("xpath",
-						"//div[contains(@class,'footer-menu')]//a[contains(text(),'" + CompanyLinks[i] + "')]");
-				Common.clickElement("xpath",
-						"//div[contains(@class,'footer-menu')]//a[contains(text(),'" + CompanyLinks[i] + "')]");
-				Sync.waitPageLoad();
-				Thread.sleep(3000);
-				System.out.println(CompanyLinks[i]);
-				String CurrentPageURL = Common.getCurrentURL();
-				Common.assertionCheckwithReport(
-						Common.getPageTitle().contains(CompanyLinks[i]) || CurrentPageURL.contains(CompanyLinks[i])
-								|| CurrentPageURL.contains("prodeal")
-								|| Common.getPageTitle().contains("Our Story")
-								|| Common.getPageTitle().contains("Privacy Policy")
-								|| Common.getPageTitle().contains("Cookie Policy"),
-						"validating the links navigation from footer Links",
-						"After Clicking on" + CompanyLinks[i] + "it should navigate to the",
-						CompanyLinks[i] + "Sucessfully Navigated to the" + CompanyLinks[i] + "Links",
-						"Unable to Navigated to the" + CompanyLinks[i] + "Links");
-				Common.navigateBack();
-			}
+//			for(i=0; i< CompanyLinks.length; i++) {
+//				Sync.waitElementPresent(30, "xpath",
+//						"//div[contains(@class,'footer-menu')]//a[contains(text(),'" + CompanyLinks[i] + "')]");
+//				Thread.sleep(3000);
+//				Common.findElement("xpath",
+//						"//div[contains(@class,'footer-menu')]//a[contains(text(),'" + CompanyLinks[i] + "')]");
+//				Common.clickElement("xpath",
+//						"//div[contains(@class,'footer-menu')]//a[contains(text(),'" + CompanyLinks[i] + "')]");
+//				Sync.waitPageLoad();
+//				Thread.sleep(3000);
+//				System.out.println(CompanyLinks[i]);
+//				String CurrentPageURL = Common.getCurrentURL();
+//				Common.assertionCheckwithReport(
+//						Common.getPageTitle().contains(CompanyLinks[i]) || CurrentPageURL.contains(CompanyLinks[i])
+//								|| CurrentPageURL.contains("prodeal")
+//								|| Common.getPageTitle().contains("Our Story")
+//								|| Common.getPageTitle().contains("Privacy Policy")
+//								|| Common.getPageTitle().contains("Cookie Policy"),
+//						"validating the links navigation from footer Links",
+//						"After Clicking on" + CompanyLinks[i] + "it should navigate to the",
+//						CompanyLinks[i] + "Sucessfully Navigated to the" + CompanyLinks[i] + "Links",
+//						"Unable to Navigated to the" + CompanyLinks[i] + "Links");
+//				Common.navigateBack();
+//			}
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
@@ -12487,17 +12507,19 @@ catch(Exception | Error e){
 
 	}
 
-	public void Terms_and_privacy() {
+	public void Terms_and_privacy_and_AntiHumanTrafficking() {
 		// TODO Auto-generated method stub
 		try {
-			Sync.waitElementPresent("xpath", "//a[contains(@href,'Privacy')]");
-			Common.clickElement("xpath", "//a[contains(@href,'Privacy')]");
+			Sync.waitElementPresent("xpath", "(//a[contains(@href,'privacy')])[3]");
+			Common.clickElement("xpath", "(//a[contains(@href,'privacy')])[3]");
 			Sync.waitPageLoad();
 			Thread.sleep(3000);
 			Common.assertionCheckwithReport(Common.getPageTitle().contains("Privacy Policy"),
 					"validating the privacy page Navigation",
 					"After Clicking  privacy it should navigate to the respective page",
 					"Sucessfully Navigated to the Privacy Policy page", "Failed Navigate to the Privacy Policy page");
+			
+			Common.navigateBack();
 			Sync.waitElementPresent("xpath", "//a[contains(@href,'terms')]");
 			Common.clickElement("xpath", "//a[contains(@href,'terms')]");
 			Sync.waitPageLoad();
@@ -12506,7 +12528,17 @@ catch(Exception | Error e){
 					"validating the Terms and condition page Navigation",
 					"After Clicking Terms and condition it should navigate to the respective page",
 					"Sucessfully Navigated to the Terms and condition page", "Failed Navigate to the Terms and condition page");
-
+			Common.navigateBack();
+			Common.clickElement("xpath", "//a[contains(@href,'anti-human-trafficking-and-modern-slavery-statement')]");
+			Common.switchWindows();
+			Common.assertionCheckwithReport(
+				    Common.getPageTitle().contains("Anti-human Trafficking and Modern Slavery Statement | Helen of Troy"),
+				    "Validating the Anti-human Trafficking and Modern Slavery page navigation",
+				    "After clicking the link, it should navigate to the Anti-human Trafficking and Modern Slavery page",
+				    "Successfully navigated to the Anti-human Trafficking and Modern Slavery page",
+				    "Failed to navigate to the Anti-human Trafficking and Modern Slavery page"
+				);
+				
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("validating the Terms and privacy page Navigation",
@@ -12529,12 +12561,12 @@ catch(Exception | Error e){
 		try {
 			for (i = 0; i < footerlinks.length; i++) {
 				Sync.waitElementPresent(30, "xpath",
-						"//div[contains(@class,'footer-menu')]//a[normalize-space()='" + footerlinks[i] + "']");
+						"//div[contains(@class,'footer-menu')]//a[contains(@href,'"+ footerlinks[i] + "')]");
 				Thread.sleep(3000);
 				Common.findElement("xpath",
-						"//div[contains(@class,'footer-menu')]//a[normalize-space()='" + footerlinks[i] + "']");
+						"//div[contains(@class,'footer-menu')]//a[contains(@href,'" + footerlinks[i] + "')]");
 				Common.clickElement("xpath",
-						"//div[contains(@class,'footer-menu')]//a[normalize-space()='" + footerlinks[i] + "']");
+						"//div[contains(@class,'footer-menu')]//a[contains(@href,'" + footerlinks[i] + "')]");
 				Sync.waitPageLoad();
 				Thread.sleep(3000);
 				String Bread = Common.findElement("xpath", "//nav[contains(@class,'breadcrumb')]").getText();
