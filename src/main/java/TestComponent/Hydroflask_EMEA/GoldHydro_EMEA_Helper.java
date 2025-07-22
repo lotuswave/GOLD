@@ -5952,32 +5952,23 @@ catch(Exception | Error e){
 					"Sucessfully Error message has been displayed in invalid fileds ",
 					"Failed to display the error meesage in invalid fields ");
 			score(data.get(Dataset).get("score"));
-			Sync.waitElementPresent("xpath", "//input[@name='review_title']");
-			int title = Common.findElements("xpath", "//input[@name='review_title']").size();
+			Sync.waitElementPresent("id", "headline");
+			int title = Common.findElements("id", "headline").size();
 			Common.assertionCheckwithReport(title > 0, "verifying the title page",
 					"title input box should be displayed", expectedResult, "User Unable to display the title box");
-			Common.textBoxInput("xpath", "//input[@name='review_title']", data.get(Dataset).get("title"));
-			Common.textBoxInput("xpath", "//textarea[@name='review_content']", data.get(Dataset).get("Review"));
-			Common.textBoxInput("xpath", "//input[@name='display_name']", data.get(Dataset).get("FirstName"));
-			Common.textBoxInput("xpath", "//input[@name='email']", data.get(Dataset).get("UserName"));
-			Common.clickElement("xpath", "//input[@value='Post']");
-			String emailerror = Common.findElement("xpath", "//span[@class='form-input-error']").getText();
-			Common.assertionCheckwithReport(emailerror.contains("Invalid email"),
-					"verifying the invaild email for the product review",
-					"error message should be display for invaild email",
-					"Sucessfully error message has been displayed for invalid email",
-					"Failed to display the error message for invaild email");
+			Common.textBoxInput("id", "headline", data.get(Dataset).get("title"));
+			Common.textBoxInput("id", "content", data.get(Dataset).get("Review"));
+			Common.textBoxInput("id", "name", data.get(Dataset).get("FirstName"));
+			
+			Common.textBoxInput("id", "email", data.get(Dataset).get("Email"));
+			Common.clickElement("xpath", "//button[text()='Send']");
 			Thread.sleep(4000);
-			Common.textBoxInput("xpath", "//input[@name='email']", data.get(Dataset).get("Email"));
-			Common.clickElement("xpath", "//input[@value='Post']");
-			Thread.sleep(4000);
-			String message = Common.findElement("xpath", "//div[@class='yotpo-thank-you']").getAttribute("aria-label");
-			Common.assertionCheckwithReport(message.equals("Thank you for posting a review"),
+			String message = Common.findElement("css", "div[class='yotpo-headline-complete']").getText();
+			Common.assertionCheckwithReport( message.equals("Thanks, " + data.get(Dataset).get("FirstName") + "!"),
 					"verifying the post for the product review",
 					"product review should be submit after clicking on post",
 					"Sucessfully Thank you message has been displayed ", "Failed to display the Thank you message ");
-//			Common.clickElement("xpath", "//div[@aria-label='Next']");
-
+			Common.clickElement("css","button[class='yotpo-icon-button']");
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("verifying the post for the product review",
@@ -5991,31 +5982,35 @@ catch(Exception | Error e){
 	}
 
 	public void score(String score) throws Exception {
-		Thread.sleep(4000);
-		switch (score) {
-		case "1":
-			Sync.waitElementPresent("xpath", "//span[@aria-label='score 1']");
-			Common.clickElement("xpath", "//span[@aria-label='score 1']");
-			break;
-		case "2":
-			Sync.waitElementPresent("xpath", "//span[@aria-label='score 2']");
-			Common.clickElement("xpath", "//span[@aria-label='score 2']");
-			break;
-		case "3":
-			Sync.waitElementPresent("xpath", "//span[@aria-label='score 3']");
-			Common.clickElement("xpath", "//span[@aria-label='score 3']");
-			;
-			break;
-		case "4":
-			Sync.waitElementPresent("xpath", "//span[@aria-label='score 4']");
-			Common.clickElement("xpath", "//span[@aria-label='score 4']");
-			break;
-		case "5":
-			Sync.waitElementPresent("xpath", "//span[@aria-label='score 5']");
-			Common.clickElement("xpath", "//span[@aria-label='score 5']");
-			break;
-		}
+	    Thread.sleep(4000);
+
+	    switch (score) {
+	        case "1":
+	            Sync.waitElementPresent("css", "label[aria-label='Score 1 Very poor']");
+	            Common.clickElement("css", "label[aria-label='Score 1 Very poor']");
+	            break;
+	        case "2":
+	            Sync.waitElementPresent("css", "label[aria-label='Score 2 Poor']");
+	            Common.clickElement("css", "label[aria-label='Score 2 Poor']");
+	            break;
+	        case "3":
+	            Sync.waitElementPresent("css", "label[aria-label='Score 3 Average']");
+	            Common.clickElement("css", "label[aria-label='Score 3 Average']");
+	            break;
+	        case "4":
+	            Sync.waitElementPresent("css", "label[aria-label='Score 4 Good']");
+	            Common.clickElement("css", "label[aria-label='Score 4 Good']");
+	            break;
+	        case "5":
+	            Sync.waitElementPresent("css", "label[aria-label='Score 5 Great!']");
+	            Common.clickElement("css", "label[aria-label='Score 5 Great!']");
+	            break;
+	        default:
+	            throw new IllegalArgumentException("Invalid score value: " + score);
+	    }
 	}
+
+
 
 	public void BillingAddress(String dataSet) {
 		// TODO Auto-generated method stub
@@ -11092,21 +11087,22 @@ catch(Exception | Error e){
 		String Name = data.get(Dataset).get("FirstName");
 		String Email = data.get(Dataset).get("Email");
 		try {
-			Sync.waitElementPresent("xpath", "//button[contains(@aria-label,'ask a question')]");
-			Common.clickElement("xpath", "//button[contains(@aria-label,'ask a question')]");
-			Sync.waitElementPresent(30, "xpath", "//textarea[contains(@id,'yotpo_input_q')]");
-			Common.textBoxInput("xpath", "//textarea[contains(@id,'yotpo_input_q')]", Question);
-			Sync.waitElementPresent(30, "xpath", "//input[@name='display_name']");
-			Common.textBoxInput("xpath", "//input[@name='display_name']", Name);
-			Sync.waitElementPresent(30, "xpath", "//input[@name='email']");
-			Common.textBoxInput("xpath", "//input[@name='email']", Email);
-			Common.clickElement("xpath", "//input[@data-button-type='submit']");
+			Sync.waitElementPresent("xpath", "//button[text()='Q&A']");
+			Common.clickElement("xpath", "//button[text()='Q&A']");
+			Sync.waitElementPresent("css", "a[class='yotpo-question-btn yotpo-ask-question-btn-l empty-state']");
+			Common.clickElement("css", "a[class='yotpo-question-btn yotpo-ask-question-btn-l empty-state']");
+			
+			Sync.waitElementPresent(30, "css", "textarea[aria-label='Type your question']");
+			Common.textBoxInput("css", "textarea[aria-label='Type your question']", Question);
+			Sync.waitElementPresent(30, "css", "input[aria-label='Enter your name']");
+			Common.textBoxInput("css", "input[aria-label='Enter your name']", Name);
+			Sync.waitElementPresent(30, "css", "input[aria-label='Enter your email address']");
+			Common.textBoxInput("css", "input[aria-label='Enter your email address']", Email);
+			Common.clickElement("xpath", "//button[text()='Send']");
 			Thread.sleep(4000);
-			String question = Common
-					.findElement("xpath", "//div[@class='yotpo-thank-you']//span[contains(text(),'Thank you')]")
-					.getText();
+			String question = Common.findElement("css", "div[class='yotpo-headline-complete']").getText();
 			System.out.println(question);
-			Common.assertionCheckwithReport(question.contains("THANK YOU FOR POSTING A QUESTION!"),
+			Common.assertionCheckwithReport(question.equals("Thanks, " + data.get(Dataset).get("FirstName") + "!"),
 					"validating the question submit form", "Ask a form should be submit",
 					"Sucessfully question post should be submit", "Failed to submit the ask a question post");
 		} catch (Exception | Error e) {
