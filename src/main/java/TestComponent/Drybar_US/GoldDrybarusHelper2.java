@@ -7723,7 +7723,8 @@ public void FUll_Payment(String dataSet) {
 								"//div[@id='algolia_instant_sorter']//span")
 						.getText();
 				System.out.println(Sort);
-				int Reviews = Common.findElements("xpath","//span[@class='yotpo-sr-bottom-line-right-panel']//span").size();
+				//int Reviews = Common.findElements("xpath","//span[@class='yotpo-sr-bottom-line-right-panel']//span").size();
+				int Reviews = Common.findElements("xpath","//span[contains(@class,'yotpo-sr-bottom-line-right-panel')]").size();
 				int Ribbons = Common.findElements("xpath","//span[contains(@class,'ribbon-bg new flex justify-center')]").size();
 				Thread.sleep(4000);
 				Common.assertionCheckwithReport(Reviews > 0 && breadcrumbs.contains("Breadcrumb") && filter.contains("Filter by") && Sort.contains("Sort by") 
@@ -13087,7 +13088,7 @@ public void verifingHomePage_and_NewsletterSubcriptionPOPUP(String dataSet) thro
 						|| Common.getPageTitle().contains("Drybar Home") || Common.getPageTitle().contains("Drybar"),
 				"validating store logo", "System directs the user to the Homepage",
 				"Sucessfully user navigates to the home page", "Failed to navigate to the homepage");
-		Common.clickElement("xpath", "(//span[contains(text(),'Rewards')])[1]");
+		//Common.clickElement("xpath", "(//span[contains(text(),'Rewards')])[1]");
 		Thread.sleep(4000);
 		int sizesframe = Common.findElements("xpath", "//div[@id='ltkpopup-content']").size();
 		System.out.println(sizesframe);
@@ -13343,8 +13344,8 @@ public void Write_to_Us(String Dataset) {
 	String email = Common.genrateRandomEmail(data.get(Dataset).get("UserName"));
 try {
 
-	Sync.waitElementPresent("xpath", "//span[text()='Write to Us']");
-	Common.clickElement("xpath", "//span[text()='Write to Us']");
+	Sync.waitElementPresent("xpath", "//span[text()='WRITE TO US']");
+	Common.clickElement("xpath", "//span[text()='WRITE TO US']");
 	Sync.waitPageLoad();
 	Thread.sleep(4000);
 	Common.switchFrames("xpath", "//iframe[@id='contact-us-form']");
