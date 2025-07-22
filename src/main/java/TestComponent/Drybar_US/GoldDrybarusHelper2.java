@@ -1167,7 +1167,8 @@ public class GoldDrybarusHelper2 {
 					"After Clicking on stored methods CTA user should be navigate to the My Payment Methods page",
 					"Sucessfully User Navigates to the My Payment Methods page after clicking on the stored methods  CTA",
 					"Failed to Navigate to the My Payment Methods page after Clicking on my stored methods  CTA");
-			int size = Common.findElements("xpath", "//div[@class='divide-y divide-border']").size();
+			//int size = Common.findElements("xpath", "//div[@class='divide-y divide-border']").size();
+			int size = Common.findElements("xpath", "//div[contains(@class,'divide-y divide-border')]").size();
 			if (size > 0) {
 				String number = Common.findElement("xpath", "//div[@class='flex items-center']//span").getText()
 						.replace("•••• ", "");
