@@ -175,5 +175,11 @@
         <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.Test_DGLD_HF_EMEA_RT_044_Validate_Blog_page"/>
     </classes>
 </test>
+
+<test name="Test_DGLD_HF_EMEA_RT_036_Write_a_Review_and_ask_a_question" testid="DQA-4435" description="This test case is to verify the write a review for the product from PDP">
+    <classes>
+        <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.Test_DGLD_HF_EMEA_RT_036_Write_a_Review_and_ask_a_question"/>
+    </classes>
+</test>
 </suite>
 

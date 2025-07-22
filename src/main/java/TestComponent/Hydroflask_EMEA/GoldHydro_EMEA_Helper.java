@@ -12181,18 +12181,22 @@ catch(Exception | Error e){
 		int i = 0;
 		try {
 			for (i = 0; i < Kustomerlinks.length; i++) {
+				//div[contains(@class,'footer-menu')]//a[@title='Contact Us']
 				Sync.waitElementPresent(30, "xpath",
-						"//div[contains(@class,'footer-menu')]//a[normalize-space()='" + Kustomerlinks[i] + "']");
+						"//div[contains(@class,'footer-menu')]//a[contains(@href,'" + Kustomerlinks[i] + "')]");
 				Thread.sleep(3000);
 				Common.findElement("xpath",
-						"//div[contains(@class,'footer-menu')]//a[normalize-space()='" + Kustomerlinks[i] + "']");
+						"//div[contains(@class,'footer-menu')]//a[contains(@href,'" + Kustomerlinks[i] + "')]");
+				String KustomerLinks=Common.findElement("xpath",
+						"//div[contains(@class,'footer-menu')]//a[contains(@href,'" + Kustomerlinks[i] + "')]").getAttribute("href");
 				Common.clickElement("xpath",
-						"//div[contains(@class,'footer-menu')]//a[normalize-space()='" + Kustomerlinks[i] + "']");
+						"//div[contains(@class,'footer-menu')]//a[contains(@href,'" + Kustomerlinks[i] + "')]");
 				Sync.waitPageLoad();
 				Thread.sleep(3000);
 				Common.assertionCheckwithReport(
 						Common.getPageTitle().contains(Kustomerlinks[i])
 								|| Common.getCurrentURL().contains(Kustomerlinks[i])
+								|| Common.getCurrentURL().contains(KustomerLinks)
 								|| Common.getPageTitle().contains("Store Locator")
 								|| Common.getPageTitle().contains("Knowledge Base")
 								|| Common.getPageTitle().contains("Contact")
@@ -12204,6 +12208,22 @@ catch(Exception | Error e){
 						"Unable to Navigated to the" + Kustomerlinks[i] + "Links");
 				Common.navigateBack();
 			}
+			Sync.waitElementPresent(30, "css",
+					"a[aria-label='Frequently Asked Questions']");
+			Thread.sleep(3000);
+			Common.findElement("css",
+					"a[aria-label='Frequently Asked Questions']");
+			String KustomerLinks=Common.findElement("css",
+					"a[aria-label='Frequently Asked Questions']").getAttribute("href");
+			Common.clickElement("css",
+					"a[aria-label='Frequently Asked Questions']");
+			Sync.waitPageLoad();
+			Thread.sleep(3000);
+			Common.assertionCheckwithReport(Common.getCurrentURL().contains(KustomerLinks),
+					"After Clicking on FAQ it should navigate to the FAQ Page", "Sucessfully Navigated to the FAQ Page Links",
+					"Unable to Navigated to the FAQ Page Links");
+			Common.navigateBack();
+			
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("validating the Kustomer links navigation from footer Links",
@@ -12213,7 +12233,6 @@ catch(Exception | Error e){
 			Assert.fail();
 		}
 	}
-
 	public void Footer_Links(String Dataset) {
 		// TODO Auto-generated method stub
 		String footer = data.get(Dataset).get("Footer Links");
