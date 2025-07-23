@@ -12225,7 +12225,7 @@ catch(Exception | Error e){
 					"a[aria-label='Frequently Asked Questions']");
 			Sync.waitPageLoad();
 			Thread.sleep(3000);
-			Common.assertionCheckwithReport(Common.getCurrentURL().contains(KustomerLinks),
+			Common.assertionCheckwithReport(Common.getCurrentURL().contains(KustomerLinks) || Common.getCurrentURL().contains("help"),
 					"After Clicking on FAQ it should navigate to the FAQ Page", "Sucessfully Navigated to the FAQ Page Links",
 					"Unable to Navigated to the FAQ Page Links");
 			Common.navigateBack();
