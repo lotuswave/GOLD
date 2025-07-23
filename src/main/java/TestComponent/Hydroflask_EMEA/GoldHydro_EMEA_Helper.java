@@ -1606,7 +1606,7 @@ Common.implicitWait();
 
 		String url = automation_properties.getInstance().getProperty(automation_properties.BASEURL);
 
-		if (url.contains("emea") || url.contains("preprod")) { // Check for stage/preprod explicitly
+		if (url.contains("stage") || url.contains("preprod")) { // Check for stage/preprod explicitly
 			try {
 
 				String Current_URL = Common.getCurrentURL();
@@ -1744,7 +1744,7 @@ Common.implicitWait();
 				Common.actionsKeyPress(Keys.ARROW_DOWN);
 				Common.switchToDefault();
 
-				if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("emea")) {
+				if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
 					Sync.waitElementPresent("css", "input[class='flex-none disabled:opacity-25']");
 					Common.clickElement("css", "input[class='flex-none disabled:opacity-25']");
 					Sync.waitPageLoad();
@@ -2145,7 +2145,7 @@ Common.implicitWait();
 			Common.actionsKeyPress(Keys.ARROW_DOWN);
 			Common.switchToDefault();
 
-			if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")||Common.getCurrentURL().contains("emea")) {
+			if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")||Common.getCurrentURL().contains("stage")) {
 				Sync.waitElementPresent("css", "input[class='flex-none disabled:opacity-25']");
 				Common.clickElement("css", "input[class='flex-none disabled:opacity-25']");
 				Sync.waitPageLoad();
@@ -15887,7 +15887,7 @@ catch(Exception | Error e){
 			Common.actionsKeyPress(Keys.ARROW_DOWN);
 			Common.switchToDefault();
 
-			if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("emea")) {
+			if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
 				Thread.sleep(1000);
 				Sync.waitElementPresent("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
 				Common.clickElement("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
