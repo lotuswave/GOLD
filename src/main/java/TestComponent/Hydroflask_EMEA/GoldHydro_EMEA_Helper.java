@@ -9844,8 +9844,8 @@ catch(Exception | Error e){
 	            Sync.waitElementClickable("xpath", "(//button[contains(@class,'relative block after') and @type='button'])[2]");
 	            Common.clickElement("xpath", "(//button[contains(@class,'relative block after') and @type='button'])[2]");
 	        } else {
-	            Sync.waitElementClickable("xpath", "(//div[@x-ref='jsThumbSlides']//div)[5]");
-	            Common.clickElement("xpath", "(//div[@x-ref='jsThumbSlides']//div)[5]");
+	            Sync.waitElementClickable("xpath", "(//button[contains(@class,'relative block after') and @type='button'])[2]");
+	            Common.clickElement("xpath", "(//button[contains(@class,'relative block after') and @type='button'])[2]");
 	        }
 
 	        Sync.waitElementVisible("xpath", "//iframe[contains(@id,'vimeo')]");
