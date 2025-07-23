@@ -4672,7 +4672,7 @@ catch(Exception | Error e){
 					"User failed to proceed with paypal payment", Common.getscreenShotPathforReport(expectedResult));
 			Assert.fail();
 		}
-		String url = automation_properties.getInstance().getProperty(automation_properties.BASEURL);
+		String url = Common.getCurrentURL();
 
 		if (!url.contains("stage") & !url.contains("preprod")) {
 
@@ -4716,7 +4716,7 @@ catch(Exception | Error e){
 						Common.getscreenShotPathforReport(expectedResult));
 				Assert.fail();
 			}
-			String url1 = automation_properties.getInstance().getProperty(automation_properties.BASEURL);
+			String url1 = Common.getCurrentURL();
 			if (!url1.contains("stage") && !url1.contains("preprod")) {
 			}
 
