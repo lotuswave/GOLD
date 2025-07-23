@@ -97,7 +97,7 @@ public class GoldHydro_EMEA_Helper {
 	        boolean isTitleCorrect = false;
 
 	       
-	      if (currentUrl.contains("preprod") || currentUrl.contains("stage4")|| currentUrl.contains("emea")) {
+	      if (currentUrl.contains("preprod") || currentUrl.contains("stage4")|| currentUrl.contains("www.hydroflask.com")) {
 	            Sync.waitPageLoad();
 	            isLogoPresent = Common.findElements("css", "a[class*='c-header__logo inline-flex'], img[alt='Store logo']").size() > 0;
 	            isTitleCorrect = validateTitle(
@@ -1604,13 +1604,13 @@ Common.implicitWait();
 
 		Sync.waitPageLoad(); // Important: Wait for page load after payment details are added
 
-		String url = automation_properties.getInstance().getProperty(automation_properties.BASEURL);
+		String Current_URL = Common.getCurrentURL();
+		System.out.println("Current_URL"+Current_URL);
 
-		if (url.contains("stage") || url.contains("preprod")) { // Check for stage/preprod explicitly
+		if (Current_URL.contains("stage") || Current_URL.contains("preprod")) { // Check for stage/preprod explicitly
 			try {
 
-				String Current_URL = Common.getCurrentURL();
-				System.out.println(Current_URL);
+								
 //	            String successMessage = Common.getText("xpath", "//div[contains(@class,'checkout-success')]//h1");
 //                  System.out.println("successMessage");
 				Common.assertionCheckwithReport(Current_URL.contains("onepage/success/"),
@@ -1771,9 +1771,15 @@ Common.implicitWait();
 					}
 
 				} else {
-					Sync.waitElementPresent("css", "iframe[title='Secure payment input frame']");
-					Common.switchFrames("css", "iframe[title='Secure payment input frame']");
+					if (Common.findElements("css", "iframe[title='Secure payment input frame']").size() > 0) {
+						Sync.waitElementPresent("css", "iframe[title='Secure payment input frame']");
+						Common.switchFrames("css", "iframe[title='Secure payment input frame']");
+					} else {
+						
+						Common.switchFrames("xpath",
+								"(//iframe[@role='presentation' and contains(@allow,'payment *; publickey-credentials')])[1]");
 
+					}
 					String cardNumberFromPage = Common.findElement("id", "Field-numberInput").getAttribute("value")
 							.replace(" ", "");
 

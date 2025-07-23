@@ -59,7 +59,7 @@ public class TEST_DGLD_HF_EMEA_DE_BCT_010_Validating_the_MiniCart_and_shopping_c
 
 	@BeforeTest
 	public void startTest() throws Exception {
-		String url="https://mcloud-na-preprod.hydroflask.com/de";
+		String url="https://www.hydroflask.com/de/";
 		System.setProperty("url", url);
 		Login.signIn();
 		Hydro.close_add();

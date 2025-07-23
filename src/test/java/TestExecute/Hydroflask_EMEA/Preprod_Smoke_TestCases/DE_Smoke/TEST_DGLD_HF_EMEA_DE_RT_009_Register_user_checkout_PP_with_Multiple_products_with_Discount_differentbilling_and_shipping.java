@@ -50,7 +50,7 @@ public class TEST_DGLD_HF_EMEA_DE_RT_009_Register_user_checkout_PP_with_Multiple
 
 	@BeforeTest
 	public void startTest() throws Exception {
-		String url="https://mcloud-na-preprod.hydroflask.com/de";
+		String url="https://www.hydroflask.com/de/";
 		System.setProperty("url", url);
         Login.signIn();
         Hydro.close_add();
