@@ -9034,6 +9034,7 @@ catch(Exception | Error e){
 
 	private void subscribeToAlert(String email) throws Exception {
 		Common.clickElement("css", "button[title='Notify Me When Available']");
+		Thread.sleep(2000);
 		Common.textBoxInput("css", "input[placeholder='Insert your email']", email);
 		Common.clickElement("xpath", "//span[text()='Subscribe']");
 		Sync.waitPageLoad();
@@ -9041,7 +9042,7 @@ catch(Exception | Error e){
 
 	private void stickysubscribeToAlert(String email) throws Exception {
 		Common.actionsKeyPress(Keys.END);
-		Common.clickElement("xpath", "(//button[@title='Notify Me When Available'])[1]");
+		Common.clickElement("xpath", "(//button[@title='Notify Me When Available'])[3]");
 		Thread.sleep(2000);
 		Common.textBoxInput("css", "input[placeholder='Insert your email']", email);
 		Common.clickElement("xpath", "//span[text()='Subscribe']");
