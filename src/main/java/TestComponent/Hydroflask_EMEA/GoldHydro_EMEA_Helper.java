@@ -6134,7 +6134,7 @@ catch(Exception | Error e){
 			Common.clickElement("xpath", "//button[text()='Sign Up']");
 			Sync.waitPageLoad();
 			Thread.sleep(2000);
-			int Text = Common.findElements("xpath", "//span[text()='Thank you for your subscription.']").size();
+			int Text = Common.findElements("xpath", "//span[contains(text(),'Thanks for subscribing')]").size();
 			System.out.println(Text);
 			int size = Common.findElements("xpath", "(//span[@class='ql-font-nunito-sans'])[1]").size();
 			String expectedResult = "User gets confirmation message that it was submitted";
@@ -8954,9 +8954,9 @@ catch(Exception | Error e){
 						Common.clickElement("xpath", "(//span[@class='country-selector-title'])[2]");
 						Thread.sleep(4000);
 						List<WebElement> select = Common.findElements("xpath",
-								"(//legend[text()='Europe']//parent::fieldset)[2]//div[@class='country-list__item']//p");
+								"(//legend[text()='Europe']//parent::fieldset)[1]//div[@class='country-list__item']//p");
 						String countryname = Common.findElement("xpath",
-								"(//legend[text()='Europe']//parent::fieldset)[2]//div[@class='country-item flex gap-3']//span[@class='country-item__country-label title-xs font-bold']")
+								"(//legend[text()='Europe']//parent::fieldset)[1]//div[@class='country-item flex gap-3']//span[@class='country-item__country-label title-xs font-bold']")
 								.getText();
 						System.out.println(countryname);
 //						int size = Common.findElements("css", "button[aria-label='Close']").size();

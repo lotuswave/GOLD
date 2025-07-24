@@ -117,11 +117,9 @@
     </classes>
   </test>
 
-
-
-  <test name="TEST_DGLD_HF_EMEA_RT_032_Validate_StoreLocator" testid="DQA-4440" description="Validate Store Locator Functionality">
+  <test name="Test_DGLD_HF_EMEA_RT_033_Validate_CountrySelector" testid="DQA-4439" description="This test case is used to validate the Country Selector in the Footer CMS Content">
     <classes>
-      <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.Test_DGLD_HF_EMEA_RT_032_Validate_StoreLocator"/>
+      <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.Test_DGLD_HF_EMEA_RT_033_Validate_CountrySelector"/>
     </classes>
   </test>
 
