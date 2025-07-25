@@ -566,7 +566,7 @@ public class GoldHydro_EMEA_Helper {
 	            if (fallbackCount > 0) {
 	                Common.javascriptclickElement("xpath", "//a[@id='checkout-link-button']");
 	            } else {
-	                throw new Exception("No checkout button found.");
+	            	throw new Exception("No checkout button found/ Minicart in not opened");
 	            }
 	        }
 
@@ -4216,7 +4216,7 @@ catch(Exception | Error e){
 				Sync.waitElementPresent("xpath", "//span[text()='Gift Cards']");
 				Common.clickElement("xpath", "//span[text()='Gift Cards']");
 			} else {
-//					Common.clickElement("css","button[aria-label='Close minicart']");
+				System.out.println("Gift cards not found in header, So searching through global search");
 				Thread.sleep(2000);
 				Common.clickElement("id", "menu-search-icon");
 				Common.textBoxInput("id", "autocomplete-0-input", GiftCard);
