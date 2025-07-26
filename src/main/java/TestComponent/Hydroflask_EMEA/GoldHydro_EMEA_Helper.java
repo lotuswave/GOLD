@@ -10276,7 +10276,7 @@ catch(Exception | Error e){
 
 	public void webpagelinks_validation(String Dataset) throws Exception, IOException {
 		// TODO Auto-generated method stub
-		String links = data.get(Dataset).get("Links");
+		String links = data.get(Dataset).get("prod Links");
 		int j = 0;
 
 		String[] strArray = links.split("\\r?\\n");
@@ -10304,7 +10304,7 @@ catch(Exception | Error e){
 
 				}
 
-			} else if (Common.getCurrentURL().contains("https://www.hydroflask.com/")) {
+			} else if (Common.getCurrentURL().contains("https://www.hydroflask.com/gb")) {
 
 				Common.oppenURL(strArray[i].replace("mcloud-na-preprod", "www"));
 
