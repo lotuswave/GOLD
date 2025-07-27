@@ -12031,8 +12031,8 @@ catch(Exception | Error e){
 		int i = 0;
 		try {
 			for (i = 0; i < Links.length; i++) {
-				Sync.waitElementPresent("xpath", "(//span[contains(text(),'Explore')])[1]");
-				Common.clickElement("xpath", "(//span[contains(text(),'Explore')])[1]");
+				Sync.waitElementPresent("xpath", "(//button[contains(@class,'level-0-link')])[3]");
+				Common.clickElement("xpath", "(//button[contains(@class,'level-0-link')])[3]");
 				Thread.sleep(3000);
 				Sync.waitElementPresent("xpath",
 						"//a[contains(@class,'link group no-underline')]//span[contains(text(),'" + Links[i] + "')]");
@@ -12044,6 +12044,12 @@ catch(Exception | Error e){
 				System.out.println(Common.getCurrentURL());
 				System.out.println(page.contains(Links[i]));
 				System.out.println(Common.getCurrentURL().contains(Links[i]));
+				if(Common.getPageTitle().contains("404"))
+				{
+					Assert.fail();
+				}
+				else
+				{
 				Common.assertionCheckwithReport(
 						Common.getPageTitle().contains("We are Hydro Flask") || Common.getPageTitle().contains(Links[i])
 								|| Common.getPageTitle().contains("Frequently Asked Questions | Hydro Flask")
@@ -12051,7 +12057,7 @@ catch(Exception | Error e){
 								|| Common.getPageTitle().contains("Let’s Go!")
 								|| Common.getPageTitle().contains("Refill For Good")
 								|| Common.getPageTitle().contains("Frequently Asked Questions")
-								|| Common.getPageTitle().contains("Trade In"),
+								|| Common.getCurrentURL().contains("festival-partnerships"),
 						"verifying the explore links navigation", "user should navigate to the " + Links[i] + " page",
 						"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
 				Thread.sleep(3000);
@@ -12062,7 +12068,7 @@ catch(Exception | Error e){
 				}
 
 			}
-
+			}
 		}
 
 		catch (Exception | Error e) {
