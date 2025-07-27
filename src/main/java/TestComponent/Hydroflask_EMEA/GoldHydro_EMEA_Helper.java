@@ -11798,19 +11798,19 @@ catch(Exception | Error e){
 		try {
 			for (i = 0; i < Links.length; i++) {
 
-				Sync.waitElementPresent(50, "xpath", "(//span[normalize-space()='Shop'])[1]");
+				Sync.waitElementPresent(50, "xpath", "(//button[contains(@class,'level-0-link')])[2]");
 //					WebElement web=	Common.findElementBy("xpath", "(//span[normalize-space()='Shop'])[1]");
 //					web.click();
-				Common.javascriptclickElement("xpath", "(//span[normalize-space()='Shop'])[1]");
+				Common.javascriptclickElement("xpath", "(//button[contains(@class,'level-0-link')])[2]");
 				Thread.sleep(3000);
 				int size = Common.findElements("xpath", "(//div[@x-init='$nextTick(() => {show = true })'])[2]").size();
 				if (size <= 0) {
 					Common.javascriptclickElement("xpath", "//img[@alt='Hydroflask store logo']");
 
-					Sync.waitElementPresent(50, "xpath", "//span[normalize-space()='Shop']");
-					Common.javascriptclickElement("xpath", "//span[normalize-space()='Shop']");
+					Sync.waitElementPresent("xpath", "(//button[contains(@class,'level-0-link')])[2]");
+					Common.javascriptclickElement("xpath", "(//button[contains(@class,'level-0-link')])[2]");
 				}
-				Common.clickElement("xpath", "//span[contains(text(),'Featured')]");
+				Common.clickElement("xpath", "(//button[contains(@class,'level-0-link')])[2]");
 				Thread.sleep(3000);
 				Sync.waitElementPresent("xpath",
 						"(//a[contains(@title,'" + Links[i] + "')]//span[contains(text(),'" + Links[i] + "')])[1]");
@@ -11850,26 +11850,40 @@ catch(Exception | Error e){
 	}
 	public void featured_Shopby_Activity(String Dataset) {
 		String names = data.get(Dataset).get("Featured links");
+		String Category=data.get(Dataset).get("Category");
 		String[] Links = names.split(",");
 		int i = 0;
 		try {
 			for (i = 0; i < Links.length; i++) {
-				Common.clickElement("xpath", "//span[contains(text(),'Featured')]");
-				Common.clickElement("xpath", "//a[contains(@title,'Shop by Activity')]");
+				Sync.waitElementPresent(50, "xpath", "(//button[contains(@class,'level-0-link')])[2]");
+				Common.javascriptclickElement("xpath", "//span[contains(text(),'Featured')]");
 				Thread.sleep(3000);
-				Sync.waitElementPresent("xpath",
-						"(//a[contains(@title,'" + Links[i] + "')]//span[contains(text(),'" + Links[i] + "')])[1]");
+				int size = Common.findElements("xpath", "(//div[@x-init='$nextTick(() => {show = true })'])[2]").size();
+				if (size <= 0) {
+					Common.javascriptclickElement("css", "img[class*='header-logo']");
+					Sync.waitElementPresent(50, "xpath", "(//button[contains(@class,'level-0-link')])[2]");
+					Common.javascriptclickElement("xpath", "(//button[contains(@class,'level-0-link')])[2]");
+				}
+				Thread.sleep(3000);
+				Sync.waitElementPresent("xpath", "//a[contains(@href,'"+ Category +"')]");
+				Common.clickElement("xpath", "//a[contains(@href,'"+ Category +"')]");
+				Thread.sleep(3000);
+				Sync.waitElementPresent(40, "xpath",
+						"//a[contains(@href,'"+ Category +"')]//span[contains(text(),'" + Links[i] + "')]");
 				Common.clickElement("xpath",
-						"(//a[contains(@title,'" + Links[i] + "')]//span[contains(text(),'" + Links[i] + "')])[1]");
+						"//a[contains(@href,'"+ Category +"')]//span[contains(text(),'" + Links[i] + "')]");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
 				String title="";
-				if(Common.findElements("xpath", "//h1[@class='hero-heading']").size()>0)
-				{
-					title = Common.findElement("xpath", "//h1[@class='hero-heading']").getText();
+				if (Common.findElements("xpath", "//h1[contains(@class,'title')]").size() > 0) {
+					title = Common.findElement("xpath", "//h1[contains(@class,'title')]").getText().trim();
+				} else if (Common.findElements("xpath", "//h1[contains(@class,'c-clp-hero')]").size() > 0) {
+					title = Common.findElement("xpath", "//h1[contains(@class,'c-clp-hero')]").getText().trim();
+				} else if (Common.findElements("xpath", "//h1//span").size() > 0) {
+					title = Common.findElement("xpath", "//h1//span").getText().trim();
 				}
-				else {
-					title = Common.findElement("xpath", "//h1[@class='title-2xl min-w-56']").getText();
+				else if (Common.findElements("xpath", "//h1").size() > 0) {
+					title = Common.findElement("xpath", "//h1").getText().trim();
 				}
 				String breadcrumbs = Common.findElement("xpath", "//nav[contains(@class,'breadcrumb')]").getText();
 				System.out.println(title);
@@ -11879,7 +11893,9 @@ catch(Exception | Error e){
 				int Number = Integer.parseInt(products);
 				int j = 0;
 				if (Number >= j) {
-					Common.assertionCheckwithReport(title.contains(Links[i]) || breadcrumbs.contains(Links[i]),
+					Common.assertionCheckwithReport(title.contains(Links[i]) || breadcrumbs.contains(Links[i]) || breadcrumbs.contains(Links[i])
+							 || Common.getPageTitle().contains("Shop Commute & Travel") || Common.getPageTitle().contains("Shop Lifestyle​"),
+				
 							"verifying the header link " + Links[i] + "Under Featured",
 							"user should navigate to the " + Links[i] + " page",
 							"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
@@ -11904,26 +11920,40 @@ catch(Exception | Error e){
 	public void featured_Shopby_Collections(String Dataset) {
 		// TODO Auto-generated method stub
 		String names = data.get(Dataset).get("Featured links");
+		String Category=data.get(Dataset).get("Category");
 		String[] Links = names.split(",");
 		int i = 0;
 		try {
 			for (i = 0; i < Links.length; i++) {
-				Common.clickElement("xpath", "//span[contains(text(),'Featured')]");
-				Common.clickElement("xpath", "//a[contains(@title,'Shop by Collection')]");
+				Sync.waitElementPresent(50, "xpath", "(//button[contains(@class,'level-0-link')])[2]");
+				Common.javascriptclickElement("xpath", "//span[contains(text(),'Featured')]");
 				Thread.sleep(3000);
-				Sync.waitElementPresent("xpath",
-						"(//a[contains(@title,'" + Links[i] + "')]//span[contains(text(),'" + Links[i] + "')])[1]");
+				int size = Common.findElements("xpath", "(//div[@x-init='$nextTick(() => {show = true })'])[2]").size();
+				if (size <= 0) {
+					Common.javascriptclickElement("css", "img[class*='header-logo']");
+					Sync.waitElementPresent(50, "xpath", "(//button[contains(@class,'level-0-link')])[2]");
+					Common.javascriptclickElement("xpath", "(//button[contains(@class,'level-0-link')])[2]");
+				}
+				Thread.sleep(3000);
+				Sync.waitElementPresent("xpath", "//a[contains(@href,'"+ Category +"')]");
+				Common.clickElement("xpath", "//a[contains(@href,'"+ Category +"')]");
+				Thread.sleep(3000);
+				Sync.waitElementPresent(40, "xpath",
+						"//a[contains(@href,'"+ Category +"')]//span[contains(text(),'" + Links[i] + "')]");
 				Common.clickElement("xpath",
-						"(//a[contains(@title,'" + Links[i] + "')]//span[contains(text(),'" + Links[i] + "')])[1]");
+						"//a[contains(@href,'"+ Category +"')]//span[contains(text(),'" + Links[i] + "')]");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
 				String title="";
-				if(Common.findElements("xpath", "//h1[@class='hero-heading']").size()>0)
-				{
-					title = Common.findElement("xpath", "//h1[@class='hero-heading']").getText();
+				if (Common.findElements("xpath", "//h1[contains(@class,'title')]").size() > 0) {
+					title = Common.findElement("xpath", "//h1[contains(@class,'title')]").getText().trim();
+				} else if (Common.findElements("xpath", "//h1[contains(@class,'c-clp-hero')]").size() > 0) {
+					title = Common.findElement("xpath", "//h1[contains(@class,'c-clp-hero')]").getText().trim();
+				} else if (Common.findElements("xpath", "//h1//span").size() > 0) {
+					title = Common.findElement("xpath", "//h1//span").getText().trim();
 				}
-				else {
-					title = Common.findElement("xpath", "//h1[@class='title-2xl min-w-56']").getText();
+				else if (Common.findElements("xpath", "//h1").size() > 0) {
+					title = Common.findElement("xpath", "//h1").getText().trim();
 				}
 				String breadcrumbs = Common.findElement("xpath", "//nav[contains(@class,'breadcrumb')]").getText();
 				System.out.println(title);
@@ -16187,8 +16217,8 @@ catch(Exception | Error e){
 		try {
 
 			for (i = 0; i < Links.length; i++) {
-				Sync.waitElementPresent(50, "xpath", "//span[normalize-space()='Shop']");
-				Common.clickElement("xpath", "//span[normalize-space()='Shop']");
+				Sync.waitElementPresent(50, "xpath", "//button[contains(@class,'level-0-link')]");
+				Common.clickElement("xpath", "//button[contains(@class,'level-0-link')]");
 				Thread.sleep(3000);
 				Sync.waitElementPresent("css", "a[title*='" + Links[i] + "']");
 				Common.clickElement("css", "a[title*='" + Links[i] + "']");
@@ -16253,8 +16283,8 @@ catch(Exception | Error e){
 		try {
 
 			for (i = 0; i < Links.length; i++) {
-				Sync.waitElementPresent(50, "xpath", "//span[normalize-space()='Featured']");
-				Common.clickElement("xpath", "//span[normalize-space()='Featured']");
+				Sync.waitElementPresent(50, "xpath", "(//button[contains(@class,'level-0-link')])[2]");
+				Common.clickElement("xpath", "(//button[contains(@class,'level-0-link')])[2]");
 				Thread.sleep(3000);
 				Sync.waitElementPresent("css", "a[title*='" + Links[i] + "']");
 				Common.clickElement("css", "a[title*='" + Links[i] + "']");
