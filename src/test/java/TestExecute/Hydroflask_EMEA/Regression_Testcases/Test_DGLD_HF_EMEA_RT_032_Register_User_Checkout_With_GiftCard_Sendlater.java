@@ -9,7 +9,7 @@ import TestComponent.Hydroflask_EMEA.GoldHydro_EMEA_Helper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_HF_EMEA_RT_032_Validate_StoreLocator {
+public class Test_DGLD_HF_EMEA_RT_032_Register_User_Checkout_With_GiftCard_Sendlater {
 
 	String datafile = "Hydroflask_EMEA//GoldHydroEMEA_TestData.xlsx";
 	GoldHydro_EMEA_Helper Hydro = new GoldHydro_EMEA_Helper(datafile,"DataSet");
