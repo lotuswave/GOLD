@@ -246,10 +246,10 @@ public class GoldHydro_EMEA_Helper {
 		try {
 
 			Sync.waitElementPresent("xpath",
-					"//button[contains(@class,'level-0-link')]");
+					"(//button[contains(@class,'level-0-link')])[2]");
 			Thread.sleep(3000);
 //			Common.scrollIntoView("xpath","//a[contains(@class,'level-top')]//span[text()=' Shop']")//a[contains(@title,'Shop')];
-			Common.clickElement("xpath", "//button[contains(@class,'level-0-link')]");
+			Common.clickElement("xpath", "(//button[contains(@class,'level-0-link')])[2]");
 
 			Thread.sleep(3000);
 			Sync.waitElementPresent("css", "a[href*='" + category + "']");
@@ -994,8 +994,8 @@ Common.implicitWait();
 			Thread.sleep(3000);
 			int size = Common.findElements("css", "label[for*='shipping-method']").size();
 			if (size > 0) {
-				Sync.waitElementPresent(30, "xpath", "//span[text()='" + method + "']");
-				Common.clickElement("xpath", "//span[text()='" + method + "']");
+				Sync.waitElementPresent(30, "css", "div[class*='checkout-shipping-methods__list-item-price']");
+				Common.clickElement("css", "div[class*='checkout-shipping-methods__list-item-price']");
 				ExtenantReportUtils.addPassLog("validating shipping methods selections on checkout page",
 						"Shipping methods should be select on the checkout page",
 						"user should able to select the shipping method",
@@ -1004,8 +1004,8 @@ Common.implicitWait();
 
 				Common.refreshpage();
 				Thread.sleep(2000);
-				Sync.waitElementPresent(30, "xpath", "//span[text()='" + method + "']");
-				Common.clickElement("xpath", "//span[text()='" + method + "']");
+				Sync.waitElementPresent(30, "css", "div[class*='checkout-shipping-methods__list-item-price']");
+				Common.clickElement("css", "div[class*='checkout-shipping-methods__list-item-price']");
 				ExtenantReportUtils.addPassLog("validating shipping methods selections on checkout page",
 						"Shipping methods should be select on the checkout page",
 						"user should able to select the shipping method",
@@ -2757,7 +2757,7 @@ Common.implicitWait();
 			} else {
 				Assert.fail();
 			}
-			Thread.sleep(6000);
+			Thread.sleep(8000);
 			String subtotal1 = Common.getText("xpath", "//span[@x-html='cart.subtotal']//span").replace(symbol, "")
 					.replace(symbol_1, "").replace(",", ".").replace(" ", "");
 			Float subtotal1value = Float.parseFloat(subtotal1);
@@ -8133,15 +8133,14 @@ catch(Exception | Error e){
 			 title = Common.findElement("xpath", "//h1[@class='title-2xl min-w-56']").getAttribute("class");
 			}
 			else {
-				 title = Common.findElement("xpath", "//h1//parent::div").getAttribute("data-element");
+				 title = Common.findElement("xpath", "//h1[@class='title-2xl min-w-56']").getAttribute("class");
 			}
 			String breadcrumbs = Common.findElement("xpath", "//nav[@id='breadcrumbs']").getAttribute("aria-label");
-			String filter = Common.findElement("xpath", "//h3[contains(@class,'flex-grow title')]").getText();
-			String Sort = Common.findElement("xpath", "//span[contains(@class,'pr-2.5 title-panel-sm')]").getText()
-					.trim();
+			String filter = Common.findElement("xpath", "//h3[contains(@class,'flex-grow title')]").getAttribute("class");
+			String Sort = Common.findElement("xpath", "//span[contains(@class,'pr-2.5 title-panel-sm')]//parent::div").getAttribute("class");
 			Common.assertionCheckwithReport(
-					breadcrumbs.contains("Breadcrumb") && title.contains("main")|| title.contains("title-2xl") && filter.contains("Filter by")
-							&& Sort.contains("Sort by")
+					breadcrumbs.contains("Breadcrumb") && title.contains("main")|| title.contains("title-2xl") && filter.contains("filter-by")
+							&& Sort.contains("sorter")
 							|| breadcrumbs.contains("Breadcrumb") && title.contains("title-2xl"),
 					"To validate the Product Listing Page", "User should able to open Product Listing Page",
 					"Sucessfully views the Product Listing Page", "Failed to view Product Listing Page");
@@ -8203,36 +8202,36 @@ catch(Exception | Error e){
 				String URL=Common.getCurrentURL();
 				if(URL.contains("de") || URL.contains("es") )
 				{
-				Common.clickElement("xpath", "//div[@id='algolia-sorts']//option[contains(text(),'" + desort + "')]");
+					Common.clickElement("xpath", "//div[@id='algolia-sorts']//option[contains(@value,'at_desc')]");
 
-				String low = Common
-						.findElement("xpath", "//div[@id='algolia-sorts']//option[contains(text(),'" + desort + "')]")
-						.getText();
+					String low = Common
+							.findElement("xpath", "//div[@id='algolia-sorts']//option[contains(@value,'at_desc')]]")
+							.getAttribute("value");
 
-				Common.assertionCheckwithReport(low.contains(desort), "To validate the Sort in Product Listing Page",
-						"User should able to Sort in Product Listing Page",
-						"Sucessfully Sorts in the Product Listing Page", "Failed to Sort  in Product Listing Page");
+					Common.assertionCheckwithReport(low.contains("at_desc"), "To validate the Sort in Product Listing Page",
+							"User should able to Sort in Product Listing Page",
+							"Sucessfully Sorts in the Product Listing Page", "Failed to Sort  in Product Listing Page");
 				}
 				else
 				{
-					Common.clickElement("xpath", "//div[@id='algolia-sorts']//option[contains(text(),'" + sort + "')]");
+					Common.clickElement("xpath", "//div[@id='algolia-sorts']//option[contains(@value,'at_desc')]");
 
 					String low = Common
-							.findElement("xpath", "//div[@id='algolia-sorts']//option[contains(text(),'" + sort + "')]")
-							.getText();
+							.findElement("xpath", "//div[@id='algolia-sorts']//option[contains(@value,'at_desc')]]")
+							.getAttribute("value");
 
-					Common.assertionCheckwithReport(low.contains(sort), "To validate the Sort in Product Listing Page",
+					Common.assertionCheckwithReport(low.contains("at_desc"), "To validate the Sort in Product Listing Page",
 							"User should able to Sort in Product Listing Page",
 							"Sucessfully Sorts in the Product Listing Page", "Failed to Sort  in Product Listing Page");
 				}
 			} else {
-				Common.clickElement("xpath", "//div[@id='algolia-sorts']//option[contains(text(),'" + Prodsort + "')]");
-
+				Common.clickElement("xpath", "//div[@id='algolia-sorts']//option[contains(@value,'at_desc')]");
+				Thread.sleep(4000);
 				String low = Common
-						.findElement("xpath", "//div[@id='algolia-sorts']//option[contains(text(),'" + Prodsort + "')]")
-						.getText();
+						.findElement("xpath", "//div[@id='algolia-sorts']//option[contains(@value,'at_desc')]")
+						.getAttribute("value");
 
-				Common.assertionCheckwithReport(low.contains(Prodsort), "To validate the Sort in Product Listing Page",
+				Common.assertionCheckwithReport(low.contains("at_desc"), "To validate the Sort in Product Listing Page",
 						"User should able to Sort in Product Listing Page",
 						"Sucessfully Sorts in the Product Listing Page", "Failed to Sort  in Product Listing Page");
 			}
@@ -13162,7 +13161,7 @@ catch(Exception | Error e){
 		// TODO Auto-generated method stub
 		try {
 
-			Common.clickElement("xpath", "//div[@class='ais-Panel-header']//span//div[text()='Colours']");
+			Common.clickElement("xpath", "//div[@class='ais-Panel-header']//span//div[contains(@id,'co')]");
 			Sync.implicitWait();
 			Sync.waitElementPresent("xpath",
 					"//ul[contains(@class,'ais-RefinementList')]//input[@value='" + colorname + "']");
@@ -13194,7 +13193,7 @@ catch(Exception | Error e){
 		// TODO Auto-generated method stub
 		String name = "";
 		try {
-			Common.clickElement("xpath", "//div[@class='ais-Panel-header']//div[text()='Price']");
+			Common.clickElement("xpath", "//div[@class='ais-Panel-header']//div");
 			Thread.sleep(3000);
 			String lastvalue = Common.findElement("xpath", "//div[@class='value end active']").getText()
 					.replace("£", "").replace(".00", "").replace("€", "").replace(",00", "").replace(" ", "");// eu//de//fr
