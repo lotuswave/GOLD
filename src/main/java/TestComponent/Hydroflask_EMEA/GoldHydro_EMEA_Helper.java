@@ -12233,7 +12233,7 @@ catch(Exception | Error e){
 				Thread.sleep(3000);
 				Common.assertionCheckwithReport(
 						Common.getPageTitle().contains(Kustomerlinks[i])||Common.getCurrentURL().contains("hydro-flask-versprechen-produktgarantie")
-								|| Common.getCurrentURL().contains(Kustomerlinks[i])
+						||Common.getCurrentURL().contains("hydro-flask-garanta-del-producto")|| Common.getCurrentURL().contains(Kustomerlinks[i])
 								|| Common.getCurrentURL().contains(KustomerLinks)
 								|| Common.getPageTitle().contains("Knowledge Base")
 								|| Common.getPageTitle().contains("Contact")
