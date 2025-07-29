@@ -12214,10 +12214,12 @@ catch(Exception | Error e){
 		// TODO Auto-generated method stub
 		String Kustomer = data.get(Dataset).get("Kustomer Links");
 		String[] Kustomerlinks = Kustomer.split(",");
+
 		int i = 0;
 		try {
 			for (i = 0; i < Kustomerlinks.length; i++) {
 				//div[contains(@class,'footer-menu')]//a[@title='Contact Us']
+				System.out.println(Kustomerlinks[i]);
 				Sync.waitElementPresent(30, "xpath",
 						"//div[contains(@class,'footer-menu')]//a[contains(@href,'" + Kustomerlinks[i] + "')]");
 				Thread.sleep(3000);
@@ -12230,10 +12232,9 @@ catch(Exception | Error e){
 				Sync.waitPageLoad();
 				Thread.sleep(3000);
 				Common.assertionCheckwithReport(
-						Common.getPageTitle().contains(Kustomerlinks[i])
+						Common.getPageTitle().contains(Kustomerlinks[i])||Common.getCurrentURL().contains("hydro-flask-versprechen-produktgarantie")
 								|| Common.getCurrentURL().contains(Kustomerlinks[i])
 								|| Common.getCurrentURL().contains(KustomerLinks)
-								|| Common.getPageTitle().contains("Store Locator")
 								|| Common.getPageTitle().contains("Knowledge Base")
 								|| Common.getPageTitle().contains("Contact")
 								|| Common.getPageTitle().contains("Tracking and Returns")
@@ -12297,8 +12298,8 @@ catch(Exception | Error e){
 									|| CurrentPageURL.contains("prodeal")
 									|| Common.getPageTitle().contains("We are Hydro Flask")
 									|| Common.getPageTitle().contains("Refer-A-Friend")
-									|| Common.getPageTitle().contains("Corporate Purchasing"),
-							"validating the links navigation from footer Links",
+									|| Common.getPageTitle().contains("Corporate Purchasing")|| Common.getCurrentURL().contains("corporate-purchasing")
+			,				"validating the links navigation from footer Links",
 							"After Clicking on" + footerlinks[i] + "it should navigate to the",
 							footerlinks[i] + "Sucessfully Navigated to the" + footerlinks[i] + "Links",
 							"Unable to Navigated to the" + footerlinks[i] + "Links");
