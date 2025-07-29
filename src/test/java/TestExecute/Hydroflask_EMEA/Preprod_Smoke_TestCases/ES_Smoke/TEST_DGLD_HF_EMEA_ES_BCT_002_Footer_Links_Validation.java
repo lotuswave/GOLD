@@ -36,7 +36,6 @@ public class TEST_DGLD_HF_EMEA_ES_BCT_002_Footer_Links_Validation {
 		Common.closeAll();
 
 	}
-
 	@BeforeTest
 	public void startTest() throws Exception {
 		String url="https://www.hydroflask.com/es";
