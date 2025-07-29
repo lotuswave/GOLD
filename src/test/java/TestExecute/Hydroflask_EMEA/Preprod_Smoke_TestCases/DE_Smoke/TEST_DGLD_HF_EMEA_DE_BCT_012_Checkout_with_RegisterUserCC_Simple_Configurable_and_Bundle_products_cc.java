@@ -23,7 +23,7 @@ public class TEST_DGLD_HF_EMEA_DE_BCT_012_Checkout_with_RegisterUserCC_Simple_Co
 			Hydro.login_Hydroflask("de_Address");
 			Hydro.search_product("Product");       
 			Hydro.addtocart("Product");
-			Hydro.bottles_headerlinks("bottles-drinkware"); 
+			Hydro.search_product("Configurable Product"); 
 			Hydro.Configurable_addtocart_pdp("Product");
 //			Hydro.search_product("Bundle product"); 
 //			Hydro.Addtocart_Bundle("Bundle product");
