@@ -11926,7 +11926,7 @@ catch(Exception | Error e){
 		try {
 			for (i = 0; i < Links.length; i++) {
 				Sync.waitElementPresent(50, "xpath", "(//button[contains(@class,'level-0-link')])[2]");
-				Common.javascriptclickElement("xpath", "//span[contains(text(),'Featured')]");
+				Common.javascriptclickElement("xpath", "(//button[contains(@class,'level-0-link')])[2]");
 				Thread.sleep(3000);
 				int size = Common.findElements("xpath", "(//div[@x-init='$nextTick(() => {show = true })'])[2]").size();
 				if (size <= 0) {
@@ -11935,8 +11935,8 @@ catch(Exception | Error e){
 					Common.javascriptclickElement("xpath", "(//button[contains(@class,'level-0-link')])[2]");
 				}
 				Thread.sleep(3000);
-				Sync.waitElementPresent("xpath", "//a[contains(@href,'"+ Category +"')]");
-				Common.clickElement("xpath", "//a[contains(@href,'"+ Category +"')]");
+				Sync.waitElementPresent(30,"xpath", "//a[contains(@href,'"+ Category +"')]");
+				Common.javascriptclickElement("xpath", "//a[contains(@href,'"+ Category +"')]");
 				Thread.sleep(3000);
 				Sync.waitElementPresent(40, "xpath",
 						"//a[contains(@href,'"+ Category +"')]//span[contains(text(),'" + Links[i] + "')]");
