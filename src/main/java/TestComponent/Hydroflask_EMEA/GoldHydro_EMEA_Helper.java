@@ -11671,7 +11671,7 @@ catch(Exception | Error e){
 				if (Number > j) {
 					Common.assertionCheckwithReport(
 							title.contains(Links[i]) || breadcrumbs.contains(Links[i]) || breadcrumbs.contains(Links[i])
-									|| Common.getCurrentURL().contains("coolers"),
+									|| Common.getCurrentURL().contains("coolers") || Common.getCurrentURL().contains("neveras-flexibles"),
 							"verifying the header link " + Links[i] + "Under Outdoor Packs",
 							"user should navigate to the " + Links[i] + " page",
 							"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
@@ -12093,7 +12093,7 @@ catch(Exception | Error e){
 				if (Common.getPageTitle().contains("Frequently Asked Questions | Hydro Flask")) {
 					Common.navigateBack();
 				} else {
-					Common.clickElement("xpath", "//img[@alt='Store logo']");
+					Common.clickElement("css", "img[class*='header-logo']");
 				}
 
 			}
