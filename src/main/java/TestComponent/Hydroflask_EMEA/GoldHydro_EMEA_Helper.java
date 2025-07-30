@@ -9993,7 +9993,7 @@ catch(Exception | Error e){
 			Sync.waitPageLoad();
 			Common.scrollIntoView("css", "span[x-html='message.text']");
 			expectedResult = "It should apply discount on your price.If user enters invalid promocode it should display coupon code is not valid message.";
-			if (Common.getCurrentURL().contains("emea") || Common.getCurrentURL().contains("preprod")) {
+			if (Common.getCurrentURL().contains("www.hydroflask.com") || Common.getCurrentURL().contains("preprod")) {
 				String discountcodemsg = Common.getText("css", "span[x-html='message.text']");
 				Common.assertionCheckwithReport(discountcodemsg.contains("You used coupon code") || discountcodemsg.contains("HFEMEA20OFF") || discountcodemsg.contains("HFEMEATEST5"), "verifying pomocode",
 						expectedResult, "promotion code working as expected", "Promation code is not applied");
@@ -13161,7 +13161,7 @@ catch(Exception | Error e){
 		// TODO Auto-generated method stub
 		try {
 
-			Common.clickElement("xpath", "//div[@class='ais-Panel-header']//span//div[contains(@id,'co')]");
+			Common.clickElement("xpath", "(//div[@class='ais-Panel-header']//span//div)[2]");
 			Sync.implicitWait();
 			Sync.waitElementPresent("xpath",
 					"//ul[contains(@class,'ais-RefinementList')]//input[@value='" + colorname + "']");
