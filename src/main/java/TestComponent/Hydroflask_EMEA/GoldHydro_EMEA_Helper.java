@@ -11934,8 +11934,8 @@ catch(Exception | Error e){
 					Common.javascriptclickElement("xpath", "(//button[contains(@class,'level-0-link')])[2]");
 				}
 				Thread.sleep(3000);
-				Sync.waitElementPresent(30,"xpath", "//a[contains(@href,'"+ Category +"')]");
-				Common.javascriptclickElement("xpath", "//a[contains(@href,'"+ Category +"')]");
+				Sync.waitElementPresent(30,"xpath", "(//a[contains(@href,'"+ Category +"')])[3]");
+				Common.javascriptclickElement("xpath", "(//a[contains(@href,'"+ Category +"')])[3]");
 				Thread.sleep(3000);
 				Sync.waitElementPresent(40, "xpath",
 						"//a[contains(@href,'"+ Category +"')]//span[contains(text(),'" + Links[i] + "')]");
@@ -12086,7 +12086,7 @@ catch(Exception | Error e){
 								|| Common.getPageTitle().contains("Let’s Go!")
 								|| Common.getPageTitle().contains("Refill For Good")
 								|| Common.getPageTitle().contains("Frequently Asked Questions")
-								|| Common.getCurrentURL().contains("festival-partnerships"),
+								|| Common.getCurrentURL().contains("festival-partnerships")||Common.getCurrentURL().contains("https://help.hydroflask.com/lang/de/"),
 						"verifying the explore links navigation", "user should navigate to the " + Links[i] + " page",
 						"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
 				Thread.sleep(3000);
