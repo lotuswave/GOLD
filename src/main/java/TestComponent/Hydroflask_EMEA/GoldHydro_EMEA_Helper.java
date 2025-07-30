@@ -11855,7 +11855,7 @@ catch(Exception | Error e){
 		try {
 			for (i = 0; i < Links.length; i++) {
 				Sync.waitElementPresent(50, "xpath", "(//button[contains(@class,'level-0-link')])[2]");
-				Common.javascriptclickElement("xpath", "//span[contains(text(),'Featured')]");
+				Common.javascriptclickElement("xpath", "(//button[contains(@class,'level-0-link')])[2]");
 				Thread.sleep(3000);
 				int size = Common.findElements("xpath", "(//div[@x-init='$nextTick(() => {show = true })'])[2]").size();
 				if (size <= 0) {
@@ -16313,7 +16313,7 @@ catch(Exception | Error e){
 				if(Number>j)
 				{
 				Common.assertionCheckwithReport(/*title.contains(Links[i]) || */Common.getCurrentURL().contains(Links[i]) || BreadCrumbs.contains(Links[i])
-						||Common.getCurrentURL().contains("collections"),
+						||Common.getCurrentURL().contains("collections") || Common.getCurrentURL().contains("colecciones"),
 						"verifying the header link " + Links[i] + "Under Featured",
 						"user should navigate to the " + Links[i] + " page",
 						"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
