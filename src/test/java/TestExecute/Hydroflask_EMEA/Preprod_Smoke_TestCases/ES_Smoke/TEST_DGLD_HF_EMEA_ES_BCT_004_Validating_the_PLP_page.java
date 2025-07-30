@@ -19,7 +19,7 @@ public class TEST_DGLD_HF_EMEA_ES_BCT_004_Validating_the_PLP_page {
 
 		try {
 			Hydro.verifingHomePage();
-			Hydro.bottle_Accessories_headerlinks("Accessories");
+			Hydro.bottle_Accessories_headerlinks("Accessories_ES");
 			Hydro.view_PLP_page();
 			Hydro.sort_By("SortBy");
 //			Hydro.filter_By("Accessories");
@@ -43,7 +43,7 @@ public class TEST_DGLD_HF_EMEA_ES_BCT_004_Validating_the_PLP_page {
 
 	@BeforeTest
 	public void startTest() throws Exception {
-		String url="https://mcloud-na-preprod.hydroflask.com/es";
+		String url="https://www.hydroflask.com/es";
 		System.setProperty("url", url);
         Login.signIn();
         Hydro.close_add();

@@ -10016,7 +10016,7 @@ catch(Exception | Error e){
 			Assert.fail();
 		}
 		try {
-			if (Common.getCurrentURL().contains("emea") || Common.getCurrentURL().contains("preprod")) {
+			if (Common.getCurrentURL().contains("hydroflask.com") || Common.getCurrentURL().contains("preprod")) {
 				Thread.sleep(6000);
 				String Subtotal = Common.getText("xpath", "//div[contains(@class,'text-right md:w-auto text-sm')]")
 						.replace(Symbol, "").replace(Symbol_1, "").replace(",", ".");

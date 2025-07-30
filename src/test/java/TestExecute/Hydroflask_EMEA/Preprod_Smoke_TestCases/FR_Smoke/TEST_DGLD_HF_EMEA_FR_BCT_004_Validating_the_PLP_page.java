@@ -19,7 +19,7 @@ public class TEST_DGLD_HF_EMEA_FR_BCT_004_Validating_the_PLP_page {
 
 		try {
 			Hydro.verifingHomePage();
-			Hydro.bottle_Accessories_headerlinks("Accessories");
+			Hydro.bottle_Accessories_headerlinks("Accessories_FR");
 			Hydro.view_PLP_page();
 			Hydro.sort_By("SortBy");
 //			Hydro.filter_By("Accessories");
