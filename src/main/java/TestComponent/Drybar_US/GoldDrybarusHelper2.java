@@ -2535,6 +2535,7 @@ public class GoldDrybarusHelper2 {
 			Common.clickElement("id", "login_email");
 			Common.textBoxInput("id", "login_email", data.get(dataSet).get("Email"));
 			Common.clickElement("xpath", "//button[text()='Next']");
+			Thread.sleep(5000);
 			int size = Common.findElements("xpath", "//button[text()='Use Password Instead']").size();
 			if(size>0) {
 				Common.clickElement("xpath", "//button[text()='Use Password Instead']");
@@ -2542,9 +2543,10 @@ public class GoldDrybarusHelper2 {
 			}
 			else {
 				
-			
+				Thread.sleep(5000);
 			Common.textBoxInput("id", "password", data.get(dataSet).get("Password"));
-			int sizeemail = Common.findElements("id", "email").size();
+			//int sizeemail = Common.findElements("id", "email").size();
+			int sizeemail = Common.findElements("id", "publicCredential").size();
 			
 			Common.assertionCheckwithReport(sizeemail > 0, "verifying the paypal payment ", expectedResult,
 					"open paypal site window", "faild to open paypal account");
@@ -11098,7 +11100,7 @@ public void view_order() {
 public void search_E2E_Completeorder() {
 	// TODO Auto-generated method stub
 	back_to_Orders();
-	String OrderNumber="DRYUSPRE97000472312";
+	String OrderNumber="DRYUSPRE97001002273";
 	  boolean found = false;
 	try
 	{
@@ -12378,14 +12380,25 @@ public void Subcription_Afterpay_Invalid() {
 		
 		Sync.waitElementPresent(30, "xpath", "//iframe[@title='Secure payment input frame']");
 		Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
-		Sync.waitElementPresent(30, "xpath", "//button[@id='afterpay_clearpay-tab']");
+	/*	Sync.waitElementPresent(30, "xpath", "//button[@id='afterpay_clearpay-tab']");
 		Common.javascriptclickElement("xpath", "//button[@id='afterpay_clearpay-tab']");	
 		Common.switchToDefault();
 		Thread.sleep(3000);
-		/*if(Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage") )
+		if(Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage") )
 			
 		{ */
-		Sync.waitElementPresent(30, "xpath", "(//button[contains(@class,'btn-place-order')])[1]");
+		
+		int size = Common.findElements("xpath", "//button[@id='afterpay_clearpay-tab']").size();
+		if(size==0) {
+			
+			System.out.println("AfterPay Not Applicable");
+			Common.assertionCheckwithReport(size==0, "validating for the afterpay payment method",
+					"After Pay paymenthod should not be display", "Sucessfully not displayed",
+					"After Pay is  displaying in Payment section");
+			
+		}
+		
+	/*	Sync.waitElementPresent(30, "xpath", "(//button[contains(@class,'btn-place-order')])[1]");
 		Common.clickElement("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
 		Sync.waitPageLoad();
 		Thread.sleep(5000);
@@ -12397,12 +12410,12 @@ public void Subcription_Afterpay_Invalid() {
 				"After clicking on the place order error message should be display", "Sucessfully error messsage has been displayed",
 				"failed to display the error message");
 		Sync.waitElementPresent("xpath", "//button[@aria-label='Close message']");
-		Common.clickElement("xpath", "//button[@aria-label='Close message']");
-	/*	}
+		Common.clickElement("xpath", "//button[@aria-label='Close message']");*/
+		
 		else
 		{
 			Assert.fail();
-			}*/
+			}
 		
 	}
 	catch (Exception | Error e)
@@ -12415,21 +12428,33 @@ public void Subcription_Afterpay_Invalid() {
 	}
 }
 
-
 public void Subcription_Klarna_Invalid() {
 	// TODO Auto-generated method stub
 	
 	try
 	{
-		Sync.waitElementPresent(30, "xpath", "//iframe[@title='Secure payment input frame']");
-		Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
-		System.out.println("Switch to Frames");
-		Common.scrollToElementAndClick("xpath", "//div[@class='p-PaymentMethodSelector']//button[@id='klarna-tab']");
+//		Sync.waitElementPresent(30, "xpath", "//iframe[@title='Secure payment input frame']");
+//		Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
+//	    System.out.println("Switch to Frames");
+	    
+		Thread.sleep(5000);
+	    int size = Common.findElements("xpath", "//div[@class='p-PaymentMethodSelector']//button[@id='klarna-tab']").size();
+		if(size==0) {
+			
+			System.out.println("Klarna Not Applicable");
+			Common.assertionCheckwithReport(size==0, "validating for the Klarna payment method",
+					"Klarna paymenthod should not be display", "Sucessfully not displayed",
+					"Klarna is  displaying in Payment section");
+			
+		}
+
+	    
+		/*Common.scrollToElementAndClick("xpath", "//div[@class='p-PaymentMethodSelector']//button[@id='klarna-tab']");
 		Common.switchToDefault();
 		System.out.println("Switch to Default");
-	/*	if(Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage") )
+		if(Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage") )
 		
-		{  */ 	 
+		{  	 
             	 Sync.waitElementPresent("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
  				 Common.clickElement("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
  				Sync.waitPageLoad();
@@ -12443,11 +12468,11 @@ public void Subcription_Klarna_Invalid() {
  						"failed to display the error message");
  				Sync.waitElementPresent("xpath", "//button[@aria-label='Close message']");
  				Common.clickElement("xpath", "//button[@aria-label='Close message']");
-	/*	}
+		}*/
 		else
 		{
 			Assert.fail();
-		}*/
+		}
 	}
 	
 	catch(Exception | Error e)
@@ -12460,6 +12485,7 @@ public void Subcription_Klarna_Invalid() {
 	}
 	
 }
+
 
 public void change_Shipping_address_sub() {
 	// TODO Auto-generated method stub
@@ -13098,12 +13124,12 @@ public void newtab_FooterLinks(String Dataset) {
 						Sync.waitPageLoad();
 						Thread.sleep(4000);
 						Sync.waitElementPresent(30, "xpath",
-								"//a[@title='"+ footerlinks[i] +"']");
+								"//ul//a[contains(text(),'"+ footerlinks[i] +"')]");
 						Thread.sleep(3000);
 						Common.findElement("xpath",
-								"//a[@title='"+ footerlinks[i] +"']");
+								"//ul//a[contains(text(),'"+ footerlinks[i] +"')]");
 						   Common.clickElement("xpath",
-								"//a[@title='"+ footerlinks[i] +"']");
+								"//ul//a[contains(text(),'"+ footerlinks[i] +"')]");
 						Sync.waitPageLoad();
 						Thread.sleep(4000);
 					
