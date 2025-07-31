@@ -2671,7 +2671,7 @@ Common.implicitWait();
 
 			product_quantity(DataSet);
 			System.out.println(productcolor);
-			Sync.waitElementPresent("css", "button[id='product-addtocart-button']");
+			Sync.waitElementPresent(30,"css", "button[id='product-addtocart-button']");
 			Common.javascriptclickElement("css", "button[id='product-addtocart-button']");
 
 			Thread.sleep(4000);
@@ -2708,6 +2708,8 @@ Common.implicitWait();
 			Float subtotalvalu£2 = Float.parseFloat(Subtotal2);
 			Float Total = subtotalvalue * 3;
 			String ExpectedTotalAmmount2 = new BigDecimal(Total).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
+			System.out.println("ExpectedTotalAmmount  :" +ExpectedTotalAmmount2);
+			System.out.println("Subtotal  :" +Subtotal2);
 			Common.assertionCheckwithReport(ExpectedTotalAmmount2.equals(Subtotal2),
 					"validating the product update quantity and subtotal",
 					"The product Quantity should be update in mini cart and subtotal should change",
