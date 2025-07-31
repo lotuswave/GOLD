@@ -4629,9 +4629,9 @@ catch(Exception | Error e){
 	    String currentURL = Common.getCurrentURL();
 
 	    // Configurable flag to allow prod execution
-	    boolean allowProdExecution = Boolean.parseBoolean(System.getProperty("allowProdExecution", "false"));
+//	    boolean allowProdExecution = Boolean.parseBoolean(System.getProperty("allowProdExecution", "false"));
 
-	    if (!allowProdExecution && !(currentURL.contains("preprod") || currentURL.contains("stage"))) {
+	    if (currentURL.contains("preprod") || currentURL.contains("prod")  || currentURL.contains("stage")) {
 	        System.out.println("PayPal payment method is skipped: Not allowed in PROD.");
 	        ExtenantReportUtils.addInfoLog("Skipping PayPal Payment This test is restricted to non-prod unless explicitly allowed. Current URL: " + currentURL);
 	        return order;
@@ -8175,7 +8175,7 @@ catch(Exception | Error e){
 					Common.clickElement("xpath", "//div[@id='algolia-sorts']//option[contains(@value,'at_desc')]");
 
 					String low = Common
-							.findElement("xpath", "//div[@id='algolia-sorts']//option[contains(@value,'at_desc')]]")
+							.findElement("xpath", "//div[@id='algolia-sorts']//option[contains(@value,'at_desc')]")
 							.getAttribute("value");
 
 					Common.assertionCheckwithReport(low.contains("at_desc"), "To validate the Sort in Product Listing Page",
