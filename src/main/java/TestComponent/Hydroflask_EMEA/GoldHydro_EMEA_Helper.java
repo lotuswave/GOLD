@@ -99,7 +99,7 @@ public class GoldHydro_EMEA_Helper {
 	       
 	      if (currentUrl.contains("preprod") || currentUrl.contains("stage4")|| currentUrl.contains("www.hydroflask.com")) {
 	            Sync.waitPageLoad();
-	            isLogoPresent = Common.findElements("css", "a[class*='c-header__logo inline-flex'], img[alt='Store logo']").size() > 0;
+	            isLogoPresent = Common.findElements("css", "a[class*='c-header__logo'], img[alt='Store logo']").size() > 0;
 	            isTitleCorrect = validateTitle(
 		                "Home Page",
 		                "Hydro Flask Reusable Bottles",
