@@ -2642,16 +2642,16 @@ Common.clickElement("xpath", "//span[contains(text(),'Cancel Coupon')]");
 //			if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage") ) {
 				Common.clickElement("xpath", "//h3[contains(text(),'Add Discount Code')]");	
 
-				Sync.waitElementPresent("id", "discount-code");
+				Sync.waitElementPresent("xpath", "//input[@id='discount-code']");
  
-				Common.textBoxInput("id", "discount-code", data.get(dataSet).get("Discountcode"));
+				Common.textBoxInput("xpath", "//input[@id='discount-code']", data.get(dataSet).get("Discountcode"));
 			} else {
-				Sync.waitElementPresent("id", "discount-code");
+				Sync.waitElementPresent("xpath", "//input[@id='discount-code']");
  
-				Common.textBoxInput("id", "discount-code", data.get(dataSet).get("prodDiscountcode"));
+				Common.textBoxInput("xpath", "//input[@id='discount-code']", data.get(dataSet).get("prodDiscountcode"));
 			}
  
-			int size = Common.findElements("id", "discount-code").size();
+			int size = Common.findElements("xpath", "//input[@id='discount-code']").size();
 			Common.assertionCheckwithReport(size > 0, "verifying the Discount Code label", expectedResult,
 					"Successfully open the discount input box", "User unable enter Discount Code");
 			Thread.sleep(4000);
@@ -8799,30 +8799,30 @@ Sync.waitElementPresent("xpath", "//input[@id='billing-as-shipping']");
 			Sync.waitElementPresent(30, "xpath", "(//div[contains(@class, 'checkout-address-list__button-container')]//button[@type='button'])[1]");
 			Common.clickElement("xpath", "(//div[contains(@class, 'checkout-address-list__button-container')]//button[@type='button'])[1]");
 			Thread.sleep(5000);
-			Common.textBoxInput("xpath", "//form[@id='billing']//input[@name='firstname']",
+			Common.textBoxInput("xpath", "//input[@id='shipping-firstname']",
 					data.get(dataSet).get("FirstName"));
-			Common.textBoxInput("xpath", "//form[@id='billing']//input[@name='lastname']",
+			Common.textBoxInput("xpath", "//input[@id='shipping-lastname']",
 					data.get(dataSet).get("LastName"));
-			Common.textBoxInput("xpath", "//form[@id='billing']//input[@name='street[0]']", data.get(dataSet).get("Street"));
-			String Text = Common.getText("xpath", "//form[@id='billing']//input[@name='street[0]']");
+			Common.textBoxInput("xpath", "//input[@id='shipping-street-0']", data.get(dataSet).get("Street"));
+			String Text = Common.getText("xpath", "//input[@id='shipping-street-0']");
 			Sync.waitPageLoad();
 			Thread.sleep(5000);
 
-			Common.textBoxInput("xpath", "//form[@id='billing']//input[@name='city']", data.get(dataSet).get("City"));
+			Common.textBoxInput("xpath", "//input[@id='shipping-city']", data.get(dataSet).get("City"));
 			System.out.println(data.get(dataSet).get("City"));
  
 //			Common.actionsKeyPress(Keys.PAGE_DOWN);
 			Thread.sleep(4000);
 			try {
-				Common.dropdown("xpath", "//form[@id='billing']//select[@name='region']", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+				Common.dropdown("xpath", "//select[@id='shipping-region']", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
 			} catch (ElementClickInterceptedException e) {
 				Thread.sleep(3000);
-				Common.dropdown("id", "shipping-region", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+				Common.dropdown("xpath", "//select[@id='shipping-region']", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
 			}
 			Thread.sleep(2000);
-			Common.textBoxInput("xpath", "//form[@id='billing']//input[@name='postcode']", data.get(dataSet).get("postcode"));
+			Common.textBoxInput("xpath", "//input[@id='shipping-postcode']", data.get(dataSet).get("postcode"));
 			Thread.sleep(4000);
-			Common.textBoxInput("xpath", "//form[@id='billing']//input[@name='telephone']",
+			Common.textBoxInput("xpath", "//input[@id='shipping-telephone']",
 					data.get(dataSet).get("phone"));
 			Thread.sleep(4000);
 			Common.clickElement("xpath", "//button[contains(@class, 'checkout-address-form__buttons-save')]");
