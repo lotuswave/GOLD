@@ -1,4 +1,4 @@
-package TestExecute.Hydroflask_EMEA.Regression_Testcases;
+package TestExecute.Hydroflask_EMEA.Archive;
 
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
@@ -9,26 +9,27 @@ import TestComponent.Hydroflask_EMEA.GoldHydro_EMEA_Helper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class TEST_DGLD_HF_EMEA_RT_047_Placeorder_Guest_user_Checkout_with_multiple_products_as_full_Redemption_using_gift_card_code {
+public class Test_DGLD_HF_EMEA_RT_032_Validate_StoreLocator {
 
 	String datafile = "Hydroflask_EMEA//GoldHydroEMEA_TestData.xlsx";
 	GoldHydro_EMEA_Helper Hydro = new GoldHydro_EMEA_Helper(datafile,"DataSet");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Validating_Placeorder_GuestUser_multipleproducts_with_full_Payment_using_gift_card_code_Method () throws Exception {
+	public void Validate_Store_Locator_Functionality () throws Exception {
 
 		try {
 			Hydro.verifingHomePage();
-			Hydro.search_product("Product");     
-			Hydro.addtocart("Product");
-			Hydro.bottles_headerlinks("bottles-drinkware"); 
-			Hydro.Configurable_addtocart_pdp("Product");
-			Hydro.minicart_Checkout();
-			Hydro.addDeliveryAddress_Guestuser("AccountDetails_2");
-            Hydro.selectshippingaddress("GroundShipping method");
-            Hydro.clickSubmitbutton_Shippingpage();
-            Hydro.Gift_card("Full_RedeemGiftcard_2");
-            Hydro.giftCardSubmitOrder();
+			Hydro.Click_Findstore();
+			Hydro.click_Retailer();
+			Hydro.verifingRetailerHours();
+			Hydro.verifingRetailerBrowser();
+			Hydro.Validate_store_sidebar();
+			Hydro.CLick_Usemylocation();
+			Hydro.Validate_AvailableRetailers();
+			Hydro.Validate_retailerlocations();
+			Hydro.Click_Instock();
+			Hydro.selectproduct("Small Bottle Boot");
+			
 
 		} catch (Exception e) {
 
@@ -49,5 +50,5 @@ public class TEST_DGLD_HF_EMEA_RT_047_Placeorder_Guest_user_Checkout_with_multip
 		Hydro.close_add();
         Hydro.acceptPrivacy();
 	}
-}
 
+}

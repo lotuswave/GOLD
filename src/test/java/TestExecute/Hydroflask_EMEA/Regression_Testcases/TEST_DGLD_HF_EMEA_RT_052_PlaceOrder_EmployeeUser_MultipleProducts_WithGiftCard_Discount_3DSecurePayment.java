@@ -23,7 +23,7 @@ public class TEST_DGLD_HF_EMEA_RT_052_PlaceOrder_EmployeeUser_MultipleProducts_W
 			Hydro.search_product("Product");      
 			Hydro.addtocart("Product"); 
 			Hydro.employee_discount();
-			Hydro.bottles_headerlinks("Bottles & Drinkware"); 
+			Hydro.bottles_headerlinks("bottles-drinkware"); 
 			Hydro.Configurable_addtocart_pdp("Product");
 			Hydro.employee_discount();
 			Hydro.minicart_Checkout();

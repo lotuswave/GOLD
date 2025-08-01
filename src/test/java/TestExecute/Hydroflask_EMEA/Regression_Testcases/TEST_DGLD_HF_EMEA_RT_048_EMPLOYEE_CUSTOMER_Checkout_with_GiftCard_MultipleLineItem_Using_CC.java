@@ -5,7 +5,6 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import TestComponent.Hydroflask.GoldHydroHyvaHelper;
 import TestComponent.Hydroflask_EMEA.GoldHydro_EMEA_Helper;
 import TestLib.Common;
 import TestLib.Login;
@@ -25,7 +24,7 @@ public class TEST_DGLD_HF_EMEA_RT_048_EMPLOYEE_CUSTOMER_Checkout_with_GiftCard_M
 			Hydro.search_product("Product");      
 			Hydro.addtocart("Product"); 
 			Hydro.employee_discount();
-			Hydro.bottles_headerlinks("Bottles & Drinkware"); 
+			Hydro.bottles_headerlinks("bottles-drinkware"); 
 			Hydro.Configurable_addtocart_pdp("Product");
 			Hydro.employee_discount();
 			Hydro.Gift_cards("Hydro Gift Card");

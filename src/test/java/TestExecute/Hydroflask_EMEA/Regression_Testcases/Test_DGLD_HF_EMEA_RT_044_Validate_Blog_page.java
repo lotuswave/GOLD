@@ -9,22 +9,18 @@ import TestComponent.Hydroflask_EMEA.GoldHydro_EMEA_Helper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_HF_EMEA_RT_059_Guest_User_checkout_with_Express_paypal {
-
-	String datafile = "Hydroflask_EMEA//GoldHydroEMEA_TestData.xlsx";
-	GoldHydro_EMEA_Helper Hydro = new GoldHydro_EMEA_Helper(datafile,"DataSet");
+public class Test_DGLD_HF_EMEA_RT_044_Validate_Blog_page {
 	
+	String datafile = "Hydroflask_EMEA//GoldHydroEMEA_TestData.xlsx";
+	GoldHydro_EMEA_Helper Hydro = new GoldHydro_EMEA_Helper(datafile,"Blog");
+
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Validating_the_Guest_User_checkout_with_Express_paypal () throws Exception {
+	public void Validating_HydroFlask_Blogs_Page () throws Exception {
 
 		try {
 			Hydro.verifingHomePage();
-			Hydro.search_product("Product");      
-			Hydro.addtocart("Product");  
-			Hydro.minicart_Checkout();
-			Hydro.addDeliveryAddress_Guestuser("AccountDetails");
-            Hydro.selectshippingaddress("GroundShipping method");
-			Hydro.Express_Paypal("PaypalDetails");
+			Hydro.Blog_Page("Blog");
+			Hydro.blog_page();
 			
 		} catch (Exception e) {
 
@@ -44,6 +40,7 @@ public class Test_DGLD_HF_EMEA_RT_059_Guest_User_checkout_with_Express_paypal {
 		Login.signIn();
 		Hydro.close_add();
         Hydro.acceptPrivacy();
+
 	}
 
 }

@@ -25,7 +25,7 @@ public class TEST_DGLD_HF_EMEA_DE_RT_009_Register_user_checkout_PP_with_Multiple
 //			Hydro.Addtocart_Bundle("Bundle product");
 			Hydro.search_product("Product");     
 			Hydro.addtocart("Product");
-			Hydro.bottles_headerlinks("Bottles & Drinkware");
+			Hydro.search_product("Configurable Product");
 			Hydro.Configurable_addtocart_pdp("Product");
 			Hydro.minicart_Checkout();
 			Hydro.RegaddDeliveryAddress("de_Address");
@@ -50,7 +50,7 @@ public class TEST_DGLD_HF_EMEA_DE_RT_009_Register_user_checkout_PP_with_Multiple
 
 	@BeforeTest
 	public void startTest() throws Exception {
-		String url="https://mcloud-na-preprod.hydroflask.com/de";
+		String url="https://www.hydroflask.com/de/";
 		System.setProperty("url", url);
         Login.signIn();
         Hydro.close_add();

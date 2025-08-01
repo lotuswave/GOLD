@@ -9,7 +9,7 @@
         <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.TEST_DGLD_HF_EMEA_RT_001_guestCheckoutwith_invalid_CC_Credentials"/>
     </classes>
 </test>
-
+  
 <test name="TEST_DGLD_HF_EMEA_RT_002_RegisteredUserCheckoutwith_invalid_CC_Credentials" testid="DQA-4412" description="This script tests registered user checkout with invalid credit card credentials.">
     <classes>
         <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.TEST_DGLD_HF_EMEA_RT_002_RegisteredUserCheckoutwith_invalid_CC_Credentials"/>
@@ -80,12 +80,6 @@
     </classes>
 </test>
 
-<!-- 
-  <test name="TEST_DGLD_HF_EMEA_RT_021_Create_and_Edit_Gift_Registery_For_Register_User" testid="DQA-4447" description="Create and Edit Gift Registry for Registered User">
-    <classes>
-      <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.TEST_DGLD_HF_EMEA_RT_021_Create_and_Edit_Gift_Registery_For_Register_User"/>
-    </classes>
-  </test> -->
 
   <test name="TEST_DGLD_HF_EMEA_RT_023_Miscellaneous_Pages" testid="DQA-4449" description="Validate Miscellaneous Pages">
     <classes>
@@ -117,11 +111,9 @@
     </classes>
   </test>
 
-
-
-  <test name="TEST_DGLD_HF_EMEA_RT_032_Validate_StoreLocator" testid="DQA-4440" description="Validate Store Locator Functionality">
+  <test name="Test_DGLD_HF_EMEA_RT_033_Validate_CountrySelector" testid="DQA-4439" description="This test case is used to validate the Country Selector in the Footer CMS Content">
     <classes>
-      <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.Test_DGLD_HF_EMEA_RT_032_Validate_StoreLocator"/>
+      <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.Test_DGLD_HF_EMEA_RT_033_Validate_CountrySelector"/>
     </classes>
   </test>
 
@@ -136,9 +128,15 @@
       <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.Test_DGLD_HF_EMEA_RT_035_Validating_the_product_video_in_PDP_page"/>
     </classes>
   </test>
-
   
 
+<!--   This test should not execute in PROD
+  <test name="Test_DGLD_HF_EMEA_RT_036_Write_a_Review_and_ask_a_question" testid="DQA-4435" description="This test case is to verify the write a review for the product from PDP">
+    <classes>
+        <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.Test_DGLD_HF_EMEA_RT_036_Write_a_Review_and_ask_a_question"/>
+    </classes>
+</test>
+-->
   <test name="TEST_DGLD_HF_EMEA_RT_038_Create_An_Account_with_cart" testid="DQA-4430" description="Create an Account with Items in Cart">
     <classes>
       <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.Test_DGLD_HF_EMEA_RT_038_Create_An_Account_with_cart"/>
@@ -151,13 +149,31 @@
     </classes>
   </test>
 
-
- <test name="TEST_DGLD_HF_EMEA_UK_RT_070_Validation_Of_Homepage" testid="DQA-4070" description="This script validates the content and elements on the EMEA UK Home Page.">
+ <test name="Test_DGLD_HF_EMEA_RT_043_Pro_Deal_Application_for_Register_User" testid="DQA-43" description="Validating the pro deal application for the Register user">
     <classes>
-        <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.TEST_DGLD_HF_EMEA_UK_RT_070_Validation_Of_Homepage"/>
+        <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.Test_DGLD_HF_EMEA_RT_043_Pro_Deal_Application_for_Register_User"/>
     </classes>
 </test>
- 
+
+<test name="Test_DGLD_HF_EMEA_RT_044_Validate_Blog_page" testid="DQA-44" description="This test case is to verify the all Blog categories pages for the HYF UK website.">
+    <classes>
+        <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.Test_DGLD_HF_EMEA_RT_044_Validate_Blog_page"/>
+    </classes>
+</test>
+
+<test name="Test_DGLD_HF_EMEA_RT_045_Newsletter_subcribtion_and_Unsubscription_from_MyAccount_Page" testid="DQA-45" description="These testcase is to verify Newsletter subscription and un subscribe from the My account page">
+    <classes>
+        <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.Test_DGLD_HF_EMEA_RT_045_Newsletter_subcribtion_and_Unsubscription_from_MyAccount_Page"/>
+    </classes>
+</test>
+
+
+<test name="Test_DGLD_HF_EMEA_UK_RT_070_Validation_Of_Homepage" testid="DQA-4070" description="This script validates the content and elements on the EMEA UK Home Page.">
+    <classes>
+        <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.Test_DGLD_HF_EMEA_UK_RT_070_Validation_Of_Homepage"/>
+    </classes>
+</test>
+
 
 </suite>
 

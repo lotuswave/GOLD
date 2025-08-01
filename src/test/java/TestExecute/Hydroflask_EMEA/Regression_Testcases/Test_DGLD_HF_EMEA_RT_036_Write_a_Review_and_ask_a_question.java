@@ -9,22 +9,21 @@ import TestComponent.Hydroflask_EMEA.GoldHydro_EMEA_Helper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_HF_EMEA_RT_059_Guest_User_checkout_with_Express_paypal {
+public class Test_DGLD_HF_EMEA_RT_036_Write_a_Review_and_ask_a_question {
 
 	String datafile = "Hydroflask_EMEA//GoldHydroEMEA_TestData.xlsx";
-	GoldHydro_EMEA_Helper Hydro = new GoldHydro_EMEA_Helper(datafile,"DataSet");
-	
+	GoldHydro_EMEA_Helper Hydro = new GoldHydro_EMEA_Helper(datafile,"Sheet1");
+
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Validating_the_Guest_User_checkout_with_Express_paypal () throws Exception {
+	public void Validate_Review_and_Questions () throws Exception {
 
 		try {
 			Hydro.verifingHomePage();
-			Hydro.search_product("Product");      
-			Hydro.addtocart("Product");  
-			Hydro.minicart_Checkout();
-			Hydro.addDeliveryAddress_Guestuser("AccountDetails");
-            Hydro.selectshippingaddress("GroundShipping method");
-			Hydro.Express_Paypal("PaypalDetails");
+			Hydro.search_product("Review product"); 
+			Hydro.review("review");
+			Hydro.Ask_a_question("Ask a question");
+			
+			
 			
 		} catch (Exception e) {
 

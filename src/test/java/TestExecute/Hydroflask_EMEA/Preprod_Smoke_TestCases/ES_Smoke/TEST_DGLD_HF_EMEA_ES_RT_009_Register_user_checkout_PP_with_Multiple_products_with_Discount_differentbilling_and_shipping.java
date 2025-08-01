@@ -26,7 +26,7 @@ public class TEST_DGLD_HF_EMEA_ES_RT_009_Register_user_checkout_PP_with_Multiple
 //			Hydro.Addtocart_Bundle("Bundle product");
 			Hydro.search_product("Product");     
 			Hydro.addtocart("Product");
-			Hydro.bottles_headerlinks("Bottles & Drinkware");
+			Hydro.search_product("Configurable Product");
 			Hydro.Configurable_addtocart_pdp("Product");
 			Hydro.minicart_Checkout();
 			Hydro.RegaddDeliveryAddress("es_Address");

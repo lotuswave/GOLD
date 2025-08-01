@@ -20,7 +20,7 @@ public class Test_DGLD_HF_EMEA_RT_069_Place_Order_Validate_ShippingMethods_for_N
 			try {
 
 				Hydro.verifingHomePage();  
-				Hydro.bottles_headerlinks("Bottles & Drinkware"); 
+				Hydro.bottles_headerlinks("bottles-drinkware"); 
 				Hydro.Configurable_addtocart_pdp("Product");
 				Hydro.minicart_Checkout();
 				Hydro.addDeliveryAddress_Guestuser("AccountDetails");

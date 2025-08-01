@@ -16381,8 +16381,10 @@ public void Add_Favorites_product_from_View_Cart() {
 				"validating the favorites in view cart page", "Favorites should be in the view cart page",
 				"Sucessfully Favorites has been displayed in the view cart page ",
 				"failed to display the favorites in the view cart page");
-		Sync.waitElementPresent("xpath", "//div[@class='product-item-details flex-1']//strong");
-		Common.clickElement("xpath", "//div[@class='product-item-details flex-1']//strong");
+		Sync.waitElementPresent("xpath", "//button[@form='product_addtocart_form']");
+
+		Common.clickElement("xpath", "//button[@form='product_addtocart_form']");
+ 
 		Sync.waitPageLoad();
 		Thread.sleep(6000);
 
@@ -16480,8 +16482,9 @@ public void Fav_Seeoption_from_View_cart(String Dataset) {
 	Common.assertionCheckwithReport(Yourfav.contains("Your Favorites"),
 			"validating the favorites in view cart page", "Favorites should be in the view cart page",
 			"Sucessfully Favorites has been displayed in the view cart page ", "failed to display the favorites in the view cart page");
-	Sync.waitElementPresent("xpath", "//div[@class='product-item-details flex-1']//strong");
-	Common.clickElement("xpath", "//div[@class='product-item-details flex-1']//strong");
+	Sync.waitElementPresent("xpath", "//button[@form='product_addtocart_form']");
+    Common.clickElement("xpath", "//button[@form='product_addtocart_form']");
+
 	Sync.waitPageLoad();
 	Thread.sleep(8000);
 //	String Options=Common.findElement("xpath", "//div[@class='a-message__container-inner']").getText();
@@ -17835,7 +17838,7 @@ public void orders_image_Validation()
  public void search_E2E_Completeorder() {
 		// TODO Auto-generated method stub
 		back_to_Orders();
-		String OrderNumber = "ZSOPREPD11000678790";
+		String OrderNumber = "ZSOPREPD11001001478";
 		boolean found = false;
 		try {
 			while (true) {

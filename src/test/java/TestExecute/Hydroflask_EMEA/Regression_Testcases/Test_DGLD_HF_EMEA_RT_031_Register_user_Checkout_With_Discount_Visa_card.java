@@ -23,7 +23,7 @@ public class Test_DGLD_HF_EMEA_RT_031_Register_user_Checkout_With_Discount_Visa_
 			Hydro.verifingHomePage();
 			Hydro.click_singinButton();
 			Hydro.login_Hydroflask("AccountDetails");
-			Hydro.bottles_headerlinks("Bottles & Drinkware"); 
+			Hydro.bottles_headerlinks("bottles-drinkware"); 
 			Hydro.Configurable_addtocart_pdp("Product");
 			Hydro.search_product("Product");       
 			Hydro.addtocart("Product");

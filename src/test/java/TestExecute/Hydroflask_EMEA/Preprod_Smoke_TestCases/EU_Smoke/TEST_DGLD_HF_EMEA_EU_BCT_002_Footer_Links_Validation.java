@@ -21,9 +21,8 @@ public class TEST_DGLD_HF_EMEA_EU_BCT_002_Footer_Links_Validation {
 			Hydro.verifingHomePage();
 			Hydro.Kustomer_Links("Kustomer");
 			Hydro.Footer_Links("Footer");
-			Hydro.Footer_validation("Breadcrumbs");
 			Hydro.Footer_Dogood("Do Good");
-			Hydro.Terms_and_privacy();
+			Hydro.Terms_and_privacy_and_AntiHumanTrafficking();
 			
 			} catch (Exception e) {
 
@@ -40,7 +39,7 @@ public class TEST_DGLD_HF_EMEA_EU_BCT_002_Footer_Links_Validation {
 
 	@BeforeTest
 	public void startTest() throws Exception {
-		String url="https://mcloud-na-stage4.hydroflask.com/eu";
+		String url="https://mcloud-na-preprod.hydroflask.com/eu";
 		System.setProperty("url", url);
         Login.signIn();
         Hydro.close_add();

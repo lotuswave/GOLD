@@ -18,7 +18,7 @@ public class TEST_DGLD_HF_EMEA_RT_055_Gift_card_and_Configurable_Product_Checkou
 
 		try {
         Hydro.verifingHomePage();
-		Hydro.bottles_headerlinks("Bottles & Drinkware"); 
+		Hydro.bottles_headerlinks("bottles-drinkware"); 
 		Hydro.Configurable_addtocart_pdp("Product");
 		Hydro.Gift_cards("Hydro Gift Card");//-
 		Hydro.Card_Value("price");

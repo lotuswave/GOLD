@@ -24,8 +24,8 @@ public class TEST_DGLD_DB_US_SUB_ST_015_Registered_User_checkout_with_Master_Cre
 			Drybar.login_Drybar("AccountDetails");
 			Drybar.HairTools_headerlinks("Hair Tools"); 
 			Drybar.addtocart("PLP Product");
-			Drybar.search_product("Liquid_Glass_Sub_Product");  
-			Drybar.subcribe_product_Add_to_Cart("Liquid_Glass_Sub_Product");
+			Drybar.search_product("Detox_SUB_Product");  
+			Drybar.subcribe_product_Add_to_Cart("Detox_SUB_Product");
 			Drybar.minicart_Checkout();
 			Drybar.selectshippingmethod("GroundShipping method");
 			Drybar.clickSubmitbutton_Shippingpage();

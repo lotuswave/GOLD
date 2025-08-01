@@ -25,8 +25,8 @@ public class TEST_DGLD_HF_EMEA_UK_RT_009_Register_user_checkout_PP_with_Multiple
 //			Hydro.Addtocart_Bundle("Bundle product");
 			Hydro.search_product("Product");     
 			Hydro.addtocart("Product");
-//			Hydro.bottles_headerlinks("Bottles & Drinkware");
-//			Hydro.Configurable_addtocart_pdp("Product");
+			Hydro.bottles_headerlinks("bottles-drinkware");
+			Hydro.Configurable_addtocart_pdp("Product");
 			Hydro.minicart_Checkout();
 			Hydro.RegaddDeliveryAddress("AccountDetails");
 			Hydro.discountCode("Discount");

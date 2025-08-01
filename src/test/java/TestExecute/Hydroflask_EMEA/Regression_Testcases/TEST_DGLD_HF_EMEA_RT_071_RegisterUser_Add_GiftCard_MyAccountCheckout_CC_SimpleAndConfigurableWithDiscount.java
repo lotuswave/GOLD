@@ -9,22 +9,31 @@ import TestComponent.Hydroflask_EMEA.GoldHydro_EMEA_Helper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_HF_EMEA_RT_059_Guest_User_checkout_with_Express_paypal {
+public class TEST_DGLD_HF_EMEA_RT_071_RegisterUser_Add_GiftCard_MyAccountCheckout_CC_SimpleAndConfigurableWithDiscount {
 
 	String datafile = "Hydroflask_EMEA//GoldHydroEMEA_TestData.xlsx";
 	GoldHydro_EMEA_Helper Hydro = new GoldHydro_EMEA_Helper(datafile,"DataSet");
 	
+	
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Validating_the_Guest_User_checkout_with_Express_paypal () throws Exception {
+	public void Validating_the_Checkout_with_RegisterUserCC_Simple_Configurable_and_Discount () throws Exception {
 
 		try {
+
 			Hydro.verifingHomePage();
+			Hydro.click_singinButton();
+			Hydro.login_Hydroflask("AccountDetails");
+			Hydro.applyGiftCardFromMyAccount("GiftCard_MyAccount");
 			Hydro.search_product("Product");      
 			Hydro.addtocart("Product");  
+			Hydro.bottles_headerlinks("bottles-drinkware"); 
+			Hydro.Configurable_addtocart_pdp("Product");
 			Hydro.minicart_Checkout();
-			Hydro.addDeliveryAddress_Guestuser("AccountDetails");
+			Hydro.RegaddDeliveryAddress("AccountDetails");
             Hydro.selectshippingaddress("GroundShipping method");
-			Hydro.Express_Paypal("PaypalDetails");
+            Hydro.discountCode("Discount");
+          	Hydro.updatePaymentAndSubmitOrder("PaymentDetails");
+//			
 			
 		} catch (Exception e) {
 

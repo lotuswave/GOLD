@@ -9,22 +9,18 @@ import TestComponent.Hydroflask_EMEA.GoldHydro_EMEA_Helper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_HF_EMEA_RT_059_Guest_User_checkout_with_Express_paypal {
+public class Test_DGLD_HF_EMEA_RT_043_Pro_Deal_Application_for_Register_User {
 
 	String datafile = "Hydroflask_EMEA//GoldHydroEMEA_TestData.xlsx";
-	GoldHydro_EMEA_Helper Hydro = new GoldHydro_EMEA_Helper(datafile,"DataSet");
-	
+	GoldHydro_EMEA_Helper Hydro = new GoldHydro_EMEA_Helper(datafile,"Sheet1");
+
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Validating_the_Guest_User_checkout_with_Express_paypal () throws Exception {
+	public void Validate_Pro_Deal_Application_for_Register_User () throws Exception {
 
 		try {
 			Hydro.verifingHomePage();
-			Hydro.search_product("Product");      
-			Hydro.addtocart("Product");  
-			Hydro.minicart_Checkout();
-			Hydro.addDeliveryAddress_Guestuser("AccountDetails");
-            Hydro.selectshippingaddress("GroundShipping method");
-			Hydro.Express_Paypal("PaypalDetails");
+			Hydro.Prodeler_Application_Page("Prodeler Details");
+			
 			
 		} catch (Exception e) {
 

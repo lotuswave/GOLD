@@ -21,7 +21,7 @@ public class TEST_DGLD_HF_EMEA_DE_BCT_010_Validating_the_MiniCart_and_shopping_c
 			
 		/*	Minicart Validation:	*/
 			Hydro.verifingHomePage();    
-			Hydro.bottles_headerlinks("Bottles & Drinkware"); 
+			Hydro.search_product("Configurable Product"); 
 			Hydro.Configurable_addtocart_pdp("Product");
 			Hydro.search_product("Product");      
 			Hydro.addtocart("Product"); 
@@ -31,7 +31,7 @@ public class TEST_DGLD_HF_EMEA_DE_BCT_010_Validating_the_MiniCart_and_shopping_c
 			Hydro.minicart_validation("Product Qunatity");
 			
 	  /*    Shoppingcart Validation:    */
-			Hydro.bottles_headerlinks("Bottles & Drinkware"); 
+			Hydro.search_product("Configurable Product"); 
 			Hydro.Configurable_addtocart_pdp("Product");
 			Hydro.click_minicart();
 			Hydro.minicart_viewcart();
@@ -59,7 +59,7 @@ public class TEST_DGLD_HF_EMEA_DE_BCT_010_Validating_the_MiniCart_and_shopping_c
 
 	@BeforeTest
 	public void startTest() throws Exception {
-		String url="https://mcloud-na-preprod.hydroflask.com/de";
+		String url="https://www.hydroflask.com/de/";
 		System.setProperty("url", url);
 		Login.signIn();
 		Hydro.close_add();

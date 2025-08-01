@@ -22,7 +22,7 @@ public class TEST_DGLD_HF_EMEA_RT_006_Checkout_with_GuestUserCC_Simple_Configura
 			Hydro.verifingHomePage();
 			Hydro.search_product("Product");      
 			Hydro.addtocart("Product");  
-			Hydro.bottles_headerlinks("Bottles & Drinkware"); 
+			Hydro.bottles_headerlinks("bottles-drinkware"); 
 			Hydro.Configurable_addtocart_pdp("Product");
 //			Hydro.search_product("Bundle product"); 
 //			Hydro.Addtocart_Bundle("Bundle product"); 
