@@ -19,7 +19,7 @@ public class TEST_DGLD_HF_EMEA_DE_BCT_002_Footer_Links_Validation {
 
 		try {
 			Hydro.verifingHomePage();
-			Hydro.Kustomer_Links("Kustomer_DE");
+			Hydro.Kustomer_Links("Kustomer_DE_Pre");
 			Hydro.Footer_Links("Footer_DE");
 			Hydro.Footer_Dogood("Do Good");
 			Hydro.Terms_and_privacy_and_AntiHumanTrafficking();

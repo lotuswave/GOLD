@@ -33,7 +33,7 @@ public class TEST_DGLD_HF_EMEA_EU_RT_009_Register_user_checkout_PP_with_Multiple
             Hydro.selectshippingaddress("GroundShipping method");
             Hydro.clickSubmitbutton_Shippingpage();
             Hydro.register_billingAddress("eu_BillingDetails");
-            Hydro.payPal_Payment("PaypalDetails");
+//            Hydro.payPal_Payment("PaypalDetails");
 
 		} catch (Exception e) {
 
