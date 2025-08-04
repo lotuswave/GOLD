@@ -1991,8 +1991,8 @@ public void click_Createaccount() {
 		}
 	}
 public String create_account(String Dataset) {
-//	String email="";
-	String email = Common.genrateRandomEmail(data.get(Dataset).get("Email"));
+     String email= data.get(Dataset).get("Email");
+	//String email = Common.genrateRandomEmail(data.get(Dataset).get("Email"));
 
 		
 		String Product = data.get(Dataset).get("Products");
@@ -9382,7 +9382,7 @@ public void header_1_Percent_Planet() {
 				Thread.sleep(4000);
 				
 				if (Common.getCurrentURL().contains(""))
-					Common.clickElement("id", "payment-submit-btn");
+					Common.clickElement("xpath", "//button[@data-id='payment-submit-btn']");
 				Thread.sleep(8000);
 				Common.switchToFirstTab();
 			} catch (Exception | Error e) {
@@ -13506,7 +13506,8 @@ public void header_WeAre_Oxo(String Dataset) {
 
 	public String Create_Account_for_Guest_my_fav(String Dataset) {
 		// TODO Auto-generated method stub
-		String email = Common.genrateRandomEmail(data.get(Dataset).get("Email"));
+		//String email = Common.genrateRandomEmail(data.get(Dataset).get("Email"));
+		String email= data.get(Dataset).get("Email");
 		try {
 			
 
