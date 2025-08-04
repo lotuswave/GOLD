@@ -2906,7 +2906,7 @@ System.out.println("cartproducts  :"+cartproducts);
 
 		try {
 			Thread.sleep(3000);
-			int discountsize = Common.findElements("xpath", "(//span[contains(text(),'functionality on HYF EMEA')])[1]")
+			int discountsize = Common.findElements("xpath", "//div[@class='item discount']")
 					.size();
 			if (discountsize > 0) {
 				Sync.waitElementPresent("css", "h3[class*='flex items-center justify-between']");
