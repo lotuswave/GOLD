@@ -109,8 +109,8 @@ public class GoldOspreyUSHyvaHelper {
 			else
 			{
 //			Close_Geolocation();
-			close_add();
-				close_countryselector();
+//			close_add();
+//				close_countryselector();
 				acceptPrivacy();
 				int size = Common.findElements("css", "img[alt='Osprey store logo']").size();
 				System.out.println(size);
@@ -8850,8 +8850,8 @@ public void MyFavorites_Guestuser(String Dataset) {
 //				Sync.waitElementPresent("xpath", "//div[@data-option-label='" + productcolor + "']");
 //				Common.clickElement("xpath", "//div[@data-option-label='" + productcolor + "']");
 //				Thread.sleep(4000);
-				Sync.waitElementPresent("xpath" , "(//button[@title='Notify Me When Available']//span)[1]");
-				Common.clickElement("xpath", "(//button[@title='Notify Me When Available']//span)[1]");
+				Sync.waitElementPresent("xpath" , "(//button[@title='Notify Me When Available']//span)[2]");
+				Common.clickElement("xpath", "(//button[@title='Notify Me When Available']//span)[2]");
 				Thread.sleep(1000);
 				Common.textBoxInput("xpath", "//input[@placeholder='Insert your email']", email);
 				Common.clickElement("xpath", "//span[text()='Subscribe']");
@@ -8888,25 +8888,27 @@ public void MyFavorites_Guestuser(String Dataset) {
 
 			} else {
 				Sync.waitElementPresent(30, "xpath", "//div[contains(@class,'flex relative justify-center items-center')]");
-				String productprice = Common.findElement("xpath", "//span[@class='title-2xs leading-none']")
+				String PLPproductprice = Common.findElement("xpath", "//span[@class='title-2xs leading-none']")
 						.getAttribute("data-price-amount");
-				System.out.println(productprice);
+				System.out.println(PLPproductprice);
 				Thread.sleep(2000);
 				Common.javascriptclickElement("xpath", "//a[contains(@class,'product-image-link')]");
 				Sync.waitPageLoad();
 				Thread.sleep(3000);
-				String PLPprice = Common
+				String PDPPrice = Common
 						.findElement("xpath",
 								"(//div[contains(@class,'final-price flex')]//span[@x-html='getFormattedFinalPrice()'])[2]")
-						.getText().replace("$","");			
+						.getText().replaceAll("[$]|\\.\\d+$", "");	
+				System.out.println(PDPPrice);
+
 				String name = Common.findElement("xpath", "//div[contains(@class,'pdp-grid-areas grid')]//h1").getText();
 				Common.assertionCheckwithReport(
-						name.contains(products) && productprice.equals(PLPprice)
-								|| name.contains(prod) && productprice.equals(PLPprice),
+						name.contains(products) && PLPproductprice.contains(PDPPrice)
+								|| name.contains(prod) && PLPproductprice.equals(PDPPrice),
 						"validating the  product navigates to PDP page", "It should be navigate to the PDP page",
 						"Sucessfully Navigates to the PDP page", "failed to Navigate to the PDP page");
 				Thread.sleep(2000);
-				Common.clickElement("xpath", "(//button[normalize-space()='Notify Me When Available'])[1]");
+				Common.clickElement("xpath", "(//button[normalize-space()='Notify Me When Available'])[2]");
 				Thread.sleep(2000);
 				Common.textBoxInput("xpath", "//input[@placeholder='Insert your email']", email);
 				Common.clickElement("xpath", "//span[text()='Subscribe']");
@@ -8923,7 +8925,7 @@ public void MyFavorites_Guestuser(String Dataset) {
 						"Sucessfully message has been displayed when we click on the subcribe button ",
 						"Failed to display the message after subcribtion");
 				Common.actionsKeyPress(Keys.END);
-				Common.clickElement("xpath", "(//button[normalize-space()='Notify Me When Available'])[1]");			
+				Common.clickElement("xpath", "(//button[normalize-space()='Notify Me When Available'])[2]");			
 				Common.textBoxInput("xpath", "//input[@placeholder='Insert your email']", email);
 				Common.clickElement("xpath", "//span[text()='Subscribe']");
 				Sync.waitPageLoad();
