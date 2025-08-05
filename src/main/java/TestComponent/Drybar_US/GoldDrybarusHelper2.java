@@ -7241,18 +7241,24 @@ public void FUll_Payment(String dataSet) {
 			int i = 0;
 			try {
 				for (i = 0; i < Links.length; i++) {
-						Sync.waitElementPresent("xpath", "//span[contains(text(),'"+bag+"')]");
-						Common.clickElement("xpath", "//span[contains(text(),'"+bag+"')]");
-						Common.clickElement("xpath", "//span[contains(text(),' Brushes')]");
+					Sync.waitElementPresent("xpath", "//span[contains(text(),'"+bag+"')]");
+					Common.clickElement("xpath", "//span[contains(text(),'"+bag+"')]");
+					Common.clickElement("xpath", "//span[contains(text(),'Brushes')]");
 						
-					Thread.sleep(3000);
-					Sync.waitElementPresent("xpath",
+					Thread.sleep(4000);
+					Sync.waitElementPresent(30,"xpath",
 							"//a[contains(@class,'link group')]//span[contains(text(),'" + Links[i] + "')]");
 					Common.clickElement("xpath",
 							"//a[contains(@class,'link group')]//span[contains(text(),'" + Links[i] + "')]");
 					Sync.waitPageLoad();
 					Thread.sleep(4000);
-					String title = Common.findElement("xpath", "//div[contains(@class,'pagebuilder')]//h2").getText();
+					String title ="";
+					if(Common.findElements("xpath","//div[contains(@class,'pagebuilder')]//h2").size()>0) {
+						title = Common.findElement("xpath", "//div[contains(@class,'pagebuilder')]//h2").getText();
+					} else {
+						title = Common.getCurrentURL();
+					}
+					System.out.println(title);
 					String breadcrumbs = Common.findElement("xpath", "//nav[contains(@class,'breadcrumb')]").getText();
 					String products=Common.getText("xpath", "//div[contains(@class,'flex w-full')]//span");
 					System.out.println(products);
@@ -7638,10 +7644,8 @@ public void FUll_Payment(String dataSet) {
 								"//div[@id='algolia_instant_sorter']//span")
 						.getText();
 				System.out.println(Sort);
-				Thread.sleep(5000);
 				//int Reviews = Common.findElements("xpath","//span[@class='yotpo-sr-bottom-line-right-panel']//span").size();
 				int Reviews = Common.findElements("xpath","//span[contains(@class,'yotpo-sr-bottom-line-right-panel')]").size();
-				Thread.sleep(5000);
 				int Ribbons = Common.findElements("xpath","//span[contains(@class,'ribbon-bg new flex justify-center')]").size();
 				Thread.sleep(4000);
 				Common.assertionCheckwithReport(Reviews > 0 && breadcrumbs.contains("Breadcrumb") && filter.contains("Filter by") && Sort.contains("Sort by") 
@@ -11446,8 +11450,8 @@ public void PDP_Tabs(String Dataset) {
 		else {
 			for (i = 0; i < Links.length; i++) {
 				Thread.sleep(3000);
-				Sync.waitElementPresent("xpath", "//h3[contains(text(),'" + Links[i] + "')]");
-				Common.clickElement("xpath", "//h3[contains(text(),'" + Links[i] + "')]");
+				Sync.waitElementPresent("xpath", "//span[contains(text(),'" + Links[i] + "')]");
+				Common.clickElement("xpath", "//span[contains(text(),'" + Links[i] + "')]");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
 				String title = Common.findElement("xpath", "(//div[@class='pb-12'])")
