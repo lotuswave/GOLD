@@ -11,13 +11,13 @@ import org.json.JSONTokener;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import TestExecute.API.Hydroflask.Test_DGLD_API_HF_US_01_01_Guest_1LineItem_QTY2_CC.JsonFormatter;
+import TestExecute.API.Hydroflask.TEST_HYF_US_APIIntegration_ST_02_Validate_shipment_invoice_Return_RegisterUserCheckout_2differentItems_each1QTY_Paypal.JsonFormatter;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 
-public class Test_DGLD_API_HF_US_02_Registered_Simple_And_Lineitem_Giftcard_1QTYeach_PayPal {
-	private String apiKey;
+public class Test_HYF_US_APIIntegration_ST_04_Validate_shipment_invoice_Return_RegisterUserCheckout_2differentItems_GCpurchase_cc {
+    private String apiKey;
     private String orderNumber;
     public Integer itemId;
     public String sku;
@@ -28,6 +28,7 @@ public class Test_DGLD_API_HF_US_02_Registered_Simple_And_Lineitem_Giftcard_1QTY
     public String MagentoOrder_ID;
     public Integer firstItemId;
     public Integer SecondItemId;
+    
     
     @Test(priority = 1)
     public void generateApiKey() {
@@ -48,7 +49,7 @@ public class Test_DGLD_API_HF_US_02_Registered_Simple_And_Lineitem_Giftcard_1QTY
 
     @Test(priority = 2, dependsOnMethods = "generateApiKey")
     public void getOrderCopy() {
-    	MagentoOrder_ID="";
+    	MagentoOrder_ID="20361527";
     	RestAssured.baseURI = "https://na-preprod.hele.digital/rest/hydroflask/V1/orders/"+MagentoOrder_ID+"/";
         RequestSpecification request = RestAssured.given();
         request.header("Content-Type", "application/json");

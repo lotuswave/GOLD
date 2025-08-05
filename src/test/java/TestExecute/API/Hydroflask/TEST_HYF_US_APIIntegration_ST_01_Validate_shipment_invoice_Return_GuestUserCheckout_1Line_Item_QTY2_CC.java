@@ -11,12 +11,11 @@ import org.json.JSONTokener;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import TestExecute.API.Hydroflask.Test_DGLD_API_HF_US_02_Registered_Simple_And_Lineitem_Giftcard_1QTYeach_PayPal.JsonFormatter;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 
-public class Test_DGLD_API_HF_US_03_Guest_ConfigurableItem_1QTY_Klarna {
+public class TEST_HYF_US_APIIntegration_ST_01_Validate_shipment_invoice_Return_GuestUserCheckout_1Line_Item_QTY2_CC {
     private String apiKey;
     private String orderNumber;
     public Integer itemId;
@@ -101,7 +100,7 @@ public class Test_DGLD_API_HF_US_03_Guest_ConfigurableItem_1QTY_Klarna {
                 "    \"items\": [\n" +
                 "        {\n" +
                 "            \"order_item_id\": " + itemId + ",\n" +
-                "            \"qty\": 1.0\n" +
+                "            \"qty\": "+QTYOrder+".0\n" +
                 "        }\n" +
                 "    ],\n" +
                 "    \"tracks\": [\n" +
@@ -166,17 +165,17 @@ public class Test_DGLD_API_HF_US_03_Guest_ConfigurableItem_1QTY_Klarna {
 	///***Create RMA***///
     	@Test(priority = 5, dependsOnMethods = {"generateApiKey", "getOrderCopy", "shipOrder","invoice"})
  public void createRma() throws InterruptedException {
-    Thread.sleep(15000);
+    		Thread.sleep(15000);
 	System.out.println(apiKey);
      RestAssured.baseURI = "https://na-preprod.hele.digital/rest/all/V1/returns/create-rma";
 
      RequestSpecification request = RestAssured.given();
-     request.header("Content-Type", "application/json"); // Or "text/plain" as in Postman
-     request.header("Authorization", "Bearer " + apiKey);// Use the provided token
+     request.header("Content-Type", "application/json"); 
+     request.header("Authorization", "Bearer " + apiKey);
      
      String Increment_Base = "15735ea9";
-     String incrementSuffix = generateRandomNumber(5); // Generate 6 random digits
-      increment_id = Increment_Base + incrementSuffix;
+     String incrementSuffix = generateRandomNumber(5); 
+     increment_id = Increment_Base + incrementSuffix;
      
      String requestBody = "{\n" +
     	        "    \"increment_id\": \""+increment_id+"\",\n" +
@@ -208,7 +207,7 @@ public class Test_DGLD_API_HF_US_03_Guest_ConfigurableItem_1QTY_Klarna {
      String jsonResponse = response.getBody().asString();
 
      JSONObject jsonObject = new JSONObject(jsonResponse);
-     //System.out.println(jsonObject);
+     System.out.println(jsonObject);
      Assert.assertEquals(response.getStatusCode(), 200, "Create RMA failed");
 
      // Validations
@@ -217,30 +216,10 @@ public class Test_DGLD_API_HF_US_03_Guest_ConfigurableItem_1QTY_Klarna {
      Assert.assertEquals(jsonObject.getString("order_increment_id"), orderNumber, "Order increment ID mismatch");
      Assert.assertEquals(jsonObject.getString("status"), "authorized", "Status mismatch");
 //     Assert.assertEquals(jsonObject.getJSONArray("items").getJSONObject(0).getInt("order_item_id"), itemId, "Order item ID mismatch");
-
      System.out.println("Create RMA Response: " + jsonObject.toString(4));
  }
      
 
-	//***Update RMA***///
-//	@Test(priority = 6, dependsOnMethods = "generateApiKey")
-// public void updateRma() {
-//     RestAssured.baseURI = "https://na-preprod.hele.digital/rest/all/V1/returns/update-rma/15110ea75021";
-//
-//     RequestSpecification request = RestAssured.given();
-//     request.header("Content-Type", "application/json"); // Or "text/plain" as in Postman
-//     request.header("Authorization", "Bearer" + apiKey); // Use the provided token
-//
-//     String requestBody = "{\r\n" + // ... (your request body) ...
-//             "}";
-//
-//     request.body(requestBody);
-//
-//     Response response = request.put();
-//
-//     Assert.assertEquals(response.getStatusCode(), 200, "Update RMA failed");
-//     System.out.println("Update RMA Response: " + response.getBody().asString());
-// }
 	
 	
 	///****Post Credit Memo****///
@@ -256,19 +235,19 @@ public class Test_DGLD_API_HF_US_03_Guest_ConfigurableItem_1QTY_Klarna {
              "    \"type\": \"approved_return\",\n" +
              "    \"order_item_ids\": [\n" +
              "        {\n" +
-             "            \"qty\": \"1.0\",\n" +
+             "            \"qty\": \""+QTYOrder+".0\",\n" +
              "            \"order_item_id\": \""+itemId+"\"\n" +
              "        }\n" +
              "    ],\n" +
              "    \"refund_shipping\": false\n" +
-             "}"; 
-     request.body(requestBody);
+             "}";
 
+     request.body(requestBody);
      Response response = request.post();
      String jsonResponse = response.getBody().asString();
 
      JSONObject jsonObject = new JSONObject(jsonResponse);
-
+     System.out.println(jsonObject);
      Assert.assertEquals(response.getStatusCode(), 200, "Post Credit Memo failed");
 
      // Validate credit_memo_id
@@ -278,7 +257,7 @@ public class Test_DGLD_API_HF_US_03_Guest_ConfigurableItem_1QTY_Klarna {
          if (successObject.has("credit_memo_id")) {
              int creditMemoId = successObject.getInt("credit_memo_id");
              System.out.println("Credit Memo ID: " + creditMemoId);
-             // Optionally, you can add further validations on the credit_memo_id
+            
          } else {
              Assert.fail("credit_memo_id is missing in the response");
          }
@@ -289,13 +268,31 @@ public class Test_DGLD_API_HF_US_03_Guest_ConfigurableItem_1QTY_Klarna {
      System.out.println("Post Credit Memo Response: " + jsonObject.toString(4));
  }
      
- 
+	//***Update RMA***///
+//	@Test(priority = 6, dependsOnMethods = "generateApiKey")
+// public void updateRma() {
+//     RestAssured.baseURI = "https://na-preprod.hele.digital/rest/all/V1/returns/update-rma/15735ea37933";
+//
+//     RequestSpecification request = RestAssured.given();
+//     request.header("Content-Type", "application/json"); // Or "text/plain" as in Postman
+//     request.header("Authorization", "Bearer" + apiKey); // Use the provided token
+//
+//     String requestBody = "{\r\n" + 
+//             "}";
+//
+//     request.body(requestBody);
+//
+//     Response response = request.put();
+//
+//     Assert.assertEquals(response.getStatusCode(), 200, "Update RMA failed");
+//     System.out.println("Update RMA Response: " + response.getBody().asString());
+// }
 	
 private String generateRandomNumber(int length) {
     Random random = new Random();
     StringBuilder sb = new StringBuilder();
     for (int i = 0; i < length; i++) {
-        sb.append(random.nextInt(10)); // Append a random digit (0-9)
+        sb.append(random.nextInt(10)); 
     }
     return sb.toString();
 }

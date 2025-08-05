@@ -7241,18 +7241,24 @@ public void FUll_Payment(String dataSet) {
 			int i = 0;
 			try {
 				for (i = 0; i < Links.length; i++) {
-						Sync.waitElementPresent("xpath", "//span[contains(text(),'"+bag+"')]");
-						Common.clickElement("xpath", "//span[contains(text(),'"+bag+"')]");
-						Common.clickElement("xpath", "//span[contains(text(),' Brushes')]");
+					Sync.waitElementPresent("xpath", "//span[contains(text(),'"+bag+"')]");
+					Common.clickElement("xpath", "//span[contains(text(),'"+bag+"')]");
+					Common.clickElement("xpath", "//span[contains(text(),'Brushes')]");
 						
-					Thread.sleep(3000);
-					Sync.waitElementPresent("xpath",
+					Thread.sleep(4000);
+					Sync.waitElementPresent(30,"xpath",
 							"//a[contains(@class,'link group')]//span[contains(text(),'" + Links[i] + "')]");
 					Common.clickElement("xpath",
 							"//a[contains(@class,'link group')]//span[contains(text(),'" + Links[i] + "')]");
 					Sync.waitPageLoad();
 					Thread.sleep(4000);
-					String title = Common.findElement("xpath", "//div[contains(@class,'pagebuilder')]//h2").getText();
+					String title ="";
+					if(Common.findElements("xpath","//div[contains(@class,'pagebuilder')]//h2").size()>0) {
+						title = Common.findElement("xpath", "//div[contains(@class,'pagebuilder')]//h2").getText();
+					} else {
+						title = Common.getCurrentURL();
+					}
+					System.out.println(title);
 					String breadcrumbs = Common.findElement("xpath", "//nav[contains(@class,'breadcrumb')]").getText();
 					String products=Common.getText("xpath", "//div[contains(@class,'flex w-full')]//span");
 					System.out.println(products);
