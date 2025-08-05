@@ -48,7 +48,7 @@ public class TEST_HYF_US_APIIntegration_ST_03_Validate_shipment_invoice_Return_G
     // get order // 
     @Test(priority = 2, dependsOnMethods = "generateApiKey")
     public void getOrderCopy() {
-    	MagentoOrder_ID="20363783";
+    	MagentoOrder_ID="20363957";
     	RestAssured.baseURI = "https://na-preprod.hele.digital/rest/hydroflask/V1/orders/"+MagentoOrder_ID+"/";
         RequestSpecification request = RestAssured.given();
         request.header("Content-Type", "application/json");
@@ -293,8 +293,8 @@ public class TEST_HYF_US_APIIntegration_ST_03_Validate_shipment_invoice_Return_G
 
 
 	///****Post first Credit Memo****///
+	@Test(priority = 6, dependsOnMethods = {"generateApiKey", "getOrderCopy", "shipOrder","invoice","createRma"})
 
-	@Test(priority = 6, dependsOnMethods = {"generateApiKey", "getOrderCopy", "createRma"})
 
 public void postCreditMemo() {
 
@@ -431,7 +431,7 @@ public void postCreditMemo() {
 // create second credit memo // 
 
 	 
-@Test(priority = 8, dependsOnMethods = {"generateApiKey", "getOrderCopy", "createRma"})
+@Test(priority = 8, dependsOnMethods = {"generateApiKey", "getOrderCopy", "shipOrder","invoice", "createsecondRma"})
 
 public void postsecondCreditMemo() {
 
