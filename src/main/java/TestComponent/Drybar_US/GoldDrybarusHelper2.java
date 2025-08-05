@@ -7638,8 +7638,10 @@ public void FUll_Payment(String dataSet) {
 								"//div[@id='algolia_instant_sorter']//span")
 						.getText();
 				System.out.println(Sort);
+				Thread.sleep(5000);
 				//int Reviews = Common.findElements("xpath","//span[@class='yotpo-sr-bottom-line-right-panel']//span").size();
 				int Reviews = Common.findElements("xpath","//span[contains(@class,'yotpo-sr-bottom-line-right-panel')]").size();
+				Thread.sleep(5000);
 				int Ribbons = Common.findElements("xpath","//span[contains(@class,'ribbon-bg new flex justify-center')]").size();
 				Thread.sleep(4000);
 				Common.assertionCheckwithReport(Reviews > 0 && breadcrumbs.contains("Breadcrumb") && filter.contains("Filter by") && Sort.contains("Sort by") 
@@ -11444,8 +11446,8 @@ public void PDP_Tabs(String Dataset) {
 		else {
 			for (i = 0; i < Links.length; i++) {
 				Thread.sleep(3000);
-				Sync.waitElementPresent("xpath", "//span[contains(text(),'" + Links[i] + "')]");
-				Common.clickElement("xpath", "//span[contains(text(),'" + Links[i] + "')]");
+				Sync.waitElementPresent("xpath", "//h3[contains(text(),'" + Links[i] + "')]");
+				Common.clickElement("xpath", "//h3[contains(text(),'" + Links[i] + "')]");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
 				String title = Common.findElement("xpath", "(//div[@class='pb-12'])")
