@@ -47,7 +47,7 @@ public class Utils {
 		String Email=null;
 		try {
 			long currentTimestamp = System.currentTimeMillis();
-			 //Email ="newuser"+currentTimestamp+"@gmail.com";
+			 Email ="newuser"+currentTimestamp+"@gmail.com";
 		}
 
 		catch (Exception e) {
