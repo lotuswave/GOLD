@@ -15,7 +15,7 @@ import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 
-public class Test_DGLD_API_DB_US_002_RegisterUser_Checkout_MultipleItems_eachQtyone_With_Paypal {
+public class Test_DGLD_API_DB_US_002_Validate_shipment_invoice_Return_RegisterUserCheckout_2differentItems_each1QTY_Paypal {
     private String apiKey;
     private String orderNumber;
     public Integer itemId;

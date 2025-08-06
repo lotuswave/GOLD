@@ -15,7 +15,7 @@ import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 
-public class Test_DGLD_API_DB_US_003_RegisterUser_Checkout_differentItems_eachQtyone_With_CC {
+public class Test_DGLD_API_DB_US_003_Validate_shipment_invoice_Return_GuestUser_checkout_1_lineItem_2QTY_with_giftcode_CC {
     private String apiKey;
     private String orderNumber;
     public Integer itemId;
