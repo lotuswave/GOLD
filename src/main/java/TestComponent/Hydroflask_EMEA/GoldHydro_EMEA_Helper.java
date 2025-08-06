@@ -6096,7 +6096,6 @@ catch(Exception | Error e){
 		String Email = Common.genrateRandomEmail(data.get(Dataset).get("Email"));
 		System.out.println("Email :"+ Email);
 		try {
-			Thread.sleep(5000);
 			Common.actionsKeyPress(Keys.END);
 			Thread.sleep(5000);
 			Sync.waitElementClickable(30, "xpath", "(//input[@id='subscribe-email' or @name='email'])[2]");
@@ -6104,12 +6103,10 @@ catch(Exception | Error e){
 			Common.clickElement("xpath", "(//input[contains(@aria-label,'I consent to receive')])[2]");
 			Common.clickElement("xpath", "//button[text()='Sign Up']");
 			Thread.sleep(5000);
-			Common.clickElement("xpath", "//button[text()='Sign Up']");
 			Sync.waitPageLoad();
-			Thread.sleep(2000);
-			int Text = Common.findElements("xpath", "//span[contains(text(),'Thanks for subscribing')]").size();
+			int Text = Common.findElements("xpath", "//span[contains(text(),'just dropped')]").size();
 			System.out.println(Text);
-			int size = Common.findElements("xpath", "(//span[@class='ql-font-nunito-sans'])[1]").size();
+			int size = Common.findElements("xpath", "//span[contains(text(),'just dropped')]//parent::p//parent::div").size();
 			String expectedResult = "User gets confirmation message that it was submitted";
 
 			Common.assertionCheckwithReport(Text > 0 || size > 0, "verifying newsletter subscription",
