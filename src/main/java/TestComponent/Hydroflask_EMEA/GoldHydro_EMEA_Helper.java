@@ -16451,8 +16451,9 @@ catch(Exception | Error e){
 				Common.textBoxInput("xpath", "(//input[contains(@id,'kl-consent-page')])[2]", "v");
 				Common.textBoxInput("xpath", "(//input[contains(@id,'kl-consent-page')])[3]", "narra");
                   Common.clickElement("xpath", "//button[text()='Subscribe']");
-              String text = Common.getText("xpath", "//span[text()='Thanks for confirming your email address.']");
-              Common.assertionCheckwithReport(text.contains("Thanks for confirming your email"),
+                  Thread.sleep(4000);
+              String text = Common.getText("css", "h1 span[style]");
+              Common.assertionCheckwithReport(text.contains("You've been subscribed"),
   					"validating Newsletter Subscription Message",
   					"After Clicking subscribe button it should display the you've subscribed",
   					"Unable to subscribed the Newsletter in My Account");
