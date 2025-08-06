@@ -16,7 +16,7 @@ import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 
 public class Test_DGLD_API_DB_US_003_Validate_shipment_invoice_Return_GuestUser_checkout_1_lineItem_2QTY_with_giftcode_CC {
-    private String apiKey;
+	private String apiKey;
     private String orderNumber;
     public Integer itemId;
     public String sku;
@@ -44,11 +44,11 @@ public class Test_DGLD_API_DB_US_003_Validate_shipment_invoice_Return_GuestUser_
         System.out.println("API Key: " + apiKey);
     }
 
+    // get order // 
     @Test(priority = 2, dependsOnMethods = "generateApiKey")
     public void getOrderCopy() {
-    	MagentoOrder_ID="12816996";
-    	RestAssured.baseURI = "https://na-preprod.hele.digital/rest/drybar/V1/orders/"+MagentoOrder_ID+"/";
-
+    	MagentoOrder_ID="20364260";
+    	RestAssured.baseURI = "https://na-preprod.hele.digital/rest/hydroflask/V1/orders/"+MagentoOrder_ID+"/";
         RequestSpecification request = RestAssured.given();
         request.header("Content-Type", "application/json");
         request.header("Authorization", "Bearer " + apiKey);
@@ -59,11 +59,11 @@ public class Test_DGLD_API_DB_US_003_Validate_shipment_invoice_Return_GuestUser_
         String jsonResponse = response.getBody().asString();
         String formattedJson = JsonFormatter.formatJson(jsonResponse);
 
-        System.out.println("Get Order Copy Response: " + formattedJson);
+//      System.out.println("Get Order Copy Response: " + formattedJson);
 
         orderNumber = response.path("increment_id");
         System.out.println("OderNumber: " + orderNumber);
-         customerEmail = response.path("customer_email");
+        customerEmail = response.path("customer_email");
         System.out.println("Customer Email: " + customerEmail);
         List<Map<String, Object>> items = response.jsonPath().getList("items");
 
@@ -80,91 +80,150 @@ public class Test_DGLD_API_DB_US_003_Validate_shipment_invoice_Return_GuestUser_
             Assert.fail("No items found in the order copy");
         }
     }
+    
+    // shippment  // 
 
     @Test(priority = 3, dependsOnMethods = {"generateApiKey", "getOrderCopy"})
+
     public void shipOrder() {
+
         RestAssured.baseURI = "https://na-preprod.hele.digital/rest/all/V1/order/" + MagentoOrder_ID + "/ship";
-
+ 
         RequestSpecification request = RestAssured.given();
-        request.header("Content-Type", "application/json");
-        request.header("Authorization", "Bearer " + apiKey);
 
+        request.header("Content-Type", "application/json");
+
+        request.header("Authorization", "Bearer " + apiKey);
+ 
         String deliveryNumberBase = "02102";
+
         String deliveryNumberSuffix = generateRandomNumber(4);
+
         deliveryNumber = deliveryNumberBase + deliveryNumberSuffix;
+
         String trackingNumberBase = "1025433";
+
         String trackingNumberSuffix = generateRandomNumber(6);
+
         String trackingNumber = trackingNumberBase + trackingNumberSuffix;
-
+ 
         String requestBody = "{\n" +
+
                 "    \"notify\": \"false\",\n" +
+
                 "    \"items\": [\n" +
+
                 "        {\n" +
+
                 "            \"order_item_id\": " + itemId + ",\n" +
-                "            \"qty\": "+QTYOrder+".0\n" +
+
+                "            \"qty\": 2.0\n" +
+
                 "        }\n" +
+
                 "    ],\n" +
+
                 "    \"tracks\": [\n" +
+
                 "        {\n" +
+
                 "            \"track_number\": \"" + trackingNumber + "\",\n" +
+
                 "            \"title\": \"FedEx\",\n" +
+
                 "            \"carrier_code\": \"fedex\"\n" +
+
                 "        }\n" +
+
                 "    ],\n" +
+
                 "    \"arguments\": {\n" +
+
                 "        \"extension_attributes\": {\n" +
+
                 "            \"delivery_number\": \"" + deliveryNumber + "\"\n" +
+
                 "        }\n" +
+
                 "    }\n" +
+
                 "}";
-
+ 
         request.body(requestBody);
-
+ 
         Response response = request.post();
-
+ 
         Assert.assertEquals(response.getStatusCode(), 200, "Ship order failed");
+
         System.out.println("Ship Order Response: " + response.getBody().asString());
-        System.out.println("Request Body: " + requestBody);
-    }
 
+        System.out.println("Request Body: " + requestBody);
+
+    }
+ 
+    //  invoice //
     @Test(priority = 4, dependsOnMethods = {"generateApiKey", "getOrderCopy", "shipOrder"})
+
     public void invoice() {
-        RestAssured.baseURI = "https://na-preprod.hele.digital/rest/drybar/V1/order/" + MagentoOrder_ID + "/invoice";
 
+        RestAssured.baseURI = "https://na-preprod.hele.digital/rest/hydroflask/V1/order/" + MagentoOrder_ID + "/invoice";
+ 
         RequestSpecification request = RestAssured.given();
+
         request.header("Content-Type", "application/json");
+
         request.header("Authorization", "Bearer " + apiKey);
-
+ 
         String requestBody = "{\n" +
+
                 "    \"items\": [\n" +
+
                 "        {\n" +
+
                 "            \"order_item_id\": " + itemId + ",\n" +
+
                 "            \"qty\": " + QTYOrder + ".0\n" +
+
                 "        }\n" +
+
                 "    ],\n" +
+
                 "    \"notify\": false,\n" +
+
                 "    \"appendComment\": false,\n" +
+
                 "    \"capture\": true,\n" +
+
                 "    \"arguments\": {\n" +
+
                 "        \"extension_attributes\": {\n" +
+
                 "            \"delivery_number\": \"" + deliveryNumber + "\",\n" +
+
                 "            \"oracle_customer_number\": \"\"\n" +
+
                 "        }\n" +
+
                 "    }\n" +
+
                 "}";
-
+ 
         request.body(requestBody);
-
+ 
         Response response = request.post();
-
+ 
         Assert.assertEquals(response.getStatusCode(), 200, "Invoice creation failed");
+
         System.out.println("Invoice Response: " + response.getBody().asString());
+
         System.out.println("Request Body: " + requestBody);
+
     }
+ 
 
 	
-	///***Create RMA***///
-    	@Test(priority = 5, dependsOnMethods = {"generateApiKey", "getOrderCopy", "shipOrder","invoice"})
+	///***Create first RMA***///
+    @Test(priority = 5, dependsOnMethods = {"generateApiKey", "getOrderCopy", "shipOrder","invoice"})
  public void createRma() throws InterruptedException {
     Thread.sleep(15000);
 	System.out.println(apiKey);
@@ -174,7 +233,7 @@ public class Test_DGLD_API_DB_US_003_Validate_shipment_invoice_Return_GuestUser_
      request.header("Content-Type", "application/json"); // Or "text/plain" as in Postman
      request.header("Authorization", "Bearer " + apiKey);// Use the provided token
      
-     String Increment_Base = "18735ea9";
+     String Increment_Base = "15735ea9";
      String incrementSuffix = generateRandomNumber(5); // Generate 6 random digits
       increment_id = Increment_Base + incrementSuffix;
      
@@ -186,7 +245,7 @@ public class Test_DGLD_API_DB_US_003_Validate_shipment_invoice_Return_GuestUser_
     	        "    \"items\": [\n" +
     	        "        {\n" +
     	        "            \"order_item_id\": "+itemId+",\n" +
-    	        "            \"quantity_to_return\": "+QTYOrder+",\n" +
+    	        "            \"quantity_to_return\": 1,\n" +
     	        "            \"entered_custom_attributes\": [\n" +
     	        "                {\n" +
     	        "                    \"attribute_code\": \"reason\",\n" +
@@ -204,12 +263,11 @@ public class Test_DGLD_API_DB_US_003_Validate_shipment_invoice_Return_GuestUser_
     
 
      request.body(requestBody);
-     
      Response response = request.post();
      String jsonResponse = response.getBody().asString();
 
      JSONObject jsonObject = new JSONObject(jsonResponse);
-     System.out.println(jsonObject);
+    //System.out.println(jsonObject);
      Assert.assertEquals(response.getStatusCode(), 200, "Create RMA failed");
 
      // Validations
@@ -223,86 +281,219 @@ public class Test_DGLD_API_DB_US_003_Validate_shipment_invoice_Return_GuestUser_
  }
      
 
-	//***Update RMA***///
-//	@Test(priority = 6, dependsOnMethods = "generateApiKey")
-// public void updateRma() {
-//     RestAssured.baseURI = "https://na-preprod.hele.digital/rest/all/V1/returns/update-rma/15110ea75021";
-//
-//     RequestSpecification request = RestAssured.given();
-//     request.header("Content-Type", "application/json"); // Or "text/plain" as in Postman
-//     request.header("Authorization", "Bearer" + apiKey); // Use the provided token
-//
-//     String requestBody = "{\r\n" + // ... (your request body) ...
-//             "}";
-//
-//     request.body(requestBody);
-//
-//     Response response = request.put();
-//
-//     Assert.assertEquals(response.getStatusCode(), 200, "Update RMA failed");
-//     System.out.println("Update RMA Response: " + response.getBody().asString());
-// }
-	
-	
-	///****Post Credit Memo****///
+
+	///****Post first Credit Memo****///
 	@Test(priority = 6, dependsOnMethods = {"generateApiKey", "getOrderCopy", "shipOrder","invoice","createRma"})
- public void postCreditMemo() {
+
+
+public void postCreditMemo() {
+
      RestAssured.baseURI = "https://na-preprod.hele.digital/rest/V1/returns/"+increment_id+"/refund";
-
+ 
      RequestSpecification request = RestAssured.given();
-     request.header("Content-Type", "application/json"); // Or "text/plain" as in your Postman
-     request.header("Authorization", "Bearer " + apiKey);// Use the provided token
 
+     request.header("Content-Type", "application/json"); // Or "text/plain" as in your Postman
+
+     request.header("Authorization", "Bearer " + apiKey);// Use the provided token
+ 
      String requestBody = "{\n" +
+
              "    \"type\": \"approved_return\",\n" +
+
              "    \"order_item_ids\": [\n" +
+
              "        {\n" +
-             "            \"qty\": \""+QTYOrder+".0\",\n" +
+
+             "            \"qty\": \"1.0\",\n" +
+
              "            \"order_item_id\": \""+itemId+"\"\n" +
+
              "        }\n" +
+
              "    ],\n" +
+
              "    \"refund_shipping\": false\n" +
+
              "}";
 
-//     request.body(requestBody); // Use this line in your RestAssured or Selenium API request
-//
-//     
-//     Response response = request.post();
-//    String jsonResponse =response.getBody().asString();
-//     String formattedJson = JsonFormatter.formatJson(jsonResponse);
-//     Assert.assertEquals(response.getStatusCode(), 200, "Post Credit Memo failed"); // Or the expected status code
-//     System.out.println("Post Credit Memo Response: " + response.getBody().asString());
-//     
-//     System.out.println(formattedJson); 
      request.body(requestBody);
 
      Response response = request.post();
+
      String jsonResponse = response.getBody().asString();
 
      JSONObject jsonObject = new JSONObject(jsonResponse);
-
+ 
      Assert.assertEquals(response.getStatusCode(), 200, "Post Credit Memo failed");
-
+ 
      // Validate credit_memo_id
+
      JSONArray successArray = jsonObject.getJSONArray("success");
+
      if (successArray.length() > 0) {
+
          JSONObject successObject = successArray.getJSONObject(0);
+
          if (successObject.has("credit_memo_id")) {
+
              int creditMemoId = successObject.getInt("credit_memo_id");
+
              System.out.println("Credit Memo ID: " + creditMemoId);
+
              // Optionally, you can add further validations on the credit_memo_id
+
          } else {
+
              Assert.fail("credit_memo_id is missing in the response");
+
          }
+
      } else {
+
          Assert.fail("success array is empty");
+
      }
-
+ 
      System.out.println("Post Credit Memo Response: " + jsonObject.toString(4));
- }
-     
- 	
 
+}
+	
+	
+	// create second  rma //
+ 
+	 @Test(priority = 7, dependsOnMethods = {"generateApiKey", "getOrderCopy", "shipOrder","invoice"})
+	 public void createsecondRma() throws InterruptedException {
+	    Thread.sleep(15000);
+		System.out.println(apiKey);
+	     RestAssured.baseURI = "https://na-preprod.hele.digital/rest/all/V1/returns/create-rma";
+
+	     RequestSpecification request = RestAssured.given();
+	     request.header("Content-Type", "application/json"); // Or "text/plain" as in Postman
+	     request.header("Authorization", "Bearer " + apiKey);// Use the provided token
+	     
+	     String Increment_Base = "15735ea9";
+	     String incrementSuffix = generateRandomNumber(5); // Generate 6 random digits
+	      increment_id = Increment_Base + incrementSuffix;
+	     
+	     String requestBody = "{\n" +
+	    	        "    \"increment_id\": \""+increment_id+"\",\n" +
+	    	        "    \"order_increment_id\": \""+orderNumber+"\",\n" +
+	    	        "    \"external_rma_id\": \""+increment_id+"\",\n" +
+	    	        "    \"customer_custom_email\": \"" + customerEmail + "\",\n" + // Use customerEmail variable
+	    	        "    \"items\": [\n" +
+	    	        "        {\n" +
+	    	        "            \"order_item_id\": "+itemId+",\n" +
+	    	        "            \"quantity_to_return\": 1,\n" +
+	    	        "            \"entered_custom_attributes\": [\n" +
+	    	        "                {\n" +
+	    	        "                    \"attribute_code\": \"reason\",\n" +
+	    	        "                    \"value\": \"2\"\n" +
+	    	        "                },\n" +
+	    	        "                {\n" +
+	    	        "                    \"attribute_code\": \"compensationMethod\",\n" +
+	    	        "                    \"value\": \"no-return-for-refund\"\n" +
+	    	        "                }\n" +
+	    	        "            ],\n" +
+	    	        "            \"selected_custom_attributes\": []\n" +
+	    	        "        }\n" +
+	    	        "    ]\n" +
+	    	        "}";
+	    
+
+	     request.body(requestBody);
+	     Response response = request.post();
+	     String jsonResponse = response.getBody().asString();
+
+	     JSONObject jsonObject = new JSONObject(jsonResponse);
+	    //System.out.println(jsonObject);
+	     Assert.assertEquals(response.getStatusCode(), 200, "Create RMA failed");
+
+	     // Validations
+	     Assert.assertEquals(jsonObject.getString("customer_custom_email"), customerEmail, "Customer email mismatch");
+	     Assert.assertEquals(jsonObject.getString("increment_id"), increment_id, "Increment ID mismatch");
+	     Assert.assertEquals(jsonObject.getString("order_increment_id"), orderNumber, "Order increment ID mismatch");
+	     Assert.assertEquals(jsonObject.getString("status"), "authorized", "Status mismatch");
+//	     Assert.assertEquals(jsonObject.getJSONArray("items").getJSONObject(0).getInt("order_item_id"), itemId, "Order item ID mismatch");
+
+	     System.out.println("Create RMA Response: " + jsonObject.toString(4));
+	 }
+	     
+// create second credit memo // 
+
+	 
+@Test(priority = 8, dependsOnMethods = {"generateApiKey", "getOrderCopy", "shipOrder","invoice", "createsecondRma"})
+
+public void postsecondCreditMemo() {
+
+		     RestAssured.baseURI = "https://na-preprod.hele.digital/rest/V1/returns/"+increment_id+"/refund";
+		 
+		     RequestSpecification request = RestAssured.given();
+
+		     request.header("Content-Type", "application/json"); // Or "text/plain" as in your Postman
+
+		     request.header("Authorization", "Bearer " + apiKey);// Use the provided token
+		 
+		     String requestBody = "{\n" +
+
+		             "    \"type\": \"approved_return\",\n" +
+
+		             "    \"order_item_ids\": [\n" +
+
+		             "        {\n" +
+
+		             "            \"qty\": \"1.0\",\n" +
+
+		             "            \"order_item_id\": \""+itemId+"\"\n" +
+
+		             "        }\n" +
+
+		             "    ],\n" +
+
+		             "    \"refund_shipping\": false\n" +
+
+		             "}";
+
+		     request.body(requestBody);
+
+		     Response response = request.post();
+
+		     String jsonResponse = response.getBody().asString();
+
+		     JSONObject jsonObject = new JSONObject(jsonResponse);
+		 
+		     Assert.assertEquals(response.getStatusCode(), 200, "Post Credit Memo failed");
+		 
+		     // Validate credit_memo_id
+
+		     JSONArray successArray = jsonObject.getJSONArray("success");
+
+		     if (successArray.length() > 0) {
+
+		         JSONObject successObject = successArray.getJSONObject(0);
+
+		         if (successObject.has("credit_memo_id")) {
+
+		             int creditMemoId = successObject.getInt("credit_memo_id");
+
+		             System.out.println("Credit Memo ID: " + creditMemoId);
+
+		             // Optionally, you can add further validations on the credit_memo_id
+
+		         } else {
+
+		             Assert.fail("credit_memo_id is missing in the response");
+
+		         }
+
+		     } else {
+
+		         Assert.fail("success array is empty");
+
+		     }
+		 
+		     System.out.println("Post Credit Memo Response: " + jsonObject.toString(4));
+
+		}
 	
 private String generateRandomNumber(int length) {
     Random random = new Random();
