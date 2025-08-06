@@ -45,6 +45,7 @@ import TestLib.Sync;
 import Utilities.ExcelReader;
 import Utilities.ExtenantReportUtils;
 import Utilities.Utils;
+import ch.qos.logback.core.recovery.ResilientSyslogOutputStream;
 import groovyjarjarantlr.CommonAST;
 
 public class GoldHydroHyvaHelper {
@@ -127,14 +128,14 @@ public class GoldHydroHyvaHelper {
 		String expectedResult = "User should click the" + category;
 		try {
 
-			Sync.waitElementClickable("xpath", "//nav[@class='main-nav flex h-full']//span[contains(text(), 'Shop')]");
+			Sync.waitElementClickable("xpath", "//ul[@role='menu']//span[contains(text(), 'Shop')]");
 			Thread.sleep(3000);
-			Common.mouseOverClick("xpath", "//nav[@class='main-nav flex h-full']//span[contains(text(), 'Shop')]");
+			Common.mouseOverClick("xpath", "//ul[@role='menu']//span[contains(text(), 'Shop')]");
 			Thread.sleep(3000);
 			try {
 				Common.mouseOver("xpath", "//span[contains(text(),'" + category + "')]");
 			} catch (Exception e) {
-				Common.clickElement("xpath", "//nav[@class='main-nav flex h-full']//span[contains(text(), 'Shop')]");
+				Common.clickElement("xpath", "//ul[@role='menu']//span[contains(text(), 'Shop')]");
 			}
 			Common.clickElement("xpath", "//span[contains(text(),'" + category + "')]");
 			Common.clickElement("xpath", "//a[text()='Shop All']");
@@ -162,17 +163,17 @@ public class GoldHydroHyvaHelper {
 		String expectedResult = "User should click the" + category;
 		try {
 
-			Sync.waitElementPresent("xpath", "//nav[@class='main-nav flex h-full']//span[contains(text(), 'Shop')]");
+			Sync.waitElementPresent("xpath", "//ul[@role='menu']//span[contains(text(), 'Shop')]");
 			Thread.sleep(3000);
 //			Common.scrollIntoView("xpath","//a[contains(@class,'level-top')]//span[text()=' Shop']");
-			Common.clickElement("xpath", "//nav[@class='main-nav flex h-full']//span[contains(text(), 'Shop')]");
+			Common.clickElement("xpath", "//ul[@role='menu']//span[contains(text(), 'Shop')]");
 
 			Thread.sleep(3000);
 
 			try {
 				Common.mouseOver("xpath", "//span[contains(text(),'" + category + "')]");
 			} catch (Exception e) {
-				Common.clickElement("xpath", "//nav[@class='main-nav flex h-full']//span[contains(text(), 'Shop')]");
+				Common.clickElement("xpath", "//ul[@role='menu']//span[contains(text(), 'Shop')]");
 			}
 			Common.clickElement("xpath", "//span[contains(text(),'" + category + "')]");
 			Thread.sleep(4000);
@@ -238,10 +239,10 @@ public class GoldHydroHyvaHelper {
 		String expectedResult = "User should click the" + category;
 		try {
 
-			Sync.waitElementPresent("xpath", "//nav[@class='main-nav flex h-full']//span[contains(text(), 'Shop')]");
+			Sync.waitElementPresent("xpath", "//ul[@role='menu']//span[contains(text(), 'Shop')]");
 			Thread.sleep(3000);
 //			Common.scrollIntoView("xpath","//a[contains(@class,'level-top')]//span[text()=' Shop']");
-			Common.clickElement("xpath", "//nav[@class='main-nav flex h-full']//span[contains(text(), 'Shop')]");
+			Common.clickElement("xpath", "//ul[@role='menu']//span[contains(text(), 'Shop')]");
 
 			Thread.sleep(3000);
 			int size=Common.findElements("xpath", "(//div[@x-init='$nextTick(() => {show = true })'])[2]").size();
@@ -249,14 +250,14 @@ public class GoldHydroHyvaHelper {
 			{
 				Common.javascriptclickElement("xpath", "//img[@alt='Hydroflask store logo']");
 			
-			Sync.waitElementPresent(50,"xpath", "//nav[@class='main-nav flex h-full']//span[contains(text(), 'Shop')]");
-			Common.javascriptclickElement("xpath", "//nav[@class='main-nav flex h-full']//span[contains(text(), 'Shop')]");
+			Sync.waitElementPresent(50,"xpath", "//ul[@role='menu']//span[contains(text(), 'Shop')]");
+			Common.javascriptclickElement("xpath", "//ul[@role='menu']//span[contains(text(), 'Shop')]");
 	}
 
 			try {
 				Common.mouseOver("xpath", "//span[contains(text(),'" + category + "')]");
 			} catch (Exception e) {
-				Common.clickElement("xpath", "//nav[@class='main-nav flex h-full']//span[contains(text(), 'Shop')]");
+				Common.clickElement("xpath", "//ul[@role='menu']//span[contains(text(), 'Shop')]");
 			}
 			Common.clickElement("xpath", "//span[contains(text(),'" + category + "')]");
 			Thread.sleep(4000);
@@ -287,17 +288,17 @@ public class GoldHydroHyvaHelper {
 		String expectedResult = "User should click the" + category;
 		try {
 
-			Sync.waitElementPresent("xpath", "(//nav[@class='main-nav flex h-full']//span[contains(text(), 'Shop')])[2]");
+			Sync.waitElementPresent("xpath", "(//ul[@role='menu']//span[contains(text(), 'Shop')])[2]");
 			Thread.sleep(3000);
 //			Common.scrollIntoView("xpath","//a[contains(@class,'level-top')]//span[text()=' Shop']");
-			Common.clickElement("xpath", "(//nav[@class='main-nav flex h-full']//span[contains(text(), 'Shop')])[2]");
+			Common.clickElement("xpath", "(//ul[@role='menu']//span[contains(text(), 'Shop')])[2]");
 
 			Thread.sleep(3000);
 
 			try {
 				Common.mouseOver("xpath", "//span[contains(text(),'" + category + "')]");
 			} catch (Exception e) {
-				Common.clickElement("xpath", "(//nav[@class='main-nav flex h-full']//span[contains(text(), 'Shop')])[2]");
+				Common.clickElement("xpath", "(//ul[@role='menu']//span[contains(text(), 'Shop')])[2]");
 			}
 			Common.clickElement("xpath", "//span[contains(text(),'" + category + "')]");
 			Thread.sleep(4000);
@@ -4129,9 +4130,9 @@ System.out.println(MyFavorites);
 		try
 		{
 			Thread.sleep(4000);
-			int size=Common.findElements("xpath", "//nav[@class='main-nav flex h-full']//span[contains(text(), 'Shop')]").size();
+			int size=Common.findElements("xpath", "//ul[@role='menu']//span[contains(text(), 'Shop')]").size();
 			if(size>0) {
-				Common.clickElement("xpath", "//nav[@class='main-nav flex h-full']//span[contains(text(), 'Shop')]");
+				Common.clickElement("xpath", "//ul[@role='menu']//span[contains(text(), 'Shop')]");
 			}else {
 				Common.javascriptclickElement("xpath","//nav[@aria-label='Main menu']//span[contains(text(),'Shop')] ");
 			}
@@ -6468,10 +6469,10 @@ catch(Exception | Error e)
 		String expectedResult = "User should click the" + category;
 		try {
 
-			Sync.waitElementPresent("xpath", "//nav[@class='main-nav flex h-full']//span[contains(text(), 'Shop')]");
+			Sync.waitElementPresent("xpath", "//ul[@role='menu']//span[contains(text(), 'Shop')]");
 			Thread.sleep(3000);
 //			Common.scrollIntoView("xpath","//a[contains(@class,'level-top')]//span[text()=' Shop']");
-			Common.clickElement("xpath", "//nav[@class='main-nav flex h-full']//span[contains(text(), 'Shop')]");
+			Common.clickElement("xpath", "//ul[@role='menu']//span[contains(text(), 'Shop')]");
 			Thread.sleep(3000);
 
 			try {
@@ -7591,7 +7592,7 @@ catch(Exception | Error e)
 	public void click_BottlesDrinkware_ShopAll() {
 
 		try {
-			Common.clickElement("xpath", "//nav[@class='main-nav flex h-full']//span[contains(text(), 'Shop')]");
+			Common.clickElement("xpath", "//ul[@role='menu']//span[contains(text(), 'Shop')]");
 			Sync.waitElementPresent("xpath",
 					"(//span[contains(text(),'Bottles & Drinkware')])[1]");
 
@@ -11232,17 +11233,17 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 			  	 Thread.sleep(3000);
 		         for (i = 0; i < Links.length; i++) {
 		        	 Thread.sleep(2000);
-		        	 Sync.waitElementPresent(50,"xpath", "//nav[@class='main-nav flex h-full']//span[contains(text(), 'Shop')]");
+		        	 Sync.waitElementPresent(50,"xpath", "//ul[@role='menu']//span[contains(text(), 'Shop')]");
 
-						Common.javascriptclickElement("xpath", "//nav[@class='main-nav flex h-full']//span[contains(text(), 'Shop')]");
+						Common.javascriptclickElement("xpath", "//ul[@role='menu']//span[contains(text(), 'Shop')]");
 						Thread.sleep(3000);
 						int size=Common.findElements("xpath", "(//div[@x-init='$nextTick(() => {show = true })'])[2]").size();
 						if(size <=0) 
 						{
 							Common.javascriptclickElement("xpath", "//img[@alt='Hydroflask store logo']");
 						
-						Sync.waitElementPresent(50,"xpath", "//nav[@class='main-nav flex h-full']//span[contains(text(), 'Shop')]");
-						Common.javascriptclickElement("xpath", "//nav[@class='main-nav flex h-full']//span[contains(text(), 'Shop')]");
+						Sync.waitElementPresent(50,"xpath", "//ul[@role='menu']//span[contains(text(), 'Shop')]");
+						Common.javascriptclickElement("xpath", "//ul[@role='menu']//span[contains(text(), 'Shop')]");
 				       }
 					Thread.sleep(3000);	
 					Sync.waitElementPresent("xpath", "(//span[contains(text(),'Travel Bottles')])[1]");
@@ -11306,17 +11307,17 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 			  	 Thread.sleep(3000);
 		         for (i = 0; i < Links.length; i++) {
 		        	 Thread.sleep(2000);
-		        	 Sync.waitElementPresent(50,"xpath", "//nav[@class='main-nav flex h-full']//span[contains(text(), 'Shop')]");
+		        	 Sync.waitElementPresent(50,"xpath", "//ul[@role='menu']//span[contains(text(), 'Shop')]");
 
-						Common.javascriptclickElement("xpath", "//nav[@class='main-nav flex h-full']//span[contains(text(), 'Shop')]");
+						Common.javascriptclickElement("xpath", "//ul[@role='menu']//span[contains(text(), 'Shop')]");
 						Thread.sleep(3000);
 						int size=Common.findElements("xpath", "(//div[@x-init='$nextTick(() => {show = true })'])[2]").size();
 						if(size <=0) 
 						{
 							Common.javascriptclickElement("xpath", "//img[@alt='Hydroflask store logo']");
 						
-						Sync.waitElementPresent(50,"xpath", "//nav[@class='main-nav flex h-full']//span[contains(text(), 'Shop')]");
-						Common.javascriptclickElement("xpath", "//nav[@class='main-nav flex h-full']//span[contains(text(), 'Shop')]");
+						Sync.waitElementPresent(50,"xpath", "//ul[@role='menu']//span[contains(text(), 'Shop')]");
+						Common.javascriptclickElement("xpath", "//ul[@role='menu']//span[contains(text(), 'Shop')]");
 				       }
 					Thread.sleep(3000);	
 					Sync.waitElementPresent("xpath", "(//span[contains(text(),'Travel Tumbler')])[1]");
@@ -11380,17 +11381,17 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 			  	 Thread.sleep(3000);
 		         for (i = 0; i < Links.length; i++) {
 		        	 Thread.sleep(2000);
-		        	 Sync.waitElementPresent(50,"xpath", "//nav[@class='main-nav flex h-full']//span[contains(text(), 'Shop')]");
+		        	 Sync.waitElementPresent(50,"xpath", "//ul[@role='menu']//span[contains(text(), 'Shop')]");
 
-						Common.javascriptclickElement("xpath", "//nav[@class='main-nav flex h-full']//span[contains(text(), 'Shop')]");
+						Common.javascriptclickElement("xpath", "//ul[@role='menu']//span[contains(text(), 'Shop')]");
 						Thread.sleep(3000);
 						int size=Common.findElements("xpath", "(//div[@x-init='$nextTick(() => {show = true })'])[2]").size();
 						if(size <=0) 
 						{
 							Common.javascriptclickElement("xpath", "//img[@alt='Hydroflask store logo']");
 						
-						Sync.waitElementPresent(50,"xpath", "//nav[@class='main-nav flex h-full']//span[contains(text(), 'Shop')]");
-						Common.javascriptclickElement("xpath", "//nav[@class='main-nav flex h-full']//span[contains(text(), 'Shop')]");
+						Sync.waitElementPresent(50,"xpath", "//ul[@role='menu']//span[contains(text(), 'Shop')]");
+						Common.javascriptclickElement("xpath", "//ul[@role='menu']//span[contains(text(), 'Shop')]");
 				       }
 					Thread.sleep(3000);	
 					Sync.waitElementPresent("xpath", "(//span[contains(text(),'New & Trending')])[1]");
@@ -11420,7 +11421,7 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 					int j=0;
 					if(Number>j)
 					{
-						Common.assertionCheckwithReport(Page_title.contains("Nonstop Color")||Page_title.contains(Links[i])|| title.contains("Shop New Arrivals")|| title.contains("Colors of Oregon: Blue, Green & Light Pink Water Bottles | Hydro Flask")|| title.contains("Shop New & Trending")|| title.contains("Limited Edition Bottles | Hydro Flask"),
+						Common.assertionCheckwithReport(Page_title.contains("Nonstop Color")||Page_title.contains(Links[i])|| title.contains("Shop New Arrivals")|| title.contains("Colors of Oregon: Blue, Green & Light Pink Water Bottles | Hydro Flask")|| title.contains("Shop New & Trending")|| title.contains("Limited Edition Bottles | Hydro Flask")|| title.contains("New Colors: Shop New Water Bottle Colors | Hydro Flask"),
 								"verifying the header link " + Links[i] + "Under Collections",
 								"user should navigate to the " + Links[i] + " page",
 								"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
@@ -11453,17 +11454,17 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 		try {
 			for (i = 0; i < Links.length; i++) {
 				
-				Sync.waitElementPresent(50,"xpath", "//nav[@class='main-nav flex h-full']//span[contains(text(), 'Shop')]");
+				Sync.waitElementPresent(50,"xpath", "//ul[@role='menu']//span[contains(text(), 'Shop')]");
 
-				Common.javascriptclickElement("xpath", "//nav[@class='main-nav flex h-full']//span[contains(text(), 'Shop')]");
+				Common.javascriptclickElement("xpath", "//ul[@role='menu']//span[contains(text(), 'Shop')]");
 				Thread.sleep(3000);
 				int size=Common.findElements("xpath", "(//div[@x-init='$nextTick(() => {show = true })'])[2]").size();
 				if(size <=0) 
 				{
 					Common.javascriptclickElement("xpath", "//img[@alt='Hydroflask store logo']");
 				
-				Sync.waitElementPresent(50,"xpath", "//nav[@class='main-nav flex h-full']//span[contains(text(), 'Shop')]");
-				Common.javascriptclickElement("xpath", "//nav[@class='main-nav flex h-full']//span[contains(text(), 'Shop')]");
+				Sync.waitElementPresent(50,"xpath", "//ul[@role='menu']//span[contains(text(), 'Shop')]");
+				Common.javascriptclickElement("xpath", "//ul[@role='menu']//span[contains(text(), 'Shop')]");
 		}
 			Thread.sleep(3000);	
 				Common.javascriptclickElement("xpath", "(//span[contains(text(),'Bottles & Drinkware')])[1]");
@@ -11477,8 +11478,8 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 							"//a[contains(@href,'bottles-drinkware')]/span[contains(text(),'" + Links[i] + "')]");
 				}
 				catch(Exception | Error e) {
-					Sync.waitElementPresent(50,"xpath", "//nav[@class='main-nav flex h-full']//span[contains(text(), 'Shop')]");
-					WebElement web2=	Common.findElementBy("xpath", "//nav[@class='main-nav flex h-full']//span[contains(text(), 'Shop')]");
+					Sync.waitElementPresent(50,"xpath", "//ul[@role='menu']//span[contains(text(), 'Shop')]");
+					WebElement web2=	Common.findElementBy("xpath", "//ul[@role='menu']//span[contains(text(), 'Shop')]");
 					web2.click();
 				Common.javascriptclickElement("xpath", "(//span[contains(text(),'Bottles & Drinkware')])[1]");
 				Sync.waitElementPresent("xpath",
@@ -11548,8 +11549,8 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 		         	Thread.sleep(4000);
 		         	for (i = 0; i < Links.length; i++) {
 		         	
-							Sync.waitElementPresent(50,"xpath", "//nav[@class='main-nav flex h-full']//span[contains(text(), 'Shop')]");
-							Common.javascriptclickElement("xpath", "//nav[@class='main-nav flex h-full']//span[contains(text(), 'Shop')]");
+							Sync.waitElementPresent(50,"xpath", "//ul[@role='menu']//span[contains(text(), 'Shop')]");
+							Common.javascriptclickElement("xpath", "//ul[@role='menu']//span[contains(text(), 'Shop')]");
 							Thread.sleep(2000);
 					Common.clickElement("xpath", "//ul[@role='menu']//a[@title='Coolers & Lunch Boxes']");
 					Thread.sleep(3000);
@@ -11615,13 +11616,13 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 					try {
 						Thread.sleep(6000);
 			        	 Common.refreshpage();
-			        	 Sync.waitElementPresent(50,"xpath", "//nav[@class='main-nav flex h-full']//span[contains(text(), 'Shop')]");
-						WebElement web=	Common.findElementBy("xpath", "//nav[@class='main-nav flex h-full']//span[contains(text(), 'Shop')]");
+			        	 Sync.waitElementPresent(50,"xpath", "//ul[@role='menu']//span[contains(text(), 'Shop')]");
+						WebElement web=	Common.findElementBy("xpath", "//ul[@role='menu']//span[contains(text(), 'Shop')]");
 						web.click();
 					}
 					catch(Exception | Error e) {
-						Sync.waitElementPresent("xpath", "//nav[@class='main-nav flex h-full']//span[contains(text(), 'Shop')]");
-						Common.javascriptclickElement("xpath", "//nav[@class='main-nav flex h-full']//span[contains(text(), 'Shop')]");
+						Sync.waitElementPresent("xpath", "//ul[@role='menu']//span[contains(text(), 'Shop')]");
+						Common.javascriptclickElement("xpath", "//ul[@role='menu']//span[contains(text(), 'Shop')]");
 					}
 					Sync.waitElementClickable("xpath", "(//span[text()='Kitchenware'])[1]");
 					Common.clickElement("xpath", "(//span[text()='Kitchenware'])[1]");
@@ -11654,8 +11655,8 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 
 				int minLength = Math.min(ProdLink.length, Links.length);
 				for (int i1 = 0; i1 < minLength; i1++) {
-				    Sync.waitElementPresent("xpath", "//nav[@class='main-nav flex h-full']//span[contains(text(), 'Shop')]");
-				    Common.clickElement("xpath", "//nav[@class='main-nav flex h-full']//span[contains(text(), 'Shop')]");
+				    Sync.waitElementPresent("xpath", "//ul[@role='menu']//span[contains(text(), 'Shop')]");
+				    Common.clickElement("xpath", "//ul[@role='menu']//span[contains(text(), 'Shop')]");
 				    Thread.sleep(1000);
 				    Common.clickElement("xpath", "//ul[@role='menu']//span[text()='Kitchenware']");
 				    Thread.sleep(1000);
@@ -11716,18 +11717,18 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 			for (i = 0; i < Links.length; i++) {
 				
 					
-					Sync.waitElementPresent(50,"xpath", "//nav[@class='main-nav flex h-full']//span[contains(text(), 'Shop')]");
-//					WebElement web=	Common.findElementBy("xpath", "//nav[@class='main-nav flex h-full']//span[contains(text(), 'Shop')]");
+					Sync.waitElementPresent(50,"xpath", "//ul[@role='menu']//span[contains(text(), 'Shop')]");
+//					WebElement web=	Common.findElementBy("xpath", "//ul[@role='menu']//span[contains(text(), 'Shop')]");
 //					web.click();
-					Common.javascriptclickElement("xpath", "//nav[@class='main-nav flex h-full']//span[contains(text(), 'Shop')]");
+					Common.javascriptclickElement("xpath", "//ul[@role='menu']//span[contains(text(), 'Shop')]");
 					Thread.sleep(3000);
 					int size=Common.findElements("xpath", "(//div[@x-init='$nextTick(() => {show = true })'])[2]").size();
 					if(size <=0) 
 					{
 						Common.javascriptclickElement("xpath", "//img[@alt='Hydroflask store logo']");
 					
-					Sync.waitElementPresent(50,"xpath", "//nav[@class='main-nav flex h-full']//span[contains(text(), 'Shop')]");
-					Common.javascriptclickElement("xpath", "//nav[@class='main-nav flex h-full']//span[contains(text(), 'Shop')]");
+					Sync.waitElementPresent(50,"xpath", "//ul[@role='menu']//span[contains(text(), 'Shop')]");
+					Common.javascriptclickElement("xpath", "//ul[@role='menu']//span[contains(text(), 'Shop')]");
 			}
 				Common.clickElement("xpath", "//span[text()='Featured']");
 				Thread.sleep(3000);
@@ -11782,8 +11783,8 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 		int i = 0;
 		try {
 			for (i = 0; i < Links.length; i++) {
-				Sync.waitElementPresent("xpath", "//nav[@class='main-nav flex h-full']//span[contains(text(), 'Shop')]");
-				Common.clickElement("xpath", "//nav[@class='main-nav flex h-full']//span[contains(text(), 'Shop')]");
+				Sync.waitElementPresent("xpath", "//ul[@role='menu']//span[contains(text(), 'Shop')]");
+				Common.clickElement("xpath", "//ul[@role='menu']//span[contains(text(), 'Shop')]");
 				Thread.sleep(3000);
 				Sync.waitElementPresent("xpath", "//span[contains(text(),'" + Links[i] + "')]");
 				Common.clickElement("xpath", "//span[contains(text(),'" + Links[i] + "')]");
@@ -11854,8 +11855,8 @@ public void Explore_Validation(String Dataset) {
 			Common.clickElement("xpath", "(//span[contains(text(),'Explore')])[1]");
 			Thread.sleep(3000);
 			Sync.waitElementPresent("xpath",
-					"//a[contains(@class,'link group no-underline')]//span[contains(text(),'" + Links[i] + "')]");
-			Common.clickElement("xpath", "//a[contains(@class,'link group no-underline')]//span[contains(text(),'" + Links[i] + "')]");
+					"//span[contains(text(),'" + Links[i] + "')]");
+			Common.clickElement("xpath", "//span[contains(text(),'" + Links[i] + "')]");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			String page = Common.getPageTitle();
@@ -12358,8 +12359,8 @@ public void Explore_Validation(String Dataset) {
 		try {
 			for (i = 0; i < Links.length; i++) {
 				System.out.println(Links.length);
-				Sync.waitElementPresent("xpath", "//nav[@class='main-nav flex h-full']//span[contains(text(), 'Shop')]");
-				Common.clickElement("xpath", "//nav[@class='main-nav flex h-full']//span[contains(text(), 'Shop')]");
+				Sync.waitElementPresent("xpath", "//ul[@role='menu']//span[contains(text(), 'Shop')]");
+				Common.clickElement("xpath", "//ul[@role='menu']//span[contains(text(), 'Shop')]");
 				Thread.sleep(3000);
 				Sync.waitElementPresent("xpath", "//span[contains(text(),' " + Links[i] + "')]");
 				Common.clickElement("xpath", "//span[contains(text(),' " + Links[i] + "')]");
@@ -12397,8 +12398,8 @@ public void Explore_Validation(String Dataset) {
 			try {
 				for (i = 0; i < Links.length; i++) {
 					System.out.println(Links.length);
-					Sync.waitElementPresent("xpath", "//nav[@class='main-nav flex h-full']//span[contains(text(), 'Shop')]");
-					Common.clickElement("xpath", "//nav[@class='main-nav flex h-full']//span[contains(text(), 'Shop')]");
+					Sync.waitElementPresent("xpath", "//ul[@role='menu']//span[contains(text(), 'Shop')]");
+					Common.clickElement("xpath", "//ul[@role='menu']//span[contains(text(), 'Shop')]");
 					Thread.sleep(3000);
 					Sync.waitElementPresent("xpath", "//span[contains(text(),' " + Links[i] + "')]");
 					Common.clickElement("xpath", "//span[contains(text(),' " + Links[i] + "')]");
@@ -13113,17 +13114,17 @@ String PDP_PrdtName = color.toLowerCase();
 		int i = 0;
 		try {
 			for (i = 0; i < Links.length; i++) {
-				Sync.waitElementPresent(50,"xpath", "//nav[@class='main-nav flex h-full']//span[contains(text(), 'Shop')]");
+				Sync.waitElementPresent(50,"xpath", "//ul[@role='menu']//span[contains(text(), 'Shop')]");
 
-				Common.javascriptclickElement("xpath", "//nav[@class='main-nav flex h-full']//span[contains(text(), 'Shop')]");
+				Common.javascriptclickElement("xpath", "//ul[@role='menu']//span[contains(text(), 'Shop')]");
 				Thread.sleep(3000);
 				int size=Common.findElements("xpath", "(//div[@x-init='$nextTick(() => {show = true })'])[2]").size();
 				if(size <=0) 
 				{
 					Common.javascriptclickElement("xpath", "//img[@alt='Hydroflask store logo']");
 				
-				Sync.waitElementPresent(50,"xpath", "//nav[@class='main-nav flex h-full']//span[contains(text(), 'Shop')]");
-				Common.javascriptclickElement("xpath", "//nav[@class='main-nav flex h-full']//span[contains(text(), 'Shop')]");
+				Sync.waitElementPresent(50,"xpath", "//ul[@role='menu']//span[contains(text(), 'Shop')]");
+				Common.javascriptclickElement("xpath", "//ul[@role='menu']//span[contains(text(), 'Shop')]");
 		       }
 			Thread.sleep(3000);	
 				Common.clickElement("xpath", "//span[contains(text(),'New Colors')]");
@@ -13183,17 +13184,17 @@ String PDP_PrdtName = color.toLowerCase();
 		int i = 0;
 		try {
 			for (i = 0; i < Links.length; i++) {
-				Sync.waitElementPresent(50,"xpath", "//nav[@class='main-nav flex h-full']//span[contains(text(), 'Shop')]");
+				Sync.waitElementPresent(50,"xpath", "//ul[@role='menu']//span[contains(text(), 'Shop')]");
 
-				Common.javascriptclickElement("xpath", "//nav[@class='main-nav flex h-full']//span[contains(text(), 'Shop')]");
+				Common.javascriptclickElement("xpath", "//ul[@role='menu']//span[contains(text(), 'Shop')]");
 				Thread.sleep(3000);
 				int size=Common.findElements("xpath", "(//div[@x-init='$nextTick(() => {show = true })'])[2]").size();
 				if(size <=0) 
 				{
 					Common.javascriptclickElement("xpath", "//img[@alt='Hydroflask store logo']");
 				
-				Sync.waitElementPresent(50,"xpath", "//nav[@class='main-nav flex h-full']//span[contains(text(), 'Shop')]");
-				Common.javascriptclickElement("xpath", "//nav[@class='main-nav flex h-full']//span[contains(text(), 'Shop')]");
+				Sync.waitElementPresent(50,"xpath", "//ul[@role='menu']//span[contains(text(), 'Shop')]");
+				Common.javascriptclickElement("xpath", "//ul[@role='menu']//span[contains(text(), 'Shop')]");
 		       }
 			Thread.sleep(3000);	
 				Common.clickElement("xpath", "(//span[contains(text(),'Shop by Color')])[1]");
@@ -13288,17 +13289,17 @@ String PDP_PrdtName = color.toLowerCase();
 
 	    for (String link : Links) {
 	        try {
-	        	Sync.waitElementPresent(50,"xpath", "//nav[@class='main-nav flex h-full']//span[contains(text(), 'Shop')]");
+	        	Sync.waitElementPresent(50,"xpath", "//ul[@role='menu']//span[contains(text(), 'Shop')]");
 
-				Common.javascriptclickElement("xpath", "//nav[@class='main-nav flex h-full']//span[contains(text(), 'Shop')]");
+				Common.javascriptclickElement("xpath", "//ul[@role='menu']//span[contains(text(), 'Shop')]");
 				Thread.sleep(3000);
 				int size=Common.findElements("xpath", "(//div[@x-init='$nextTick(() => {show = true })'])[2]").size();
 				if(size <=0) 
 				{
 					Common.javascriptclickElement("xpath", "//img[@alt='Hydroflask store logo']");
 				
-				Sync.waitElementPresent(50,"xpath", "//nav[@class='main-nav flex h-full']//span[contains(text(), 'Shop')]");
-				Common.javascriptclickElement("xpath", "//nav[@class='main-nav flex h-full']//span[contains(text(), 'Shop')]");
+				Sync.waitElementPresent(50,"xpath", "//ul[@role='menu']//span[contains(text(), 'Shop')]");
+				Common.javascriptclickElement("xpath", "//ul[@role='menu']//span[contains(text(), 'Shop')]");
 		}
 			Thread.sleep(3000);	
 	            Sync.waitElementPresent(50,"xpath", "(//a[@title='Accessories']//span[text()='Accessories'])[1]");
@@ -14054,6 +14055,46 @@ Common.clickElement("xpath", "//span[text()='Edit']");
 			Assert.fail();
 		}
 		
+	}
+	
+	public void single_Categories_From_Shop(String Dataset) {
+		// TODO Auto-generated method stub
+		String names ="";
+		if(Common.getCurrentURL().contains("preprod")) {
+			names = data.get(Dataset).get("PreprodsingleCategories");
+		}else {
+			names = data.get(Dataset).get("ProdsingleCategories");
+		}
+		String[] Links = names.split(",");
+		int i=0;
+		try
+		{
+
+			for (i = 0; i < Links.length; i++) {
+				Thread.sleep(4000);
+				Sync.waitElementPresent("css", "button[type='button'].menu-node-shop");
+				Common.clickElement("css", "button[type='button'].menu-node-shop");
+				Thread.sleep(2000);
+				Common.clickElement("xpath", "//ul[@role='menu']//span[text()='"+ Links[i] +"']");
+				Thread.sleep(3000);
+				Sync.waitPageLoad();
+				System.out.println(Common.getPageTitle());
+				Common.assertionCheckwithReport(Common.getPageTitle().contains("Back to School Lunch Bags & Water Bottles | Hydro Flask")||Common.getPageTitle().contains("Hydro Flask Gift Card")||Common.getPageTitle().contains("Shop Micro Hydro")||Common.getPageTitle().contains("Shop Travel Bottles")||Common.getPageTitle().contains("Shop Travel Tumbler")||Common.getPageTitle().contains("Hydro Flask Bundles: Sets & Gifts for Water Drinkers | Hydro Flask")||Common.getPageTitle().contains("Sale | Hydro Flask"),
+						"verifying the header link " + Links[i] + "Under Shop",
+						"user should navigate to the " + Links[i] + " page",
+						"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
+			}
+		}
+		catch(Exception |Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("verifying the header link " + Links[i] + "Under Shop",
+					"User should navigate to the " + Links[i] + "pages",
+					" unable to navigate to the " + Links[i] + "pages",
+					Common.getscreenShot("Failed to navigate to the " + Links[i] + "pages"));
+			Assert.fail();
+		}
+
 	}
 	
 	
@@ -14846,17 +14887,17 @@ Common.clickElement("xpath", "//span[text()='Edit']");
 		try {
 		         	Thread.sleep(4000);
 		         	for (i = 0; i < Links.length; i++) {
-		         		Sync.waitElementPresent(50,"xpath", "//nav[@class='main-nav flex h-full']//span[contains(text(), 'Shop')]");
+		         		Sync.waitElementPresent(50,"xpath", "//ul[@role='menu']//span[contains(text(), 'Shop')]");
 
-						Common.javascriptclickElement("xpath", "//nav[@class='main-nav flex h-full']//span[contains(text(), 'Shop')]");
+						Common.javascriptclickElement("xpath", "//ul[@role='menu']//span[contains(text(), 'Shop')]");
 						Thread.sleep(3000);
 						int size=Common.findElements("xpath", "(//div[@x-init='$nextTick(() => {show = true })'])[2]").size();
 						if(size <=0) 
 						{
 							Common.javascriptclickElement("xpath", "//img[@alt='Hydroflask store logo']");
 						
-						Sync.waitElementPresent(50,"xpath", "//nav[@class='main-nav flex h-full']//span[contains(text(), 'Shop')]");
-						Common.javascriptclickElement("xpath", "//nav[@class='main-nav flex h-full']//span[contains(text(), 'Shop')]");
+						Sync.waitElementPresent(50,"xpath", "//ul[@role='menu']//span[contains(text(), 'Shop')]");
+						Common.javascriptclickElement("xpath", "//ul[@role='menu']//span[contains(text(), 'Shop')]");
 				}
 					Thread.sleep(3000);	
 					Common.clickElement("xpath", "//a[@title='Collections']");
@@ -14882,7 +14923,7 @@ Common.clickElement("xpath", "//span[text()='Edit']");
 					int j=0;
 					if(Number>j)
 					{
-						Common.assertionCheckwithReport(title.contains(Links[i]) || breadcrumbs.contains(Links[i]) 
+						Common.assertionCheckwithReport(title.contains(Links[i]) || breadcrumbs.contains(Links[i]) || Common.getPageTitle().contains("Bestsellers")
 						|| Common.getPageTitle().contains("Shop Remix Collection")|| Common.getPageTitle().contains("Shop Micro Hydro"),
 								"verifying the header link " + Links[i] + "Under Collections",
 								"user should navigate to the " + Links[i] + " page",
@@ -15783,8 +15824,8 @@ Common.clickElement("xpath", "//span[text()='Edit']");
 		try {
 			Thread.sleep(4000);
 			for (i = 0; i < Links.length; i++) {
-				Sync.waitElementPresent("xpath", "//nav[@class='main-nav flex h-full']//span[contains(text(), 'Shop')]");
-				Common.clickElement("xpath", "//nav[@class='main-nav flex h-full']//span[contains(text(), 'Shop')]");
+				Sync.waitElementPresent("xpath", "//ul[@role='menu']//span[contains(text(), 'Shop')]");
+				Common.clickElement("xpath", "//ul[@role='menu']//span[contains(text(), 'Shop')]");
 				Common.clickElement("xpath", "//span[contains(text(),'Coolers')]");
 				Thread.sleep(3000);
 				Sync.waitElementPresent("xpath",
@@ -16130,7 +16171,7 @@ Common.clickElement("xpath", "//span[text()='Edit']");
 		try {
 			Common.refreshpage();
 			Sync.waitPageLoad();
-			int ribbon = Common.findElements("xpath", "//div[contains(@class,'ribbons grid gap')]").size();
+			int ribbon = Common.findElements("css", "span[x-init*='handleSaleRibbon']").size();
 			Common.assertionCheckwithReport(ribbon>0,
 					"Verfying the PDP ribbon when navigated to the PDP page ",
 					"User should able to see ribbon when navigated on the PDP Page",

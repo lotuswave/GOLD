@@ -21,7 +21,6 @@ public class Test_DGLD_HF_ST_080_Validating_the_PDP_page {
 			Hydro.verifingHomePage();
 			Hydro.search_product("Configurable_Product");
 			Hydro.Configurableproduct_addtocart_pdppage("Configurable_Product");
-
 			Hydro.ribbon();
 			Hydro.search_product("Product_PDP");
 			Hydro.addtocart("Product_PDP");
@@ -31,7 +30,7 @@ public class Test_DGLD_HF_ST_080_Validating_the_PDP_page {
 			Common.actionsKeyPress(Keys.UP);
 			Hydro.BNPL();
 			Hydro.Related_Products();
-//			Hydro.User_GenerTed_Content();
+			//Hydro.User_GenerTed_Content();
 
 			if (Common.getCurrentURL().contains("https://www.hydroflask.com/")) {
 				Hydro.Gift_cards("Hydro Gift Card");
