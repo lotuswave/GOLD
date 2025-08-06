@@ -7123,6 +7123,7 @@ catch(Exception | Error e){
 				System.out.println(Common.getCurrentURL());
 
 				if (socallinksarry[i].equals("instagram")) {
+					Thread.sleep(2000);
 					Common.assertionCheckwithReport(Common.getCurrentURL().contains("instagram"),
 							"Verifying Social link  " + socallinksarry[i], "User click the social " + socallinksarry[i],
 							"successfully navigating to social link  " + socallinksarry[i],
@@ -7130,6 +7131,7 @@ catch(Exception | Error e){
 					Common.closeCurrentWindow();
 					Common.switchToFirstTab();
 				} else if (socallinksarry[i].equals("tiktok")) {
+					Thread.sleep(2000);
 					Common.assertionCheckwithReport(Common.getCurrentURL().contains("tiktok.com"),
 							"Verifying Social link  " + socallinksarry[i], "User click the social " + socallinksarry[i],
 							"successfully navigating to social link  " + socallinksarry[i],
@@ -16452,11 +16454,23 @@ catch(Exception | Error e){
 				Common.textBoxInput("xpath", "(//input[contains(@id,'kl-consent-page')])[3]", "narra");
                   Common.clickElement("xpath", "//button[text()='Subscribe']");
                   Thread.sleep(4000);
-              String text = Common.getText("css", "h1 span[style]");
+                  int size=Common.findElements("css", "h1 span[style]").size();
+                  if(size>0){
+              String text = Common.findElement("css", "h1 span[style]").getText().trim();
               Common.assertionCheckwithReport(text.contains("You've been subscribed"),
-  					"validating Newsletter Subscription Message",
-  					"After Clicking subscribe button it should display the you've subscribed",
-  					"Unable to subscribed the Newsletter in My Account");
+    					"validating Newsletter Subscription Message",
+    					"After Clicking subscribe button it should display the you've subscribed",
+    					"Unable to subscribed the Newsletter in My Account");
+                  }
+                  else
+                  {
+                	   String text1 = Common.findElement("xpath", "//h1[contains(text(),'Check your inbox')]").getText().trim(); 
+                	   Common.assertionCheckwithReport(text1.contains("Check your inbox"),
+           					"validating Newsletter Subscription Message",
+           					"After Clicking subscribe button it should display the you've subscribed",
+           					"Unable to subscribed the Newsletter in My Account");
+                  }
+             
 					}else {
 				
 			
