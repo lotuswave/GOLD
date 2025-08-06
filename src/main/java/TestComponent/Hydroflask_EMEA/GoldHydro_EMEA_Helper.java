@@ -9813,8 +9813,8 @@ catch(Exception | Error e){
 	        Common.scrollIntoView("xpath", "//h1[@itemprop='name']");
 
 	        if (currentUrl.contains("emea") || currentUrl.contains("preprod")) {
-	            Sync.waitElementClickable("xpath", "(//button[contains(@class,'relative block after') and @type='button'])[2]");
-	            Common.clickElement("xpath", "(//button[contains(@class,'relative block after') and @type='button'])[2]");
+	            Sync.waitElementClickable("xpath", "(//button[contains(@class,'relative block after') and @type='button'])[3]");
+	            Common.clickElement("xpath", "(//button[contains(@class,'relative block after') and @type='button'])[3]");
 	        } else {
 	            Sync.waitElementClickable("xpath", "(//button[contains(@class,'relative block after') and @type='button'])[2]");
 	            Common.clickElement("xpath", "(//button[contains(@class,'relative block after') and @type='button'])[2]");
