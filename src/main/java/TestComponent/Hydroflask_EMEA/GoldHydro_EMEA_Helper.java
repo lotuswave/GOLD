@@ -10497,7 +10497,6 @@ catch(Exception | Error e){
 				String Bottleimagecolor = Common.getText("xpath",
 						"(//span[contains(@x-text,'getSwatchText')])['" + value + "']");
 				System.out.println(Bottleimagecolor);
-
 				Common.assertionCheckwithReport(colorname != null && colorname.contains(Bottleimagecolor),
 						"Validate Selected Color Swatch", "User should be able to select color swatch",
 						"Color swatch selected successfully: " + colorname, "Failed to select color swatch");
@@ -10521,26 +10520,28 @@ catch(Exception | Error e){
 		// TODO Auto-generated method stub
 //		String names = data.get(Dataset).get("names");
 //		String[] Links = names.split(",");
+		Common.actionsKeyPress(Keys.DOWN);
 		List<WebElement> size = Common.findElements("css",
 				"div[x-ref='productTabsComponent'] div h2[aria-live='polite']");
 		try {
 			for (int i = 0; i < size.size(); i++) {
 				int value = i + 1;
 				size.get(i).click();
+				Thread.sleep(4000);
 				String title = Common
-						.getText("xpath",
+						.findElement("xpath",
 								"(//div[@x-ref='productTabsComponent']//div//h2[@aria-live='polite'])['" + value + "']")
-						.trim();
+						.getText().trim();
 				System.out.println(title);
 				String data = Common
-						.getText("xpath",
+						.findElement("xpath",
 								"(//div[@x-ref='productTabsComponent']//h2[@aria-live='polite'])['" + value + "']")
-						.trim();
+						.getText().trim();
 				System.out.println(data);
 				Common.assertionCheckwithReport(title.contains(data), "verifying the tabs in PDP ",
-						"After clicking on the " + title + "It should display the related content",
-						"sucessfully after clicking on the " + title + "it has been displayed related content",
-						"Failed to display related content" + title);
+						"After clicking on the  product tab It should display the related content",
+						"sucessfully after clicking on the product tab it has been displayed related content",
+						"Failed to display related content after clicking on the product tab");
 			}
 		} catch (Exception | Error e) {
 			e.printStackTrace();
