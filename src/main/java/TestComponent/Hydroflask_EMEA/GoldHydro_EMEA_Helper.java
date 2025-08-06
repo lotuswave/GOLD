@@ -2345,6 +2345,7 @@ Common.implicitWait();
 //				boolean isEmailErrorCorrect = emailErrorMessage.equalsIgnoreCase("Please enter a valid email address.");
 //				boolean isConfirmPasswordErrorCorrect = confirmPasswordErrorMessage.contains("must be the same as");
 //				boolean pagetitlename = pageTitlename.contains("Create an Account");
+			Thread.sleep(4000);
 				Common.assertionCheckwithReport(
 					 Common.getCurrentURL().contains("/account/create/"),
 						"Validating error messages for invalid data in account creation form",
@@ -2601,7 +2602,7 @@ Common.implicitWait();
 			boolean isRegistrationSuccess = successMessage.contains("Thank you for registering");
 			boolean isWishlistMessage = Common.getPageTitle().contains("Wish List Sharing")
 					&& successMessage.contains(Product + " has been added to your Favorites");
-
+			Thread.sleep(2000);
 			Common.assertionCheckwithReport(
 					isRegistrationSuccess || isWishlistMessage || Common.getCurrentURL().contains("account"),
 					"Verifying account creation and redirection after Sign Up",
@@ -9025,6 +9026,7 @@ catch(Exception | Error e){
 
 		String message = Common.findElement("xpath", "//div[contains(@class,'message')]//span").getText();
 		System.out.println(message);
+		Thread.sleep(4000);
 		boolean isSuccess = isNewSubscription
 				? message.contains("Alert subscription has been saved.")
 						|| message.contains("Thank you! You are already subscribed to this product.")
