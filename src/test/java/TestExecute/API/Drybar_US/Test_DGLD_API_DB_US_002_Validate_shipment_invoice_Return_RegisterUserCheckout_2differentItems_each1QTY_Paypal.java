@@ -47,7 +47,7 @@ public class Test_DGLD_API_DB_US_002_Validate_shipment_invoice_Return_RegisterUs
 
     @Test(priority = 2, dependsOnMethods = "generateApiKey")
     public void getOrderCopy() {
-    	MagentoOrder_ID="12817764";
+    	MagentoOrder_ID="20364293";
     	RestAssured.baseURI = "https://na-preprod.hele.digital/rest/drybar/V1/orders/"+MagentoOrder_ID+"/";
 
         RequestSpecification request = RestAssured.given();
@@ -109,11 +109,11 @@ public class Test_DGLD_API_DB_US_002_Validate_shipment_invoice_Return_RegisterUs
                 "    \"items\": [\n" +
                 "        {\n" +
                 "            \"order_item_id\": " + firstItemId + ",\n" +
-                "            \"qty\":2.0\n" +
+                "            \"qty\":1.0\n" +
                 "        },\n" + 
                 "        {\n" +
                 "            \"order_item_id\": " + SecondItemId + ",\n" +
-                "            \"qty\":2.0\n" +
+                "            \"qty\":1.0\n" +
                 "        }\n" +
                 "    ],\n" +
                 "    \"tracks\": [\n" +
@@ -150,11 +150,11 @@ public class Test_DGLD_API_DB_US_002_Validate_shipment_invoice_Return_RegisterUs
                 "    \"items\": [\n" +
                 "        {\n" +
                 "            \"order_item_id\": " + firstItemId + ",\n" +
-                "            \"qty\": 2.0\n" +
+                "            \"qty\": 1.0\n" +
                 "        },\n" + 
                 "        {\n" + 
                 "            \"order_item_id\": " + SecondItemId + ",\n" +
-                "            \"qty\":2.0\n" +
+                "            \"qty\":1.0\n" +
                 "        }\n" +
                 "    ],\n" +
                 "    \"notify\": false,\n" +
@@ -201,7 +201,7 @@ public class Test_DGLD_API_DB_US_002_Validate_shipment_invoice_Return_RegisterUs
     	        "    \"items\": [\n" +
     	        "        {\n" +
     	        "            \"order_item_id\": "+firstItemId+",\n" +
-    	        "            \"quantity_to_return\": 2,\n" +
+    	        "            \"quantity_to_return\": 1,\n" +
     	        "            \"entered_custom_attributes\": [\n" +
     	        "                {\n" +
     	        "                    \"attribute_code\": \"reason\",\n" +
@@ -271,7 +271,7 @@ public class Test_DGLD_API_DB_US_002_Validate_shipment_invoice_Return_RegisterUs
              "    \"type\": \"approved_return\",\n" +
              "    \"order_item_ids\": [\n" +
              "        {\n" +
-             "            \"qty\": 2,\n" +
+             "            \"qty\": 1,\n" +
              "            \"order_item_id\": \""+firstItemId+"\"\n" +
              "        }\n" +
              "    ],\n" +
