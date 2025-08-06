@@ -15,7 +15,7 @@ import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
  
-public class Test_DGLD_API_OXO_04_Guest_1LineItem_QTY2_GiftCodeFullRedemption {
+public class Test_DGLD_API_OXO_04_Validate_shipment_invoice_Return_Register_User_checkout_2differentItems_giftcard_purchase_CC {
     private String apiKey;
     private String orderNumber;
     public Integer itemId;

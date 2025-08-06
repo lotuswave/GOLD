@@ -15,7 +15,7 @@ import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 
-public class Test_DGLD_API_OXO_02_Registered_SimpleConfigurableGiftcard_1QTYeach_PayPal {
+public class Test_DGLD_API_OXO_02_Validate_shipment_invoice_Return_Registered_2differentitems_SimpleConfigurable_1QTYeach_PayPal {
     private String apiKey;
     private String orderNumber;
     public Integer itemId;

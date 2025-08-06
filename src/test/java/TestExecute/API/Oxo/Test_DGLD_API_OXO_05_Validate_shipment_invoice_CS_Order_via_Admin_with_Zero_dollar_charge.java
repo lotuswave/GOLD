@@ -15,7 +15,7 @@ import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 
-public class Test_DGLD_API_OXO_05_CS_Order_via_Admin_with_Zero_dollar_charge_1LineItem_2QTY_Full_shippment_Invoice {
+public class Test_DGLD_API_OXO_05_Validate_shipment_invoice_CS_Order_via_Admin_with_Zero_dollar_charge {
     private String apiKey;
     private String orderNumber;
     public Integer itemId;

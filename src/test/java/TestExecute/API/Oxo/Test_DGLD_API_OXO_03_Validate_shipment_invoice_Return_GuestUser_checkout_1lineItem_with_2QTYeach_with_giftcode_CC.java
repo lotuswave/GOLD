@@ -15,7 +15,7 @@ import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 
-public class Test_DGLD_API_OXO_03_Guest_ConfigurableItem_1QTY_Klarna {
+public class Test_DGLD_API_OXO_03_Validate_shipment_invoice_Return_GuestUser_checkout_1lineItem_with_2QTYeach_with_giftcode_CC {
     private String apiKey;
     private String orderNumber;
     public Integer itemId;
