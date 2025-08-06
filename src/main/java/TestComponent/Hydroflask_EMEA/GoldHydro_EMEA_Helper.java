@@ -4193,9 +4193,9 @@ catch(Exception | Error e){
 	public void click_Prodeal() {
 		// TODO Auto-generated method stub
 		try {
-			Common.scrollIntoView("xpath", "//a[@title='Pro Deal']");
-			Sync.waitElementPresent("xpath", "//a[@title='Pro Deal']");
-			Common.clickElement("xpath", "//a[@title='Pro Deal']");
+			Common.scrollIntoView("xpath", "//a[@title='Pro Deal' and contains(@href,'prodeal')]");
+			Sync.waitElementPresent("xpath", "//a[@title='Pro Deal' and contains(@href,'prodeal')]");
+			Common.clickElement("xpath", "//a[@title='Pro Deal' and contains(@href,'prodeal')]");
 
 			Common.assertionCheckwithReport(Common.getCurrentURL().contains("/prodeal/application"),
 					"To validate the Pro Deal", "Should be display the Pro Deal Application ",
