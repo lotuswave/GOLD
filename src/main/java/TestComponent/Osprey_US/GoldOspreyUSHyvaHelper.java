@@ -11011,8 +11011,8 @@ public void Gift_card(String dataSet) {
 			System.out.println(URL);
 			if(URL.contains("stage")|| URL.contains("preprod")) {
 			Thread.sleep(5000);
-		Sync.waitElementPresent("css", "div.amcard-field-container h3.cursor-pointer");	
-		Common.clickElement("css","div.amcard-field-container h3.cursor-pointer");
+//		Sync.waitElementPresent("css", "div.amcard-field-container h3.cursor-pointer");	
+//		Common.clickElement("css","div.amcard-field-container h3.cursor-pointer");
 		
 
 		Thread.sleep(5000);
@@ -11030,16 +11030,18 @@ public void Gift_card(String dataSet) {
 			}
 			else
 			{
-				Common.scrollIntoView("xpath", "//h3[contains(normalize-space(), 'Add Gift Card')]");
-				Common.clickElement("xpath","//h3[contains(normalize-space(), 'Add Gift Card')]");
+				Common.scrollIntoView("css", "div.border-b.pb-4.amcard-field-container.-code");
+				Common.clickElement("css","div.border-b.pb-4.amcard-field-container.-code");
+				Thread.sleep(3000);
 				Common.textBoxInput("xpath","//input[@x-model='giftCardCode']", data.get(dataSet).get("GiftCard_Prod"));
+				Thread.sleep(2000);
 //				Common.actionsKeyPress(Keys.ARROW_UP);
 				Common.clickElement("xpath","//button[@aria-label='Add Code']");
 //				Thread.sleep(2000);
 				Sync.waitElementVisible(30,"xpath", "//div[@ui-id='message-success']");
 				String successmsg=Common.findElement("xpath", "//div[@ui-id='message-success']").getText();
 			    System.out.println(successmsg);	
-				Common.assertionCheckwithReport(successmsg.contains("added."),
+				Common.assertionCheckwithReport(successmsg.contains("was added."),
 						"validating the success message after applying gift card",
 						"Success message should be displayed after the applying of gift card",
 						"Sucessfully gift card has been applyed","Failed to apply the gift card");
@@ -11109,7 +11111,7 @@ public void Gift_card(String dataSet) {
    }
    else
    {
-	   AssertJUnit.fail();
+	  System.out.print("Executed in production environment so we can not click place order button");
    }
 
 		String url = automation_properties.getInstance().getProperty(automation_properties.BASEURL);
@@ -16215,9 +16217,9 @@ public void url_color_validation(String Dataset) {
 	try {
 		Sync.waitPageLoad();
 		for (int i = 0; i <= 10; i++) {
-			Sync.waitElementPresent("xpath", "//img[contains(@itemprop ,'image')]");
-			List<WebElement> webelementslist = Common.findElements("xpath",
-					"//img[contains(@itemprop ,'image')]");
+			Sync.waitElementPresent("css", "img[loading='eager']");
+			List<WebElement> webelementslist = Common.findElements("css",
+					"img[loading='eager']");
 			String s = webelementslist.get(i).getAttribute("src");
 			System.out.println(s);
 			if (s.isEmpty()) {
@@ -16275,12 +16277,12 @@ public void url_color_validation(String Dataset) {
 			pdpcolors.get(i).click();
 			Thread.sleep(2000);
 			String clicked_Color = pdpcolors.get(i).getAttribute("data-option-label");
-//			System.out.println(clicked_Color + " selected color");
+			System.out.println(clicked_Color + " selected color");
             Thread.sleep(2000);
-//			System.out.println(Common.getCurrentURL());
+			System.out.println(Common.getCurrentURL());
 			String URL=Common.getCurrentURL().replace("+", " ");
-//			System.out.println(URL);
-			Common.assertionCheckwithReport(URL.contains(clicked_Color),
+			System.out.println(URL);
+			Common.assertionCheckwithReport(clicked_Color.contains(URL),
 					"Validating PDP page url Color name is passing to url",
 					"select the color of product is " + clicked_Color + " it must pass throw url",
 					" Selected color " + clicked_Color + "passing throw url",

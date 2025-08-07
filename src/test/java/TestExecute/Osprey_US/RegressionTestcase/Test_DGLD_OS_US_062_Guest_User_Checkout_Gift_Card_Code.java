@@ -19,8 +19,8 @@ public class Test_DGLD_OS_US_062_Guest_User_Checkout_Gift_Card_Code {
 
 		try {
         Osprey_ReEu.verifingHomePage();
-        Osprey_ReEu.search_product("Product");
-        Osprey_ReEu.addtocart("Product");
+        Osprey_ReEu.search_product("Simple product");
+        Osprey_ReEu.addtocart("Simple product");
         Osprey_ReEu.minicart_Checkout();
         Osprey_ReEu.addDeliveryAddress_Guestuser("Account");
         Osprey_ReEu.selectshippingmethod("GroundShipping method");
