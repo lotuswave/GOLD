@@ -21,7 +21,7 @@ public class Test_DGLD_HF_ST_032_Header_Links_Validation {
 		try {
 			Hydro.verifingHomePage();
 			if(Common.getCurrentURL().contains("preprod")) {
-				Hydro.New_Arrivals_validation("New Arrivals");
+				Hydro.newTrending_validation("newTrending");
 				Hydro.travel_Bottles_validation("travel Bottles");
 				Hydro.Travel_Tumbler_validation("Travel Tumbler");			
 				Hydro.bottles_validation("Bottle and drinkware");			
@@ -33,7 +33,7 @@ public class Test_DGLD_HF_ST_032_Header_Links_Validation {
 				Hydro.Customize_validation("Customize");
 				Hydro.single_Categories_From_Shop("singleCategories");
 			}else {
-
+				Hydro.newTrending_validation("newTrending");
 				Hydro.bottles_validation("Bottle and drinkware");
 				Hydro.Coolers_LunchBoxes_Validation("Coolers"); 
 				Hydro.kitchenware_validation("kitchenware");
@@ -46,7 +46,7 @@ public class Test_DGLD_HF_ST_032_Header_Links_Validation {
 			//            Hydro.featured_validation("Featured");
 			// Hydro.New_Color_Destination("Colors");
 			//  Hydro.featured_validation("Featured"); 
-			//			Hydro.shop_by_Color_validation("Shop by Color");		
+
 			// Hydro.Holiday_shop_validation("Holiday Sale"); 
 			// Hydro.New_Color_Destination("Colors");
 		} catch (Exception e) {
@@ -58,7 +58,7 @@ public class Test_DGLD_HF_ST_032_Header_Links_Validation {
 
 	@AfterTest
 	public void clearBrowser() {
-				Common.closeAll();
+						Common.closeAll();
 
 	}
 
