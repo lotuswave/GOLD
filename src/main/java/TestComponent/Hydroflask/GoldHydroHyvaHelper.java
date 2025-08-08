@@ -8849,7 +8849,7 @@ Sync.waitElementPresent("xpath", "//input[@id='billing-as-shipping']");
  
  
 	}
-
+//08-08-25 Changed the search results page element
 	public void outofstock_subcription(String Dataset) {
 		// TODO Auto-generated method stub
 		String products = data.get(Dataset).get("Products");
@@ -8859,9 +8859,9 @@ Sync.waitElementPresent("xpath", "//input[@id='billing-as-shipping']");
 		try {
 			Sync.waitPageLoad();
 			for (int i = 0; i <= 10; i++) {
-				Sync.waitElementPresent("xpath", "//img[@itemprop='image']");
-				List<WebElement> webelementslist = Common.findElements("xpath",
-						"//img[@itemprop='image']");
+				Sync.waitElementPresent("css", "img[alt='Stainless Steel Straw Set']");
+				List<WebElement> webelementslist = Common.findElements("css",
+						"img[alt='Stainless Steel Straw Set']");
 
 				String s = webelementslist.get(i).getAttribute("src");
 				System.out.println(s);
@@ -8888,7 +8888,7 @@ Sync.waitElementPresent("xpath", "//input[@id='billing-as-shipping']");
 								|| name.contains(prod) && productprice.equals(PLPprice),
 						"validating the  product navigates to PDP page", "It should be navigate to the PDP page",
 						"Sucessfully Navigates to the PDP page", "failed to Navigate to the PDP page");
-				Common.javascriptclickElement("xpath", "(//button[@title='Email Me When Available'])[1]");
+				Common.javascriptclickElement("xpath", "(//button[@title='Email Me When Available'])[2]");
 				Thread.sleep(2000);
 				Common.textBoxInput("xpath", "//input[@placeholder='Insert your email']", email);
 				Thread.sleep(2000);
@@ -8906,7 +8906,7 @@ Sync.waitElementPresent("xpath", "//input[@id='billing-as-shipping']");
 						"Failed to display the message after subcribtion");
 				Common.actionsKeyPress(Keys.END);
 				Sync.waitPageLoad();
-				Common.clickElement("xpath", "(//button[@title='Email Me When Available'])[1]");
+				Common.clickElement("xpath", "(//button[@title='Email Me When Available'])[2]");
 				Thread.sleep(2000);
 				Common.textBoxInput("xpath", "//input[@placeholder='Insert your email']", email);
 				Common.clickElement("xpath", "//span[text()='Subscribe']");
