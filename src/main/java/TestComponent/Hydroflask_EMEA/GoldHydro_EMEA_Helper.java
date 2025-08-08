@@ -622,8 +622,8 @@ public class GoldHydro_EMEA_Helper {
 //        Assert.assertEquals(PDPprice, Minicartprice);
 			Sync.waitElementPresent("xpath", "//span[@x-text='totalCartAmount']");
 			String minicart = Common.findElement("xpath", "//span[@x-text='totalCartAmount']").getText();
-			Sync.waitElementPresent(30, "xpath", "//a[contains(text(),'Checkout')]");
-			Common.clickElement("xpath", "//a[contains(text(),'Checkout')]");
+			Sync.waitElementPresent(30, "css", "button[class*='inline-flex btn btn-primary']");
+			Common.clickElement("css", "button[class*='inline-flex btn btn-primary']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Common.assertionCheckwithReport(Common.getCurrentURL().contains("checkout"),
@@ -3682,7 +3682,7 @@ catch(Exception | Error e){
 					"After Clicking on My Orders CTA user should be navigate to the My Orders page",
 					"Sucessfully User Navigates to the My Orders page after clicking on the My Orders CTA",
 					"Failed to Navigate to the My Orders page after Clicking on My Orders CTA");
-			String Ordernumber = Common.findElement("xpath", "(//span[@class='text-right'])[1]").getText();
+			String Ordernumber = Common.findElement("css", "span[class*='text-right']").getText();
 			Sync.waitPageLoad();
 			System.out.println(Ordernumber);
 			System.out.println(Dataset);

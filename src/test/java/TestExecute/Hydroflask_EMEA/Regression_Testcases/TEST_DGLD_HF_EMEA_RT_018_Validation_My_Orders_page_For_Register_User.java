@@ -25,7 +25,6 @@ public class TEST_DGLD_HF_EMEA_RT_018_Validation_My_Orders_page_For_Register_Use
 			Hydro.addtocart("Product");                    
 			Hydro.Minicart_Checkout();
             Hydro.selectshippingaddress("GroundShipping method");
-            Hydro.clickSubmitbutton_Shippingpage();
 			String order=Hydro.updatePaymentAndSubmitOrder("CCMastercard");
 			Hydro.My_Orders_Page(order);
 			
