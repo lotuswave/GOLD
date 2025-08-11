@@ -19,8 +19,8 @@ public class Test_DGLD_HF_EMEA_RT_065_PlaceOrder_Validate_ShippingMethods_for_No
 
 		try {
 			Hydro.verifingHomePage();
-			Hydro.search_product("Product");       
-			Hydro.addtocart("Product");
+			Hydro.search_product("Below30_Product");       
+			Hydro.addtocart("Below30_Product");
 			Hydro.minicart_Checkout();
 			Hydro.addDeliveryAddress_Guestuser("AccountDetails");
             Hydro.selectshippingaddress("GroundShipping method");
