@@ -4456,7 +4456,7 @@ public void Remove_GiftCode() {
 		
 	}
 	
-	
+	// 08/11/2025 Changed the XPath for the PayPal popup email field and complete the purchase
 	
 
 	public String payPal_Payment(String dataSet) throws Exception {
@@ -4516,12 +4516,12 @@ public void Remove_GiftCode() {
 			Common.assertionCheckwithReport(sizeofelement > 0, "verifying the paypal payment ", expectedResult,
 					"open paypal site window", "faild to open paypal account");
 		} else {
-			Sync.waitElementPresent("id", "login_email");
-			Common.clickElement("id", "login_email");
-			Sync.waitElementPresent("id", "login_email");
-			Common.findElement("id", "login_email").clear();
+			Sync.waitElementPresent("name", "login_email");
+			Common.clickElement("name", "login_email");
+			Sync.waitElementPresent("name", "login_email");
+			Common.findElement("name", "login_email").clear();
 		//	Common.textBoxInput("id", "login_email", data.get(dataSet).get("Email"));
-			Common.textBoxInput("id", "login_email", "oxobuyer@oxo.com");
+			Common.textBoxInput("name", "login_email", "oxobuyer@oxo.com");
 
 			Sync.waitElementClickable("xpath", "//button[text()='Next']");
 			Common.clickElement("xpath", "//button[text()='Next']");
@@ -4548,8 +4548,8 @@ public void Remove_GiftCode() {
 				Thread.sleep(5000);
 				Common.actionsKeyPress(Keys.END);
 				Thread.sleep(5000);
-				Sync.waitElementClickable("xpath", "//div[text()='Pay']");
-				Common.clickElement("xpath", "//div[text()='Pay']");
+				Sync.waitElementClickable("xpath", "//button[text()='Complete Purchase']");
+				Common.clickElement("xpath", "//button[text()='Complete Purchase']");
 				Thread.sleep(8000);
 				Common.switchToFirstTab();
 			} catch (Exception | Error e) {
@@ -9141,7 +9141,7 @@ Sync.waitElementPresent("xpath", "//input[@id='billing-as-shipping']");
 						Common.textBoxInput("xpath", "//textarea[@name='emails']", data.get(Dataset).get("Email"));
 						Common.textBoxInput("xpath", "//textarea[@name='message']", data.get(Dataset).get("message"));
 						Thread.sleep(4000);
-						Common.clickElement("xpath", "//button[contains(@class,'customer-wishlist-title-container-share-button')]");
+						Common.clickElement("xpath", "//button[contains(text(),'Share Wish List')]");
 						Sync.waitPageLoad();
 						Thread.sleep(3000);
 						String message1 = Common.findElement("xpath", "//span[text()='Your wish list has been shared.']").getText();
@@ -10232,8 +10232,8 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 			    WebElement element = category.get(i);
 			    String text =Common.getText("xpath", "(//span[contains(text(),'Shop Now')]//parent::div)[" +( i+1) + "]").toLowerCase();
                  System.out.println("Shopy by Category: "+text);
-                 Thread.sleep(2000);
-                 Common.mouseOver("xpath", "(//span[contains(text(),'Shop Now')]//parent::div)[" +( i+1) + "]");
+//                 Thread.sleep(2000);
+//                 Common.mouseOver("xpath", "(//span[contains(text(),'Shop Now')]//parent::div)[" +( i+1) + "]");
                  Thread.sleep(1000);
                  Common.mouseOverClick("xpath", "(//span[contains(text(),'Shop Now')]//parent::div)[" +( i+1) + "]");
 			     String    Breadcrumb = Common.getText("css", "nav[id='breadcrumbs']").toLowerCase();
@@ -10457,6 +10457,8 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 		}
 
 	}
+	
+	// 08/11/2025 Engraving simple product name changes in Excel
 
 	public void Text_Engraving(String Dataset) {
 		// TODO Auto-generated method stub
@@ -10478,8 +10480,10 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 					break;
 				}
 			}
-			Thread.sleep(6000);
+			Thread.sleep(6000);			
+			Common.scrollIntoView( "xpath", "//img[@alt='" + products + "']");
 			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
+			Thread.sleep(1000);
 			Common.clickElement("xpath", "//img[@alt='" + products + "']");
 			Sync.waitPageLoad();
 			Thread.sleep(3000);
@@ -10720,6 +10724,8 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 		}
 
 	}
+	
+	// 08/11/2025 Engraving horizontal font test data changed in Excel 
 
 	public void enraving_Checkout(String Dataset) {
 		// TODO Auto-generated method stub
@@ -12917,14 +12923,15 @@ String PDP_PrdtName = color.toLowerCase();
 		}
 
 	}
-
+   // 08/11/2025 Reviews css element changed
+	
 	public void reviews_colorcount_banner_Ribbon_ColorSwatch() {
 		// TODO Auto-generated method stub
 		try {
 			Common.actionsKeyPress(Keys.ARROW_DOWN);
 			Common.scrollIntoView("xpath","(//li[@class='ais-InfiniteHits-item'])[1]");
 			Common.mouseOver("xpath","(//li[@class='ais-InfiniteHits-item'])[1]");
-			int Reviews = Common.findElements("css", "div[class*='yotpo-reviews-star-ratings']").size();
+			int Reviews = Common.findElements("css", "span[class*='stars-empty relative']").size();
 			System.out.println(Reviews);
 			int colorcount = Common.findElements("css", "div[class*='flex-shrink']").size();
 			System.out.println(colorcount);
