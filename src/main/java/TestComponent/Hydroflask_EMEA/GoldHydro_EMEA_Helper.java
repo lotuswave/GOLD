@@ -8903,7 +8903,7 @@ catch(Exception | Error e){
 			}
 			Thread.sleep(4000);
 			List<WebElement> country = Common.findElements("xpath",
-					"(//legend[text()='Europe']//parent::fieldset)[1]//div[@class='country-list__item']//p");
+					"//legend[text()='Europe']//parent::fieldset//div[@class='country-list__item']");
 			List<WebElement> Countryselector = Common.findElements("xpath",
 					"(//legend[text()='Europe']//parent::fieldset)[1]//div[@class='country-list__item']//p");
 			ArrayList<String> CountryNames = new ArrayList<String>();
@@ -8920,7 +8920,7 @@ catch(Exception | Error e){
 
 					System.out.println(country.size());
 
-					for (int i = 1; i < country.size(); i++) {
+					for (int i = 0, a=1; i < country.size(); i++,a++) {
 						Sync.waitElementPresent(50, "xpath", "(//span[@class='country-selector-title'])[2]");
 						Common.clickElement("xpath", "(//span[@class='country-selector-title'])[2]");
 						Thread.sleep(4000);
@@ -8938,16 +8938,16 @@ catch(Exception | Error e){
 						Country = select.get(i).getText();
 						System.out.println(Country);
 //						select.get(i).click();
-						int k = 0 + i;
+						int k = 0 + a;
 						Common.clickElement("xpath",
-								"(((//legend[text()='Europe']//parent::fieldset)[2])//div[@class='country-list__item']//p)["
+								"(((//legend[text()='Europe']//parent::fieldset)[1])//div[@class='country-list__item']//p)["
 										+ k + "]");
 						System.out.println(
-								"(((//legend[text()='Europe']//parent::fieldset)[2])//div[@class='country-list__item']//p)["
+								"(((//legend[text()='Europe']//parent::fieldset)[1])//div[@class='country-list__item']//p)["
 										+ k + "]");
 						Thread.sleep(5000);
-						if (Country.contains("English (£)") && countryname.contains("UK")
-								|| Country.contains("English (£)") && countryname.contains("United Kingdom")) {
+						if (Country.equals("English (£)") && countryname.equals("United Kingdom")
+								|| Country.equals("English (£)") && countryname.equals("United Kingdom")) {
 							ExtenantReportUtils.addPassLog("Validating" + Country + "Page  ",
 									"click on the country should navigate to the  " + Country + "Page",
 									"successfully page navigating to " + Country + "PAGE",
@@ -10428,7 +10428,7 @@ catch(Exception | Error e){
 			Thread.sleep(2000);
 
 			// Expected price after 10% discount
-			float expectedDiscountedPrice = originalPrice - (originalPrice * 10 / 100);
+			float expectedDiscountedPrice = originalPrice - (originalPrice * 70 / 100);
 
 			// Round both prices to 2 decimal places
 			expectedDiscountedPrice = Math.round(expectedDiscountedPrice * 100.0f) / 100.0f;
