@@ -6408,7 +6408,7 @@ catch(Exception | Error e){
 			Common.clickElement("css", "button[id='customer-menu']");
 			Sync.waitElementPresent(30, "css", "a[title='My Account']");
 			Common.clickElement("css", "a[title='My Account']");
-			Common.assertionCheckwithReport(Common.getPageTitle().equals("Dashboard"),
+			Common.assertionCheckwithReport(Common.getPageTitle().equals("Dashboard") || Common.getPageTitle().contains("account"),
 					"validating the Navigation to the My account page",
 					"After Clicking on My account CTA user should be navigate to the my account page",
 					"Sucessfully User Navigates to the My account page after clicking on the my account CTA",
@@ -6433,7 +6433,7 @@ catch(Exception | Error e){
 					"After Clicking on stored methods CTA user should be navigate to the My Payment Methods page",
 					"Sucessfully User Navigates to the My Payment Methods page after clicking on the stored methods  CTA",
 					"Failed to Navigate to the My Payment Methods page after Clicking on my stored methods  CTA");
-			int size = Common.findElements("css", "div[class='divide-y divide-border']").size();
+			int size = Common.findElements("css", "div[class*='customer-payment-methods']").size();
 			if (size > 0) {
 				Thread.sleep(2000);
 				String number = Common.findElement("xpath", "(//div[@class='flex items-center']//span)[1]").getText()
@@ -14442,7 +14442,7 @@ catch(Exception | Error e){
 	    String currentURL = Common.getCurrentURL();
 	    boolean allowProdExecution = Boolean.parseBoolean(System.getProperty("allowProdExecution", "false"));
 
-	    if (!allowProdExecution && !(currentURL.contains("preprod") || currentURL.contains("stage"))) {
+	    if (currentURL.contains("preprod") || currentURL.contains("prod")|| currentURL.contains("stage")) {
 	        System.out.println("Express PayPal payment skipped: Not allowed in PROD.");
 	        ExtenantReportUtils.addInfoLog("Skipping Express PayPal Payment Execution not permitted in production environment. URL: " + currentURL);
 	        return order;

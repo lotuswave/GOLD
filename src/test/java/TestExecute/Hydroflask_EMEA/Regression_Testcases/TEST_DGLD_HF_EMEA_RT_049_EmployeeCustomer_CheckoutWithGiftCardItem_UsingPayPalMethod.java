@@ -24,7 +24,6 @@ public class TEST_DGLD_HF_EMEA_RT_049_EmployeeCustomer_CheckoutWithGiftCardItem_
 			Hydro.Gift_cards("Hydro Gift Card");
 			Hydro.Card_Value("price");
 			Hydro.minicart_Checkout();
-			Hydro.register_billingAddress("Employee_id");
            Hydro.payPal_Payment("PaypalDetails");
 
 		} catch (Exception e) {

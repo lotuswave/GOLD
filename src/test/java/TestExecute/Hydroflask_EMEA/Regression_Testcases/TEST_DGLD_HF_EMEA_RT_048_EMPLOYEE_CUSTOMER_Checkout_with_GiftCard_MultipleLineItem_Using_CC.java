@@ -30,7 +30,7 @@ public class TEST_DGLD_HF_EMEA_RT_048_EMPLOYEE_CUSTOMER_Checkout_with_GiftCard_M
 			Hydro.Gift_cards("Hydro Gift Card");
 			Hydro.Card_Value("price");
 			Hydro.minicart_Checkout();
-			Hydro.RegaddDeliveryAddress("Employee_id");
+			Hydro.RegaddDeliveryAddress("AccountDetails");
             Hydro.selectshippingaddress("GroundShipping method");
             Hydro.updatePaymentAndSubmitOrder("PaymentDetails");
 
