@@ -27,7 +27,7 @@ public class TEST_DGLD_HF_EMEA_RT_052_PlaceOrder_EmployeeUser_MultipleProducts_W
 			Hydro.Configurable_addtocart_pdp("Product");
 			Hydro.employee_discount();
 			Hydro.minicart_Checkout();
-			Hydro.RegaddDeliveryAddress("Employee_id");
+			Hydro.RegaddDeliveryAddress("AccountDetails");
             Hydro.selectshippingaddress("GroundShipping method");
             Hydro.discountCode("Discount");
             Hydro.Gift_card("Giftcard_Partial_1");  // Beforre executing Partial Gift code needs to be Added in Testdata
@@ -42,7 +42,7 @@ public class TEST_DGLD_HF_EMEA_RT_052_PlaceOrder_EmployeeUser_MultipleProducts_W
 
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 
