@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<suite name="Gold-Hydroflask EMEA Regression execution">
+    <listeners>
+        <listener class-name="Utilities.TestListener"/>
+    </listeners>
+
+ 
+<test name="TEST_DGLD_HF_EMEA_RT_025_EmployeeUser_1_Simple_1_ConfigurableItem_1_QTY_each_Checkout_Partial_Giftcode_redeem_CC" 
+      testid="DQA-XXXX" 
+      description="Employee user checks out 1 simple product and 1 configurable item (1 quantity each) with partial gift code redemption and credit card payment">
+    <classes>
+        <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.TEST_DGLD_HF_EMEA_RT_025_EmployeeUser_1_Simple_1_ConfigurableItem_1_QTY_each_Checkout_Partial_Giftcode_redeem_CC"/>
+    </classes>
+</test>
+
+<test name="TEST_DGLD_HF_EMEA_RT_028_EmployeeUser_1Simple_1Configurable_5QtyEach_PartialGift_Discount_Paypal" 
+      testid="DQA-XXXX" 
+      description="Employee user checks out 1 simple product and 1 configurable item (5 quantity each) with partial gift card, discount, and PayPal payment">
+    <classes>
+        <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.TEST_DGLD_HF_EMEA_RT_028_EmployeeUser_1Simple_1Configurable_5QtyEach_PartialGift_Discount_Paypal"/>
+    </classes>
+</test>
+
+<test name="TEST_DGLD_HF_EMEA_RT_052_PlaceOrder_EmployeeUser_MultipleProducts_WithGiftCard_Discount_3DSecurePayment" 
+      testid="DQA-4462" 
+      description="Employee user places order with multiple products, using gift card, discount, and 3D Secure payment">
+    <classes>
+        <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.TEST_DGLD_HF_EMEA_RT_052_PlaceOrder_EmployeeUser_MultipleProducts_WithGiftCard_Discount_3DSecurePayment"/>
+    </classes>
+</test>
+
+
+  <test name="TEST_DGLD_HF_EMEA_RT_046_Placeorder_Register_user_multipleproducts_with_giftcardcode_discount_and_3D_Secure_Payment_Method" testid="DQA-4457" description="Registered User Places Order with Multiple Products, Gift Card Code, Discount, and 3D Secure Payment">
+    <classes>
+      <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.TEST_DGLD_HF_EMEA_RT_046_Placeorder_Register_user_multipleproducts_with_giftcardcode_discount_and_3D_Secure_Payment_Method"/>
+    </classes>
+  </test>
+
+  <test name="TEST_DGLD_HF_EMEA_RT_047_Placeorder_Guest_user_Checkout_with_multiple_products_as_full_Redemption_using_gift_card_code" testid="DQA-4468" description="Guest User Checkout with Multiple Products Fully Redeemed Using Gift Card Code">
+    <classes>
+      <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.TEST_DGLD_HF_EMEA_RT_047_Placeorder_Guest_user_Checkout_with_multiple_products_as_full_Redemption_using_gift_card_code"/>
+    </classes>
+  </test>
+
+<test name="TEST_DGLD_HF_EMEA_RT_050_Register_User_Checkout_Gift_Card_Partial_Payment" testid="DQA-4465" description="this testcase covers registeruser checkout with giftcard partial payment">
+  <classes>
+    <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.TEST_DGLD_HF_EMEA_RT_050_Register_User_Checkout_Gift_Card_Partial_Payment"/>
+  </classes>
+</test>
+
+  <test name="TEST_DGLD_HF_EMEA_RT_051_RegisterUser_Checkout_using_GiftCard_and_Payment_with_3D_Payment" testid="DQA-4464" description="Registered User Checkout Using Gift Card and 3D Secure Payment">
+    <classes>
+      <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.TEST_DGLD_HF_EMEA_RT_051_RegisterUser_Checkout_using_GiftCard_and_Payment_with_3D_Payment"/>
+    </classes>
+  </test>
+
+  <test name="TEST_DGLD_HF_EMEA_RT_053_Placeorder_Register_user_mutipleproducts_with_giftcardcode_discount_and_CC" testid="DQA-4461" description="Registered User Places Order with Multiple Products, Gift Card Code, Discount, and Credit Card">
+    <classes>
+      <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.TEST_DGLD_HF_EMEA_RT_053_Placeorder_Register_user_mutipleproducts_with_giftcardcode_discount_and_CC"/>
+    </classes>
+  </test>
+
+  <test name="TEST_DGLD_HF_EMEA_RT_054_Add_Gift_Card_Code_in_My_Account_Page_and_Select_the_Gift_Card_Code_at_Payment_Page_and_Place_an_Order" testid="DQA-4460" description="Add Gift Card Code in My Account and Use at Payment Page to Place Order">
+    <classes>
+      <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.TEST_DGLD_HF_EMEA_RT_054_Add_Gift_Card_Code_in_My_Account_Page_and_Select_the_Gift_Card_Code_at_Payment_Page_and_Place_an_Order"/>
+    </classes>
+  </test>
+
+  <test name="TEST_DGLD_HF_EMEA_RT_055_Gift_card_and_Configurable_Product_Checkout_with_Promo_code_Applied" testid="DQA-4459" description="Checkout with Gift Card and Configurable Product with Promo Code Applied">
+    <classes>
+      <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.TEST_DGLD_HF_EMEA_RT_055_Gift_card_and_Configurable_Product_Checkout_with_Promo_code_Applied"/>
+    </classes>
+  </test>
+
+  
+ <test name="TEST_DGLD_HF_EMEA_RT_056_Guest_User_Checkout_with_Gift_Card_Code" testid="DQA-4458" description="Guest User Checkout with Gift Card Code">
+  <classes>
+    <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.TEST_DGLD_HF_EMEA_RT_056__Guest_User_Checkout_with_Gift_Card_Code"/>
+  </classes>
+</test>
+
+<test name="TEST_DGLD_HF_EMEA_RT_060_Placeorder_Guest_user_multipleproducts_with_giftcardcode_discount_and_3D_Secure_Payment_Method" testid="DQA-4489" description="Guest Order: Multiple Products, Gift Card Discount and 3D Secure Payment">
+  <classes>
+    <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.TEST_DGLD_HF_EMEA_RT_060_Placeorder_Guest_user_multipleproducts_with_giftcardcode_discount_and_3D_Secure_Payment_Method"/>
+  </classes>
+</test>
+
+<test name="TEST_DGLD_HF_EMEA_RT_067_Guest_User_Checkout_with_Multiple_Gift_Card_Codes" testid="DQA-4511" description="Guest User Checkout with Multiple Gift Card Codes">
+  <classes>
+    <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.TEST_DGLD_HF_EMEA_RT_067_Guest_User_Checkout_with_Multiple_Gift_Card_Codes"/>
+  </classes>
+</test>
+
+<test name="TEST_DGLD_HF_EMEA_RT_068_Placeorder_GuestUser_checkout_with_Multiple_giftCard_Products" testid="DQA-4513" description="Guest User Checkout with Multiple Gift Card Products">
+  <classes>
+    <class name="TestExecute.Hydroflask_EMEA.Regression_Testcases.Test_DGLD_HF_EMEA_RT_068_Placeorder_GuestUser_checkout_with_Multiple_giftCard_Products"/>
+  </classes>
+</test>
+
+
+</suite>
+
