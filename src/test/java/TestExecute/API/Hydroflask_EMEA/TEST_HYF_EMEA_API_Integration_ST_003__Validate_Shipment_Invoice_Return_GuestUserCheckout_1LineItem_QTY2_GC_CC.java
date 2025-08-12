@@ -1,3 +1,4 @@
+
 package TestExecute.API.Hydroflask_EMEA;
 
 import java.io.StringReader;
@@ -80,6 +81,8 @@ public class TEST_HYF_EMEA_API_Integration_ST_003__Validate_Shipment_Invoice_Ret
 	            Assert.fail("No items found in the order copy");
 	        }
 	    }
+	    
+	    
 	    @Test(priority = 3, dependsOnMethods = {"generateApiKey", "getOrderCopy"})
 	    public void shipOrder() {
 	        RestAssured.baseURI = "https://emea-preprod.hele.digital/rest/all/V1/order/"+MagentoOrder_ID+"/ship";
@@ -157,12 +160,12 @@ public class TEST_HYF_EMEA_API_Integration_ST_003__Validate_Shipment_Invoice_Ret
 
 	        Response response = request.post();
 
-	        Assert.assertEquals(response.getStatusCode(), 200, "Ship order failed");
-	        System.out.println("Ship Order Response: " + response.getBody().asString());
+	        Assert.assertEquals(response.getStatusCode(), 200, "Invoice creation failed");
+	        System.out.println("Invoice  Response: " + response.getBody().asString());
 	        System.out.println("Request Body: " + requestBody); // print request body for debugging.
 	    }
 	    
-		///***Create RMA***///
+		///***Create RMA***   First RMA///
 	    	@Test(priority = 5, dependsOnMethods = {"generateApiKey", "getOrderCopy", "shipOrder","invoice"})
 	 public void createRma() throws InterruptedException {
 	    Thread.sleep(15000);
@@ -185,7 +188,7 @@ public class TEST_HYF_EMEA_API_Integration_ST_003__Validate_Shipment_Invoice_Ret
 	    	        "    \"items\": [\n" +
 	    	        "        {\n" +
 	    	        "            \"order_item_id\": "+itemId+",\n" +
-	    	        "            \"quantity_to_return\": "+QTYOrder+",\n" +
+	    	        "            \"quantity_to_return\": 1,\n" +
 	    	        "            \"entered_custom_attributes\": [\n" +
 	    	        "                {\n" +
 	    	        "                    \"attribute_code\": \"reason\",\n" +
@@ -222,7 +225,7 @@ public class TEST_HYF_EMEA_API_Integration_ST_003__Validate_Shipment_Invoice_Ret
 	     
 		
 		
-		///****Post Credit Memo****///
+		///****Post Credit Memo**** First credit memo///
 		@Test(priority = 6, dependsOnMethods = {"generateApiKey", "getOrderCopy", "shipOrder","invoice","createRma"})
 	 public void postCreditMemo() {
 	     RestAssured.baseURI = "https://emea-preprod.hele.digital/rest/V1/returns/"+increment_id+"/refund";
@@ -235,7 +238,7 @@ public class TEST_HYF_EMEA_API_Integration_ST_003__Validate_Shipment_Invoice_Ret
 	             "    \"type\": \"approved_return\",\n" +
 	             "    \"order_item_ids\": [\n" +
 	             "        {\n" +
-	             "            \"qty\": \""+QTYOrder+".0\",\n" +
+	             "            \"qty\": \"1.0\",\n" +
 	             "            \"order_item_id\": \""+itemId+"\"\n" +
 	             "        }\n" +
 	             "    ],\n" +
@@ -251,6 +254,100 @@ public class TEST_HYF_EMEA_API_Integration_ST_003__Validate_Shipment_Invoice_Ret
 
 	     Assert.assertEquals(response.getStatusCode(), 200, "Post Credit Memo failed");
 
+		}
+		
+	   ///***Create RMA***  Second RMA///
+	     @Test(priority = 6, dependsOnMethods = {"generateApiKey", "getOrderCopy", "shipOrder","invoice","createRma","postCreditMemo"})
+	 public void createRma_2() throws InterruptedException {
+	    Thread.sleep(15000);
+		System.out.println(apiKey);
+	     RestAssured.baseURI = "https://emea-preprod.hele.digital/rest/all/V1/returns/create-rma";
+
+	     RequestSpecification request = RestAssured.given();
+	     request.header("Content-Type", "application/json"); // Or "text/plain" as in Postman
+	     request.header("Authorization", "Bearer " + apiKey);// Use the provided token
+	     
+	     String Increment_Base = "17118qa";
+	     String incrementSuffix = generateRandomNumber(5); // Generate 6 random digits
+	      increment_id = Increment_Base + incrementSuffix;
+	     
+	     String requestBody = "{\n" +
+	    	        "    \"increment_id\": \""+increment_id+"\",\n" +
+	    	        "    \"order_increment_id\": \""+orderNumber+"\",\n" +
+	    	        "    \"external_rma_id\": \""+increment_id+"\",\n" +
+	    	        "    \"customer_custom_email\": \"" + customerEmail + "\",\n" + // Use customerEmail variable
+	    	        "    \"items\": [\n" +
+	    	        "        {\n" +
+	    	        "            \"order_item_id\": "+itemId+",\n" +
+	    	        "            \"quantity_to_return\": 1,\n" +
+	    	        "            \"entered_custom_attributes\": [\n" +
+	    	        "                {\n" +
+	    	        "                    \"attribute_code\": \"reason\",\n" +
+	    	        "                    \"value\": \"2\"\n" +
+	    	        "                },\n" +
+	    	        "                {\n" +
+	    	        "                    \"attribute_code\": \"compensationMethod\",\n" +
+	    	        "                    \"value\": \"no-return-for-refund\"\n" +
+	    	        "                }\n" +
+	    	        "            ],\n" +
+	    	        "            \"selected_custom_attributes\": []\n" +
+	    	        "        }\n" +
+	    	        "    ]\n" +
+	    	        "}";
+	    
+
+	     request.body(requestBody);     
+	     Response response = request.post();
+	     String jsonResponse = response.getBody().asString();
+
+	     JSONObject jsonObject = new JSONObject(jsonResponse);
+	//System.out.println(jsonObject);
+	     Assert.assertEquals(response.getStatusCode(), 200, "Create RMA failed");
+
+	     // Validations
+	     Assert.assertEquals(jsonObject.getString("customer_custom_email"), customerEmail, "Customer email mismatch");
+	     Assert.assertEquals(jsonObject.getString("increment_id"), increment_id, "Increment ID mismatch");
+	     Assert.assertEquals(jsonObject.getString("order_increment_id"), orderNumber, "Order increment ID mismatch");
+	     Assert.assertEquals(jsonObject.getString("status"), "authorized", "Status mismatch");
+//	     Assert.assertEquals(jsonObject.getJSONArray("items").getJSONObject(0).getInt("order_item_id"), itemId, "Order item ID mismatch");
+
+	     System.out.println("Create RMA Response: " + jsonObject.toString(4));
+	 }
+	     
+		
+		
+		///****Post Credit Memo**** Second credit memo///
+		@Test(priority = 8, dependsOnMethods = {"generateApiKey", "getOrderCopy", "shipOrder","invoice","createRma","postCreditMemo","createRma_2"})
+	 public void postCreditMemo_2() {
+	     RestAssured.baseURI = "https://emea-preprod.hele.digital/rest/V1/returns/"+increment_id+"/refund";
+
+	     RequestSpecification request = RestAssured.given();
+	     request.header("Content-Type", "application/json"); // Or "text/plain" as in your Postman
+	     request.header("Authorization", "Bearer " + apiKey);// Use the provided token
+
+	     String requestBody = "{\n" +
+	             "    \"type\": \"approved_return\",\n" +
+	             "    \"order_item_ids\": [\n" +
+	             "        {\n" +
+	             "            \"qty\": \"1.0\",\n" +
+	             "            \"order_item_id\": \""+itemId+"\"\n" +
+	             "        }\n" +
+	             "    ],\n" +
+	             "    \"refund_shipping\": false\n" +
+	             "}";
+
+	     request.body(requestBody);
+
+	     Response response = request.post();
+	     String jsonResponse = response.getBody().asString();
+
+	     JSONObject jsonObject = new JSONObject(jsonResponse);
+
+	     Assert.assertEquals(response.getStatusCode(), 200, "Post Credit Memo failed");
+
+	     
+	     
+	     
 	     // Validate credit_memo_id
 	     JSONArray successArray = jsonObject.getJSONArray("success");
 	     if (successArray.length() > 0) {

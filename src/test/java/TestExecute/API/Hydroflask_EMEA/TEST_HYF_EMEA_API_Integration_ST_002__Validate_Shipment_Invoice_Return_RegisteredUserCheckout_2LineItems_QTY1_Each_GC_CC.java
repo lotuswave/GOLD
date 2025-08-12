@@ -267,7 +267,7 @@ public class TEST_HYF_EMEA_API_Integration_ST_002__Validate_Shipment_Invoice_Ret
 	    	        "                },\n" +
 	    	        "                {\n" +
 	    	        "                    \"attribute_code\": \"compensationMethod\",\n" +
-	    	        "                    \"value\": \"return-for-refund\"\n" +
+	    	        "                    \"value\": \"no-return-for-refund\"\n" +
 	    	        "                }\n" +
 	    	        "            ],\n" +
 	    	        "            \"selected_custom_attributes\": []\n" +
