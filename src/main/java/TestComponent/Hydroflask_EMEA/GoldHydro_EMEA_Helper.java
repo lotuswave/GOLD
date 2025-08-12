@@ -14676,9 +14676,9 @@ catch(Exception | Error e){
 					System.out.println(order);
 				}
 
-				if (Common.findElements("xpath", "//div[contains(@class,'checkout-success container')]//p//span")
+				if (Common.findElements("xpath", "//div[contains(@class,'checkout-success')]//p//a")
 						.size() > 0) {
-					Common.getText("xpath", "//div[contains(@class,'checkout-success container')]//p//span");
+					Common.getText("xpath", "//div[contains(@class,'checkout-success')]//p//a");
 					System.out.println(order);
 
 				}
