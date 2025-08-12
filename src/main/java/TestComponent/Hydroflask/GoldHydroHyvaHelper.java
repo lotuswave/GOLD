@@ -409,7 +409,7 @@ public class GoldHydroHyvaHelper {
 
 		}
 	}
-	
+	// 12-08-2025 scroll in to view method added
 	public void Other_Amount(String Dataset) {
 		// TODO Auto-generated method stub
 		String Enter_amount=data.get(Dataset).get("Another Amount");
@@ -422,6 +422,7 @@ public class GoldHydroHyvaHelper {
 //			Common.textBoxInput("xpath", "//input[@type='number']", data.get(Dataset).get("Enter_amount"));
 			Common.clickElement("xpath", "//button[@title='Add']");
 			Thread.sleep(2000);
+			Common.scrollIntoView("xpath", "//div[@class='final-price inline-block']//span[@class='price']");
 			String Price=Common.findElement("xpath", "//div[@class='final-price inline-block']//span[@class='price']").getText();
 			System.out.println(Price);
 			Common.assertionCheckwithReport(Price.contains(Enter_amount),
@@ -15699,7 +15700,7 @@ Common.clickElement("xpath", "//span[text()='Edit']");
 		}
 
 	}
-
+//12-08-2025 changed shipping as billing
 	public void GiftCard_RegaddDeliveryAddress(String dataSet) {
 		// TODO Auto-generated method stub
 		String expectedResult = "shipping address is entering in the fields";
