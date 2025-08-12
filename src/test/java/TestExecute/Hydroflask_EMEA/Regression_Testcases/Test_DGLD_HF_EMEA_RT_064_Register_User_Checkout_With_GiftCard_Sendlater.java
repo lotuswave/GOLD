@@ -25,6 +25,7 @@ public class Test_DGLD_HF_EMEA_RT_064_Register_User_Checkout_With_GiftCard_Sendl
 			Hydro.Gift_cards("Hydro Gift Card");
 			Hydro.SendLater_Card_Value("price");
 			Hydro.minicart_Checkout();
+			Thread.sleep(4000);
 			Hydro.updatePaymentAndSubmitOrder("PaymentDetails");
 			
 		} catch (Exception e) {

@@ -22,7 +22,7 @@ public class TEST_DGLD_HF_EMEA_RT_014_Change_Password_and_Email_from_AccountInfo
 			
 			Hydro.verifingHomePage();
 			Hydro.click_Createaccount();
-            String NewDetail=Hydro.create_account("AccountDetails");
+            String NewDetail=Hydro.create_account("New Account Details");
             Hydro.edit_Account_info("NewDetails");
             Hydro.changed_password(NewDetail);
             String newemail=Hydro.change_Email("NewDetails");

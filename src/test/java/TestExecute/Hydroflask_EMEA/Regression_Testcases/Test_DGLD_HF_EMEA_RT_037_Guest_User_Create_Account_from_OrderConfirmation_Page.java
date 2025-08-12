@@ -24,7 +24,7 @@ public class Test_DGLD_HF_EMEA_RT_037_Guest_User_Create_Account_from_OrderConfir
 			Hydro.minicart_Checkout();
 			Hydro.newuseraddDeliveryAddress("AccountDetails");
 			Hydro.updatePaymentAndSubmitOrder("PaymentDetails");
-			Hydro.createAccountFromOrderSummaryPage("AccountDetails");
+			Hydro.createAccountFromOrderSummaryPage("New Account Details");
 
 		} catch (Exception e) {
 
@@ -34,7 +34,7 @@ public class Test_DGLD_HF_EMEA_RT_037_Guest_User_Create_Account_from_OrderConfir
 
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+//		Common.closeAll();
 
 	}
 

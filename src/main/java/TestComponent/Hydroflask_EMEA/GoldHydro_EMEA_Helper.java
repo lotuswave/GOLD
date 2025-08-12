@@ -3231,7 +3231,8 @@ System.out.println("cartproducts  :"+cartproducts);
 		}
 
 	}
-
+	
+	
 	public void Klarna_Saved_Payment(String dataSet) throws Exception {
 		// TODO Auto-generated method stub
 		HashMap<String, String> Paymentmethod = new HashMap<String, String>();
@@ -4261,7 +4262,7 @@ catch(Exception | Error e){
 					"After clicking on the value amount should be appear in PDP",
 					"Successfully selected amount is matched for the gift card",
 					"Failed to appear amount for the gift card");
-			Common.clickElement("xpath", "(//img[contains(@class,'amcard-image')])[2]");
+//			Common.clickElement("xpath", "(//img[contains(@class,'amcard-image')])[2]");
 //			String SmallCard=Common.findElement("xpath", "//img[@class='amcard-image -active']").getAttribute("src");
 //			String MainCard=Common.findElement("xpath", "//img[@class='fotorama__img']").getAttribute("src");
 //			Common.assertionCheckwithReport(SmallCard.equals(MainCard),
@@ -4460,6 +4461,7 @@ catch(Exception | Error e){
 						"validating the success message after applying gift card",
 						"Success message should be displayed after the applying of gift card",
 						"Sucessfully gift card has been applyed", "Failed to apply the gift card");
+				Thread.sleep(5000);
 			} else {
 				Common.scrollIntoView("xpath", "//button[contains(text(),'Add Gift Card')]");
 				Common.clickElement("xpath", "//button[contains(text(),'Add Gift Card')]");
