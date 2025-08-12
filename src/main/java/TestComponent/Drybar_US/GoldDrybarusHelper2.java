@@ -7122,7 +7122,7 @@ public void FUll_Payment(String dataSet) {
 			
 			int i = 0;
 			try {
-				Common.findElement("xpath","(//div[@class='row-full-width-inner']//p)[4]");
+				Common.findElement("xpath","//div[contains(@class, 'm-promo-banner glider-slide active')]");
 				Common.clickElement("xpath","//img[contains(@class,'header__logo-image')]");
 				Sync.waitPageLoad();
 				for (i = 0; i < Links.length; i++) {
@@ -7644,8 +7644,11 @@ public void FUll_Payment(String dataSet) {
 								"//div[@id='algolia_instant_sorter']//span")
 						.getText();
 				System.out.println(Sort);
+				Thread.sleep(4000);
 				//int Reviews = Common.findElements("xpath","//span[@class='yotpo-sr-bottom-line-right-panel']//span").size();
-				int Reviews = Common.findElements("xpath","//span[contains(@class,'yotpo-sr-bottom-line-right-panel')]").size();
+				//int Reviews = Common.findElements("xpath","//span[contains(@class,'yotpo-sr-bottom-line-right-panel')]").size();
+				int Reviews = Common.findElements("xpath","//span[contains(@class, 'stars-empty relative')]").size();
+				Thread.sleep(4000);
 				int Ribbons = Common.findElements("xpath","//span[contains(@class,'ribbon-bg new flex justify-center')]").size();
 				Thread.sleep(4000);
 				Common.assertionCheckwithReport(Reviews > 0 && breadcrumbs.contains("Breadcrumb") && filter.contains("Filter by") && Sort.contains("Sort by") 
@@ -9662,7 +9665,7 @@ public void outofstock_subcription(String Dataset) {
 			Sync.waitElementPresent("xpath", "//button[@title='Notify Me When Available']");
 			Common.clickElement("xpath", "//button[@title='Notify Me When Available']");
 			
-			Common.textBoxInput("xpath", "(//input[@placeholder='Insert your email'])[1]", email);
+			Common.textBoxInput("xpath", "(//input[@placeholder='Insert your email'])[2]", email);
 			Common.clickElement("xpath", "//span[text()='Subscribe']");
 			Sync.waitPageLoad();
 			Thread.sleep(2000);
@@ -9681,7 +9684,7 @@ public void outofstock_subcription(String Dataset) {
 			Common.actionsKeyPress(Keys.END);
 			Common.clickElement("xpath",
 					"//div[@x-show='showStickyBar']//button[@title='Notify Me When Available']");
-			Common.textBoxInput("xpath", "(//input[@placeholder='Insert your email'])[2]", email);
+			Common.textBoxInput("xpath", "(//input[@placeholder='Insert your email'])[3]", email);
 			Common.clickElement("xpath", "//span[text()='Subscribe']");
 			Sync.waitPageLoad();
 			Thread.sleep(2000);

@@ -24,8 +24,8 @@ public class TEST_DGLD_DRY_SUB_192_Checkout_with_Subscription_Product_anyOneplan
 			Drybar.login_Drybar("AccountDetails");
 			Drybar.search_product("Detox_SUB_Product"); 
 			Drybar.subcribe_product_Add_to_Cart("Detox_SUB_Product");
-		    Drybar.search_product("Sparkling Soda Shine Mist & UV Shield");  
-		    Drybar.subcribe_product_Add_to_Cart("Sparkling Soda Shine Mist & UV Shield");
+		    Drybar.search_product("Liquid_Glass_Sub_Product");  
+		    Drybar.subcribe_product_Add_to_Cart("Liquid_Glass_Sub_Product");
 			Drybar.minicart_Checkout();
 			Drybar.RegaddDeliveryAddress("AccountDetails");	
 			String rewardpoints=Drybar.Twentypercent_Reward_Points("$20 Off (400 points)");;
