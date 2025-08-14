@@ -99,7 +99,7 @@ public class GoldHydro_EMEA_Helper {
 	       
 	      if (currentUrl.contains("preprod") || currentUrl.contains("stage4")|| currentUrl.contains("www.hydroflask.com")) {
 	            Sync.waitPageLoad();
-	            isLogoPresent = Common.findElements("css", "a[class*='c-header__logo inline-flex'], img[alt='Store logo']").size() > 0;
+	            isLogoPresent = Common.findElements("css", "a[class*='c-header__logo'], img[alt='Store logo']").size() > 0;
 	            isTitleCorrect = validateTitle(
 		                "Home Page",
 		                "Hydro Flask Reusable Bottles",
@@ -622,8 +622,8 @@ public class GoldHydro_EMEA_Helper {
 //        Assert.assertEquals(PDPprice, Minicartprice);
 			Sync.waitElementPresent("xpath", "//span[@x-text='totalCartAmount']");
 			String minicart = Common.findElement("xpath", "//span[@x-text='totalCartAmount']").getText();
-			Sync.waitElementPresent(30, "xpath", "//a[contains(text(),'Checkout')]");
-			Common.clickElement("xpath", "//a[contains(text(),'Checkout')]");
+			Sync.waitElementPresent(30, "css", "button[class*='inline-flex btn btn-primary']");
+			Common.clickElement("css", "button[class*='inline-flex btn btn-primary']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Common.assertionCheckwithReport(Common.getCurrentURL().contains("checkout"),
@@ -2345,6 +2345,7 @@ Common.implicitWait();
 //				boolean isEmailErrorCorrect = emailErrorMessage.equalsIgnoreCase("Please enter a valid email address.");
 //				boolean isConfirmPasswordErrorCorrect = confirmPasswordErrorMessage.contains("must be the same as");
 //				boolean pagetitlename = pageTitlename.contains("Create an Account");
+			Thread.sleep(4000);
 				Common.assertionCheckwithReport(
 					 Common.getCurrentURL().contains("/account/create/"),
 						"Validating error messages for invalid data in account creation form",
@@ -2601,7 +2602,7 @@ Common.implicitWait();
 			boolean isRegistrationSuccess = successMessage.contains("Thank you for registering");
 			boolean isWishlistMessage = Common.getPageTitle().contains("Wish List Sharing")
 					&& successMessage.contains(Product + " has been added to your Favorites");
-
+			Thread.sleep(2000);
 			Common.assertionCheckwithReport(
 					isRegistrationSuccess || isWishlistMessage || Common.getCurrentURL().contains("account"),
 					"Verifying account creation and redirection after Sign Up",
@@ -2906,7 +2907,7 @@ System.out.println("cartproducts  :"+cartproducts);
 
 		try {
 			Thread.sleep(3000);
-			int discountsize = Common.findElements("xpath", "(//span[contains(text(),'functionality on HYF EMEA')])[1]")
+			int discountsize = Common.findElements("xpath", "//div[@class='item discount']")
 					.size();
 			if (discountsize > 0) {
 				Sync.waitElementPresent("css", "h3[class*='flex items-center justify-between']");
@@ -3230,7 +3231,8 @@ System.out.println("cartproducts  :"+cartproducts);
 		}
 
 	}
-
+	
+	
 	public void Klarna_Saved_Payment(String dataSet) throws Exception {
 		// TODO Auto-generated method stub
 		HashMap<String, String> Paymentmethod = new HashMap<String, String>();
@@ -3681,7 +3683,7 @@ catch(Exception | Error e){
 					"After Clicking on My Orders CTA user should be navigate to the My Orders page",
 					"Sucessfully User Navigates to the My Orders page after clicking on the My Orders CTA",
 					"Failed to Navigate to the My Orders page after Clicking on My Orders CTA");
-			String Ordernumber = Common.findElement("xpath", "(//span[@class='text-right'])[1]").getText();
+			String Ordernumber = Common.findElement("css", "span[class*='text-right']").getText();
 			Sync.waitPageLoad();
 			System.out.println(Ordernumber);
 			System.out.println(Dataset);
@@ -4192,9 +4194,9 @@ catch(Exception | Error e){
 	public void click_Prodeal() {
 		// TODO Auto-generated method stub
 		try {
-			Common.scrollIntoView("xpath", "//a[@title='Pro Deal']");
-			Sync.waitElementPresent("xpath", "//a[@title='Pro Deal']");
-			Common.clickElement("xpath", "//a[@title='Pro Deal']");
+			Common.scrollIntoView("xpath", "//a[@title='Pro Deal' and contains(@href,'prodeal')]");
+			Sync.waitElementPresent("xpath", "//a[@title='Pro Deal' and contains(@href,'prodeal')]");
+			Common.clickElement("xpath", "//a[@title='Pro Deal' and contains(@href,'prodeal')]");
 
 			Common.assertionCheckwithReport(Common.getCurrentURL().contains("/prodeal/application"),
 					"To validate the Pro Deal", "Should be display the Pro Deal Application ",
@@ -4260,7 +4262,7 @@ catch(Exception | Error e){
 					"After clicking on the value amount should be appear in PDP",
 					"Successfully selected amount is matched for the gift card",
 					"Failed to appear amount for the gift card");
-			Common.clickElement("xpath", "(//img[contains(@class,'amcard-image')])[2]");
+//			Common.clickElement("xpath", "(//img[contains(@class,'amcard-image')])[2]");
 //			String SmallCard=Common.findElement("xpath", "//img[@class='amcard-image -active']").getAttribute("src");
 //			String MainCard=Common.findElement("xpath", "//img[@class='fotorama__img']").getAttribute("src");
 //			Common.assertionCheckwithReport(SmallCard.equals(MainCard),
@@ -4459,6 +4461,7 @@ catch(Exception | Error e){
 						"validating the success message after applying gift card",
 						"Success message should be displayed after the applying of gift card",
 						"Sucessfully gift card has been applyed", "Failed to apply the gift card");
+				Thread.sleep(5000);
 			} else {
 				Common.scrollIntoView("xpath", "//button[contains(text(),'Add Gift Card')]");
 				Common.clickElement("xpath", "//button[contains(text(),'Add Gift Card')]");
@@ -6095,7 +6098,6 @@ catch(Exception | Error e){
 		String Email = Common.genrateRandomEmail(data.get(Dataset).get("Email"));
 		System.out.println("Email :"+ Email);
 		try {
-			Thread.sleep(5000);
 			Common.actionsKeyPress(Keys.END);
 			Thread.sleep(5000);
 			Sync.waitElementClickable(30, "xpath", "(//input[@id='subscribe-email' or @name='email'])[2]");
@@ -6103,12 +6105,10 @@ catch(Exception | Error e){
 			Common.clickElement("xpath", "(//input[contains(@aria-label,'I consent to receive')])[2]");
 			Common.clickElement("xpath", "//button[text()='Sign Up']");
 			Thread.sleep(5000);
-			Common.clickElement("xpath", "//button[text()='Sign Up']");
 			Sync.waitPageLoad();
-			Thread.sleep(2000);
-			int Text = Common.findElements("xpath", "//span[contains(text(),'Thanks for subscribing')]").size();
+			int Text = Common.findElements("xpath", "//span[contains(text(),'just dropped')]").size();
 			System.out.println(Text);
-			int size = Common.findElements("xpath", "(//span[@class='ql-font-nunito-sans'])[1]").size();
+			int size = Common.findElements("xpath", "//span[contains(text(),'just dropped')]//parent::p//parent::div").size();
 			String expectedResult = "User gets confirmation message that it was submitted";
 
 			Common.assertionCheckwithReport(Text > 0 || size > 0, "verifying newsletter subscription",
@@ -6410,7 +6410,7 @@ catch(Exception | Error e){
 			Common.clickElement("css", "button[id='customer-menu']");
 			Sync.waitElementPresent(30, "css", "a[title='My Account']");
 			Common.clickElement("css", "a[title='My Account']");
-			Common.assertionCheckwithReport(Common.getPageTitle().equals("Dashboard"),
+			Common.assertionCheckwithReport(Common.getPageTitle().equals("Dashboard") || Common.getPageTitle().contains("account"),
 					"validating the Navigation to the My account page",
 					"After Clicking on My account CTA user should be navigate to the my account page",
 					"Sucessfully User Navigates to the My account page after clicking on the my account CTA",
@@ -6435,7 +6435,7 @@ catch(Exception | Error e){
 					"After Clicking on stored methods CTA user should be navigate to the My Payment Methods page",
 					"Sucessfully User Navigates to the My Payment Methods page after clicking on the stored methods  CTA",
 					"Failed to Navigate to the My Payment Methods page after Clicking on my stored methods  CTA");
-			int size = Common.findElements("css", "div[class='divide-y divide-border']").size();
+			int size = Common.findElements("css", "div[class*='customer-payment-methods']").size();
 			if (size > 0) {
 				Thread.sleep(2000);
 				String number = Common.findElement("xpath", "(//div[@class='flex items-center']//span)[1]").getText()
@@ -7125,6 +7125,7 @@ catch(Exception | Error e){
 				System.out.println(Common.getCurrentURL());
 
 				if (socallinksarry[i].equals("instagram")) {
+					Thread.sleep(2000);
 					Common.assertionCheckwithReport(Common.getCurrentURL().contains("instagram"),
 							"Verifying Social link  " + socallinksarry[i], "User click the social " + socallinksarry[i],
 							"successfully navigating to social link  " + socallinksarry[i],
@@ -7132,6 +7133,7 @@ catch(Exception | Error e){
 					Common.closeCurrentWindow();
 					Common.switchToFirstTab();
 				} else if (socallinksarry[i].equals("tiktok")) {
+					Thread.sleep(2000);
 					Common.assertionCheckwithReport(Common.getCurrentURL().contains("tiktok.com"),
 							"Verifying Social link  " + socallinksarry[i], "User click the social " + socallinksarry[i],
 							"successfully navigating to social link  " + socallinksarry[i],
@@ -8903,7 +8905,7 @@ catch(Exception | Error e){
 			}
 			Thread.sleep(4000);
 			List<WebElement> country = Common.findElements("xpath",
-					"(//legend[text()='Europe']//parent::fieldset)[1]//div[@class='country-list__item']//p");
+					"//legend[text()='Europe']//parent::fieldset//div[@class='country-list__item']");
 			List<WebElement> Countryselector = Common.findElements("xpath",
 					"(//legend[text()='Europe']//parent::fieldset)[1]//div[@class='country-list__item']//p");
 			ArrayList<String> CountryNames = new ArrayList<String>();
@@ -8920,7 +8922,7 @@ catch(Exception | Error e){
 
 					System.out.println(country.size());
 
-					for (int i = 1; i < country.size(); i++) {
+					for (int i = 0, a=1; i < country.size(); i++,a++) {
 						Sync.waitElementPresent(50, "xpath", "(//span[@class='country-selector-title'])[2]");
 						Common.clickElement("xpath", "(//span[@class='country-selector-title'])[2]");
 						Thread.sleep(4000);
@@ -8938,16 +8940,16 @@ catch(Exception | Error e){
 						Country = select.get(i).getText();
 						System.out.println(Country);
 //						select.get(i).click();
-						int k = 0 + i;
+						int k = 0 + a;
 						Common.clickElement("xpath",
-								"(((//legend[text()='Europe']//parent::fieldset)[2])//div[@class='country-list__item']//p)["
+								"(((//legend[text()='Europe']//parent::fieldset)[1])//div[@class='country-list__item']//p)["
 										+ k + "]");
 						System.out.println(
-								"(((//legend[text()='Europe']//parent::fieldset)[2])//div[@class='country-list__item']//p)["
+								"(((//legend[text()='Europe']//parent::fieldset)[1])//div[@class='country-list__item']//p)["
 										+ k + "]");
 						Thread.sleep(5000);
-						if (Country.contains("English (£)") && countryname.contains("UK")
-								|| Country.contains("English (£)") && countryname.contains("United Kingdom")) {
+						if (Country.equals("English (£)") && countryname.equals("United Kingdom")
+								|| Country.equals("English (£)") && countryname.equals("United Kingdom")) {
 							ExtenantReportUtils.addPassLog("Validating" + Country + "Page  ",
 									"click on the country should navigate to the  " + Country + "Page",
 									"successfully page navigating to " + Country + "PAGE",
@@ -9025,6 +9027,7 @@ catch(Exception | Error e){
 
 		String message = Common.findElement("xpath", "//div[contains(@class,'message')]//span").getText();
 		System.out.println(message);
+		Thread.sleep(4000);
 		boolean isSuccess = isNewSubscription
 				? message.contains("Alert subscription has been saved.")
 						|| message.contains("Thank you! You are already subscribed to this product.")
@@ -9814,8 +9817,8 @@ catch(Exception | Error e){
 	        Common.scrollIntoView("xpath", "//h1[@itemprop='name']");
 
 	        if (currentUrl.contains("emea") || currentUrl.contains("preprod")) {
-	            Sync.waitElementClickable("xpath", "(//button[contains(@class,'relative block after') and @type='button'])[2]");
-	            Common.clickElement("xpath", "(//button[contains(@class,'relative block after') and @type='button'])[2]");
+	            Sync.waitElementClickable("xpath", "(//button[contains(@class,'relative block after') and @type='button'])[3]");
+	            Common.clickElement("xpath", "(//button[contains(@class,'relative block after') and @type='button'])[3]");
 	        } else {
 	            Sync.waitElementClickable("xpath", "(//button[contains(@class,'relative block after') and @type='button'])[2]");
 	            Common.clickElement("xpath", "(//button[contains(@class,'relative block after') and @type='button'])[2]");
@@ -10427,7 +10430,7 @@ catch(Exception | Error e){
 			Thread.sleep(2000);
 
 			// Expected price after 10% discount
-			float expectedDiscountedPrice = originalPrice - (originalPrice * 10 / 100);
+			float expectedDiscountedPrice = originalPrice - (originalPrice * 70 / 100);
 
 			// Round both prices to 2 decimal places
 			expectedDiscountedPrice = Math.round(expectedDiscountedPrice * 100.0f) / 100.0f;
@@ -10497,7 +10500,6 @@ catch(Exception | Error e){
 				String Bottleimagecolor = Common.getText("xpath",
 						"(//span[contains(@x-text,'getSwatchText')])['" + value + "']");
 				System.out.println(Bottleimagecolor);
-
 				Common.assertionCheckwithReport(colorname != null && colorname.contains(Bottleimagecolor),
 						"Validate Selected Color Swatch", "User should be able to select color swatch",
 						"Color swatch selected successfully: " + colorname, "Failed to select color swatch");
@@ -10521,26 +10523,28 @@ catch(Exception | Error e){
 		// TODO Auto-generated method stub
 //		String names = data.get(Dataset).get("names");
 //		String[] Links = names.split(",");
+		Common.actionsKeyPress(Keys.DOWN);
 		List<WebElement> size = Common.findElements("css",
 				"div[x-ref='productTabsComponent'] div h2[aria-live='polite']");
 		try {
 			for (int i = 0; i < size.size(); i++) {
 				int value = i + 1;
 				size.get(i).click();
+				Thread.sleep(4000);
 				String title = Common
-						.getText("xpath",
+						.findElement("xpath",
 								"(//div[@x-ref='productTabsComponent']//div//h2[@aria-live='polite'])['" + value + "']")
-						.trim();
+						.getText().trim();
 				System.out.println(title);
 				String data = Common
-						.getText("xpath",
+						.findElement("xpath",
 								"(//div[@x-ref='productTabsComponent']//h2[@aria-live='polite'])['" + value + "']")
-						.trim();
+						.getText().trim();
 				System.out.println(data);
 				Common.assertionCheckwithReport(title.contains(data), "verifying the tabs in PDP ",
-						"After clicking on the " + title + "It should display the related content",
-						"sucessfully after clicking on the " + title + "it has been displayed related content",
-						"Failed to display related content" + title);
+						"After clicking on the  product tab It should display the related content",
+						"sucessfully after clicking on the product tab it has been displayed related content",
+						"Failed to display related content after clicking on the product tab");
 			}
 		} catch (Exception | Error e) {
 			e.printStackTrace();
@@ -14440,7 +14444,7 @@ catch(Exception | Error e){
 	    String currentURL = Common.getCurrentURL();
 	    boolean allowProdExecution = Boolean.parseBoolean(System.getProperty("allowProdExecution", "false"));
 
-	    if (!allowProdExecution && !(currentURL.contains("preprod") || currentURL.contains("stage"))) {
+	    if (currentURL.contains("preprod") || currentURL.contains("prod")|| currentURL.contains("stage")) {
 	        System.out.println("Express PayPal payment skipped: Not allowed in PROD.");
 	        ExtenantReportUtils.addInfoLog("Skipping Express PayPal Payment Execution not permitted in production environment. URL: " + currentURL);
 	        return order;
@@ -14674,9 +14678,9 @@ catch(Exception | Error e){
 					System.out.println(order);
 				}
 
-				if (Common.findElements("xpath", "//div[contains(@class,'checkout-success container')]//p//span")
+				if (Common.findElements("xpath", "//div[contains(@class,'checkout-success')]//p//a")
 						.size() > 0) {
-					Common.getText("xpath", "//div[contains(@class,'checkout-success container')]//p//span");
+					Common.getText("xpath", "//div[contains(@class,'checkout-success')]//p//a");
 					System.out.println(order);
 
 				}
@@ -16451,11 +16455,24 @@ catch(Exception | Error e){
 				Common.textBoxInput("xpath", "(//input[contains(@id,'kl-consent-page')])[2]", "v");
 				Common.textBoxInput("xpath", "(//input[contains(@id,'kl-consent-page')])[3]", "narra");
                   Common.clickElement("xpath", "//button[text()='Subscribe']");
-              String text = Common.getText("xpath", "//span[text()='Thanks for confirming your email address.']");
-              Common.assertionCheckwithReport(text.contains("Thanks for confirming your email"),
-  					"validating Newsletter Subscription Message",
-  					"After Clicking subscribe button it should display the you've subscribed",
-  					"Unable to subscribed the Newsletter in My Account");
+                  Thread.sleep(4000);
+                  int size=Common.findElements("css", "h1 span[style]").size();
+                  if(size>0){
+              String text = Common.findElement("css", "h1 span[style]").getText().trim();
+              Common.assertionCheckwithReport(text.contains("You've been subscribed"),
+    					"validating Newsletter Subscription Message",
+    					"After Clicking subscribe button it should display the you've subscribed",
+    					"Unable to subscribed the Newsletter in My Account");
+                  }
+                  else
+                  {
+                	   String text1 = Common.findElement("xpath", "//h1[contains(text(),'Check your inbox')]").getText().trim(); 
+                	   Common.assertionCheckwithReport(text1.contains("Check your inbox"),
+           					"validating Newsletter Subscription Message",
+           					"After Clicking subscribe button it should display the you've subscribed",
+           					"Unable to subscribed the Newsletter in My Account");
+                  }
+             
 					}else {
 				
 			

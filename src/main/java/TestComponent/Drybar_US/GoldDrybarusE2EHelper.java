@@ -11848,7 +11848,8 @@ public String fivepercent_Reward_Points(String Dataset) {
 		String off = Common.findElement("xpath", "//div[@class='yotpo-remove-tag-container']//div").getText().trim()
 				.replace(" Off", "");
 		Thread.sleep(3000);
-		String discount = Common.findElement("xpath", "//div[@class='item discount']//span[@class='value']").getText()
+		//String discount = Common.findElement("xpath", "//div[@class='item discount']//span[@class='value']").getText().trim().replace("-", "").replace(".00", "");
+		String discount = Common.findElement("xpath", "(//div[@class='item discount']//span[contains(@class,'discount-value value')])").getText()
 				.trim().replace("-", "").replace(".00", "");
 		Thread.sleep(3000);
 		System.out.println(off);

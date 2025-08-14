@@ -20,35 +20,36 @@ public class Test_DGLD_HF_ST_032_Header_Links_Validation {
 
 		try {
 			Hydro.verifingHomePage();
-			if(Common.getCurrentURL().contains("https://mcloud-na-preprod.hydroflask.com/")) {
-			Hydro.New_Arrivals_validation("New Arrivals");
-		    Hydro.travel_Bottles_validation("travel Bottles");
-		    Hydro.Travel_Tumbler_validation("Travel Tumbler");			
-			Hydro.shop_by_Color_validation("Shop by Color");
-            Hydro.bottles_validation("Bottle and drinkware");			
-        	Hydro.coolers_LunchBoxes_Validation("Coolers");  
-         	Hydro.kitchenware_validation("kitchenware");
-            Hydro.Accessories_validation("Accessories");
-            Hydro.Collections_validation("Collections");        
-			Hydro.Explore_Validation("Explore Links");
-//			Hydro.Customize_validation("Customize");
-			}else {
-			   // Hydro.New_Color_Destination("Colors");
-	           	Hydro.bottles_validation("Bottle and drinkware");
-	        	Hydro.Coolers_LunchBoxes_Validation("Coolers"); 
-	         	Hydro.kitchenware_validation("kitchenware");
-	      		Hydro.Accessories_validation("Accessories");
-	            Hydro.featured_validation("Featured");
-	            Hydro.Collections_validation("Collections");
+			if(Common.getCurrentURL().contains("preprod")) {
+				Hydro.newTrending_validation("newTrending");
+				Hydro.travel_Bottles_validation("travel Bottles");
+				Hydro.Travel_Tumbler_validation("Travel Tumbler");			
+				Hydro.bottles_validation("Bottle and drinkware");			
+				Hydro.coolers_LunchBoxes_Validation("Coolers");  
+				Hydro.kitchenware_validation("kitchenware");
+				Hydro.Accessories_validation("Accessories");
+				Hydro.Collections_validation("Collections");        
 				Hydro.Explore_Validation("Explore Links");
 				Hydro.Customize_validation("Customize");
+				Hydro.single_Categories_From_Shop("singleCategories");
+			}else {
+				Hydro.newTrending_validation("newTrending");
+				Hydro.bottles_validation("Bottle and drinkware");
+				Hydro.Coolers_LunchBoxes_Validation("Coolers"); 
+				Hydro.kitchenware_validation("kitchenware");
+				Hydro.Accessories_validation("Accessories");
+				Hydro.Collections_validation("Collections");
+				Hydro.Explore_Validation("Explore Links");
+				Hydro.Customize_validation("Customize");
+				Hydro.single_Categories_From_Shop("singleCategories");
 			}
-			 // Hydro.New_Color_Destination("Colors");
-		     //  Hydro.featured_validation("Featured"); 
-						
+			//            Hydro.featured_validation("Featured");
+			// Hydro.New_Color_Destination("Colors");
+			//  Hydro.featured_validation("Featured"); 
+
 			// Hydro.Holiday_shop_validation("Holiday Sale"); 
-			
-			} catch (Exception e) {
+			// Hydro.New_Color_Destination("Colors");
+		} catch (Exception e) {
 
 			Assert.fail(e.getMessage(), e);
 		}
@@ -57,16 +58,16 @@ public class Test_DGLD_HF_ST_032_Header_Links_Validation {
 
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+						Common.closeAll();
 
 	}
 
 	@BeforeTest
 	public void startTest() throws Exception {
 		System.setProperty("configFile", "Hydroflask\\config.properties");
-        Login.signIn();
-        Hydro.close_add();
-        Hydro.acceptPrivacy();
+		Login.signIn();
+		Hydro.close_add();
+		Hydro.acceptPrivacy();
 
 	}
 

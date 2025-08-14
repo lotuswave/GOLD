@@ -1,28 +1,29 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <suite name="GOLD API OXO Tests">
-<test name="Guest Checkout - 1 Line Item QTY2 - CC">
+
+<test name="Test_DGLD_API_OXO_01_Validate_shipment_invoice_Return_Guest_1LineItem_QTY2_CC">
 <classes>
-<class name="TestExecute.API.Oxo.Test_DGLD_API_OXO_01_Guest_1LineItem_QTY2_CC"/>
+<class name="TestExecute.API.Oxo.Test_DGLD_API_OXO_01_Validate_shipment_invoice_Return_Guest_1LineItem_QTY2_CC"/>
 </classes>
 </test>
-<test name="Regster Checkout SimpleConfigurableGiftcard Item QTY1 PP - CC">
+<test name="Test_DGLD_API_OXO_02_Validate_shipment_invoice_Return_Registered_2differentitems_SimpleConfigurable_1QTYeach_PayPal">
 <classes>
-<class name="TestExecute.API.Oxo.Test_DGLD_API_OXO_02_Registered_SimpleConfigurableGiftcard_1QTYeach_PayPal"/>
+<class name="TestExecute.API.Oxo.Test_DGLD_API_OXO_02_Validate_shipment_invoice_Return_Registered_2differentitems_SimpleConfigurable_1QTYeach_PayPal"/>
 </classes>
 </test>
-<test name="Guest Checkout onfigurableItem Item QTY1 - Klarna">
+<test name="Test_DGLD_API_OXO_03_Validate_shipment_invoice_Return_GuestUser_checkout_1lineItem_with_2QTYeach_with_giftcode_CC">
 <classes>
-<class name="TestExecute.API.Oxo.Test_DGLD_API_OXO_03_Guest_ConfigurableItem_1QTY_Klarna"/>
+<class name="TestExecute.API.Oxo.Test_DGLD_API_OXO_03_Validate_shipment_invoice_Return_GuestUser_checkout_1lineItem_with_2QTYeach_with_giftcode_CC"/>
 </classes>
 </test>
-<test name="Guest Checkout - 1 Line Item QTY2 - CC with _GiftCodeFullRedemption">
+<test name="Test_DGLD_API_OXO_04_Validate_shipment_invoice_Return_Register_User_checkout_2differentItems_giftcard_purchase_CC">
 <classes>
-<class name="TestExecute.API.Oxo.Test_DGLD_API_OXO_04_Guest_1LineItem_QTY2_GiftCodeFullRedemption"/>
+<class name="TestExecute.API.Oxo.Test_DGLD_API_OXO_04_Validate_shipment_invoice_Return_Register_User_checkout_2differentItems_giftcard_purchase_CC"/>
 </classes>
 </test>
-<test name="CS Order - 1 Line Item QTY2 - zero dollar charge">
+<test name="Test_DGLD_API_OXO_05_Validate_shipment_invoice_CS_Order_via_Admin_with_Zero_dollar_charge_1LineItem_2QTY">
 <classes>
-<class name="TestExecute.API.Oxo.Test_DGLD_API_OXO_05_CS_Order_via_Admin_with_Zero_dollar_charge_1LineItem_2QTY_Full_shippment_Invoice"/>
+<class name="TestExecute.API.Oxo.Test_DGLD_API_OXO_05_Validate_shipment_invoice_CS_Order_via_Admin_with_Zero_dollar_charge_1LineItem_2QTY"/>
 </classes>
 </test>
 </suite>

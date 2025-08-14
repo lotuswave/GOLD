@@ -23,7 +23,7 @@ public class Test_DGLD_OXO_ST_030_Header_Links_Validation {
 			Oxo.header_CoffeeAndBeverage("Coffee & Beverage");
 			Oxo.header_CleaningAndOrganization("Cleaning & Organization");
 			Oxo.header_BabyandToddler("BabyAndToddler");
-			Oxo.header_CampandGrill("CampandGrill");
+			Oxo.header_CampandGrill("Outdoor & Grill");
 			Oxo.header_ShopAll("ShopAll");
 			Oxo.header_Coffeefinder();
 			Oxo.header_WeAre_Oxo("WeAreOXO");

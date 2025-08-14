@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<suite name="Gold-Osprey EMEA API Execution">
+    
+ 
+<test name="TEST_HYF_EMEA_API_Integration_ST_001__Validate_Shipment_Invoice_Return_GuestCheckout_1LineItem_QTY2_CC" testid="DQA-3442" priority="P1" description="This script will cover guestuser checkout with one line item 2 quantity with CC">
+        <classes>
+            <class name="TestExecute.API.Hydroflask_EMEA.TEST_HYF_EMEA_API_Integration_ST_001__Validate_Shipment_Invoice_Return_GuestCheckout_1LineItem_QTY2_CC"/>
+        </classes>
+    </test> 
+    
+<test name="TEST_HYF_EMEA_API_Integration_ST_002__Validate_Shipment_Invoice_Return_RegisteredUserCheckout_2LineItems_QTY1_Each_GC_CC" testid="DQA-3444" priority="P1" description="This script will cover the registeruser 2line item giftcard one quantity each with paypal">
+        <classes>
+            <class name="TestExecute.API.Hydroflask_EMEA.TEST_HYF_EMEA_API_Integration_ST_002__Validate_Shipment_Invoice_Return_RegisteredUserCheckout_2LineItems_QTY1_Each_GC_CC"/>
+        </classes>
+    </test>
+   
+    <test name="TEST_HYF_EMEA_API_Integration_ST_003__Validate_Shipment_Invoice_Return_GuestUserCheckout_1LineItem_QTY2_GC_CC" testid="DQA-3443" priority="P1" description="This script will cover validating GuestUser Checkout Multiple GiftCod _Partial Redemption with CC">
+        <classes>
+            <class name="TestExecute.API.Hydroflask_EMEA.TEST_HYF_EMEA_API_Integration_ST_003__Validate_Shipment_Invoice_Return_GuestUserCheckout_1LineItem_QTY2_GC_CC"/>
+        </classes>
+    </test>  
+
+   <test name="TEST_HYF_EMEA_API_Integration_ST_004__Validate_Shipment_Invoice_Return_RegisteredUserCheckout_2LineItems_WithGiftCardPurchase_CC" testid="DQA-3510" priority="P1" description="This script will cover validating the guestuser giftcode full redemption with qunatity 2">
+        <classes>
+            <class name="TestExecute.API.Hydroflask_EMEA.TEST_HYF_EMEA_API_Integration_ST_004__Validate_Shipment_Invoice_Return_RegisteredUserCheckout_2LineItems_WithGiftCardPurchase_CC"/>
+        </classes>
+    </test>
+
+   
+     
+    <test name="TEST_HYF_EMEA_API_Integration_ST_005__Validate_Shipment_Invoice_Return_CSOrder_Admin_ZeroDollarCharge" testid="DQA-4487" priority="P1" description="This script will cover validating GuestUser Checkout Multiple GiftCod _Partial Redemption with CC">
+        <classes>
+            <class name="TestExecute.API.Hydroflask_EMEA.TEST_HYF_EMEA_API_Integration_ST_005__Validate_Shipment_Invoice_Return_CSOrder_Admin_ZeroDollarCharge"/>
+        </classes>
+    </test>
+    
+</suite>

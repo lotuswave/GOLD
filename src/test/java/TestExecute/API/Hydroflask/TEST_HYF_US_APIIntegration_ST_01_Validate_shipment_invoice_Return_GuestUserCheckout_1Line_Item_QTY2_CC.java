@@ -1,4 +1,4 @@
-package TestExecute.API.Oxo;
+package TestExecute.API.Hydroflask;
 
 import java.io.StringReader;
 import java.util.List;
@@ -15,7 +15,7 @@ import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 
-public class Test_DGLD_API_OXO_02_Registered_SimpleConfigurableGiftcard_1QTYeach_PayPal {
+public class TEST_HYF_US_APIIntegration_ST_01_Validate_shipment_invoice_Return_GuestUserCheckout_1Line_Item_QTY2_CC {
     private String apiKey;
     private String orderNumber;
     public Integer itemId;
@@ -37,6 +37,7 @@ public class Test_DGLD_API_OXO_02_Registered_SimpleConfigurableGiftcard_1QTYeach
         request.body(requestBody);
 
         Response response = request.post();
+
         Assert.assertEquals(response.getStatusCode(), 200, "API Key generation failed");
 
         apiKey = response.getBody().asString().replaceAll("^\"|\"$", "");
@@ -46,8 +47,7 @@ public class Test_DGLD_API_OXO_02_Registered_SimpleConfigurableGiftcard_1QTYeach
     @Test(priority = 2, dependsOnMethods = "generateApiKey")
     public void getOrderCopy() {
     	MagentoOrder_ID="";
-    	RestAssured.baseURI = "https://na-preprod.hele.digital/rest/all/V1/orders/"+MagentoOrder_ID+"/";
-
+    	RestAssured.baseURI = "https://na-preprod.hele.digital/rest/hydroflask/V1/orders/"+MagentoOrder_ID+"/";
         RequestSpecification request = RestAssured.given();
         request.header("Content-Type", "application/json");
         request.header("Authorization", "Bearer " + apiKey);
@@ -58,11 +58,11 @@ public class Test_DGLD_API_OXO_02_Registered_SimpleConfigurableGiftcard_1QTYeach
         String jsonResponse = response.getBody().asString();
         String formattedJson = JsonFormatter.formatJson(jsonResponse);
 
-        System.out.println("Get Order Copy Response: " + formattedJson);
+//      System.out.println("Get Order Copy Response: " + formattedJson);
 
         orderNumber = response.path("increment_id");
         System.out.println("OderNumber: " + orderNumber);
-         customerEmail = response.path("customer_email");
+        customerEmail = response.path("customer_email");
         System.out.println("Customer Email: " + customerEmail);
         List<Map<String, Object>> items = response.jsonPath().getList("items");
 
@@ -100,7 +100,7 @@ public class Test_DGLD_API_OXO_02_Registered_SimpleConfigurableGiftcard_1QTYeach
                 "    \"items\": [\n" +
                 "        {\n" +
                 "            \"order_item_id\": " + itemId + ",\n" +
-                "            \"qty\": 1.0\n" +
+                "            \"qty\": "+QTYOrder+".0\n" +
                 "        }\n" +
                 "    ],\n" +
                 "    \"tracks\": [\n" +
@@ -128,7 +128,7 @@ public class Test_DGLD_API_OXO_02_Registered_SimpleConfigurableGiftcard_1QTYeach
 
     @Test(priority = 4, dependsOnMethods = {"generateApiKey", "getOrderCopy", "shipOrder"})
     public void invoice() {
-        RestAssured.baseURI = "https://na-preprod.hele.digital/rest/oxo/V1/order/" + MagentoOrder_ID + "/invoice";
+        RestAssured.baseURI = "https://na-preprod.hele.digital/rest/hydroflask/V1/order/" + MagentoOrder_ID + "/invoice";
 
         RequestSpecification request = RestAssured.given();
         request.header("Content-Type", "application/json");
@@ -160,22 +160,22 @@ public class Test_DGLD_API_OXO_02_Registered_SimpleConfigurableGiftcard_1QTYeach
         System.out.println("Invoice Response: " + response.getBody().asString());
         System.out.println("Request Body: " + requestBody);
     }
-
+	
 	
 	///***Create RMA***///
     	@Test(priority = 5, dependsOnMethods = {"generateApiKey", "getOrderCopy", "shipOrder","invoice"})
  public void createRma() throws InterruptedException {
-		Thread.sleep(30000);
+    		Thread.sleep(15000);
 	System.out.println(apiKey);
      RestAssured.baseURI = "https://na-preprod.hele.digital/rest/all/V1/returns/create-rma";
 
      RequestSpecification request = RestAssured.given();
-     request.header("Content-Type", "application/json"); // Or "text/plain" as in Postman
-     request.header("Authorization", "Bearer " + apiKey);// Use the provided token
+     request.header("Content-Type", "application/json"); 
+     request.header("Authorization", "Bearer " + apiKey);
      
-     String Increment_Base = "15735ea";
-     String incrementSuffix = generateRandomNumber(5); // Generate 6 random digits
-      increment_id = Increment_Base + incrementSuffix;
+     String Increment_Base = "15735ea9";
+     String incrementSuffix = generateRandomNumber(5); 
+     increment_id = Increment_Base + incrementSuffix;
      
      String requestBody = "{\n" +
     	        "    \"increment_id\": \""+increment_id+"\",\n" +
@@ -185,7 +185,7 @@ public class Test_DGLD_API_OXO_02_Registered_SimpleConfigurableGiftcard_1QTYeach
     	        "    \"items\": [\n" +
     	        "        {\n" +
     	        "            \"order_item_id\": "+itemId+",\n" +
-    	        "            \"quantity_to_return\": 1,\n" +
+    	        "            \"quantity_to_return\": "+QTYOrder+",\n" +
     	        "            \"entered_custom_attributes\": [\n" +
     	        "                {\n" +
     	        "                    \"attribute_code\": \"reason\",\n" +
@@ -207,7 +207,7 @@ public class Test_DGLD_API_OXO_02_Registered_SimpleConfigurableGiftcard_1QTYeach
      String jsonResponse = response.getBody().asString();
 
      JSONObject jsonObject = new JSONObject(jsonResponse);
-//System.out.println(jsonObject);
+     System.out.println(jsonObject);
      Assert.assertEquals(response.getStatusCode(), 200, "Create RMA failed");
 
      // Validations
@@ -216,11 +216,12 @@ public class Test_DGLD_API_OXO_02_Registered_SimpleConfigurableGiftcard_1QTYeach
      Assert.assertEquals(jsonObject.getString("order_increment_id"), orderNumber, "Order increment ID mismatch");
      Assert.assertEquals(jsonObject.getString("status"), "authorized", "Status mismatch");
 //     Assert.assertEquals(jsonObject.getJSONArray("items").getJSONObject(0).getInt("order_item_id"), itemId, "Order item ID mismatch");
-
      System.out.println("Create RMA Response: " + jsonObject.toString(4));
  }
      
 
+	
+	
 	///****Post Credit Memo****///
 	@Test(priority = 6, dependsOnMethods = {"generateApiKey", "getOrderCopy", "shipOrder","invoice","createRma"})
  public void postCreditMemo() {
@@ -234,21 +235,19 @@ public class Test_DGLD_API_OXO_02_Registered_SimpleConfigurableGiftcard_1QTYeach
              "    \"type\": \"approved_return\",\n" +
              "    \"order_item_ids\": [\n" +
              "        {\n" +
-             "            \"qty\": \"1.0\",\n" +
+             "            \"qty\": \""+QTYOrder+".0\",\n" +
              "            \"order_item_id\": \""+itemId+"\"\n" +
              "        }\n" +
              "    ],\n" +
              "    \"refund_shipping\": false\n" +
              "}";
 
-
      request.body(requestBody);
-
      Response response = request.post();
      String jsonResponse = response.getBody().asString();
 
      JSONObject jsonObject = new JSONObject(jsonResponse);
-
+     System.out.println(jsonObject);
      Assert.assertEquals(response.getStatusCode(), 200, "Post Credit Memo failed");
 
      // Validate credit_memo_id
@@ -258,7 +257,7 @@ public class Test_DGLD_API_OXO_02_Registered_SimpleConfigurableGiftcard_1QTYeach
          if (successObject.has("credit_memo_id")) {
              int creditMemoId = successObject.getInt("credit_memo_id");
              System.out.println("Credit Memo ID: " + creditMemoId);
-             // Optionally, you can add further validations on the credit_memo_id
+            
          } else {
              Assert.fail("credit_memo_id is missing in the response");
          }
@@ -269,14 +268,31 @@ public class Test_DGLD_API_OXO_02_Registered_SimpleConfigurableGiftcard_1QTYeach
      System.out.println("Post Credit Memo Response: " + jsonObject.toString(4));
  }
      
- 	
-
+	//***Update RMA***///
+//	@Test(priority = 6, dependsOnMethods = "generateApiKey")
+// public void updateRma() {
+//     RestAssured.baseURI = "https://na-preprod.hele.digital/rest/all/V1/returns/update-rma/15735ea37933";
+//
+//     RequestSpecification request = RestAssured.given();
+//     request.header("Content-Type", "application/json"); // Or "text/plain" as in Postman
+//     request.header("Authorization", "Bearer" + apiKey); // Use the provided token
+//
+//     String requestBody = "{\r\n" + 
+//             "}";
+//
+//     request.body(requestBody);
+//
+//     Response response = request.put();
+//
+//     Assert.assertEquals(response.getStatusCode(), 200, "Update RMA failed");
+//     System.out.println("Update RMA Response: " + response.getBody().asString());
+// }
 	
 private String generateRandomNumber(int length) {
     Random random = new Random();
     StringBuilder sb = new StringBuilder();
     for (int i = 0; i < length; i++) {
-        sb.append(random.nextInt(10)); // Append a random digit (0-9)
+        sb.append(random.nextInt(10)); 
     }
     return sb.toString();
 }

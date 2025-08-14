@@ -1,4 +1,4 @@
-package TestExecute.API.Hydroflask;
+package TestExecute.API.Drybar_US;
 
 import java.io.StringReader;
 import java.util.List;
@@ -11,13 +11,12 @@ import org.json.JSONTokener;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import TestExecute.API.Hydroflask.Test_DGLD_API_HF_US_01_01_Guest_1LineItem_QTY2_CC.JsonFormatter;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 
-public class Test_DGLD_API_HF_US_02_Registered_Simple_And_Lineitem_Giftcard_1QTYeach_PayPal {
-	private String apiKey;
+public class Test_DGLD_API_DB_US_002_Validate_shipment_invoice_Return_RegisterUserCheckout_2differentItems_each1QTY_Paypal {
+    private String apiKey;
     private String orderNumber;
     public Integer itemId;
     public String sku;
@@ -28,7 +27,7 @@ public class Test_DGLD_API_HF_US_02_Registered_Simple_And_Lineitem_Giftcard_1QTY
     public String MagentoOrder_ID;
     public Integer firstItemId;
     public Integer SecondItemId;
-    
+ 
     @Test(priority = 1)
     public void generateApiKey() {
         RestAssured.baseURI = "https://na-preprod.hele.digital/rest/V1/integration/admin/token";
@@ -48,8 +47,9 @@ public class Test_DGLD_API_HF_US_02_Registered_Simple_And_Lineitem_Giftcard_1QTY
 
     @Test(priority = 2, dependsOnMethods = "generateApiKey")
     public void getOrderCopy() {
-    	MagentoOrder_ID="";
-    	RestAssured.baseURI = "https://na-preprod.hele.digital/rest/hydroflask/V1/orders/"+MagentoOrder_ID+"/";
+    	MagentoOrder_ID="20364293";
+    	RestAssured.baseURI = "https://na-preprod.hele.digital/rest/drybar/V1/orders/"+MagentoOrder_ID+"/";
+
         RequestSpecification request = RestAssured.given();
         request.header("Content-Type", "application/json");
         request.header("Authorization", "Bearer " + apiKey);
@@ -60,26 +60,26 @@ public class Test_DGLD_API_HF_US_02_Registered_Simple_And_Lineitem_Giftcard_1QTY
         String jsonResponse = response.getBody().asString();
         String formattedJson = JsonFormatter.formatJson(jsonResponse);
 
-//      System.out.println("Get Order Copy Response: " + formattedJson);
+        System.out.println("Get Order Copy Response: " + formattedJson);
 
         orderNumber = response.path("increment_id");
         System.out.println("OderNumber: " + orderNumber);
-        customerEmail = response.path("customer_email");
+         customerEmail = response.path("customer_email");
         System.out.println("Customer Email: " + customerEmail);
         List<Map<String, Object>> items = response.jsonPath().getList("items");
         if (items != null && !items.isEmpty()) {
-            if (items.size() >= 3) { 
+            if (items.size() >= 2) { 
                  firstItemId = (Integer) items.get(0).get("item_id");
                 if (firstItemId != null) {
                     System.out.println("First item_id: " + firstItemId);
                 } else {
                     System.out.println("First item_id is null.");
                 }
-                 SecondItemId = (Integer) items.get(2).get("item_id");
+                 SecondItemId = (Integer) items.get(1).get("item_id");
                 if (SecondItemId != null) {
-                    System.out.println("Third item_id: " + SecondItemId);
+                    System.out.println("Second item_id: " + SecondItemId);
                 } else {
-                    System.out.println("Third item_id is null.");
+                    System.out.println("Second item_id is null.");
                 }
             } else {
                 System.out.println("Not enough items to get the first and Second item_id.");
@@ -89,8 +89,6 @@ public class Test_DGLD_API_HF_US_02_Registered_Simple_And_Lineitem_Giftcard_1QTY
             Assert.fail("No items found in the order copy");
         }
     }
-        
-    
     @Test(priority = 3, dependsOnMethods = {"generateApiKey", "getOrderCopy"})
     public void shipOrder() {
         RestAssured.baseURI = "https://na-preprod.hele.digital/rest/all/V1/order/" + MagentoOrder_ID + "/ship";
@@ -111,11 +109,11 @@ public class Test_DGLD_API_HF_US_02_Registered_Simple_And_Lineitem_Giftcard_1QTY
                 "    \"items\": [\n" +
                 "        {\n" +
                 "            \"order_item_id\": " + firstItemId + ",\n" +
-                "            \"qty\": 1.0\n" +
+                "            \"qty\":1.0\n" +
                 "        },\n" + 
                 "        {\n" +
                 "            \"order_item_id\": " + SecondItemId + ",\n" +
-                "            \"qty\": 1.0\n" +
+                "            \"qty\":1.0\n" +
                 "        }\n" +
                 "    ],\n" +
                 "    \"tracks\": [\n" +
@@ -133,8 +131,6 @@ public class Test_DGLD_API_HF_US_02_Registered_Simple_And_Lineitem_Giftcard_1QTY
                 "}";
         request.body(requestBody);
 
-        request.body(requestBody);
-
         Response response = request.post();
 
         Assert.assertEquals(response.getStatusCode(), 200, "Ship order failed");
@@ -144,11 +140,12 @@ public class Test_DGLD_API_HF_US_02_Registered_Simple_And_Lineitem_Giftcard_1QTY
 
     @Test(priority = 4, dependsOnMethods = {"generateApiKey", "getOrderCopy", "shipOrder"})
     public void invoice() {
-        RestAssured.baseURI = "https://na-preprod.hele.digital/rest/hydroflask/V1/order/" + MagentoOrder_ID + "/invoice";
+        RestAssured.baseURI = "https://na-preprod.hele.digital/rest/drybar/V1/order/" + MagentoOrder_ID + "/invoice";
 
         RequestSpecification request = RestAssured.given();
         request.header("Content-Type", "application/json");
         request.header("Authorization", "Bearer " + apiKey);
+
         String requestBody = "{\n" +
                 "    \"items\": [\n" +
                 "        {\n" +
@@ -157,7 +154,7 @@ public class Test_DGLD_API_HF_US_02_Registered_Simple_And_Lineitem_Giftcard_1QTY
                 "        },\n" + 
                 "        {\n" + 
                 "            \"order_item_id\": " + SecondItemId + ",\n" +
-                "            \"qty\": 1.0\n" +
+                "            \"qty\":1.0\n" +
                 "        }\n" +
                 "    ],\n" +
                 "    \"notify\": false,\n" +
@@ -179,12 +176,12 @@ public class Test_DGLD_API_HF_US_02_Registered_Simple_And_Lineitem_Giftcard_1QTY
         System.out.println("Invoice Response: " + response.getBody().asString());
         System.out.println("Request Body: " + requestBody);
     }
-	
+
 	
 	///***Create RMA***///
     	@Test(priority = 5, dependsOnMethods = {"generateApiKey", "getOrderCopy", "shipOrder","invoice"})
  public void createRma() throws InterruptedException {
-		Thread.sleep(30000);
+		Thread.sleep(15000);
 	System.out.println(apiKey);
      RestAssured.baseURI = "https://na-preprod.hele.digital/rest/all/V1/returns/create-rma";
 
@@ -212,7 +209,7 @@ public class Test_DGLD_API_HF_US_02_Registered_Simple_And_Lineitem_Giftcard_1QTY
     	        "                },\n" +
     	        "                {\n" +
     	        "                    \"attribute_code\": \"compensationMethod\",\n" +
-    	        "                    \"value\": \"return-for-refund\"\n" +
+    	        "                    \"value\": \"no-return-for-refund\"\n" +
     	        "                }\n" +
     	        "            ],\n" +
     	        "            \"selected_custom_attributes\": []\n" +
@@ -226,7 +223,7 @@ public class Test_DGLD_API_HF_US_02_Registered_Simple_And_Lineitem_Giftcard_1QTY
      String jsonResponse = response.getBody().asString();
 
      JSONObject jsonObject = new JSONObject(jsonResponse);
-//System.out.println(jsonObject);
+     System.out.println(jsonObject);
      Assert.assertEquals(response.getStatusCode(), 200, "Create RMA failed");
 
      // Validations
@@ -274,7 +271,7 @@ public class Test_DGLD_API_HF_US_02_Registered_Simple_And_Lineitem_Giftcard_1QTY
              "    \"type\": \"approved_return\",\n" +
              "    \"order_item_ids\": [\n" +
              "        {\n" +
-             "            \"qty\": \"1.0\",\n" +
+             "            \"qty\": 1,\n" +
              "            \"order_item_id\": \""+firstItemId+"\"\n" +
              "        }\n" +
              "    ],\n" +
@@ -288,6 +285,7 @@ public class Test_DGLD_API_HF_US_02_Registered_Simple_And_Lineitem_Giftcard_1QTY
      String jsonResponse = response.getBody().asString();
 
      JSONObject jsonObject = new JSONObject(jsonResponse);
+      System.out.println(jsonObject);
 
      Assert.assertEquals(response.getStatusCode(), 200, "Post Credit Memo failed");
 

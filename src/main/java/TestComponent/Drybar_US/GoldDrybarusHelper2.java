@@ -7122,7 +7122,7 @@ public void FUll_Payment(String dataSet) {
 			
 			int i = 0;
 			try {
-				Common.findElement("xpath","(//div[@class='row-full-width-inner']//p)[4]");
+				Common.findElement("xpath","//div[contains(@class, 'm-promo-banner glider-slide active')]");
 				Common.clickElement("xpath","//img[contains(@class,'header__logo-image')]");
 				Sync.waitPageLoad();
 				for (i = 0; i < Links.length; i++) {
@@ -7241,18 +7241,24 @@ public void FUll_Payment(String dataSet) {
 			int i = 0;
 			try {
 				for (i = 0; i < Links.length; i++) {
-						Sync.waitElementPresent("xpath", "//span[contains(text(),'"+bag+"')]");
-						Common.clickElement("xpath", "//span[contains(text(),'"+bag+"')]");
-						Common.clickElement("xpath", "//span[contains(text(),' Brushes')]");
+					Sync.waitElementPresent("xpath", "//span[contains(text(),'"+bag+"')]");
+					Common.clickElement("xpath", "//span[contains(text(),'"+bag+"')]");
+					Common.clickElement("xpath", "//span[contains(text(),'Brushes')]");
 						
-					Thread.sleep(3000);
-					Sync.waitElementPresent("xpath",
+					Thread.sleep(4000);
+					Sync.waitElementPresent(30,"xpath",
 							"//a[contains(@class,'link group')]//span[contains(text(),'" + Links[i] + "')]");
 					Common.clickElement("xpath",
 							"//a[contains(@class,'link group')]//span[contains(text(),'" + Links[i] + "')]");
 					Sync.waitPageLoad();
 					Thread.sleep(4000);
-					String title = Common.findElement("xpath", "//div[contains(@class,'pagebuilder')]//h2").getText();
+					String title ="";
+					if(Common.findElements("xpath","//div[contains(@class,'pagebuilder')]//h2").size()>0) {
+						title = Common.findElement("xpath", "//div[contains(@class,'pagebuilder')]//h2").getText();
+					} else {
+						title = Common.getCurrentURL();
+					}
+					System.out.println(title);
 					String breadcrumbs = Common.findElement("xpath", "//nav[contains(@class,'breadcrumb')]").getText();
 					String products=Common.getText("xpath", "//div[contains(@class,'flex w-full')]//span");
 					System.out.println(products);
@@ -7638,8 +7644,11 @@ public void FUll_Payment(String dataSet) {
 								"//div[@id='algolia_instant_sorter']//span")
 						.getText();
 				System.out.println(Sort);
+				Thread.sleep(4000);
 				//int Reviews = Common.findElements("xpath","//span[@class='yotpo-sr-bottom-line-right-panel']//span").size();
-				int Reviews = Common.findElements("xpath","//span[contains(@class,'yotpo-sr-bottom-line-right-panel')]").size();
+				//int Reviews = Common.findElements("xpath","//span[contains(@class,'yotpo-sr-bottom-line-right-panel')]").size();
+				int Reviews = Common.findElements("xpath","//span[contains(@class, 'stars-empty relative')]").size();
+				Thread.sleep(4000);
 				int Ribbons = Common.findElements("xpath","//span[contains(@class,'ribbon-bg new flex justify-center')]").size();
 				Thread.sleep(4000);
 				Common.assertionCheckwithReport(Reviews > 0 && breadcrumbs.contains("Breadcrumb") && filter.contains("Filter by") && Sort.contains("Sort by") 
@@ -9656,7 +9665,7 @@ public void outofstock_subcription(String Dataset) {
 			Sync.waitElementPresent("xpath", "//button[@title='Notify Me When Available']");
 			Common.clickElement("xpath", "//button[@title='Notify Me When Available']");
 			
-			Common.textBoxInput("xpath", "(//input[@placeholder='Insert your email'])[1]", email);
+			Common.textBoxInput("xpath", "(//input[@placeholder='Insert your email'])[2]", email);
 			Common.clickElement("xpath", "//span[text()='Subscribe']");
 			Sync.waitPageLoad();
 			Thread.sleep(2000);
@@ -9675,7 +9684,7 @@ public void outofstock_subcription(String Dataset) {
 			Common.actionsKeyPress(Keys.END);
 			Common.clickElement("xpath",
 					"//div[@x-show='showStickyBar']//button[@title='Notify Me When Available']");
-			Common.textBoxInput("xpath", "(//input[@placeholder='Insert your email'])[2]", email);
+			Common.textBoxInput("xpath", "(//input[@placeholder='Insert your email'])[3]", email);
 			Common.clickElement("xpath", "//span[text()='Subscribe']");
 			Sync.waitPageLoad();
 			Thread.sleep(2000);
@@ -11902,7 +11911,9 @@ public String fifteenpercent_Reward_Points(String Dataset) {
 		Common.clickElement("xpath", "//button[contains(text(),'Your Reward Points')]");
 		Thread.sleep(4000);
 		String off=Common.findElement("xpath", "//div[@class='yotpo-remove-tag-container']//div").getText().trim().replace(" Off", "");
-		String discount=Common.findElement("xpath", "//div[@class='item discount']//span[@class='value']").getText().trim().replace("-", "").replace(".00", "");
+		//String discount=Common.findElement("xpath", "//div[@class='item discount']//span[@class='value']").getText().trim().replace("-", "").replace(".00", "");
+		String discount = Common.findElement("xpath", "(//div[@class='item discount']//span[contains(@class,'discount-value value')])").getText()
+				.trim().replace("-", "").replace(".00", "");
 		System.out.println(off);
 		System.out.println(discount);
 		   Common.assertionCheckwithReport(off.equals(discount), "validating the reward points redeem in the order summary page",
@@ -11958,7 +11969,9 @@ public String Twentypercent_Reward_Points(String Dataset) {
 		Common.clickElement("xpath", "//button[contains(text(),'Your Reward Points')]");
 		Thread.sleep(4000);
 		String off=Common.findElement("xpath", "//div[@class='yotpo-remove-tag-container']//div").getText().trim().replace(" Off", "");
-		String discount=Common.findElement("xpath", "//div[@class='item discount']//span[@class='value']").getText().trim().replace("-", "").replace(".00", "");
+		//String discount=Common.findElement("xpath", "//div[@class='item discount']//span[@class='value']").getText().trim().replace("-", "").replace(".00", "");
+		String discount = Common.findElement("xpath", "(//div[@class='item discount']//span[contains(@class,'discount-value value')])").getText()
+				.trim().replace("-", "").replace(".00", "");
 		System.out.println(off);
 		System.out.println(discount);
 		   Common.assertionCheckwithReport(off.equals(discount), "validating the reward points redeem in the order summary page",
@@ -12010,7 +12023,9 @@ public String Ten_percent_Reward_Points(String Dataset) {
 		Common.clickElement("xpath", "//button[contains(text(),'Your Reward Points')]");
 		Thread.sleep(4000);
 		String off=Common.findElement("xpath", "//div[@class='yotpo-remove-tag-container']//div").getText().trim().replace(" Off", "");
-		String discount=Common.findElement("xpath", "//div[@class='item discount']//span[@class='value']").getText().trim().replace("-", "").replace(".00", "");
+		//String discount=Common.findElement("xpath", "//div[@class='item discount']//span[@class='value']").getText().trim().replace("-", "").replace(".00", "");
+		String discount = Common.findElement("xpath", "(//div[@class='item discount']//span[contains(@class,'discount-value value')])").getText()
+				.trim().replace("-", "").replace(".00", "");
 		System.out.println(off);
 		System.out.println(discount);
 		   Common.assertionCheckwithReport(off.equals(discount), "validating the reward points redeem in the order summary page",
@@ -12063,7 +12078,8 @@ public String fivepercent_Reward_Points(String Dataset) {
 		Thread.sleep(4000);
 		String off = Common.findElement("xpath", "//div[@class='yotpo-remove-tag-container']//div").getText().trim()
 				.replace(" Off", "");
-		String discount = Common.findElement("xpath", "//div[@class='item discount']//span[@class='value']").getText()
+		//String discount = Common.findElement("xpath", "//div[@class='item discount']//span[@class='value']").getText().trim().replace("-", "").replace(".00", "");
+		String discount = Common.findElement("xpath", "(//div[@class='item discount']//span[contains(@class,'discount-value value')])").getText()
 				.trim().replace("-", "").replace(".00", "");
 		System.out.println(off);
 		System.out.println(discount);
@@ -12287,7 +12303,9 @@ public String Twenty_percent_Reward_Points(String Dataset) {
 		Common.clickElement("xpath", "//button[contains(text(),'Your Reward Points')]");
 		Thread.sleep(4000);
 		String off=Common.findElement("xpath", "//div[@class='yotpo-remove-tag-container']//div").getText().trim().replace(" Off", "");
-		String discount=Common.findElement("xpath", "//div[@class='item discount']//span[@class='value']").getText().trim().replace("-", "").replace(".00", "");
+		//String discount=Common.findElement("xpath", "//div[@class='item discount']//span[@class='value']").getText().trim().replace("-", "").replace(".00", "");
+		String discount = Common.findElement("xpath", "(//div[@class='item discount']//span[contains(@class,'discount-value value')])").getText()
+				.trim().replace("-", "").replace(".00", "");
 		System.out.println(off);
 		System.out.println(discount);
 		   Common.assertionCheckwithReport(off.equals(discount), "validating the reward points redeem in the order summary page",
@@ -12961,7 +12979,9 @@ public String TwentyFive_percent_Reward_Points(String Dataset) {
 //		Common.clickElement("xpath", "//button[contains(text(),'Your Reward Points')]");
 		Thread.sleep(3000);
 		String off=Common.findElement("xpath", "//div[@class='yotpo-remove-tag-container']//div").getText().trim().replace(" Off", "");
-		String discount=Common.findElement("xpath", "//div[@class='item discount']//span[@class='value']").getText().trim().replace("-", "").replace(".00", "");
+		//String discount=Common.findElement("xpath", "//div[@class='item discount']//span[@class='value']").getText().trim().replace("-", "").replace(".00", "");
+		String discount = Common.findElement("xpath", "(//div[@class='item discount']//span[contains(@class,'discount-value value')])").getText()
+				.trim().replace("-", "").replace(".00", "");
 		System.out.println(off);
 		System.out.println(discount);
 		
@@ -13149,6 +13169,23 @@ public void newtab_FooterLinks(String Dataset) {
 						int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
 						System.out.println(size);
 				}
+					
+					Sync.waitElementPresent(30, "xpath",
+							"//ul//a[contains(text(),'Donation Request')]");
+					Thread.sleep(3000);
+					Common.findElement("xpath",
+							"//ul//a[contains(text(),'Donation Request')]");
+					Common.switchWindowsAfterClick("xpath",
+							"//ul//a[contains(text(),'Donation Request')]");
+					Sync.waitPageLoad();
+					Thread.sleep(5000);
+					Common.assertionCheckwithReport(Common.getCurrentURL().contains("forms"),
+							"validating the links navigation from footer Links", "user should navigate to the Donation Request page",
+							"user successfully Navigated to the Donation Request page",
+							"Failed navigate to the Donation Request page");
+					Common.closeCurrentWindow(); 
+			           Common.switchToFirstTab();
+			           Thread.sleep(3000);	
 				int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
 				System.out.println(size);
 	}

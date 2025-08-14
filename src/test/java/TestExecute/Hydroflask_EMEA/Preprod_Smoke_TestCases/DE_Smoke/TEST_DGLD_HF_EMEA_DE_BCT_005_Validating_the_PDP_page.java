@@ -37,7 +37,7 @@ public class TEST_DGLD_HF_EMEA_DE_BCT_005_Validating_the_PDP_page {
 	
 	@BeforeTest
 	public void startTest() throws Exception {
-		String url="https://www.hydroflask.com/de/";
+		String url="https://mcloud-na-preprod.hydroflask.com/de/";
 		System.setProperty("url", url);
         Login.signIn();
         Hydro.close_add();
