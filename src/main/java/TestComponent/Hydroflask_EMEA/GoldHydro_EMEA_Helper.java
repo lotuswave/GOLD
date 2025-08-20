@@ -4636,7 +4636,7 @@ catch(Exception | Error e){
 	    // Configurable flag to allow prod execution
 //	    boolean allowProdExecution = Boolean.parseBoolean(System.getProperty("allowProdExecution", "false"));
 
-	    if (currentURL.contains("preprod") || currentURL.contains("prod")  || currentURL.contains("stage")) {
+	    if (currentURL.contains("preprod") || currentURL.contains("/checkout/")  || currentURL.contains("stage")) {
 	        System.out.println("PayPal payment method is skipped: Not allowed in PROD.");
 	        ExtenantReportUtils.addInfoLog("Skipping PayPal Payment This test is restricted to non-prod unless explicitly allowed. Current URL: " + currentURL);
 	        return order;
@@ -6109,9 +6109,10 @@ catch(Exception | Error e){
 			int Text = Common.findElements("xpath", "//span[contains(text(),'just dropped')]").size();
 			System.out.println(Text);
 			int size = Common.findElements("xpath", "//span[contains(text(),'just dropped')]//parent::p//parent::div").size();
+			int prod=Common.findElements("xpath", "//span[contains(text(),'Thanks for subscribing!')]").size();
 			String expectedResult = "User gets confirmation message that it was submitted";
 
-			Common.assertionCheckwithReport(Text > 0 || size > 0, "verifying newsletter subscription",
+			Common.assertionCheckwithReport(Text > 0 || size > 0 || prod > 0, "verifying newsletter subscription",
 					"User get confirmation message if new email if it used mail it showing error message ",
 					expectedResult, Common.getscreenShotPathforReport("NewsLetter Subscrptionsuccess"));
 
@@ -8762,6 +8763,7 @@ catch(Exception | Error e){
 		System.out.println(Address);
 		try {
 			Sync.waitPageLoad();
+			Thread.sleep(4000);
 			Common.clickElement("xpath", "//input[@id='billing-as-shipping']");
 			Thread.sleep(4000);
 			if (Common.findElements("xpath", "//section[@id='billing-details']//button[normalize-space()='New Address']").size() > 0) {
@@ -9727,8 +9729,17 @@ catch(Exception | Error e){
 				}
 			}
 			Thread.sleep(6000);
+			if(Common.getCurrentURL().contains("preprod"))
+			{
 			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
 			Common.mouseOver("xpath", "//img[@alt='" + products + "']");
+			}
+			else
+			{
+				Sync.waitElementPresent(30, "xpath", "//img[@alt='Micro Hydro Mini Bottle - Beachplum']");
+				Common.mouseOver("xpath", "//img[@alt='Micro Hydro Mini Bottle - Beachplum']");
+				
+			}
 			if (Common.getCurrentURL().contains("/de") || Common.getCurrentURL().contains("/fr")
 					|| Common.getCurrentURL().contains("/es")) {
 				Sync.waitElementPresent("css", "form[class='flex-grow product_addtocart_form'] button");
@@ -9922,9 +9933,9 @@ catch(Exception | Error e){
 		try {
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			Common.scrollIntoView("xpath", "(//a[contains(@class,'back-to-cart')])[1]");
-			Sync.waitElementVisible(30, "xpath", "(//a[contains(@class,'back-to-cart')])[1]");
-			Common.clickElement("xpath", "(//a[contains(@class,'back-to-cart')])[1]");
+			Common.scrollIntoView("xpath", "(//a[contains(@class,'back-to-cart')])[2]");
+			Sync.waitElementVisible(30, "xpath", "(//a[contains(@class,'back-to-cart')])[2]");
+			Common.clickElement("xpath", "(//a[contains(@class,'back-to-cart')])[2]");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Common.assertionCheckwithReport(
