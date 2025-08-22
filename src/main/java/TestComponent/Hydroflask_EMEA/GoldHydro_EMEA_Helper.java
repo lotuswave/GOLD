@@ -9933,9 +9933,9 @@ catch(Exception | Error e){
 		try {
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			Common.scrollIntoView("xpath", "(//a[contains(@class,'back-to-cart')])[2]");
-			Sync.waitElementVisible(30, "xpath", "(//a[contains(@class,'back-to-cart')])[2]");
-			Common.clickElement("xpath", "(//a[contains(@class,'back-to-cart')])[2]");
+			Common.scrollIntoView("xpath", "(//a[contains(@class,'back-to-cart')])[3]");
+			Sync.waitElementVisible(30, "xpath", "(//a[contains(@class,'back-to-cart')])[3]");
+			Common.clickElement("xpath", "(//a[contains(@class,'back-to-cart')])[3]");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Common.assertionCheckwithReport(
