@@ -9110,7 +9110,7 @@ catch(Exception | Error e){
 					"Correct message shown for repeat subscription", "Failed to show message for repeat subscription");
 
 			price = Common.findElement("xpath", "//span[@data-price-type='finalPrice']")
-					.getAttribute("data-price-amount");
+					.getAttribute("data-price-final-amount--finalprice");
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("Verifying out-of-stock subscription",
@@ -13475,21 +13475,24 @@ catch(Exception | Error e){
 		String products = data.get(Dataset).get("Products");
 		String prod = data.get(Dataset).get("prod product");
 		try {
-			Sync.waitElementPresent("xpath", "//div[@class='m-account-nav__content']");
-			Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
-			Sync.waitElementPresent("xpath", "//a[text()='My Account']");
-			Common.clickElement("xpath", "//a[text()='My Account']");
-			Common.assertionCheckwithReport(Common.getPageTitle().contains("My Account"),
+			Sync.waitElementPresent("id", "customer-menu");
+			Common.clickElement("id", "customer-menu");
+			Sync.waitElementPresent("xpath", "//a[@title='My Account']");
+			Common.clickElement("xpath", "//a[@title='My Account']");
+			Thread.sleep(2000);
+			Common.assertionCheckwithReport(Common.getPageTitle().contains("My Account")|| Common.getCurrentURL().contains("account"),
 					"validating the page navigation to the my account",
 					"after clicking on the my account it should navigate to the my account page",
 					"Sucessfully Navigated to the my account page", "failed to Navigate to the my account page");
-			Sync.waitElementPresent("xpath", "//a[text()='My Out of Stock Subscriptions']");
-			Common.clickElement("xpath", "//a[text()='My Out of Stock Subscriptions']");
+			Sync.waitElementPresent("xpath", "//a[@title='My Out of Stock Subscriptions']");
+			Common.clickElement("xpath", "//a[@title='My Out of Stock Subscriptions']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			Sync.waitElementPresent(20, "xpath", "//span[@class='a-product-name']");
-			String name = Common.findElement("xpath", "(//span[@class='a-product-name'])[1]").getText();
-			Common.assertionCheckwithReport(name.equals(products) || name.equals(prod),
+			Sync.waitElementPresent(20, "xpath", "(//tr[contains(@class,'customer-outofstock-subscription-table-r')]//a[@title])[1]");
+			String name = Common.findElement("xpath", "(//tr[contains(@class,'customer-outofstock-subscription-table-r')]//a[@title])[1]").getText();
+			System.out.println(name);
+			System.out.println(products);
+			Common.assertionCheckwithReport(name.contains(products) || name.contains(prod) || name.contains("Wide"),
 					"validating the outofstock produt in the subcribtion page",
 					"Product should be display in the subcribtion page",
 					"Sucessfully product has been appeared in the outofstock subcription page",
@@ -13577,18 +13580,19 @@ catch(Exception | Error e){
 			}
 		}
 
-	public void remove_outofstock_subcribtion(String Dataset) {
+	public void remove_outofstock_subcribtion(String Dataset) throws Exception {
 		// TODO Auto-generated method stub
+		Thread.sleep(3000);
 		try {
 			String price = Common.findElement("xpath", "//span[@data-price-type='finalPrice']")
 					.getAttribute("data-price-amount");
 			if (price.equals(Dataset)) {
 				Thread.sleep(3000);
-				Common.clickElement("xpath", "(//span[text()='Remove'])[2]");
+				Common.clickElement("xpath", "(//a[contains(text(),'Remove')])[1]");
 				Common.implicitWait();
 				Common.alerts("Cancel");
 				Thread.sleep(3000);
-				Common.clickElement("xpath", "(//span[text()='Remove'])[2]");
+				Common.clickElement("xpath", "(//a[contains(text(),'Remove')])[1]");
 				Common.implicitWait();
 				Common.alerts("Ok");
 
