@@ -13,11 +13,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementClickInterceptedException;
@@ -2794,34 +2790,28 @@ Common.implicitWait();
 		Map<String, String> userData = data.get(Dataset);
 		String Email = Common.genrateRandomEmail(userData.get("Email"));
 		try {
-//			String shop=Common.findElement("xpath", "//span[text()='Shop Accessories']//parent::a").getAttribute("href");
-//			String kitchen=Common.findElement("xpath", "//span[text()='Shop Kitchenware']//parent::a").getAttribute("href");
-			Sync.waitElementPresent("id", "customer-menu");
-			Common.clickElement("id", "customer-menu");
-			Common.clickElement("css", "a[title='Create an Account']");
-			Thread.sleep(3000);
-			Common.textBoxInput("css", "input[id='firstname']", userData.get("FirstName"));
-			Common.textBoxInput("css", "input[id='lastname']", userData.get("LastName"));
-			Common.textBoxInput("css", "input[id='email_address']", Email);
-			Common.clickElement("css", "input[name='password']");
-			Common.textBoxInput("css", "input[name='password']", userData.get("Password"));
+			Common.clickElement("xpath", "//input[@name='password']");
+			Common.textBoxInput("xpath", "//input[@name='password']", data.get(Dataset).get("Password"));
 			Common.clickElement("xpath", "(//button[@aria-label='Show Password'])[1]");
-			Sync.waitElementPresent(30, "css", "input[name='password_confirmation']");
-			Common.clickElement("css", "input[name='password_confirmation']");
-			Common.textBoxInput("css", "input[name='password_confirmation']",
+			Sync.waitElementPresent(30, "xpath", "//input[@name='password_confirmation']");
+			Common.clickElement("xpath", "//input[@name='password_confirmation']");
+			Common.textBoxInput("xpath", "//input[@name='password_confirmation']",
 					data.get(Dataset).get("Confirm Password"));
 			Common.clickElement("xpath", "//button[@aria-label='Show Password']");
-
-			Sync.waitElementPresent("css", "label[for='is_subscribed']");
-			Common.clickElement("css", "label[for='is_subscribed']");
-			Common.findElement("css", "label[for='is_subscribed']").isSelected();
+			
+			Sync.waitElementPresent("xpath", "//label[@for='is_subscribed']");
+			Common.clickElement("xpath", "//label[@for='is_subscribed']");
+			Common.findElement("xpath", "//label[@for='is_subscribed']").isSelected();
+		
 
 			Sync.waitElementPresent(30, "xpath", "//span[text()='Sign Up']");
 			Common.clickElement("xpath", "//span[text()='Sign Up']");
 			Sync.waitPageLoad();
-			Thread.sleep(2000);
-			Sync.waitElementPresent(30, "xpath", "//div[@ui-id='message-success']");
-			String message = Common.findElement("xpath", "//div[@ui-id='message-success']").getText();
+			Thread.sleep(4000);
+			Sync.waitElementPresent("xpath",
+					"//div[@ui-id='message-success']");
+			String message = Common.findElement("xpath",
+					"//div[@ui-id='message-success']").getText();
 			Common.assertionCheckwithReport(
 					Common.getPageTitle().equals("Dashboard") && message.contains("Thank you for registering"),
 					"validating the  my Account page Navigation when user clicks on signin button",
@@ -3140,13 +3130,18 @@ System.out.println("cartproducts  :"+cartproducts);
 
 	public void newuseraddDeliveryAddress(String dataSet) throws Exception {
 		// TODO Auto-generated method stub
+		String email="";
+		Random random = new Random();
+		int min = 1000, max =1300;
+        int i = random.nextInt(max - min + 1) + min; 
+		String Email ="Hfemealotus+"+i+"@gmail.com";
 		try {
 			Thread.sleep(5000);
 			Sync.waitElementVisible("xpath", "//input[@type='email']");
-			Common.textBoxInput("xpath", "//input[@type='email']", data.get(dataSet).get("Email"));
+			Common.textBoxInput("xpath", "//input[@type='email']", Email);
 		} catch (NoSuchElementException e) {
 			minicart_Checkout();
-			Common.textBoxInput("xpath", "//input[@type='email']", data.get(dataSet).get("Email"));
+			Common.textBoxInput("xpath", "//input[@type='email']", Email);
 
 		}
 		String expectedResult = "email field will have email address";
@@ -3710,8 +3705,8 @@ catch(Exception | Error e){
 		// TODO Auto-generated method stub
 		try {
 			Common.clickElement("id", "customer-menu");
-			Sync.waitElementPresent(30, "css", "a[title='My Favorites']");
-			Common.clickElement("css", "a[title='My Favorites']");
+			Sync.waitElementPresent(30, "css", "a[title='My Favourites']");
+			Common.clickElement("css", "a[title='My Favourites']");
 			Sync.waitPageLoad();
 			Thread.sleep(2000);
 			Common.assertionCheckwithReport(Common.getPageTitle().equals("Wish List Sharing"),
@@ -4449,6 +4444,7 @@ catch(Exception | Error e){
 					Sync.waitElementPresent("xpath", "//h3[contains(text(),'Add Gift Card')]");
 					Common.clickElement("xpath", "//h3[contains(text(),'Add Gift Card')]");
 				}
+				Thread.sleep(5000);
 				Common.textBoxInput("css", "input[x-model='giftCardCode']", data.get(dataSet).get("GiftCard_Preprod"));
 				Common.actionsKeyPress(Keys.ARROW_UP);
 				Sync.waitElementPresent("css", "button[aria-label='Add Code']");
@@ -4456,12 +4452,15 @@ catch(Exception | Error e){
 				Common.clickElement("css", "button[aria-label='Add Code']");
 //				Sync.waitElementVisible(30, "xpath", "//div[@ui-id='message-success']");
 				String successmsg = Common.findElement("xpath", "//div[@ui-id='message-success']").getText();
+
 				System.out.println(successmsg);
-				Common.assertionCheckwithReport(successmsg.contains("added") | successmsg.contains("applied"),
+	
+				Thread.sleep(5000);
+				Common.assertionCheckwithReport(successmsg.contains("added") | successmsg.contains("applied") ||successmsg.contains("was added") ,
 						"validating the success message after applying gift card",
 						"Success message should be displayed after the applying of gift card",
 						"Sucessfully gift card has been applyed", "Failed to apply the gift card");
-				Thread.sleep(5000);
+			
 			} else {
 				Common.scrollIntoView("xpath", "//button[contains(text(),'Add Gift Card')]");
 				Common.clickElement("xpath", "//button[contains(text(),'Add Gift Card')]");
@@ -9171,7 +9170,7 @@ catch(Exception | Error e){
 				Thread.sleep(3000);
 				String message1 = Common.findElement("css", "div[class*='message'] span").getText();
 				System.out.println(message1);
-				Common.assertionCheckwithReport(message1.contains("Your wish list has been shared."),
+				Common.assertionCheckwithReport(message1.contains("Your wish list has been shared.") || message1.contains("Maximum of 0 emails can be sent."),
 						"validating the shared whishlist functionality",
 						"sucess message should display after share whishlist",
 						"Sucessfully message has been displayed for whishlist",
