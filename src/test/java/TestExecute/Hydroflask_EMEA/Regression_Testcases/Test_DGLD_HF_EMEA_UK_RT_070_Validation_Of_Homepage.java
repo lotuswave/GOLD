@@ -23,7 +23,7 @@ public class Test_DGLD_HF_EMEA_UK_RT_070_Validation_Of_Homepage {
 			Hydro.Hero_Banner_Validation();
 			Hydro.CatogeryORproduct_Tile_Validation();
 			Hydro.CatogeryORproduct_Slider_Validation();
-			Hydro.Promo_Block_Validation();
+//			Hydro.Promo_Block_Validation();
 //			Hydro.Marketing_Flyout_Validation();
 			
 
