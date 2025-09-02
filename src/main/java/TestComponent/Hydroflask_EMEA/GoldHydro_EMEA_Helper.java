@@ -12068,9 +12068,9 @@ catch(Exception | Error e){
 				Common.clickElement("xpath", "(//button[contains(@class,'level-0-link')])[3]");
 				Thread.sleep(1500);
 				Sync.waitElementPresent("xpath",
-						"//a[contains(@class,'link group no-underline')]//span[contains(text(),'" + Links[i] + "')]");
+						"//a[contains(@class,'main-nav')]//span[contains(text(),'" + Links[i] + "')]");
 				Common.clickElement("xpath",
-						"//a[contains(@class,'link group no-underline')]//span[contains(text(),'" + Links[i] + "')]");
+						"//a[contains(@class,'main-nav')]//span[contains(text(),'" + Links[i] + "')]");
 				Sync.waitPageLoad();
 				Thread.sleep(2000);
 				String page = Common.getPageTitle();
@@ -12090,7 +12090,10 @@ catch(Exception | Error e){
 								|| Common.getPageTitle().contains("Let’s Go!")
 								|| Common.getPageTitle().contains("Refill For Good")
 								|| Common.getPageTitle().contains("Frequently Asked Questions")
-								|| Common.getCurrentURL().contains("festival-partnerships")||Common.getCurrentURL().contains("https://help.hydroflask.com/lang/de/"),
+								|| Common.getCurrentURL().contains("festival-partnerships")
+								||  Common.getPageTitle().contains("Knowledge Base")
+								||Common.getCurrentURL().contains("https://help.hydroflask.com/lang/de/"),
+								
 						"verifying the explore links navigation", "user should navigate to the " + Links[i] + " page",
 						"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
 				Thread.sleep(3000);
@@ -16258,8 +16261,8 @@ catch(Exception | Error e){
 				Sync.waitElementPresent(50, "xpath", "(//button[contains(@class,'level-0-link')])[2]");
 				Common.clickElement("xpath", "(//button[contains(@class,'level-0-link')])[2]");
 				Thread.sleep(1500);
-				Sync.waitElementPresent("xpath", "(//a[@title='" + Links[i] + "'])[1]");
-				Common.clickElement("xpath", "(//a[@title='" + Links[i] + "'])[1]");
+				Sync.waitElementPresent("xpath", "(//a[contains(@title,'" + Links[i] + "')])[1]");
+				Common.clickElement("xpath", "(//a[contains(@title,'" + Links[i] + "')])[1]");
 				Thread.sleep(1000);
 				Common.clickElement("xpath", "//a[contains(@class,'btn btn-secondary')]//span");
 				Sync.waitPageLoad();
