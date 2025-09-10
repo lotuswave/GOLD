@@ -6100,9 +6100,9 @@ catch(Exception | Error e){
 		try {
 			Common.actionsKeyPress(Keys.END);
 			Thread.sleep(5000);
-			Sync.waitElementClickable(30, "xpath", "(//input[@id='subscribe-email' or @name='email'])[2]");
-			Common.textBoxInput("xpath", "(//input[@id='subscribe-email' or @name='email'])[2]", Email);
-			Common.clickElement("xpath", "(//input[contains(@aria-label,'I consent to receive')])[2]");
+			Sync.waitElementClickable(30, "xpath", "(//input[@id='subscribe-email' or @name='email'])[1]");
+			Common.textBoxInput("xpath", "(//input[@id='subscribe-email' or @name='email'])[1]", Email);
+			Common.clickElement("xpath", "(//input[contains(@aria-label,'I consent to receive')])[1]");
 			Common.clickElement("xpath", "//button[text()='Sign Up']");
 			Thread.sleep(5000);
 			Sync.waitPageLoad();
