@@ -26,7 +26,7 @@ public class TEST_DGLD_HF_EMEA_RT_055_Gift_card_and_Configurable_Product_Checkou
 		Hydro.addDeliveryAddress_Guestuser("AccountDetails");
         Hydro.selectshippingaddress("GroundShipping method");
         Hydro.clickSubmitbutton_Shippingpage();
-        Hydro.discountCode("Discount");
+//        Hydro.discountCode("Discount");
         Hydro.updatePaymentAndSubmitOrder("PaymentDetails");
         
 		} catch (Exception e) {

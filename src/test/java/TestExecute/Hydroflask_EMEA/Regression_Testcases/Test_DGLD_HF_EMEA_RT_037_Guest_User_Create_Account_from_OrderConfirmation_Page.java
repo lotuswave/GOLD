@@ -4,9 +4,8 @@ import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-
-import TestComponent.Hydroflask_EMEA.GoldHydro_EMEA_Helper;
 import TestLib.Common;
+import TestComponent.Hydroflask_EMEA.GoldHydro_EMEA_Helper;
 import TestLib.Login;
 
 public class Test_DGLD_HF_EMEA_RT_037_Guest_User_Create_Account_from_OrderConfirmation_Page {
@@ -34,7 +33,7 @@ public class Test_DGLD_HF_EMEA_RT_037_Guest_User_Create_Account_from_OrderConfir
 
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 
